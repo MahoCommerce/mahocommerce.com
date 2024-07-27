@@ -1,0 +1,76 @@
+site_name: Maho - The ecommerce platform
+site_url: https://mahocommerce.com
+repo_url: https://github.com/MahoCommerce/maho
+repo_name: MahoCommerce/maho
+
+theme:
+  name: material
+  logo: assets/logo.png
+  favicon: assets/favicon.png
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.top
+    - search.suggest
+    - search.highlight
+    - content.tabs.link
+
+plugins:
+  - blog
+  - search
+  - minify:
+      minify_html: true
+  - git-revision-date-localized:
+      type: date
+      fallback_to_build_date: true
+  - social
+  - awesome-pages
+
+markdown_extensions:
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences
+  - admonition
+  - pymdownx.details
+  - pymdownx.tabbed:
+      alternate_style: true
+  - attr_list
+  - md_in_html
+
+nav:
+  - Home: index.md
+  - Installation: installation.md
+  - Features:
+    - Overview: features/overview.md
+    - Maho Specifics: features/maho-specifics.md
+  - Developers:
+    - Contributing: developers/contributing.md
+    - Architecture: developers/architecture.md
+  - FAQ: faq.md
+
+extra:
+  generator: false
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/MahoCommerce/maho
+    - icon: fontawesome/brands/twitter
+      link: https://twitter.com/mahocommerce
+    - icon: fontawesome/brands/discord
+      link: https://discord.gg/dWgcVUFTrS
