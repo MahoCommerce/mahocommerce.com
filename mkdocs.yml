@@ -20,8 +20,9 @@ theme:
     - content.tabs.link
 
 plugins:
-  - blog
   - search
+  - social
+  - awesome-pages
   - blog:
       blog_dir: blog
       post_date_format: full
@@ -31,8 +32,6 @@ plugins:
   - git-revision-date-localized:
       type: date
       fallback_to_build_date: true
-  - social
-  - awesome-pages
 
 markdown_extensions:
   - pymdownx.highlight:
