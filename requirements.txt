@@ -16,6 +16,7 @@ mkdocs-material-extensions==1.3.1
 mkdocs-minify-plugin==0.7.1
 mkdocs-git-revision-date-localized-plugin==1.2.6
 mkdocs-awesome-pages-plugin==2.9.3
+mkdocs-material[blog]==9.5.12
 packaging==24.1
 paginate==0.5.6
 pathspec==0.12.1

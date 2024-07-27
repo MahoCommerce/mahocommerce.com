@@ -22,6 +22,10 @@ theme:
 plugins:
   - blog
   - search
+  - blog:
+      blog_dir: blog
+      post_date_format: full
+      post_url_format: "{date}/{slug}"
   - minify:
       minify_html: true
   - git-revision-date-localized:
@@ -46,13 +50,14 @@ markdown_extensions:
 nav:
   - Home: index.md
   - Installation: installation.md
-  - Features:
-    - Overview: features/overview.md
-    - Maho Specifics: features/maho-specifics.md
-  - Developers:
-    - Contributing: developers/contributing.md
-    - Architecture: developers/architecture.md
-  - FAQ: faq.md
+  - Blog: blog/index.md
+#  - Features:
+#    - Overview: features/overview.md
+#    - Maho Specifics: features/maho-specifics.md
+#  - Developers:
+#    - Contributing: developers/contributing.md
+#    - Architecture: developers/architecture.md
+#  - FAQ: faq.md
 
 extra:
   generator: false
