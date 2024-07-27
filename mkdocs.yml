@@ -9,8 +9,8 @@ theme:
 #  favicon: assets/favicon.png
   palette:
     - scheme: default
-      primary: indigo
-      accent: indigo
+      primary: white
+      accent: teal
   features:
     - navigation.tabs
     - navigation.sections
