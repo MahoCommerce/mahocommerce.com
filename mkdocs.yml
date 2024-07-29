@@ -8,10 +8,11 @@ theme:
 #  logo: assets/logo.png
 #  favicon: assets/favicon.png
   palette:
-    - scheme: default
+      scheme: default
       primary: white
-      accent: teal
   features:
+    - instant
+    - content.code.copy
     - navigation.tabs
     - navigation.sections
     - navigation.top

@@ -1,3 +1,9 @@
-.md-logo {display: none !important;}
+:root, [data-md-color-scheme=default] {
+    --md-default-fg-color--light: black !important;
+}
 
+.md-logo {display: none !important;}
+.md-sidebar:not(:has(.md-post__back)) {
+    visibility: hidden !important;
+}
 .md-header__title {margin-left: 0 !important;}
