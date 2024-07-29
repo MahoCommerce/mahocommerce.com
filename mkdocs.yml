@@ -18,6 +18,8 @@ theme:
     - search.suggest
     - search.highlight
     - content.tabs.link
+extra_css:
+  - maho.css
 
 plugins:
   - search
@@ -28,7 +30,7 @@ plugins:
       post_date_format: full
       post_url_format: "{date}/{slug}"
   - minify:
-      minify_html: true
+      minify_html: false
   - git-revision-date-localized:
       type: date
       fallback_to_build_date: true
