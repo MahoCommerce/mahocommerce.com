@@ -6,9 +6,5 @@ Maho aims to be the go-to solution for businesses that demand control, flexibili
 
 By participating to Maho, you're not just contributing to a project – you are putting your dent in the furure of e-commerce.
 
-:fontawesome-regular-face-laugh-wink:
-
-:heart:
-
-[:fontawesome-solid-paper-plane: Join our community on Discord](https://discord.gg/dWgcVUFTrS){:target="_blank" .md-button .md-button--primary}
-[Check our contributing guidelines](contributing.md){.md-button .md-button--primary}
+[Join our community on Discord :fontawesome-brands-discord:](https://discord.gg/dWgcVUFTrS){:target="_blank" .md-button .md-button--primary .md-consent__controls}
+[Check our contributing guidelines](contributing.md){.md-button .md-button--primary .md-consent__controls}

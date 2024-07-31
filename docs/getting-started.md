@@ -1,6 +1,6 @@
 # Getting Started
 
-!!! note
+!!! danger ""
     Maho's is under heavy development so, at this moment, we suggest you to install it only if you want to
     see what's going on and to give it a try.
 
@@ -17,7 +17,7 @@
 composer create-project -s dev mahocommerce/maho-starter yourproject
 ```
 
-!!! note
+!!! info
     - `-s dev` is a temporary flag that will be removed when the final release will be ready
     - `yourproject` is the name of the folder where you want to create the project
 
