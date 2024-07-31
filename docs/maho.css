@@ -2,12 +2,16 @@
     --md-default-fg-color--light: black !important;
 }
 
+/* needed until we don't have a logo */
 .md-logo {display: none !important;}
-.md-sidebar:not(:has(.md-post__back)) {
-    aavisibility: hidden !important;
-}
 .md-header__title {margin-left: 0 !important;}
 
+/* hide sidebar for blog index */
+body:has(h1[id=blog]) .md-sidebar {
+    visibility: hidden;
+}
+
+/* lighter color for update date info */
 aside.md-source-file * {
     color: var(--md-default-fg-color--lighter);
 }
