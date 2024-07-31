@@ -1,7 +1,8 @@
 # Installation
 
-Maho's is under heavy development so, at this moment, we suggest you to install it only if you want to
-see what's going on and to give it a try.
+!!! note
+    Maho's is under heavy development so, at this moment, we suggest you to install it only if you want to
+    see what's going on and to give it a try.
 
 ## System requirements
 
