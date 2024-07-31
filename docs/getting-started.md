@@ -1,4 +1,4 @@
-# Installation
+# Getting Started
 
 !!! note
     Maho's is under heavy development so, at this moment, we suggest you to install it only if you want to

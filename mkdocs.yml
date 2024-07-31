@@ -51,15 +51,12 @@ markdown_extensions:
 
 nav:
   - Home: index.md
-  - Installation: installation.md
+  - Documentation:
+    - Getting Started: getting-started.md
   - Blog: blog/index.md
-#  - Features:
-#    - Overview: features/overview.md
-#    - Maho Specifics: features/maho-specifics.md
-#  - Developers:
-#    - Contributing: developers/contributing.md
-#    - Architecture: developers/architecture.md
-#  - FAQ: faq.md
+  - Community:
+      - Get Involved: community/get-involved.md
+      - Contributing: community/contributing.md
 
 extra:
   generator: false

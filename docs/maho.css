@@ -4,6 +4,10 @@
 
 .md-logo {display: none !important;}
 .md-sidebar:not(:has(.md-post__back)) {
-    visibility: hidden !important;
+    aavisibility: hidden !important;
 }
 .md-header__title {margin-left: 0 !important;}
+
+aside.md-source-file * {
+    color: var(--md-default-fg-color--lighter);
+}
