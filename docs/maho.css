@@ -7,7 +7,8 @@
 .md-header__title {margin-left: 0 !important;}
 
 /* hide sidebar for blog index */
-body:has(h1[id=blog]) .md-sidebar {
+body:has(h1[id=blog]) .md-sidebar,
+body:has(h1[id=maho-the-ecommerce-platform]) .md-sidebar{
     visibility: hidden;
 }
 
