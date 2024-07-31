@@ -12,7 +12,11 @@ body:has(h1[id=maho-the-ecommerce-platform]) .md-sidebar{
     visibility: hidden;
 }
 
+.md-content a:not(.md-button) {
+    text-decoration: underline;
+}
+
 /* lighter color for update date info */
 aside.md-source-file * {
-    color: var(--md-default-fg-color--lighter);
+    color: #666;
 }
