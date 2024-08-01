@@ -6,11 +6,12 @@ repo_name: MahoCommerce/maho
 
 theme:
   name: material
-#  logo: assets/logo.png
-#  favicon: assets/favicon.png
+  logo: assets/maho-logo.svg
+  favicon: assets/maho-symbol.svg
   palette:
       scheme: default
       primary: white
+      accent: '#ADB41A'
   features:
     - instant
     - content.code.copy
