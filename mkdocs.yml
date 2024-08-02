@@ -8,6 +8,7 @@ theme:
   name: material
   logo: assets/maho-logo.svg
   favicon: assets/maho-symbol.svg
+  custom_dir: docs/overrides
   palette:
       scheme: default
       primary: white

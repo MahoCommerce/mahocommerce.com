@@ -1,0 +1,28 @@
+<form id="subscriptionform">
+    <label>
+        Subscribe to our newsletter
+        <input type="email" id="subscriptionformemail" name="fields[email]" placeholder="example@email.com"
+               autocomplete="email" aria-invalid="false" class="md-search__form" style="background:none;color:white">
+    </label>
+
+    <button type="submit" class="md-button md-button--primary" id="subscriptionformsubmit">Subscribe</button>
+</form>
+<script>
+    document.getElementById('subscriptionformsubmit').addEventListener('click', function(event) {
+        event.preventDefault();
+        const email = document.getElementById('subscriptionformemail').value;
+
+        fetch('https://stats.sender.net/forms/e1xwmd/subscribe', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({email: email})
+        })
+            .then(response => response.json())
+            .then(data => {
+                alert('Thank you for subscribing, you should receive a confirmation email soon!');
+            })
+            .catch((error) => {
+                alert('There was a problem processing your request, please try again later or contact us.');
+            });
+    });
+</script>
