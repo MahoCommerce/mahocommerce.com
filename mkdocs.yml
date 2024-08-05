@@ -54,6 +54,7 @@ markdown_extensions:
       alternate_style: true
   - attr_list
   - md_in_html
+  - footnotes
 
 nav:
   - Home: index.md

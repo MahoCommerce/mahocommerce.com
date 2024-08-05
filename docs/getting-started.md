@@ -7,7 +7,7 @@
 ## System requirements
 
 - PHP 8.2+
-- Apache/Nginx/Caddy (we'll test a FrankenPHP builder ASAP)
+- Apache/Nginx/Caddy/FrankenPHP[^1]
 - MySQL 5.7+ (8.0+ recommended) or MariaDB
 - `patch` command 2.7+ (or `gpatch` on MacOS/HomeBrew)
 
@@ -33,3 +33,5 @@ publish everything.
 
 Thank you for your patience!  
 Maho rocks! 🚀
+
+[^1]: Standalone binary building with FrankenPHP is untested at the moment.
