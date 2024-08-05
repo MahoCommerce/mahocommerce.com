@@ -12,6 +12,7 @@ I want to share an overview of our recent activities and upcoming plans.
 ## Recent revelopments
 
 We worked on several minor buy key areas:
+
 * Website development and implementation of an automatic publishing toolchain
 * Configuration of automatic phpDoc generation on each push to the main repository
 * A few cleanup commits on Maho's main branch (further details will be provided in the first release)
