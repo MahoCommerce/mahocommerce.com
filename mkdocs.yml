@@ -59,8 +59,10 @@ markdown_extensions:
 nav:
   - Home: index.md
   - Documentation:
-    - Getting Started: getting-started.md
-    - Code Reference: code-reference.md
+    - Getting started: getting-started.md
+    - CLI tool: cli-tool.md
+    - Roadmap: roadmap.md
+    - phpDoc code reference: code-reference.md
   - Blog: blog/index.md
   - Community:
       - Get Involved: community/get-involved.md

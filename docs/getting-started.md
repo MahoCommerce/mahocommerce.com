@@ -13,7 +13,7 @@
 
 ## Create your project
 
-```bash title="You'll be able to create a project based on Maho with:"
+```bash
 composer create-project -s dev mahocommerce/maho-starter yourproject
 ```
 
