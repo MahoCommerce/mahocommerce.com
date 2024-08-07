@@ -62,6 +62,7 @@ nav:
     - Getting started: getting-started.md
     - CLI tool: cli-tool.md
     - Roadmap: roadmap.md
+    - Robots.txt: robotstxt.md
     - phpDoc code reference: code-reference.md
   - Blog: blog/index.md
   - Community:
