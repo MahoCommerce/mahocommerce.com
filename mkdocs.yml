@@ -63,6 +63,7 @@ nav:
     - Roadmap: roadmap.md
     - Technical doc:
       - CLI tool: cli-tool.md
+      - Cron setup: cron.md
       - Robots.txt: robotstxt.md
     - Reference:
       - phpDoc code reference: code-reference.md

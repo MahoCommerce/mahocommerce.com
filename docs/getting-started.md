@@ -126,4 +126,8 @@ Simply open your browser to type the URL you configured in your web server, poin
 Maho project `pub` directory, the web installer will start automatically and you'll be guided
 through the complete installation of Maho into your database.
 
+## Cron setup
+
+Please check [cron setup dedicated documentation](cron.md).
+
 [^1]: Standalone binary building with FrankenPHP is untested at the moment.
