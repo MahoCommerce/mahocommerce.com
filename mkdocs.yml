@@ -60,10 +60,12 @@ nav:
   - Home: index.md
   - Documentation:
     - Getting started: getting-started.md
-    - CLI tool: cli-tool.md
     - Roadmap: roadmap.md
-    - Robots.txt: robotstxt.md
-    - phpDoc code reference: code-reference.md
+    - Technical doc:
+      - CLI tool: cli-tool.md
+      - Robots.txt: robotstxt.md
+    - Reference:
+      - phpDoc code reference: code-reference.md
   - Blog: blog/index.md
   - Community:
       - Get Involved: community/get-involved.md
