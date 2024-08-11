@@ -18,25 +18,38 @@ Options:
   -v|vv|vvv, --verbose  Increase the verbosity of messages: 1 for normal output, 2 for more verbose output and 3 for debug
 
 Available commands:
-  completion             Dump the shell completion script
-  help                   Display help for a command
-  list                   List commands
-  serve                  Run Maho with the built in server
+  completion                  Dump the shell completion script
+  help                        Display help for a command
+  install                     Install Maho
+  list                        List commands
+  serve                       Run Maho with the built in web server
+ admin
+  admin:user:change-password  List all admin users
+  admin:user:disable          Enable an admin user
+  admin:user:enable           Enable an admin user
+  admin:user:list             List all admin users
  cache
-  cache:disable          Disable all caches
-  cache:enable           Enable all caches
-  cache:flush            Flush cache
+  cache:disable               Disable all caches
+  cache:enable                Enable all caches
+  cache:flush                 Flush cache
+ cron
+  cron:history                List cron jobs executions stored in the database
+  cron:list                   List cron jobs configured in the XML files
+  cron:run                    Run a group of cron processes (default/always) or a single job_code (eg: newsletter_send_all)
  customer
-  customer:list          List all customers
+  customer:delete             Delete customers
+  customer:list               List all customers
  index
-  index:list             List all indexes
-  index:reindex          Reindex a single index
-  index:reindex:all      Reindex all indexes
- legacy
-  legacy:run-shell-file  Run legacy shell file
+  index:list                  List all indexes
+  index:reindex               Reindex a single index
+  index:reindex:all           Reindex all indexes
  log
-  log:clean              Clean log tables in the database
-  log:status             Show status for log tables in the database
+  log:clean                   Clean log tables in the database
+  log:status                  Show status for log tables in the database
+ sys
+  sys:currencies              Get all available currencies
+  sys:locales                 Get all available locales
+  sys:timezones               Get all available timezones
 ```
 
 This tool is inspired by [Laravel Artisan](https://laravel.com/docs/11.x/artisan),
