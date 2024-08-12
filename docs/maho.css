@@ -15,10 +15,17 @@
 }
 
 /* hide sidebar for blog index */
-@media screen and (min-width: 76.25em) {
+@media screen and (min-width: 60em) {
     body:has(h1[id=blog]) .md-sidebar,
-    body:has(h1[id=maho-the-ecommerce-platform]) .md-sidebar {
+    body:has(#homeh1) .md-sidebar {
         visibility: hidden;
+    }
+    body:has(#homeh1) .md-main__inner {
+        flex-direction: column;
+        align-items: center;
+    }
+    body:has(#homeh1) .md-content {
+        max-width: 736px;
     }
 }
 
@@ -29,4 +36,87 @@
 /* lighter color for update date info */
 aside.md-source-file * {
     color: #666;
+}
+
+/* HOME PAGE */
+#homeh1, #homeh2, article:has(#homeh1) :where(h2,h3) {text-align: center}
+#homeh1 span {display: none}
+#homeh1 {margin-bottom: 0}
+#homeh2 {margin-top: 0; font-size: 1.3em; font-style: italic; margin-bottom: 2em}
+aarticle:has(#homeh1) {text-align: center}
+
+.logo {
+    width: 100%;
+    max-width: 30em;
+    overflow: hidden;
+    margin: auto;
+}
+@media screen and (max-width: 520px) {
+    .logo {
+        zoom: 70%;
+    }
+}
+.lp {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+}
+.lp > div {
+    padding: 10px;
+    box-sizing: border-box;
+    opacity: 0;
+}
+.lp1 {
+    animation: fadeInLeft 0.8s ease-out forwards;
+    width: 23%;
+}
+.lp1 img {
+    transform: scale(1.15);
+}
+.lp2 {
+    animation: fadeInTop 0.8s ease-out forwards;
+    animation-delay: 0.2s;
+    width: 72%;
+}
+.lp2 img {
+    transform: translateY(-10%);
+}
+.lp3 {
+    animation: fadeInRight 0.8s ease-out forwards;
+    animation-delay: 0.5s;
+    width:5%;
+    padding:0 !important;
+}
+.lp3 img {
+    transform: translateY(-20%);
+}
+@keyframes fadeInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-50px) rotate(-90deg);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+@keyframes fadeInTop {
+    from {
+        opacity: 0;
+        transform: translateY(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+@keyframes fadeInRight {
+    from {
+        opacity: 0;
+        transform: translateX(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
 }

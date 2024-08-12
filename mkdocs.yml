@@ -60,6 +60,7 @@ nav:
   - Home: index.md
   - Documentation:
     - Getting started: getting-started.md
+    - Origins: origins.md
     - Roadmap: roadmap.md
     - Technical doc:
       - CLI tool: cli-tool.md
