@@ -18,14 +18,14 @@
 @media screen and (min-width: 60em) {
     body:has(h1[id=blog]) .md-sidebar,
     body:has(#homeh1) .md-sidebar {
-        visibility: hidden;
+        display: none;
     }
     body:has(#homeh1) .md-main__inner {
-        flex-direction: column;
         align-items: center;
     }
     body:has(#homeh1) .md-content {
         max-width: 736px;
+        margin: auto;
     }
 }
 
@@ -43,7 +43,7 @@ aside.md-source-file * {
 #homeh1 span {display: none}
 #homeh1 {margin-bottom: 0}
 #homeh2 {margin-top: 0; font-size: 1.3em; font-style: italic; margin-bottom: 2em}
-aarticle:has(#homeh1) {text-align: center}
+article:has(#homeh1) .md-source-file {display: none}
 
 .logo {
     width: 100%;
