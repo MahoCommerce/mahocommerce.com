@@ -16,7 +16,9 @@
 
 /* hide sidebar for blog index */
 @media screen and (min-width: 60em) {
-    body:has(h1[id=blog]) .md-sidebar,
+    body:has(h1[id=blog]) .md-sidebar {
+        visibility: hidden;
+    }
     body:has(#homeh1) .md-sidebar {
         display: none;
     }
