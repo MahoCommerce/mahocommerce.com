@@ -35,9 +35,6 @@ plugins:
       post_url_format: "{date}/{slug}"
   - minify:
       minify_html: true
-  - git-revision-date-localized:
-      type: date
-      fallback_to_build_date: true
 
 markdown_extensions:
   - pymdownx.emoji:

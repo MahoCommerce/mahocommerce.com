@@ -58,14 +58,64 @@ This tool is inspired by [Laravel Artisan](https://laravel.com/docs/11.x/artisan
 
 ## Available commands
 
-The list of the built-in commands is growing rapidly, at the moment of writing it is exactly the one listed above,
-but if you run Maho's CLI tool in the next few days you'll probably find more commands to run.
+The list of the built-in commands is growing rapidly, at the moment yon can either run
+`./maho` within your Maho based project or you can check
+[Maho CLI commands folder](https://github.com/MahoCommerce/maho/tree/main/lib/MahoCLI/Commands)
+within our GitHub repository.
 
 All commands should be self-explanatory, also thanks to the inline descriptions.
 
 ## Add your custom commands
 
-At the moment this is not possible, we will definitely work on this as the task in already on 
-[our roadmap](https://github.com/orgs/MahoCommerce/projects/2/views/1).  
-[Contact us](community/get-involved.md) if you want to help with the development, 
-or if you have ideas on what we should add to the Maho's CLI tool. 
+1. Create `lib/MahoCLI/Commands` in the main folder of your project
+2. Create your command file, eg `MyCustomCommand.php` in `lib/MahoCLI/Commands` just like:
+```php
+<?php
+
+namespace MahoCLI\Commands;
+
+use Symfony\Component\Console\Attribute\AsCommand;
+use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Output\OutputInterface;
+
+#[AsCommand(
+    name: 'my-custom-command',
+    description: 'This command is just a test'
+)]
+class MyCustomCommand extends BaseMahoCommand
+{
+    protected function execute(InputInterface $input, OutputInterface $output): int
+    {
+        $output->writeln("<info>IT WORKED!</info>");
+        return Command::SUCCESS;
+    }
+}
+```
+3. Add a PSR4 autoload configuration in your `composer.json`
+```
+"autoload": {
+    "psr-4": {
+        "MahoCLI\\": "lib/MahoCLI"
+    }
+}
+```
+4. run `composer dump-autoload`
+
+Now you can run `./maho` and you will see it appear in the list of available commands:
+```
+Available commands:
+  completion                    Dump the shell completion script
+  help                          Display help for a command
+  install                       Install Maho
+  list                          List commands
+  my-custom-command             This command is just a test
+  serve                         Run Maho with the built in web server
+```
+
+and you will be able to run it with
+
+```
+$ ./maho my-custom-command
+IT WORKED!
+```
