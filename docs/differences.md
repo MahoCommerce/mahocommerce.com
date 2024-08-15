@@ -11,15 +11,26 @@ Differences between Maho and Magento 1 because are documented in
 
 ## Differences between Maho and OpenMage
 
+![Structure of a basic Maho project](/assets/basic-project-structure.png){ width=200 loading=lazy align=left }
+
 ### Project structure
 
+The first task we wanted to develop was a complete overhaul of the store's project structure, without the need for the
+original M1 composer plugin to copy (and duplicate) all the files from the core to the project's root directory.
 
+This allows for a modern and lean project structure, like any other PHP based project you can work on since quite
+some years.
+
+**In this picture you see a basic Maho project right after installation.** Pretty clean right?
+
+Whatever is in your local project overrides whatever is in composer-installed modules, which override Maho's core.
+
+<div style="clear: both"></div>
 
 ### Built-in command line tool
 
 With previous M1 based project you had some basic scripts in the `shell/` directory but everybody was relying on
 [MageRun](https://magerun.net/){:target="_blank"} for anything slightly more advanced.
-
 
 To know more, check the [complete documentation of Maho's CLI tool](cli-tool.md).
 
@@ -31,3 +42,8 @@ problem for a quick and effective development of the whole platform.
 This is why, at Maho, we decided to maintain internally both the [CLI tool](cli-tool.md), the
 [composer plugin](https://github.com/MahoCommerce/maho-composer-plugin){:target="_blank"} and the
 [PHPStan plugin](https://github.com/MahoCommerce/maho-phpstan-plugin){:target="_blank"}.
+
+### Other differences
+
+There are many more minor differences, it's difficult to list them all, please refer to our changelog and our release
+notes for a complete list release-by-release.
