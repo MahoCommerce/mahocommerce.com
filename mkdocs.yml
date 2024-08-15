@@ -27,7 +27,10 @@ extra_css:
 
 plugins:
   - search
-  - social
+  - social:
+      cards_layout_options:
+        logo: docs/assets/maho-logo.svg
+        background_color: "#ADB41A"
   - awesome-pages
   - blog:
       blog_dir: blog
@@ -58,6 +61,7 @@ nav:
   - Documentation:
     - Getting started: getting-started.md
     - Origins: origins.md
+    - Differences: differences.md
     - Roadmap: roadmap.md
     - Technical doc:
       - CLI tool: cli-tool.md
