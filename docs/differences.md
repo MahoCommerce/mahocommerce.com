@@ -43,6 +43,11 @@ This is why, at Maho, we decided to maintain internally both the [CLI tool](cli-
 [composer plugin](https://github.com/MahoCommerce/maho-composer-plugin){:target="_blank"} and the
 [PHPStan plugin](https://github.com/MahoCommerce/maho-phpstan-plugin){:target="_blank"}.
 
+### Legacy backend theme
+
+The legacy theme for the backend (the one we all know from Magento1) is deprecated and not selectable anymore,
+every Maho project will have the modern theme for the backend.
+
 ### Other differences
 
 There are many more minor differences, it's difficult to list them all, please refer to our changelog and our release
