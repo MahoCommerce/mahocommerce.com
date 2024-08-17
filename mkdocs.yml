@@ -73,8 +73,10 @@ nav:
       - Cron setup: cron.md
       - Robots.txt: robotstxt.md
     - Reference:
-      #- REST API:
-      #    - Introduction: api/rest/introduction.md
+      - REST API:
+          - Introduction: api/rest/introduction.md
+          - Common HTTP status codes: api/rest/common_http_status_codes.md
+          - Response formats: api/rest/response_formats.md
       - SOAP API:
           - Introduction: api/soap.md
           - Catalog Category: api/soap/catalog-category.md
