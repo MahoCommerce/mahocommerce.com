@@ -39,9 +39,9 @@ function getSomeRandomCategory(&$categories, $targetLevel, $currentLevel = 0) {
         return false;
     }
     if ($targetLevel == $currentLevel) {
-        return $categories\[array\_rand($categories)\];
+        return $categories\[array_rand($categories)\];
     } else {
-        return getSomeRandomCategory($categories\[array\_rand($categories)\]\['children'\], $targetLevel + 1);
+        return getSomeRandomCategory($categories\[array_rand($categories)\]\['children'\], $targetLevel + 1);
     }
 }
 
@@ -57,24 +57,24 @@ $newCategoryId = $proxy->call(
 $sessionId,
 'category.create',
 array(
-$selectedCategory\['category\_id'\],
+$selectedCategory\['category_id'\],
 array(
 'name'=>'Newopenerp',
-'is\_active'=>1,
-'include\_in\_menu'=>2,
-'available\_sort\_by'=>'position',
-'default\_sort\_by'=>'position'
+'is_active'=>1,
+'include_in_menu'=>2,
+'available_sort_by'=>'position',
+'default_sort_by'=>'position'
 )
 )
 );
 
-$newData = array('is\_active'=>1);
+$newData = array('is_active'=>1);
 // update created category on German store view
 $proxy->call($sessionId, 'category.update', array($newCategoryId, $newData, 'german'));
 
-$firstLevel = $proxy->call($sessionId, 'category.level', array(null, 'german', $selectedCategory\['category\_id'\]));
+$firstLevel = $proxy->call($sessionId, 'category.level', array(null, 'german', $selectedCategory\['category_id'\]));
 
-var\_dump($firstLevel);
+var_dump($firstLevel);
 
 // If you wish remove category, uncomment next line
 //$proxy->call($sessionId, 'category.delete', $newCategoryId);
@@ -90,7 +90,7 @@ $categoryId = 5; // Put here your category id
 $storeId = 1; // You can add store level
 
 $assignedProducts = $proxy->call($sessionId, 'category.assignedProducts', array($categoryId, $storeId));
-var\_dump($assignedProducts); // Will output assigned products.
+var_dump($assignedProducts); // Will output assigned products.
 
 // Assign product
 $proxy->call($sessionId, 'category.assignProduct', array($categoryId, 'someProductSku', 5));
@@ -106,7 +106,7 @@ $proxy->call($sessionId, 'category.removeProduct', array($categoryId, 'someProdu
 
 **Method:**
 
--   catalog\_category.assignedProducts (SOAP V1)
+-   catalog_category.assignedProducts (SOAP V1)
 -   catalogCategoryAssignedProducts (SOAP V2)
 
 Retrieve the list of products assigned to a required category.
@@ -132,7 +132,7 @@ The **catalogAssignedProduct** content is as follows:
 
 | Type | Name | Description |
 | --- | --- | --- |
-| int | product\_id | ID of the assigned product |
+| int | product_id | ID of the assigned product |
 | string | type | Product type |
 | int | set | Attribute set ID |
 | string | sku | Product SKU |
@@ -146,8 +146,8 @@ The **catalogAssignedProduct** content is as follows:
 $client = new SoapClient('http://magentohost/api/soap/?wsdl');
 $session = $client->login('apiUser', 'apiKey');
 
-$result = $client->call($session, 'catalog\_category.assignedProducts', '4');
-var\_dump($result);
+$result = $client->call($session, 'catalog_category.assignedProducts', '4');
+var_dump($result);
 
 // If you don't need the session anymore
 //$client->endSession($session);
@@ -156,21 +156,21 @@ var\_dump($result);
 **Request Example SOAP V2**
 
 ```php
-$proxy = new SoapClient('http://magentohost/api/v2\_soap/?wsdl'); // TODO : change url
+$proxy = new SoapClient('http://magentohost/api/v2_soap/?wsdl'); // TODO : change url
 $sessionId = $proxy->login('apiUser', 'apiKey'); // TODO : change login and pwd if necessary
 
 $result = $proxy->catalogCategoryAssignedProducts($sessionId, '4');
-var\_dump($result);
+var_dump($result);
 ```
 
 **Request Example SOAP V2 (WS-I Compliance Mode)**
 
 ```php
-$proxy = new SoapClient('http://magentohost/api/v2\_soap/?wsdl');
+$proxy = new SoapClient('http://magentohost/api/v2_soap/?wsdl');
 $sessionId = $proxy->login((object)array('username' => 'apiUser', 'apiKey' => 'apiKey'));
 
 $result = $proxy->catalogCategoryAssignedProducts((object)array('sessionId' => $sessionId->result, 'categoryId' => '4'));
-var\_dump($result->result);
+var_dump($result->result);
 ```
 
 **Response Example SOAP V1**
@@ -179,14 +179,14 @@ var\_dump($result->result);
 array
   0 =>
     array
-      'product\_id' => string '1' (length=1)
+      'product_id' => string '1' (length=1)
       'type' => string 'simple' (length=6)
       'set' => string '4' (length=1)
       'sku' => string 'n2610' (length=5)
       'position' => string '1' (length=1)
   1 =>
     array
-      'product\_id' => string '2' (length=1)
+      'product_id' => string '2' (length=1)
       'type' => string 'simple' (length=6)
       'set' => string '4' (length=1)
       'sku' => string 'b8100' (length=5)
@@ -197,7 +197,7 @@ array
 
 **Method:**
 
--   catalog\_category.assignProduct (SOAP V1)
+-   catalog_category.assignProduct (SOAP V1)
 -   catalogCategoryAssignProduct (SOAP V2)
 
 Assign a product to the required category.
@@ -230,8 +230,8 @@ Assign a product to the required category.
 $client = new SoapClient('http://magentohost/api/soap/?wsdl');
 $session = $client->login('apiUser', 'apiKey');
 
-$result = $client->call($session, 'catalog\_category.assignProduct', array('categoryId' => '4', 'product' => '1'));
-var\_dump($result);
+$result = $client->call($session, 'catalog_category.assignProduct', array('categoryId' => '4', 'product' => '1'));
+var_dump($result);
 
 // If you don't need the session anymore
 //$client->endSession($session);
@@ -240,28 +240,28 @@ var\_dump($result);
 **Request Example SOAP V2**
 
 ```php
-$proxy = new SoapClient('http://magentohost/api/v2\_soap/?wsdl'); // TODO : change url
+$proxy = new SoapClient('http://magentohost/api/v2_soap/?wsdl'); // TODO : change url
 $sessionId = $proxy->login('apiUser', 'apiKey'); // TODO : change login and pwd if necessary
 
 $result = $proxy->catalogCategoryAssignProduct($sessionId, '4', '3');
-var\_dump($result);
+var_dump($result);
 ```
 
 **Request Example SOAP V2 (WS-I Compliance Mode)**
 
 ```php
-$proxy = new SoapClient('http://magentohost/api/v2\_soap/?wsdl');
+$proxy = new SoapClient('http://magentohost/api/v2_soap/?wsdl');
 $sessionId = $proxy->login((object)array('username' => 'apiUser', 'apiKey' => 'apiKey'));
 
 $result = $proxy->catalogCategoryAssignProduct((object)array('sessionId' => $sessionId->result, 'categoryId' => '5', 'productId' => '1', 'position' => '5'));
-var\_dump($result->result);
+var_dump($result->result);
 ```
 
 ## Create Category
 
 **Method:**
 
--   catalog\_category.create (SOAP V1)
+-   catalog_category.create (SOAP V1)
 -   catalogCategoryCreate (SOAP V2)
 
 Create a new category and return its ID.
@@ -283,36 +283,36 @@ Create a new category and return its ID.
 
 | Type | Name | Description |
 | --- | --- | --- |
-| int | attribute\_id | ID of the created category |
+| int | attribute_id | ID of the created category |
 
 The **categoryData** content is as follows:
 
 | Type | Name | Description |
 | --- | --- | --- |
 | string | name | Name of the created category |
-| int | is\_active | Defines whether the category will be visible in the frontend |
+| int | is_active | Defines whether the category will be visible in the frontend |
 | int | position | Position of the created category (optional) |
-| ArrayOfString | available\_sort\_by | All available options by which products in the category can be sorted |
-| string | custom\_design | The custom design for the category (optional) |
-| int | custom\_apply\_to\_products | Apply the custom design to all products assigned to the category (optional) |
-| string | custom\_design\_from | Date starting from which the custom design will be applied to the category (optional) |
-| string | custom\_design\_to | Date till which the custom design will be applied to the category (optional) |
-| string | custom\_layout\_update | Custom layout update (optional) |
-| string | default\_sort\_by | The default option by which products in the category are sorted |
+| ArrayOfString | available_sort_by | All available options by which products in the category can be sorted |
+| string | custom_design | The custom design for the category (optional) |
+| int | custom_apply_to_products | Apply the custom design to all products assigned to the category (optional) |
+| string | custom_design_from | Date starting from which the custom design will be applied to the category (optional) |
+| string | custom_design_to | Date till which the custom design will be applied to the category (optional) |
+| string | custom_layout_update | Custom layout update (optional) |
+| string | default_sort_by | The default option by which products in the category are sorted |
 | string | description | Category description (optional) |
-| string | display\_mode | Content that will be displayed on the category view page (optional) |
-| int | is\_anchor | Defines whether the category will be anchored (optional) |
-| int | landing\_page | Landing page (optional) |
-| string | meta\_description | Category meta description (optional) |
-| string | meta\_keywords | Category meta keywords (optional) |
-| string | meta\_title | Category meta title (optional) |
-| string | page\_layout | Type of page layout that the category should use (optional) |
-| string | url\_key | A relative URL path which can be entered in place of the standard target path (optional) |
-| int | include\_in\_menu | Defines whether the category is visible on the top menu bar |
-| string | filter\_price\_range | Price range of each price level displayed in the layered navigation block (optional) |
-| int | custom\_use\_parent\_settings | Defines whether the category will inherit custom design settings of the category to which it is assigned. 1 - Yes, 0 - No (optional) |
+| string | display_mode | Content that will be displayed on the category view page (optional) |
+| int | is_anchor | Defines whether the category will be anchored (optional) |
+| int | landing_page | Landing page (optional) |
+| string | meta_description | Category meta description (optional) |
+| string | meta_keywords | Category meta keywords (optional) |
+| string | meta_title | Category meta title (optional) |
+| string | page_layout | Type of page layout that the category should use (optional) |
+| string | url_key | A relative URL path which can be entered in place of the standard target path (optional) |
+| int | include_in_menu | Defines whether the category is visible on the top menu bar |
+| string | filter_price_range | Price range of each price level displayed in the layered navigation block (optional) |
+| int | custom_use_parent_settings | Defines whether the category will inherit custom design settings of the category to which it is assigned. 1 - Yes, 0 - No (optional) |
 
-**Notes**: The **position** parameter is deprecated, the category will be positioned anyway in the end of the list and you can not set the position directly. You should use the catalog\_category.move method instead. You cannot also assign a root category to the specified store.
+**Notes**: The **position** parameter is deprecated, the category will be positioned anyway in the end of the list and you can not set the position directly. You should use the catalog_category.move method instead. You cannot also assign a root category to the specified store.
 
 ### Examples
 
@@ -322,92 +322,92 @@ The **categoryData** content is as follows:
 $client = new SoapClient('http://magentohost/api/soap/?wsdl');
 $session = $client->login('apiUser', 'apiKey');
 
-$result = $client->call($session, 'catalog\_category.create', array(2, array(
+$result = $client->call($session, 'catalog_category.create', array(2, array(
 'name' => 'Category name',
-'is\_active' => 1,
+'is_active' => 1,
 'position' => 1,
 //<!-- position parameter is deprecated, category anyway will be positioned in the end of list
-//and you can not set position directly, use catalog\_category.move instead -->
-'available\_sort\_by' => 'position',
-'custom\_design' => null,
-'custom\_apply\_to\_products' => null,
-'custom\_design\_from' => null,
-'custom\_design\_to' => null,
-'custom\_layout\_update' => null,
-'default\_sort\_by' => 'position',
+//and you can not set position directly, use catalog_category.move instead -->
+'available_sort_by' => 'position',
+'custom_design' => null,
+'custom_apply_to_products' => null,
+'custom_design_from' => null,
+'custom_design_to' => null,
+'custom_layout_update' => null,
+'default_sort_by' => 'position',
 'description' => 'Category description',
-'display\_mode' => null,
-'is\_anchor' => 0,
-'landing\_page' => null,
-'meta\_description' => 'Category meta description',
-'meta\_keywords' => 'Category meta keywords',
-'meta\_title' => 'Category meta title',
-'page\_layout' => 'two\_columns\_left',
-'url\_key' => 'url-key',
-'include\_in\_menu' => 1,
+'display_mode' => null,
+'is_anchor' => 0,
+'landing_page' => null,
+'meta_description' => 'Category meta description',
+'meta_keywords' => 'Category meta keywords',
+'meta_title' => 'Category meta title',
+'page_layout' => 'two_columns_left',
+'url_key' => 'url-key',
+'include_in_menu' => 1,
 )));
 
-var\_dump ($result);
+var_dump ($result);
 ```
 
 **Request Example SOAP V2**
 
 ```php
-$client = new SoapClient('http://magentohost/api/v2\_soap/?wsdl');
+$client = new SoapClient('http://magentohost/api/v2_soap/?wsdl');
 $session = $client->login('apiUser', 'apiKey');
 
 $result = $client->catalogCategoryCreate($session, 2, array(
 'name' => 'Category name 2',
-'is\_active' => 1,
+'is_active' => 1,
 'position' => 1,
 //<!-- position parameter is deprecated, category anyway will be positioned in the end of list
-//and you can not set position directly, use catalog\_category.move instead -->
-'available\_sort\_by' => array('position'),
-'custom\_design' => null,
-'custom\_apply\_to\_products' => null,
-'custom\_design\_from' => null,
-'custom\_design\_to' => null,
-'custom\_layout\_update' => null,
-'default\_sort\_by' => 'position',
+//and you can not set position directly, use catalog_category.move instead -->
+'available_sort_by' => array('position'),
+'custom_design' => null,
+'custom_apply_to_products' => null,
+'custom_design_from' => null,
+'custom_design_to' => null,
+'custom_layout_update' => null,
+'default_sort_by' => 'position',
 'description' => 'Category description',
-'display\_mode' => null,
-'is\_anchor' => 0,
-'landing\_page' => null,
-'meta\_description' => 'Category meta description',
-'meta\_keywords' => 'Category meta keywords',
-'meta\_title' => 'Category meta title',
-'page\_layout' => 'two\_columns\_left',
-'url\_key' => 'url-key',
-'include\_in\_menu' => 1,
+'display_mode' => null,
+'is_anchor' => 0,
+'landing_page' => null,
+'meta_description' => 'Category meta description',
+'meta_keywords' => 'Category meta keywords',
+'meta_title' => 'Category meta title',
+'page_layout' => 'two_columns_left',
+'url_key' => 'url-key',
+'include_in_menu' => 1,
 ));
 
-var\_dump ($result);
+var_dump ($result);
 ```
 
 **Request Example SOAP V2 (WS-I Compliance Mode)**
 
 ```php
-$proxy = new SoapClient('http://magentohost/api/v2\_soap/?wsdl');
+$proxy = new SoapClient('http://magentohost/api/v2_soap/?wsdl');
 $sessionId = $proxy->login((object)array('username' => 'apiUser', 'apiKey' => 'apiKey'));
 
 $result = $proxy->catalogCategoryCreate((object)array('sessionId' => $sessionId->result, 'parentId' => '5', 'categoryData' => ((object)array(
 'name' => 'category',
-'is\_active' => '1',
+'is_active' => '1',
 'position' => '1',
-'available\_sort\_by' => array('position'),
-'default\_sort\_by' => 'position',
+'available_sort_by' => array('position'),
+'default_sort_by' => 'position',
 'description' => 'Category description',
-'is\_anchor' => '1',
-'include\_in\_menu' => '1'
+'is_anchor' => '1',
+'include_in_menu' => '1'
 ))));
-var\_dump($result->result);
+var_dump($result->result);
 ```
 
 ## Current Store
 
 **Method:**
 
--   catalog\_category.currentStore (SOAP V1)
+-   catalog_category.currentStore (SOAP V1)
 -   catalogCategoryCurrentStore (SOAP V2)
 
 Allows you to set/get the current store view.
@@ -438,24 +438,24 @@ $client = new SoapClient('http://magentohost/api/soap/?wsdl');
 $session = $client->login('apiUser', 'apiKey');
 
 $result = $client->call($session, 'category.currentStore', '1');
-var\_dump ($result);
+var_dump ($result);
 ```
 
 **Request Example SOAP V2**
 
 ```php
-$proxy = new SoapClient('http://magentohost/api/v2\_soap/?wsdl'); // TODO : change url
+$proxy = new SoapClient('http://magentohost/api/v2_soap/?wsdl'); // TODO : change url
 $sessionId = $proxy->login('apiUser', 'apiKey'); // TODO : change login and pwd if necessary
 
 $result = $proxy->catalogCategoryCurrentStore($sessionId, '1');
-var\_dump($result);
+var_dump($result);
 ```
 
 ## Category Delete
 
 **Method:**
 
--   catalog\_category.delete (SOAP V1)
+-   catalog_category.delete (SOAP V1)
 -   catalogCategoryDelete (SOAP V2)
 
 Allows you to delete the required category.
@@ -485,8 +485,8 @@ Allows you to delete the required category.
 $client = new SoapClient('http://magentohost/api/soap/?wsdl');
 $session = $client->login('apiUser', 'apiKey');
 
-$result = $client->call($session, 'catalog\_category.delete', '7');
-var\_dump($result);
+$result = $client->call($session, 'catalog_category.delete', '7');
+var_dump($result);
 
 // If you don't need the session anymore
 //$client->endSession($session);
@@ -495,28 +495,28 @@ var\_dump($result);
 **Request Example SOAP V2**
 
 ```php
-$proxy = new SoapClient('http://magentohost/api/v2\_soap/?wsdl'); // TODO : change url
+$proxy = new SoapClient('http://magentohost/api/v2_soap/?wsdl'); // TODO : change url
 $sessionId = $proxy->login('apiUser', 'apiKey'); // TODO : change login and pwd if necessary
 
 $result = $proxy->catalogCategoryDelete($sessionId, '7');
-var\_dump($result);
+var_dump($result);
 ```
 
 **Request Example SOAP V2 (WS-I Compliance Mode)**
 
 ```php
-$proxy = new SoapClient('http://magentohost/api/v2\_soap/?wsdl');
+$proxy = new SoapClient('http://magentohost/api/v2_soap/?wsdl');
 $sessionId = $proxy->login((object)array('username' => 'apiUser', 'apiKey' => 'apiKey'));
 
 $result = $proxy->catalogCategoryDelete((object)array('sessionId' => $sessionId->result, 'categoryId' => '7'));
-var\_dump($result->result);
+var_dump($result->result);
 ```
 
 ## Category Info
 
 **Method:**
 
--   catalog\_category.info (SOAP V1)
+-   catalog_category.info (SOAP V1)
 -   catalogCategoryInfo (SOAP V2)
 
 Allows you to retrieve information about the required category.
@@ -544,38 +544,38 @@ The **catalogCategoryInfo** content is as follows:
 
 | Type | Name | Description |
 | --- | --- | --- |
-| string | category\_id | Category ID |
-| int | is\_active | Defines whether the category is active |
+| string | category_id | Category ID |
+| int | is_active | Defines whether the category is active |
 | string | position | Category position |
 | string | level | Category level |
-| string | parent\_id | Parent category ID |
-| string | all\_children | All child categories of the current category |
+| string | parent_id | Parent category ID |
+| string | all_children | All child categories of the current category |
 | string | children | Names of direct child categories |
-| string | created\_at | Date when the category was created |
-| string | updated\_at | Date when the category was updated |
+| string | created_at | Date when the category was created |
+| string | updated_at | Date when the category was updated |
 | string | name | Category name |
-| string | url\_key | A relative URL path which can be entered in place of the standard target path (optional) |
+| string | url_key | A relative URL path which can be entered in place of the standard target path (optional) |
 | string | description | Category description |
-| string | meta\_title | Category meta title |
-| string | meta\_keywords | Category meta keywords |
-| string | meta\_description | Category meta description |
+| string | meta_title | Category meta title |
+| string | meta_keywords | Category meta keywords |
+| string | meta_description | Category meta description |
 | string | path | Path |
-| string | url\_path | URL path |
-| int | children\_count | Number of child categories |
-| string | display\_mode | Content that will be displayed on the category view page (optional) |
-| int | is\_anchor | Defines whether the category is anchored |
-| ArrayOfString | available\_sort\_by | All available options by which products in the category can be sorted |
-| string | custom\_design | The custom design for the category (optional) |
-| string | custom\_apply\_to\_products | Apply the custom design to all products assigned to the category (optional) |
-| string | custom\_design\_from | Date starting from which the custom design will be applied to the category (optional) |
-| string | custom\_design\_to | Date till which the custom design will be applied to the category (optional) |
-| string | page\_layout | Type of page layout that the category should use (optional) |
-| string | custom\_layout\_update | Custom layout update (optional) |
-| string | default\_sort\_by | The default option by which products in the category are sorted |
-| int | landing\_page | Landing page (optional) |
-| int | include\_in\_menu | Defines whether the category is available on the Magento top menu bar |
-| string | filter\_price\_range | Price range of each price level displayed in the layered navigation block |
-| int | custom\_use\_parent\_settings | Defines whether the category will inherit custom design settings of the category to which it is assigned. 1 - Yes, 0 - No |
+| string | url_path | URL path |
+| int | children_count | Number of child categories |
+| string | display_mode | Content that will be displayed on the category view page (optional) |
+| int | is_anchor | Defines whether the category is anchored |
+| ArrayOfString | available_sort_by | All available options by which products in the category can be sorted |
+| string | custom_design | The custom design for the category (optional) |
+| string | custom_apply_to_products | Apply the custom design to all products assigned to the category (optional) |
+| string | custom_design_from | Date starting from which the custom design will be applied to the category (optional) |
+| string | custom_design_to | Date till which the custom design will be applied to the category (optional) |
+| string | page_layout | Type of page layout that the category should use (optional) |
+| string | custom_layout_update | Custom layout update (optional) |
+| string | default_sort_by | The default option by which products in the category are sorted |
+| int | landing_page | Landing page (optional) |
+| int | include_in_menu | Defines whether the category is available on the Magento top menu bar |
+| string | filter_price_range | Price range of each price level displayed in the layered navigation block |
+| int | custom_use_parent_settings | Defines whether the category will inherit custom design settings of the category to which it is assigned. 1 - Yes, 0 - No |
 
 ### Examples
 
@@ -585,8 +585,8 @@ The **catalogCategoryInfo** content is as follows:
 $client = new SoapClient('http://magentohost/api/soap/?wsdl');
 $session = $client->login('apiUser', 'apiKey');
 
-$result = $client->call($session, 'catalog\_category.info', '5');
-var\_dump($result);
+$result = $client->call($session, 'catalog_category.info', '5');
+var_dump($result);
 
 // If you don't need the session anymore
 //$client->endSession($session);
@@ -595,70 +595,70 @@ var\_dump($result);
 **Request Example SOAP V2**
 
 ```php
-$proxy = new SoapClient('http://magentohost/api/v2\_soap/?wsdl'); // TODO : change url
+$proxy = new SoapClient('http://magentohost/api/v2_soap/?wsdl'); // TODO : change url
 $sessionId = $proxy->login('apiUser', 'apiKey'); // TODO : change login and pwd if necessary
 
 $result = $proxy->catalogCategoryInfo($sessionId, '5');
-var\_dump($result);
+var_dump($result);
 ```
 
 **Request Example SOAP V2 (WS-I Compliance Mode)**
 
 ```php
-$proxy = new SoapClient('http://magentohost/api/v2\_soap/?wsdl');
+$proxy = new SoapClient('http://magentohost/api/v2_soap/?wsdl');
 $sessionId = $proxy->login((object)array('username' => 'apiUser', 'apiKey' => 'apiKey'));
 
 $result = $proxy->catalogCategoryInfo((object)array('sessionId' => $sessionId->result, 'categoryId' => '5'));
-var\_dump($result->result);
+var_dump($result->result);
 ```
 
 **Response Example SOAP V1**
 
 ```php
 array
-  'category\_id' => string '5' (length=1)
-  'is\_active' => string '1' (length=1)
+  'category_id' => string '5' (length=1)
+  'is_active' => string '1' (length=1)
   'position' => string '1' (length=1)
   'level' => string '2' (length=1)
-  'parent\_id' => int 3
-  'increment\_id' => null
-  'created\_at' => string '2012-03-29 12:30:51' (length=19)
-  'updated\_at' => string '2012-03-29 14:25:08' (length=19)
+  'parent_id' => int 3
+  'increment_id' => null
+  'created_at' => string '2012-03-29 12:30:51' (length=19)
+  'updated_at' => string '2012-03-29 14:25:08' (length=19)
   'name' => string 'Mobile Phones' (length=13)
-  'url\_key' => string 'mobile-phones' (length=13)
+  'url_key' => string 'mobile-phones' (length=13)
   'thumbnail' => null
   'description' => string 'Category for cell phones' (length=24)
   'image' => null
-  'meta\_title' => string 'Cell Phones' (length=11)
-  'meta\_keywords' => string 'cell, phone' (length=11)
-  'meta\_description' => null
-  'include\_in\_menu' => string '1' (length=1)
+  'meta_title' => string 'Cell Phones' (length=11)
+  'meta_keywords' => string 'cell, phone' (length=11)
+  'meta_description' => null
+  'include_in_menu' => string '1' (length=1)
   'path' => string '1/3/4' (length=5)
-  'all\_children' => string '4' (length=1)
-  'path\_in\_store' => null
+  'all_children' => string '4' (length=1)
+  'path_in_store' => null
   'children' => string '' (length=0)
-  'url\_path' => string 'mobile-phones.html' (length=18)
-  'children\_count' => string '0' (length=1)
-  'display\_mode' => string 'PRODUCTS' (length=8)
-  'landing\_page' => null
-  'is\_anchor' => string '1' (length=1)
-  'available\_sort\_by' => null
-  'default\_sort\_by' => null
-  'filter\_price\_range' => null
-  'custom\_use\_parent\_settings' => string '1' (length=1)
-  'custom\_apply\_to\_products' => null
-  'custom\_design' => null
-  'custom\_design\_from' => null
-  'custom\_design\_to' => null
-  'page\_layout' => null
-  'custom\_layout\_update' => null
+  'url_path' => string 'mobile-phones.html' (length=18)
+  'children_count' => string '0' (length=1)
+  'display_mode' => string 'PRODUCTS' (length=8)
+  'landing_page' => null
+  'is_anchor' => string '1' (length=1)
+  'available_sort_by' => null
+  'default_sort_by' => null
+  'filter_price_range' => null
+  'custom_use_parent_settings' => string '1' (length=1)
+  'custom_apply_to_products' => null
+  'custom_design' => null
+  'custom_design_from' => null
+  'custom_design_to' => null
+  'page_layout' => null
+  'custom_layout_update' => null
 ```
 
 ## Category Level
 
 **Method:**
 
--   catalog\_category.level (SOAP V1)
+-   catalog_category.level (SOAP V1)
 -   catalogCategoryLevel (SOAP V2)
 
 Allows you to retrieve one level of categories by a website, a store view, or a parent category.
@@ -686,10 +686,10 @@ The **CatalogCategoryEntitityNoChildren** content is as follows:
 
 | Type | Name | Description |
 | --- | --- | --- |
-| int | category\_id | Category ID |
-| int | parent\_id | Parent category ID |
+| int | category_id | Category ID |
+| int | parent_id | Parent category ID |
 | string | name | Category name |
-| int | is\_active | Defines whether the category is active |
+| int | is_active | Defines whether the category is active |
 | int | position | Category position |
 | int | level | Category level |
 
@@ -701,8 +701,8 @@ The **CatalogCategoryEntitityNoChildren** content is as follows:
 $client = new SoapClient('http://magentohost/api/soap/?wsdl');
 $session = $client->login('apiUser', 'apiKey');
 
-$result = $client->call($session, 'catalog\_category.level');
-var\_dump($result);
+$result = $client->call($session, 'catalog_category.level');
+var_dump($result);
 
 // If you don't need the session anymore
 //$client->endSession($session);
@@ -711,11 +711,11 @@ var\_dump($result);
 **Request Example SOAP V2**
 
 ```php
-$proxy = new SoapClient('http://magentohost/api/v2\_soap/?wsdl'); // TODO : change url
+$proxy = new SoapClient('http://magentohost/api/v2_soap/?wsdl'); // TODO : change url
 $sessionId = $proxy->login('apiUser', 'apiKey'); // TODO : change login and pwd if necessary
 
 $result = $proxy->catalogCategoryLevel($sessionId);
-var\_dump($result);
+var_dump($result);
 ```
 
 **Response Example SOAP V1**
@@ -724,18 +724,18 @@ var\_dump($result);
 array
   0 =>
     array
-      'category\_id' => string '2' (length=1)
-      'parent\_id' => int 1
+      'category_id' => string '2' (length=1)
+      'parent_id' => int 1
       'name' => string 'Default Category' (length=16)
-      'is\_active' => string '1' (length=1)
+      'is_active' => string '1' (length=1)
       'position' => string '1' (length=1)
       'level' => string '1' (length=1)
   1 =>
     array
-      'category\_id' => string '3' (length=1)
-      'parent\_id' => int 1
-      'name' => string 'root\_category' (length=13)
-      'is\_active' => string '1' (length=1)
+      'category_id' => string '3' (length=1)
+      'parent_id' => int 1
+      'name' => string 'root_category' (length=13)
+      'is_active' => string '1' (length=1)
       'position' => string '2' (length=1)
       'level' => string '1' (length=1)
 ```
@@ -744,7 +744,7 @@ array
 
 **Method:**
 
--   catalog\_category.move (SOAP V1)
+-   catalog_category.move (SOAP V1)
 -   catalogCategoryMove (SOAP V2)
 
 Allows you to move the required category in the category tree.
@@ -776,8 +776,8 @@ Allows you to move the required category in the category tree.
 $client = new SoapClient('http://magentohost/api/soap/?wsdl');
 $session = $client->login('apiUser', 'apiKey');
 
-$result = $client->call($session, 'catalog\_category.move', array('categoryId' => '4', 'parentId' => '3'));
-var\_dump($result);
+$result = $client->call($session, 'catalog_category.move', array('categoryId' => '4', 'parentId' => '3'));
+var_dump($result);
 
 // If you don't need the session anymore
 //$client->endSession($session);
@@ -786,21 +786,21 @@ var\_dump($result);
 **Request Example SOAP V2**
 
 ```php
-$proxy = new SoapClient('http://magentohost/api/v2\_soap/?wsdl'); // TODO : change url
+$proxy = new SoapClient('http://magentohost/api/v2_soap/?wsdl'); // TODO : change url
 $sessionId = $proxy->login('apiUser', 'apiKey'); // TODO : change login and pwd if necessary
 
 $result = $proxy->catalogCategoryMove($sessionId, '4', '3');
-var\_dump($result);
+var_dump($result);
 ```
 
 **Request Example SOAP V2 (WS-I Compliance Mode)**
 
 ```php
-$proxy = new SoapClient('http://magentohost/api/v2\_soap/?wsdl');
+$proxy = new SoapClient('http://magentohost/api/v2_soap/?wsdl');
 $sessionId = $proxy->login((object)array('username' => 'apiUser', 'apiKey' => 'apiKey'));
 
 $result = $proxy->catalogCategoryMove((object)array('sessionId' => $sessionId->result, 'categoryId' => '19', 'parentId' => '8', 'afterId' => '4'));
-var\_dump($result->result);
+var_dump($result->result);
 ```
 
 **Note**: Please make sure that you are not moving the category to any of its own children. There are no extra checks to prevent doing it through API, and you won’t be able to fix this from the admin interface later.
@@ -809,7 +809,7 @@ var\_dump($result->result);
 
 **Method:**
 
--   catalog\_category.removeProduct (SOAP V1)
+-   catalog_category.removeProduct (SOAP V1)
 -   catalogCategoryRemoveProduct (SOAP V2)
 
 Allows you to remove the product assignment from the category.
@@ -841,8 +841,8 @@ Allows you to remove the product assignment from the category.
 $client = new SoapClient('http://magentohost/api/soap/?wsdl');
 $session = $client->login('apiUser', 'apiKey');
 
-$result = $client->call($session, 'catalog\_category.removeProduct', array('categoryId' => '4', 'product' => '3'));
-var\_dump($result);
+$result = $client->call($session, 'catalog_category.removeProduct', array('categoryId' => '4', 'product' => '3'));
+var_dump($result);
 
 // If you don't need the session anymore
 //$client->endSession($session);
@@ -851,28 +851,28 @@ var\_dump($result);
 **Request Example SOAP V2**
 
 ```php
-$proxy = new SoapClient('http://magentohost/api/v2\_soap/?wsdl'); // TODO : change url
+$proxy = new SoapClient('http://magentohost/api/v2_soap/?wsdl'); // TODO : change url
 $sessionId = $proxy->login('apiUser', 'apiKey'); // TODO : change login and pwd if necessary
 
 $result = $proxy->catalogCategoryRemoveProduct($sessionId, '4', '3');
-var\_dump($result);
+var_dump($result);
 ```
 
 **Request Example SOAP V2 (WS-I Compliance Mode)**
 
 ```php
-$proxy = new SoapClient('http://magentohost/api/v2\_soap/?wsdl');
+$proxy = new SoapClient('http://magentohost/api/v2_soap/?wsdl');
 $sessionId = $proxy->login((object)array('username' => 'apiUser', 'apiKey' => 'apiKey'));
 
 $result = $proxy->catalogCategoryRemoveProduct((object)array('sessionId' => $sessionId->result, 'categoryId' => '4', 'productId' => '3'));
-var\_dump($result->result);
+var_dump($result->result);
 ```
 
 ## Category Tree
 
 **Method:**
 
--   catalog\_category.tree (SOAP V1)
+-   catalog_category.tree (SOAP V1)
 -   catalogCategoryTree (SOAP V2)
 
 Allows you to retrieve the hierarchical tree of categories.
@@ -899,8 +899,8 @@ The **catalogCategoryTree** content is as follows:
 
 | Type | Name | Description |
 | --- | --- | --- |
-| int | category\_id | Category ID |
-| int | parent\_id | Parent category ID |
+| int | category_id | Category ID |
+| int | parent_id | Parent category ID |
 | string | name | Category name |
 | int | position | Category position |
 | int | level | Category level |
@@ -910,10 +910,10 @@ The **catalogCategoryEntity** content is as follows:
 
 | Type | Name | Description |
 | --- | --- | --- |
-| int | category\_id | Category ID |
-| int | parent\_id | Parent category ID |
+| int | category_id | Category ID |
+| int | parent_id | Parent category ID |
 | string | name | Category name |
-| int | is\_active | defines whether the category is active |
+| int | is_active | defines whether the category is active |
 | int | position | Category position |
 | int | level | Category level |
 | array | children | Array of CatalogCategoryEntities |
@@ -926,8 +926,8 @@ The **catalogCategoryEntity** content is as follows:
 $client = new SoapClient('http://magentohost/api/soap/?wsdl');
 $session = $client->login('apiUser', 'apiKey');
 
-$result = $client->call($session, 'catalog\_category.tree');
-var\_dump($result);
+$result = $client->call($session, 'catalog_category.tree');
+var_dump($result);
 
 // If you don't need the session anymore
 //$client->endSession($session);
@@ -936,41 +936,41 @@ var\_dump($result);
 **Request Example SOAP V2**
 
 ```
-$proxy = new SoapClient('http://magentohost/api/v2\_soap/?wsdl'); // TODO : change url
+$proxy = new SoapClient('http://magentohost/api/v2_soap/?wsdl'); // TODO : change url
 $sessionId = $proxy->login('apiUser', 'apiKey'); // TODO : change login and pwd if necessary
 
 $result = $proxy->catalogCategoryTree($sessionId);
-var\_dump($result);
+var_dump($result);
 ```
 
 **Request Example SOAP V2 (WS-I Compliance Mode)**
 
 ```php
-$proxy = new SoapClient('http://magentohost/api/v2\_soap/?wsdl');
+$proxy = new SoapClient('http://magentohost/api/v2_soap/?wsdl');
 $sessionId = $proxy->login((object)array('username' => 'apiUser', 'apiKey' => 'apiKey'));
 
 $result = $proxy->catalogCategoryTree((object)array('sessionId' => $sessionId->result, 'parentId' => '15'));
-var\_dump($result->result);
+var_dump($result->result);
 ```
 
 **Response Example SOAP V1**
 
 ```php
 array
-  'category\_id' => string '1' (length=1)
-  'parent\_id' => string '0' (length=1)
+  'category_id' => string '1' (length=1)
+  'parent_id' => string '0' (length=1)
   'name' => string 'Root Catalog' (length=12)
-  'is\_active' => null
+  'is_active' => null
   'position' => string '0' (length=1)
   'level' => string '0' (length=1)
   'children' =>
     array
       0 =>
         array
-          'category\_id' => string '2' (length=1)
-          'parent\_id' => string '1' (length=1)
+          'category_id' => string '2' (length=1)
+          'parent_id' => string '1' (length=1)
           'name' => string 'Default Category' (length=16)
-          'is\_active' => string '1' (length=1)
+          'is_active' => string '1' (length=1)
           'position' => string '1' (length=1)
           'level' => string '1' (length=1)
           'children' =>
@@ -978,10 +978,10 @@ array
               ...
       1 =>
         array
-          'category\_id' => string '3' (length=1)
-          'parent\_id' => string '1' (length=1)
-          'name' => string 'root\_category' (length=13)
-          'is\_active' => string '1' (length=1)
+          'category_id' => string '3' (length=1)
+          'parent_id' => string '1' (length=1)
+          'name' => string 'root_category' (length=13)
+          'is_active' => string '1' (length=1)
           'position' => string '2' (length=1)
           'level' => string '1' (length=1)
           'children' =>
@@ -993,7 +993,7 @@ array
 
 **Method:**
 
--   catalog\_category.update (SOAP V1)
+-   catalog_category.update (SOAP V1)
 -   catalogCategoryUpdate (SOAP V2)
 
 Update the required category. Note that you should specify only those parameters which you want to be updated.
@@ -1022,27 +1022,27 @@ The **catalogCategoryEntityCreate** content is as follows:
 | Type | Name | Description |
 | --- | --- | --- |
 | string | name | Name of the category to be updated |
-| int | is\_active | Defines whether the category is visible in the frontend |
+| int | is_active | Defines whether the category is visible in the frontend |
 | int | position | Position of the category to be updated |
-| arrayOfString | available\_sort\_by | All available options by which products in the category can be sorted |
-| string | custom\_design | The custom design for the category |
-| int | custom\_apply\_to\_products | Apply the custom design to all products assigned to the category |
-| string | custom\_design\_from | Date starting from which the custom design will be applied to the category |
-| string | custom\_design\_to | Date till which the custom design will be applied to the category |
-| string | custom\_layout\_update | Custom layout update |
-| string | default\_sort\_by | The default option by which products in the category are sorted |
+| arrayOfString | available_sort_by | All available options by which products in the category can be sorted |
+| string | custom_design | The custom design for the category |
+| int | custom_apply_to_products | Apply the custom design to all products assigned to the category |
+| string | custom_design_from | Date starting from which the custom design will be applied to the category |
+| string | custom_design_to | Date till which the custom design will be applied to the category |
+| string | custom_layout_update | Custom layout update |
+| string | default_sort_by | The default option by which products in the category are sorted |
 | string | description | Category description |
-| string | display\_mode | Content that will be displayed on the category view page |
-| int | is\_anchor | Defines whether the category will be anchored |
-| int | landing\_page | Landing page |
-| string | meta\_description | Category meta description |
-| string | meta\_keywords | Category meta keywords |
-| string | meta\_title | Category meta title |
-| string | page\_layout | Type of page layout that the category should use |
-| string | url\_key | A relative URL path which can be entered in place of the standard target path |
-| int | include\_in\_menu | Defines whether the category is visible on the top menu bar in the frontend |
-| string | filter\_price\_range | Price range of each price level displayed in the layered navigation block |
-| int | custom\_use\_parent\_settings | Defines whether the category will inherit custom design settings of the category to which it is assigned. 1 - Yes, 0 - No |
+| string | display_mode | Content that will be displayed on the category view page |
+| int | is_anchor | Defines whether the category will be anchored |
+| int | landing_page | Landing page |
+| string | meta_description | Category meta description |
+| string | meta_keywords | Category meta keywords |
+| string | meta_title | Category meta title |
+| string | page_layout | Type of page layout that the category should use |
+| string | url_key | A relative URL path which can be entered in place of the standard target path |
+| int | include_in_menu | Defines whether the category is visible on the top menu bar in the frontend |
+| string | filter_price_range | Price range of each price level displayed in the layered navigation block |
+| int | custom_use_parent_settings | Defines whether the category will inherit custom design settings of the category to which it is assigned. 1 - Yes, 0 - No |
 
 **Faults**:  
 _No Faults_
@@ -1055,92 +1055,92 @@ _No Faults_
 $client = new SoapClient('http://magentohost/api/soap/?wsdl');
 $session = $client->login('apiUser', 'apiKey');
 
-$result = $client->call($session, 'catalog\_category.update', array(23, array(
+$result = $client->call($session, 'catalog_category.update', array(23, array(
 'name' => 'Category name',
-'is\_active' => 1,
+'is_active' => 1,
 'position' => 1,
 //<!-- position parameter is deprecated, category anyway will be positioned in the end of list
-//and you can not set position directly, use catalog\_category.move instead -->
-'available\_sort\_by' => 'position',
-'custom\_design' => null,
-'custom\_apply\_to\_products' => null,
-'custom\_design\_from' => null,
-'custom\_design\_to' => null,
-'custom\_layout\_update' => null,
-'default\_sort\_by' => 'position',
+//and you can not set position directly, use catalog_category.move instead -->
+'available_sort_by' => 'position',
+'custom_design' => null,
+'custom_apply_to_products' => null,
+'custom_design_from' => null,
+'custom_design_to' => null,
+'custom_layout_update' => null,
+'default_sort_by' => 'position',
 'description' => 'Category description',
-'display\_mode' => null,
-'is\_anchor' => 0,
-'landing\_page' => null,
-'meta\_description' => 'Category meta description',
-'meta\_keywords' => 'Category meta keywords',
-'meta\_title' => 'Category meta title',
-'page\_layout' => 'two\_columns\_left',
-'url\_key' => 'url-key',
-'include\_in\_menu' => 1,
+'display_mode' => null,
+'is_anchor' => 0,
+'landing_page' => null,
+'meta_description' => 'Category meta description',
+'meta_keywords' => 'Category meta keywords',
+'meta_title' => 'Category meta title',
+'page_layout' => 'two_columns_left',
+'url_key' => 'url-key',
+'include_in_menu' => 1,
 )));
 
-var\_dump ($result);
+var_dump ($result);
 ```
 
 **Request Example SOAP V2**
 
 ```php
-$client = new SoapClient('http://magentohost/api/v2\_soap/?wsdl');
+$client = new SoapClient('http://magentohost/api/v2_soap/?wsdl');
 $session = $client->login('apiUser', 'apiKey');
 
 $result = $client->catalogCategoryUpdate($session, 23, array(
 'name' => 'Category name 2',
-'is\_active' => 1,
+'is_active' => 1,
 'position' => 1,
 //<!-- position parameter is deprecated, category anyway will be positioned in the end of list
-//and you can not set position directly, use catalog\_category.move instead -->
-'available\_sort\_by' => array('position'),
-'custom\_design' => null,
-'custom\_apply\_to\_products' => null,
-'custom\_design\_from' => null,
-'custom\_design\_to' => null,
-'custom\_layout\_update' => null,
-'default\_sort\_by' => 'position',
+//and you can not set position directly, use catalog_category.move instead -->
+'available_sort_by' => array('position'),
+'custom_design' => null,
+'custom_apply_to_products' => null,
+'custom_design_from' => null,
+'custom_design_to' => null,
+'custom_layout_update' => null,
+'default_sort_by' => 'position',
 'description' => 'Category description',
-'display\_mode' => null,
-'is\_anchor' => 0,
-'landing\_page' => null,
-'meta\_description' => 'Category meta description',
-'meta\_keywords' => 'Category meta keywords',
-'meta\_title' => 'Category meta title',
-'page\_layout' => 'two\_columns\_left',
-'url\_key' => 'url-key',
-'include\_in\_menu' => 1,
+'display_mode' => null,
+'is_anchor' => 0,
+'landing_page' => null,
+'meta_description' => 'Category meta description',
+'meta_keywords' => 'Category meta keywords',
+'meta_title' => 'Category meta title',
+'page_layout' => 'two_columns_left',
+'url_key' => 'url-key',
+'include_in_menu' => 1,
 ));
 
-var\_dump ($result);
+var_dump ($result);
 ```
 
 **Request Example SOAP V2 (WS-I Compliance Mode)**
 
 ```php
-$proxy = new SoapClient('http://magentohost/api/v2\_soap/?wsdl');
+$proxy = new SoapClient('http://magentohost/api/v2_soap/?wsdl');
 $sessionId = $proxy->login((object)array('username' => 'apiUser', 'apiKey' => 'apiKey'));
 
 $result = $proxy->catalogCategoryUpdate((object)array('sessionId' => $sessionId->result, 'categoryId' => '23', 'categoryData' => ((object)array(
 'name' => 'Category Name Updated',
-'is\_active' => '1',
+'is_active' => '1',
 'position' => '1',
-'available\_sort\_by' => array('name'),
-'default\_sort\_by' => 'name',
+'available_sort_by' => array('name'),
+'default_sort_by' => 'name',
 'description' => 'Category description',
-'is\_anchor' => '1',
-'include\_in\_menu' => '1'
+'is_anchor' => '1',
+'include_in_menu' => '1'
 ))));
-var\_dump($result->result);
+var_dump($result->result);
 ```
 
 ## Category Product Update
 
 **Method:**
 
--   catalog\_category.updateProduct (SOAP V1)
+-   catalog_category.updateProduct (SOAP V1)
 -   catalogCategoryUpdateProduct (SOAP V2)
 
 Allows you to update the product assigned to a category. The product position is updated.
@@ -1173,8 +1173,8 @@ Allows you to update the product assigned to a category. The product position is
 $client = new SoapClient('http://magentohost/api/soap/?wsdl');
 $session = $client->login('apiUser', 'apiKey');
 
-$result = $client->call($session, 'catalog\_category.updateProduct', array('categoryId' => '4', 'product' => '1', 'position' => '3'));
-var\_dump($result);
+$result = $client->call($session, 'catalog_category.updateProduct', array('categoryId' => '4', 'product' => '1', 'position' => '3'));
+var_dump($result);
 
 // If you don't need the session anymore
 //$client->endSession($session);
@@ -1183,19 +1183,19 @@ var\_dump($result);
 **Request Example SOAP V2**
 
 ```php
-$proxy = new SoapClient('http://magentohost/api/v2\_soap/?wsdl'); // TODO : change url
+$proxy = new SoapClient('http://magentohost/api/v2_soap/?wsdl'); // TODO : change url
 $sessionId = $proxy->login('apiUser', 'apiKey'); // TODO : change login and pwd if necessary
 
 $result = $proxy->catalogCategoryUpdateProduct($sessionId, '4', '1', '3');
-var\_dump($result);
+var_dump($result);
 ```
 
 **Request Example SOAP V2 (WS-I Compliance Mode)**
 
 ```php
-$proxy = new SoapClient('http://magentohost/api/v2\_soap/?wsdl');
+$proxy = new SoapClient('http://magentohost/api/v2_soap/?wsdl');
 $sessionId = $proxy->login((object)array('username' => 'apiUser', 'apiKey' => 'apiKey'));
 
 $result = $proxy->catalogCategoryUpdateProduct((object)array('sessionId' => $sessionId->result, 'categoryId' => '4', 'productId' => '1', 'position' => '3'));
-var\_dump($result->result);
+var_dump($result->result);
 ```
