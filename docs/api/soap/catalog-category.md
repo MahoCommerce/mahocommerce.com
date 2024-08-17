@@ -54,18 +54,18 @@ while (($selectedCategory = getSomeRandomCategory($allCategories, 3)) === false)
 
 // create new category
 $newCategoryId = $proxy->call(
-$sessionId,
-'category.create',
-array(
-$selectedCategory\['category_id'\],
-array(
-'name'=>'Newopenerp',
-'is_active'=>1,
-'include_in_menu'=>2,
-'available_sort_by'=>'position',
-'default_sort_by'=>'position'
-)
-)
+    $sessionId,
+    'category.create',
+    array(
+        $selectedCategory\['category_id'\],
+        array(
+            'name'=>'Newopenerp',
+            'is_active'=>1,
+            'include_in_menu'=>2,
+            'available_sort_by'=>'position',
+            'default_sort_by'=>'position'
+        )
+    )
 );
 
 $newData = array('is_active'=>1);
@@ -323,28 +323,28 @@ $client = new SoapClient('http://magentohost/api/soap/?wsdl');
 $session = $client->login('apiUser', 'apiKey');
 
 $result = $client->call($session, 'catalog_category.create', array(2, array(
-'name' => 'Category name',
-'is_active' => 1,
-'position' => 1,
-//<!-- position parameter is deprecated, category anyway will be positioned in the end of list
-//and you can not set position directly, use catalog_category.move instead -->
-'available_sort_by' => 'position',
-'custom_design' => null,
-'custom_apply_to_products' => null,
-'custom_design_from' => null,
-'custom_design_to' => null,
-'custom_layout_update' => null,
-'default_sort_by' => 'position',
-'description' => 'Category description',
-'display_mode' => null,
-'is_anchor' => 0,
-'landing_page' => null,
-'meta_description' => 'Category meta description',
-'meta_keywords' => 'Category meta keywords',
-'meta_title' => 'Category meta title',
-'page_layout' => 'two_columns_left',
-'url_key' => 'url-key',
-'include_in_menu' => 1,
+    'name' => 'Category name',
+    'is_active' => 1,
+    'position' => 1,
+    //<!-- position parameter is deprecated, category anyway will be positioned in the end of list
+    //and you can not set position directly, use catalog_category.move instead -->
+    'available_sort_by' => 'position',
+    'custom_design' => null,
+    'custom_apply_to_products' => null,
+    'custom_design_from' => null,
+    'custom_design_to' => null,
+    'custom_layout_update' => null,
+    'default_sort_by' => 'position',
+    'description' => 'Category description',
+    'display_mode' => null,
+    'is_anchor' => 0,
+    'landing_page' => null,
+    'meta_description' => 'Category meta description',
+    'meta_keywords' => 'Category meta keywords',
+    'meta_title' => 'Category meta title',
+    'page_layout' => 'two_columns_left',
+    'url_key' => 'url-key',
+    'include_in_menu' => 1,
 )));
 
 var_dump ($result);
@@ -357,28 +357,28 @@ $client = new SoapClient('http://magentohost/api/v2_soap/?wsdl');
 $session = $client->login('apiUser', 'apiKey');
 
 $result = $client->catalogCategoryCreate($session, 2, array(
-'name' => 'Category name 2',
-'is_active' => 1,
-'position' => 1,
-//<!-- position parameter is deprecated, category anyway will be positioned in the end of list
-//and you can not set position directly, use catalog_category.move instead -->
-'available_sort_by' => array('position'),
-'custom_design' => null,
-'custom_apply_to_products' => null,
-'custom_design_from' => null,
-'custom_design_to' => null,
-'custom_layout_update' => null,
-'default_sort_by' => 'position',
-'description' => 'Category description',
-'display_mode' => null,
-'is_anchor' => 0,
-'landing_page' => null,
-'meta_description' => 'Category meta description',
-'meta_keywords' => 'Category meta keywords',
-'meta_title' => 'Category meta title',
-'page_layout' => 'two_columns_left',
-'url_key' => 'url-key',
-'include_in_menu' => 1,
+    'name' => 'Category name 2',
+    'is_active' => 1,
+    'position' => 1,
+    //<!-- position parameter is deprecated, category anyway will be positioned in the end of list
+    //and you can not set position directly, use catalog_category.move instead -->
+    'available_sort_by' => array('position'),
+    'custom_design' => null,
+    'custom_apply_to_products' => null,
+    'custom_design_from' => null,
+    'custom_design_to' => null,
+    'custom_layout_update' => null,
+    'default_sort_by' => 'position',
+    'description' => 'Category description',
+    'display_mode' => null,
+    'is_anchor' => 0,
+    'landing_page' => null,
+    'meta_description' => 'Category meta description',
+    'meta_keywords' => 'Category meta keywords',
+    'meta_title' => 'Category meta title',
+    'page_layout' => 'two_columns_left',
+    'url_key' => 'url-key',
+    'include_in_menu' => 1,
 ));
 
 var_dump ($result);
@@ -391,14 +391,14 @@ $proxy = new SoapClient('http://magentohost/api/v2_soap/?wsdl');
 $sessionId = $proxy->login((object)array('username' => 'apiUser', 'apiKey' => 'apiKey'));
 
 $result = $proxy->catalogCategoryCreate((object)array('sessionId' => $sessionId->result, 'parentId' => '5', 'categoryData' => ((object)array(
-'name' => 'category',
-'is_active' => '1',
-'position' => '1',
-'available_sort_by' => array('position'),
-'default_sort_by' => 'position',
-'description' => 'Category description',
-'is_anchor' => '1',
-'include_in_menu' => '1'
+    'name' => 'category',
+    'is_active' => '1',
+    'position' => '1',
+    'available_sort_by' => array('position'),
+    'default_sort_by' => 'position',
+    'description' => 'Category description',
+    'is_anchor' => '1',
+    'include_in_menu' => '1'
 ))));
 var_dump($result->result);
 ```
@@ -1090,28 +1090,28 @@ $client = new SoapClient('http://magentohost/api/v2_soap/?wsdl');
 $session = $client->login('apiUser', 'apiKey');
 
 $result = $client->catalogCategoryUpdate($session, 23, array(
-'name' => 'Category name 2',
-'is_active' => 1,
-'position' => 1,
-//<!-- position parameter is deprecated, category anyway will be positioned in the end of list
-//and you can not set position directly, use catalog_category.move instead -->
-'available_sort_by' => array('position'),
-'custom_design' => null,
-'custom_apply_to_products' => null,
-'custom_design_from' => null,
-'custom_design_to' => null,
-'custom_layout_update' => null,
-'default_sort_by' => 'position',
-'description' => 'Category description',
-'display_mode' => null,
-'is_anchor' => 0,
-'landing_page' => null,
-'meta_description' => 'Category meta description',
-'meta_keywords' => 'Category meta keywords',
-'meta_title' => 'Category meta title',
-'page_layout' => 'two_columns_left',
-'url_key' => 'url-key',
-'include_in_menu' => 1,
+    'name' => 'Category name 2',
+    'is_active' => 1,
+    'position' => 1,
+    //<!-- position parameter is deprecated, category anyway will be positioned in the end of list
+    //and you can not set position directly, use catalog_category.move instead -->
+    'available_sort_by' => array('position'),
+    'custom_design' => null,
+    'custom_apply_to_products' => null,
+    'custom_design_from' => null,
+    'custom_design_to' => null,
+    'custom_layout_update' => null,
+    'default_sort_by' => 'position',
+    'description' => 'Category description',
+    'display_mode' => null,
+    'is_anchor' => 0,
+    'landing_page' => null,
+    'meta_description' => 'Category meta description',
+    'meta_keywords' => 'Category meta keywords',
+    'meta_title' => 'Category meta title',
+    'page_layout' => 'two_columns_left',
+    'url_key' => 'url-key',
+    'include_in_menu' => 1,
 ));
 
 var_dump ($result);
@@ -1124,14 +1124,14 @@ $proxy = new SoapClient('http://magentohost/api/v2_soap/?wsdl');
 $sessionId = $proxy->login((object)array('username' => 'apiUser', 'apiKey' => 'apiKey'));
 
 $result = $proxy->catalogCategoryUpdate((object)array('sessionId' => $sessionId->result, 'categoryId' => '23', 'categoryData' => ((object)array(
-'name' => 'Category Name Updated',
-'is_active' => '1',
-'position' => '1',
-'available_sort_by' => array('name'),
-'default_sort_by' => 'name',
-'description' => 'Category description',
-'is_anchor' => '1',
-'include_in_menu' => '1'
+    'name' => 'Category Name Updated',
+    'is_active' => '1',
+    'position' => '1',
+    'available_sort_by' => array('name'),
+    'default_sort_by' => 'name',
+    'description' => 'Category description',
+    'is_anchor' => '1',
+    'include_in_menu' => '1'
 ))));
 var_dump($result->result);
 ```
