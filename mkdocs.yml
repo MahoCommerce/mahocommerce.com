@@ -76,7 +76,10 @@ nav:
       - REST API:
           - Introduction: api/rest/introduction.md
           - Common HTTP status codes: api/rest/common_http_status_codes.md
+          - HTTP methods: api/rest/http_methods.md
+          - GET Filters: api/rest/get_filters.md
           - Response formats: api/rest/response_formats.md
+          - Testing: api/rest/testing_rest_resources.md
       - SOAP API:
           - Introduction: api/soap.md
           - Catalog Category: api/soap/catalog-category.md
