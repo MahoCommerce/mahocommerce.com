@@ -100,7 +100,10 @@ nav:
           - Customer Address: api/soap/customer-address.md
           - Directory: api/soap/directory.md
           - Store: api/soap/store.md
-          - Sales: api/soap/sales.md
+          - Sales Order: api/soap/sales-order.md
+          - Sales Order Credit Memo: api/soap/sales-order-credit-memo.md
+          - Sales Order Invoice: api/soap/sales-order-invoice.md
+          - Sales Order Shipment: api/soap/sales-order-shipment.md
       - phpDoc code reference: code-reference.md
   - Blog: blog/index.md
   - Community:
