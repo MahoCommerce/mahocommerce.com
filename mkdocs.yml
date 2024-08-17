@@ -83,6 +83,7 @@ nav:
           - Catalog Inventory: api/soap/catalog-inventory.md
           - Checkout Cart: api/soap/checkout-cart.md
           - Customer: api/soap/customer.md
+          - Directory: api/soap/directory.md
           - Store: api/soap/store.md
           - Sales: api/soap/sales.md
       - phpDoc code reference: code-reference.md
