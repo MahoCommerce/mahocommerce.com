@@ -8,12 +8,12 @@ Allows you to manage orders.
 
 **Methods**:
 
--   [sales_order.list](sales_order.list.html "sales_order.list") - Retrieve the list of orders using filters
--   [sales_order.info](sales_order.info.html "sales_order.info") - Retrieve the order information
--   [sales_order.addComment](sales_order.addComment.html "sales_order.addComment") - Add a comment to an order
--   [sales_order.hold](sales_order.hold.html "sales_order.hold") - Hold an order
--   [sales_order.unhold](sales_order.unhold.html "sales_order.unhold") - Unhold an order
--   [sales_order.cancel](sales_order.cancel.html "sales_order.cancel") - Cancel an order
+- sales_order.list - Retrieve the list of orders using filters
+- sales_order.info - Retrieve the order information
+- sales_order.addComment - Add a comment to an order
+- sales_order.hold - Hold an order
+- sales_order.unhold - Unhold an order
+- sales_order.cancel - Cancel an order
 
 ## Faults
 
