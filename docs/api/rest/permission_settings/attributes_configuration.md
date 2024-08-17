@@ -1,113 +1,64 @@
----
-layout: m1x_rest
-title: Attributes Configuration
----
+REST attributes allow specifying additional filters for different types of users. Attributes allow limiting user access more precisely.
 
+## REST Attributes Structure
 
-<ul class="introduction-menu">
-    <li><a href='#RESTAttributesConfiguration-RESTAttributesStructure'>REST Attributes Structure</a></li>
-    <li><a href='#RESTAttributesConfiguration-ManagingAttributesforGuest'>Managing Attributes for Guest</a></li>
-    <li><a href='#RESTAttributesConfiguration-ManagingAttributesforCustomer'>Managing Attributes for Customer</a></li>
-    <li><a href='#RESTAttributesConfiguration-ManagingAttributesforAdmin'>Managing Attributes for Admin</a></li>
-    <li><a href='#RESTAttributesConfiguration-Examples'>Examples</a>
-    <ul>
-        <li><a href='#RESTAttributesConfiguration-LimitingGuestAccesstoProducts'>Limiting Guest Access to Products</a></li>
-        <li><a href='#RESTAttributesConfiguration-LimitingCustomerAccesstoProducts'>Limiting Customer Access to Products</a></li>
-    </ul>
-    </li>
-</ul>
+The REST attributes tree includes the following elements (as subnodes):
 
-<p>REST attributes allow specifying additional filters for different types of users. Attributes allow limiting user access more precisely.</p>
+-   Name of the resource
+    -   Read permissions (includes all elements available for the current resource)
+    -   Write permissions (includes all elements available for the current resource)
 
+The Resources tree may be too immense. To avoid scrolling down when searching for the required resource, you can fold the nodes for better representation.
 
-<h3><a name="RESTAttributesConfiguration-RESTAttributesStructure"></a>REST Attributes Structure</h3>
+## Managing Attributes for Guest
 
-<img src="{{ site.baseurl }}/guides/m1x/images/rest_attributes-conf.png" style="border: 1px solid black"/>
+1.  On the Magento Admin Panel menu, select **System** > **Web Services** > **REST - Attributes**.
+2.  The REST Attributes page opens. From the list of user types, select the **Guest** type and click it.
+3.  The page for editing attribute rules opens.
+4.  In the User Type Resources panel, in the **Resource Access** drop-down list, select whether all or some specific resources will be limited to a **Guest** type of user by selecting the corresponding **All** or **Custom** options.
+5.  If you select the **Custom** option, the resources tree appears.
+6.  Select the required options and click **Save** in the top right corner to apply changes.
 
-<p>The REST attributes tree includes the following elements (as subnodes):</p>
-<ul>
-	<li>Name of the resource
-	<ul>
-		<li>Read permissions (includes all elements available for the current resource)</li>
-		<li>Write permissions (includes all elements available for the current resource)</li>
-	</ul>
-	</li>
-</ul>
+## Managing Attributes for Customer
 
+1.  On the Magento Admin Panel menu, select **System** > **Web Services** > **REST - Attributes**.
+2.  The REST Attributes page opens. From the list of user types, select the **Customer** type and click it.
+3.  The page for editing attribute rules opens.
+4.  In the User Type Resources panel, in the **Resource Access** drop-down list, select whether all or some specific resources will be limited to a **Customer** type of user by selecting the corresponding **All** or **Custom** options.
+5.  If you select the **Custom** option, the resources tree appears. Some resources have options for selecting read and write permissions.
+6.  Select the required options and click **Save** in the top right corner to apply changes.
 
-<p>The Resources tree may be too immense. To avoid scrolling down when searching for the required resource, you can fold the nodes for better representation.</p>
+## Managing Attributes for Admin
 
+1.  On the Magento Admin Panel menu, select **System** > **Web Services** > **REST - Attributes**.
+2.  The REST Attributes page opens. From the list of user types, select the **Admin** type and click it.
+3.  The page for editing attribute rules opens.
+4.  In the User Type Resources panel, in the **Resource Access** drop-down list, select whether all or some specific resources will be limited to an **Admin** type of user by selecting the corresponding **All** or **Custom** options.
+5.  If you select the **Custom** option, the resources tree appears. Each resource has options for selecting read and write permissions.
+6.  Select the required options and click **Save** in the top right corner to apply changes.
 
+## Examples
 
-<h3><a name="RESTAttributesConfiguration-ManagingAttributesforGuest"></a>Managing Attributes for Guest</h3>
+This section provides some examples of limiting Guest and Customer access to certain resource elements.
 
-<ol>
-	<li>On the Magento Admin Panel menu, select <b>System</b> &gt; <b>Web Services</b> &gt; <b>REST - Attributes</b>.</li>
-	<li>The REST Attributes page opens. From the list of user types, select the <b>Guest</b> type and click it.</li>
-	<li>The page for editing attribute rules opens.</li>
-	<li>In the User Type Resources panel, in the <b>Resource Access</b> drop-down list, select whether all or some specific resources will be limited to a <b>Guest</b> type of user by selecting the corresponding <b>All</b> or <b>Custom</b> options.</li>
-	<li>If you select the <b>Custom</b> option, the resources tree appears.</li>
-	<li>Select the required options and click <b>Save</b> in the top right corner to apply changes.</li>
-</ol>
+### Limiting Guest Access to Products
 
+To allow Guests (users that are not registered in the Magento system) view only product name and final price with tax, perform the following steps:
 
+1.  On the Magento Admin Panel menu, select **System** > **Web Services** > **REST - Roles** and select the Guest role.
+2.  In the **Role API Resources**, specify the Retrieve option for the Product resource.
+3.  Click **Save Role** on the top right corner to save the role.
+4.  On the Magento Admin Panel menu, select **System** > **Web Services** > **REST - Attributes** and select **Guest** in the list of User Types.
+5.  In the Resources tree, navigate to the **Catalog Product** node. In the Read subnode, select the **Name** and **Final Price With Tax** options.
+6.  Click **Save** in the top right corner to save the selected attributes.
 
-<h3><a name="RESTAttributesConfiguration-ManagingAttributesforCustomer"></a>Managing Attributes for Customer</h3>
+### Limiting Customer Access to Products
 
-<ol>
-	<li>On the Magento Admin Panel menu, select <b>System</b> &gt; <b>Web Services</b> &gt; <b>REST - Attributes</b>.</li>
-	<li>The REST Attributes page opens. From the list of user types, select the <b>Customer</b> type and click it.</li>
-	<li>The page for editing attribute rules opens.</li>
-	<li>In the User Type Resources panel, in the <b>Resource Access</b> drop-down list, select whether all or some specific resources will be limited to a <b>Customer</b> type of user by selecting the corresponding <b>All</b> or <b>Custom</b> options.</li>
-	<li>If you select the <b>Custom</b> option, the resources tree appears. Some resources have options for selecting read and write permissions.</li>
-	<li>Select the required options and click <b>Save</b> in the top right corner to apply changes.</li>
-</ol>
+To allow Customers (users that are registered in the Magento system) view only product name and final price with tax, perform the following steps:
 
-
-<h3><a name="RESTAttributesConfiguration-ManagingAttributesforAdmin"></a>Managing Attributes for Admin</h3>
-
-<ol>
-	<li>On the Magento Admin Panel menu, select <b>System</b> &gt; <b>Web Services</b> &gt; <b>REST - Attributes</b>.</li>
-	<li>The REST Attributes page opens. From the list of user types, select the <b>Admin</b> type and click it.</li>
-	<li>The page for editing attribute rules opens.</li>
-	<li>In the User Type Resources panel, in the <b>Resource Access</b> drop-down list, select whether all or some specific resources will be limited to an <b>Admin</b> type of user by selecting the corresponding <b>All</b> or <b>Custom</b> options.</li>
-	<li>If you select the <b>Custom</b> option, the resources tree appears. Each resource has options for selecting read and write permissions.</li>
-	<li>Select the required options and click <b>Save</b> in the top right corner to apply changes.</li>
-</ol>
-
-
-
-<h3><a name="RESTAttributesConfiguration-Examples"></a>Examples</h3>
-
-<p>This section provides some examples of limiting Guest and Customer access to certain resource elements.</p>
-
-<h4><a name="RESTAttributesConfiguration-LimitingGuestAccesstoProducts"></a>Limiting Guest Access to Products</h4>
-
-<p>To allow Guests (users that are not registered in the Magento system) view only product name and final price with tax, perform the following steps:</p>
-<ol>
-	<li>On the Magento Admin Panel menu, select <b>System</b> &gt; <b>Web Services</b> &gt; <b>REST - Roles</b> and select the Guest role.</li>
-	<li>In the <b>Role API Resources</b>, specify the Retrieve option for the Product resource.</li>
-	<li>Click <b>Save Role</b> on the top right corner to save the role.</li>
-	<li>On the Magento Admin Panel menu, select <b>System</b> &gt; <b>Web Services</b> &gt; <b>REST - Attributes</b> and select <b>Guest</b> in the list of User Types.</li>
-	<li>In the Resources tree, navigate to the <b>Catalog Product</b> node. In the Read subnode, select the <b>Name</b> and <b>Final Price With Tax</b> options.</li>
-	<li>Click <b>Save</b> in the top right corner to save the selected attributes.</li>
-</ol>
-
-
-
-<h4><a name="RESTAttributesConfiguration-LimitingCustomerAccesstoProducts"></a>Limiting Customer Access to Products</h4>
-
-<p>To allow Customers (users that are registered in the Magento system) view only product name and final price with tax, perform the following steps:</p>
-<ol>
-	<li>On the Magento Admin Panel menu, select <b>System</b> &gt; <b>Web Services</b> &gt; <b>REST - Roles</b> and select the Customer role.</li>
-	<li>In the <b>Role API Resources</b>, specify the Retrieve option for the Product resource.</li>
-	<li>Click <b>Save Role</b> on the top right corner to save the role.</li>
-	<li>On the Magento Admin Panel menu, select <b>System</b> &gt; <b>Web Services</b> &gt; <b>REST - Attributes</b> and select <b>Customer</b> in the list of User Types.</li>
-	<li>In the Resources tree, navigate to the <b>Catalog Product</b> node. In the Read subnode, select the <b>Name</b> and <b>Final Price With Tax</b> options.</li>
-	<li>Click <b>Save</b> in the top right corner to save the selected attributes.</li>
-</ol>
-
-
-				    					    <br/>
-                        				    
-Create the Magento file system owner                   			    
+1.  On the Magento Admin Panel menu, select **System** > **Web Services** > **REST - Roles** and select the Customer role.
+2.  In the **Role API Resources**, specify the Retrieve option for the Product resource.
+3.  Click **Save Role** on the top right corner to save the role.
+4.  On the Magento Admin Panel menu, select **System** > **Web Services** > **REST - Attributes** and select **Customer** in the list of User Types.
+5.  In the Resources tree, navigate to the **Catalog Product** node. In the Read subnode, select the **Name** and **Final Price With Tax** options.
+6.  Click **Save** in the top right corner to save the selected attributes.

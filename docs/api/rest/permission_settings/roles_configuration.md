@@ -1,175 +1,111 @@
----
-layout: m1x_rest
-title: Roles Configuration
----
+REST roles in Magento are used to limit access to certain resources. Limiting access lies in configuration of a REST role and assigning a user to it. You can select which resources will be available for the user and which will not.
 
+REST roles management consists in the role creation, editing, deleting, and user assignment. Note that REST role creation and deletion is available only for Admin role.
 
-<ul class="introduction-menu">
-    <li><a href='#RESTRolesConfiguration-ViewingRESTRoles'>Viewing REST Roles</a></li>
-    <li><a href='#RESTRolesConfiguration-WorkingwithAdminRole'>Working with Admin Role</a>
-    <ul>
-        <li><a href='#RESTRolesConfiguration-AddingaNewRESTRoleforAdmin'>Adding a New REST Role for Admin</a></li>
-        <li><a href='#RESTRolesConfiguration-EditinganExistingAdminRESTRole'>Editing an Existing Admin REST Role</a></li>
-        <li><a href='#RESTRolesConfiguration-DeletinganExistingAdminRESTRole'>Deleting an Existing Admin REST Role</a></li>
-        <li><a href='#RESTRolesConfiguration-AssigningaRESTRoletoAdmin'>Assigning a REST Role to Admin</a></li>
-        <li><a href='#RESTRolesConfiguration-AssigningMultipleUserstoanAdminRESTRole'>Assigning Multiple Users to an Admin REST Role</a></li>
-        <li><a href='#RESTRolesConfiguration-ViewingUsersAssignedtoanAdminRESTRole'>Viewing Users Assigned to an Admin REST Role</a></li>
-        <li><a href='#RESTRolesConfiguration-UnassigningUserfromtheAdminRESTRole'>Unassigning User from the Admin REST Role</a></li>
-    </ul>
-    </li>
-    <li><a href='#RESTRolesConfiguration-WorkingwithGuestandCustomerRoles'>Working with Guest and Customer Roles</a>
-    <ul>
-        <li><a href='#RESTRolesConfiguration-EditingtheGuestRESTRole'>Editing the Guest REST Role</a></li>
-        <li><a href='#RESTRolesConfiguration-EditingtheCustomerRESTRole'>Editing the Customer REST Role</a></li>
-    </ul>
-    </li>
-</ul>
+The REST Roles page initially includes two roles: Customer and Guest.
 
-<p>REST roles in Magento are used to limit access to certain resources. Limiting access lies in configuration of a REST role and assigning a user to it. You can select which resources will be available for the user and which will not.</p>
+Only API Resources can be edited in the Guest and Customer roles. You cannot change the name or assigned users in these roles. Also, you cannot delete the Guest or Customer role.
 
-<p>REST roles management consists in the role creation, editing, deleting, and user assignment. Note that REST role creation and deletion is available only for Admin role.</p>
+## Viewing REST Roles
 
-<p>The REST Roles page initially includes two roles: Customer and Guest.</p>
+To view the list of REST roles, perform the following steps:
 
-<p>Only API Resources can be edited in the Guest and Customer roles. You cannot change the name or assigned users in these roles. Also, you cannot delete the Guest or Customer role. For example, when editing the Guest Role, the page looks as follows:<br/>
-<img src="{{ site.baseurl }}/guides/m1x/images/rest_roles-conf.png" style="border: 1px solid black"/></p>
+1.  On the Magento Admin Panel menu, select **System** > **Web Services** > **REST - Roles**.
+2.  The REST Roles page opens.
+3.  REST roles are displayed in a grid with the following columns: ID (role ID), Role Name, User Type, and Created At (date and time of the role creation).
 
-<h3><a name="RESTRolesConfiguration-ViewingRESTRoles"></a>Viewing REST Roles</h3>
+## Working with Admin Role
 
-<p>To view the list of REST roles, perform the following steps:</p>
-<ol>
-	<li>On the Magento Admin Panel menu, select <b>System</b> &gt; <b>Web Services</b> &gt; <b>REST - Roles</b>.</li>
-	<li>The REST Roles page opens.</li>
-	<li>REST roles are displayed in a grid with the following columns: ID (role ID), Role Name, User Type, and Created At (date and time of the role creation).</li>
-</ol>
+### Adding a New REST Role for Admin
 
+To add a new REST role for Admin, perform the following steps:
 
+1.  On the Magento Admin Panel menu, select **System** > **Web Services** > **REST - Roles**.
+2.  The REST Roles page opens.
+3.  In the top right corner, click **Add Admin Role**. The Add New Role page opens.
+4.  There are two tabs in the Role Information panel on the left: Role Info and Role API Resources.
+5.  Select the Role Info tab and in the Role Information panel, enter the name for the role to be created in the corresponding **Role Name** field. This field is required.
+6.  In the Role API Resources tab, in the **Resource Access** drop-down list, select whether the user will have full or custom access by selecting the corresponding **All** or **Custom** options. If you select the **Custom** option, the Resources tree will appear where you will be able to check the required resources and actions.
+7.  Click **Save Role** in the top right corner to save the role.
+8.  After you saved the role, a new Role Users tab appears in the Role Information panel on the left. In this tab, you can manage users for the current role. Click **Reset Filter** to view all users to which the role can be assigned.
 
-<h3><a name="RESTRolesConfiguration-WorkingwithAdminRole"></a>Working with Admin Role</h3>
+### Editing an Existing Admin REST Role
 
-<h4><a name="RESTRolesConfiguration-AddingaNewRESTRoleforAdmin"></a>Adding a New REST Role for Admin</h4>
+To edit an existing Admin REST role, perform the following steps:
 
-<p>To add a new REST role for Admin, perform the following steps:</p>
+1.  On the Magento Admin Panel menu, select **System** > **Web Services** > **REST - Roles**.
+2.  The REST Roles page opens. In the roles grid, select the Admin role and click it.
+3.  The Edit Role `<role name>` page opens. You can edit the following information:
+    -   **Role Info**: Edit the name of the Admin role by selecting the Role Info tab to the left.
+    -   **Role API Resources**: Select or clear the resources available for this role.
+    -   **Role Users**: Assign or remove users for this role.
+4.  Click **Save Role** in the top right corner to apply changes.
 
-<ol>
-	<li>On the Magento Admin Panel menu, select <b>System</b> &gt; <b>Web Services</b> &gt; <b>REST - Roles</b>.</li>
-	<li>The REST Roles page opens.</li>
-	<li>In the top right corner, click <b>Add Admin Role</b>. The Add New Role page opens.</li>
-	<li>There are two tabs in the Role Information panel on the left: Role Info and Role API Resources.</li>
-	<li>Select the Role Info tab and in the Role Information panel, enter the name for the role to be created in the corresponding <b>Role Name</b> field. This field is required.</li>
-	<li>In the Role API Resources tab, in the <b>Resource Access</b> drop-down list, select whether the user will have full or custom access by selecting the corresponding <b>All</b> or <b>Custom</b> options. If you select the <b>Custom</b> option, the Resources tree will appear where you will be able to check the required resources and actions.</li>
-	<li>Click <b>Save Role</b> in the top right corner to save the role.</li>
-	<li>After you saved the role, a new Role Users tab appears in the Role Information panel on the left. In this tab, you can manage users for the current role. Click <b>Reset Filter</b> to view all users to which the role can be assigned.</li>
-</ol>
+### Deleting an Existing Admin REST Role
 
+To delete an existing Admin REST role, perform the following steps:
 
+1.  On the Magento Admin Panel menu, select **System** > **Web Services** > **REST - Roles**.
+2.  The REST Roles page opens. In the roles grid, select the required Admin role to be deleted and click it.
+3.  The Edit Role `<role name>` page opens. In the top right corner, click **Delete Role**. The role is deleted.
 
-<h4><a name="RESTRolesConfiguration-EditinganExistingAdminRESTRole"></a>Editing an Existing Admin REST Role</h4>
+### Assigning a REST Role to Admin
 
-<p>To edit an existing Admin REST role, perform the following steps:</p>
-<ol>
-	<li>On the Magento Admin Panel menu, select <b>System</b> &gt; <b>Web Services</b> &gt; <b>REST - Roles</b>.</li>
-	<li>The REST Roles page opens. In the roles grid, select the Admin role and click it.</li>
-	<li>The Edit Role &lt;role name&gt; page opens. You can edit the following information:
-	<ul>
-		<li><b>Role Info</b>: Edit the name of the Admin role by selecting the Role Info tab to the left.</li>
-		<li><b>Role API Resources</b>: Select or clear the resources available for this role.</li>
-		<li><b>Role Users</b>: Assign or remove users for this role.</li>
-	</ul>
-	</li>
-	<li>Click <b>Save Role</b> in the top right corner to apply changes.</li>
-</ol>
+To assign a REST role to admin, perform the following steps:
 
+1.  On the Magento Admin Panel menu, select **System** > **Permissions** > **Users**.
+2.  The Users page opens. In the users grid, select the user to which the REST Admin role will be assigned.
+3.  The Edit User `<Name of the User>` page opens. In the User Information panel, select the REST Role tab.
+4.  In the list of REST roles, select the Admin role to be assigned and select the option button next to it.
+5.  Click **Save User** in the top right corner to save changes.
 
+### Assigning Multiple Users to an Admin REST Role
 
-<h4><a name="RESTRolesConfiguration-DeletinganExistingAdminRESTRole"></a>Deleting an Existing Admin REST Role</h4>
+To assign more than one user to an existing Admin REST role, perform the following steps:
 
-<p>To delete an existing Admin REST role, perform the following steps:</p>
-<ol>
-	<li>On the Magento Admin Panel menu, select <b>System</b> &gt; <b>Web Services</b> &gt; <b>REST - Roles</b>.</li>
-	<li>The REST Roles page opens. In the roles grid, select the required Admin role to be deleted and click it.</li>
-	<li>The Edit Role &lt;role name&gt; page opens. In the top right corner, click <b>Delete Role</b>. The role is deleted.</li>
-</ol>
+1.  On the Magento Admin Panel menu, select **System** > **Web Services** > **REST - Roles**.
+2.  The REST Roles page opens. In the REST roles grid, select the Admin role to which users will be assigned.
+3.  The Edit Role `<role name>` page opens. In the Role Information panel, select the Role Users tab.
+4.  In the list of users, click **Reset Filter** to view the list of all users to which the role can be assigned. Select the checkboxes near the users to be assigned to the Admin role.
+5.  Click **Save Role** in the top right corner to save changes.
 
+### Viewing Users Assigned to an Admin REST Role
 
+To view the list of users assigned to a REST role, perform the following steps:
 
-<h4><a name="RESTRolesConfiguration-AssigningaRESTRoletoAdmin"></a>Assigning a REST Role to Admin</h4>
+1.  On the Magento Admin Panel menu, select **System** > **Web Services** > **REST - Roles**.
+2.  The REST Roles page opens. From the list of roles, select the Admin role whose assigned users you want to view and click it.
+3.  The Edit Role `<role name>` page opens. In the Role Information panel on the left, select the Role Users tab.
+4.  The list of REST role users is displayed in a grid with the following columns: ID, User Name, First Name, and Last Name.
 
-<p>To assign a REST role to admin, perform the following steps:</p>
-<ol>
-	<li>On the Magento Admin Panel menu, select <b>System</b> &gt; <b>Permissions</b> &gt; <b>Users</b>.</li>
-	<li>The Users page opens. In the users grid, select the user to which the REST Admin role will be assigned.</li>
-	<li>The Edit User &lt;Name of the User&gt; page opens. In the User Information panel, select the REST Role tab.</li>
-	<li>In the list of REST roles, select the Admin role to be assigned and select the option button next to it.</li>
-	<li>Click <b>Save User</b> in the top right corner to save changes.</li>
-</ol>
+### Unassigning User from the Admin REST Role
 
+To unassign the Admin REST role from a user, perform the following steps:
 
-<h4><a name="RESTRolesConfiguration-AssigningMultipleUserstoanAdminRESTRole"></a>Assigning Multiple Users to an Admin REST Role</h4>
+1.  On the Magento Admin Panel menu, select **System** > **Web Services** > **REST - Roles**.
+2.  The REST Roles page opens. From the list of roles, select the Admin role from which you want to unassign a user and click it.
+3.  The Edit Role `<role name>` page opens. In the Role Information panel on the left, select the Role Users tab.
+4.  Clear the checkbox next to the user which you want to unassign from the current REST role.
+5.  Click **Save Role** in the top right corner to apply the changes.
 
-<p>To assign more than one user to an existing Admin REST role, perform the following steps:</p>
-<ol>
-	<li>On the Magento Admin Panel menu, select <b>System</b> &gt; <b>Web Services</b> &gt; <b>REST - Roles</b>.</li>
-	<li>The REST Roles page opens. In the REST roles grid, select the Admin role to which users will be assigned.</li>
-	<li>The Edit Role &lt;role name&gt; page opens. In the Role Information panel, select the Role Users tab.</li>
-	<li>In the list of users, click <b>Reset Filter</b> to view the list of all users to which the role can be assigned. Select the checkboxes near the users to be assigned to the Admin role.</li>
-	<li>Click <b>Save Role</b> in the top right corner to save changes.</li>
-</ol>
+## Working with Guest and Customer Roles
 
+As it has been mentioned before, the Customer and Guest roles cannot be removed and can be only partially edited. You can edit only the resources and actions allowed for the user.
 
+### Editing the Guest REST Role
 
-<h4><a name="RESTRolesConfiguration-ViewingUsersAssignedtoanAdminRESTRole"></a>Viewing Users Assigned to an Admin REST Role</h4>
+To edit the Guest REST role, perform the following steps:
 
-<p>To view the list of users assigned to a REST role, perform the following steps:</p>
-<ol>
-	<li>On the Magento Admin Panel menu, select <b>System</b> &gt; <b>Web Services</b> &gt; <b>REST - Roles</b>.</li>
-	<li>The REST Roles page opens. From the list of roles, select the Admin role whose assigned users you want to view and click it.</li>
-	<li>The Edit Role &lt;role name&gt; page opens. In the Role Information panel on the left, select the Role Users tab.</li>
-	<li>The list of REST role users is displayed in a grid with the following columns: ID, User Name, First Name, and Last Name.</li>
-</ol>
+1.  On the Magento Admin Panel menu, select **System** > **Web Services** > **REST - Roles**.
+2.  The REST Roles page opens. From the list of roles, select the Guest role and click it.
+3.  The Edit Role "Guest" page opens. In the Role Resources panel, edit the required information.
+4.  Click **Save Role** in the top right corner to apply changes.
 
+### Editing the Customer REST Role
 
+To edit the Customer REST role, perform the following steps:
 
-
-<h4><a name="RESTRolesConfiguration-UnassigningUserfromtheAdminRESTRole"></a>Unassigning User from the Admin REST Role</h4>
-
-<p>To unassign the Admin REST role from a user, perform the following steps:</p>
-<ol>
-	<li>On the Magento Admin Panel menu, select <b>System</b> &gt; <b>Web Services</b> &gt; <b>REST - Roles</b>.</li>
-	<li>The REST Roles page opens. From the list of roles, select the Admin role from which you want to unassign a user and click it.</li>
-	<li>The Edit Role &lt;role name&gt; page opens. In the Role Information panel on the left, select the Role Users tab.</li>
-	<li>Clear the checkbox next to the user which you want to unassign from the current REST role.</li>
-	<li>Click <b>Save Role</b> in the top right corner to apply the changes.</li>
-</ol>
-
-
-
-<h3><a name="RESTRolesConfiguration-WorkingwithGuestandCustomerRoles"></a>Working with Guest and Customer Roles</h3>
-
-<p>As it has been mentioned before, the Customer and Guest roles cannot be removed and can be only partially edited. You can edit only the resources and actions allowed for the user.</p>
-
-<h4><a name="RESTRolesConfiguration-EditingtheGuestRESTRole"></a>Editing the Guest REST Role</h4>
-
-<p>To edit the Guest REST role, perform the following steps:</p>
-<ol>
-	<li>On the Magento Admin Panel menu, select <b>System</b> &gt; <b>Web Services</b> &gt; <b>REST - Roles</b>.</li>
-	<li>The REST Roles page opens. From the list of roles, select the Guest role and click it.</li>
-	<li>The Edit Role "Guest" page opens. In the Role Resources panel, edit the required information.</li>
-	<li>Click <b>Save Role</b> in the top right corner to apply changes.</li>
-</ol>
-
-
-<h4><a name="RESTRolesConfiguration-EditingtheCustomerRESTRole"></a>Editing the Customer REST Role</h4>
-
-<p>To edit the Customer REST role, perform the following steps:</p>
-<ol>
-	<li>On the Magento Admin Panel menu, select <b>System</b> &gt; <b>Web Services</b> &gt; <b>REST - Roles</b>.</li>
-	<li>The REST Roles page opens. From the list of roles, select the Customer role and click it.</li>
-	<li>The Edit Role "Customer" page opens. In the Role Resources panel, edit the required information.</li>
-	<li>Click <b>Save Role</b> in the top right corner to apply changes.</li>
-</ol>
-
-
-				    					    <br/>
-                        				    
-Create the Magento file system owner                   			    
+1.  On the Magento Admin Panel menu, select **System** > **Web Services** > **REST - Roles**.
+2.  The REST Roles page opens. From the list of roles, select the Customer role and click it.
+3.  The Edit Role "Customer" page opens. In the Role Resources panel, edit the required information.
+4.  Click **Save Role** in the top right corner to apply changes.
