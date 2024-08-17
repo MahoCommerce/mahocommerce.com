@@ -68,6 +68,18 @@ nav:
       - Cron setup: cron.md
       - Robots.txt: robotstxt.md
     - Reference:
+      #- REST API:
+      #    - Introduction: api/rest/introduction.md
+      - SOAP API:
+          - Introduction: api/soap.md
+          - Catalog Category: api/soap/catalog-category.md
+          - Catalog Category Attribute: api/soap/catalog-category-attribute.md
+          - Catalog Product: api/soap/catalog-product.md
+          - Catalog Inventory: api/soap/catalog-inventory.md
+          - Checkout Cart: api/soap/checkout-cart.md
+          - Customer: api/soap/customer.md
+          - Store: api/soap/store.md
+          - Sales: api/soap/sales.md
       - phpDoc code reference: code-reference.md
   - Blog: blog/index.md
   - Community:
