@@ -80,6 +80,14 @@ nav:
           - GET Filters: api/rest/get_filters.md
           - Response formats: api/rest/response_formats.md
           - Testing: api/rest/testing_rest_resources.md
+          - Authentication:
+            - OAuth authentication: api/rest/authentication/oauth_authentication.md
+            - OAuth configuration: api/rest/authentication/oauth_configuration.md
+          - Permission settings:
+            - Introduction: api/rest/permission_settings/introduction.md
+            - Roles configuration: api/rest/permission_settings/roles_configuration.md
+            - Attributes configuration: api/rest/permission_settings/attributes_configuration.md
+            - Attributes description: api/rest/permission_settings/attributes_description.md
       - SOAP API:
           - Introduction: api/soap.md
           - Catalog Category: api/soap/catalog-category.md
