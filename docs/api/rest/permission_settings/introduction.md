@@ -53,13 +53,9 @@ You should remember that ACL is not the same as authentication. ACL is the next 
 ACL is implemented in a tree structure. There is a tree of resources for each user type. Namely, Admin, Customer, and Guest have their own trees of resources.  
 Each ACL entry specifies two instances: a subject and an action the subject can perform.
 
-Example of the resource tree for the Admin role is as follows:  
-![]({{ site.baseurl }}/guides/m1x/images/rest_permissions2.png)
-
 #### Read/Write Permissions
 
-All REST resource attributes are divided into two categories: Read and Write. The Read category includes the operation of retrieving. So, when selecting the attributes in the Read category, you specify them for the resource retrieving. The Write category includes the operations of creating and updating. So, when selecting the attributes in the Write category, you specify them for the resource creation and updating. To illustrate the situation, let's take the following example:  
-![]({{ site.baseurl }}/guides/m1x/images/rest_permissions2.png)
+All REST resource attributes are divided into two categories: Read and Write. The Read category includes the operation of retrieving. So, when selecting the attributes in the Read category, you specify them for the resource retrieving. The Write category includes the operations of creating and updating. So, when selecting the attributes in the Write category, you specify them for the resource creation and updating.
 
 #### Setting Up ACL
 
