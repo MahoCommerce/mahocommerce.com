@@ -98,7 +98,7 @@ nav:
           - Checkout Cart Coupon: api/soap/checkout-cart-coupon.md
           - Checkout Cart Customer: api/soap/checkout-cart-customer.md
           - Checkout Cart Payment: api/soap/checkout-cart-payment.md
-          #- Checkout Cart Product: api/soap/checkout-cart-product.md
+          - Checkout Cart Product: api/soap/checkout-cart-product.md
           - Checkout Cart Shipping: api/soap/checkout-cart-shipping.md
           - Customer: api/soap/customer.md
           - Customer Group: api/soap/customer-group.md
