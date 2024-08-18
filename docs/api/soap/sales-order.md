@@ -1,3 +1,5 @@
+# Sales Order
+
 Allows you to manage orders.
 
 **Resource Name**: sales_order

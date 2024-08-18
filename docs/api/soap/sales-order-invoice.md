@@ -1,3 +1,5 @@
+# Sales Order invoice
+
 Allows you to manage invoices.
 
 **Resource Name**: sales_order_invoice

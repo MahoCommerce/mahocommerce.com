@@ -92,23 +92,37 @@ nav:
           - Introduction: api/soap.md
           - Catalog Category: api/soap/catalog-category.md
           - Catalog Category Attribute: api/soap/catalog-category-attribute.md
-          - Catalog Product: api/soap/catalog-product.md
+          - Catalog Product:
+            - Product: api/soap/catalog-product.md
+            - Product Attribute: api/soap/catalog-product-attribute.md
+            - Product Attribute Media: api/soap/catalog-product-attribute-media.md
+            - Product Attribute Set: api/soap/catalog-product-attribute-set.md
+            - Product Custom Option: api/soap/catalog-product-custom-option.md
+            - Product Custom Option Value: api/soap/catalog-product-custom-option-value.md
+            - Product Downloadable Link: api/soap/catalog-product-downloadable-link.md
+            - Product Link: api/soap/catalog-product-link.md
+            - Product Tag: api/soap/catalog-product-tag.md
+            - Product Tier Price: api/soap/catalog-product-tier-price.md
+            - Product Types: api/soap/catalog-product-types.md
           - Catalog Inventory: api/soap/catalog-inventory.md
-          - Checkout Cart: api/soap/checkout-cart.md
-          - Checkout Cart Coupon: api/soap/checkout-cart-coupon.md
-          - Checkout Cart Customer: api/soap/checkout-cart-customer.md
-          - Checkout Cart Payment: api/soap/checkout-cart-payment.md
-          - Checkout Cart Product: api/soap/checkout-cart-product.md
-          - Checkout Cart Shipping: api/soap/checkout-cart-shipping.md
-          - Customer: api/soap/customer.md
-          - Customer Group: api/soap/customer-group.md
-          - Customer Address: api/soap/customer-address.md
+          - Checkout Cart:
+            - Checkout Cart: api/soap/checkout-cart.md
+            - Checkout Cart Coupon: api/soap/checkout-cart-coupon.md
+            - Checkout Cart Customer: api/soap/checkout-cart-customer.md
+            - Checkout Cart Payment: api/soap/checkout-cart-payment.md
+            - Checkout Cart Product: api/soap/checkout-cart-product.md
+            - Checkout Cart Shipping: api/soap/checkout-cart-shipping.md
+          - Customer:
+            - Customer: api/soap/customer.md
+            - Customer Group: api/soap/customer-group.md
+            - Customer Address: api/soap/customer-address.md
           - Directory: api/soap/directory.md
           - Store: api/soap/store.md
-          - Sales Order: api/soap/sales-order.md
-          - Sales Order Credit Memo: api/soap/sales-order-credit-memo.md
-          - Sales Order Invoice: api/soap/sales-order-invoice.md
-          - Sales Order Shipment: api/soap/sales-order-shipment.md
+          - Sales Order:
+            - Order: api/soap/sales-order.md
+            - Credit Memo: api/soap/sales-order-credit-memo.md
+            - Invoice: api/soap/sales-order-invoice.md
+            - Shipment: api/soap/sales-order-shipment.md
       - phpDoc code reference: code-reference.md
   - Blog: blog/index.md
   - Community:

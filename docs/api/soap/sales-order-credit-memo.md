@@ -1,3 +1,5 @@
+# Sales Order Credit Memo
+
 Allows you to operate with credit memos for orders.
 
 **Resource: sales_order_creditmemo**
