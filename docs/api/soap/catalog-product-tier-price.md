@@ -200,17 +200,18 @@ $sessionId = $proxy->login('apiUser', 'apiKey');
 
 $productId = 1;
 $tierPrices = array(
-	array('customer_group_id' => '0', 'website' => '0', 'qty' => '50', 'price' => '9.90')
+    array(
+        'customer_group_id' => '0',
+        'website' => '0',
+        'qty' => '50',
+        'price' => '9.90'
+    )
 );
 
-$result = $proxy->call(
-	$sessionId,
-	'product_attribute_tier_price.update',
-	array(
-		$productId,
-		$tierPrices
-	)
-);
+$result = $proxy->call($sessionId, 'product_attribute_tier_price.update', array(
+    $productId,
+    $tierPrices
+));
 var_dump($result);
 ```
 
@@ -220,17 +221,17 @@ var_dump($result);
 $proxy = new SoapClient('http://magentohost/api/v2_soap/?wsdl');
 $sessionId = $proxy->login('apiUser', 'apiKey');
 
-
 $productId = 1;
 $tierPrices = array(
-	array('customer_group_id' => '0', 'website' => '0', 'qty' => '50', 'price' => '9.90')
+    array(
+        'customer_group_id' => '0',
+        'website' => '0',
+        'qty' => '50',
+        'price' => '9.90'
+    )
 );
 
-$result = $proxy->catalogProductAttributeTierPriceUpdate(
-	$sessionId,
-	$productId,
-	$tierPrices
-);
+$result = $proxy->catalogProductAttributeTierPriceUpdate($sessionId, $productId, $tierPrices);
 var_dump($result);
 ```
 
@@ -238,12 +239,19 @@ var_dump($result);
 
 ```php
 $proxy = new SoapClient('http://magentohost/api/v2_soap/?wsdl');
-$sessionId = $proxy->login((object)array('username' => 'apiUser', 'apiKey' => 'apiKey'));
-
+$sessionId = $proxy->login((object)array(
+    'username' => 'apiUser',
+    'apiKey' => 'apiKey'
+));
 
 $productId = 1;
 $tierPrices = array(
-	array('customer_group_id' => '0', 'website' => '0', 'qty' => '50', 'price' => '9.90')
+    array(
+        'customer_group_id' => '0',
+        'website' => '0',
+        'qty' => '50',
+        'price' => '9.90'
+    )
 );
 
 $result = $proxy->catalogProductAttributeTierPriceUpdate((object)array(
