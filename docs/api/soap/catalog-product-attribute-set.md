@@ -177,7 +177,7 @@ $client = new SoapClient('http://magentohost/api/soap/?wsdl');
 $session = $client->login('apiUser', 'apiKey');
 
 $result = $client->call($session, 'catalog_product_attribute_set.list');
-var_dump ($result);
+var_dump($result);
 
 // If you don't need the session anymore
 //$client->endSession($session);
@@ -561,7 +561,7 @@ $client = new SoapClient('http://magentohost/api/soap/?wsdl');
 $session = $client->login('apiUser', 'apiKey');
 
 $result = $client->call($session, 'product_attribute_set.groupAdd', array('attributeSetId' => '9', 'groupName' => 'new_group'));
-var_dump ($result);
+var_dump($result);
 
 // If you don't need the session anymore
 //$client->endSession($session);

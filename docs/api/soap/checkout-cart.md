@@ -553,7 +553,7 @@ $client = new SoapClient('http://magentohost/api/soap/?wsdl');
 $session = $client->login('apiUser', 'apiKey');
 
 $result = $client->call($session, 'cart.info', '15');
-var_dump ($result);
+var_dump($result);
 ```
 
 **Request Example SOAP V2**
@@ -615,7 +615,7 @@ $client = new SoapClient('http://magentohost/api/soap/?wsdl');
 $session = $client->login('apiUser', 'apiKey');
 
 $result = $client->call($session, 'cart.totals', '15');
-var_dump ($result);
+var_dump($result);
 ```
 
 **Request Example SOAP V2**
@@ -714,7 +714,7 @@ $proxy = new SoapClient('http://magentohost/api/soap/?wsdl');
 $sessionId = $proxy->login('apiUser', 'apiKey');
 
 $result = $client->call($session, 'cart.license', '15');
-var_dump ($result);
+var_dump($result);
 ```
 
 **Request Example SOAP V2**

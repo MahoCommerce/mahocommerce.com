@@ -439,7 +439,7 @@ $client = new SoapClient('http://magentohost/api/soap/?wsdl');
 $session = $client->login('apiUser', 'apiKey');
 
 $result = $client->call($session, 'customer.update', array('customerId' => '2', 'customerData' => array('firstname' => 'John', 'lastname' => 'Doe', 'email' => 'test@example.com', 'password' => 'john22')));
-var_dump ($result);
+var_dump($result);
 
 // If you don't need the session anymore
 //$client->endSession($session);
@@ -452,7 +452,7 @@ $client = new SoapClient('http://magentohost/api/v2_soap/?wsdl');
 $session = $client->login('apiUser', 'apiKey');
 
 $result = $client->customerCustomerUpdate($session, '2', array('email' => 'customer-mail@example.org', 'firstname' => 'Dough', 'lastname' => 'Deekson', 'password' => 'password', 'website_id' => 1, 'store_id' => 1, 'group_id' => 1));
-var_dump ($result);
+var_dump($result);
 ```
 
 **Request Example SOAP V2 (WS-I Compliance Mode)**

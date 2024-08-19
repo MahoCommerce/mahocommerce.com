@@ -287,7 +287,7 @@ $complexFilter = array(
     )
 );
 $result = $client->salesOrderCreditmemoList($session, $complexFilter);
-var_dump ($result);
+var_dump($result);
 ```
 
 **Request Example SOAP V2 (WS-I Compliance Mode)**
@@ -548,7 +548,7 @@ $client = new SoapClient('http://magentohost/api/soap/?wsdl');
 $session = $client->login('apiUser', 'apiKey');
 
 $result = $client->call($session, 'order_creditmemo.info', '200000001');
-var_dump ($result);
+var_dump($result);
 ```
 
 **Request Example SOAP V2**
@@ -807,7 +807,7 @@ $client = new SoapClient('http://magentohost/api/soap/?wsdl');
 $session = $client->login('apiUser', 'apiKey');
 
 $result = $client->call($session, 'order_creditmemo.create', '200000010');
-var_dump ($result);
+var_dump($result);
 ```
 
 **Request Example SOAP V2**

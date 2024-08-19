@@ -129,7 +129,7 @@ $client = new SoapClient('http://magentohost/api/soap/?wsdl');
 $session = $client->login('apiUser', 'apiKey');
 
 $result = $client->call($session, 'catalog_product.currentStore', 'english');
-var_dump ($result);
+var_dump($result);
 ```
 
 **Request Example SOAP V2**
@@ -221,7 +221,7 @@ $complexFilter = array(
     )
 );
 $result = $client->catalogProductList($session, $complexFilter);
-var_dump ($result);
+var_dump($result);
 ```
 
 **Request Example SOAP V2 (WS-I Compliance Mode)**
@@ -598,7 +598,7 @@ $result = $client->call($session, 'catalog_product.create', array('simple', $att
     'meta_keyword' => 'Product meta keyword',
     'meta_description' => 'Product meta description'
 )));
-var_dump ($result);
+var_dump($result);
 ```
 
 **Request Example SOAP V2**
@@ -791,7 +791,7 @@ $result = $client->call($session, 'catalog_product.update', array('product_sku',
     'meta_keyword' => 'Product meta keyword',
     'meta_description' => 'Product meta description'
 )));
-var_dump ($result);
+var_dump($result);
 ```
 
 **Request Example SOAP V2**
@@ -817,7 +817,7 @@ $result = $client->catalogProductUpdate($session, 'product_sku', array(
     'meta_keyword' => 'Product meta keyword',
     'meta_description' => 'Product meta description'
 ));
-var_dump ($result);
+var_dump($result);
 ```
 
 **Request Example SOAP V2 (WS-I Compliance Mode)**

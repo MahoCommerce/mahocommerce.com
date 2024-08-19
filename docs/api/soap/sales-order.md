@@ -166,7 +166,7 @@ $client = new SoapClient('http://magentohost/api/soap/?wsdl');
 $session = $client->login('apiUser', 'apiKey');
 
 $result = $client->call($session, 'order.list');
-var_dump ($result);
+var_dump($result);
 ```
 
 **Request Example SOAP V2**
@@ -212,7 +212,7 @@ $session = $client->login('apiUser', 'apiKey');
 
 $filter = array('filter' => array(array('key' => 'status', 'value' => 'closed')));
 $result = $client->salesOrderList($session, $filter);
-var_dump ($result);
+var_dump($result);
 ```
 
 **Request Example SOAP V2 (WS-I Compliance Mode)**

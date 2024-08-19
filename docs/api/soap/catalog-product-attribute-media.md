@@ -110,7 +110,7 @@ $client = new SoapClient('http://magentohost/api/soap/?wsdl');
 $session = $client->login('apiUser', 'apiKey');
 
 $result = $client->call($session, 'catalog_product_attribute_media.currentStore', 'english');
-var_dump ($result);
+var_dump($result);
 ```
 
 **Request Example SOAP V2**
@@ -266,7 +266,7 @@ $client = new SoapClient('http://magentohost/api/soap/?wsdl');
 $session = $client->login('apiUser', 'apiKey');
 
 $result = $client->call($session, 'catalog_product_attribute_media.info', array('product' => '2', 'file' => '/b/l/blackberry8100_2.jpg'));
-var_dump ($result);
+var_dump($result);
 
 // If you don't need the session anymore
 //$client->endSession($session);
@@ -660,7 +660,7 @@ $client = new SoapClient('http://magentohost/api/soap/?wsdl');
 $session = $client->login('apiUser', 'apiKey');
 
 $result = $client->call($session, 'catalog_product_attribute_media.remove', array('product' => '3', 'file' => '/b/l/blackberry8100_2.jpg'));
-var_dump ($result);
+var_dump($result);
 
 // If you don't need the session anymore
 //$client->endSession($session);

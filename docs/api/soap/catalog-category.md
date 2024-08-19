@@ -347,7 +347,7 @@ $result = $client->call($session, 'catalog_category.create', array(2, array(
     'include_in_menu' => 1,
 )));
 
-var_dump ($result);
+var_dump($result);
 ```
 
 **Request Example SOAP V2**
@@ -381,7 +381,7 @@ $result = $client->catalogCategoryCreate($session, 2, array(
     'include_in_menu' => 1,
 ));
 
-var_dump ($result);
+var_dump($result);
 ```
 
 **Request Example SOAP V2 (WS-I Compliance Mode)**
@@ -438,7 +438,7 @@ $client = new SoapClient('http://magentohost/api/soap/?wsdl');
 $session = $client->login('apiUser', 'apiKey');
 
 $result = $client->call($session, 'category.currentStore', '1');
-var_dump ($result);
+var_dump($result);
 ```
 
 **Request Example SOAP V2**
@@ -1080,7 +1080,7 @@ $result = $client->call($session, 'catalog_category.update', array(23, array(
 'include_in_menu' => 1,
 )));
 
-var_dump ($result);
+var_dump($result);
 ```
 
 **Request Example SOAP V2**
@@ -1114,7 +1114,7 @@ $result = $client->catalogCategoryUpdate($session, 23, array(
     'include_in_menu' => 1,
 ));
 
-var_dump ($result);
+var_dump($result);
 ```
 
 **Request Example SOAP V2 (WS-I Compliance Mode)**

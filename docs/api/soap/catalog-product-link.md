@@ -101,7 +101,7 @@ $client = new SoapClient('http://magentohost/api/soap/?wsdl');
 $session = $client->login('apiUser', 'apiKey');
 
 $result = $client->call($session, 'catalog_product_link.list', array('type' => 'related', 'product' => '1'));
-var_dump ($result);
+var_dump($result);
 
 // If you don't need the session anymore
 //$client->endSession($session);
@@ -197,7 +197,7 @@ $client = new SoapClient('http://magentohost/api/soap/?wsdl');
 $session = $client->login('apiUser', 'apikey');
 
 $result = $client->call($session, 'catalog_product_link.assign', array('type' => 'related', 'product' => '1', 'linkedProduct' => '4'));
-var_dump ($result);
+var_dump($result);
 
 // If you don't need the session anymore
 //$client->endSession($session);
@@ -308,7 +308,7 @@ $linkedProduct = "3";
 $orders = $client->catalogProductLinkUpdate($session, $type, $product, $linkedProduct, $data, $identifierType);
 
 echo 'Number of results: ' . count($orders) . '<br/>';
-var_dump ($orders);
+var_dump($orders);
 ```
 
 **Request Example SOAP V2 (WS-I Compliance Mode)**
@@ -361,7 +361,7 @@ $client = new SoapClient('http://magentohost/api/soap/?wsdl');
 $session = $client->login('apiUser', 'apiKey');
 
 $result = $client->call($session, 'catalog_product_link.remove', array('type' => 'related', 'product' => '1', 'linkedProduct' => '4'));
-var_dump ($result);
+var_dump($result);
 
 // If you don't need the session anymore
 //$client->endSession($session);
@@ -499,7 +499,7 @@ $client = new SoapClient('http://magentohost/api/soap/?wsdl');
 $session = $client->login('apiUser', 'apiKey');
 
 $result = $client->call($session, 'catalog_product_link.attributes', 'related');
-var_dump ($result);
+var_dump($result);
 
 // If you don't need the session anymore
 //$client->endSession($session);

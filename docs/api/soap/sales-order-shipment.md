@@ -135,7 +135,7 @@ $complexFilter = array(
     )
 );
 $result = $client->salesOrderShipmentList($session, $complexFilter);
-var_dump ($result);
+var_dump($result);
 ```
 
 **Request Example SOAP V2 (WS-I Compliance Mode)**
@@ -340,7 +340,7 @@ $result = $proxy->call(
     )
 );
 
-var_dump ($result);
+var_dump($result);
 ```
 
 **Request Example SOAP V2**

@@ -138,7 +138,7 @@ $complexFilter = array(
     )
 );
 $result = $client->salesOrderInvoiceList($session, $complexFilter);
-var_dump ($result);
+var_dump($result);
 ```
 
 **Request Example SOAP V2 (WS-I Compliance Mode)**
@@ -463,7 +463,7 @@ $result = $client->call(
     array('orderIncrementId' => '200000008', array('15' => '1', '16' => '1')) 
     // orderItemIdQty Array is Keyed with Order Item ID, with Value of qty to invoice
 );
-var_dump ($result);
+var_dump($result);
 
 // If you don't need the session anymore
 //$client->endSession($session);
@@ -539,7 +539,7 @@ $client = new SoapClient('http://magentohost/api/soap/?wsdl');
 $session = $client->login('apiUser', 'apikey');
 
 $result = $client->call($session, 'sales_order_invoice.addComment', array('invoiceIncrementId' => '200000006', 'comment' => 'invoice comment'));
-var_dump ($result);
+var_dump($result);
 
 // If you don't need the session anymore
 //$client->endSession($session);

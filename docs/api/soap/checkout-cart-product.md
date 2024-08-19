@@ -419,7 +419,7 @@ $client = new SoapClient('http://magentohost/api/soap/?wsdl');
 $session = $client->login('apiUser', 'apiKey');
 
 $result = $client->call($session, 'cart_product.list', '15');
-var_dump ($result);
+var_dump($result);
 ```
 
 **Request Example SOAP V2**

@@ -136,7 +136,7 @@ $client = new SoapClient('http://magentohost/api/soap/?wsdl');
 $session = $client->login('apiUser', 'apiKey');
 
 $result = $client->call($session, 'catalog_product_tag.list', array('productId' => '4', 'store' => '2'));
-var_dump ($result);
+var_dump($result);
 ```
 
 **Request Example SOAP V2**
@@ -221,7 +221,7 @@ $client = new SoapClient('http://magentohost/api/soap/?wsdl');
 $session = $client->login('apiUser', 'apiKey');
 
 $result = $client->call($session, 'catalog_product_tag.info', array('tagId' => '4', 'store' => '2'));
-var_dump ($result);
+var_dump($result);
 ```
 
 **Request Example SOAP V2**
@@ -399,7 +399,7 @@ $client = new SoapClient('http://magentohost/api/soap/?wsdl');
 $session = $client->login('apiUser', 'apiKey');
 
 $result = $client->call($session, 'catalog_product_tag.update', array('tagId' => '4', 'data' => array('name' => 'digital_1')));
-var_dump ($result);
+var_dump($result);
 ```
 
 **Request Example SOAP V2**
@@ -467,7 +467,7 @@ $client = new SoapClient('http://magentohost/api/soap/?wsdl');
 $session = $client->login('apiUser', 'apiKey');
 
 $result = $client->call($session, 'catalog_product_tag.remove', '3');
-var_dump ($result);
+var_dump($result);
 ```
 
 **Request Example SOAP V2**

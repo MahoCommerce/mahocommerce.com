@@ -205,7 +205,7 @@ $client = new SoapClient('http://magentohost/api/soap/?wsdl');
 $session = $client->login('apiUser', 'apiKey');
 
 $result = $client->call($session, 'catalog_product_attribute.currentStore', 'english');
-var_dump ($result);
+var_dump($result);
 ```
 
 **Request Example SOAP V2**
@@ -524,7 +524,7 @@ $orders = $client->catalogProductAttributeAddOption($session, $attributeCode, $d
 //$result = $client->catalogProductAttributeAddOption(...);
 //$orders = $result->result->complexObjectArray;
 
-var_dump ($orders);
+var_dump($orders);
 ```
 
 ## Create
@@ -661,7 +661,7 @@ $attributeToUpdate = array(
 $attributeCode = 'code1';
 
 $result = $client->call($session, 'product_attribute.update', array($attributeCode, $attributeToUpdate));
-var_dump ($result);
+var_dump($result);
  
 // If you don't need the session anymore
 //$client->endSession($session);
@@ -707,7 +707,7 @@ $orders = $client->catalogProductAttributeCreate($session, $data);
 //$orders = $result->result->complexObjectArray;
 
 echo 'Number of results: ' . count($orders) . '<br/>';
-var_dump ($orders);
+var_dump($orders);
 ```
 
 ## Info
@@ -822,7 +822,7 @@ $client = new SoapClient('http://magentohost/api/soap/?wsdl');
 $session = $client->login('apiUser', 'apiKey');
 
 $result = $client->call($session, 'product_attribute.info', '11');
-var_dump ($result);
+var_dump($result);
 
 // If you don't need the session anymore
 //$client->endSession($session);
@@ -941,7 +941,7 @@ $client = new SoapClient('http://magentohost/api/v2_soap/?wsdl');
 $session = $client->login((object)array('username' => 'apiUser', 'apiKey' => 'apiKey'));
 
 $result = $client->catalogProductAttributeRemove((object)array('sessionId' => $session->result, 'attribute' => '11'));
-var_dump ($result);
+var_dump($result);
 ```
 
 ## RemoveOption
@@ -1267,5 +1267,5 @@ $orders = $client->catalogProductAttributeUpdate($session, $attributeCode, $data
 //$orders = $result->result->complexObjectArray;
 
 echo 'Number of results: ' . count($orders) . '<br/>';
-var_dump ($orders);
+var_dump($orders);
 ```

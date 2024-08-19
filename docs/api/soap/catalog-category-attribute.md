@@ -69,7 +69,7 @@ $client = new SoapClient('http://magentohost/api/soap/?wsdl');
 $session = $client->login('apiUser', 'apiKey');
 
 $result = $client->call($session, 'catalog_category_attribute.currentStore', 'english');
-var_dump ($result);
+var_dump($result);
 ```
 
 **Request Example SOAP V2**
@@ -149,7 +149,7 @@ $client = new SoapClient('http://magentohost/api/v2_soap/?wsdl');
 $session = $client->login((object)array('username' => 'apiUser', 'apiKey' => 'apiKey'));
 
 $result = $client->catalogCategoryAttributeList((object)array('sessionId' => $session->result));
-var_dump ($result);
+var_dump($result);
 ```
 
 **Response Example SOAP V1**
@@ -242,7 +242,7 @@ $client = new SoapClient('http://magentohost/api/v2_soap/?wsdl');
 $session = $client->login((object)array('username' => 'apiUser', 'apiKey' => 'apiKey'));
 
 $result = $client->catalogCategoryAttributeOptions((object)array('sessionId' => $session->result, 'attributeId' => '65'));
-var_dump ($result);
+var_dump($result);
 ```
 
 **Response Example SOAP V1**

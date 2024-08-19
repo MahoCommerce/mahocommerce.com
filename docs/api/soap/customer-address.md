@@ -247,7 +247,7 @@ $result = $client->call(
     'customer_address.create',
     array('customerId' => 2, 'addressdata' => array('firstname' => 'John', 'lastname' => 'Doe', 'street' => array('Street line 1', 'Streer line 2'), 'city' => 'Weaverville', 'country_id' => 'US', 'region' => 'Texas', 'region_id' => 3, 'postcode' => '96093', 'telephone' => '530-623-2513', 'is_default_billing' => FALSE, 'is_default_shipping' => FALSE
 )));
-var_dump ($result);
+var_dump($result);
 ```
 
 **Request Example SOAP V2**
@@ -257,7 +257,7 @@ $client = new SoapClient('http://magentohost/api/v2_soap/?wsdl');
 $session = $client->login('apiUser', 'apiKey');
 
 $result = $client->customerAddressCreate($session, '2', array('firstname' => 'John', 'lastname' => 'Doe', 'street' => array('Street line 1', 'Streer line 2'), 'city' => 'Weaverville', 'country_id' => 'US', 'region' => 'Texas', 'region_id' => 3, 'postcode' => '96093', 'telephone' => '530-623-2513', 'is_default_billing' => FALSE, 'is_default_shipping' => FALSE));
-var_dump ($result);
+var_dump($result);
 ```
 
 **Request Example SOAP V2 (WS-I Compliance Mode)**
@@ -449,7 +449,7 @@ $result = $client->call(
     $session,
     'customer_address.update',
     array('addressId' => 8, 'addressdata' => array('firstname' => 'John', 'lastname' => 'Doe', 'street' => array('Street line 1', 'Streer line 2'), 'city' => 'Weaverville', 'country_id' => 'US', 'region' => 'Texas', 'region_id' => 3, 'postcode' => '96093', 'telephone' => '530-623-2513', 'is_default_billing' => TRUE, 'is_default_shipping' => FALSE)));
-var_dump ($result);
+var_dump($result);
 ```
 
 **Request Example SOAP V2**
@@ -459,7 +459,7 @@ $client = new SoapClient('http://magentohost/api/v2_soap/?wsdl');
 $session = $client->login('apiUser', 'apiKey');
 
 $result = $client->customerAddressUpdate($session, '8', array('firstname' => 'John', 'lastname' => 'Doe', 'street' => array('Street line 1', 'Streer line 2'), 'city' => 'Weaverville', 'country_id' => 'US', 'region' => 'Texas', 'region_id' => 3, 'postcode' => '96093', 'telephone' => '530-623-2513', 'is_default_billing' => FALSE, 'is_default_shipping' => FALSE));
-var_dump ($result);
+var_dump($result);
 ```
 
 **Request Example SOAP V2 (WS-I Compliance Mode)**
@@ -515,7 +515,7 @@ $client = new SoapClient('http://magentohost/api/soap/?wsdl');
 $session = $client->login('apiUser', 'apiKey');
 
 $result = $client->call($session, 'customer_address.delete', '4');
-var_dump ($result);
+var_dump($result);
 ```
 
 **Request Example SOAP V2**
