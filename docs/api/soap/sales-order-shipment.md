@@ -6,13 +6,13 @@ Allows you to manage shipments and tracking numbers.
 
 **Methods**:
 
-- sales_order_shipment.list - Retrieve a list of shipments using filters
-- sales_order_shipment.info - Retrieve information about the shipment
-- sales_order_shipment.create - Create a new shipment for an order
-- sales_order_shipment.addComment - Add a new comment to a shipment
-- sales_order_shipment.addTrack - Add a new tracking number to a shipment
-- sales_order_shipment.removeTrack - Remove tracking number from a shipment
-- sales_order_shipment.getCarriers - Retrieve a list of allowed carriers for an order
+- sales_order_shipment.list - Retrieve a list of shipments using filters
+- sales_order_shipment.info - Retrieve information about the shipment
+- sales_order_shipment.create - Create a new shipment for an order
+- sales_order_shipment.addComment - Add a new comment to a shipment
+- sales_order_shipment.addTrack - Add a new tracking number to a shipment
+- sales_order_shipment.removeTrack - Remove tracking number from a shipment
+- sales_order_shipment.getCarriers - Retrieve a list of allowed carriers for an order
 
 **Faults**:
 
@@ -25,7 +25,7 @@ Allows you to manage shipments and tracking numbers.
 | 104 | Requested tracking not exists. |
 | 105 | Tracking not deleted. Details in error message. |
 
-## Examples
+**Examples**:
 
 **Example 1. Basic working with shipments**
 
@@ -62,7 +62,7 @@ $shipment = $proxy->call($sessionId, 'sales_order_shipment.info', $newShipmentId
 var_dump($shipment);
 ```
 
-## Sales Order Shipment List
+## List
 
 **Method:**
 
@@ -168,7 +168,7 @@ array
       'shipment_id' => null
 ```
 
-## Sales Order Shipment Info
+## Info
 
 **Method:**
 
@@ -279,7 +279,7 @@ $result = $proxy->salesOrderShipmentInfo((object)array('sessionId' => $sessionId
 var_dump($result->result);
 ```
 
-## Sales Order Shipment Create
+## Create
 
 **Method:**
 
@@ -391,7 +391,7 @@ $result = $proxy->salesOrderShipmentCreate((object)array(
 var_dump($result->result);
 ```
 
-## Sales Order Shipment Add Comment
+## AddComment
 
 **Method:**
 
@@ -455,7 +455,7 @@ $result = $proxy->salesOrderShipmentAddComment((object)array('sessionId' => $ses
 var_dump($result->result);
 ```
 
-## Sales Order Shipment Add Track
+## AddTrack
 
 **Method:**
 
@@ -519,7 +519,7 @@ $result = $proxy->salesOrderShipmentAddTrack((object)array('sessionId' => $sessi
 var_dump($result->result);
 ```
 
-## Sales Order Shipment Remove Track
+## RemoveTrack
 
 **Method:**
 
@@ -581,7 +581,7 @@ $result = $proxy->salesOrderShipmentRemoveTrack((object)array('sessionId' => $se
 var_dump($result->result);
 ```
 
-## Sales Order Shipment Get Carriers
+## GetCarriers
 
 **Method:**
 

@@ -1,4 +1,4 @@
-## Directory Country List
+## Country List
 
 **Method:**
 
@@ -88,7 +88,7 @@ array
       'name' => string 'Afghanistan' (length=11)
 ```
 
-## Directory Region List
+## Region List
 
 **Method:**
 

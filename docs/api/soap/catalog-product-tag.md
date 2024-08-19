@@ -28,7 +28,7 @@ Allows you to operate with product tags.
 | 106 | Error while saving tag. Details in error message. |
 | 107 | Error while removing tag. Details in error message. |
 
-## Example:
+**Example**:
 
 ```php
 $proxy = new SoapClient('http://magentohost/api/soap/?wsdl');
@@ -92,7 +92,7 @@ $removeResult = $proxy->call(
 echo ($removeResult ? "Done!" : "Fail!");
 ```
 
-## Catalog Product Tag List
+## List
 
 **Method:**
 
@@ -175,7 +175,7 @@ array
       'name' => string 'digital' (length=7)
 ```
 
-## Catalog Product Tag Info
+## Info
 
 **Method:**
 
@@ -260,7 +260,7 @@ array
       4 => string '1' (length=1)
 ```
 
-## Catalog Product Tag Add
+## Add
 
 **Method:**
 
@@ -351,7 +351,7 @@ $result = $proxy->catalogProductTagAdd((object)array('sessionId' => $sessionId->
 var_dump($result->result);
 ```
 
-## Catalog Product Tag Update
+## Update
 
 **Method:**
 
@@ -431,7 +431,7 @@ $result = $proxy->catalogProductTagUpdate((object)array('sessionId' => $sessionI
 var_dump($result->result);
 ```
 
-## Catalog Product Tag Remove
+## Remove
 
 **Method:**
 

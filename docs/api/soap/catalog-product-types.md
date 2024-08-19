@@ -14,7 +14,7 @@ Allows you to retrieve product types.
 
 - catalog_product_type.list - Retrieve the list of product types
 
-## Examples
+**Examples**:
 
 **Example 1. Retrieving the product types**
 
@@ -26,7 +26,7 @@ $types = $proxy->call($sessionId, 'product_type.list');
 var_dump($types);
 ```
 
-## Catalog Product Types List
+## List
 
 **Method:**
 

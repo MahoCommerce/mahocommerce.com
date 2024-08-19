@@ -12,12 +12,12 @@ Allows you to manage invoices.
 
 **Methods**:
 
-- sales_order_invoice.list - Retrieve a list of invoices using filters
-- sales_order_invoice.info - Retrieve information about the invoice
-- sales_order_invoice.create - Create a new invoice for an order
-- sales_order_invoice.addComment - Add a new comment to an invoice
-- sales_order_invoice.capture - Capture an invoice
-- sales_order_invoice.cancel - Cancel an invoice
+- sales_order_invoice.list - Retrieve a list of invoices using filters
+- sales_order_invoice.info - Retrieve information about the invoice
+- sales_order_invoice.create - Create a new invoice for an order
+- sales_order_invoice.addComment - Add a new comment to an invoice
+- sales_order_invoice.capture - Capture an invoice
+- sales_order_invoice.cancel - Cancel an invoice
 
 **Faults**:
 
@@ -29,7 +29,7 @@ Allows you to manage invoices.
 | 103 | Requested order does not exists |
 | 104 | Invoice status not changed. |
 
-## Examples
+**Examples**:
 
 **Example 1. Basic working with invoices.**
 
@@ -62,7 +62,7 @@ $invoice = $proxy->call($sessionId, 'sales_order_invoice.info', $newInvoiceId);
 var_dump($invoice);
 ```
 
-## Sales Order Invoice List
+## List
 
 **Method:**
 
@@ -177,7 +177,7 @@ array
       'invoice_id' => null
 ```
 
-## Sales Order Invoice Info
+## Info
 
 **Method:**
 
@@ -414,7 +414,7 @@ array
       empty
 ```
 
-## Sales Order Invoice Create
+## Create
 
 **Method:**
 
@@ -503,7 +503,7 @@ $result = $proxy->salesOrderInvoiceCreate((object)array('sessionId' => $sessionI
 var_dump($result->result);
 ```
 
-## Sales Order Invoice Add Comment
+## AddComment
 
 **Method:**
 
@@ -567,7 +567,7 @@ $result = $proxy->salesOrderInvoiceAddComment((object)array('sessionId' => $sess
 var_dump($result->result);
 ```
 
-## Sales Order Invoice Capture
+## Capture
 
 **Method:**
 
@@ -668,7 +668,7 @@ $result = $proxy->salesOrderInvoiceCapture((object)array('sessionId' => $session
 var_dump($result->result);
 ```
 
-## Sales Order Invoice Cancel
+## Cancel
 
 **Method:**
 

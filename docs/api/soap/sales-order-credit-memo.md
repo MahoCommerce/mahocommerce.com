@@ -28,7 +28,7 @@ Allows you to operate with credit memos for orders.
 | 105 | Money can not be refunded to the store credit account as order was created by guest. |
 | 106 | Credit memo for requested order can not be created. |
 
-## Example:
+**Example**:
 
 ```php
 $proxy = new SoapClient('http://magentohost/api/soap/?wsdl');
@@ -74,7 +74,7 @@ $creditmemoList = $proxy->call($sessionId, 'order_creditmemo.list', array($filte
 print_r($creditmemoList);
 ```
 
-## Sales Order Credit Memo List
+## List
 
 **Method:**
 
@@ -387,7 +387,7 @@ array(
 );
 ```
 
-## Sales Order Credit Memo Info
+## Info
 
 **Method:**
 
@@ -748,7 +748,7 @@ array(
 );
 ```
 
-## Sales Order Credit Memo Create
+## Create
 
 **Method:**
 
@@ -844,7 +844,7 @@ $result = $proxy->salesOrderCreditmemoCreate((object)array('sessionId' => $sessi
 var_dump($result->result);
 ```
 
-## Sales Order Credit Memo AddComment
+## AddComment
 
 **Method:**
 
@@ -910,7 +910,7 @@ $result = $proxy->salesOrderCreditmemoAddComment((object)array('sessionId' => $s
 var_dump($result->result);
 ```
 
-## Sales Order Credit Memo Cancel
+## Cancel
 
 **Method:**
 

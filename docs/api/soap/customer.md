@@ -19,9 +19,9 @@ Allows you to create, retrieve, update, and delete data about customers.
 | 102 | Customer does not exist. |
 | 103 | Customer not deleted. Details in error message. |
 
-## Examples
+**Examples**:
 
-### Example 1. View, create, update, and delete a customer
+**Example 1. View, create, update, and delete a customer**
 
 ```php
 $proxy = new SoapClient('http://magentohost/api/soap/?wsdl');
@@ -55,7 +55,7 @@ mp($proxy->call($sessionId, 'customer.info', $newCustomerId));
 $proxy->call($sessionId, 'customer.delete', $newCustomerId);
 ```
 
-## Customer List
+## List
 
 **Method:**
 
@@ -195,7 +195,7 @@ array
       'password_hash' => string '5670581cabba4e2189e5edee99ed0c86:5q' (length=35)
 ```
 
-## Customer Create
+## Create
 
 **Method:**
 
@@ -277,7 +277,7 @@ $result = $proxy->customerCustomerCreate((object)array('sessionId' => $sessionId
 mp($result->result);
 ```
 
-## Customer Info
+## Info
 
 **Method:**
 
@@ -392,7 +392,7 @@ array
   'taxvat' => null
 ```
 
-## Customer Update
+## Update
 
 **Method:**
 
@@ -471,7 +471,7 @@ $sessionId = $proxy->login((object)array('username' => 'apiUser', 'apiKey' => 'a
 var_dump($result->result);
 ```
 
-## Customer Delete
+## Delete
 
 **Method:**
 

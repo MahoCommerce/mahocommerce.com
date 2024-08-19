@@ -28,7 +28,7 @@ Allows you to manage links for products, including related, cross-sells, up-sell
 | 102 | Invalid data given. Details in error message. |
 | 104 | Product link not removed. |
 
-## Examples
+**Examples**:
 
 **Example 1. Working with product links**
 
@@ -55,7 +55,7 @@ $proxy->call($sessionId, 'product_link.remove', array('related', 'Sku', 'Sku2'))
 var_dump($proxy->call($sessionId, 'product_link.list', array('related', 'Sku')));
 ```
 
-## Catalog Product Link List
+## List
 
 **Method:**
 
@@ -149,7 +149,7 @@ array
       'position' => string '0' (length=1)
 ```
 
-## Catalog Product Link Assign
+## Assign
 
 **Method:**
 
@@ -225,7 +225,7 @@ $result = $proxy->catalogProductLinkAssign((object)array('sessionId' => $session
 var_dump($result->result);
 ```
 
-## Catalog Product Link Update
+## Update
 
 **Method:**
 
@@ -325,7 +325,7 @@ $result = $proxy->catalogProductLinkUpdate((object)array('sessionId' => $session
 var_dump($result->result);
 ```
 
-## Catalog Product Link Remove
+## Remove
 
 **Method:**
 
@@ -389,7 +389,7 @@ $result = $proxy->catalogProductLinkRemove((object)array('sessionId' => $session
 var_dump($result->result);
 ```
 
-## Catalog Product Link Types
+## Types
 
 **Method:**
 
@@ -459,7 +459,7 @@ array
   3 => string 'grouped' (length=7)
 ```
 
-## Catalog Product Link Attributes
+## Attributes
 
 **Method:**
 

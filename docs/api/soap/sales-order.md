@@ -28,7 +28,7 @@ Allows you to manage orders.
 | 102 | Invalid data given. Details in error message. |
 | 103 | Order status not changed. Details in error message. |
 
-## Examples
+**Examples**:
 
 **Example 1. Work with orders**
 
@@ -60,7 +60,7 @@ $proxy->call($sessionId, 'sales_order.addComment', array('100000003', 'pending',
 var_dump($proxy->call($sessionId, 'sales_order.info', '100000003'));
 ```
 
-## Sales Order List
+## List
 
 **Method:**
 
@@ -271,7 +271,7 @@ var_dump($result->result);
 </SOAP-ENV:Envelope>
 ```
 
-## Sales Order Info
+## Info
 
 **Method:**
 
@@ -669,7 +669,7 @@ English' (length=29)
   more elements...
 ```
 
-## Sales Order AddComment
+## AddComment
 
 **Method:**
 
@@ -733,7 +733,7 @@ $result = $proxy->salesOrderAddComment((object)array('sessionId' => $sessionId->
 var_dump($result->result);
 ```
 
-## Sales Order Hold
+## Hold
 
 **Method:**
 
@@ -794,7 +794,7 @@ $result = $proxy->salesOrderHold((object)array('sessionId' => $sessionId->result
 var_dump($result->result);
 ```
 
-## Sales Order Unhold
+## Unhold
 
 **Method:**
 
@@ -852,7 +852,7 @@ $result = $proxy->salesOrderUnhold((object)array('sessionId' => $sessionId->resu
 var_dump($result->result);
 ```
 
-## Sales Order Cancel
+## Cancel
 
 **Method:**
 

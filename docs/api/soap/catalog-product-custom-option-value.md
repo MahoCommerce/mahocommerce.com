@@ -8,11 +8,11 @@
 
 **Methods:**
 
-- product_custom_option_value.add -  Add a new custom option value to a selectable custom option
-- product_custom_option_value.list -  Retrieve the list of product custom option values
-- product_custom_option_value.info -  Retrieve full information about the specified product custom option value
-- product_custom_option_value.update -  Update the custom option value
-- product_custom_option_value.remove -  Remove the custom option value
+- product_custom_option_value.add - Add a new custom option value to a selectable custom option
+- product_custom_option_value.list - Retrieve the list of product custom option values
+- product_custom_option_value.info - Retrieve full information about the specified product custom option value
+- product_custom_option_value.update - Update the custom option value
+- product_custom_option_value.remove - Remove the custom option value
 
 **Faults**::
 
@@ -28,7 +28,7 @@
 | 108 | Title field is required. |
 | 109 | Option should have at least one value. Can not delete last value. |
 
-## Catalog Product Custom Option Value Add
+## Add
 
 **Method:**
 
@@ -131,7 +131,7 @@ $result = $proxy->catalogProductCustomOptionValueAdd((object)array('sessionId' =
 var_dump($result->result);
 ```
 
-## Catalog Product Custom Option Value List
+## List
 
 **Method:**
 
@@ -229,7 +229,7 @@ array
       'sort_order' => string '0' (length=1)
 ```
 
-## Catalog Product Custom Option Value Info
+## Info
 
 **Method:**
 
@@ -327,7 +327,7 @@ array
   'value_id' => string '2' (length=1)
 ```
 
-## Catalog Product Custom Option Value Update
+## Update
 
 **Method:**
 
@@ -433,7 +433,7 @@ $result = $proxy->catalogProductCustomOptionValueUpdate((object)array('sessionId
 var_dump($result->result);
 ```
 
-## Catalog Product Custom Option Value Remove
+## Remove
 
 **Method:**
 

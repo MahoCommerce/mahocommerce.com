@@ -24,7 +24,7 @@ Allows you to retrieve and update product tier prices.
 | 101 | Invalid data given. Details in error message. |
 | 102 | Tier prices not updated. Details in error message. |
 
-## Examples
+**Examples**:
 
 ```php
 $proxy = new SoapClient('http://magentohost/api/soap/?wsdl');
@@ -51,7 +51,7 @@ var_dump($proxy->call($sessionId, 'product_tier_price.info', 'Sku'));
 var_dump($tierPrices);
 ```
 
-## Catalog Product Tier Price Info
+## Info
 
 **Method:**
 
@@ -154,7 +154,7 @@ array
       public 'price' => float 98
 ```
 
-## Catalog Product Tier Price Update
+## Update
 
 **Method:**
 

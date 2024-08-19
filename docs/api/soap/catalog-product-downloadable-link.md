@@ -4,13 +4,13 @@
 
 **Resource**: product_downloadable_link
 
-##### Methods:
+**Methods**:
 
 - product_downloadable_link.add - Add a new link to the downloadable product
 - product_downloadable_link.list - Get the list of links for a downloadable product
 - product_downloadable_link.remove - Remove a link from a downloadable product
 
-## Catalog Product Downloadable Link Add
+## Add
 
 **Method:**
 
@@ -205,7 +205,7 @@ $result = $proxy->catalogProductDownloadableLinkAdd((object)array('sessionId' =>
 var_dump($result->result);
 ```
 
-## Catalog Product Downloadable Link List
+## List
 
 **Method:**
 
@@ -359,7 +359,7 @@ array
           'title' => string 'Sample 1' (length=8)
 ```
 
-## Catalog Product Downloadable Link Remove
+## Remove
 
 **Method:**
 
