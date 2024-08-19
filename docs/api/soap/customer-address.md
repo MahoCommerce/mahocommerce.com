@@ -67,7 +67,7 @@ $proxy->call($sessionId, 'customer_address.delete', $newAddressId);
 var_dump($proxy->call($sessionId, 'customer_address.list', $newCustomerId));
 ```
 
-## Customer Address List
+## List
 
 **Method:**
 
@@ -188,7 +188,7 @@ array
       'is_default_shipping' => boolean false
 ```
 
-## Customer Address Create
+## Create
 
 **Method:**
 
@@ -280,7 +280,7 @@ $sessionId = $proxy->login((object)array('username' => 'apiUser', 'apiKey' => 'a
 var_dump($result->result);
 ```
 
-## Customer Address Info
+## Info
 
 **Method:**
 
@@ -393,7 +393,7 @@ array
   'is_default_shipping' => boolean true
 ```
 
-## Customer Address Update
+## Update
 
 **Method:**
 
@@ -484,7 +484,7 @@ $result = $proxy->customerAddressUpdate((object)array('sessionId' => $sessionId-
 var_dump($result->result);
 ```
 
-## Customer Address Delete
+## Delete
 
 **Method:**
 

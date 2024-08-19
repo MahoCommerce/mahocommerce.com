@@ -22,7 +22,7 @@ $attributeSets = $client->call($session, ‘product_stock.update’, array(’SK
 
 The use_config_manage_stock unchecks the ‘Use Config Settings’ box which allows you to make changes to this product and not to use the global settings that are set by default.
 
-#### Example 1. Working with stock update
+**Example 1. Working with stock update**
 
 ```php
 $proxy = new SoapClient('http://magentohost/api/soap/?wsdl');
@@ -37,7 +37,7 @@ $proxy->call($sessionId, 'product_stock.update', array('Sku', array('qty'=>50, '
 var_dump($proxy->call($sessionId, 'product_stock.list', 'Sku'));
 ```
 
-#### Example 2. Listing multiple SKUs' data
+**Example 2. Listing multiple SKUs' data**
 
 ```php
 $client = new SoapClient('http://magentohost/api/soap/?wsdl');
@@ -60,7 +60,7 @@ print_r(
 );
 ```
 
-## Inventory Item List
+## Item List
 
 **Method:**
 
@@ -110,7 +110,7 @@ var_dump($result);
 //$client->endSession($session);
 ```
 
-*Request Example SOAP V2*
+**Request Example SOAP V2**
 
 ```php
 $proxy = new SoapClient('http://magentohost/api/v2_soap/?wsdl'); // TODO : change url
@@ -142,7 +142,7 @@ array
       'is_in_stock' => string '1' (length=1)
 ```
 
-## Inventory Item Update
+## Item Update
 
 **Method:**
 
