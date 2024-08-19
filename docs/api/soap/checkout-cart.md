@@ -10,7 +10,7 @@ Allows you to manage shopping carts.
 - cart.totals - Get all available prices for items in shopping cart, using additional parameters
 - cart.license - Get website license agreement
 
-## Faults
+**Faults**:
 
 | Fault Code | Fault Message |
 | --- | --- |
@@ -191,7 +191,7 @@ Allows you to create an empty shopping cart.
 **Faults:**  
 _No Faults_
 
-### Examples
+**Examples**:
 
 **Request Example SOAP V1**
 
@@ -250,7 +250,7 @@ Before placing the order, you need to add the customer, customer address, shippi
 **Faults:**  
 _No Faults._
 
-### Examples
+**Examples**:
 
 **Request Example SOAP V1**
 
@@ -544,7 +544,7 @@ The **shoppingCartPaymentEntity** content is as follows:
 | string | additional_data | Additional data |
 | string | additional_information | Additional information |
 
-### Examples
+**Examples**:
 
 **Request Example SOAP V1**
 
@@ -606,7 +606,7 @@ The **shoppingCartTotalsEntity** content is as follows:
 | string | title | Title |
 | float | amount | Total amount |
 
-### Examples
+**Examples**:
 
 **Request Example SOAP V1**
 
@@ -705,7 +705,7 @@ The **shoppingCartLicenseEntity** content is as follows:
 
 **Faults:**
 
-### Examples
+**Examples**:
 
 **Request Example SOAP V1**
 

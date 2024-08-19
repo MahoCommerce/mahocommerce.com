@@ -12,7 +12,7 @@
 - product_custom_option_value.update -  Update the custom option value
 - product_custom_option_value.remove -  Remove the custom option value
 
-### Faults:
+**Faults**::
 
 | Fault Code | Fault Message |
 | --- | --- |
@@ -68,7 +68,7 @@ The **catalogProductCustomOptionValueAdd** content is as follows:
 | 102 | Error while adding an option value. Details are in the error message. |
 | 104 | Invalid option type. |
 
-### Examples
+**Examples**:
 
 **Request Example SOAP V1**
 
@@ -170,7 +170,7 @@ The **catalogProductCustomOptionValueListEntity** content is as follows:
 | 101 | Provided data is invalid. |
 | 102 | Error while adding an option value. Details are in the error message. |
 
-### Examples
+**Examples**:
 
 **Request Example SOAP V1**
 
@@ -274,7 +274,7 @@ The **catalogProductCustomOptionValueInfoEntity** content is as follows:
 | --- | --- |
 | 101 | Option value with requested id does not exist. |
 
-### Examples
+**Examples**:
 
 **Request Example SOAP V1**
 
@@ -369,7 +369,7 @@ The **catalogProductCustomOptionValueUpdateEntity** content is as follows:
 | 107 | Error while updating an option value. Details are in the error message. |
 | 108 | Title field is required. |
 
-### Examples
+**Examples**:
 
 **Request Example SOAP V1**
 
@@ -461,7 +461,7 @@ Allows you to remove the custom option value from a product.
 | 106 | Can not delete option. |
 | 109 | Option should have at least one value. Can not delete last value. |
 
-### Examples
+**Examples**:
 
 **Request Example SOAP V1**
 

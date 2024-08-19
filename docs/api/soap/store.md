@@ -38,7 +38,7 @@ The **storeEntity** content is as follows:
 | --- | --- |
 | 101 | Requested store view not found. |
 
-### Examples
+**Examples**:
 
 **Request Example SOAP V1**
 
@@ -119,7 +119,7 @@ The **storeEntity** content is as follows:
 **Faults:**  
 _No Faults_
 
-### Examples
+**Examples**:
 
 **Request Example SOAP V1**
 

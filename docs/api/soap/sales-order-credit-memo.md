@@ -14,7 +14,7 @@ Allows you to operate with credit memos for orders.
 - sales_order_creditmemo.addComment - Add a new comment to the credit memo
 - sales_order_creditmemo.cancel - Cancel the credit memo
 
-## Faults:
+**Faults**::
 
 | Fault Code | Fault Message |
 | --- | --- |
@@ -226,7 +226,7 @@ The **salesOrderCreditmemoCommentEntity** content is as follows:
 | --- | --- |
 | 101 | Invalid filter given. Details in error message. |
 
-### Examples
+**Examples**:
 
 **Request Example SOAP V1**
 
@@ -539,7 +539,7 @@ The **salesOrderCreditmemoCommentEntity** content is as follows:
 | --- | --- |
 | 100 | Requested credit memo does not exist. |
 
-### Examples
+**Examples**:
 
 **Request Example SOAP V1**
 
@@ -798,7 +798,7 @@ The **orderItemIdQty** content is as follows:
 | 105 | Money can not be refunded to the store credit account as order was created by guest. |
 | 106 | Credit memo for requested order can not be created. |
 
-### Examples
+**Examples**:
 
 **Request Example SOAP V1**
 
@@ -874,7 +874,7 @@ Allows you to add a new comment to an existing credit memo. Email notification c
 | 100 | Requested credit memo does not exist. |
 | 102 | Invalid data given. Details in error message. |
 
-### Examples
+**Examples**:
 
 **Request Example SOAP V1**
 
@@ -937,7 +937,7 @@ Allows you to cancel an existing credit memo.
 | 100 | Requested credit memo does not exist. |
 | 104 | Credit memo status not changed. |
 
-### Examples
+**Examples**:
 
 **Request Example SOAP V1**
 

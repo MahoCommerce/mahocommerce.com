@@ -14,7 +14,7 @@ Allows you to operate with product tags.
 - product_tag.update - Update an existing product tag
 - product_tag.remove - Remove a product tag
 
-## Faults:
+**Faults**::
 
 | Fault Code | Fault Message |
 | --- | --- |
@@ -127,7 +127,7 @@ The **catalogProductTagListEntity** content is as follows:
 | 101 | Requested store does not exist. |
 | 102 | Requested product does not exist. |
 
-### Examples
+**Examples**:
 
 **Request Example SOAP V1**
 
@@ -212,7 +212,7 @@ The **catalogProductTagInfoEntity** content is as follows:
 | 101 | Requested store does not exist. |
 | 104 | Requested tag does not exist. |
 
-### Examples
+**Examples**:
 
 **Request Example SOAP V1**
 
@@ -299,7 +299,7 @@ The **catalogProductTagAddEntity** content is as follows:
 | 105 | Provided data is invalid. |
 | 106 | Error while saving tag. Details in error message. |
 
-### Examples
+**Examples**:
 
 **Request Example SOAP V1**
 
@@ -390,7 +390,7 @@ The **catalogProductTagUpdateEntity** content is as follows:
 | 105 | Provided data is invalid. |
 | 106 | Error while saving tag. Details in error message. |
 
-### Examples
+**Examples**:
 
 **Request Example SOAP V1**
 
@@ -458,7 +458,7 @@ Allows you to remove an existing product tag.
 | 104 | Requested tag does not exist. |
 | 107 | Error while removing tag. Details in error message. |
 
-### Examples
+**Examples**:
 
 **Request Example SOAP V1**
 

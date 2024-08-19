@@ -7,7 +7,7 @@ Allows you to add customer information and addresses into a shopping cart.
 - cart_customer.set - Add customer information into a shopping cart
 - cart_customer.addresses - Set the customer addresses (shipping and billing) into a shopping cart
 
-#### Faults
+**Faults**:
 
 | Fault Code | Fault Message |
 | --- | --- |
@@ -66,7 +66,7 @@ The **shoppingCartCustomerEntity** content is as follows:
 **Faults:**  
 _No Faults._
 
-### Examples
+**Examples**:
 
 **Request Example SOAP V1**
 
@@ -152,7 +152,7 @@ The **shoppingCartCustomerAddressEntity** content is as follows:
 **Faults:**  
 _No Faults._
 
-### Examples
+**Examples**:
 
 **Request Example SOAP V1**
 

@@ -6,7 +6,7 @@
 - customer_address.update - Update the customer address
 - customer_address.delete - Delete the customer address
 
-## Faults
+**Faults**:
 
 | Fault Code | Fault Message |
 | --- | --- |
@@ -114,7 +114,7 @@ The **customerAddressEntity** content is as follows:
 | boolean | is_default_billing | True if the address is the default one for billing |
 | boolean | is_default_shipping | True if the address is the default one for shipping |
 
-### Examples
+**Examples**:
 
 **Request Example SOAP V1**
 
@@ -234,7 +234,7 @@ The **customerAddressEntityCreate** content is as follows:
 
 **Note**: If you want to leave any address fields empty, specify them as empty ones in the request body.
 
-### Examples
+**Examples**:
 
 **Request Example SOAP V1**
 
@@ -327,7 +327,7 @@ The **customerAddressEntityItem** content is as follows:
 | boolean | is_default_billing | True if the address is the default one for billing |
 | boolean | is_default_shipping | True if the address is the default one for shipping |
 
-### Examples
+**Examples**:
 
 **Request Example SOAP V1**
 
@@ -437,7 +437,7 @@ The **customerAddressEntityCreate** content is as follows:
 | boolean | is_default_billing | True if the address is the default one for billing |
 | boolean | is_default_shipping | True if the address is the default one for shipping |
 
-### Examples
+**Examples**:
 
 **Request Example SOAP V1**
 
@@ -506,7 +506,7 @@ Delete the required customer address.
 | --- | --- |
 | boolean | True if the customer address is deleted |
 
-### Examples
+**Examples**:
 
 **Request Example SOAP V1**
 

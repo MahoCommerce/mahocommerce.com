@@ -5,14 +5,14 @@
 - cataloginventory_stock_item.list - Retrieve the list of stock data by product IDs
 - cataloginventory_stock_item.update - Update the stock data for a list of products
 
-### Faults
+**Faults**:
 
 | Fault Code | Fault Message |
 | --- | --- |
 | 101 | Product not exists. |
 | 102 | Product inventory not updated. Details in error message. |
 
-### Examples
+**Examples**:
 
 Change manage_stock setting to ‘off’ in the inventory area.
 
@@ -95,7 +95,7 @@ The **catalogInventoryStockItemEntity** content is as follows:
 | string | qty | Product quantity |
 | string | is_in_stock | Defines whether the product is in stock |
 
-### Examples
+**Examples**:
 
 **Request Example SOAP V1**
 
@@ -189,7 +189,7 @@ The **catalogInventoryStockItemUpdateEntity** content is as follows:
 | int | notify_stock_qty | Stock quantity below which a notification will appear |
 | int | use_config_notify_stock_qty | Use config settings flag (for stock quantity) |
 
-### Examples
+**Examples**:
 
 **Request Example SOAP V1**
 

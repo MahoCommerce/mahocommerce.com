@@ -16,7 +16,7 @@ Allows you to retrieve the list of category attributes and options.
 | 100        | Requested store view not found.    |
 | 101        | Requested attribute not found.     |
 
-### Examples
+**Examples**:
 
 **Example 1. Retrieving attributes and options**
 
@@ -60,7 +60,7 @@ Allows you to set/get the current store view.
 | int  | storeView | Store view ID   |
 
 
-### Examples
+**Examples**:
 
 **Request Example SOAP V1**
 
@@ -117,7 +117,7 @@ The **catalogAttributeEntity** content is as follows:
 | string | required | Defines whether the attribute is required |
 | string | scope | Attribute scope: global, website, or store |
 
-### Examples
+**Examples**:
 
 **Request Example SOAP V1**
 
@@ -210,7 +210,7 @@ The **catalogAttributeOptionEntity** content is as follows:
 | string | label | Option label |
 | string | value | Option value |
 
-### Examples
+**Examples**:
 
 **Request Example SOAP V1**
 

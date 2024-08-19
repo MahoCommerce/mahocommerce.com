@@ -12,7 +12,7 @@ Allows you to manage shipments and tracking numbers.
 - sales_order_shipment.removeTrack - Remove tracking number from a shipment
 - sales_order_shipment.getCarriers - Retrieve a list of allowed carriers for an order
 
-## Faults
+**Faults**:
 
 | Fault Code | Fault Message |
 | --- | --- |
@@ -95,7 +95,7 @@ The **salesOrderShipmentEntity** content is as follows:
 | string | total_qty | Total quantity of items to ship |
 | string | shipment_id | Shipment ID |
 
-### Examples
+**Examples**:
 
 **Request Example SOAP V1**
 
@@ -245,7 +245,7 @@ The **salesOrderShipmentCommentEntity** content is as follows:
 | string | is_customer_notified | Defines whether the customer is notified |
 | string | comment_id | Comment ID |
 
-### Examples
+**Examples**:
 
 **Request example SOAP V1**
 
@@ -316,7 +316,7 @@ The **orderItemIdQty** content is as follows:
 
 **Notes**: The array of orderItemQty is used for partial shipment. To create shipment for all order items, you do not need to specify these attributes.
 
-### Examples
+**Examples**:
 
 **Request Example SOAP V1**
 
@@ -418,7 +418,7 @@ Allows you to add a new comment to the order shipment.
 | --- | --- |
 | booleanint | True (1) if the comment is added to the order shipment |
 
-### Examples
+**Examples**:
 
 **Request Example SOAP V1**
 
@@ -482,7 +482,7 @@ Allows you to add a new tracking number to the order shipment.
 | --- | --- |
 | int | Tracking number ID |
 
-### Examples
+**Examples**:
 
 **Request Example SOAP V1**
 
@@ -544,7 +544,7 @@ Allows you to remove a tracking number from the order shipment.
 | --- | --- |
 | booleanint | True (1) if the tracking number is removed from the shipment |
 
-### Examples
+**Examples**:
 
 **Request Example SOAP V1**
 
@@ -605,7 +605,7 @@ Allows you to retrieve the list of allowed carriers for an order.
 | --- | --- | --- |
 | associativeArray | result | Array of carriers |
 
-### Examples
+**Examples**:
 
 **Request Example SOAP V1**
 

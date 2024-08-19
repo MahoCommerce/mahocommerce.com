@@ -32,7 +32,7 @@ The **directoryCountryEntity** content is as follows:
 | string | iso3_code | ISO 3-alpha code |
 | string | name | Name of the retrieved country |
 
-### Examples
+**Examples**:
 
 **Request Example SOAP V1**
 
@@ -128,7 +128,7 @@ The **directoryRegionEntity** content is as follows:
 | --- | --- |
 | 101 | Country not exists. |
 
-### Examples
+**Examples**:
 
 **Request Example SOAP V1**
 

@@ -10,7 +10,7 @@ Allows you to manage products in a shopping cart.
 - cart_product.list - Get a list of products in a shopping cart
 - cart_product.moveToCustomerQuote - Move one or more products from the quote to the customer shopping cart
 
-## Faults
+**Faults**:
 
 | Fault Code | Fault Message |
 | --- | --- |
@@ -68,7 +68,7 @@ The shoppingCartProductEntity array attributes are as follows:
 **Faults**:  
 _No Faults._
 
-### Examples
+**Examples**:
 
 **Request Example SOAP V1**
 
@@ -177,7 +177,7 @@ The **shoppingCartProductEntity** content is as follows:
 **Faults:**  
 _No Faults._
 
-### Examples
+**Examples**:
 
 **Request Example SOAP V1**
 
@@ -295,7 +295,7 @@ The **shoppingCartProductEntity** content is as follows:
 **Faults:**  
 _No Faults._
 
-### Examples
+**Examples**:
 
 **Request Example SOAP V1**
 
@@ -410,7 +410,7 @@ The **shoppingCartProductResponseEntity** (**catalogProductEntity**) content is 
 
 **Faults:**
 
-### Examples
+**Examples**:
 
 **Request Example SOAP V1**
 
@@ -500,7 +500,7 @@ The **shoppingCartProductEntity** content is as follows:
 **Faults:**  
 _No Faults._
 
-### Examples
+**Examples**:
 
 **Request Example SOAP V1**
 

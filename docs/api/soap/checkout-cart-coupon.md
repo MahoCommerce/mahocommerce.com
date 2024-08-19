@@ -9,7 +9,7 @@ Allows you to add and remove coupon codes for a shopping cart.
 
 **Note**: In Magento, quotes and shopping carts are logically related, but technically different. The shopping cart is a wrapper for a quote, and it is used primarily by the frontend logic. The cart is represented by the Mage_Checkout_Model_Cart class and the quote is represented by the Mage_Sales_Model_Quote class.
 
-#### Faults
+**Faults**:
 
 | Fault Code | Fault Message |
 | --- | --- |
@@ -45,7 +45,7 @@ Allows you to add a coupon code for a shopping cart (quote). The shopping cart m
 
 **Faults:**
 
-### Examples
+**Examples**:
 
 **Request Example SOAP V1**
 
@@ -111,7 +111,7 @@ Allows you to remove a coupon code from a shopping cart (quote).
 **Faults:**  
 _No Faults._
 
-### Examples
+**Examples**:
 
 **Request Example SOAP V1**
 

@@ -7,7 +7,7 @@ Allows you to retrieve and set payment methods for a shopping cart.
 - cart_payment.method - Set a payment method for a shopping cart
 - cart_payment.list - Get the list of available payment methods for a shopping cart
 
-## Faults
+**Faults**:
 
 | Fault Code | Fault Message |
 | --- | --- |
@@ -59,7 +59,7 @@ The **shoppingCartPaymentMethodEntity** content is as follows:
 **Faults:**  
 _No Faults._
 
-### Examples
+**Examples**:
 
 **Request Example SOAP V1**
 ```php
@@ -151,7 +151,7 @@ The **shoppingCartPaymentMethodResponseEntity** content is as follows:
 | string | title | Payment method title |
 | associativeArray | cc_types | Array of credit card types |
 
-### Examples
+**Examples**:
 
 **Request Example SOAP V1**
 

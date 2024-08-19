@@ -17,7 +17,7 @@ Allows you to manage orders.
 - sales_order.unhold - Unhold an order
 - sales_order.cancel - Cancel an order
 
-## Faults
+**Faults**:
 
 | Fault Code | Fault Message |
 | --- | --- |
@@ -157,7 +157,7 @@ The **salesOrderEntity** content is as follows:
 | string | gift_message_id | Gift message ID |
 | string | gift_message | Gift message |
 
-### Examples
+**Examples**:
 
 **Request Example SOAP V1**
 
@@ -495,7 +495,7 @@ The **salesOrderStatusHistoryEntity** content is as follows:
 | string | status | Order status |
 | string | comment | Order comment |
 
-### Examples
+**Examples**:
 
 **Request Example SOAP V1**
 
@@ -696,7 +696,7 @@ Allows you to add a new comment to the order.
 | --- | --- |
 | booleanint | True (1) if the comment is added to the order |
 
-### Examples
+**Examples**:
 
 **Request Example SOAP V1**
 
@@ -757,7 +757,7 @@ Allows you to place the required order on hold.
 | --- | --- |
 | booleanint | True (1) if the order is placed on hold |
 
-### Examples
+**Examples**:
 
 **Request Example SOAP V1**
 
@@ -818,7 +818,7 @@ Allows you to unhold the required order.
 | --- | --- |
 | booleanint | True (1) if the order is unheld |
 
-### Examples
+**Examples**:
 
 **Request Example SOAP V1**
 
@@ -876,7 +876,7 @@ Allows you to cancel the required order.
 | --- | --- |
 | boolean | True if the order is canceled |
 
-### Examples
+**Examples**:
 
 **Request Example SOAP V1**
 

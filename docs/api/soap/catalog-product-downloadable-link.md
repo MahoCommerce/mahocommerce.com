@@ -72,7 +72,7 @@ The **catalogProductDownloadableLinkFileEntity** content is as follows:
 | 414 | Unable to save action. Details in error message. |
 | 415 | Validation error has occurred. |
 
-### Examples
+**Examples**:
 
 **Request Example SOAP V1**
 
@@ -279,7 +279,7 @@ The **catalogProductDownloadableLinkFileInfoEntity** content is as follows:
 **Faults:**  
 _No Faults_
 
-### Examples
+**Examples**:
 
 **Request Example SOAP V1**
 
@@ -388,7 +388,7 @@ Allows you to remove a link/sample from a downloadable product.
 | 415 | Validation error has occurred. |
 | 416 | Unable to remove link. Details in error message. |
 
-### Examples
+**Examples**:
 
 **Request Example SOAP V1**
 

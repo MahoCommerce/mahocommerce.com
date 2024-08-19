@@ -13,7 +13,7 @@
 - product_custom_option.info - Get full information about the custom option in a product
 - product_custom_option.remove - Remove the custom option
 
-## Faults:
+**Faults**::
 
 | Fault Code | Fault Message |
 | --- | --- |
@@ -84,7 +84,7 @@ The **catalogProductCustomOptionAdditionalFieldsEntity** content is as follows:
 | 104 | Store with requested code/id does not exist. |
 | 106 | Invalid option type provided. Call 'types' to get list of allowed option types. |
 
-### Examples
+**Examples**:
 
 **Request Example SOAP V1**
 
@@ -277,7 +277,7 @@ The **catalogProductCustomOptionAdditionalFields** content is as follows:
 | 105 | Option with requested id does not exist. |
 | 106 | Invalid option type provided. Call 'types' to get list of allowed option types. |
 
-### Examples
+**Examples**:
 
 **Request Example SOAP V1**
 
@@ -417,7 +417,7 @@ The **catalogProductCustomOptionTypesEntity** content is as follows:
 
 _No faults_
 
-### Examples
+**Examples**:
 
 **Request Example SOAP V1**
 
@@ -538,7 +538,7 @@ The **catalogProductCustomOptionList** content is as follows:
 | 101 | Product with requested id does not exist. |
 | 104 | Store with requested code/id does not exist. |
 
-### Examples
+**Examples**:
 
 **Request Example SOAP V1**
 
@@ -642,7 +642,7 @@ The **catalogProductCustomOptionAdditionalFields** content is as follows:
 | 104 | Store with requested code/id does not exist. |
 | 105 | Option with requested id does not exist. |
 
-### Examples
+**Examples**:
 
 **Request Example SOAP V1**
 
@@ -734,7 +734,7 @@ Allows you to remove a custom option from the product.
 | 105 | Option with requested id does not exist. |
 | 107 | Error while deleting an option. Details are in the error message. |
 
-### Examples
+**Examples**:
 
 **Request Example SOAP V1**
 

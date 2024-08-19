@@ -17,7 +17,7 @@ Allows you to manage links for products, including related, cross-sells, up-sell
 - catalog_product_link.types - Retrieve product link types
 - catalog_product_link.attributes - Retrieve product link type attributes
 
-## Faults
+**Faults**:
 
 | Fault Code | Fault Message |
 | --- | --- |
@@ -92,7 +92,7 @@ The **catalogProductLinkEntity** content is as follows:
 | string | position | Position |
 | string | qty | Quantity |
 
-### Examples
+**Examples**:
 
 **Request Example SOAP V1**
 
@@ -188,7 +188,7 @@ The **catalogProductLinkEntity** content is as follows:
 | string | position | Position of the product |
 | string | qty | Quantity of products |
 
-### Examples
+**Examples**:
 
 **Request Example SOAP V1**
 
@@ -264,7 +264,7 @@ The **catalogProductLinkEntity** content is as follows:
 | string | position | Position |
 | string | qty | Quantity |
 
-### Examples
+**Examples**:
 
 **Request Example SOAP V1**
 
@@ -352,7 +352,7 @@ Allows you to remove the product link from a specific product.
 | --- | --- |
 | booleanint | True (1) if the link is removed from a product |
 
-### Examples
+**Examples**:
 
 **Request Example SOAP V1**
 
@@ -412,7 +412,7 @@ Allows you to retrieve the list of product link types.
 | --- | --- | --- |
 | ArrayOfString | result | Array of link types |
 
-### Examples
+**Examples**:
 
 **Request Example SOAP V1**
 
@@ -490,7 +490,7 @@ The **catalogProductLinkAttributeEntity** content is as follows:
 | string | code | Attribute code |
 | string | type | Attribute type |
 
-### Examples
+**Examples**:
 
 **Request Example SOAP V1**
 

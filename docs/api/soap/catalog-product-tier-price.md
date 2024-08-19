@@ -14,7 +14,7 @@ Allows you to retrieve and update product tier prices.
 - catalog_product_attribute_tier_price.info - Retrieve information about product tier prices
 - catalog_product_attribute_tier_price.update - Update the product tier prices
 
-## Faults
+**Faults**:
 
 | Fault Code | Fault Message |
 | --- | --- |
@@ -86,7 +86,7 @@ The **catalogProductTierPriceEntity** content is as follows:
 | int | qty | Quantity of items to which the price will be applied |
 | double | price | Price that each item will cost |
 
-### Examples
+**Examples**:
 
 **Request Example SOAP V1**
 
@@ -190,7 +190,7 @@ The **catalogProductTierPriceEntity** content is as follows:
 | int | qty | Quantity of items to which the price will be applied |
 | double | price | Price that each item will cost |
 
-### Examples
+**Examples**:
 
 **Request Example SOAP V1**
 

@@ -17,7 +17,7 @@ Allows you to manage invoices.
 - sales_order_invoice.capture - Capture an invoice
 - sales_order_invoice.cancel - Cancel an invoice
 
-## Faults
+**Faults**:
 
 | Fault Code | Fault Message |
 | --- | --- |
@@ -98,7 +98,7 @@ The **salesOrderInvoiceEntity** content is as follows:
 | string | grand_total | Grand total amount invoiced |
 | string | invoice_id | Invoice ID |
 
-### Examples
+**Examples**:
 
 **Request Example SOAP V1**
 
@@ -285,7 +285,7 @@ The **salesOrderInvoiceCommentEntity** content is as follows:
 | string | is_customer_notified | Defines whether the customer is notified |
 | string | comment_id | Comment ID |
 
-### Examples
+**Examples**:
 
 **Request Example SOAP V1**
 
@@ -449,7 +449,7 @@ The **orderItemIdQty** content is as follows:
 | int | order_item_id | Order item ID |
 | double | qty | Quantity |
 
-### Examples
+**Examples**:
 
 **Request Example SOAP V1**
 
@@ -530,7 +530,7 @@ Allows you to add a new comment to the order invoice.
 | --- | --- |
 | boolean | True if the comment is added to the invoice |
 
-### Examples
+**Examples**:
 
 **Request Example SOAP V1**
 
@@ -603,7 +603,7 @@ Invoices have states as defined in the model Mage_Sales_Model_Order_Invoice:
 
 Also note that there is a method call in the model that checks this for you - canCapture(). And it also verifies that the payment can be captured, so the invoice state might not be the only condition that is required to allow it to be captured.
 
-### Examples
+**Examples**:
 
 **Request Example SOAP V1**
 
@@ -692,7 +692,7 @@ Allows you to cancel the required invoice. Note that not all order invoices can 
 | --- | --- |
 | boolean | True if the order invoice is canceled. |
 
-### Examples
+**Examples**:
 
 **Request Example SOAP V1**
 

@@ -7,7 +7,7 @@ Allows you to retrieve and set shipping methods for a shopping cart.
 - cart_shipping.method - Set a shipping method for a shopping cart
 - cart_shipping.list - Retrieve the list of available shipping methods for a shopping cart
 
-## Faults
+**Faults**:
 
 | Fault Code | Fault Message |
 | --- | --- |
@@ -45,7 +45,7 @@ Allows you to set a shipping method for a shopping cart (quote).
 **Faults:**  
 _No Faults._
 
-### Examples
+**Examples**:
 
 **Request Example SOAP V1**
 
@@ -115,7 +115,7 @@ The **shoppingCartShippingMethodEntity** content is as follows:
 **Faults:**  
 _No Faults._
 
-### Examples
+**Examples**:
 
 **Request Example SOAP V1**
 

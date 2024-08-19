@@ -29,7 +29,7 @@ Allows you to manage categories and how products are assigned to categories.
 | 105 | Category not deleted. Details in error message. |
 | 106 | Requested product is not assigned to category. |
 
-### Examples
+**Examples**:
 
 **Example 1. Working with categories**
 
@@ -138,7 +138,7 @@ The **catalogAssignedProduct** content is as follows:
 | string | sku | Product SKU |
 | int | position | Position of the assigned product |
 
-### Examples
+**Examples**:
  
 **Request Example SOAP V1**
 
@@ -222,7 +222,7 @@ Assign a product to the required category.
 | --- | --- |
 | boolean | True if the product is assigned to the specified category |
 
-### Examples
+**Examples**:
 
 **Request Example SOAP V1**
 
@@ -314,7 +314,7 @@ The **categoryData** content is as follows:
 
 **Notes**: The **position** parameter is deprecated, the category will be positioned anyway in the end of the list and you can not set the position directly. You should use the catalog_category.move method instead. You cannot also assign a root category to the specified store.
 
-### Examples
+**Examples**:
 
 **Request Example SOAP V1**
 
@@ -429,7 +429,7 @@ Allows you to set/get the current store view.
 | --- | --- | --- |
 | int | storeView | Store view ID |
 
-### Examples
+**Examples**:
 
 **Request Example SOAP V1**
 
@@ -477,7 +477,7 @@ Allows you to delete the required category.
 | --- | --- |
 | boolean | True if the category is deleted |
 
-### Examples
+**Examples**:
 
 **Request Example SOAP V1**
 
@@ -577,7 +577,7 @@ The **catalogCategoryInfo** content is as follows:
 | string | filter_price_range | Price range of each price level displayed in the layered navigation block |
 | int | custom_use_parent_settings | Defines whether the category will inherit custom design settings of the category to which it is assigned. 1 - Yes, 0 - No |
 
-### Examples
+**Examples**:
 
 **Request Example SOAP V1**
 
@@ -693,7 +693,7 @@ The **CatalogCategoryEntitityNoChildren** content is as follows:
 | int | position | Category position |
 | int | level | Category level |
 
-### Examples
+**Examples**:
 
 **Request Example SOAP V1**
 
@@ -768,7 +768,7 @@ Allows you to move the required category in the category tree.
 | --- | --- | --- |
 | boolean | id  | True if the category is moved |
 
-### Examples
+**Examples**:
 
 **Request Example SOAP V1**
 
@@ -833,7 +833,7 @@ Allows you to remove the product assignment from the category.
 | --- | --- |
 | boolean | True if the product is removed from the category |
 
-### Examples
+**Examples**:
 
 **Request Example SOAP V1**
 
@@ -918,7 +918,7 @@ The **catalogCategoryEntity** content is as follows:
 | int | level | Category level |
 | array | children | Array of CatalogCategoryEntities |
 
-### Examples
+**Examples**:
 
 **Request Example SOAP V1**
 
@@ -1047,7 +1047,7 @@ The **catalogCategoryEntityCreate** content is as follows:
 **Faults**:  
 _No Faults_
 
-### Examples
+**Examples**:
 
 **Request Example SOAP V1**
 
@@ -1165,7 +1165,7 @@ Allows you to update the product assigned to a category. The product position is
 | --- | --- |
 | boolean | True if the product is updated in the category |
 
-### Examples
+**Examples**:
 
 **Request Example SOAP V1**
 

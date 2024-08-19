@@ -24,7 +24,7 @@ The **customerGroupEntity** content is as follows:
 | int | customer_group_id | ID of the customer group |
 | string | customer_group_code | Customer group code |
 
-### Examples
+**Examples**:
 
 **Request Example SOAP V1**
 

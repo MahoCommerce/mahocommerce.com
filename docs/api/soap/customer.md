@@ -8,7 +8,7 @@ Allows you to create, retrieve, update, and delete data about customers.
 - customer.update - Update the customer data
 - customer.delete - Delete a required customer
 
-## Faults
+**Faults**:
 
 | Fault Code | Fault Message |
 | --- | --- |
@@ -100,7 +100,7 @@ The **customerCustomerEntity** content is as follows:
 
 **Note**: The password_hash parameter will only match exactly with the same MD5 and salt as was used when Magento stored the value. If you try to match with an unsalted MD5 hash, or any salt other than what Magento used, it will not match. This is just a straight string comparison.
 
-### Examples
+**Examples**:
 
 **Request Example SOAP V1**
 
@@ -233,7 +233,7 @@ The **customerCustomerEntityToCreate** content is as follows:
 | int | gender | Customer gender: 1 - Male, 2 - Female (optional) |
 | string | middlename | Customer middle name/initial (optional) |
 
-### Examples
+**Examples**:
 
 **Request Example SOAP V1**
 
@@ -325,7 +325,7 @@ The **customerCustomerEntity** content is as follows:
 | string | rp_token | Reset password token |
 | string | rp_token_created_at | Date when the password was reset |
 
-### Examples
+**Examples**:
 
 **Request Example SOAP V1**
 
@@ -430,7 +430,7 @@ The **customerCustomerEntityToCreate** content is as follows:
 | int | gender | Customer gender: 1 - Male, 2 - Female |
 | string | middlename | Customer middle name/initial |
 
-### Examples
+**Examples**:
 
 **Request Example SOAP V1**
 
@@ -491,7 +491,7 @@ Delete the required customer.
 | --- | --- |
 | boolean | True if the customer is deleted |
 
-### Examples
+**Examples**:
 
 **Request Example SOAP V1**
 

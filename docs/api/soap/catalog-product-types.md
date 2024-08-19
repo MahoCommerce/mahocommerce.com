@@ -56,7 +56,7 @@ The **catalogProductTypeEntity** content is as follows:
 | string | type | Product type |
 | string | label | Product label in the Admin Panel |
 
-### Examples
+**Examples**:
 
 **Request Example SOAP V1**
 
