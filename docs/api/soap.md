@@ -105,13 +105,14 @@ For example, consider the following PHP code using SOAP v1.
 
 ```php
 $params = array(array(
-    'status'=&gt;array('eq'=&gt;'pending'),
-    'customer_is_guest'=&gt;array('eq'=&gt;'1'))
+    'status' => array('eq'=>'pending'),
+    'customer_is_guest' => array('eq'=>'1'))
 ));
-$result = $client-&gt;call($sessionId, 'sales_order.list', $params);
+$result = $client->call($sessionId, 'sales_order.list', $params);
 ```
 
 <p>With SOAP v2, the following code would be equivalent.</p>
+
 ```php
 $params = array('filter' =&gt; array(
     array('key' =&gt; 'status', 'value' =&gt; 'pending'),
@@ -692,6 +693,6 @@ class Mage_Checkout_Model_Cart_Api extends Mage_Cart_Model_Api_Resource
         ...
     }
 }
-``
+```
 
 If you are missing this method, the error "Invalid API path" will be returned.
