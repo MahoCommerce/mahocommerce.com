@@ -78,12 +78,9 @@ Options:
       --session_save[=SESSION_SAVE]                            Where to store session data (files/db) [default: "files"]
       --admin_frontname[=ADMIN_FRONTNAME]                      Admin panel path, "admin" by default [default: "admin"]
       --url=URL                                                URL the store is supposed to be available at
-      --skip_url_validation[=SKIP_URL_VALIDATION]              Skip validating base URL during installation or not. No by default [default: false]
-      --use_rewrites[=USE_REWRITES]                            Use Web Server (Apache) Rewrites. Ensure that mod_rewrite is enabled in Apache configuration [default: false]
       --use_secure[=USE_SECURE]                                Use Secure URLs (SSL). Enable this option only if you have SSL available. [default: false]
       --secure_base_url[=SECURE_BASE_URL]                      Secure Base URL. Provide a complete base URL for SSL connection. For example: https://mydomain.com/
       --use_secure_admin[=USE_SECURE_ADMIN]                    Run admin interface with SSL [default: false]
-      --enable_charts[=ENABLE_CHARTS]                          Enables Charts on the backend's dashboard [default: false]
       --admin_lastname=ADMIN_LASTNAME                          Admin user last name
       --admin_firstname=ADMIN_FIRSTNAME                        Admin user first name
       --admin_email=ADMIN_EMAIL                                Admin user email
@@ -104,12 +101,12 @@ Sample of a complete CLI installation command:
 ./maho install \
 --license_agreement_accepted yes \
 --locale en_US --timezone Europe/London --default_currency EUR \ 
---db_host localhost --db_name pippocommerce --db_user root --db_pass root \
---url http://yourdomain.test/ --use_rewrites 1 --use_secure 0 \
---secure_base_url http://yourdomain.test/ --use_secure_admin 0 \
+--db_host localhost --db_name maho --db_user root --db_pass root \
+--url http://yourdomain.test/ --secure_base_url http://yourdomain.test/ \
+--use_secure 0 --use_secure_admin 0 \
 --admin_lastname admin --admin_firstname admin \
 --admin_email admin@admin.com --admin_username admin \ 
---admin_password samplepassword --skip_url_validation
+--admin_password samplepassword
 ```
 
 If you need a list of the available currencies, locales or timezones, simply run one of
