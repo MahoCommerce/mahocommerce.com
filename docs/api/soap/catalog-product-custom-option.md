@@ -1,5 +1,7 @@
 # Catalog Product Custom Option
 
+## Introduction
+
 **Resource**: catalog_product_custom_option
 
 **Aliases**: product_custom_option

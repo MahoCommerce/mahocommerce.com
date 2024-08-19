@@ -1,3 +1,5 @@
+## Introduction
+
 Allows you to create, retrieve, update, and delete data about customers.
 
 **Methods**:

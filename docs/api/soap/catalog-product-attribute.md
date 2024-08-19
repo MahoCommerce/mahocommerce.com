@@ -1,5 +1,7 @@
 # Catalog Product Attribute
 
+## Introduction
+
 Allows you to retrieve product attributes and options.
 
 **Resource Name**: catalog_product_attribute

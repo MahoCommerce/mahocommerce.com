@@ -1,3 +1,5 @@
+## Introduction
+
 Allows you to manage products in a shopping cart.
 
 **Resource Name**: cart_product
@@ -29,7 +31,7 @@ Allows you to manage products in a shopping cart.
 | 1031 | Product(s) could not be moved. |
 | 1032 | One of quote could not be saved during moving product(s) operation. |
 
-## Checkout Cart Product Add
+## Add
 
 **Method:**
 
@@ -138,7 +140,7 @@ $result = $proxy->shoppingCartProductAdd((object)array('sessionId' => $sessionId
 var_dump($result->result);
 ```
 
-## Checkout Cart Product Update
+## Update
 
 **Method:**
 
@@ -256,7 +258,7 @@ $result = $proxy->shoppingCartProductUpdate((object)array('sessionId' => $sessio
 var_dump($result->result);
 ```
 
-## Checkout Cart Product Remove
+## Remove
 
 **Method:**
 
@@ -373,7 +375,7 @@ $result = $proxy->shoppingCartProductRemove((object)array('sessionId' => $sessio
 var_dump($result->result);
 ```
 
-## Checkout Cart Product List
+## List
 
 **Method:**
 
@@ -461,7 +463,7 @@ array
           0 => string '2' (length=1)
 ```
 
-## Checkout Cart Product MoveToCustomerQuote
+## MoveToCustomerQuote
 
 **Method:**
 

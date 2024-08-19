@@ -1,5 +1,7 @@
 # Sales Order Shipment
 
+## Introduction
+
 Allows you to manage shipments and tracking numbers.
 
 **Methods**:

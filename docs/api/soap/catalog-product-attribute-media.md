@@ -1,5 +1,7 @@
 # Catalog Product Attribute Media
 
+## Introduction
+
 Allows you to manage product images.
 
 **Resource Name**: catalog_product_attribute_media

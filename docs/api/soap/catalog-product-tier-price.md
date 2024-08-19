@@ -1,5 +1,7 @@
 # Catalog Product Tier Price
 
+## Introduction
+
 Allows you to retrieve and update product tier prices.
 
 **Resource Name**: catalog_product_attribute_tier_price

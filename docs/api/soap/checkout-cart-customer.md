@@ -1,3 +1,5 @@
+## Introduction
+
 Allows you to add customer information and addresses into a shopping cart.
 
 **Resource Name**: cart_customer
@@ -24,7 +26,7 @@ Allows you to add customer information and addresses into a shopping cart.
 | 1054 | Customer address is not set. |
 | 1055 | Customer address identifier do not belong customer, which set in quote |
 
-## Checkout Cart Customer Set
+## Set
 
 **Method:**
 
@@ -105,7 +107,7 @@ $customerData = array(
 $resultCustomerSet = $client->shoppingCartCustomerSet($session, $quoteId, $customerData);
 ```
 
-## Checkout Cart Customer Addresses
+## Addresses
 
 **Method:**
 

@@ -1,5 +1,7 @@
 # Catalog Product
 
+## Introduction
+
 Allows you to manage products.
 
 **Resource Name**: catalog_product

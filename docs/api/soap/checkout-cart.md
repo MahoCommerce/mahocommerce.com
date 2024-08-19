@@ -1,3 +1,5 @@
+## Introduction
+
 Allows you to manage shopping carts.
 
 **Resource Name**: cart
@@ -23,7 +25,7 @@ Allows you to manage shopping carts.
 | 1007 | Checkout is not available for guest |
 | 1008 | Can not create an order. |
 
-## Example
+**Example**
 
 The following example illustrates the work with shopping cart (creation of a shopping cart, setting customer and customer addresses, adding products to the shopping cart, updating products in the shopping cart, removing products from the shopping cart, getting the list of products/shipping methods/payment methods, setting payment/shipping methods,  adding/removing coupon, getting total prices/full information about shopping cart/list of licenses, and creating an order.
 
@@ -166,7 +168,7 @@ if (count($shoppingCartLicenses)) {
 $resultOrderCreation = $proxy->call($sessionId,"cart.order",array($shoppingCartId, null, $licenseForOrderCreation));
 ```
 
-## Checkout Cart Create
+## Create
 
 **Method:**
 
@@ -222,7 +224,7 @@ $result = $proxy->shoppingCartCreate((object)array('sessionId' => $sessionId->re
 var_dump($result->result);
 ```
 
-## Checkout Cart Order
+## Order
 
 **Method:**
 
@@ -343,7 +345,7 @@ $password = 'apiKey';
     $orderId = $proxy->shoppingCartOrder($sessionId, $cartId, null, null);
 ```
 
-## Checkout Cart Info
+## Info
 
 **Method:**
 
@@ -576,7 +578,7 @@ $result = $proxy->shoppingCartInfo((object)array('sessionId' => $sessionId->resu
 var_dump($result->result);
 ```
 
-## Checkout Cart Totals
+## Totals
 
 **Method:**
 
@@ -668,7 +670,7 @@ array
       'amount' => null
 ```
 
-## Checkout Cart License
+## License
 
 **Method:**
 

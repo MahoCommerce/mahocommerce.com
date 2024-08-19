@@ -1,5 +1,7 @@
 # Catalog Product Downloadable Link
 
+## Introduction
+
 **Resource**: product_downloadable_link
 
 ##### Methods:

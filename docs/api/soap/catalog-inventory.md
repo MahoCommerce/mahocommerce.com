@@ -1,5 +1,7 @@
 # Catalog Inventory
 
+## Introduction
+
 **Methods**:
 
 - cataloginventory_stock_item.list - Retrieve the list of stock data by product IDs

@@ -1,5 +1,7 @@
 # Catalog Product Attribute Set
 
+## Introduction
+
 Allows you to retrieve product attribute sets.
 
 **Resource Name**: catalog_product_attribute_set

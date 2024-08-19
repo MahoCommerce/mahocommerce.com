@@ -1,3 +1,5 @@
+## Introduction
+
 Allows you to add and remove coupon codes for a shopping cart.
 
 **Resource Name**: cart_coupon
@@ -19,7 +21,7 @@ Allows you to add and remove coupon codes for a shopping cart.
 | 1082 | Coupon could not be applied. |
 | 1083 | Coupon is not valid. |
 
-## Checkout Cart Coupon Add
+## Add
 
 **Method:**
 
@@ -85,7 +87,7 @@ $result = $proxy->shoppingCartCouponAdd((object)array('sessionId' => $sessionId-
 var_dump($result->result);
 ```
 
-## Checkout Cart Coupon Remove
+## Remove
 
 **Method:**
 

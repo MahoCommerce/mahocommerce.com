@@ -1,3 +1,5 @@
+## Introduction
+
 **Method:**
 
 -   customer_group.list (SOAP V1)

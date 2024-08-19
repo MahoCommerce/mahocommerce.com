@@ -1,5 +1,7 @@
 # Catalog Product Tag
 
+## Introduction
+
 Allows you to operate with product tags.
 
 **Resource**: catalog_product_tag

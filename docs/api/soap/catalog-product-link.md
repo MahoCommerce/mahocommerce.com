@@ -1,5 +1,7 @@
 # Catalog Product Link
 
+## Introduction
+
 Allows you to manage links for products, including related, cross-sells, up-sells, and grouped.
 
 **Resource Name**: catalog_product_link

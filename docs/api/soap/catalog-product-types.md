@@ -1,5 +1,7 @@
 # Catalog Product Types
 
+## Introduction
+
 Allows you to retrieve product types.
 
 **Resource Name**: catalog_product_type

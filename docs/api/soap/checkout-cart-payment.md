@@ -1,11 +1,13 @@
+## Introduction
+
 Allows you to retrieve and set payment methods for a shopping cart.
 
 **Resource Name**: cart_payment
 
 **Methods**:
 
-- cart_payment.method - Set a payment method for a shopping cart
-- cart_payment.list - Get the list of available payment methods for a shopping cart
+- cart_payment.method - Set a payment method for a shopping cart
+- cart_payment.list - Get the list of available payment methods for a shopping cart
 
 **Faults**:
 
@@ -19,7 +21,7 @@ Allows you to retrieve and set payment methods for a shopping cart.
 | 1074 | Payment method is not allowed |
 | 1075 | Payment method is not set. |
 
-## Checkout Cart Payment Method
+## Method
 
 **Method:**
 
@@ -120,7 +122,7 @@ $result = $proxy->shoppingCartPaymentMethod((object)array('sessionId' => $sessio
 var_dump($result->result);
 ```
 
-## Checkout Cart Payment List
+## List
 
 **Method:**
 

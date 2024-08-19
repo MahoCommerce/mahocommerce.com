@@ -1,3 +1,5 @@
+## Introduction
+
 Allows you to retrieve and set shipping methods for a shopping cart.
 
 **Resource Name**: cart_shipping
@@ -18,7 +20,7 @@ Allows you to retrieve and set shipping methods for a shopping cart.
 | 1063 | Can not set shipping method. |
 | 1064 | Can not receive list of shipping methods. |
 
-## Checkout Cart Shipping Method
+## Method
 
 **Methods**:
 
@@ -77,7 +79,7 @@ $result = $proxy->shoppingCartShippingMethod((object)array('sessionId' => $sessi
 var_dump($result->result);
 ```
 
-## Checkout Cart Shipping List
+## List
 
 **Method:**
 
