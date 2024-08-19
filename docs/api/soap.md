@@ -114,11 +114,11 @@ $result = $client->call($sessionId, 'sales_order.list', $params);
 <p>With SOAP v2, the following code would be equivalent.</p>
 
 ```php
-$params = array('filter' =&gt; array(
-    array('key' =&gt; 'status', 'value' =&gt; 'pending'),
-    array('key' =&gt; 'customer_is_guest', 'value' =&gt; '1')
+$params = array('filter' => array(
+    array('key' => 'status', 'value' => 'pending'),
+    array('key' => 'customer_is_guest', 'value' => '1')
 ));
-$result = $client-&gt;salesOrderList($sessionId, $params);
+$result = $client->salesOrderList($sessionId, $params);
 ```
 
 <p>Note that the WSDL for SOAP v1 and SOAP v2 are different. Note that in SOAP v1, customizing the API did not involve changing the WSDL. In SOAP v2, changes to the WSDL are required.</p>
