@@ -90,6 +90,7 @@ nav:
             - Roles configuration: api/rest/permission_settings/roles_configuration.md
             - Attributes configuration: api/rest/permission_settings/attributes_configuration.md
             - Attributes description: api/rest/permission_settings/attributes_description.md
+          - Extending REST API: api/rest/extending.md
       - SOAP API:
           - Introduction: api/soap.md
           - Catalog Category: api/soap/catalog-category.md
