@@ -9,7 +9,7 @@ I want to share an overview of our recent activities and upcoming plans.
 
 <!-- more -->
 
-## Recent revelopments
+## Recent developments
 
 We worked on several minor buy key areas:
 
@@ -20,11 +20,11 @@ We worked on several minor buy key areas:
 
 ## Ongoing major projects
 
-In addition to these accomplishments, we are currently engaged in two substantial projects:
+In addition to these accomplishments, we are currently engaged in two significant projects:
 
 1. **New CLI Tool**: Development of a command-line interface tool comparable to Laravel's Artisan.
 2. **File Structure Innovation**: We are working on a project that will introduce a new approach to file structure in 
-   the M1 platform. While specifics are not yet ready for public disclosure, we anticipate this development to 
+   the M1 platform. While specifics are not yet ready for public disclosure, we expect this development to 
    significantly impact project organization. We estimate approximately two more weeks of development 
    before we can provide more comprehensive information.
 

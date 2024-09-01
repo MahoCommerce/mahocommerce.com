@@ -2,7 +2,7 @@
 how to crawl pages on their website. The file uses the
 [Robots Exclusion Protocol](https://en.wikipedia.org/wiki/Robots.txt){:target="_blank"},
 which is a protocol with a small set of commands that can be used to indicate access to your site by section and by 
-specific kinds of web crawlers (such as mobile crawlers vs desktop crawlers).
+specific kinds of web crawlers (such as mobile crawlers vs. desktop crawlers).
 
 ## Why is robots.txt important for e-commerce websites?
 

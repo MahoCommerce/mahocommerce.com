@@ -52,23 +52,23 @@ Available commands:
   sys:timezones               Get all available timezones
 ```
 
-This tool is inspired by [Laravel Artisan](https://laravel.com/docs/11.x/artisan),
-[n98-magerun](https://github.com/netz98/n98-magerun), and it was created using the awesome
-[Symfony Console](https://symfony.com/doc/current/console.html) component.
+This tool is inspired by [Laravel Artisan](https://laravel.com/docs/11.x/artisan){:target="_blank"},
+[n98-magerun](https://github.com/netz98/n98-magerun){:target="_blank"}, and it was created using the awesome
+[Symfony Console](https://symfony.com/doc/current/console.html){:target="_blank"} component.
 
 ## Available commands
 
 The list of the built-in commands is growing rapidly, at the moment yon can either run
 `./maho` within your Maho based project or you can check
-[Maho CLI commands folder](https://github.com/MahoCommerce/maho/tree/main/lib/MahoCLI/Commands)
+[Maho CLI commands directory](https://github.com/MahoCommerce/maho/tree/main/lib/MahoCLI/Commands){:target="_blank"}
 within our GitHub repository.
 
 All commands should be self-explanatory, also thanks to the inline descriptions.
 
 ## Add your custom commands
 
-1. Create `lib/MahoCLI/Commands` in the main folder of your project
-2. Create your command file, eg `MyCustomCommand.php` in `lib/MahoCLI/Commands` just like:
+1. Create `lib/MahoCLI/Commands` in the main directory of your project
+2. Create your command file, e.g. `MyCustomCommand.php` in `lib/MahoCLI/Commands` just like:
 ```php
 <?php
 
