@@ -1,6 +1,6 @@
 ## Deploy to production
 
-When you deploy a Maho project in production, you need to setup cron this way:
+When you deploy a Maho project in production, you need to set up cron this way:
 
 ```cron
 */5 * * * * cd /var/www/mahoproject; php ./maho cron:run default >/dev/null 2>&1
@@ -78,7 +78,7 @@ these two commands:
 
 ## Test locally
 
-When developing a Maho project locally, you don't need to setup cron, but you may
+When developing a Maho project locally, you don't need to set up cron, but you may
 want to run a specific cron job.
 
 This can be done passing the `job_code` you want to execute to `./maho cron:run`, like:
@@ -90,5 +90,5 @@ core_email_queue_send_all executed successfully
 
 !!! note
     If there's a record in the `cron_schedule` table for the specified `job_code` with status
-    of `pending, that record will be "burnt", otherwise no record will be created but the job
+    of `pending`, that record will be "burnt" otherwise no record will be created but the job
     will be executed anyway.

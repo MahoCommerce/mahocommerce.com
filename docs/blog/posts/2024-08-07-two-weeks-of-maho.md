@@ -31,18 +31,18 @@ Also, the [roadmap](../../roadmap.md) got some love too.
 
 ## Platform updates
 
-- a lot of cleanup
+- a lot of cleanups
 - a lot of refinements to the new autoloader systems
 - worked on the web installer which should now work
 - worked on the CLI tool to make it functional and to add as many commands as possible
-- ironed out a few things with our new [composer plugin](https://github.com/MahoCommerce/maho-composer-plugin)
-- fixed a couple of bugs with the new [starter project](https://github.com/MahoCommerce/maho-starter) which
-  should now be working
+- ironed out a few things with our new [composer plugin](https://github.com/MahoCommerce/maho-composer-plugin){:target="_blank"}
+- fixed a couple of bugs with the new [starter project](https://github.com/MahoCommerce/maho-starter){:target="_blank"} 
+  which should now be working
 
 ## Closing thoughts
 
-If you want to test Maho, please let us know if it works for you or what problems you find, we are
-committed to solve them in order to make Maho as perfect as possible, as quickly as possible.
+If you want to test Maho, please let us know if it works for you or what problems you find.
+We are committed to solving them to make Maho as perfect as possible, as quickly as possible.
 
 See you next week!  
 Maho rocks! 🚀

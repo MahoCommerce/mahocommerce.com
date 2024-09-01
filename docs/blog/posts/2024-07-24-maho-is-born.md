@@ -9,7 +9,7 @@ We are thrilled to announce the birth of Maho.
 
 <!-- more -->
 
-We'll give you more details soon, this blog post is just to set this date in stone as a future reminder
+We'll give you more details soon. This blog post is just to set this date in stone as a future reminder.
 
 As we embark on this exciting journey, we invite developers, merchants, and e-commerce enthusiasts to join us
 in shaping the future of Maho. Whether you're looking to migrate or seeking an alternative to existing platforms,

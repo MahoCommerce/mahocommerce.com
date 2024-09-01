@@ -20,8 +20,8 @@ the way for future innovations in the e-commerce space.
 
 ## Meaning and pronunciation of Maho
 
-"Maho" ([pronounced as "mah-hoh"](https://www.ingles.com/pronunciacion/majo)) draws inspiration from various
-cultural meanings:
+"Maho" ([pronounced as "mah-hoh"](https://www.ingles.com/pronunciacion/majo){:target="_blank"}) draws inspiration
+from various cultural meanings:
 
 - **Maho (or Majo) is the name given to the ancient indigenous people of Lanzarote and Fuerteventura**,
   islands in the Atlantic archipelago of the Canary Islands (Spain), home of this project's maintainer.  
