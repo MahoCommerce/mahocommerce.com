@@ -150,11 +150,11 @@ namely, to increase compatibility with .NET and Java programming languages.
 To enable/disable the WS-I compliance mode, perform the following steps:
 
 1. In the Maho Admin Panel, go to **System > Configuration > Maho Core API**.
-2. In the WS-I Compliance drop-down, select **Yes** to enable the WS-I compliance mode and **No** to disable 
-   the WS-I compliance mode, correspondingly.  
+2. In the WS-I Compliance drop-down, select **Yes** to enable the WS-I compliance mode and **No** to disable
+   the WS-I compliance mode, correspondingly.
 
 The WS-I compliant mode uses the same WSDL endpoint as SOAP API V2 does.
-The key difference is that XML namespaces are used in WS-I compliance mode.  
+The key difference is that XML namespaces are used in WS-I compliance mode.
 
 ## Creating a Custom API or Extending the Core API
 
@@ -205,7 +205,7 @@ Note that:
 ```xml
 <config>
     <api>
-       ...
+        ...
         <resources>
             <customer translate="title" module="customer">
                 <title>Customer Resource</title>
@@ -227,11 +227,11 @@ Note that:
                     </delete>
                 </methods>
                 <faults module="customer">
-                   ...
+                    ...
                 </faults>
             </customer>
         </resources>
-       ...
+        ...
     </api>
 </config>
 ```
@@ -243,32 +243,32 @@ The resource can return some faults, so add a `faults` element in the `customer`
 ```xml
 <config>
     <api>
-       ...
+        ...
         <resources>
             <customer translate="title" module="customer">
-               ...
+                ...
                 <faults module="customer"> <!-- module="customer" specifies the module which will be used for translation. -->
                     <data_invalid> <!-- if we get invalid input data for customers -->
-                        <code>100</code >
+                        <code>100</code>
                         <!-- we cannot know all the errors that can appear, their details can be found in error message for call -->
                         <message>Invalid customer data. Details in error message.</message>
                     </data_invalid>
                     <filters_invalid>
-                        <code>101</code >
+                        <code>101</code>
                         <message>Invalid filters specified. Details in error message.</message>
                     </filters_invalid>
                     <not_exists>
-                        <code>102</code >
+                        <code>102</code>
                         <message>Customer doesn't exist.</message>
                     </not_exists>
                     <not_deleted>
-                        <code>103</code >
+                        <code>103</code>
                         <message>Customer was not deleted. Details in error message.</message>
                     </not_deleted>
                 </faults>
             </customer>
         </resources>
-       ...
+        ...
     </api>
 </config>
 ```
@@ -281,34 +281,34 @@ you must first list the resources that are restricted within the `acl` element.
 ```xml
 <config>
     <api>
-       ...
+        ...
         <acl>
             <resources>
-                    <customer translate="title" module="customer">
-                         <title>Customers</title>
-                         <list translate="title" module="customer">
-                            <title>View All</title>
-                         </list>
-                         <create translate="title" module="customer">
-                            <title>Create</title>
-                         </create>
-                         <info translate="title" module="customer">
-                            <title>Get Info</title>
-                         </info>
-                         <update translate="title" module="customer">
-                            <title>Update</title>
-                         </update>
-                         <delete translate="title" module="customer">
-                            <title>Delete</title>
-                         </delete>
-                    </customer>
+                <customer translate="title" module="customer">
+                    <title>Customers</title>
+                    <list translate="title" module="customer">
+                        <title>View All</title>
+                    </list>
+                    <create translate="title" module="customer">
+                        <title>Create</title>
+                    </create>
+                    <info translate="title" module="customer">
+                        <title>Get Info</title>
+                    </info>
+                    <update translate="title" module="customer">
+                        <title>Update</title>
+                    </update>
+                    <delete translate="title" module="customer">
+                        <title>Delete</title>
+                    </delete>
+                </customer>
             </resources>
         </acl>
     </api>
 </config>
 ```
 
-Then, map ACL resources to API resource methods by adding an `acl` element to each part of the resource that 
+Then, map ACL resources to API resource methods by adding an `acl` element to each part of the resource that
 needs restricting:
 
 ```xml
@@ -340,10 +340,10 @@ needs restricting:
                         <acl>customer/delete</acl>
                     </delete>
                 </methods>
-               ...
+                ...
             </customer>
         </resources>
-       ...
+        ...
     </api>
 </config>
 ```
@@ -386,12 +386,12 @@ To make this work, add a `method` element into the `list` element in `api.xml`, 
                         <method>items</method> <!-- we have another method name inside our resource -->
                         <acl>customer/list</acl>
                     </list>
-                   ...
+                    ...
                 </methods>
             </customer>
-           ...
+            ...
         </resources>
-       ...
+        ...
     </api>
 </config>
 ```
@@ -665,7 +665,7 @@ For example, in your `api.xml` file, you might have this:
                 </methods>
             </checkout_cart>
         </resources>
-       ...
+        ...
     </api>
 </config>
 ```
