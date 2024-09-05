@@ -1,8 +1,7 @@
 ## Introduction
 
-The Maho SOAP API provides you with the ability
-to manage your eCommerce stores by providing calls for working with resources such as customers,
-categories, products, and sales orders.
+The Maho SOAP API provides you with the ability to manage your eCommerce stores by providing calls
+for working with resources such as customers, categories, products, and sales orders.
 It also allows you to manage shopping carts and inventory.
 
 ## Supported Types
@@ -19,17 +18,17 @@ To connect to Maho SOAP web services, load the WSDL into your SOAP client from e
 
 The following PHP example shows how to make SOAP calls to the Maho API v1:
 
-``` php
+```php
 $client = new SoapClient('https://mahohost/api/soap/?wsdl');
 $session = $client->login('apiUser', 'apiKey');
 
-$result = $client->call($session, 'somestuff.method');
-$result = $client->call($session, 'somestuff.method', 'arg1');
-$result = $client->call($session, 'somestuff.method', ['arg1', 'arg2', 'arg3']);
+$result = $client->call($session, 'example.method');
+$result = $client->call($session, 'example.method', 'arg1');
+$result = $client->call($session, 'example.method', ['arg1', 'arg2', 'arg3']);
 $result = $client->multiCall($session, [
-    ['somestuff.method'],
-    ['somestuff.method', 'arg1'],
-    ['somestuff.method', ['arg1', 'arg2']]
+    ['example.method'],
+    ['example.method', 'arg1'],
+    ['example.method', ['arg1', 'arg2']]
 )];
 
 $client->endSession($session);
@@ -39,7 +38,7 @@ $client->endSession($session);
 
 To use XML-RPC, load the following URL into your XML-RPC client:
 
-```https://mahohost/api/xmlrpc/```
+`https://mahohost/api/xmlrpc/`
 
 where `mahohost` is the domain for your Maho host.
 
@@ -49,14 +48,14 @@ The following PHP example shows how to make XML-RPC calls:
 $client = new Zend_XmlRpc_Client('https://mahohost/api/xmlrpc/');
 $session = $client->call('login', ['apiUser', 'apiKey']);
 
-$client->call('call', [$session, 'somestuff.method', ['arg1', 'arg2', 'arg3']]);
-$client->call('call', [$session, 'somestuff.method', ['arg1']]);
-$client->call('call', [$session, 'somestuff.method')];
+$client->call('call', [$session, 'example.method', ['arg1', 'arg2', 'arg3']]);
+$client->call('call', [$session, 'example.method', ['arg1']]);
+$client->call('call', [$session, 'example.method')];
 $client->call('multiCall', [$session,
     [
-        ['somestuff.method', 'arg1'],
-        ['somestuff.method', ['arg1', 'arg2']],
-        ['somestuff.method']
+        ['example.method', 'arg1'],
+        ['example.method', ['arg1', 'arg2']],
+        ['example.method']
     ]
 ]);
 
@@ -206,7 +205,7 @@ Note that:
 ```xml
 <config>
     <api>
-...
+       ...
         <resources>
             <customer translate="title" module="customer">
                 <title>Customer Resource</title>
@@ -228,10 +227,11 @@ Note that:
                     </delete>
                 </methods>
                 <faults module="customer">
+                   ...
                 </faults>
             </customer>
         </resources>
-...
+       ...
     </api>
 </config>
 ```
@@ -243,10 +243,10 @@ The resource can return some faults, so add a `faults` element in the `customer`
 ```xml
 <config>
     <api>
-...
+       ...
         <resources>
             <customer translate="title" module="customer">
-...
+               ...
                 <faults module="customer"> <!-- module="customer" specifies the module which will be used for translation. -->
                     <data_invalid> <!-- if we get invalid input data for customers -->
                         <code>100</code >
@@ -268,7 +268,7 @@ The resource can return some faults, so add a `faults` element in the `customer`
                 </faults>
             </customer>
         </resources>
-...
+       ...
     </api>
 </config>
 ```
@@ -281,7 +281,7 @@ you must first list the resources that are restricted within the `acl` element.
 ```xml
 <config>
     <api>
-...
+       ...
         <acl>
             <resources>
                     <customer translate="title" module="customer">
@@ -340,10 +340,10 @@ needs restricting:
                         <acl>customer/delete</acl>
                     </delete>
                 </methods>
-              ...
+               ...
             </customer>
         </resources>
-...
+       ...
     </api>
 </config>
 ```
@@ -386,12 +386,12 @@ To make this work, add a `method` element into the `list` element in `api.xml`, 
                         <method>items</method> <!-- we have another method name inside our resource -->
                         <acl>customer/list</acl>
                     </list>
-...
+                   ...
                 </methods>
             </customer>
-...
+           ...
         </resources>
-...
+       ...
     </api>
 </config>
 ```
@@ -665,7 +665,7 @@ For example, in your `api.xml` file, you might have this:
                 </methods>
             </checkout_cart>
         </resources>
-    ...
+       ...
     </api>
 </config>
 ```
