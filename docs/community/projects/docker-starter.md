@@ -1,7 +1,7 @@
 The goal of this project by
 [Simone Fantini](https://www.linkedin.com/in/simonedanielefantini){target=_blank}
 is to create a complete and modern docker stack for Maho, either to speed up development
-or, with a few tweak, publish to production.
+or, with a few tweaks, publish to production.
 
 Some features of Docker starter for Maho:
 
