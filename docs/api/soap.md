@@ -138,7 +138,7 @@ system configuration menu. To do this, set <b>Services &gt; Maho Core API &gt; W
 <p>Note that the WSDL for the SOAP v2 API is different when in WS-I compliant mode.</p>
 
 <p>Using the WS-I compliant SOAP v2 API WSDL, it is easy to automatically generate client classes for Java, .NET,
-and other languages using standard libraries. </p>
+and other languages using standard libraries.</p>
 
 ## WS-I Compliance Mode
 
