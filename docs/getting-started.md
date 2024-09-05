@@ -26,6 +26,8 @@ composer create-project -s dev mahocommerce/maho-starter yourproject
 With Maho you have to point your web server's document root to the `/pub` directory.  
 This is a necessary step to ensure the highest level of security.
 
+### Local development server
+
 Alternatively, if you're just developing on your computer, you can run `./maho serve` 
 to start the built-in PHP web server (you will still need a database tho).
 
@@ -45,6 +47,11 @@ Arguments:
 ./maho serve
 Serving Maho on http://127.0.0.1:8000, press CTRL+C to exit...
 ```
+
+### Do you like docker?
+
+If docker is your go-to choice then we suggest you check the [Docker Starter](community/projects/docker-starter.md)
+community project by Simone Fantini.
 
 ## Install Maho
 

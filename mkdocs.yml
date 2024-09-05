@@ -73,6 +73,7 @@ nav:
     - Technical doc:
       - CLI tool: cli-tool.md
       - Cron setup: cron.md
+      - Language packs: language-packs.md
       - Robots.txt: robotstxt.md
     - Reference:
       - REST API:
@@ -131,6 +132,8 @@ nav:
   - Community:
       - Get Involved: community/get-involved.md
       - Contributing: community/contributing.md
+      - Community projects:
+          - Docker Starter: community/projects/docker-starter.md
 
 extra:
   generator: false
