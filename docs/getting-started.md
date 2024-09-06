@@ -23,7 +23,7 @@ composer create-project -s dev mahocommerce/maho-starter yourproject
 
 ## Configure your web server
 
-With Maho you have to point your web server's document root to the `/pub` directory.  
+With Maho you have to point your web server's document root to the `/public` directory.  
 This is a necessary step to ensure the highest level of security.
 
 ### Local development server
