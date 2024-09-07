@@ -1,5 +1,5 @@
-[FrankenPHP](https://frankenphp.dev/) is a modern application server for PHP built on top
-of the [Caddy](https://caddyserver.com/) web server.
+[FrankenPHP](https://frankenphp.dev/){target=_blank} is a modern application server for PHP built on top
+of the [Caddy](https://caddyserver.com/){target=_blank} web server.
 
 While Maho runs perfectly on both Caddy + PHP-FPM or FrankenPHP, this page is mainly about specific
 characteristics of FrakenPHP, like the ability to create standalone, self-executable binaries
@@ -23,6 +23,10 @@ cd dist
 ./frankenphp-mac-arm64 php-cli maho
 ```
 
-!!! danger ""
+!!! info
+    For more info on options and configurations, check
+    [FrankenPHP documentation](https://frankenphp.dev/docs/embed/){target=_blank}.
+
+!!! danger
     Support for FrankenPHP is still under development and heavy testing.  
     If you find issues and want to help, [get involved](community/get-involved.md) 😉
