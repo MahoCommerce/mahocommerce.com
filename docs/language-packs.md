@@ -15,3 +15,11 @@ composer require mahocommerce/maho-language-xx_xx
 
 !!! note
     Remember to replace `xx_xx` with the code of the locale you're about to install.
+
+## Contribute to a translation
+
+If your language pack has a mistake, or you want to rephrase one of the translations, head over to
+[Maho's translation platform](https://translate.mahocommerce.com/){target=_blank}, select the language you
+want to work on and go from there.
+
+For any question, feel free to contact us via any of the links in the footer of this website.

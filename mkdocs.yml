@@ -73,6 +73,7 @@ nav:
     - Technical doc:
       - CLI tool: cli-tool.md
       - Cron setup: cron.md
+      - FrankenPHP: frankenphp.md
       - Language packs: language-packs.md
       - Robots.txt: robotstxt.md
     - Reference:
