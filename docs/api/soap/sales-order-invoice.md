@@ -4,43 +4,43 @@
 
 Allows you to manage invoices.
 
-**Resource Name**: sales_order_invoice
+### Resource Name
 
-**Aliases**:
+- `sales_order_invoice`
 
--   order_invoice
+### Aliases
 
-**Methods**:
+- `order_invoice`
 
-- sales_order_invoice.list - Retrieve a list of invoices using filters
-- sales_order_invoice.info - Retrieve information about the invoice
-- sales_order_invoice.create - Create a new invoice for an order
-- sales_order_invoice.addComment - Add a new comment to an invoice
-- sales_order_invoice.capture - Capture an invoice
-- sales_order_invoice.cancel - Cancel an invoice
+### Methods
 
-**Faults**:
+- `sales_order_invoice.list` — Retrieve a list of invoices using filters.
+- `sales_order_invoice.info` — Retrieve information about the invoice.
+- `sales_order_invoice.create` — Create a new invoice for an order.
+- `sales_order_invoice.addComment` — Add a new comment to an invoice.
+- `sales_order_invoice.capture` — Capture an invoice.
+- `sales_order_invoice.cancel` — Cancel an invoice.
 
-| Fault Code | Fault Message |
-| --- | --- |
-| 100 | Requested shipment does not exists. |
-| 101 | Invalid filters given. Details in error message. |
-| 102 | Invalid data given. Details in error message. |
-| 103 | Requested order does not exists |
-| 104 | Invoice status not changed. |
+### Faults
 
-**Examples**:
+| Fault Code | Fault Message                                    |
+|------------|--------------------------------------------------|
+| 100        | Requested shipment does not exists.              |
+| 101        | Invalid filters given. Details in error message. |
+| 102        | Invalid data given. Details in error message.    |
+| 103        | Requested order does not exists                  |
+| 104        | Invoice status not changed.                      |
 
-**Example 1. Basic working with invoices.**
+### Example — Working With Invoices
 
 ```php
-$proxy = new SoapClient('http://magentohost/api/soap/?wsdl');
+$proxy = new SoapClient('https://mahohost/api/soap/?wsdl');
 $sessionId = $proxy->login('apiUser', 'apiKey');
 
 $notInvoicedOrderId  = '100000003';
 
 // Create new invoice
-$newInvoiceId = $proxy->call($sessionId, 'sales_order_invoice.create', array($notInvoicedOrderId, array(), 'Invoice Created', true, true));
+$newInvoiceId = $proxy->call($sessionId, 'sales_order_invoice.create', [$notInvoicedOrderId, [], 'Invoice Created', true, true]);
 
 // View new invoice
 $invoice = $proxy->call($sessionId, 'sales_order_invoice.info', $newInvoiceId);
@@ -48,7 +48,7 @@ $invoice = $proxy->call($sessionId, 'sales_order_invoice.info', $newInvoiceId);
 var_dump($invoice);
 
 // Add Comment
-$proxy->call($sessionId, 'sales_order_invoice.addComment', array($newInvoiceId, 'Invoice comment, some text', true, false));
+$proxy->call($sessionId, 'sales_order_invoice.addComment', [$newInvoiceId, 'Invoice comment, some text', true, false]);
 
 // View invoice with new comment
 $invoice = $proxy->call($sessionId, 'sales_order_invoice.info', $newInvoiceId);
@@ -64,96 +64,96 @@ var_dump($invoice);
 
 ## List
 
-**Method:**
+### Method
 
--   sales_order_invoice.list (SOAP V1)
--   salesOrderInvoiceList (SOAP V2)
+- `sales_order_invoice.list` (SOAP V1)
+- `salesOrderInvoiceList` (SOAP V2)
 
 Allows you to retrieve the list of order invoices. Additional filters can also be applied.
 
-**Aliases**:
+### Alias
 
--   order_invoice.list
+- `order_invoice.list`
 
-**Arguments**:
+### Arguments
 
-| Type | Name | Description |
-| --- | --- | --- |
-| string | sessionId | Session ID |
-| array | filters | Array of filters for the list of invoices (optional) |
+| Type   | Name      | Description                                          |
+|--------|-----------|------------------------------------------------------|
+| string | sessionId | Session ID                                           |
+| array  | filters   | Array of filters for the list of invoices (optional) |
 
-**Returns**:
+### Returns
 
-| Type | Name | Description |
-| --- | --- | --- |
+| Type  | Name   | Description                      |
+|-------|--------|----------------------------------|
 | array | result | Array of salesOrderInvoiceEntity |
 
-The **salesOrderInvoiceEntity** content is as follows:
+### Content `salesOrderInvoiceEntity`
 
-| Type | Name | Description |
-| --- | --- | --- |
-| string | increment_id | Increment ID |
-| string | created_at | Date of invoice creation |
+| Type   | Name                | Description                     |
+|--------|---------------------|---------------------------------|
+| string | increment_id        | Increment ID                    |
+| string | created_at          | Date of invoice creation        |
 | string | order_currency_code | Order currency code (e.g., EUR) |
-| string | order_id | Order ID |
-| string | state | Order state |
-| string | grand_total | Grand total amount invoiced |
-| string | invoice_id | Invoice ID |
+| string | order_id            | Order ID                        |
+| string | state               | Order state                     |
+| string | grand_total         | Grand total amount invoiced     |
+| string | invoice_id          | Invoice ID                      |
 
-**Examples**:
+### Examples
 
-**Request Example SOAP V1**
+#### Request Example SOAP V1
 
 ```php
-$client = new SoapClient('http://magentohost/api/soap/?wsdl');
+$client = new SoapClient('https://mahohost/api/soap/?wsdl');
 $session = $client->login('apiUser', 'apiKey');
 
 $result = $client->call($session, 'sales_order_invoice.list');
 var_dump($result);
 
-// If you don't need the session anymore
-//$client->endSession($session);
+// When the session can be closed
+$client->endSession($session);
 ```
 
-**Request Example SOAP V2 (List of All Invoices)**
+#### Request Example SOAP V2 (List of All Invoices)
 
 ```php
-$proxy = new SoapClient('http://magentohost/api/v2_soap/?wsdl'); // TODO : change url
-$sessionId = $proxy->login('apiUser', 'apiKey'); // TODO : change login and pwd if necessary
+$proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); // TODO: change url
+$sessionId = $proxy->login('apiUser', 'apiKey'); // TODO: change login and pwd if necessary
 
 $result = $proxy->salesOrderInvoiceList($sessionId);
 var_dump($result);
 ```
 
-**Request Example SOAP V2 (Complex Filter)**
+#### Request Example SOAP V2 (Complex Filter)
 
 ```php
-$client = new SoapClient('http://magentohost/api/v2_soap/?wsdl');
+$client = new SoapClient('https://mahohost/api/v2_soap/?wsdl');
 $session = $client->login('apiUser', 'apiKey');
 
-$complexFilter = array(
-    'complex_filter' => array(
-        array(
+$complexFilter = [
+    'complex_filter' => [
+        [
             'key' => 'state',
-            'value' => array('key' => 'in', 'value' => '2,3')
-        )
-    )
-);
+            'value' => ['key' => 'in', 'value' => '2,3']
+        ]
+    ]
+];
 $result = $client->salesOrderInvoiceList($session, $complexFilter);
 var_dump($result);
 ```
 
-**Request Example SOAP V2 (WS-I Compliance Mode)**
+#### Request Example SOAP V2 (WS-I Compliance Mode)
 
 ```php
-$proxy = new SoapClient('http://magentohost/api/v2_soap/?wsdl'); 
-$sessionId = $proxy->login((object)array('username' => 'apiUser', 'apiKey' => 'apiKey')); 
+$proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); 
+$sessionId = $proxy->login((object)['username' => 'apiUser', 'apiKey' => 'apiKey']); 
  
-$result = $proxy->salesOrderInvoiceList((object)array('sessionId' => $sessionId->result));   
+$result = $proxy->salesOrderInvoiceList((object)['sessionId' => $sessionId->result]);   
 var_dump($result->result);
 ```
 
-**Response Example SOAP V1**
+#### Response Example SOAP V1
 
 ```php
 array
@@ -179,150 +179,150 @@ array
 
 ## Info
 
-**Method:**
+### Method
 
--   sales_order_invoice.info (SOAP V1)
--   salesOrderInvoiceInfo (SOAP V2)
+- `sales_order_invoice.info` (SOAP V1)
+- `salesOrderInvoiceInfo` (SOAP V2)
 
 Allows you to retrieve information about the required invoice.
 
-**Aliases**:
+### Alias
 
--   order_invoice.info
+- `order_invoice.info`
 
-**Arguments**:
+### Arguments
 
-| Type | Name | Description |
-| --- | --- | --- |
-| string | sessionId | Session ID |
+| Type   | Name               | Description          |
+|--------|--------------------|----------------------|
+| string | sessionId          | Session ID           |
 | string | invoiceIncrementId | Invoice increment ID |
 
-**Returns**:
+### Returns
 
-| Type | Name | Description |
-| --- | --- | --- |
+| Type  | Name   | Description                      |
+|-------|--------|----------------------------------|
 | array | result | Array of salesOrderInvoiceEntity |
 
-The **salesOrderInvoiceEntity** content is as follows:
+### Content `salesOrderInvoiceEntity`
 
-| Type | Name | Description |
-| --- | --- | --- |
-| string | increment_id | Increment ID |
-| string | parent_id | Parent ID |
-| string | store_id | Store ID |
-| string | created_at | Date of creation |
-| string | updated_at | Date of updating |
-| string | is_active | Defines whether the invoice is active |
-| string | global_currency_code | Global currency code |
-| string | base_currency_code | Base currency code |
-| string | store_currency_code | Store currency code |
-| string | order_currency_code | Order currency code |
-| string | store_to_base_rate | Store to base rate |
-| string | store_to_order_rate | Store to order rate |
-| string | base_to_global_rate | Base to global rate |
-| string | base_to_order_rate | Base to order rate |
-| string | subtotal | Subtotal |
-| string | base_subtotal | Base subtotal |
-| string | base_grand_total | Base grand total |
-| string | discount_amount | Discount amount |
-| string | base_discount_amount | Base discount amount |
-| string | shipping_amount | Shipping amount |
-| string | base_shipping_amount | Base shipping amount |
-| string | tax_amount | Tax amount |
-| string | base_tax_amount | Base tax amount |
-| string | billing_address_id | Billing address ID |
-| string | billing_firstname | First name in the billing address |
-| string | billing_lastname | Last name in the billing address |
-| string | order_id | Order ID |
-| string | order_increment_id | Order increment ID |
-| string | order_created_at | Date of order creation |
-| string | state | Order state |
-| string | grand_total | Grand total |
-| string | invoice_id | Invoice ID |
-| array | items | Array of salesOrderInvoiceItemEntity |
-| array | comments | Array of salesOrderInvoiceCommentEntity |
+| Type   | Name                 | Description                             |
+|--------|----------------------|-----------------------------------------|
+| string | increment_id         | Increment ID                            |
+| string | parent_id            | Parent ID                               |
+| string | store_id             | Store ID                                |
+| string | created_at           | Date of creation                        |
+| string | updated_at           | Date of updating                        |
+| string | is_active            | Defines whether the invoice is active   |
+| string | global_currency_code | Global currency code                    |
+| string | base_currency_code   | Base currency code                      |
+| string | store_currency_code  | Store currency code                     |
+| string | order_currency_code  | Order currency code                     |
+| string | store_to_base_rate   | Store to base rate                      |
+| string | store_to_order_rate  | Store to order rate                     |
+| string | base_to_global_rate  | Base to global rate                     |
+| string | base_to_order_rate   | Base to order rate                      |
+| string | subtotal             | Subtotal                                |
+| string | base_subtotal        | Base subtotal                           |
+| string | base_grand_total     | Base grand total                        |
+| string | discount_amount      | Discount amount                         |
+| string | base_discount_amount | Base discount amount                    |
+| string | shipping_amount      | Shipping amount                         |
+| string | base_shipping_amount | Base shipping amount                    |
+| string | tax_amount           | Tax amount                              |
+| string | base_tax_amount      | Base tax amount                         |
+| string | billing_address_id   | Billing address ID                      |
+| string | billing_firstname    | First name in the billing address       |
+| string | billing_lastname     | Last name in the billing address        |
+| string | order_id             | Order ID                                |
+| string | order_increment_id   | Order increment ID                      |
+| string | order_created_at     | Date of order creation                  |
+| string | state                | Order state                             |
+| string | grand_total          | Grand total                             |
+| string | invoice_id           | Invoice ID                              |
+| array  | items                | Array of salesOrderInvoiceItemEntity    |
+| array  | comments             | Array of salesOrderInvoiceCommentEntity |
 
-The **salesOrderInvoiceItemEntity** content is as follows:
+### Content `salesOrderInvoiceItemEntity`
 
-| Type | Name | Description |
-| --- | --- | --- |
-| string | increment_id | Increment ID |
-| string | parent_id | Parent ID |
-| string | created_at | Date of creation |
-| string | updated_at | Date of updating |
-| string | is_active | Active flag |
-| string | weee_tax_applied | Applied fixed product tax |
-| string | qty | Quantity |
-| string | cost | Cost |
-| string | price | Price |
-| string | tax_amount | Tax amount |
-| string | row_total | Row total |
-| string | base_price | Base price |
-| string | base_tax_amount | Base tax amount |
-| string | base_row_total | Base row total |
-| string | base_weee_tax_applied_amount | Applied fixed product tax amount (in base currency) |
+| Type   | Name                             | Description                                             |
+|--------|----------------------------------|---------------------------------------------------------|
+| string | increment_id                     | Increment ID                                            |
+| string | parent_id                        | Parent ID                                               |
+| string | created_at                       | Date of creation                                        |
+| string | updated_at                       | Date of updating                                        |
+| string | is_active                        | Active flag                                             |
+| string | weee_tax_applied                 | Applied fixed product tax                               |
+| string | qty                              | Quantity                                                |
+| string | cost                             | Cost                                                    |
+| string | price                            | Price                                                   |
+| string | tax_amount                       | Tax amount                                              |
+| string | row_total                        | Row total                                               |
+| string | base_price                       | Base price                                              |
+| string | base_tax_amount                  | Base tax amount                                         |
+| string | base_row_total                   | Base row total                                          |
+| string | base_weee_tax_applied_amount     | Applied fixed product tax amount (in base currency)     |
 | string | base_weee_tax_applied_row_amount | Applied fixed product tax row amount (in base currency) |
-| string | weee_tax_applied_amount | Applied fixed product tax amount |
-| string | weee_tax_applied_row_amount | Applied fixed product tax row amount |
-| string | weee_tax_disposition | Fixed product tax disposition |
-| string | weee_tax_row_disposition | Fixed product tax row disposition |
-| string | base_weee_tax_disposition | Fixed product tax disposition (in base currency) |
-| string | base_weee_tax_row_disposition | Fixed product tax row disposition (in base currency) |
-| string | sku | SKU |
-| string | name | Name |
-| string | order_item_id | Order item ID |
-| string | product_id | Product ID |
-| string | item_id | Item ID |
+| string | weee_tax_applied_amount          | Applied fixed product tax amount                        |
+| string | weee_tax_applied_row_amount      | Applied fixed product tax row amount                    |
+| string | weee_tax_disposition             | Fixed product tax disposition                           |
+| string | weee_tax_row_disposition         | Fixed product tax row disposition                       |
+| string | base_weee_tax_disposition        | Fixed product tax disposition (in base currency)        |
+| string | base_weee_tax_row_disposition    | Fixed product tax row disposition (in base currency)    |
+| string | sku                              | SKU                                                     |
+| string | name                             | Name                                                    |
+| string | order_item_id                    | Order item ID                                           |
+| string | product_id                       | Product ID                                              |
+| string | item_id                          | Item ID                                                 |
 
-The **salesOrderInvoiceCommentEntity** content is as follows:
+### Content `salesOrderInvoiceCommentEntity`
 
-| Type | Name | Description |
-| --- | --- | --- |
-| string | increment_id | Increment ID |
-| string | parent_id | Parent ID |
-| string | created_at | Date of creation |
-| string | updated_at | Date of updating |
-| string | is_active | Active flag |
-| string | comment | Invoice comment |
+| Type   | Name                 | Description                              |
+|--------|----------------------|------------------------------------------|
+| string | increment_id         | Increment ID                             |
+| string | parent_id            | Parent ID                                |
+| string | created_at           | Date of creation                         |
+| string | updated_at           | Date of updating                         |
+| string | is_active            | Active flag                              |
+| string | comment              | Invoice comment                          |
 | string | is_customer_notified | Defines whether the customer is notified |
-| string | comment_id | Comment ID |
+| string | comment_id           | Comment ID                               |
 
-**Examples**:
+### Examples
 
-**Request Example SOAP V1**
+#### Request Example SOAP V1
 
 ```php
-$client = new SoapClient('http://magentohost/api/soap/?wsdl');
+$client = new SoapClient('https://mahohost/api/soap/?wsdl');
 $session = $client->login('apiUser', 'apiKey');
 
 $result = $client->call($session, 'sales_order_invoice.info', '200000006');
 var_dump($result);
 
-// If you don't need the session anymore
-//$client->endSession($session);
+// When the session can be closed
+$client->endSession($session);
 ```
 
-**Request Example SOAP V2**
+#### Request Example SOAP V2
 
 ```php
-$proxy = new SoapClient('http://magentohost/api/v2_soap/?wsdl'); // TODO : change url
-$sessionId = $proxy->login('apiUser', 'apiKey'); // TODO : change login and pwd if necessary
+$proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); // TODO: change url
+$sessionId = $proxy->login('apiUser', 'apiKey'); // TODO: change login and pwd if necessary
 
 $result = $proxy->salesOrderInvoiceInfo($sessionId, '200000006');
 var_dump($result);
 ```
 
-**Request Example SOAP V2 (WS-I Compliance Mode)**
+#### Request Example SOAP V2 (WS-I Compliance Mode)
 
 ```php
-$proxy = new SoapClient('http://magentohost/api/v2_soap/?wsdl'); 
-$sessionId = $proxy->login((object)array('username' => 'apiUser', 'apiKey' => 'apiKey')); 
+$proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); 
+$sessionId = $proxy->login((object)['username' => 'apiUser', 'apiKey' => 'apiKey']); 
  
-$result = $proxy->salesOrderInvoiceInfo((object)array('sessionId' => $sessionId->result, 'invoiceIncrementId' => '200000006'));   
+$result = $proxy->salesOrderInvoiceInfo((object)['sessionId' => $sessionId->result, 'invoiceIncrementId' => '200000006']);   
 var_dump($result->result);
 ```
 
-**Response Example SOAP V1**
+#### Response Example SOAP V1
 
 ```php
 array
@@ -416,71 +416,71 @@ array
 
 ## Create
 
-**Method:**
+### Method
 
--   sales_order_invoice.create (SOAP V1)
--   salesOrderInvoiceCreate (SOAP V2)
+- `sales_order_invoice.create` (SOAP V1)
+- `salesOrderInvoiceCreate` (SOAP V2)
 
 Allows you to create a new invoice for an order.
 
-**Aliases**:
+### Alias
 
--   order_invoice.create
+- `order_invoice.create`
 
-**Arguments**:
+### Arguments
 
-| Type | Name | Description |
-| --- | --- | --- |
-| string | sessionId | Session ID |
-| string | invoiceIncrementId | Order increment ID |
-| array | itemsQty | Array of orderItemIdQty (quantity of items to invoice) |
-| string | comment | Invoice comment (optional) |
-| string | email | Send invoice on email (optional) |
-| string | includeComment | Include comments in email (optional) |
+| Type   | Name               | Description                                            |
+|--------|--------------------|--------------------------------------------------------|
+| string | sessionId          | Session ID                                             |
+| string | invoiceIncrementId | Order increment ID                                     |
+| array  | itemsQty           | Array of orderItemIdQty (quantity of items to invoice) |
+| string | comment            | Invoice comment (optional)                             |
+| string | email              | Send invoice on email (optional)                       |
+| string | includeComment     | Include comments in email (optional)                   |
 
-**Returns**:
+### Returns
 
-| Type | Description |
-| --- | --- |
+| Type   | Description               |
+|--------|---------------------------|
 | string | ID of the created invoice |
 
-The **orderItemIdQty** content is as follows:
+### Content `orderItemIdQty`
 
-| Type | Name | Description |
-| --- | --- | --- |
-| int | order_item_id | Order item ID |
-| double | qty | Quantity |
+| Type   | Name          | Description   |
+|--------|---------------|---------------|
+| int    | order_item_id | Order item ID |
+| double | qty           | Quantity      |
 
-**Examples**:
+### Examples
 
-**Request Example SOAP V1**
+#### Request Example SOAP V1
 
 ```php
-$client = new SoapClient('http://magentohost/api/soap/?wsdl');
+$client = new SoapClient('https://mahohost/api/soap/?wsdl');
 $session = $client->login('apiUser', 'apiKey');
 
 $result = $client->call(
     $session,
     'sales_order_invoice.create',
-    array('orderIncrementId' => '200000008', array('15' => '1', '16' => '1')) 
+    ['orderIncrementId' => '200000008', ['15' => '1', '16' => '1']] 
     // orderItemIdQty Array is Keyed with Order Item ID, with Value of qty to invoice
 );
 var_dump($result);
 
-// If you don't need the session anymore
-//$client->endSession($session);
+// When the session can be closed
+$client->endSession($session);
 ```
 
-**Request Example SOAP V2**
+#### Request Example SOAP V2
 
 ```php
-$proxy = new SoapClient('http://magentohost/api/v2_soap/?wsdl'); // TODO : change url
-$sessionId = $proxy->login('apiUser', 'apiKey'); // TODO : change login and pwd if necessary
+$proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); // TODO: change url
+$sessionId = $proxy->login('apiUser', 'apiKey'); // TODO: change login and pwd if necessary
 
-//Create invoice for order
+// Create invoice for order
 
 // orderItemIdQty Array is Keyed with Order Item ID, with Value of qty to invoice
-$qty = array('15' => '1', '16' => '1');
+$qty = ['15' => '1', '16' => '1'];
 
 $invoiceIncrementId = $proxy->salesOrderInvoiceCreate(
     $sessionID,
@@ -490,142 +490,146 @@ $invoiceIncrementId = $proxy->salesOrderInvoiceCreate(
 var_dump($invoiceIncrementId);
 ```
 
-**Request Example SOAP V2 (WS-I Compliance Mode)**
+#### Request Example SOAP V2 (WS-I Compliance Mode)
 
 ```php
-$proxy = new SoapClient('http://magentohost/api/v2_soap/?wsdl');
-$sessionId = $proxy->login((object)array('username' => 'apiUser', 'apiKey' => 'apiKey'));
+$proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl');
+$sessionId = $proxy->login((object)['username' => 'apiUser', 'apiKey' => 'apiKey']);
 
-$result = $proxy->salesOrderInvoiceCreate((object)array('sessionId' => $sessionId->result, 'orderIncrementId' => '200000008', 'itemsQty' => array('15' => '1',  '16' => '1'), 'comment' => null,
+$result = $proxy->salesOrderInvoiceCreate((object)['sessionId' => $sessionId->result, 'orderIncrementId' => '200000008', 'itemsQty' => ['15' => '1',  '16' => '1'], 'comment' => null,
     'email' => null,
     'includeComment' => null
-));
+]);
 var_dump($result->result);
 ```
 
 ## AddComment
 
-**Method:**
+### Method
 
--   sales_order_invoice.addComment (SOAP V1)
--   salesOrderInvoiceAddComment (SOAP V2)
+- `sales_order_invoice.addComment` (SOAP V1)
+- `salesOrderInvoiceAddComment` (SOAP V2)
 
 Allows you to add a new comment to the order invoice.
 
-**Aliases**:
+### Alias
 
--   order_invoice.addComment
+- `order_invoice.addComment`
 
-**Arguments**:
+### Arguments
 
-| Type | Name | Description |
-| --- | --- | --- |
-| string | sessionId | Session ID |
-| string | invoiceIncrementId | Invoice increment ID |
-| string | comment | Invoice comment (optional) |
-| int | email | Send invoice on email flag (optional) |
-| int | includeComment | Include comment in email flag (optional) |
+| Type   | Name               | Description                              |
+|--------|--------------------|------------------------------------------|
+| string | sessionId          | Session ID                               |
+| string | invoiceIncrementId | Invoice increment ID                     |
+| string | comment            | Invoice comment (optional)               |
+| int    | email              | Send invoice on email flag (optional)    |
+| int    | includeComment     | Include comment in email flag (optional) |
 
-**Returns**:
+### Returns
 
-| Type | Description |
-| --- | --- |
+| Type    | Description                                 |
+|---------|---------------------------------------------|
 | boolean | True if the comment is added to the invoice |
 
-**Examples**:
+### Examples
 
-**Request Example SOAP V1**
+#### Request Example SOAP V1
 
 ```php
-$client = new SoapClient('http://magentohost/api/soap/?wsdl');
+$client = new SoapClient('https://mahohost/api/soap/?wsdl');
 $session = $client->login('apiUser', 'apikey');
 
-$result = $client->call($session, 'sales_order_invoice.addComment', array('invoiceIncrementId' => '200000006', 'comment' => 'invoice comment'));
+$result = $client->call($session, 'sales_order_invoice.addComment', ['invoiceIncrementId' => '200000006', 'comment' => 'invoice comment']);
 var_dump($result);
 
-// If you don't need the session anymore
-//$client->endSession($session);
+// When the session can be closed
+$client->endSession($session);
 ```
 
-**Request Example SOAP V2**
+#### Request Example SOAP V2
 
 ```php
-$proxy = new SoapClient('http://magentohost/api/v2_soap/?wsdl'); // TODO : change url
-$sessionId = $proxy->login('apiUser', 'apiKey'); // TODO : change login and pwd if necessary
+$proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); // TODO: change url
+$sessionId = $proxy->login('apiUser', 'apiKey'); // TODO: change login and pwd if necessary
 
 $result = $proxy->salesOrderInvoiceAddComment($sessionId, '200000006');
 var_dump($result);
 ```
 
-**Request Example SOAP V2 (WS-I Compliance Mode)**
+#### Request Example SOAP V2 (WS-I Compliance Mode)
 
 ```php
-$proxy = new SoapClient('http://magentohost/api/v2_soap/?wsdl'); 
-$sessionId = $proxy->login((object)array('username' => 'apiUser', 'apiKey' => 'apiKey')); 
+$proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); 
+$sessionId = $proxy->login((object)['username' => 'apiUser', 'apiKey' => 'apiKey']); 
  
-$result = $proxy->salesOrderInvoiceAddComment((object)array('sessionId' => $sessionId->result, 'invoiceIncrementId' => '200000006', 'comment' => 'invoice comment', 'email' => null, 'includeComment' => null));   
+$result = $proxy->salesOrderInvoiceAddComment((object)['sessionId' => $sessionId->result, 'invoiceIncrementId' => '200000006', 'comment' => 'invoice comment', 'email' => null, 'includeComment' => null]);   
 var_dump($result->result);
 ```
 
 ## Capture
 
-**Method:**
+### Method
 
--   sales_order_invoice.capture (SOAP V1)
--   salesOrderInvoiceCapture (SOAP V2)
+- `sales_order_invoice.capture` (SOAP V1)
+- `salesOrderInvoiceCapture` (SOAP V2)
 
-Allows you to capture the required invoice. Note that not all order invoices can be captured. Only some payment methods support capturing the order invoice (e.g., PayPal Pro).
+Allows you to capture the required invoice. Note that not all order invoices can be captured.
+Only some payment methods support capturing the order invoice (e.g., PayPal Pro).
 
-**Aliases**:
+### Alias
 
--   order_invoice.capture
+- `order_invoice.capture`
 
-**Arguments**:
+### Arguments
 
-| Type | Name | Description |
-| --- | --- | --- |
-| string | sessionId | Session ID |
+| Type   | Name               | Description          |
+|--------|--------------------|----------------------|
+| string | sessionId          | Session ID           |
 | string | invoiceIncrementId | Invoice increment ID |
 
-**Returns**:
+### Returns
 
-| Type | Description |
-| --- | --- |
+| Type       | Description                                |
+|------------|--------------------------------------------|
 | booleanint | True (1) if the order invoice is captured. |
 
-**Notes**:
+### Notes
 
-You should check the invoice to see if it can be captured before attempting to capture the invoice. Otherwise, the API call will generate an error.
+You should check the invoice to see if it can be captured before attempting to capture the invoice.
+Otherwise, the API call will generate an error.
 
-Invoices have states as defined in the model Mage_Sales_Model_Order_Invoice:
+Invoices have states as defined in the model `Mage_Sales_Model_Order_Invoice`:
 
--   STATE_OPEN = 1
--   STATE_PAID = 2
--   STATE_CANCELED = 3
+- `STATE_OPEN = 1`
+- `STATE_PAID = 2`
+- `STATE_CANCELED = 3`
 
-Also note that there is a method call in the model that checks this for you - canCapture(). And it also verifies that the payment can be captured, so the invoice state might not be the only condition that is required to allow it to be captured.
+Also note that there is a method call in the model that checks this for you: `canCapture()`.
+And it also verifies that the payment can be captured,
+so the invoice state might not be the only condition required to allow it to be captured.
 
-**Examples**:
+### Examples
 
-**Request Example SOAP V1**
+#### Request Example SOAP V1
 
 ```php
-$proxy = new SoapClient('http://magentohost/api/soap/?wsdl');
+$proxy = new SoapClient('https://mahohost/api/soap/?wsdl');
 $sessionId = $proxy->login('apiUser', 'apiKey');
 
 $orderIncrementId = '100000016';
 
-//Create invoice for order
+// Create invoice for order
 $invoiceIncrementId = $proxy->call(
     $session,
     'sales_order_invoice.create',
-    array(
+    [
         'orderIncrementId' => $orderIncrementId,
-        array('order_item_id' => '15', 'qty' => '1')
-    )
+        ['order_item_id' => '15', 'qty' => '1']
+    ]
 );
 
-//Capture invoice amount
+// Capture invoice amount
 $result = $proxy->call(
     $session,
     'sales_order_invoice.capture',
@@ -633,73 +637,76 @@ $result = $proxy->call(
 );
 ```
 
-**Request Example SOAP V2**
+#### Request Example SOAP V2
 
 ```php
-$proxy = new SoapClient('http://magentohost/api/v2_soap/?wsdl');
+$proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl');
 $sessionID = $proxy->login('apiUser', 'apiKey');
 
 $orderIncrementId = '100000016';
 
-//Create invoice for order
-$qty = array(
-    array('order_item_id' => '15', 'qty' => '1')
-);
+// Create invoice for order
+$qty = [
+    ['order_item_id' => '15', 'qty' => '1']
+];
 $invoiceIncrementId = $proxy->salesOrderInvoiceCreate(
-     $sessionID,
-     $orderIncrementId,
-     $qty);
+    $sessionID,
+    $orderIncrementId,
+    $qty
+);
 
-//Capture invoice amount
+// Capture invoice amount
 $result = $proxy->salesOrderInvoiceCapture(
      $sessionID,
      $invoiceIncrementId
 );
 ```
 
-**Request Example SOAP V2 (WS-I Compliance Mode)**
+#### Request Example SOAP V2 (WS-I Compliance Mode)
 
 ```php
-$proxy = new SoapClient('http://magentohost/api/v2_soap/?wsdl'); 
-$sessionId = $proxy->login((object)array('username' => 'apiUser', 'apiKey' => 'apiKey')); 
+$proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); 
+$sessionId = $proxy->login((object)['username' => 'apiUser', 'apiKey' => 'apiKey']); 
  
-$result = $proxy->salesOrderInvoiceCapture((object)array('sessionId' => $sessionId->result, 'invoiceIncrementId' => '100000016'));   
+$result = $proxy->salesOrderInvoiceCapture((object)['sessionId' => $sessionId->result, 'invoiceIncrementId' => '100000016']);   
 
 var_dump($result->result);
 ```
 
 ## Cancel
 
-**Method:**
+### Method
 
--   sales_order_invoice.cancel (SOAP V1)
--   salesOrderInvoiceCancel (SOAP V2)
+- `sales_order_invoice.cancel` (SOAP V1)
+- `salesOrderInvoiceCancel` (SOAP V2)
 
-Allows you to cancel the required invoice. Note that not all order invoices can be canceled. Only some payment methods support canceling the order invoice (e.g., Google Checkout, PayPal Pro, PayPal Express Checkout).
+Allows you to cancel the required invoice.
+Note that not all order invoices can be canceled.
+Only some payment methods support canceling the order invoice (e.g., PayPal Express).
 
-**Aliases**:
+### Alias
 
--   order_invoice.cancel
+- `order_invoice.cancel`
 
-**Arguments**:
+### Arguments
 
-| Type | Name | Description |
-| --- | --- | --- |
-| string | sessionId | Session ID |
+| Type   | Name               | Description          |
+|--------|--------------------|----------------------|
+| string | sessionId          | Session ID           |
 | string | invoiceIncrementId | Invoice increment ID |
 
-**Returns**:
+### Returns
 
-| Type | Description |
-| --- | --- |
+| Type    | Description                            |
+|---------|----------------------------------------|
 | boolean | True if the order invoice is canceled. |
 
-**Examples**:
+### Examples
 
-**Request Example SOAP V1**
+#### Request Example SOAP V1
 
 ```php
-$proxy = new SoapClient('http://magentohost/api/soap/?wsdl');
+$proxy = new SoapClient('https://mahohost/api/soap/?wsdl');
 $sessionId = $proxy->login('apiUser', 'apiKey');
 
 $invoiceIncrementId = '100000013';

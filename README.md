@@ -1,6 +1,6 @@
-# Maho's home page
+# Source of the mahocommerce.com website
 
-Test your changes with
+Please test your changes with
 
 ```bash
 docker run --rm -it -p 8000:8000 -v .:/docs squidfunk/mkdocs-material
@@ -8,8 +8,10 @@ docker run --rm -it -p 8000:8000 -v .:/docs squidfunk/mkdocs-material
 
 then open your browser to [http://localhost:8000](http://localhost:8000).
 
-## Tools I've used to convert old docs
+## Tools used to convert old docs
 
 - https://htmlmarkdown.com
 - https://appdevtools.com/html-entity-encoder-decoder
 - https://jsonformatter.org/json-pretty-print
+
+...and a lot of manual work. :)
