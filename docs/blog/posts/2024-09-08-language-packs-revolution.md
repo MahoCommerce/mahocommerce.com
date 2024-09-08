@@ -2,7 +2,7 @@
 date: 2024-09-08
 ---
 
-# The 15-Year-Long Quest for perfect Language Packs
+# 15-Year-Long quest for perfect language packs
 
 In the world of e-commerce platforms, localization is key to reaching a global audience.
 At Maho Commerce, we know that a great software solution needs excellent localization.
@@ -11,7 +11,7 @@ Today, we're excited to share our journey in solving a 15-year-old challenge: cr
 
 <!-- more -->
 
-## The M1 Era: A Decentralized Approach
+## M1 era: the decentralized approach
 
 For years, the M1 platform lacked a centralized hub for translations. Language packs were maintained by a global community of contributors, without central oversight. While this approach fostered community involvement, it led to several challenges:
 
@@ -51,17 +51,19 @@ Our new localization system is designed with collaboration and ease of use in mi
 - **Crowdin Integration**: We've integrated with the [Crowdin translation platform](https://translate.mahocommerce.com/){target=_blank}, enabling two-way synchronization.
   This makes it incredibly easy for users to [contribute and improve translations](https://translate.mahocommerce.com/){target=_blank} directly.
 
-## Looking Ahead
+## Official documentation
+
+We invite our users and the broader community to [explore and test these new language packs](../../language-packs.md),
+provide feedback, and contribute to making Maho's localization even better.
+Together, we can ensure that Maho speaks your language, wherever you are in the world.
+
+## Looking ahead
 
 While we're excited about the progress we've made, we know that language is dynamic and ever-evolving.
 We see this new system as a solid foundation upon which we can build and improve.
 With the combined power of community contributions, existing high-quality translations, and cutting-edge AI,
 we're confident that Maho will offer one of the most comprehensive and accurate localization systems
 in the e-commerce platform space.
-
-We invite our users and the broader community to explore these new language packs, provide feedback,
-and contribute to making Maho's localization even better.
-Together, we can ensure that Maho speaks your language, wherever you are in the world.
 
 Stay tuned for more updates as we continue to work extremely hard on this beautiful platform!
 As always... Maho rocks! 🚀
