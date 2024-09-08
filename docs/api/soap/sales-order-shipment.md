@@ -387,7 +387,8 @@ $result = $proxy->salesOrderShipmentCreate(
         'orderIncrementId' => '200000006',
         'itemsQty' => $itemsQty,
         'comment' => 'shipment comment',
-        'email' => null, 'includeComment' => null
+        'email' => null,
+        'includeComment' => null
     ]
 );   
     
@@ -641,7 +642,9 @@ var_dump($result);
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); 
 $sessionId = $proxy->login((object)['username' => 'apiUser', 'apiKey' => 'apiKey']); 
  
-$result = $proxy->salesOrderShipmentGetCarriers((object)['sessionId' => $sessionId->result, 'orderIncrementId' => '200000010']);   
+$result = $proxy->salesOrderShipmentGetCarriers(
+    (object)['sessionId' => $sessionId->result, 'orderIncrementId' => '200000010']
+);   
 var_dump($result->result);
 ```
 
