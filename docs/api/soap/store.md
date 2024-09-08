@@ -1,76 +1,78 @@
+# Store
+
 ## Store Info
 
-**Method:**
+### Method
 
-- store.info (SOAP V1)
-- storeInfo (SOAP V2)
+- `store.info` (SOAP V1)
+- `storeInfo` (SOAP V2)
 
 Allows you to retrieve information about the required store view.
 
-**Arguments:**
+### Arguments
 
-| Type | Name | Description |
-| --- | --- | --- |
-| string | sessionId | Session ID |
-| string | storeId | Store view ID or code (optional) |
+| Type   | Name      | Description                      |
+|--------|-----------|----------------------------------|
+| string | sessionId | Session ID                       |
+| string | storeId   | Store view ID or code (optional) |
 
-**Return:**
+### Return
 
-| Type | Name | Description |
-| --- | --- | --- |
+| Type  | Name   | Description          |
+|-------|--------|----------------------|
 | array | result | Array of storeEntity |
 
-The **storeEntity** content is as follows:
+### Content `storeEntity`
 
-| Type | Name | Description |
-| --- | --- | --- |
-| int | store_id | Store view ID |
-| string | code | Store view code |
-| int | website_id | Website ID |
-| int | group_id | Group ID |
-| string | name | Store name |
-| int | sort_order | Store view sort order |
-| int | is_active | Defines whether the store is active |
+| Type   | Name       | Description                         |
+|--------|------------|-------------------------------------|
+| int    | store_id   | Store view ID                       |
+| string | code       | Store view code                     |
+| int    | website_id | Website ID                          |
+| int    | group_id   | Group ID                            |
+| string | name       | Store name                          |
+| int    | sort_order | Store view sort order               |
+| int    | is_active  | Defines whether the store is active |
 
-**Faults:**
+### Faults
 
-| Fault Code | Fault Message |
-| --- | --- |
-| 101 | Requested store view not found. |
+| Fault Code | Fault Message                   |
+|------------|---------------------------------|
+| 101        | Requested store view not found. |
 
-**Examples**:
+### Examples
 
-**Request Example SOAP V1**
+#### Request Example SOAP V1
 
 ```php
-$client = new SoapClient('http://magentohost/api/soap/?wsdl');
+$client = new SoapClient('https://mahohost/api/soap/?wsdl');
 $session = $client->login('apiUser', 'apiKey');
 
 $result = $client->call($session, 'store.info', '2');
 var_dump($result);
 ```
 
-**Request Example SOAP V2**
+#### Request Example SOAP V2
 
 ```php
-$proxy = new SoapClient('http://magentohost/api/v2_soap/?wsdl'); // TODO : change url
-$sessionId = $proxy->login('apiUser', 'apiKey'); // TODO : change login and pwd if necessary
+$proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); // TODO: change url
+$sessionId = $proxy->login('apiUser', 'apiKey'); // TODO: change login and pwd if necessary
 
 $result = $proxy->storeInfo($sessionId, '2');
 var_dump($result);
 ```
 
-**Request Example SOAP V2 (WS-I Compliance Mode)**
+#### Request Example SOAP V2 (WS-I Compliance Mode)
 
 ```php
-$proxy = new SoapClient('http://magentohost/api/v2_soap/?wsdl'); 
+$proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); 
 $sessionId = $proxy->login((object)array('username' => 'apiUser', 'apiKey' => 'apiKey'));
 
 $result = $proxy->storeInfo((object)array('sessionId' => $sessionId->result, 'storeId' => '2'));
 var_dump($result->result);
 ```
 
-**Response Example SOAP V1**
+#### Response Example SOAP V1
 
 ```php
 array
@@ -85,73 +87,74 @@ array
 
 ## Store list
 
-**Method:**
+### Method
 
-  -   store.list (SOAP V1)
-  -   storeList (SOAP V2)
+- `store.list` (SOAP V1)
+- `storeList` (SOAP V2)
 
 Allows you to retrieve the list of store views.
 
-**Arguments:**
+### Arguments
 
-| Type | Name | Description |
-| --- | --- | --- |
-| string | sessionId | Session ID |
+| Type   | Name      | Description |
+|--------|-----------|-------------|
+| string | sessionId | Session ID  |
 
-**Return:**
+### Return
 
-| Type | Name | Description |
-| --- | --- | --- |
+| Type  | Name   | Description          |
+|-------|--------|----------------------|
 | array | result | Array of storeEntity |
 
-The **storeEntity** content is as follows:
+### Content `storeEntity`
 
-| Type | Name | Description |
-| --- | --- | --- |
-| int | store_id | Store view ID |
-| string | code | Store view code |
-| int | website_id | Website ID |
-| int | group_id | Group ID |
-| string | name | Store view name |
-| int | sort_order | Store view sort order |
-| int | is_active | Defines whether the store is active |
+| Type   | Name       | Description                         |
+|--------|------------|-------------------------------------|
+| int    | store_id   | Store view ID                       |
+| string | code       | Store view code                     |
+| int    | website_id | Website ID                          |
+| int    | group_id   | Group ID                            |
+| string | name       | Store view name                     |
+| int    | sort_order | Store view sort order               |
+| int    | is_active  | Defines whether the store is active |
 
-**Faults:**  
+### Faults
+
 _No Faults_
 
-**Examples**:
+### Examples
 
-**Request Example SOAP V1**
+#### Request Example SOAP V1
 
 ```php
-$client = new SoapClient('http://magentohost/api/soap/?wsdl');
+$client = new SoapClient('https://mahohost/api/soap/?wsdl');
 $session = $client->login('apiUser', 'apiKey');
 
 $result = $client->call($session, 'store.list');
 var_dump($result);
 ```
 
-**Request Example SOAP V2**
+#### Request Example SOAP V2
 
 ```php
-$proxy = new SoapClient('http://magentohost/api/v2_soap/?wsdl'); // TODO : change url
-$sessionId = $proxy->login('apiUser', 'apiKey'); // TODO : change login and pwd if necessary
+$proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); // TODO: change url
+$sessionId = $proxy->login('apiUser', 'apiKey'); // TODO: change login and pwd if necessary
 
 $result = $proxy->storeList($sessionId);
 var_dump($result);
 ```
 
-**Request Example SOAP V2 (WS-I Compliance Mode)**
+#### Request Example SOAP V2 (WS-I Compliance Mode)
 
 ```php
-$proxy = new SoapClient('http://magentohost/api/v2_soap/?wsdl'); 
-$sessionId = $proxy->login((object)array('username' => 'apiUser', 'apiKey' => 'apiKey'));
+$proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); 
+$sessionId = $proxy->login((object)['username' => 'apiUser', 'apiKey' => 'apiKey']);
 
-$result = $proxy->storeList((object)array('sessionId' => $sessionId->result));
+$result = $proxy->storeList((object)['sessionId' => $sessionId->result]);
 var_dump($result->result);
 ```
 
-**Response Example SOAP V1**
+#### Response Example SOAP V1
 
 ```php
 array

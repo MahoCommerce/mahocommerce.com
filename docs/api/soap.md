@@ -1,3 +1,5 @@
+# SOAP API
+
 ## Introduction
 
 The Maho SOAP API provides you with the ability to manage your eCommerce stores by providing calls
@@ -433,7 +435,7 @@ public function info($customerId)
 }
 ```
 
-Retrieve a list of customers using filtering:
+Retrieve the list of customers using filtering:
 
 ```php
 public function items($filters)

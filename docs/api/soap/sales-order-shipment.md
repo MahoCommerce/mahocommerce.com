@@ -4,58 +4,55 @@
 
 Allows you to manage shipments and tracking numbers.
 
-**Methods**:
+### Methods
 
-- sales_order_shipment.list - Retrieve a list of shipments using filters
-- sales_order_shipment.info - Retrieve information about the shipment
-- sales_order_shipment.create - Create a new shipment for an order
-- sales_order_shipment.addComment - Add a new comment to a shipment
-- sales_order_shipment.addTrack - Add a new tracking number to a shipment
-- sales_order_shipment.removeTrack - Remove tracking number from a shipment
-- sales_order_shipment.getCarriers - Retrieve a list of allowed carriers for an order
+- `sales_order_shipment.list` — Retrieve the list of shipments using filters.
+- `sales_order_shipment.info` — Retrieve information about the shipment.
+- `sales_order_shipment.create` — Create a new shipment for an order.
+- `sales_order_shipment.addComment` — Add a new comment to a shipment.
+- `sales_order_shipment.addTrack` — Add a new tracking number to a shipment.
+- `sales_order_shipment.removeTrack` — Remove tracking number from a shipment.
+- `sales_order_shipment.getCarriers` — Retrieve the list of allowed carriers for an order.
 
-**Faults**:
+### Faults
 
-| Fault Code | Fault Message |
-| --- | --- |
-| 100 | Requested shipment not exists. |
-| 101 | Invalid filters given. Details in error message. |
-| 102 | Invalid data given. Details in error message. |
-| 103 | Requested order not exists. |
-| 104 | Requested tracking not exists. |
-| 105 | Tracking not deleted. Details in error message. |
+| Fault Code | Fault Message                                    |
+|------------|--------------------------------------------------|
+| 100        | Requested shipment not exists.                   |
+| 101        | Invalid filters given. Details in error message. |
+| 102        | Invalid data given. Details in error message.    |
+| 103        | Requested order not exists.                      |
+| 104        | Requested tracking not exists.                   |
+| 105        | Tracking not deleted. Details in error message.  |
 
-**Examples**:
-
-**Example 1. Basic working with shipments**
+### Example — Working With Shipments
 
 ```php
-$proxy = new SoapClient('http://magentohost/api/soap/?wsdl');
+$proxy = new SoapClient('https://mahohost/api/soap/?wsdl');
 $sessionId = $proxy->login('apiUser', 'apiKey');
 
-$notShipedOrderId  = '100000003';
+$notShippedOrderId = '100000003';
 
 // Create new shipment
-$newShipmentId = $proxy->call($sessionId, 'sales_order_shipment.create', array($notShipedOrderId, array(), 'Shipment Created', true, true));
+$newShipmentId = $proxy->call($sessionId, 'sales_order_shipment.create', [$notShippedOrderId, [], 'Shipment Created', true, true]);
 
 // View new shipment
 $shipment = $proxy->call($sessionId, 'sales_order_shipment.info', $newShipmentId);
 
 var_dump($shipment);
 
-
 // Get allowed carriers for shipping
-$allowedCarriers = $proxy->call($sessionId, 'sales_order_shipment.getCarriers', $notShipedOrderId);
+$allowedCarriers = $proxy->call($sessionId, 'sales_order_shipment.getCarriers', $notShippedOrderId);
 
 end($allowedCarriers);
 
-$choosenCarrier = key($allowedCarriers);
+$chosenCarrier = key($allowedCarriers);
 
 var_dump($allowedCarriers);
-var_dump($choosenCarrier);
+var_dump($chosenCarrier);
 
 // Add tracking
-$newTrackId = $proxy->call($sessionId, 'sales_order_shipment.addTrack', array($newShipmentId, $choosenCarrier, 'My Track', rand(5000, 9000)));
+$newTrackId = $proxy->call($sessionId, 'sales_order_shipment.addTrack', [$newShipmentId, $chosenCarrier, 'My Track', rand(5000, 9000)]);
 
 $shipment = $proxy->call($sessionId, 'sales_order_shipment.info', $newShipmentId);
 
@@ -64,93 +61,93 @@ var_dump($shipment);
 
 ## List
 
-**Method:**
+### Method
 
--   sales_order_shipment.list (SOAP V1)
--   salesOrderShipmentList (SOAP V2)
+- `sales_order_shipment.list` (SOAP V1)
+- `salesOrderShipmentList` (SOAP V2)
 
 Allows you to retrieve the list of order shipments. Additional filters can be applied.
 
-**Aliases**:
+### Alias
 
--   order_shipment.list
+- `order_shipment.list`
 
-**Arguments**:
+### Arguments
 
-| Type | Name | Description |
-| --- | --- | --- |
-| string | sessionId | Session ID |
-| array | filters | Array of filters for the list of shipments |
+| Type   | Name      | Description                                |
+|--------|-----------|--------------------------------------------|
+| string | sessionId | Session ID                                 |
+| array  | filters   | Array of filters for the list of shipments |
 
-Returns:
+### Returns
 
-| Type | Name | Description |
-| --- | --- | --- |
+| Type  | Name   | Description                       |
+|-------|--------|-----------------------------------|
 | array | result | Array of salesOrderShipmentEntity |
 
-The **salesOrderShipmentEntity** content is as follows:
+### Content `salesOrderShipmentEntity`
 
-| Type | Name | Description |
-| --- | --- | --- |
-| string | increment_id | Increment ID |
-| string | created_at | Date of shipment creation |
-| string | total_qty | Total quantity of items to ship |
-| string | shipment_id | Shipment ID |
+| Type   | Name         | Description                     |
+|--------|--------------|---------------------------------|
+| string | increment_id | Increment ID                    |
+| string | created_at   | Date of shipment creation       |
+| string | total_qty    | Total quantity of items to ship |
+| string | shipment_id  | Shipment ID                     |
 
-**Examples**:
+### Examples
 
-**Request Example SOAP V1**
+#### Request Example SOAP V1
 
 ```php
-$client = new SoapClient('http://magentohost/api/soap/?wsdl');
+$client = new SoapClient('https://mahohost/api/soap/?wsdl');
 $session = $client->login('apiUser', 'apiKey');
 
 $result = $client->call($session, 'sales_order_shipment.list');
 var_dump($result);
 
-// If you don't need the session anymore
-//$client->endSession($session);
+// When the session can be closed
+$client->endSession($session);
 ```
 
-**Request Example SOAP V2 (List of All Shipments)**
+#### Request Example SOAP V2 (List of All Shipments)
 
 ```php
-$proxy = new SoapClient('http://magentohost/api/v2_soap/?wsdl'); // TODO : change url
-$sessionId = $proxy->login('apiUser', 'apiKey'); // TODO : change login and pwd if necessary
+$proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); // TODO: change url
+$sessionId = $proxy->login('apiUser', 'apiKey'); // TODO: change login and pwd if necessary
 
 $result = $proxy->salesOrderShipmentList($sessionId);
 var_dump($result);
 ```
 
-**Request Example SOAP V2 (Complex Filter)**
+#### Request Example SOAP V2 (Complex Filter)
 
 ```php
-$client = new SoapClient('http://magentohost/api/v2_soap/?wsdl');
+$client = new SoapClient('https://mahohost/api/v2_soap/?wsdl');
 $session = $client->login('apiUser', 'apiKey');
 
-$complexFilter = array(
-    'complex_filter' => array(
-        array(
+$complexFilter = [
+    'complex_filter' => [
+        [
             'key' => 'created_at',
-            'value' => array('key' => 'in', 'value' => '2012-03-30 12:54:46')
-        )
-    )
-);
+            'value' => ['key' => 'in', 'value' => '2012-03-30 12:54:46']
+        ]
+    ]
+];
 $result = $client->salesOrderShipmentList($session, $complexFilter);
 var_dump($result);
 ```
 
-**Request Example SOAP V2 (WS-I Compliance Mode)**
+#### Request Example SOAP V2 (WS-I Compliance Mode)
 
 ```php
-$proxy = new SoapClient('http://magentohost/api/v2_soap/?wsdl'); 
-$sessionId = $proxy->login((object)array('username' => 'apiUser', 'apiKey' => 'apiKey')); 
+$proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); 
+$sessionId = $proxy->login((object)['username' => 'apiUser', 'apiKey' => 'apiKey']); 
  
-$result = $proxy->salesOrderShipmentList((object)array('sessionId' => $sessionId->result));   
+$result = $proxy->salesOrderShipmentList((object)['sessionId' => $sessionId->result]);   
 var_dump($result->result);
 ```
 
-**Response Example SOAP V1**
+#### Response Example SOAP V1
 
 ```php
 array
@@ -170,479 +167,488 @@ array
 
 ## Info
 
-**Method:**
+### Method
 
--   sales_order_shipment.info (SOAP V1)
--   salesOrderShipmentInfo (SOAP V2)
+- `sales_order_shipment.info` (SOAP V1)
+- `salesOrderShipmentInfo` (SOAP V2)
 
 Allows you to retrieve the shipment information.
 
-**Aliases**:
+### Alias
 
--   order_shipment.info
+- `order_shipment.info`
 
-**Arguments**:
+### Arguments
 
-| Type | Name | Description |
-| --- | --- | --- |
-| string | sessionId | Session ID |
+| Type   | Name                | Description                 |
+|--------|---------------------|-----------------------------|
+| string | sessionId           | Session ID                  |
 | string | shipmentIncrementId | Order shipment increment ID |
 
-**Returns**:
+### Returns
 
-| Type | Name | Description |
-| --- | --- | --- |
-| array | result | Array of salesOrderShipmentEntity |
+| Type   | Name   | Description                       |
+|--------|--------|-----------------------------------|
+| array  | result | Array of salesOrderShipmentEntity |
 
-The **salesOrderShipmentEntity** content is as follows:
+### Content `salesOrderShipmentEntity`
 
-| Type | Name | Description |
-| --- | --- | --- |
-| string | increment_id | Shipment increment ID |
-| string | store_id | Store ID |
-| string | created_at | Date of shipment creation |
-| string | updated_at | Date of shipment updating |
-| string | shipping_address_id | Shipping address ID |
-| string | order_id | Order ID |
-| string | total_qty | Total quantity of items to ship |
-| string | shipment_id | Shipment ID |
-| array | items | Array of salesOrderShipmentItemEntity |
-| array | tracks | Array of salesOrderShipmentTrackEntity |
-| array | comments | Array of salesOrderShipmentCommentEntity |
+| Type   | Name                | Description                              |
+|--------|---------------------|------------------------------------------|
+| string | increment_id        | Shipment increment ID                    |
+| string | store_id            | Store ID                                 |
+| string | created_at          | Date of shipment creation                |
+| string | updated_at          | Date of shipment updating                |
+| string | shipping_address_id | Shipping address ID                      |
+| string | order_id            | Order ID                                 |
+| string | total_qty           | Total quantity of items to ship          |
+| string | shipment_id         | Shipment ID                              |
+| array  | items               | Array of salesOrderShipmentItemEntity    |
+| array  | tracks              | Array of salesOrderShipmentTrackEntity   |
+| array  | comments            | Array of salesOrderShipmentCommentEntity |
 
-The **salesOrderShipmentItemEntity** content is as follows:
+### Content `salesOrderShipmentItemEntity`
 
-| Type | Name | Description |
-| --- | --- | --- |
-| string | parent_id | Parent ID |
-| string | sku | Shipment item SKU |
-| string | name | Shipment item name |
-| string | order_item_id | Order item ID |
-| string | product_id | Product ID |
-| string | weight | Weight |
-| string | price | Price |
-| string | qty | Quantity of items |
-| string | item_id | Item ID |
+| Type   | Name          | Description        |
+|--------|---------------|--------------------|
+| string | parent_id     | Parent ID          |
+| string | sku           | Shipment item SKU  |
+| string | name          | Shipment item name |
+| string | order_item_id | Order item ID      |
+| string | product_id    | Product ID         |
+| string | weight        | Weight             |
+| string | price         | Price              |
+| string | qty           | Quantity of items  |
+| string | item_id       | Item ID            |
 
-The **salesOrderShipmentTrackEntity** content is as follows:
+### Content `salesOrderShipmentTrackEntity`
 
-| Type | Name | Description |
-| --- | --- | --- |
-| string | parent_id | Parent ID |
-| string | created_at | Date of tracking number creation |
-| string | updated_at | Date of tracking number updating |
-| string | carrier_code | Carrier code |
-| string | title | Track title |
-| string | number | Tracking number |
-| string | order_id | Order ID |
-| string | track_id | Track ID |
+| Type   | Name         | Description                      |
+|--------|--------------|----------------------------------|
+| string | parent_id    | Parent ID                        |
+| string | created_at   | Date of tracking number creation |
+| string | updated_at   | Date of tracking number updating |
+| string | carrier_code | Carrier code                     |
+| string | title        | Track title                      |
+| string | number       | Tracking number                  |
+| string | order_id     | Order ID                         |
+| string | track_id     | Track ID                         |
 
-The **salesOrderShipmentCommentEntity** content is as follows:
+### Content `salesOrderShipmentCommentEntity`
 
-| Type | Name | Description |
-| --- | --- | --- |
-| string | parent_id | Parent ID |
-| string | created_at | Date of comment creation |
-| string | comment | Shipment comment text |
+| Type   | Name                 | Description                              |
+|--------|----------------------|------------------------------------------|
+| string | parent_id            | Parent ID                                |
+| string | created_at           | Date of comment creation                 |
+| string | comment              | Shipment comment text                    |
 | string | is_customer_notified | Defines whether the customer is notified |
-| string | comment_id | Comment ID |
+| string | comment_id           | Comment ID                               |
 
-**Examples**:
+### Examples
 
-**Request example SOAP V1**
+#### Request Example SOAP V1
 
 ```php
-$client = new SoapClient('http://magentohost/api/soap/?wsdl');
+$client = new SoapClient('https://mahohost/api/soap/?wsdl');
 $session = $client->login('apiUser', 'apiKey');
 
 $result = $client->call($session, 'sales_order_shipment.info', '200000003');
 var_dump($result);
 ```
 
-**Request example SOAP V2**
+#### Request Example SOAP V2
 
 ```php
-$proxy = new SoapClient('http://magentohost/api/v2_soap/?wsdl'); // TODO : change url
-$sessionId = $proxy->login('apiUser', 'apiKey'); // TODO : change login and pwd if necessary
+$proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); // TODO: change url
+$sessionId = $proxy->login('apiUser', 'apiKey'); // TODO: change login and pwd if necessary
 
 $result = $proxy->salesOrderShipmentInfo($sessionId, '200000003');
 var_dump($result);
 ```
 
-**Request example SOAP V2 (WS-I Compliance Mode)**
+#### Request Example SOAP V2 (WS-I Compliance Mode)
 
 ```php
-$proxy = new SoapClient('http://magentohost/api/v2_soap/?wsdl'); 
-$sessionId = $proxy->login((object)array('username' => 'apiUser', 'apiKey' => 'apiKey')); 
+$proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); 
+$sessionId = $proxy->login((object)['username' => 'apiUser', 'apiKey' => 'apiKey']); 
  
-$result = $proxy->salesOrderShipmentInfo((object)array('sessionId' => $sessionId->result, 'shipmentIncrementId' => '200000003'));   
+$result = $proxy->salesOrderShipmentInfo((object)['sessionId' => $sessionId->result, 'shipmentIncrementId' => '200000003']);   
 var_dump($result->result);
 ```
 
 ## Create
 
-**Method:**
+### Method
 
--   sales_order_shipment.create (SOAP V1)
--   salesOrderShipmentCreate (SOAP V2)
+- `sales_order_shipment.create` (SOAP V1)
+- `salesOrderShipmentCreate` (SOAP V2)
 
 Allows you to create a new shipment for an order.
 
-**Aliases**:
+### Alias
 
--   order_shipment.create
+- `order_shipment.create`
 
-**Arguments**:
+### Arguments
 
-| Type | Name | Description |
-| --- | --- | --- |
-| string | sessionId | Session ID |
-| string | orderIncrementId | Order increment ID |
-| array | itemsQty | Array of orderItemIdQty (optional) |
-| string | comment | Shipment comment (optional) |
-| int | email | Send email flag (optional) |
-| int | includeComment | Include comment in email flag (optional) |
+| Type   | Name             | Description                              |
+|--------|------------------|------------------------------------------|
+| string | sessionId        | Session ID                               |
+| string | orderIncrementId | Order increment ID                       |
+| array  | itemsQty         | Array of orderItemIdQty (optional)       |
+| string | comment          | Shipment comment (optional)              |
+| int    | email            | Send email flag (optional)               |
+| int    | includeComment   | Include comment in email flag (optional) |
 
-**Returns**:
+### Returns
 
-| Type | Name | Description |
-| --- | --- | --- |
+| Type   | Name                | Description           |
+|--------|---------------------|-----------------------|
 | string | shipmentIncrementId | Shipment increment ID |
 
-The **orderItemIdQty** content is as follows:
+### Content `orderItemIdQty`
 
-| Type | Name | Description |
-| --- | --- | --- |
-| int | order_item_id | Order item ID |
-| double | qty | Quantity of items to be shipped |
+| Type   | Name          | Description                     |
+|--------|---------------|---------------------------------|
+| int    | order_item_id | Order item ID                   |
+| double | qty           | Quantity of items to be shipped |
 
-**Notes**: The array of orderItemQty is used for partial shipment. To create shipment for all order items, you do not need to specify these attributes.
+**Notes**: The array of `orderItemQty` is used for partial shipment.
+To create shipment for all order items, you do not need to specify these attributes.
 
-**Examples**:
+### Examples
 
-**Request Example SOAP V1**
+#### Request Example SOAP V1
 
 ```php
-$proxy = new SoapClient('http://magentohost/api/soap/?wsdl');
+$proxy = new SoapClient('https://mahohost/api/soap/?wsdl');
 $session = $proxy->login('apiUser', 'apiKey');
 
 $orderIncrementId = '200000006';
 $orderItemId = 3;
 $qty = 5;
-$itemsQty = array(
+$itemsQty = [
 	$orderItemId => $qty,
-);
+];
 
 $result = $proxy->call(
     $session,
     'order_shipment.create',
-    array(
+    [
         $orderIncrementId,
         $itemsQty
-    )
+    ]
 );
 
 var_dump($result);
 ```
 
-**Request Example SOAP V2**
+#### Request Example SOAP V2
 
 ```php
-$proxy = new SoapClient('http://magentohost/api/v2_soap/?wsdl');
+$proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl');
 $sessionId = $proxy->login('apiUser', 'apiKey');
 
-$itemsQty = array(
-    array(
+$itemsQty = [
+    [
         'order_item_id' => 3,
         'qty' => 3
-    ),
-    array(
+    ],
+    [
         'order_item_id' => 4,
         'qty' => 5
-    ));
+    ]
+];
 
 $result = $proxy->salesOrderShipmentCreate($sessionId, '200000006', $itemsQty, 'shipment comment');
 var_dump($result);
 ```
 
-**Request Example SOAP V2 (WS-I Compliance Mode)**
+#### Request Example SOAP V2 (WS-I Compliance Mode)
 
 ```php
-$proxy = new SoapClient('http://magentohost/api/v2_soap/?wsdl'); 
-$sessionId = $proxy->login((object)array('username' => 'apiUser', 'apiKey' => 'apiKey')); 
+$proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); 
+$sessionId = $proxy->login((object)['username' => 'apiUser', 'apiKey' => 'apiKey']); 
 
-$itemsQty = array(
-    array(
+$itemsQty = [
+    [
         'order_item_id' => 3,
         'qty' => 3
-    ),
-    array(
+    ],
+    [
         'order_item_id' => 4,
         'qty' => 5
-    ));
+    ]
+];
  
-$result = $proxy->salesOrderShipmentCreate((object)array(
-    'sessionId' => $sessionId->result,
-    'orderIncrementId' => '200000006',
-    'itemsQty' => $itemsQty,
-    'comment' => 'shipment comment',
-    'email' => null, 'includeComment' => null));   
+$result = $proxy->salesOrderShipmentCreate(
+    (object)[
+        'sessionId' => $sessionId->result,
+        'orderIncrementId' => '200000006',
+        'itemsQty' => $itemsQty,
+        'comment' => 'shipment comment',
+        'email' => null,
+        'includeComment' => null
+    ]
+);   
     
 var_dump($result->result);
 ```
 
 ## AddComment
 
-**Method:**
+### Method
 
--   sales_order_shipment.addComment (SOAP V1)
--   salesOrderShipmentAddComment (SOAP V2)
+- `sales_order_shipment.addComment` (SOAP V1)
+- `salesOrderShipmentAddComment` (SOAP V2)
 
 Allows you to add a new comment to the order shipment.
 
-**Aliases**:
+### Alias
 
--   order_shipment.addComment
+- `order_shipment.addComment`
 
-**Arguments**:
+### Arguments
 
-| Type | Name | Description |
-| --- | --- | --- |
-| string | sessionId | Session ID |
-| string | shipmentIncrementId | Shipment increment ID |
-| string | comment | Shipment comment (optional) |
-| string | email | Send email flag (optional) |
-| string | includeInEmail | Include comment in email flag (optional) |
+| Type   | Name                | Description                              |
+|--------|---------------------|------------------------------------------|
+| string | sessionId           | Session ID                               |
+| string | shipmentIncrementId | Shipment increment ID                    |
+| string | comment             | Shipment comment (optional)              |
+| string | email               | Send email flag (optional)               |
+| string | includeInEmail      | Include comment in email flag (optional) |
 
-**Returns**:
+### Returns
 
-| Type | Description |
-| --- | --- |
+| Type       | Description                                            |
+|------------|--------------------------------------------------------|
 | booleanint | True (1) if the comment is added to the order shipment |
 
-**Examples**:
+### Examples
 
-**Request Example SOAP V1**
+#### Request Example SOAP V1
 
 ```php
-$client = new SoapClient('http://magentohost/api/soap/?wsdl');
+$client = new SoapClient('https://mahohost/api/soap/?wsdl');
 $session = $client->login('apiUser', 'apiKey');
 
-$result = $client->call($session, 'sales_order_shipment.addComment', array('shipmentIncrementId' => '200000002', 'comment' => 'comment for the shipment', 'email' => null));
+$result = $client->call($session, 'sales_order_shipment.addComment', ['shipmentIncrementId' => '200000002', 'comment' => 'comment for the shipment', 'email' => null]);
 var_dump($result);
 
-// If you don't need the session anymore
-//$client->endSession($session);
+// When the session can be closed
+$client->endSession($session);
 ```
 
-**Request Example SOAP V2**
+#### Request Example SOAP V2
 
 ```php
-$proxy = new SoapClient('http://magentohost/api/v2_soap/?wsdl'); // TODO : change url
-$sessionId = $proxy->login('apiUser', 'apiKey'); // TODO : change login and pwd if necessary
+$proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); // TODO: change url
+$sessionId = $proxy->login('apiUser', 'apiKey'); // TODO: change login and pwd if necessary
 
 $result = $proxy->salesOrderShipmentAddComment($sessionId, '200000002');
 var_dump($result);
 ```
 
-**Request Example SOAP V2 (WS- I Compliance Mode)**
+#### Request Example SOAP V2 (WS- I Compliance Mode)
 
 ```php
-$proxy = new SoapClient('http://magentohost/api/v2_soap/?wsdl'); 
-$sessionId = $proxy->login((object)array('username' => 'apiUser', 'apiKey' => 'apiKey')); 
+$proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); 
+$sessionId = $proxy->login((object)['username' => 'apiUser', 'apiKey' => 'apiKey']); 
  
-$result = $proxy->salesOrderShipmentAddComment((object)array('sessionId' => $sessionId->result, 'shipmentIncrementId' => '200000002', 'comment' => 'comment for the shipment', 'email' => null, 'includeInEmail' => null));   
+$result = $proxy->salesOrderShipmentAddComment((object)['sessionId' => $sessionId->result, 'shipmentIncrementId' => '200000002', 'comment' => 'comment for the shipment', 'email' => null, 'includeInEmail' => null]);   
 var_dump($result->result);
 ```
 
 ## AddTrack
 
-**Method:**
+### Method
 
--   sales_order_shipment.addTrack (SOAP V1)
--   salesOrderShipmentAddTrack (SOAP V2)
+- `sales_order_shipment.addTrack` (SOAP V1)
+- `salesOrderShipmentAddTrack` (SOAP V2)
 
 Allows you to add a new tracking number to the order shipment.
 
-**Aliases**:
+### Aliases
 
--   order_shipment.addTrack
+- `order_shipment.addTrack`
 
-**Arguments**:
+### Arguments
 
-| Type | Name | Description |
-| --- | --- | --- |
-| string | sessionId | Session ID |
-| string | shipmentIncrementId | Shipment increment ID |
-| string | carrier | Carrier code (ups, usps, dhl, fedex, or dhlint) |
-| string | title | Tracking title |
-| string | trackNumber | Tracking number |
+| Type   | Name                | Description                                     |
+|--------|---------------------|-------------------------------------------------|
+| string | sessionId           | Session ID                                      |
+| string | shipmentIncrementId | Shipment increment ID                           |
+| string | carrier             | Carrier code (ups, usps, dhl, fedex, or dhlint) |
+| string | title               | Tracking title                                  |
+| string | trackNumber         | Tracking number                                 |
 
-**Returns**:
+### Returns
 
-| Type | Description |
-| --- | --- |
-| int | Tracking number ID |
+| Type | Description        |
+|------|--------------------|
+| int  | Tracking number ID |
 
-**Examples**:
+### Examples
 
-**Request Example SOAP V1**
+#### Request Example SOAP V1
 
 ```php
-$client = new SoapClient('http://magentohost/api/soap/?wsdl');
+$client = new SoapClient('https://mahohost/api/soap/?wsdl');
 $session = $client->login('apiUser', 'apiKey');
 
-$result = $client->call($session, 'sales_order_shipment.addTrack', array('shipmentIncrementId' => '200000002', 'carrier' => 'ups', 'title' => 'tracking title', 'trackNumber' => '123123'));
+$result = $client->call($session, 'sales_order_shipment.addTrack', ['shipmentIncrementId' => '200000002', 'carrier' => 'ups', 'title' => 'tracking title', 'trackNumber' => '123123']);
 var_dump($result);
 
-// If you don't need the session anymore
-//$client->endSession($session);
+// When the session can be closed
+$client->endSession($session);
 ```
 
-**Request Example SOAP V2**
+#### Request Example SOAP V2
 
 ```php
-$proxy = new SoapClient('http://magentohost/api/v2_soap/?wsdl'); // TODO : change url
-$sessionId = $proxy->login('apiUser', 'apiKey'); // TODO : change login and pwd if necessary
+$proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); // TODO: change url
+$sessionId = $proxy->login('apiUser', 'apiKey'); // TODO: change login and pwd if necessary
 
 $result = $proxy->salesOrderShipmentAddTrack($sessionId, '200000002', 'ups', 'tracking title', '123123');
 var_dump($result);
 ```
 
-**Request Example SOAP V2 (WS-I Compliance Mode)**
+#### Request Example SOAP V2 (WS-I Compliance Mode)
 
 ```php
-$proxy = new SoapClient('http://magentohost/api/v2_soap/?wsdl'); 
-$sessionId = $proxy->login((object)array('username' => 'apiUser', 'apiKey' => 'apiKey')); 
+$proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); 
+$sessionId = $proxy->login((object)['username' => 'apiUser', 'apiKey' => 'apiKey']); 
  
-$result = $proxy->salesOrderShipmentAddTrack((object)array('sessionId' => $sessionId->result, 'shipmentIncrementId' => '200000002', 'carrier' => 'ups', 'title' => 'tracking title', 'trackNumber' => '123123'));   
+$result = $proxy->salesOrderShipmentAddTrack((object)['sessionId' => $sessionId->result, 'shipmentIncrementId' => '200000002', 'carrier' => 'ups', 'title' => 'tracking title', 'trackNumber' => '123123']);   
 var_dump($result->result);
 ```
 
 ## RemoveTrack
 
-**Method:**
+### Method
 
--   sales_order_shipment.removeTrack (SOAP V1)
--   salesOrderShipmentRemoveTrack (SOAP V2)
+- `sales_order_shipment.removeTrack` (SOAP V1)
+- `salesOrderShipmentRemoveTrack` (SOAP V2)
 
 Allows you to remove a tracking number from the order shipment.
 
-**Aliases**:
+### Alias
 
--   order_shipment.removeTrack
+- `order_shipment.removeTrack`
 
-**Arguments**:
+### Arguments
 
-| Type | Name | Description |
-| --- | --- | --- |
-| string | sessionId | Session ID |
+| Type   | Name                | Description           |
+|--------|---------------------|-----------------------|
+| string | sessionId           | Session ID            |
 | string | shipmentIncrementId | Shipment increment ID |
-| string | trackId | Track ID |
+| string | trackId             | Track ID              |
 
-**Returns**:
+### Returns
 
-| Type | Description |
-| --- | --- |
+| Type       | Description                                                  |
+|------------|--------------------------------------------------------------|
 | booleanint | True (1) if the tracking number is removed from the shipment |
 
-**Examples**:
+### Examples
 
-**Request Example SOAP V1**
+#### Request Example SOAP V1
 
 ```php
-$client = new SoapClient('http://magentohost/api/soap/?wsdl');
+$client = new SoapClient('https://mahohost/api/soap/?wsdl');
 $session = $client->login('apiUser', 'apiKey');
 
-$result = $client->call($session, 'sales_order_shipment.removeTrack', array('shipmentIncrementId' => '200000002', 'trackId' => '2'));
+$result = $client->call($session, 'sales_order_shipment.removeTrack', ['shipmentIncrementId' => '200000002', 'trackId' => '2']);
 var_dump($result);
 
-// If you don't need the session anymore
-//$client->endSession($session);
+// When the session can be closed
+$client->endSession($session);
 ```
 
-**Request Example SOAP V2**
+#### Request Example SOAP V2
 
 ```php
-$proxy = new SoapClient('http://magentohost/api/v2_soap/?wsdl'); // TODO : change url
-$sessionId = $proxy->login('apiUser', 'apiKey'); // TODO : change login and pwd if necessary
+$proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); // TODO: change url
+$sessionId = $proxy->login('apiUser', 'apiKey'); // TODO: change login and pwd if necessary
 
 $result = $proxy->salesOrderShipmentRemoveTrack($sessionId, '200000002', '2');
 var_dump($result);
 ```
 
-**Request Example SOAP V2 (WS-I Compliance Mode)**
+#### Request Example SOAP V2 (WS-I Compliance Mode)
 
 ```php
-$proxy = new SoapClient('http://magentohost/api/v2_soap/?wsdl'); 
-$sessionId = $proxy->login((object)array('username' => 'apiUser', 'apiKey' => 'apiKey')); 
+$proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); 
+$sessionId = $proxy->login((object)['username' => 'apiUser', 'apiKey' => 'apiKey']); 
  
-$result = $proxy->salesOrderShipmentRemoveTrack((object)array('sessionId' => $sessionId->result, 'shipmentIncrementId' => '200000002', 'trackId' => '2'));   
+$result = $proxy->salesOrderShipmentRemoveTrack((object)['sessionId' => $sessionId->result, 'shipmentIncrementId' => '200000002', 'trackId' => '2']);   
 var_dump($result->result);
 ```
 
 ## GetCarriers
 
-**Method:**
+### Method
 
--   sales_order_shipment.getCarriers (SOAP V1)
--   salesOrderShipmentGetCarriers (SOAP V2)
+- `sales_order_shipment.getCarriers` (SOAP V1)
+- `salesOrderShipmentGetCarriers` (SOAP V2)
 
 Allows you to retrieve the list of allowed carriers for an order.
 
-**Aliases**:
+### Alias
 
--   order_shipment.getCarriers
+- `order_shipment.getCarriers`
 
-**Arguments**:
+### Arguments
 
-| Type | Name | Description |
-| --- | --- | --- |
-| string | sessionId | Session ID |
+| Type   | Name             | Description        |
+|--------|------------------|--------------------|
+| string | sessionId        | Session ID         |
 | string | orderIncrementId | Order increment ID |
 
-**Returns**:
+### Returns
 
-| Type | Name | Description |
-| --- | --- | --- |
+| Type             | Name   | Description       |
+|------------------|--------|-------------------|
 | associativeArray | result | Array of carriers |
 
-**Examples**:
+### Examples
 
-**Request Example SOAP V1**
+#### Request Example SOAP V1
 
 ```php
-$client = new SoapClient('http://magentohost/api/soap/?wsdl');
+$client = new SoapClient('https://mahohost/api/soap/?wsdl');
 $session = $client->login('apiUser', 'apiKey');
 
 $result = $client->call($session, 'sales_order_shipment.getCarriers', '200000010');
 var_dump($result);
 
-// If you don't need the session anymore
-//$client->endSession($session);
+// When the session can be closed
+$client->endSession($session);
 ```
 
-**Request Example SOAP V2**
+#### Request Example SOAP V2
 
 ```php
-$proxy = new SoapClient('http://magentohost/api/v2_soap/?wsdl'); // TODO : change url
-$sessionId = $proxy->login('apiUser', 'apiKey'); // TODO : change login and pwd if necessary
+$proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); // TODO: change url
+$sessionId = $proxy->login('apiUser', 'apiKey'); // TODO: change login and pwd if necessary
 
 $result = $proxy->salesOrderShipmentGetCarriers($sessionId, '200000010');
 var_dump($result);
 ```
 
-**Request Example SOAP V2 (WS-I Compliance Mode)**
+#### Request Example SOAP V2 (WS-I Compliance Mode)
 
 ```php
-$proxy = new SoapClient('http://magentohost/api/v2_soap/?wsdl'); 
-$sessionId = $proxy->login((object)array('username' => 'apiUser', 'apiKey' => 'apiKey')); 
+$proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); 
+$sessionId = $proxy->login((object)['username' => 'apiUser', 'apiKey' => 'apiKey']); 
  
-$result = $proxy->salesOrderShipmentGetCarriers((object)array('sessionId' => $sessionId->result, 'orderIncrementId' => '200000010'));   
+$result = $proxy->salesOrderShipmentGetCarriers(
+    (object)['sessionId' => $sessionId->result, 'orderIncrementId' => '200000010']
+);   
 var_dump($result->result);
 ```
 
-**Response Example SOAP V1**
+#### Response Example SOAP V1
 
 ```php
 array
