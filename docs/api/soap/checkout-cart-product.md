@@ -1,116 +1,121 @@
+# Checkout Cart Product
+
 ## Introduction
 
 Allows you to manage products in a shopping cart.
 
-**Resource Name**: cart_product
+### Resource Name
 
-**Methods**:
+- `cart_product`
 
-- cart_product.add - Add one or more products to a shopping cart
-- cart_product.update - Update one or more products in a shopping cart
-- cart_product.remove - Remove one or more products from a shopping cart
-- cart_product.list - Get a list of products in a shopping cart
-- cart_product.moveToCustomerQuote - Move one or more products from the quote to the customer shopping cart
+### Methods
 
-**Faults**:
+- `cart_product.add` — Add one or more products to a shopping cart.
+- `cart_product.update` — Update one or more products in a shopping cart.
+- `cart_product.remove` — Remove one or more products from a shopping cart.
+- `cart_product.list` — Get a list of products in a shopping cart.
+- `cart_product.moveToCustomerQuote` — Move one or more products from the quote to the customer shopping cart.
 
-| Fault Code | Fault Message |
-| --- | --- |
-| 1001 | Can not make operation because store is not exists |
-| 1002 | Can not make operation because quote is not exists |
-| 1021 | Product’s data is not valid. |
-| 1022 | Product(s) could not be added. |
-| 1023 | Quote could not be saved during adding product(s) operation. |
-| 1024 | Product(s) could not be updated. |
-| 1025 | Quote could not be saved during updating product(s) operation. |
-| 1026 | Product(s) could not be removed. |
-| 1027 | Quote could not be saved during removing product(s) operation. |
-| 1028 | Customer is not set for quote. |
-| 1029 | Customer’s quote is not existed. |
-| 1030 | Quotes are identical. |
-| 1031 | Product(s) could not be moved. |
-| 1032 | One of quote could not be saved during moving product(s) operation. |
+### Faults
+
+| Fault Code | Fault Message                                                       |
+|------------|---------------------------------------------------------------------|
+| 1001       | Can not make operation because store is not exists                  |
+| 1002       | Can not make operation because quote is not exists                  |
+| 1021       | Product’s data is not valid.                                        |
+| 1022       | Product(s) could not be added.                                      |
+| 1023       | Quote could not be saved during adding product(s) operation.        |
+| 1024       | Product(s) could not be updated.                                    |
+| 1025       | Quote could not be saved during updating product(s) operation.      |
+| 1026       | Product(s) could not be removed.                                    |
+| 1027       | Quote could not be saved during removing product(s) operation.      |
+| 1028       | Customer is not set for quote.                                      |
+| 1029       | Customer’s quote is not existed.                                    |
+| 1030       | Quotes are identical.                                               |
+| 1031       | Product(s) could not be moved.                                      |
+| 1032       | One of quote could not be saved during moving product(s) operation. |
 
 ## Add
 
-**Method:**
+### Method
 
--   cart_product.add (SOAP V1)
--   shoppingCartProductAdd (SOAP V2)
+- `cart_product.add` (SOAP V1)
+- `shoppingCartProductAdd` (SOAP V2)
 
 Allows you to add one or more products to the shopping cart (quote).
 
-**Arguments**:
+### Arguments
 
-| Type | Name | Description |
-| --- | --- | --- |
-| string | sessionId | Session ID |
-| int | quoteId | Shopping cart ID (quote ID) |
-| array | productsproductsData | An array with the list of shoppingCartProductEntity |
-| string | storeId | Store view ID or code (optional) |
+| Type   | Name                 | Description                                         |
+|--------|----------------------|-----------------------------------------------------|
+| string | sessionId            | Session ID                                          |
+| int    | quoteId              | Shopping cart ID (quote ID)                         |
+| array  | productsproductsData | An array with the list of shoppingCartProductEntity |
+| string | storeId              | Store view ID or code (optional)                    |
 
-**Returns**:
+### Returns
 
-| Type | Description |
-| --- | --- |
+| Type    | Description                                                    |
+|---------|----------------------------------------------------------------|
 | boolean | True on success (if the product is added to the shopping cart) |
 
-The shoppingCartProductEntity array attributes are as follows:
+### Content `shoppingCartProductEntity`
 
-| Type | Name | Description |
-| --- | --- | --- |
-| string | product_id | ID of the product to be added to the shopping cart (quote) (optional) |
-| string | sku | SKU of the product to be added to the shopping cart (quote) (optional) |
-| double | qty | Number of products to be added to the shopping cart (quote) (optional) |
-| associativeArray | options | An array in the form of option_id => content (optional) |
-| associativeArray | bundle_option | An array of bundle item options (optional) |
-| associativeArray | bundle_option_qty | An array of bundle items quantity (optional) |
-| ArrayOfString | links | An array of links (optional) |
+| Type             | Name              | Description                                                            |
+|------------------|-------------------|------------------------------------------------------------------------|
+| string           | product_id        | ID of the product to be added to the shopping cart (quote) (optional)  |
+| string           | sku               | SKU of the product to be added to the shopping cart (quote) (optional) |
+| double           | qty               | Number of products to be added to the shopping cart (quote) (optional) |
+| associativeArray | options           | An array in the form of option_id => content (optional)                |
+| associativeArray | bundle_option     | An array of bundle item options (optional)                             |
+| associativeArray | bundle_option_qty | An array of bundle items quantity (optional)                           |
+| ArrayOfString    | links             | An array of links (optional)                                           |
 
-**Faults**:  
+### Faults  
+
 _No Faults._
 
-**Examples**:
+### Examples
 
-**Request Example SOAP V1**
+#### Request Example SOAP V1
 
 ```php
-$proxy = new SoapClient('http://magentohost/api/soap/?wsdl');
+$proxy = new SoapClient('https://mahohost/api/soap/?wsdl');
 $sessionId = $proxy->login('apiUser', 'apiKey');
 
-$quoteId = $proxy->call( $sessionId, 'cart.create', array( 'magento_store' ) );
-$arrProducts = array(
-	array(
+$quoteId = $proxy->call($sessionId, 'cart.create', ['maho_store']);
+$arrProducts = [
+	[
 		"product_id" => "1",
 		"qty" => 2
-                "options" => array(         
+                "options" => [
                     optionId_1 => optionValue_1,
-                    ...,
+                    ...
                     optionId_n => optionValue_n
-                 )
-	),
-	array(
+                 ]
+	],
+	[
 		"sku" => "testSKU",
 		"quantity" => 4
-	)
-);
+	]
+];
 $resultCartProductAdd = $proxy->call(
 	$sessionId,
 	"cart_product.add",
-	array(
+	[
 		$quoteId,
 		$arrProducts
-	)
+	]
 );
 ```
 
-**Request Example SOAP V2**
+#### Request Example SOAP V2
 
 ```php
-$proxy = new SoapClient('http://magentohost/api/v2_soap/?wsdl'); 
+$proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); 
 $sessionId = $proxy->login('apiUser', 'apiKey'); 
   
-$result = $proxy->shoppingCartProductAdd($sessionId, 10, array(array(
+$result = $proxy->shoppingCartProductAdd($sessionId, 10, [[
     'product_id' => '4',
     'sku' => 'simple_product',
     'qty' => '5',
@@ -118,17 +123,17 @@ $result = $proxy->shoppingCartProductAdd($sessionId, 10, array(array(
     'bundle_option' => null,
     'bundle_option_qty' => null,
     'links' => null
-)));
+]]);
 var_dump($result);
 ```
 
-**Request Example SOAP V2 (WS-I Compliance Mode)**
+#### Request Example SOAP V2 (WS-I Compliance Mode)
 
 ```php
-$proxy = new SoapClient('http://magentohost/api/v2_soap/?wsdl');
-$sessionId = $proxy->login((object)array('username' => 'apiUser', 'apiKey' => 'apiKey'));
+$proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl');
+$sessionId = $proxy->login((object)['username' => 'apiUser', 'apiKey' => 'apiKey']);
 
-$result = $proxy->shoppingCartProductAdd((object)array('sessionId' => $sessionId->result, 'quoteId' => 10, 'productsData' => array(array(
+$result = $proxy->shoppingCartProductAdd((object)['sessionId' => $sessionId->result, 'quoteId' => 10, 'productsData' => [[
     'product_id' => '4',
     'sku' => 'simple_product',
     'qty' => '1',
@@ -136,99 +141,100 @@ $result = $proxy->shoppingCartProductAdd((object)array('sessionId' => $sessionId
     'bundle_option' => null,
     'bundle_option_qty' => null,
     'links' => null
-))));
+]]]);
 var_dump($result->result);
 ```
 
 ## Update
 
-**Method:**
+### Method
 
--   cart_product.update (SOAP V1)
--   shoppingCartProductUpdate (SOAP V2)
+- `cart_product.update` (SOAP V1)
+- `shoppingCartProductUpdate` (SOAP V2)
 
 Allows you to update one or several products in the shopping cart (quote).
 
-**Arguments:**
+### Arguments
 
-| Type | Name | Description |
-| --- | --- | --- |
-| string | sessionId | Session ID |
-| int | quoteId | Shopping cart ID |
-| array | productsData | Array of shoppingCartProductEntity |
-| string | store | Store view ID or code (optional) |
+| Type   | Name         | Description                        |
+|--------|--------------|------------------------------------|
+| string | sessionId    | Session ID                         |
+| int    | quoteId      | Shopping cart ID                   |
+| array  | productsData | Array of shoppingCartProductEntity |
+| string | store        | Store view ID or code (optional)   |
 
-**Return:**
+### Return
 
-| Type | Description |
-| --- | --- |
+| Type    | Description                    |
+|---------|--------------------------------|
 | boolean | True if the product is updated |
 
-The **shoppingCartProductEntity** content is as follows:
+### Content `shoppingCartProductEntity`
 
-| Type | Name | Description |
-| --- | --- | --- |
-| string | product_id | Product ID |
-| string | sku | Product SKU |
-| double | qty | Product quantity |
-| associativeArray | options | Product custom options |
-| associativeArray | bundle_option | An array of bundle item options (optional) |
+| Type             | Name              | Description                                  |
+|------------------|-------------------|----------------------------------------------|
+| string           | product_id        | Product ID                                   |
+| string           | sku               | Product SKU                                  |
+| double           | qty               | Product quantity                             |
+| associativeArray | options           | Product custom options                       |
+| associativeArray | bundle_option     | An array of bundle item options (optional)   |
 | associativeArray | bundle_option_qty | An array of bundle items quantity (optional) |
-| ArrayOfString | links | An array of links (optional) |
+| ArrayOfString    | links             | An array of links (optional)                 |
 
-**Faults:**  
+### Faults
+
 _No Faults._
 
-**Examples**:
+### Examples
 
-**Request Example SOAP V1**
+#### Request Example SOAP V1
 
 ```php
-$proxy = new SoapClient('http://magentohost/api/soap/?wsdl');
+$proxy = new SoapClient('https://mahohost/api/soap/?wsdl');
 $sessionId = $proxy->login('apiUser', 'apiKey');
 
-$shoppingCartIncrementId = $proxy->call( $sessionId, 'cart.create', array( 'magento_store' ) );
-$arrProducts = array(
-	array(
+$shoppingCartIncrementId = $proxy->call($sessionId, 'cart.create', ['maho_store']);
+$arrProducts = [
+	[
 		"product_id" => "1",
 		"qty" => 2
-	),
-	array(
+	],
+	[
 		"sku" => "testSKU",
 		"quantity" => 4
-	)
-);
+	]
+];
 $resultCartProductAdd = $proxy->call(
 	$sessionId,
 	"cart_product.add",
-	array(
+	[
 		$shoppingCartId,
 		$arrProducts
-	)
+	]
 );
-$arrProducts = array(
-	array(
+$arrProducts = [
+	[
 		"product_id" => "1",
 		"qty" => 5
-	),
-);
+	],
+];
 $resultCartProductUpdate = $proxy->call(
 	$sessionId,
 	"cart_product.update",
-	array(
+	[
 		$shoppingCartId,
 		$arrProducts
-	)
+	]
 );
 ```
 
-**Request Example SOAP V2**
+#### Request Example SOAP V2
 
 ```php
-$proxy = new SoapClient('http://magentohost/api/v2_soap/?wsdl'); 
+$proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); 
 $sessionId = $proxy->login('apiUser', 'apiKey'); 
   
-$result = $proxy->shoppingCartProductUpdate($sessionId, 10, array(array(
+$result = $proxy->shoppingCartProductUpdate($sessionId, 10, [[
     'product_id' => '4',
     'sku' => 'simple_product',
     'qty' => '2',
@@ -236,17 +242,17 @@ $result = $proxy->shoppingCartProductUpdate($sessionId, 10, array(array(
     'bundle_option' => null,
     'bundle_option_qty' => null,
     'links' => null
-)));
+]]);
 var_dump($result);
 ```
 
-**Request Example SOAP V2 (WS-I Compliance Mode)**
+#### Request Example SOAP V2 (WS-I Compliance Mode)
 
 ```php
-$proxy = new SoapClient('http://magentohost/api/v2_soap/?wsdl'); 
-$sessionId = $proxy->login((object)array('username' => 'apiUser', 'apiKey' => 'apiKey')); 
+$proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); 
+$sessionId = $proxy->login((object)['username' => 'apiUser', 'apiKey' => 'apiKey']); 
   
-$result = $proxy->shoppingCartProductUpdate((object)array('sessionId' => $sessionId->result, 'quoteId' => 10, 'productsData' => array(array(
+$result = $proxy->shoppingCartProductUpdate((object)['sessionId' => $sessionId->result, 'quoteId' => 10, 'productsData' => [[
     'product_id' => '4',
     'sku' => 'simple_product',
     'qty' => '5',
@@ -254,98 +260,99 @@ $result = $proxy->shoppingCartProductUpdate((object)array('sessionId' => $sessio
     'bundle_option' => null,
     'bundle_option_qty' => null,
     'links' => null
-))));
+]]]);
 var_dump($result->result);
 ```
 
 ## Remove
 
-**Method:**
+### Method
 
--   cart_product.remove (SOAP V1)
--   shoppingCartProductRemove (SOAP V2)
+- `cart_product.remove` (SOAP V1)
+- `shoppingCartProductRemove` (SOAP V2)
 
 Allows you to remove one or several products from a shopping cart (quote).
 
-**Arguments:**
+### Arguments
 
-| Type | Name | Description |
-| --- | --- | --- |
-| string | sessionId | Session ID |
-| int | quoteId | Shopping cart ID |
-| array | productsData | Array of shoppingCartProductEntity |
-| string | store | Store view ID or code (optional) |
+| Type   | Name         | Description                        |
+|--------|--------------|------------------------------------|
+| string | sessionId    | Session ID                         |
+| int    | quoteId      | Shopping cart ID                   |
+| array  | productsData | Array of shoppingCartProductEntity |
+| string | store        | Store view ID or code (optional)   |
 
-**Return:**
+### Return
 
-| Type | Description |
-| --- | --- |
+| Type    | Description                    |
+|---------|--------------------------------|
 | boolean | True if the product is removed |
 
-The **shoppingCartProductEntity** content is as follows:
+### Content `shoppingCartProductEntity`
 
-| Type | Name | Description |
-| --- | --- | --- |
-| string | product_id | Product ID |
-| string | sku | Product SKU |
-| double | qty | Product quantity |
-| associativeArray | options | Product custom options |
-| associativeArray | bundle_option | An array of bundle item options (optional) |
+| Type             | Name              | Description                                  |
+|------------------|-------------------|----------------------------------------------|
+| string           | product_id        | Product ID                                   |
+| string           | sku               | Product SKU                                  |
+| double           | qty               | Product quantity                             |
+| associativeArray | options           | Product custom options                       |
+| associativeArray | bundle_option     | An array of bundle item options (optional)   |
 | associativeArray | bundle_option_qty | An array of bundle items quantity (optional) |
-| ArrayOfString | links | An array of links (optional) |
+| ArrayOfString    | links             | An array of links (optional)                 |
 
-**Faults:**  
+### Faults
+
 _No Faults._
 
-**Examples**:
+### Examples
 
-**Request Example SOAP V1**
+#### Request Example SOAP V1
 
 ```php
-$proxy = new SoapClient('http://magentohost/api/soap/?wsdl');
+$proxy = new SoapClient('https://mahohost/api/soap/?wsdl');
 $sessionId = $proxy->login('apiUser', 'apiKey');
 
-$shoppingCartIncrementId = $proxy->call( $sessionId, 'cart.create', array( 'magento_store' ) );
-$arrProducts = array(
-	array(
+$shoppingCartIncrementId = $proxy->call($sessionId, 'cart.create', ['maho_store']);
+$arrProducts = [
+	[
 		"product_id" => "1",
 		"qty" => 2
-	),
-	array(
+	],
+	[
 		"sku" => "testSKU",
 		"quantity" => 4
-	)
-);
+	]
+];
 $resultCartProductAdd = $proxy->call(
 	$sessionId,
 	"cart_product.add",
-	array(
+	[
 		$shoppingCartId,
 		$arrProducts
-	)
+	]
 );
-$arrProducts = array(
-	array(
+$arrProducts = [
+	[
 		"product_id" => "1"
-	),
-);
+	],
+];
 $resultCartProductUpdate = $proxy->call(
 	$sessionId,
 	"cart_product.remove",
-	array(
+	[
 		$shoppingCartId,
 		$arrProducts
-	)
+	]
 );
 ```
 
-**Request Example SOAP V2**
+#### Request Example SOAP V2
 
 ```php
-$proxy = new SoapClient('http://magentohost/api/v2_soap/?wsdl'); 
+$proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); 
 $sessionId = $proxy->login('apiUser', 'apiKey'); 
  
-$result = $proxy->shoppingCartProductRemove($sessionId, 10, array(array(
+$result = $proxy->shoppingCartProductRemove($sessionId, 10, [[
     'product_id' => '4',
     'sku' => 'simple_product',
     'qty' => '1',
@@ -353,17 +360,17 @@ $result = $proxy->shoppingCartProductRemove($sessionId, 10, array(array(
     'bundle_option' => null,
     'bundle_option_qty' => null,
     'links' => null
-)));
+]]);
 var_dump($result);
 ```
 
-**Request Example SOAP V2 (WS-I Compliance Mode)**
+#### Request Example SOAP V2 (WS-I Compliance Mode)
 
 ```php
-$proxy = new SoapClient('http://magentohost/api/v2_soap/?wsdl'); 
-$sessionId = $proxy->login((object)array('username' => 'apiUser', 'apiKey' => 'apiKey')); 
+$proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); 
+$sessionId = $proxy->login((object)['username' => 'apiUser', 'apiKey' => 'apiKey']); 
  
-$result = $proxy->shoppingCartProductRemove((object)array('sessionId' => $sessionId->result, 'quoteId' => 10, 'productsData' => array(array(
+$result = $proxy->shoppingCartProductRemove((object)['sessionId' => $sessionId->result, 'quoteId' => 10, 'productsData' => [[
     'product_id' => '4',
     'sku' => 'simple_product',
     'qty' => '1',
@@ -371,80 +378,82 @@ $result = $proxy->shoppingCartProductRemove((object)array('sessionId' => $sessio
     'bundle_option' => null,
     'bundle_option_qty' => null,
     'links' => null
-))));
+]]]);
 var_dump($result->result);
 ```
 
 ## List
 
-**Method:**
+### Method
 
--   cart_product.list (SOAP V1)
--   shoppingCartProductList (SOAP V2)
+- `cart_product.list` (SOAP V1)
+- `shoppingCartProductList` (SOAP V2)
 
 Allows you to retrieve the list of products in the shopping cart (quote).
 
-**Arguments:**
+### Arguments
 
-| Type | Name | Description |
-| --- | --- | --- |
-| string | sessionId | Session ID |
-| int | quoteId | Shopping cart ID |
-| string | store | Store view ID or code (optional) |
+| Type   | Name      | Description                      |
+|--------|-----------|----------------------------------|
+| string | sessionId | Session ID                       |
+| int    | quoteId   | Shopping cart ID                 |
+| string | store     | Store view ID or code (optional) |
 
-**Return:**
+### Return
 
-| Type | Name | Description |
-| --- | --- | --- |
+| Type  | Name   | Descripti on                               |
+|-------|--------|--------------------------------------------|
 | array | result | Array of shoppingCartProductResponseEntity |
 
-The **shoppingCartProductResponseEntity** (**catalogProductEntity**) content is as follows:
+### Content `shoppingCartProductResponseEntity` (`catalogProductEntity`)
 
-| Type | Name | Description |
-| --- | --- | --- |
-| string | product_id | Product ID |
-| string | sku | Product SKU |
-| string | name | Product name |
-| string | set | Product attribute set |
-| string | type | Product type |
+| Type          | Name         | Description           |
+|---------------|--------------|-----------------------|
+| string        | product_id   | Product ID            |
+| string        | sku          | Product SKU           |
+| string        | name         | Product name          |
+| string        | set          | Product attribute set |
+| string        | type         | Product type          |
 | ArrayOfString | category_ids | Array of category IDs |
-| ArrayOfString | website_ids | Array of website IDs |
+| ArrayOfString | website_ids  | Array of website IDs  |
 
-**Faults:**
+### Faults
 
-**Examples**:
+_No Faults._
 
-**Request Example SOAP V1**
+### Examples
+
+#### Request Example SOAP V1
 
 ```php
-$client = new SoapClient('http://magentohost/api/soap/?wsdl');
+$client = new SoapClient('https://mahohost/api/soap/?wsdl');
 $session = $client->login('apiUser', 'apiKey');
 
 $result = $client->call($session, 'cart_product.list', '15');
 var_dump($result);
 ```
 
-**Request Example SOAP V2**
+#### Request Example SOAP V2
 
 ```php
-$proxy = new SoapClient('http://magentohost/api/v2_soap/?wsdl'); // TODO : change url
+$proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); // TODO : change url
 $sessionId = $proxy->login('apiUser', 'apiKey'); // TODO : change login and pwd if necessary
 
 $result = $proxy->shoppingCartProductList($sessionId, '15');
 var_dump($result);
 ```
 
-**Request Example SOAP V2 (WS-I Compliance Mode)**
+#### Request Example SOAP V2 (WS-I Compliance Mode)
 
 ```php
-$proxy = new SoapClient('http://magentohost/api/v2_soap/?wsdl'); 
-$sessionId = $proxy->login((object)array('username' => 'apiUser', 'apiKey' => 'apiKey')); 
+$proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); 
+$sessionId = $proxy->login((object)['username' => 'apiUser', 'apiKey' => 'apiKey']); 
  
-$result = $proxy->shoppingCartProductList((object)array('sessionId' => $sessionId->result, 'quoteId' => 15));   
+$result = $proxy->shoppingCartProductList((object)['sessionId' => $sessionId->result, 'quoteId' => 15]);   
 var_dump($result->result);
 ```
 
-**Response Example SOAP V1**
+#### Response Example SOAP V1
 
 ```php
 array
@@ -465,81 +474,82 @@ array
 
 ## MoveToCustomerQuote
 
-**Method:**
+### Method
 
--   cart_product.moveToCustomerQuote (SOAP V1)
--   shoppingCartProductMoveToCustomerQuote (SOAP V2)
+- `cart_product.moveToCustomerQuote` (SOAP V1)
+- `shoppingCartProductMoveToCustomerQuote` (SOAP V2)
 
 Allows you to move products from the current quote to a customer quote.
 
-**Arguments:**
+### Arguments
 
-| Type | Name | Description |
-| --- | --- | --- |
-| string | sessionId | Session ID |
-| int | quoteId | Shopping cart ID |
-| array | productsData | Array of shoppingCartProductEntity |
-| string | store | Store view ID or code (optional) |
+| Type   | Name         | Description                        |
+|--------|--------------|------------------------------------|
+| string | sessionId    | Session ID                         |
+| int    | quoteId      | Shopping cart ID                   |
+| array  | productsData | Array of shoppingCartProductEntity |
+| string | store        | Store view ID or code (optional)   |
 
-**Return:**
+### Return
 
-| Type | Name | Description |
-| --- | --- | --- |
+| Type    | Name   | Description                                    |
+|---------|--------|------------------------------------------------|
 | boolean | result | True if the product is moved to customer quote |
 
-The **shoppingCartProductEntity** content is as follows:
+### Content `shoppingCartProductEntity`
 
-| Type | Name | Description |
-| --- | --- | --- |
-| string | product_id | Product ID |
-| string | sku | Product SKU |
-| double | qty | Product quantity |
-| associativeArray | options | Product custom options |
-| associativeArray | bundle_option | An array of bundle item options (optional) |
+| Type             | Name              | Description                                  |
+|------------------|-------------------|----------------------------------------------|
+| string           | product_id        | Product ID                                   |
+| string           | sku               | Product SKU                                  |
+| double           | qty               | Product quantity                             |
+| associativeArray | options           | Product custom options                       |
+| associativeArray | bundle_option     | An array of bundle item options (optional)   |
 | associativeArray | bundle_option_qty | An array of bundle items quantity (optional) |
-| ArrayOfString | links | An array of links (optional) |
+| ArrayOfString    | links             | An array of links (optional)                 |
 
-**Faults:**  
+### Faults
+
 _No Faults._
 
-**Examples**:
+### Examples
 
-**Request Example SOAP V1**
+#### Request Example SOAP V1
 
 ```php
-$proxy = new SoapClient('http://magentohost/api/soap/?wsdl');
+$proxy = new SoapClient('https://mahohost/api/soap/?wsdl');
 $sessionId = $proxy->login('apiUser', 'apiKey');
 
-$shoppingCartIncrementId = $proxy->call( $sessionId, 'cart.create', array( 'magento_store' ) );
-$arrProducts = array(
-	array(
+$shoppingCartIncrementId = $proxy->call($sessionId, 'cart.create', ['maho_store']);
+$arrProducts = [
+	[
 		"product_id" => "1",
 		"qty" => 2
-	),
-	array(
+	],
+	[
 		"sku" => "testSKU",
 		"quantity" => 4
-	)
-);
+	]
+];
 $resultCartProductAdd = $proxy->call(
 	$sessionId,
 	"cart_product.add",
-	array(
+	[
 		$shoppingCartId,
 		$arrProducts
-	)
+	]
 );
-$arrProducts = array(
-	array(
+$arrProducts = [
+	[
 		"product_id" => "1"
-	),
-);
+	],
+];
 $resultCartProductMove = $proxy->call(
 	$sessionId,
 	"cart_product.moveToCustomerQuote",
-	array(
+	[
 		$shoppingCartId,
 		$arrProducts
-	)
+	]
 );
 ```

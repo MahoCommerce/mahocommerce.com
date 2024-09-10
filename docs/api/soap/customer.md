@@ -1,53 +1,52 @@
+# Customer
+
 ## Introduction
 
 Allows you to create, retrieve, update, and delete data about customers.
 
-**Methods**:
+### Methods
 
-- customer.list - Retrieve the list of customers
-- customer.create - Create a new customer
-- customer.info - Retrieve the customer data
-- customer.update - Update the customer data
-- customer.delete - Delete a required customer
+- `customer.list` — Retrieve the list of customers.
+- `customer.create` — Create a new customer.
+- `customer.info` — Retrieve the customer data.
+- `customer.update` — Update the customer data.
+- `customer.delete` — Delete a required customer.
 
-**Faults**:
+### Faults
 
-| Fault Code | Fault Message |
-| --- | --- |
-| 100 | Invalid customer data. Details in error message. |
-| 101 | Invalid filters specified. Details in error message. |
-| 102 | Customer does not exist. |
-| 103 | Customer not deleted. Details in error message. |
+| Fault Code | Fault Message                                        |
+|------------|------------------------------------------------------|
+| 100        | Invalid customer data. Details in error message.     |
+| 101        | Invalid filters specified. Details in error message. |
+| 102        | Customer does not exist.                             |
+| 103        | Customer not deleted. Details in error message.      |
 
-**Examples**:
-
-**Example 1. View, create, update, and delete a customer**
+### Examples — View, Create, Update and Delete a Customer
 
 ```php
-$proxy = new SoapClient('http://magentohost/api/soap/?wsdl');
+$proxy = new SoapClient('https://mahohost/api/soap/?wsdl');
 
-$newCustomer = array(
-    'firstname'  => 'First',
-    'lastname'   => 'Last',
-    'email'      => 'test@example.com',
-    'password_hash'   => md5('password'),
-    // password hash can be either regular or salted md5:
+$newCustomer = [
+    'firstname' => 'First',
+    'lastname' => 'Last',
+    'email' => 'test@example.com',
+    'password_hash' => md5('password'),
+    // The password hash can be either regular or salted md5:
     // $hash = md5($password);
-    // $hash = md5($salt.$password).':'.$salt;
-    // both variants are valid
+    // $hash = md5($salt . $password) . ':' . $salt;
+    // Both variants are valid.
     'store_id'   => 0,
     'website_id' => 0
-);
+];
 
-$newCustomerId = $proxy->call($sessionId, 'customer.create', array($newCustomer));
+$newCustomerId = $proxy->call($sessionId, 'customer.create', [$newCustomer]);
 
 // Get new customer info
 mp($proxy->call($sessionId, 'customer.info', $newCustomerId));
 
-
 // Update customer
-$update = array('firstname'=>'Changed Firstname');
-$proxy->call($sessionId, 'customer.update', array($newCustomerId, $update));
+$update = ['firstname' => 'Changed Firstname'];
+$proxy->call($sessionId, 'customer.update', [$newCustomerId, $update]);
 
 mp($proxy->call($sessionId, 'customer.info', $newCustomerId));
 
@@ -57,105 +56,108 @@ $proxy->call($sessionId, 'customer.delete', $newCustomerId);
 
 ## List
 
-**Method:**
+### Method
 
--   customer.list (SOAP V1)
--   customerCustomerList (SOAP V2)
+- `customer.list` (SOAP V1)
+- `customerCustomerList` (SOAP V2)
 
 Allows you to retrieve the list of customers.
 
-**Arguments:**
+### Arguments
 
-| Type | Name | Description |
-| --- | --- | --- |
-| string | sessionId | Session ID |
-| array | filters | Array of filters by customer attributes (optional) |
+| Type   | Name      | Description                                        |
+|--------|-----------|----------------------------------------------------|
+| string | sessionId | Session ID                                         |
+| array  | filters   | Array of filters by customer attributes (optional) |
 
-**Returns**:
+### Returns
 
-| Type | Name | Description |
-| --- | --- | --- |
+| Type  | Name      | Description                     |
+|-------|-----------|---------------------------------|
 | array | storeView | Array of customerCustomerEntity |
 
-The **customerCustomerEntity** content is as follows:
+### Content `customerCustomerEntity`
 
-| Type | Name | Description |
-| --- | --- | --- |
-| int | customer_id | ID of the customer |
-| string | created_at | Date when the customer was created |
-| string | updated_at | Date of when the customer was updated |
-| string | increment_id | Increment ID |
-| int | store_id | Store ID |
-| int | website_id | Website ID |
-| string | created_in | Created in |
-| string | email | Customer email |
-| string | firstname | Customer first name |
-| string | middlename | Customer middle name |
-| string | lastname | Customer last name |
-| int | group_id | Group ID |
-| string | prefix | Customer prefix |
-| string | suffix | Customer suffix |
-| string | dob | Customer date of birth |
-| string | taxvat | Taxvat value |
-| boolean | confirmation | Confirmation flag |
-| string | password_hash | Password hash |
+| Type    | Name          | Description                           |
+|---------|---------------|---------------------------------------|
+| int     | customer_id   | ID of the customer                    |
+| string  | created_at    | Date when the customer was created    |
+| string  | updated_at    | Date of when the customer was updated |
+| string  | increment_id  | Increment ID                          |
+| int     | store_id      | Store ID                              |
+| int     | website_id    | Website ID                            |
+| string  | created_in    | Created in                            |
+| string  | email         | Customer email                        |
+| string  | firstname     | Customer first name                   |
+| string  | middlename    | Customer middle name                  |
+| string  | lastname      | Customer last name                    |
+| int     | group_id      | Group ID                              |
+| string  | prefix        | Customer prefix                       |
+| string  | suffix        | Customer suffix                       |
+| string  | dob           | Customer date of birth                |
+| string  | taxvat        | Taxvat value                          |
+| boolean | confirmation  | Confirmation flag                     |
+| string  | password_hash | Password hash                         |
 
-**Note**: The password_hash parameter will only match exactly with the same MD5 and salt as was used when Magento stored the value. If you try to match with an unsalted MD5 hash, or any salt other than what Magento used, it will not match. This is just a straight string comparison.
+**Note**: The `password_hash` parameter will only match exactly with the same MD5 and salt
+as was used when Maho stored the value.
+If you try to match with an unsalted MD5 hash or any salt other than what Maho used, it will not match.
+This is just a straight string comparison.
 
-**Examples**:
+### Examples
 
-**Request Example SOAP V1**
+#### Request Example SOAP V1
 
 ```php
-$client = new SoapClient('http://magentohost/api/soap/?wsdl');
+$client = new SoapClient('https://mahohost/api/soap/?wsdl');
 $session = $client->login('apiUser', 'apiKey');
 
 $result = $client->call($session, 'customer.list');
 mp ($result);
 
-// If you don't need the session anymore
-//$client->endSession($session);
+// When the session can be closed
+$client->endSession($session);
 ```
 
-**Request Example SOAP V2 (List of All Customers)**
+#### Request Example SOAP V2 (List of All Customers)
 
 ```php
-$proxy = new SoapClient('http://magentohost/api/v2_soap/?wsdl'); // TODO : change url
-$sessionId = $proxy->login('apiUser', 'apiKey'); // TODO : change login and pwd if necessary
+$proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); // TODO: change url
+$sessionId = $proxy->login('apiUser', 'apiKey'); // TODO: change login and pwd if necessary
 
 $result = $proxy->customerCustomerList($sessionId);
 mp($result);
 ```
 
-**Request Example SOAP V2 (Complex Filter)**
+#### Request Example SOAP V2 (Complex Filter)
 
 ```php
-$client = new SoapClient('http://magentohost/api/v2_soap/?wsdl');
+$client = new SoapClient('https://mahohost/api/v2_soap/?wsdl');
 $session = $client->login('apiUser', 'apiKey');
 
-$complexFilter = array(
-    'complex_filter' => array(
-        array(
+$complexFilter = [
+    'complex_filter' => [
+        [
             'key' => 'group_id',
-            'value' => array('key' => 'in', 'value' => '1,3')
-        )
-    )
-);
+            'value' => ['key' => 'in', 'value' => '1,3']
+        ]
+    ]
+];
 $result = $client->customerCustomerList($session, $complexFilter);
 mp ($result);
 ```
 
-**Request Example SOAP V2 (WS-I Compliance Mode)**
+#### Request Example SOAP V2 (WS-I Compliance Mode)
 
 ```php
-$proxy = new SoapClient('http://magentohost/api/v2_soap/?wsdl');
-$sessionId = $proxy->login((object)array('username' => 'apiUser', 'apiKey' => 'apiKey'));
+$proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl');
+$sessionId = $proxy->login((object)['username' => 'apiUser', 'apiKey' => 'apiKey']);
 
-$result = $proxy->customerCustomerList((object)array('sessionId' => $sessionId->result, 'filters' => null));
+$result = $proxy->customerCustomerList((object)['sessionId' => $sessionId->result, 'filters' => null]);
 mp($result->result);
 ```
 
-**Response Example SOAP V1**
+#### Response Example SOAP V1
 
 ```php
 array
@@ -197,172 +199,203 @@ array
 
 ## Create
 
-**Method:**
+### Method
 
--   customer.create (SOAP V1)
--   customerCustomerCreate (SOAP V2)
+- `customer.create` (SOAP V1)
+- `customerCustomerCreate` (SOAP V2)
 
 Create a new customer.
 
-**Arguments:**
+### Arguments
 
-| Type | Name | Description |
-| --- | --- | --- |
-| string | sessionId | Session ID |
-| array | customerData | Array of customerCustomerEntityToCreate |
+| Type   | Name         | Description                             |
+|--------|--------------|-----------------------------------------|
+| string | sessionId    | Session ID                              |
+| array  | customerData | Array of customerCustomerEntityToCreate |
 
-**Returns**:
+### Returns
 
-| Type | Name | Description |
-| --- | --- | --- |
-| int | result | ID of the created customer |
+| Type | Name   | Description                |
+|------|--------|----------------------------|
+| int  | result | ID of the created customer |
 
-The **customerCustomerEntityToCreate** content is as follows:
+### Content `customerCustomerEntityToCreate`
 
-| Type | Name | Description |
-| --- | --- | --- |
-| string | email | Customer email |
-| string | firstname | Customer first name |
-| string | lastname | Customer last name |
-| string | password | Customer password |
-| int | website_id | Website ID |
-| int | store_id | Store ID |
-| int | group_id | Group ID |
-| string | prefix | Customer prefix (optional) |
-| string | suffix | Customer suffix (optional) |
-| string | dob | Customer date of birth (optional) |
-| string | taxvat | Customer tax/VAT number (optional) |
-| int | gender | Customer gender: 1 - Male, 2 - Female (optional) |
-| string | middlename | Customer middle name/initial (optional) |
+| Type   | Name       | Description                                      |
+|--------|------------|--------------------------------------------------|
+| string | email      | Customer email                                   |
+| string | firstname  | Customer first name                              |
+| string | lastname   | Customer last name                               |
+| string | password   | Customer password                                |
+| int    | website_id | Website ID                                       |
+| int    | store_id   | Store ID                                         |
+| int    | group_id   | Group ID                                         |
+| string | prefix     | Customer prefix (optional)                       |
+| string | suffix     | Customer suffix (optional)                       |
+| string | dob        | Customer date of birth (optional)                |
+| string | taxvat     | Customer tax/VAT number (optional)               |
+| int    | gender     | Customer gender: 1 - Male, 2 - Female (optional) |
+| string | middlename | Customer middle name/initial (optional)          |
 
-**Examples**:
+### Examples
 
-**Request Example SOAP V1**
+#### Request Example SOAP V1
 
 ```php
-$client = new SoapClient('http://magentohost/api/soap/?wsdl');
+$client = new SoapClient('https://mahohost/api/soap/?wsdl');
 $session = $client->login('apiUser', 'apiKey');
 
-$result = $client->call($session,'customer.create',array(array('email' => 'mail@example.org', 'firstname' => 'Dough', 'lastname' => 'Deeks', 'password' => 'password', 'website_id' => 1, 'store_id' => 1, 'group_id' => 1)));
+$result = $client->call(
+    $session,
+    'customer.create',
+    [
+        [
+            'email' => 'mail@example.org',
+            'firstname' => 'Dough',
+            'lastname' => 'Deeks',
+            'password' => 'password',
+            'website_id' => 1,
+            'store_id' => 1,
+            'group_id' => 1
+        ]
+    ]
+);
 mp ($result);
 
-// If you don't need the session anymore
-//$client->endSession($session);
+// When the session can be closed
+$client->endSession($session);
 ```
 
-**Request Example SOAP V2**
+#### Request Example SOAP V2
 
 ```php
-$client = new SoapClient('http://magentohost/api/v2_soap/?wsdl');
+$client = new SoapClient('https://mahohost/api/v2_soap/?wsdl');
 $session = $client->login('apiUser', 'apiKey');
 
-$result = $client->customerCustomerCreate($session, array('email' => 'customer-mail@example.org', 'firstname' => 'Dough', 'lastname' => 'Deeks', 'password' => 'password', 'website_id' => 1, 'store_id' => 1, 'group_id' => 1));
+$result = $client->customerCustomerCreate(
+    $session,
+    [
+        'email' => 'customer-mail@example.org',
+        'firstname' => 'Dough',
+        'lastname' => 'Deeks',
+        'password' => 'password',
+        'website_id' => 1,
+        'store_id' => 1,
+        'group_id' => 1
+    ]
+);
 mp ($result);
 ```
 
-**Request Example SOAP V2 (WS-I Compliance Mode)**
+#### Request Example SOAP V2 (WS-I Compliance Mode)
 
 ```php
-$proxy = new SoapClient('http://magentohost/api/v2_soap/?wsdl'); 
-$sessionId = $proxy->login((object)array('username' => 'apiUser', 'apiKey' => 'apiKey')); 
+$proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); 
+$sessionId = $proxy->login((object)['username' => 'apiUser', 'apiKey' => 'apiKey']); 
  
-$result = $proxy->customerCustomerCreate((object)array('sessionId' => $sessionId->result, 'customerData' => ((object)array(
-    'email' => 'customer-mail@example.org',
-    'firstname' => 'John',
-    'lastname' => 'Dou',
-    'password' => '123123',
-    'website_id' => '0',
-    'group_id' => '1'
-))));   
+$result = $proxy->customerCustomerCreate(
+    (object)[
+        'sessionId' => $sessionId->result,
+        'customerData' => (object)[
+            'email' => 'customer-mail@example.org',
+            'firstname' => 'John',
+            'lastname' => 'Dou',
+            'password' => '123123',
+            'website_id' => '0',
+            'group_id' => '1'
+        ]
+    ]
+);   
 mp($result->result);
 ```
 
 ## Info
 
-**Method:**
+### Method
 
--   customer.info (SOAP V1)
--   customerCustomerInfo (SOAP V2)
+- `customer.info` (SOAP V1)
+- `customerCustomerInfo` (SOAP V2)
 
 Retrieve information about the specified customer.
 
-**Arguments:**
+### Arguments
 
-| Type | Name | Description |
-| --- | --- | --- |
-| string | sessionId | Session ID |
-| int | customerId | ID of the required customer |
-| ArrayOfString | attributes | Array of attributes |
+| Type          | Name       | Description                 |
+|---------------|------------|-----------------------------|
+| string        | sessionId  | Session ID                  |
+| int           | customerId | ID of the required customer |
+| ArrayOfString | attributes | Array of attributes         |
 
--   attributes (optional depending on the version) - only specified attributes will be returned. The customer_id value is always returned.
+**Note:** Only specified attributes will be returned.
+The `customer_id` value is always returned.
 
-**Returns:**
+### Returns
 
-| Type | Name | Description |
-| --- | --- | --- |
+| Type  | Name         | Description                     |
+|-------|--------------|---------------------------------|
 | array | customerInfo | Array of customerCustomerEntity |
 
-The **customerCustomerEntity** content is as follows:
+### Content `customerCustomerEntity`
 
-| Type | Name | Description |
-| --- | --- | --- |
-| int | customer_id | ID of the customer |
-| string | created_at | Date when the customer was created |
-| string | updated_at | Date when the customer was updated |
-| string | increment_id | Increment ID |
-| int | store_id | Store ID |
-| int | website_id | Website ID |
-| string | created_in | Store view the customer was created in |
-| string | email | Customer email |
-| string | firstname | Customer first name |
-| string | middlename | Customer middle name |
-| string | lastname | Customer last name |
-| int | group_id | Customer group ID |
-| string | prefix | Customer prefix |
-| string | suffix | Customer suffix |
-| string | dob | Customer date of birth |
-| string | taxvat | Tax/VAT number |
-| boolean | confirmation | Confirmation flag |
-| string | password_hash | Password hash |
-| string | rp_token | Reset password token |
-| string | rp_token_created_at | Date when the password was reset |
+| Type    | Name                | Description                            |
+|---------|---------------------|----------------------------------------|
+| int     | customer_id         | ID of the customer                     |
+| string  | created_at          | Date when the customer was created     |
+| string  | updated_at          | Date when the customer was updated     |
+| string  | increment_id        | Increment ID                           |
+| int     | store_id            | Store ID                               |
+| int     | website_id          | Website ID                             |
+| string  | created_in          | Store view the customer was created in |
+| string  | email               | Customer email                         |
+| string  | firstname           | Customer first name                    |
+| string  | middlename          | Customer middle name                   |
+| string  | lastname            | Customer last name                     |
+| int     | group_id            | Customer group ID                      |
+| string  | prefix              | Customer prefix                        |
+| string  | suffix              | Customer suffix                        |
+| string  | dob                 | Customer date of birth                 |
+| string  | taxvat              | Tax/VAT number                         |
+| boolean | confirmation        | Confirmation flag                      |
+| string  | password_hash       | Password hash                          |
+| string  | rp_token            | Reset password token                   |
+| string  | rp_token_created_at | Date when the password was reset       |
 
-**Examples**:
+### Examples
 
-**Request Example SOAP V1**
+#### Request Example SOAP V1
 
 ```php
-$client = new SoapClient('http://magentohost/api/soap/?wsdl');
+$client = new SoapClient('https://mahohost/api/soap/?wsdl');
 $session = $client->login('apiUser', 'apiKey');
 
 $result = $client->call($session, 'customer.info', '2');
 var_dump($result);
 
-// If you don't need the session anymore
-//$client->endSession($session);
+// When the session can be closed
+$client->endSession($session);
 ```
 
-**Request Example SOAP V2**
+#### Request Example SOAP V2
 
 ```php
-$proxy = new SoapClient('http://magentohost/api/v2_soap/?wsdl'); // TODO : change url
-$sessionId = $proxy->login('apiUser', 'apiKey'); // TODO : change login and pwd if necessary
+$proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); // TODO: change url
+$sessionId = $proxy->login('apiUser', 'apiKey'); // TODO: change login and pwd if necessary
 
 $result = $proxy->customerCustomerInfo($sessionId, '2');
 var_dump($result);
 ```
 
-**Request Example SOAP V2 (WS-I Compliance Mode)**
+#### Request Example SOAP V2 (WS-I Compliance Mode)
 
 ```php
-$proxy = new SoapClient('http://magentohost/api/v2_soap/?wsdl');
-$sessionId = $proxy->login((object)array('username' => 'apiUser', 'apiKey' => 'apiKey'));
+$proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl');
+$sessionId = $proxy->login((object)['username' => 'apiUser', 'apiKey' => 'apiKey']);
 
-$result = $proxy->customerCustomerInfo((object)array('sessionId' => $sessionId->result, 'customerId' => '2'));
+$result = $proxy->customerCustomerInfo((object)['sessionId' => $sessionId->result, 'customerId' => '2']);
 var_dump($result->result);
 ```
 
-**Response Example SOAP V1**
+#### Response Example SOAP V1
 
 ```php
 array
@@ -394,136 +427,167 @@ array
 
 ## Update
 
-**Method:**
+### Method
 
--   customer.update (SOAP V1)
--   customerCustomerUpdate (SOAP V2)
+- `customer.update` (SOAP V1)
+- `customerCustomerUpdate` (SOAP V2)
 
-Update information about the required customer. Note that you need to pass only those arguments which you want to be updated.
+Update information about the required customer.
+Note that you need to pass only those arguments which you want to be updated.
 
-**Arguments:**
+### Arguments
 
-| Type | Name | Description |
-| --- | --- | --- |
-| string | sessionId | Session ID |
-| int | customerId | Customer ID |
-| array | customerData | Array of customerCustomerEntityToCreate |
+| Type   | Name         | Description                             |
+|--------|--------------|-----------------------------------------|
+| string | sessionId    | Session ID                              |
+| int    | customerId   | Customer ID                             |
+| array  | customerData | Array of customerCustomerEntityToCreate |
 
-**Returns**:
+### Returns
 
-| Type | Description |
-| --- | --- |
+| Type    | Description                     |
+|---------|---------------------------------|
 | boolean | True if the customer is updated |
 
-The **customerCustomerEntityToCreate** content is as follows:
+### Content `customerCustomerEntityToCreate`
 
-| Type | Name | Description |
-| --- | --- | --- |
-| int | customer_id | Customer ID |
-| string | email | Customer email |
-| string | firstname | Customer first name |
-| string | lastname | Customer last name |
-| string | password | Customer password |
-| int | group_id | Group ID |
-| string | prefix | Customer prefix |
-| string | suffix | Customer suffix |
-| string | dob | Customer date of birth |
-| string | taxvat | Customer tax/VAT number |
-| int | gender | Customer gender: 1 - Male, 2 - Female |
-| string | middlename | Customer middle name/initial |
+| Type   | Name        | Description                           |
+|--------|-------------|---------------------------------------|
+| int    | customer_id | Customer ID                           |
+| string | email       | Customer email                        |
+| string | firstname   | Customer first name                   |
+| string | lastname    | Customer last name                    |
+| string | password    | Customer password                     |
+| int    | group_id    | Group ID                              |
+| string | prefix      | Customer prefix                       |
+| string | suffix      | Customer suffix                       |
+| string | dob         | Customer date of birth                |
+| string | taxvat      | Customer tax/VAT number               |
+| int    | gender      | Customer gender: 1 - Male, 2 - Female |
+| string | middlename  | Customer middle name/initial          |
 
-**Examples**:
+### Examples
 
-**Request Example SOAP V1**
+#### Request Example SOAP V1
 
 ```php
-$client = new SoapClient('http://magentohost/api/soap/?wsdl');
+$client = new SoapClient('https://mahohost/api/soap/?wsdl');
 $session = $client->login('apiUser', 'apiKey');
 
-$result = $client->call($session, 'customer.update', array('customerId' => '2', 'customerData' => array('firstname' => 'John', 'lastname' => 'Doe', 'email' => 'test@example.com', 'password' => 'john22')));
+$result = $client->call(
+    $session,
+    'customer.update',
+    [
+        'customerId' => '2',
+        'customerData' => [
+            'firstname' => 'John',
+            'lastname' => 'Doe',
+            'email' => 'test@example.com',
+            'password' => 'john22'
+        ]
+    ]
+);
 var_dump($result);
 
-// If you don't need the session anymore
-//$client->endSession($session);
+// When the session can be closed
+$client->endSession($session);
 ```
 
-**Request Example SOAP V2**
+#### Request Example SOAP V2
 
 ```php
-$client = new SoapClient('http://magentohost/api/v2_soap/?wsdl');
+$client = new SoapClient('https://mahohost/api/v2_soap/?wsdl');
 $session = $client->login('apiUser', 'apiKey');
 
-$result = $client->customerCustomerUpdate($session, '2', array('email' => 'customer-mail@example.org', 'firstname' => 'Dough', 'lastname' => 'Deekson', 'password' => 'password', 'website_id' => 1, 'store_id' => 1, 'group_id' => 1));
+$result = $client->customerCustomerUpdate(
+    $session,
+    '2',
+    [
+        'email' => 'customer-mail@example.org',
+        'firstname' => 'Dough',
+        'lastname' => 'Deekson',
+        'password' => 'password',
+        'website_id' => 1,
+        'store_id' => 1,
+        'group_id' => 1
+    ]
+);
 var_dump($result);
 ```
 
-**Request Example SOAP V2 (WS-I Compliance Mode)**
+#### Request Example SOAP V2 (WS-I Compliance Mode)
 
 ```php
-$proxy = new SoapClient('http://magentohost/api/v2_soap/?wsdl'); 
-$sessionId = $proxy->login((object)array('username' => 'apiUser', 'apiKey' => 'apiKey')); 
+$proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); 
+$sessionId = $proxy->login((object)['username' => 'apiUser', 'apiKey' => 'apiKey']); 
  
-    $result = $proxy->customerCustomerUpdate((object)array('sessionId' => $sessionId->result, 'customerId' => '2', 'customerData' =>  ((object)array(
-    'email' => 'customer-mail@example.org',
-    'firstname' => 'Dough',
-    'lastname' => 'Deekson'
-))));   
+$result = $proxy->customerCustomerUpdate(
+    (object)[
+        'sessionId' => $sessionId->result,
+        'customerId' => '2',
+        'customerData' => (object)[
+            'email' => 'customer-mail@example.org',
+            'firstname' => 'Dough',
+            'lastname' => 'Deekson'
+        ]
+    ]
+);   
 var_dump($result->result);
 ```
 
 ## Delete
 
-**Method:**
+### Method
 
--   customer.delete (SOAP V1)
--   customerCustomerDelete (SOAP V2)
+- `customer.delete` (SOAP V1)
+- `customerCustomerDelete` (SOAP V2)
 
 Delete the required customer.
 
-**Arguments:**
+### Arguments
 
-| Type | Name | Description |
-| --- | --- | --- |
-| string | sessionId | Session ID |
-| int | customerId | Customer ID |
+| Type   | Name       | Description |
+|--------|------------|-------------|
+| string | sessionId  | Session ID  |
+| int    | customerId | Customer ID |
 
-**Returns**:
+### Returns
 
-| Type | Description |
-| --- | --- |
+| Type    | Description                     |
+|---------|---------------------------------|
 | boolean | True if the customer is deleted |
 
-**Examples**:
+### Examples
 
-**Request Example SOAP V1**
+#### Request Example SOAP V1
 
 ```php
-$client = new SoapClient('http://magentohost/api/soap/?wsdl');
+$client = new SoapClient('https://mahohost/api/soap/?wsdl');
 $session = $client->login('apiUser', 'apiKey');
 
 $result = $client->call($session, 'customer.delete', '2');
 var_dump($result);
 
-// If you don't need the session anymore
-//$client->endSession($session);
+// When the session can be closed
+$client->endSession($session);
 ```
 
-**Request Example SOAP V2**
+#### Request Example SOAP V2
 
 ```php
-$proxy = new SoapClient('http://magentohost/api/v2_soap/?wsdl'); // TODO : change url
-$sessionId = $proxy->login('apiUser', 'apiKey'); // TODO : change login and pwd if necessary
+$proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); // TODO: change url
+$sessionId = $proxy->login('apiUser', 'apiKey'); // TODO: change login and pwd if necessary
 
 $result = $proxy->customerCustomerDelete($sessionId, '2');
 var_dump($result);
 ```
 
-**Request Example SOAP V2 (WS-I Compliance Mode)**
+#### Request Example SOAP V2 (WS-I Compliance Mode)
 
 ```php
-$proxy = new SoapClient('http://magentohost/api/v2_soap/?wsdl'); 
-$sessionId = $proxy->login((object)array('username' => 'apiUser', 'apiKey' => 'apiKey')); 
+$proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); 
+$sessionId = $proxy->login((object)['username' => 'apiUser', 'apiKey' => 'apiKey']); 
  
-$result = $proxy->customerCustomerDelete((object)array('sessionId' => $sessionId->result, 'customerId' => '2'));   
+$result = $proxy->customerCustomerDelete((object)['sessionId' => $sessionId->result, 'customerId' => '2']);   
 var_dump($result->result);
 ```

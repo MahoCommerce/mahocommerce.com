@@ -1,67 +1,69 @@
+# Customer Group
+
 ## Introduction
 
-**Method:**
+### Method
 
--   customer_group.list (SOAP V1)
--   customerGroupList (SOAP V2)
+- `customer_group.list` (SOAP V1)
+- `customerGroupList` (SOAP V2)
 
-Retrieve the list of customer groups
+Retrieve the list of customer groups.
 
-**Arguments:**
+### Arguments
 
-| Type | Name | Description |
-| --- | --- | --- |
-| string | sessionId | Session ID |
+| Type   | Name      | Description  |
+|--------|-----------|--------------|
+| string | sessionId | Session ID   |
 
-**Returns**:
+### Returns
 
-| Type | Name | Description |
-| --- | --- | --- |
+| Type  | Name   | Description                     |
+|-------|--------|---------------------------------|
 | array | result | An array of customerGroupEntity |
 
-The **customerGroupEntity** content is as follows:
+### Content `customerGroupEntity`
 
-| Type | Name | Description |
-| --- | --- | --- |
-| int | customer_group_id | ID of the customer group |
-| string | customer_group_code | Customer group code |
+| Type   | Name                | Description              |
+|--------|---------------------|--------------------------|
+| int    | customer_group_id   | ID of the customer group |
+| string | customer_group_code | Customer group code      |
 
-**Examples**:
+### Examples
 
-**Request Example SOAP V1**
+#### Request Example SOAP V1
 
 ```php
-$client = new SoapClient('http://magentohost/api/soap/?wsdl');
+$client = new SoapClient('https://mahohost/api/soap/?wsdl');
 $session = $client->login('apiUser', 'apiKey');
 
 $result = $client->call($session, 'customer_group.list');
 var_dump($result);
 
-// If you don't need the session anymore
-//$client->endSession($session);
+// When the session can be closed
+$client->endSession($session);
 ```
 
-**Request Example SOAP V2**
+#### Request Example SOAP V2
 
 ```php
-$proxy = new SoapClient('http://magentohost/api/v2_soap/?wsdl'); // TODO : change url
-$sessionId = $proxy->login('apiUser', 'apiKey'); // TODO : change login and pwd if necessary
+$proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); // TODO: change url
+$sessionId = $proxy->login('apiUser', 'apiKey'); // TODO: change login and pwd if necessary
 
 $result = $proxy->customerGroupList($sessionId);
 var_dump($result);
 ```
 
-**Request Example SOAP V2 (WS-I Compliance Mode)**
+#### Request Example SOAP V2 (WS-I Compliance Mode)
 
 ```php
-$proxy = new SoapClient('http://magentohost/api/v2_soap/?wsdl');
-$sessionId = $proxy->login((object)array('username' => 'apiUser', 'apiKey' => 'apiKey'));
+$proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl');
+$sessionId = $proxy->login((object)['username' => 'apiUser', 'apiKey' => 'apiKey']);
 
-$result = $proxy->customerGroupList((object)array('sessionId' => $sessionId->result));
+$result = $proxy->customerGroupList((object)['sessionId' => $sessionId->result]);
 var_dump($result->result);
 ```
 
-**Response Example SOAP V1**
+#### Response Example SOAP V1
 
 ```php
 array
