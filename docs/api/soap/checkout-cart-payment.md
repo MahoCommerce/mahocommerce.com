@@ -1,96 +1,102 @@
+# Checkout Cart Payment
+
 ## Introduction
 
 Allows you to retrieve and set payment methods for a shopping cart.
 
-**Resource Name**: cart_payment
+### Resource Name
 
-**Methods**:
+- `cart_payment`
 
-- cart_payment.method - Set a payment method for a shopping cart
-- cart_payment.list - Get the list of available payment methods for a shopping cart
+### Methods
 
-**Faults**:
+- `cart_payment.method` — Set a payment method for a shopping cart.
+- `cart_payment.list` — Get the list of available payment methods for a shopping cart.
 
-| Fault Code | Fault Message |
-| --- | --- |
-| 1001 | Can not make operation because store is not exists |
-| 1002 | Can not make operation because quote is not exists |
-| 1071 | Payment method data is empty. |
-| 1072 | Customer’s billing address is not set. Required for payment method data. |
-| 1073 | Customer’s shipping address is not set. Required for payment method data. |
-| 1074 | Payment method is not allowed |
-| 1075 | Payment method is not set. |
+### Faults
 
-## Method
+| Fault Code | Fault Message                                                             |
+|------------|---------------------------------------------------------------------------|
+| 1001       | Can not make operation because store is not exists                        |
+| 1002       | Can not make operation because quote is not exists                        |
+| 1071       | Payment method data is empty.                                             |
+| 1072       | Customer’s billing address is not set. Required for payment method data.  |
+| 1073       | Customer’s shipping address is not set. Required for payment method data. |
+| 1074       | Payment method is not allowed                                             |
+| 1075       | Payment method is not set.                                                |
 
-**Method:**
+## (Payment) Method
 
--   cart_payment.method (SOAP V1)
--   shoppingCartPaymentMethod (SOAP V2)
+### Method
+
+- `cart_payment.method` (SOAP V1)
+- `shoppingCartPaymentMethod` (SOAP V2)
 
 Allows you to set a payment method for a shopping cart (quote).
 
-**Arguments:**
+### Arguments
 
-| Type | Name | Description |
-| --- | --- | --- |
-| string | sessionId | Session ID |
-| int | quoteId | Shopping cart ID |
-| array | method | Array of shoppingCartPaymentMethodEntity |
-| string | store | Store view ID or code (optional) |
+| Type   | Name      | Description                              |
+|--------|-----------|------------------------------------------|
+| string | sessionId | Session ID                               |
+| int    | quoteId   | Shopping cart ID                         |
+| array  | method    | Array of shoppingCartPaymentMethodEntity |
+| string | store     | Store view ID or code (optional)         |
 
-**Return:**
+### Return
 
-| Type | Description |
-| --- | --- |
+| Type    | Description     |
+|---------|-----------------|
 | boolean | True on success |
 
-The **shoppingCartPaymentMethodEntity** content is as follows:
+### Content `shoppingCartPaymentMethodEntity`
 
-| Type | Name | Description |
-| --- | --- | --- |
-| string | po_number | Purchase order number |
-| string | method | Payment method |
-| string | cc_cid | Credit card CID |
-| string | cc_owner | Credit card owner |
-| string | cc_number | Credit card number |
-| string | cc_type | Credit card type |
-| string | cc_exp_year | Credit card expiration year |
+| Type   | Name         | Description                  |
+|--------|--------------|------------------------------|
+| string | po_number    | Purchase order number        |
+| string | method       | Payment method               |
+| string | cc_cid       | Credit card CID              |
+| string | cc_owner     | Credit card owner            |
+| string | cc_number    | Credit card number           |
+| string | cc_type      | Credit card type             |
+| string | cc_exp_year  | Credit card expiration year  |
 | string | cc_exp_month | Credit card expiration month |
 
-**Faults:**  
+### Faults 
+
 _No Faults._
 
-**Examples**:
+### Examples
 
-**Request Example SOAP V1**
+#### Request Example SOAP V1
+
 ```php
-$proxy = new SoapClient('http://magentohost/api/soap/?wsdl');
+$proxy = new SoapClient('https://mahohost/api/soap/?wsdl');
 $sessionId = $proxy->login('apiUser', 'apiKey');
 
-$shoppingCartId = $proxy->call( $sessionId, 'cart.create', array( 'magento_store' ) );
+$shoppingCartId = $proxy->call($sessionId, 'cart.create', ['maho_store']);
 
-$paymentMethod = array(
-	"method" => "checkmo"
-);
+$paymentMethod = [
+	'method' => 'checkmo'
+];
 
 $resultPaymentMethod = $proxy->call(
 	$sessionId,
-	"cart_payment.method",
-	array(
+	'cart_payment.method',
+	[
 		$shoppingCartId,
 		$paymentMethod
-	)
+	]
 );
 ```
 
-**Request Example SOAP V2**
+#### Request Example SOAP V2
 
 ```php
-$proxy = new SoapClient('http://magentohost/api/v2_soap/?wsdl'); 
+$proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); 
 $sessionId = $proxy->login('apiUser', 'apiKey'); 
  
-$result = $proxy->shoppingCartPaymentMethod($sessionId, 10, array(
+$result = $proxy->shoppingCartPaymentMethod($sessionId, 10, [
     'po_number' => null,
     'method' => 'checkmo',
     'cc_cid' => null,
@@ -99,17 +105,17 @@ $result = $proxy->shoppingCartPaymentMethod($sessionId, 10, array(
     'cc_type' => null,
     'cc_exp_year' => null,
     'cc_exp_month' => null
-));
+]);
 var_dump($result);
 ```
 
-**Request Example SOAP V2 (WS-I Compliance Mode)**
+#### Request Example SOAP V2 (WS-I Compliance Mode)
 
 ```php
-$proxy = new SoapClient('http://magentohost/api/v2_soap/?wsdl'); 
-$sessionId = $proxy->login((object)array('username' => 'apiUser', 'apiKey' => 'apiKey')); 
+$proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); 
+$sessionId = $proxy->login((object)['username' => 'apiUser', 'apiKey' => 'apiKey']); 
  
-$result = $proxy->shoppingCartPaymentMethod((object)array('sessionId' => $sessionId->result, 'quoteId' => 10, 'method' => array(
+$result = $proxy->shoppingCartPaymentMethod((object)['sessionId' => $sessionId->result, 'quoteId' => 10, 'method' => [
     'po_number' => null,
     'method' => 'checkmo',
     'cc_cid' => null,
@@ -118,54 +124,54 @@ $result = $proxy->shoppingCartPaymentMethod((object)array('sessionId' => $sessio
     'cc_type' => null,
     'cc_exp_year' => null,
     'cc_exp_month' => null
-)));
+]]);
 var_dump($result->result);
 ```
 
 ## List
 
-**Method:**
+### Method
 
--   cart_payment.list (SOAP V1)
--   shoppingCartPaymentList (SOAP V2)
+- `cart_payment.list` (SOAP V1)
+- `shoppingCartPaymentList` (SOAP V2)
 
 Allows you to retrieve a list of available payment methods for a shopping cart (quote).
 
-**Arguments:**
+### Arguments
 
-| Type | Name | Description |
-| --- | --- | --- |
-| string | sessionId | Session ID |
-| int | quoteId | Shopping cart ID |
-| string | store | Store view ID or code (optional) |
+| Type   | Name      | Description                      |
+|--------|-----------|----------------------------------|
+| string | sessionId | Session ID                       |
+| int    | quoteId   | Shopping cart ID                 |
+| string | store     | Store view ID or code (optional) |
 
-**Return:**
+### Return
 
-| Type | Name | Description |
-| --- | --- | --- |
+| Type  | Name   | Description                                      |
+|-------|--------|--------------------------------------------------|
 | array | result | Array of shoppingCartPaymentMethodResponseEntity |
 
-The **shoppingCartPaymentMethodResponseEntity** content is as follows:
+### Content `shoppingCartPaymentMethodResponseEntity`
 
-| Type | Name | Description |
-| --- | --- | --- |
-| string | code | Payment method code |
-| string | title | Payment method title |
+| Type             | Name     | Description                |
+|------------------|----------|----------------------------|
+| string           | code     | Payment method code        |
+| string           | title    | Payment method title       |
 | associativeArray | cc_types | Array of credit card types |
 
-**Examples**:
+### Examples
 
-**Request Example SOAP V1**
+#### Request Example SOAP V1
 
 ```php
-$client = new SoapClient('http://magentohost/api/soap/?wsdl');
+$client = new SoapClient('https://mahohost/api/soap/?wsdl');
 $session = $client->login('apiUser', 'apiKey');
 
 $result = $client->call($session, 'cart_payment.list', 'quoteId');
 var_dump($result);
 ```
 
-**Response Example SOAP V1**
+#### Response Example SOAP V1
 
 ```php
 array
