@@ -120,7 +120,7 @@ Allows you to retrieve the list of store views.
 
 ### Faults
 
-_No Faults_
+_No Faults._
 
 ### Examples
 

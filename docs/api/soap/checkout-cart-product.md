@@ -86,22 +86,22 @@ $sessionId = $proxy->login('apiUser', 'apiKey');
 $quoteId = $proxy->call($sessionId, 'cart.create', ['maho_store']);
 $arrProducts = [
 	[
-		"product_id" => "1",
-		"qty" => 2
-                "options" => [
+		'product_id' => '1',
+		'qty' => 2
+                'options' => [
                     optionId_1 => optionValue_1,
                     ...
                     optionId_n => optionValue_n
                  ]
 	],
 	[
-		"sku" => "testSKU",
-		"quantity" => 4
+		'sku' => 'testSKU',
+		'quantity' => 4
 	]
 ];
 $resultCartProductAdd = $proxy->call(
 	$sessionId,
-	"cart_product.add",
+	'cart_product.add',
 	[
 		$quoteId,
 		$arrProducts
@@ -196,17 +196,17 @@ $sessionId = $proxy->login('apiUser', 'apiKey');
 $shoppingCartIncrementId = $proxy->call($sessionId, 'cart.create', ['maho_store']);
 $arrProducts = [
 	[
-		"product_id" => "1",
-		"qty" => 2
+		'product_id' => '1',
+		'qty' => 2
 	],
 	[
-		"sku" => "testSKU",
-		"quantity" => 4
+		'sku' => 'testSKU',
+		'quantity' => 4
 	]
 ];
 $resultCartProductAdd = $proxy->call(
 	$sessionId,
-	"cart_product.add",
+	'cart_product.add',
 	[
 		$shoppingCartId,
 		$arrProducts
@@ -214,13 +214,13 @@ $resultCartProductAdd = $proxy->call(
 );
 $arrProducts = [
 	[
-		"product_id" => "1",
-		"qty" => 5
+		'product_id' => '1',
+		'qty' => 5
 	],
 ];
 $resultCartProductUpdate = $proxy->call(
 	$sessionId,
-	"cart_product.update",
+	'cart_product.update',
 	[
 		$shoppingCartId,
 		$arrProducts
@@ -315,17 +315,17 @@ $sessionId = $proxy->login('apiUser', 'apiKey');
 $shoppingCartIncrementId = $proxy->call($sessionId, 'cart.create', ['maho_store']);
 $arrProducts = [
 	[
-		"product_id" => "1",
-		"qty" => 2
+		'product_id' => '1',
+		'qty' => 2
 	],
 	[
-		"sku" => "testSKU",
-		"quantity" => 4
+		'sku' => 'testSKU',
+		'quantity' => 4
 	]
 ];
 $resultCartProductAdd = $proxy->call(
 	$sessionId,
-	"cart_product.add",
+	'cart_product.add',
 	[
 		$shoppingCartId,
 		$arrProducts
@@ -333,12 +333,12 @@ $resultCartProductAdd = $proxy->call(
 );
 $arrProducts = [
 	[
-		"product_id" => "1"
+		'product_id' => '1'
 	],
 ];
 $resultCartProductUpdate = $proxy->call(
 	$sessionId,
-	"cart_product.remove",
+	'cart_product.remove',
 	[
 		$shoppingCartId,
 		$arrProducts
@@ -523,17 +523,17 @@ $sessionId = $proxy->login('apiUser', 'apiKey');
 $shoppingCartIncrementId = $proxy->call($sessionId, 'cart.create', ['maho_store']);
 $arrProducts = [
 	[
-		"product_id" => "1",
-		"qty" => 2
+		'product_id' => '1',
+		'qty' => 2
 	],
 	[
-		"sku" => "testSKU",
-		"quantity" => 4
+		'sku' => 'testSKU',
+		'quantity' => 4
 	]
 ];
 $resultCartProductAdd = $proxy->call(
 	$sessionId,
-	"cart_product.add",
+	'cart_product.add',
 	[
 		$shoppingCartId,
 		$arrProducts
@@ -541,12 +541,12 @@ $resultCartProductAdd = $proxy->call(
 );
 $arrProducts = [
 	[
-		"product_id" => "1"
+		'product_id' => '1'
 	],
 ];
 $resultCartProductMove = $proxy->call(
 	$sessionId,
-	"cart_product.moveToCustomerQuote",
+	'cart_product.moveToCustomerQuote',
 	[
 		$shoppingCartId,
 		$arrProducts
