@@ -443,7 +443,7 @@ Allows you to retrieve the list of products in the shopping cart (quote).
 
 ### Return
 
-| Type  | Name   | Descripti on                               |
+| Type  | Name   | Description                                |
 |-------|--------|--------------------------------------------|
 | array | result | Array of shoppingCartProductResponseEntity |
 
