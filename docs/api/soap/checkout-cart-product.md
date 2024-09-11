@@ -115,15 +115,21 @@ $resultCartProductAdd = $proxy->call(
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); 
 $sessionId = $proxy->login('apiUser', 'apiKey'); 
   
-$result = $proxy->shoppingCartProductAdd($sessionId, 10, [[
-    'product_id' => '4',
-    'sku' => 'simple_product',
-    'qty' => '5',
-    'options' => null,
-    'bundle_option' => null,
-    'bundle_option_qty' => null,
-    'links' => null
-]]);
+$result = $proxy->shoppingCartProductAdd(
+    $sessionId,
+    10,
+    [
+        [
+            'product_id' => '4',
+            'sku' => 'simple_product',
+            'qty' => '5',
+            'options' => null,
+            'bundle_option' => null,
+            'bundle_option_qty' => null,
+            'links' => null
+        ]
+    ]
+);
 var_dump($result);
 ```
 
@@ -133,15 +139,23 @@ var_dump($result);
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl');
 $sessionId = $proxy->login((object)['username' => 'apiUser', 'apiKey' => 'apiKey']);
 
-$result = $proxy->shoppingCartProductAdd((object)['sessionId' => $sessionId->result, 'quoteId' => 10, 'productsData' => [[
-    'product_id' => '4',
-    'sku' => 'simple_product',
-    'qty' => '1',
-    'options' => null,
-    'bundle_option' => null,
-    'bundle_option_qty' => null,
-    'links' => null
-]]]);
+$result = $proxy->shoppingCartProductAdd(
+    (object)[
+        'sessionId' => $sessionId->result,
+        'quoteId' => 10,
+        'productsData' => [
+            [
+                'product_id' => '4',
+                'sku' => 'simple_product',
+                'qty' => '1',
+                'options' => null,
+                'bundle_option' => null,
+                'bundle_option_qty' => null,
+                'links' => null
+            ]
+        ]
+    ]
+);
 var_dump($result->result);
 ```
 
@@ -234,15 +248,21 @@ $resultCartProductUpdate = $proxy->call(
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); 
 $sessionId = $proxy->login('apiUser', 'apiKey'); 
   
-$result = $proxy->shoppingCartProductUpdate($sessionId, 10, [[
-    'product_id' => '4',
-    'sku' => 'simple_product',
-    'qty' => '2',
-    'options' => null,
-    'bundle_option' => null,
-    'bundle_option_qty' => null,
-    'links' => null
-]]);
+$result = $proxy->shoppingCartProductUpdate(
+    $sessionId,
+    10,
+    [
+        [
+            'product_id' => '4',
+            'sku' => 'simple_product',
+            'qty' => '2',
+            'options' => null,
+            'bundle_option' => null,
+            'bundle_option_qty' => null,
+            'links' => null
+        ]
+    ]
+);
 var_dump($result);
 ```
 
@@ -252,15 +272,23 @@ var_dump($result);
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); 
 $sessionId = $proxy->login((object)['username' => 'apiUser', 'apiKey' => 'apiKey']); 
   
-$result = $proxy->shoppingCartProductUpdate((object)['sessionId' => $sessionId->result, 'quoteId' => 10, 'productsData' => [[
-    'product_id' => '4',
-    'sku' => 'simple_product',
-    'qty' => '5',
-    'options' => null,
-    'bundle_option' => null,
-    'bundle_option_qty' => null,
-    'links' => null
-]]]);
+$result = $proxy->shoppingCartProductUpdate(
+    (object)[
+        'sessionId' => $sessionId->result,
+        'quoteId' => 10,
+        'productsData' => [
+            [
+                'product_id' => '4',
+                'sku' => 'simple_product',
+                'qty' => '5',
+                'options' => null,
+                'bundle_option' => null,
+                'bundle_option_qty' => null,
+                'links' => null
+            ]
+        ]
+    ]
+);
 var_dump($result->result);
 ```
 
@@ -352,15 +380,21 @@ $resultCartProductUpdate = $proxy->call(
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); 
 $sessionId = $proxy->login('apiUser', 'apiKey'); 
  
-$result = $proxy->shoppingCartProductRemove($sessionId, 10, [[
-    'product_id' => '4',
-    'sku' => 'simple_product',
-    'qty' => '1',
-    'options' => null,
-    'bundle_option' => null,
-    'bundle_option_qty' => null,
-    'links' => null
-]]);
+$result = $proxy->shoppingCartProductRemove(
+    $sessionId,
+    10,
+    [
+        [
+            'product_id' => '4',
+            'sku' => 'simple_product',
+            'qty' => '1',
+            'options' => null,
+            'bundle_option' => null,
+            'bundle_option_qty' => null,
+            'links' => null
+        ]
+    ]
+);
 var_dump($result);
 ```
 
@@ -370,15 +404,23 @@ var_dump($result);
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); 
 $sessionId = $proxy->login((object)['username' => 'apiUser', 'apiKey' => 'apiKey']); 
  
-$result = $proxy->shoppingCartProductRemove((object)['sessionId' => $sessionId->result, 'quoteId' => 10, 'productsData' => [[
-    'product_id' => '4',
-    'sku' => 'simple_product',
-    'qty' => '1',
-    'options' => null,
-    'bundle_option' => null,
-    'bundle_option_qty' => null,
-    'links' => null
-]]]);
+$result = $proxy->shoppingCartProductRemove(
+    (object)[
+        'sessionId' => $sessionId->result,
+        'quoteId' => 10,
+        'productsData' => [
+            [
+                'product_id' => '4',
+                'sku' => 'simple_product',
+                'qty' => '1',
+                'options' => null,
+                'bundle_option' => null,
+                'bundle_option_qty' => null,
+                'links' => null
+            ]
+        ]
+    ]
+);
 var_dump($result->result);
 ```
 
