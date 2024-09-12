@@ -4,106 +4,108 @@
 
 Allows you to retrieve and update product tier prices.
 
-**Resource Name**: catalog_product_attribute_tier_price
+### Resource Name
 
-**Aliases**:
+- `catalog_product_attribute_tier_price`
 
--   product_attribute_tier_price
--   product_tier_price
+### Aliases
 
-**Methods**:
+- `product_attribute_tier_price`
+- `product_tier_price`
 
-- catalog_product_attribute_tier_price.info - Retrieve information about product tier prices
-- catalog_product_attribute_tier_price.update - Update the product tier prices
+### Methods
 
-**Faults**:
+- `catalog_product_attribute_tier_price.info` — Retrieve information about product tier prices.
+- `catalog_product_attribute_tier_price.update` — Update the product tier prices.
 
-| Fault Code | Fault Message |
-| --- | --- |
-| 100 | Product not exists. |
-| 101 | Invalid data given. Details in error message. |
-| 102 | Tier prices not updated. Details in error message. |
+### Faults
 
-**Examples**:
+| Fault Code | Fault Message                                      |
+|------------|----------------------------------------------------|
+| 100        | Product not exists.                                |
+| 101        | Invalid data given. Details in error message.      |
+| 102        | Tier prices not updated. Details in error message. |
+
+### Examples
 
 ```php
-$proxy = new SoapClient('http://magentohost/api/soap/?wsdl');
+$proxy = new SoapClient('https://mahohost/api/soap/?wsdl');
 $sessionId = $proxy->login('apiUser', 'apiKey');
 
 // Get tier prices
-$tierPrices = $proxy->call($sessionId, 'product_tier_price.info', 'Sku');
+$tierPrices = $proxy->call($sessionId, 'product_tier_price.info', 'sku');
 
 var_dump($tierPrices);
 
 // Add new
-$tierPrices[] = array(
-    'website'           => 'all',
+$tierPrices[] = [
+    'website' => 'all',
     'customer_group_id' => 'all',
-    'qty'               => 68,
-    'price'             => 18.20
-);
+    'qty' => 68,
+    'price' => 18.20
+];
 
 // Update tier prices
-$proxy->call($sessionId, 'product_tier_price.update', array('Sku', $tierPrices));
+$proxy->call($sessionId, 'product_tier_price.update', ['sku', $tierPrices]);
 
 // Compare values
-var_dump($proxy->call($sessionId, 'product_tier_price.info', 'Sku'));
+var_dump($proxy->call($sessionId, 'product_tier_price.info', 'sku'));
 var_dump($tierPrices);
 ```
 
 ## Info
 
-**Method:**
+### Method
 
--   catalog_product_attribute_tier_price.info (SOAP V1)
--   catalogProductAttributeTierPriceInfo (SOAP V2)
+- `catalog_product_attribute_tier_price.info` (SOAP V1)
+- `catalogProductAttributeTierPriceInfo` (SOAP V2)
 
 Allows you to retrieve information about product tier prices.
 
-**Aliases:**
+### Aliases
 
--   product_attribute_tier_price.info
--   product_tier_price.info
+- `product_attribute_tier_price.info`
+- `product_tier_price.info`
 
-**Arguments:**
+### Arguments
 
-| Type | Name | Description |
-| --- | --- | --- |
-| string | sessionId | Session ID |
-| string | productproductId | Product ID or SKU |
-| string | identifierType | Defines whether the product ID or SKU is passed in the 'product' parameter |
+| Type   | Name             | Description                                                                |
+|--------|------------------|----------------------------------------------------------------------------|
+| string | sessionId        | Session ID                                                                 |
+| string | productproductId | Product ID or SKU                                                          |
+| string | identifierType   | Defines whether the product ID or SKU is passed in the 'product' parameter |
 
-**Returns**:
+### Returns
 
-| Type | Name | Description |
-| --- | --- | --- |
+| Type  | Name   | Description                            |
+|-------|--------|----------------------------------------|
 | array | result | Array of catalogProductTierPriceEntity |
 
-The **catalogProductTierPriceEntity** content is as follows:
+### Content `catalogProductTierPriceEntity`
 
-| Type | Name | Description |
-| --- | --- | --- |
-| string | customer_group_id | Customer group ID |
-| string | website | Website |
-| int | qty | Quantity of items to which the price will be applied |
-| double | price | Price that each item will cost |
+| Type   | Name              | Description                                          |
+|--------|-------------------|------------------------------------------------------|
+| string | customer_group_id | Customer group ID                                    |
+| string | website           | Website                                              |
+| int    | qty               | Quantity of items to which the price will be applied |
+| double | price             | Price that each item will cost                       |
 
-**Examples**:
+### Examples
 
-**Request Example SOAP V1**
+#### Request Example SOAP V1
 
 ```php
-$client = new SoapClient('http://magentohost/api/soap/?wsdl');
+$client = new SoapClient('https://mahohost/api/soap/?wsdl');
 $session = $client->login('apiUser', 'apiKey');
 
 $result = $client->call($session, 'catalog_product_attribute_tier_price.info', 'productId');
 var_dump($result);
 ```
 
-**Request Example SOAP V2**
+#### Request Example SOAP V2
 
 ```php
-$client = new SoapClient('http://magentohost/api/v2_soap/?wsdl');
+$client = new SoapClient('https://mahohost/api/v2_soap/?wsdl');
 $session = $client->login('apiUser', 'apiKey');
 
 $productId = 1;
@@ -114,17 +116,19 @@ $result = $client->catalogProductAttributeTierPriceInfo(
 );
 ```
 
-**Request Example SOAP V2 (WS-I Compliance Mode)**
+#### Request Example SOAP V2 (WS-I Compliance Mode)
 
 ```php
-$proxy = new SoapClient('http://magentohost/api/v2_soap/?wsdl');
-$sessionId = $proxy->login((object)array('username' => 'apiUser', 'apiKey' => 'apiKey'));
+$proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl');
+$sessionId = $proxy->login((object)['username' => 'apiUser', 'apiKey' => 'apiKey']);
 
-$result = $proxy->catalogProductAttributeTierPriceInfo((object)array('sessionId' => $sessionId->result, 'productId' => '1'));
+$result = $proxy->catalogProductAttributeTierPriceInfo(
+    (object)['sessionId' => $sessionId->result, 'productId' => '1']
+);
 var_dump($result->result);
 ```
 
-**Response Example SOAP V1**
+#### Response Example SOAP V1
 
 ```php
 array
@@ -136,7 +140,7 @@ array
       'price' => string '129.9900' (length=8)
 ```
 
-**Response Example SOAP V2**
+#### Response Example SOAP V2
 
 ```php
 array
@@ -156,110 +160,113 @@ array
 
 ## Update
 
-**Method:**
+### Method
 
--   catalog_product_attribute_tier_price.update (SOAP V1)
--   catalogProductAttributeTierPriceUpdate (SOAP V2)
+- `catalog_product_attribute_tier_price.update` (SOAP V1)
+- `catalogProductAttributeTierPriceUpdate` (SOAP V2)
 
 Allows you to update the product tier prices.
 
-**Aliases:**
+### Aliases
 
--   product_attribute_tier_price.update
--   product_tier_price.update
+- `product_attribute_tier_price.update`
+- `product_tier_price.update`
 
-**Arguments:**
+### Arguments
 
-| Type | Name | Description |
-| --- | --- | --- |
-| string | sessionId | Session ID |
-| string | productproductId | Product ID or SKU |
-| array | tierPrices | Array of catalogProductTierPriceEntity |
-| string | identifierType | Defines whether the product ID or SKU is passed in the 'product' parameter |
+| Type   | Name             | Description                                                                |
+|--------|------------------|----------------------------------------------------------------------------|
+| string | sessionId        | Session ID                                                                 |
+| string | productproductId | Product ID or SKU                                                          |
+| array  | tierPrices       | Array of catalogProductTierPriceEntity                                     |
+| string | identifierType   | Defines whether the product ID or SKU is passed in the 'product' parameter |
 
-**Returns**:
+### Returns
 
-| Type | Name | Description |
-| --- | --- | --- |
+| Type       | Name   | Description                                   |
+|------------|--------|-----------------------------------------------|
 | booleanint | result | True (1) if the product tier price is updated |
 
-The **catalogProductTierPriceEntity** content is as follows:
+### Content `catalogProductTierPriceEntity`
 
-| Type | Name | Description |
-| --- | --- | --- |
-| string | customer_group_id | Customer group ID |
-| string | website | Website |
-| int | qty | Quantity of items to which the price will be applied |
-| double | price | Price that each item will cost |
+| Type   | Name              | Description                                          |
+|--------|-------------------|------------------------------------------------------|
+| string | customer_group_id | Customer group ID                                    |
+| string | website           | Website                                              |
+| int    | qty               | Quantity of items to which the price will be applied |
+| double | price             | Price that each item will cost                       |
 
-**Examples**:
+### Examples
 
-**Request Example SOAP V1**
+#### Request Example SOAP V1
 
 ```php
-$proxy = new SoapClient('http://magentohost/api/soap/?wsdl');
+$proxy = new SoapClient('https://mahohost/api/soap/?wsdl');
 $sessionId = $proxy->login('apiUser', 'apiKey');
 
 $productId = 1;
-$tierPrices = array(
-    array(
+$tierPrices = [
+    [
         'customer_group_id' => '0',
         'website' => '0',
         'qty' => '50',
         'price' => '9.90'
-    )
-);
+    ]
+];
 
-$result = $proxy->call($sessionId, 'product_attribute_tier_price.update', array(
-    $productId,
-    $tierPrices
-));
+$result = $proxy->call(
+    $sessionId,
+    'product_attribute_tier_price.update',
+    [
+        $productId,
+        $tierPrices
+    ]
+);
 var_dump($result);
 ```
 
-**Request Example SOAP V2**
+#### Request Example SOAP V2
 
 ```php
-$proxy = new SoapClient('http://magentohost/api/v2_soap/?wsdl');
+$proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl');
 $sessionId = $proxy->login('apiUser', 'apiKey');
 
 $productId = 1;
-$tierPrices = array(
-    array(
+$tierPrices = [
+    [
         'customer_group_id' => '0',
         'website' => '0',
         'qty' => '50',
         'price' => '9.90'
-    )
-);
+    ]
+];
 
 $result = $proxy->catalogProductAttributeTierPriceUpdate($sessionId, $productId, $tierPrices);
 var_dump($result);
 ```
 
-**Request Example SOAP V2 (WS-I Compliance Mode)**
+#### Request Example SOAP V2 (WS-I Compliance Mode)
 
 ```php
-$proxy = new SoapClient('http://magentohost/api/v2_soap/?wsdl');
-$sessionId = $proxy->login((object)array(
-    'username' => 'apiUser',
-    'apiKey' => 'apiKey'
-));
+$proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl');
+$sessionId = $proxy->login((object)['username' => 'apiUser', 'apiKey' => 'apiKey']);
 
 $productId = 1;
-$tierPrices = array(
-    array(
+$tierPrices = [
+    [
         'customer_group_id' => '0',
         'website' => '0',
         'qty' => '50',
         'price' => '9.90'
-    )
-);
+    ]
+];
 
-$result = $proxy->catalogProductAttributeTierPriceUpdate((object)array(
-    'sessionId' => $sessionId->result,
-    'productId' => $productId,
-    'tierPrices' => $tierPrices
-));
+$result = $proxy->catalogProductAttributeTierPriceUpdate(
+    (object)[
+        'sessionId' => $sessionId->result,
+        'productId' => $productId,
+        'tierPrices' => $tierPrices
+    ]
+);
 var_dump($result->result);
 ```
