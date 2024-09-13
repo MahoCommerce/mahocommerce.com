@@ -2,15 +2,15 @@
 
 ## Introduction
 
-### Resource
+<h3>Resource</h3>
 
 - `catalog_product_custom_option_value`
 
-### Alias
+<h3>Alias</h3>
 
 - `product_custom_option_value`
 
-### Methods
+<h3>Methods</h3>
 
 - `product_custom_option_value.add` — Add a new custom option value to a selectable custom option.
 - `product_custom_option_value.list` — Retrieve the list of product custom option values.
@@ -18,7 +18,7 @@
 - `product_custom_option_value.update` — Update the custom option value.
 - `product_custom_option_value.remove` — Remove the custom option value.
 
-### Faults
+<h3>Faults</h3>
 
 | Fault Code | Fault Message                                                           |
 |------------|-------------------------------------------------------------------------|
@@ -34,7 +34,7 @@
 
 ## Add
 
-### Method
+<h3>Method</h3>
 
 - `product_custom_option_value.add` (SOAP V1)
 - `catalogProductCustomOptionValueAdd` (SOAP V2)
@@ -42,7 +42,7 @@
 Allows you to add a new custom option value to a custom option.
 Note that the custom option value can be added only to the option with the **Select** input type.
 
-### Arguments
+<h3>Arguments</h3>
 
 | Type   | Name      | Description                                 |
 |--------|-----------|---------------------------------------------|
@@ -51,13 +51,13 @@ Note that the custom option value can be added only to the option with the **Sel
 | array  | data      | Array of catalogProductCustomOptionValueAdd |
 | string | store     | Store view ID or code (optional)            |
 
-### Return
+<h3>Return</h3>
 
 | Type    | Description                              |
 |---------|------------------------------------------|
 | boolean | True if the custom option value is added |
 
-### Content `catalogProductCustomOptionValueAdd`
+<h3>Content `catalogProductCustomOptionValueAdd`</h3>
 
 | Type   | Name       | Description                                                                                       |
 |--------|------------|---------------------------------------------------------------------------------------------------|
@@ -67,7 +67,7 @@ Note that the custom option value can be added only to the option with the **Sel
 | string | sku        | Custom option value row SKU                                                                       |
 | string | sort_order | Custom option value sort order                                                                    |
 
-### Faults
+<h3>Faults</h3>
 
 | Fault Code | Fault Message                                                         |
 |------------|-----------------------------------------------------------------------|
@@ -75,9 +75,9 @@ Note that the custom option value can be added only to the option with the **Sel
 | 102        | Error while adding an option value. Details are in the error message. |
 | 104        | Invalid option type.                                                  |
 
-### Examples
+<h3>Examples</h3>
 
-#### Request Example SOAP V1
+<h4>Request Example SOAP V1</h4>
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/soap/?wsdl');
@@ -104,7 +104,7 @@ $resultCustomOptionValueAdd = $proxy->call(
 );
 ```
 
-#### Request Example SOAP V2
+<h4>Request Example SOAP V2</h4>
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl');
@@ -126,7 +126,7 @@ $result = $proxy->catalogProductCustomOptionValueAdd(
 var_dump($result);
 ```
 
-#### Request Example SOAP V2 (WS-I Compliance Mode)
+<h4>Request Example SOAP V2 (WS-I Compliance Mode)</h4>
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl');
@@ -152,7 +152,7 @@ var_dump($result->result);
 
 ## List
 
-### Method
+<h3>Method</h3>
 
 - `product_custom_option_value.list` (SOAP V1)
 - `catalogProductCustomOptionValueList` (SOAP V2)
@@ -160,7 +160,7 @@ var_dump($result->result);
 Allows you to retrieve the list of product custom option values.
 Note that the method is available only for the option **Select** input type.
 
-### Arguments
+<h3>Arguments</h3>
 
 | Type   | Name      | Description                      |
 |--------|-----------|----------------------------------|
@@ -168,13 +168,13 @@ Note that the method is available only for the option **Select** input type.
 | string | optionId  | Option ID                        |
 | string | store     | Store view ID or code (optional) |
 
-### Returns
+<h3>Returns</h3>
 
 | Type  | Name   | Description                                  |
 |-------|--------|----------------------------------------------|
 | array | result | Array of catalogProductCustomOptionValueList |
 
-### Content `catalogProductCustomOptionValueListEntity`
+<h3>Content `catalogProductCustomOptionValueListEntity`</h3>
 
 | Type   | Name       | Description                                       |
 |--------|------------|---------------------------------------------------|
@@ -185,16 +185,16 @@ Note that the method is available only for the option **Select** input type.
 | string | sku        | Custom option value SKU                           |
 | string | sort_order | Option value sort order (optional)                |
 
-### Faults
+<h3>Faults</h3>
 
 | Fault Code | Fault Message                                                         |
 |------------|-----------------------------------------------------------------------|
 | 101        | Provided data is invalid.                                             |
 | 102        | Error while adding an option value. Details are in the error message. |
 
-### Examples
+<h3>Examples</h3>
 
-#### Request Example SOAP V1
+<h4>Request Example SOAP V1</h4>
 
 ```php
 $client = new SoapClient('https://mahohost/api/soap/?wsdl');
@@ -207,7 +207,7 @@ var_dump($result);
 $client->endSession($session);
 ```
 
-#### Request Example SOAP V2
+<h4>Request Example SOAP V2</h4>
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); // TODO: change url
@@ -217,7 +217,7 @@ $result = $proxy->catalogProductCustomOptionValueList($sessionId, '3');
 var_dump($result);
 ```
 
-#### Request Example SOAP V2 (WS-I Compliance Mode)
+<h4>Request Example SOAP V2 (WS-I Compliance Mode)</h4>
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl');
@@ -232,7 +232,7 @@ $result = $proxy->catalogProductCustomOptionValueList(
 var_dump($result->result);
 ```
 
-#### Response Example SOAP V1
+<h4>Response Example SOAP V1</h4>
 
 ```php
 array
@@ -256,14 +256,14 @@ array
 
 ## Info
 
-### Method
+<h3>Method</h3>
 
 - `product_custom_option_value.info` (SOAP V1)
 - `catalogProductCustomOptionValueInfo` (SOAP V2)
 
 Allows you to retrieve full information about the specified product custom option value.
 
-### Arguments
+<h3>Arguments</h3>
 
 | Type   | Name      | Description                      |
 |--------|-----------|----------------------------------|
@@ -271,13 +271,13 @@ Allows you to retrieve full information about the specified product custom optio
 | string | valueId   | Value ID                         |
 | string | store     | Store view ID or code (optional) |
 
-### Return
+<h3>Return</h3>
 
 | Type  | Name   | Description                                        |
 |-------|--------|----------------------------------------------------|
 | array | result | Array of catalogProductCustomOptionValueInfoEntity |
 
-### Content `catalogProductCustomOptionValueInfoEntity`
+<h3>Content `catalogProductCustomOptionValueInfoEntity`</h3>
 
 | Type   | Name               | Description                                                              |
 |--------|--------------------|--------------------------------------------------------------------------|
@@ -295,15 +295,15 @@ Allows you to retrieve full information about the specified product custom optio
 | string | store_title        | Option value store title                                                 |
 | string | title              | Option value title                                                       |
 
-### Faults
+<h3>Faults</h3>
 
 | Fault Code | Fault Message                                  |
 |------------|------------------------------------------------|
 | 101        | Option value with requested id does not exist. |
 
-### Examples
+<h3>Examples</h3>
 
-#### Request Example SOAP V1
+<h4>Request Example SOAP V1</h4>
 
 ```php
 $client = new SoapClient('https://mahohost/api/soap/?wsdl');
@@ -313,7 +313,7 @@ $result = $client->call($session, 'product_custom_option_value.info', '5');
 var_dump($result);
 ```
 
-#### Request Example SOAP V2
+<h4>Request Example SOAP V2</h4>
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); // TODO: change url
@@ -323,7 +323,7 @@ $result = $proxy->catalogProductCustomOptionValueInfo($sessionId, '5');
 var_dump($result);
 ```
 
-#### Request Example SOAP V2 (WS-I Compliance Mode)
+<h4>Request Example SOAP V2 (WS-I Compliance Mode)</h4>
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl');
@@ -338,7 +338,7 @@ $result = $proxy->catalogProductCustomOptionValueInfo(
 var_dump($result->result);
 ```
 
-#### Response Example SOAP V1
+<h4>Response Example SOAP V1</h4>
 
 ```php
 array
@@ -359,14 +359,14 @@ array
 
 ## Update
 
-### Method
+<h3>Method</h3>
 
 - `product_custom_option_value.update` (SOAP V1)
 - `catalogProductCustomOptionValueUpdate` (SOAP V2)
 
 Allows you to update the product custom option value.
 
-### Arguments
+<h3>Arguments</h3>
 
 | Type   | Name      | Description                                          |
 |--------|-----------|------------------------------------------------------|
@@ -375,13 +375,13 @@ Allows you to update the product custom option value.
 | array  | data      | Array of catalogProductCustomOptionValueUpdateEntity |
 | string | storeId   | Store view ID or code (optional)                     |
 
-### Return
+<h3>Return</h3>
 
 | Type    | Description                                |
 |---------|--------------------------------------------|
 | boolean | True if the custom option value is updated |
 
-### Content `catalogProductCustomOptionValueUpdateEntity`
+<h3>Content `catalogProductCustomOptionValueUpdateEntity`</h3>
 
 | Type   | Name       | Description                                                      |
 |--------|------------|------------------------------------------------------------------|
@@ -391,7 +391,7 @@ Allows you to update the product custom option value.
 | string | sku        | Custom option value row SKU                                      |
 | string | sort_order | Custom option value sort order                                   |
 
-### Faults
+<h3>Faults</h3>
 
 | Fault Code | Fault Message                                                           |
 |------------|-------------------------------------------------------------------------|
@@ -401,9 +401,9 @@ Allows you to update the product custom option value.
 | 107        | Error while updating an option value. Details are in the error message. |
 | 108        | Title field is required.                                                |
 
-### Examples
+<h3>Examples</h3>
 
-#### Request Example SOAP V1
+<h4>Request Example SOAP V1</h4>
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/soap/?wsdl');
@@ -433,7 +433,7 @@ $resultCustomOptionValueUpdate = $proxy->call(
 );
 ```
 
-#### Request Example SOAP V2
+<h4>Request Example SOAP V2</h4>
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl');
@@ -452,7 +452,7 @@ $result = $proxy->catalogProductCustomOptionValueUpdate(
 var_dump($result);
 ```
 
-#### Request Example SOAP V2 (WS-I Compliance Mode)
+<h4>Request Example SOAP V2 (WS-I Compliance Mode)</h4>
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl');
@@ -475,27 +475,27 @@ var_dump($result->result);
 
 ## Remove
 
-### Method
+<h3>Method</h3>
 
 - `product_custom_option_value.remove` (SOAP V1)
 - `catalogProductCustomOptionValueRemove` (SOAP V2)
 
 Allows you to remove the custom option value from a product.
 
-### Arguments
+<h3>Arguments</h3>
 
 | Type   | Name      | Description            |
 |--------|-----------|------------------------|
 | string | sessionId | Session ID             |
 | string | valueId   | Custom option value ID |
 
-### Return
+<h3>Return</h3>
 
 | Type       | Description                                    |
 |------------|------------------------------------------------|
 | booleanint | True (1) if the custom option value is removed |
 
-### Faults
+<h3>Faults</h3>
 
 | Fault Code | Fault Message                                                     |
 |------------|-------------------------------------------------------------------|
@@ -503,9 +503,9 @@ Allows you to remove the custom option value from a product.
 | 106        | Can not delete option.                                            |
 | 109        | Option should have at least one value. Can not delete last value. |
 
-### Examples
+<h3>Examples</h3>
 
-#### Request Example SOAP V1
+<h4>Request Example SOAP V1</h4>
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/soap/?wsdl');
@@ -526,7 +526,7 @@ $result = $proxy->call(
 );
 ```
 
-#### Request Example SOAP V2
+<h4>Request Example SOAP V2</h4>
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); // TODO: change url
@@ -536,7 +536,7 @@ $result = $proxy->catalogProductCustomOptionValueRemove($sessionId, '4');
 var_dump($result);
 ```
 
-#### Request Example SOAP V2 (WS-I Compliance Mode)
+<h4>Request Example SOAP V2 (WS-I Compliance Mode)</h4>
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl');

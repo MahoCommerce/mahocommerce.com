@@ -10,7 +10,7 @@ It also allows you to manage shopping carts and inventory.
 
 The Maho API supports SOAP and XML-RPC, where SOAP is the default protocol.
 
-### SOAP
+<h3>SOAP</h3>
 
 To connect to Maho SOAP web services, load the WSDL into your SOAP client from either of these URLs:
 
@@ -36,7 +36,7 @@ $result = $client->multiCall($session, [
 $client->endSession($session);
 ```
 
-### XML-RPC
+<h3>XML-RPC</h3>
 
 To use XML-RPC, load the following URL into your XML-RPC client:
 
@@ -173,7 +173,7 @@ To learn more about the Core API, to read Maho Core API calls.
 
 For general information about the Maho API, go to the [Introduction](#Introduction).
 
-### 1. Creating an XML File that Will Define the API Resource
+<h3>1. Creating an XML File that Will Define the API Resource</h3>
 
 Create a file named `api.xml` in the `/etc` directory in the customer module.
 Start with the empty structure, as follows:
@@ -191,7 +191,7 @@ Start with the empty structure, as follows:
 </config>
 ```
 
-### 2. Adding a Resource Named Customer
+<h3>2. Adding a Resource Named Customer</h3>
 
 Add an element named `customer` in the `resources` element.
 Add a `methods` element with elements for `list`, `create`, `info`, `update` and `remove` methods for customer resource.
@@ -238,7 +238,7 @@ Note that:
 </config>
 ```
 
-### 3. Adding Faults
+<h3>3. Adding Faults</h3>
 
 The resource can return some faults, so add a `faults` element in the `customer` element, and list the various faults.
 
@@ -275,7 +275,7 @@ The resource can return some faults, so add a `faults` element in the `customer`
 </config>
 ```
 
-### 4. Describing the Access Control List (ACL) for the Resource
+<h3>4. Describing the Access Control List (ACL) for the Resource</h3>
 
 To prevent unauthorized access to our custom API,
 you must first list the resources that are restricted within the `acl` element.
@@ -350,7 +350,7 @@ needs restricting:
 </config>
 ```
 
-### 5. Creating PHP Code
+<h3>5. Creating PHP Code</h3>
 
 Next, write some PHP code to access the resources.
 Start by creating a class called `Mage_Customer_Model_Customer_Api`that extends `Mage_Api_Model_Resource_Abstract`.
@@ -503,7 +503,7 @@ public function delete($customerId)
 }
 ```
 
-### Creating a Custom Adapter
+<h3>Creating a Custom Adapter</h3>
 
 To create custom webservice adapter, implement the `Mage_Api_Model_Server_Adapter_Interface`, which is shown below.
 
@@ -641,7 +641,7 @@ public function fault($code, $message)
 }
 ```
 
-### Common Error Messages
+<h3>Common Error Messages</h3>
 
 The following are common error messages that you might receive when creating your own custom API.
 

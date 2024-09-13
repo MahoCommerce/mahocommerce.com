@@ -2,7 +2,7 @@
 
 ## Introduction
 
-### Methods
+<h3>Methods</h3>
 
 - `customer_address.list` — Retrieve the list of customer addresses.
 - `customer_address.create` — Create a new address for a customer.
@@ -10,7 +10,7 @@
 - `customer_address.update` — Update the customer address.
 - `customer_address.delete` — Delete the customer address.
 
-### Faults
+<h3>Faults</h3>
 
 | Fault Code | Fault Message                                   |
 |------------|-------------------------------------------------|
@@ -69,27 +69,27 @@ var_dump($proxy->call($sessionId, 'customer_address.list', $newCustomerId));
 
 ## List
 
-### Method
+<h3>Method</h3>
 
 - `customer_address.list` (SOAP V1)
 - `customerAddressList` (SOAP V2)
 
 Retrieve the list of customer addresses.
 
-### Arguments
+<h3>Arguments</h3>
 
 | Type   | Name       | Description |
 |--------|------------|-------------|
 | string | sessionId  | Session ID  |
 | int    | customerId | Customer ID |
 
-### Returns
+<h3>Returns</h3>
 
 | Type  | Name   | Description                    |
 |-------|--------|--------------------------------|
 | array | result | Array of customerAddressEntity |
 
-### Content `customerAddressEntity`
+<h3>Content `customerAddressEntity`</h3>
 
 | Type    | Name                | Description                                         |
 |---------|---------------------|-----------------------------------------------------|
@@ -114,9 +114,9 @@ Retrieve the list of customer addresses.
 | boolean | is_default_billing  | True if the address is the default one for billing  |
 | boolean | is_default_shipping | True if the address is the default one for shipping |
 
-### Examples
+<h3>Examples</h3>
 
-#### Request Example SOAP V1
+<h4>Request Example SOAP V1</h4>
 
 ```php
 $client = new SoapClient('https://mahohost/api/soap/?wsdl');
@@ -129,7 +129,7 @@ var_dump($result);
 $client->endSession($session);
 ```
 
-#### Request Example SOAP V2
+<h4>Request Example SOAP V2</h4>
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); // TODO: change url
@@ -139,7 +139,7 @@ $result = $proxy->customerAddressList($sessionId, '2');
 var_dump($result);
 ```
 
-#### Request Example SOAP V2 (WS-I Compliance Mode)
+<h4>Request Example SOAP V2 (WS-I Compliance Mode)</h4>
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); 
@@ -149,7 +149,7 @@ $result = $proxy->customerAddressList((object)['sessionId' => $sessionId->result
 var_dump($result->result);
 ```
 
-#### Response Example SOAP V1
+<h4>Response Example SOAP V1</h4>
 
 ```php
 array
@@ -190,14 +190,14 @@ array
 
 ## Create
 
-### Method
+<h3>Method</h3>
 
 - `customer_address.create` (SOAP V1)
 - `customerAddressCreate` (SOAP V2)
 
 Create a new address for the customer.
 
-### Arguments
+<h3>Arguments</h3>
 
 | Type   | Name        | Description                          |
 |--------|-------------|--------------------------------------|
@@ -205,13 +205,13 @@ Create a new address for the customer.
 | int    | customerId  | Customer ID                          |
 | array  | addressdata | Array of customerAddressEntityCreate |
 
-### Returns
+<h3>Returns</h3>
 
 | Type | Name   | Description                        |
 |------|--------|------------------------------------|
 | int  | result | ID of the created customer address |
 
-### Content `customerAddressEntityCreate`
+<h3>Content `customerAddressEntityCreate`</h3>
 
 | Type          | Name                | Description                                         |
 |---------------|---------------------|-----------------------------------------------------|
@@ -234,9 +234,9 @@ Create a new address for the customer.
 
 **Note**: If you want to leave any address fields empty, specify them as empty ones in the request body.
 
-### Examples
+<h3>Examples</h3>
 
-#### Request Example SOAP V1
+<h4>Request Example SOAP V1</h4>
 
 ```php
 $client = new SoapClient('https://mahohost/api/soap/?wsdl');
@@ -265,7 +265,7 @@ $result = $client->call(
 var_dump($result);
 ```
 
-#### Request Example SOAP V2
+<h4>Request Example SOAP V2</h4>
 
 ```php
 $client = new SoapClient('https://mahohost/api/v2_soap/?wsdl');
@@ -291,7 +291,7 @@ $result = $client->customerAddressCreate(
 var_dump($result);
 ```
 
-#### Request Example SOAP V2 (WS-I Compliance Mode)
+<h4>Request Example SOAP V2 (WS-I Compliance Mode)</h4>
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); 
@@ -320,27 +320,27 @@ var_dump($result->result);
 
 ## Info
 
-### Method
+<h3>Method</h3>
 
 - `customer_address.info` (SOAP V1)
 - `customerAddressInfo` (SOAP V2)
 
 Retrieve information about the required customer address.
 
-### Arguments
+<h3>Arguments</h3>
 
 | Type   | Name      | Description |
 |--------|-----------|-------------|
 | string | sessionId | Session ID  |
 | int    | addressId | Address ID  |
 
-### Returns
+<h3>Returns</h3>
 
 | Type  | Name | Description                        |
 |-------|------|------------------------------------|
 | array | info | Array of customerAddressEntityItem |
 
-### Content `customerAddressEntityItem`
+<h3>Content `customerAddressEntityItem`</h3>
 
 | Type    | Name                | Description                                         |
 |---------|---------------------|-----------------------------------------------------|
@@ -365,9 +365,9 @@ Retrieve information about the required customer address.
 | boolean | is_default_billing  | True if the address is the default one for billing  |
 | boolean | is_default_shipping | True if the address is the default one for shipping |
 
-### Examples
+<h3>Examples</h3>
 
-#### Request Example SOAP V1
+<h4>Request Example SOAP V1</h4>
 
 ```php
 $client = new SoapClient('https://mahohost/api/soap/?wsdl');
@@ -380,7 +380,7 @@ var_dump($result);
 $client->endSession($session);
 ```
 
-#### Request Example SOAP V2
+<h4>Request Example SOAP V2</h4>
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); // TODO: change url
@@ -390,7 +390,7 @@ $result = $proxy->customerAddressInfo($sessionId, '2');
 var_dump($result);
 ```
 
-#### Request Example SOAP V2 (WS-I Compliance Mode)
+<h4>Request Example SOAP V2 (WS-I Compliance Mode)</h4>
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); 
@@ -402,7 +402,7 @@ $result = $proxy->customerAddressInfo(
 var_dump($result->result);
 ```
 
-#### Response Example SOAP V1
+<h4>Response Example SOAP V1</h4>
 
 ```php
 array
@@ -435,14 +435,14 @@ array
 
 ## Update
 
-### Method
+<h3>Method</h3>
 
 - `customer_address.update` (SOAP V1)
 - `customerAddressUpdate` (SOAP V2)
 
 Update address data of the required customer.
 
-### Arguments
+<h3>Arguments</h3>
 
 | Type   | Name        | Description                          |
 |--------|-------------|--------------------------------------|
@@ -450,13 +450,13 @@ Update address data of the required customer.
 | int    | addressId   | Address ID                           |
 | array  | addressdata | Array of customerAddressEntityCreate |
 
-### Returns
+<h3>Returns</h3>
 
 | Type    | Description                             |
 |---------|-----------------------------------------|
 | boolean | True if the customer address is updated |
 
-### Content `customerAddressEntityCreate`
+<h3>Content `customerAddressEntityCreate`</h3>
 
 | Type          | Name                | Description                                         |
 |---------------|---------------------|-----------------------------------------------------|
@@ -477,9 +477,9 @@ Update address data of the required customer.
 | boolean       | is_default_billing  | True if the address is the default one for billing  |
 | boolean       | is_default_shipping | True if the address is the default one for shipping |
 
-### Examples
+<h3>Examples</h3>
 
-#### Request Example SOAP V1
+<h4>Request Example SOAP V1</h4>
 
 ```php
 $client = new SoapClient('https://mahohost/api/soap/?wsdl');
@@ -508,7 +508,7 @@ $result = $client->call(
 var_dump($result);
 ```
 
-#### Request Example SOAP V2
+<h4>Request Example SOAP V2</h4>
 
 ```php
 $client = new SoapClient('https://mahohost/api/v2_soap/?wsdl');
@@ -534,7 +534,7 @@ $result = $client->customerAddressUpdate(
 var_dump($result);
 ```
 
-#### Request Example SOAP V2 (WS-I Compliance Mode)
+<h4>Request Example SOAP V2 (WS-I Compliance Mode)</h4>
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); 
@@ -566,29 +566,29 @@ var_dump($result->result);
 
 ## Delete
 
-### Method
+<h3>Method</h3>
 
 - `customer_address.delete` (SOAP V1)
 - `customerAddressDelete` (SOAP V2)
 
 Delete the required customer address.
 
-### Arguments
+<h3>Arguments</h3>
 
 | Type   | Name      | Description |
 |--------|-----------|-------------|
 | string | sessionId | Session ID  |
 | int    | addressId | Address ID  |
 
-### Returns
+<h3>Returns</h3>
 
 | Type    | Description                             |
 |---------|-----------------------------------------|
 | boolean | True if the customer address is deleted |
 
-### Examples
+<h3>Examples</h3>
 
-#### Request Example SOAP V1
+<h4>Request Example SOAP V1</h4>
 
 ```php
 $client = new SoapClient('https://mahohost/api/soap/?wsdl');
@@ -598,7 +598,7 @@ $result = $client->call($session, 'customer_address.delete', '4');
 var_dump($result);
 ```
 
-#### Request Example SOAP V2
+<h4>Request Example SOAP V2</h4>
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); // TODO: change url
@@ -608,7 +608,7 @@ $result = $proxy->customerAddressDelete($sessionId, '4');
 var_dump($result);
 ```
 
-#### Request Example SOAP V2 (WS-I Compliance Mode)
+<h4>Request Example SOAP V2 (WS-I Compliance Mode)</h4>
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); 

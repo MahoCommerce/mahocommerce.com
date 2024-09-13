@@ -2,11 +2,11 @@
 
 ## Introduction
 
-### Resource
+<h3>Resource</h3>
 
 - `product_downloadable_link`
 
-### Methods
+<h3>Methods</h3>
 
 - `product_downloadable_link.add` — Add a new link to the downloadable product.
 - `product_downloadable_link.list` — Get the list of links for a downloadable product.
@@ -14,14 +14,14 @@
 
 ## Add
 
-### Method
+<h3>Method</h3>
 
 - `product_downloadable_link.add` (SOAP V1)
 - `catalogProductDownloadableLinkAdd` (SOAP V2)
 
 Allows you to add a new link to a downloadable product.
 
-### Arguments
+<h3>Arguments</h3>
 
 | Type   | Name           | Description                                                                          |
 |--------|----------------|--------------------------------------------------------------------------------------|
@@ -32,13 +32,13 @@ Allows you to add a new link to a downloadable product.
 | string | store          | Store view ID or code (optional)                                                     |
 | string | identifierType | Type of the product identifier. Can have one of the following values: 'sku' or 'id'. |
 
-### Return
+<h3>Return</h3>
 
 | Type | Name   | Description                                         |
 |------|--------|-----------------------------------------------------|
 | int  | result | Result of adding a link to the downloadable product |
 
-### Content `catalogProductDownloadableLinkAddEntity`
+<h3>Content `catalogProductDownloadableLinkAddEntity`</h3>
 
 | Type   | Name                | Description                                                                    |
 |--------|---------------------|--------------------------------------------------------------------------------|
@@ -54,7 +54,7 @@ Allows you to add a new link to a downloadable product.
 | string | sample_url          | Sample URL address                                                             |
 | int    | sort_order          | Link sort order                                                                |
 
-### Content `catalogProductDownloadableLinkAddSampleEntity`
+<h3>Content `catalogProductDownloadableLinkAddSampleEntity`</h3>
 
 | Type   | Name | Description                                                                    |
 |--------|------|--------------------------------------------------------------------------------|
@@ -62,23 +62,23 @@ Allows you to add a new link to a downloadable product.
 | array  | file | Array of catalogProductDownloadableLinkFileEntity                              |
 | string | url  | URL to upload                                                                  |
 
-### Content `catalogProductDownloadableLinkFileEntity`
+<h3>Content `catalogProductDownloadableLinkFileEntity`</h3>
 
 | Type   | Name           | Description         |
 |--------|----------------|---------------------|
 | string | name           | File name           |
 | string | base64_content | BASE64 encoded file |
 
-### Faults
+<h3>Faults</h3>
 
 | Fault Code | Fault Message                                    |
 |------------|--------------------------------------------------|
 | 414        | Unable to save action. Details in error message. |
 | 415        | Validation error has occurred.                   |
 
-### Examples
+<h3>Examples</h3>
 
-#### Request Example SOAP V1
+<h4>Request Example SOAP V1</h4>
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/soap/?wsdl');
@@ -184,7 +184,7 @@ foreach ($items as $item) {
 }
 ```
 
-#### Request Example SOAP V2 (WS-I Compliance Mode)
+<h4>Request Example SOAP V2 (WS-I Compliance Mode)</h4>
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl');
@@ -233,14 +233,14 @@ var_dump($result->result);
 
 ## List
 
-### Method
+<h3>Method</h3>
 
 - `product_downloadable_link.list` (SOAP V1)
 - `catalogProductDownloadableLinkList` (SOAP V2)
 
 Allows you to retrieve a list of links of a downloadable product.
 
-### Arguments
+<h3>Arguments</h3>
 
 | Type   | Name           | Description                                                    |
 |--------|----------------|----------------------------------------------------------------|
@@ -249,20 +249,20 @@ Allows you to retrieve a list of links of a downloadable product.
 | string | store          | Store view ID or code (optional)                               |
 | string | identifierType | Defines whether the product ID or SKU is passed in the request |
 
-### Return
+<h3>Return</h3>
 
 | Type  | Name   | Description                                       |
 |-------|--------|---------------------------------------------------|
 | array | result | Array of catalogProductDownloadableLinkListEntity |
 
-### Content `catalogProductDownloadableLinkListEntity`
+<h3>Content `catalogProductDownloadableLinkListEntity`</h3>
 
 | Type  | Name    | Description                                         |
 |-------|---------|-----------------------------------------------------|
 | array | links   | Array of catalogProductDownloadableLinkEntity       |
 | array | samples | Array of catalogProductDownloadableLinkSampleEntity |
 
-### Content `catalogProductDownloadableLinkEntity`
+<h3>Content `catalogProductDownloadableLinkEntity`</h3>
 
 | Type   | Name                | Description                                                                         |
 |--------|---------------------|-------------------------------------------------------------------------------------|
@@ -281,7 +281,7 @@ Allows you to retrieve a list of links of a downloadable product.
 | array  | file_save           | Array of catalogProductDownloadableLinkFileInfoEntity                               |
 | array  | sample_file_save    | Array of catalogProductDownloadableLinkFileInfoEntity                               |
 
-### Content `catalogProductDownloadableLinkSampleEntity`
+<h3>Content `catalogProductDownloadableLinkSampleEntity`</h3>
 
 | Type   | Name          | Description                                                        |
 |--------|---------------|--------------------------------------------------------------------|
@@ -295,7 +295,7 @@ Allows you to retrieve a list of links of a downloadable product.
 | string | store_title   | Store title                                                        |
 | string | title         | Sample title                                                       |
 
-### Content `catalogProductDownloadableLinkFileInfoEntity`
+<h3>Content `catalogProductDownloadableLinkFileInfoEntity`</h3>
 
 | Type   | Name   | Description |
 |--------|--------|-------------|
@@ -304,13 +304,13 @@ Allows you to retrieve a list of links of a downloadable product.
 | int    | size   | File size   |
 | string | status | Status      |
 
-### Faults
+<h3>Faults</h3>
 
 _No Faults._
 
-### Examples
+<h3>Examples</h3>
 
-#### Request Example SOAP V1
+<h4>Request Example SOAP V1</h4>
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/soap/?wsdl');
@@ -325,7 +325,7 @@ $resultList = $proxy->call(
 );
 ```
 
-#### Request Example SOAP V2
+<h4>Request Example SOAP V2</h4>
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); // TODO: change url
@@ -335,7 +335,7 @@ $result = $proxy->catalogProductDownloadableLinkList($sessionId, '5', null, 'sku
 var_dump($result);
 ```
 
-#### Request Example SOAP V2 (WS-I Compliance Mode)
+<h4>Request Example SOAP V2 (WS-I Compliance Mode)</h4>
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl');
@@ -350,7 +350,7 @@ $result = $proxy->catalogProductDownloadableLinkList(
 var_dump($result->result);
 ```
 
-#### Response Example SOAP V1
+<h4>Response Example SOAP V1</h4>
 
 ```php
 array
@@ -393,14 +393,14 @@ array
 
 ## Remove
 
-### Method
+<h3>Method</h3>
 
 - `product_downloadable_link.remove` (SOAP V1)
 - `catalogProductDownloadableLinkRemove` (SOAP V2)
 
 Allows you to remove a link/sample from a downloadable product.
 
-### Arguments
+<h3>Arguments</h3>
 
 | Type   | Name            | Description                                                             |
 |--------|-----------------|-------------------------------------------------------------------------|
@@ -408,13 +408,13 @@ Allows you to remove a link/sample from a downloadable product.
 | string | linkId/sampleId | Link/sample ID                                                          |
 | string | resourceType    | Resource type. Can have one of the following values: 'sample' or 'link' |
 
-### Return
+<h3>Return</h3>
 
 | Type    | Description                                                    |
 |---------|----------------------------------------------------------------|
 | boolean | True if the link/sample is removed from a downloadable product |
 
-### Faults
+<h3>Faults</h3>
 
 | Fault Code | Fault Message                                    |
 |------------|--------------------------------------------------|
@@ -422,9 +422,9 @@ Allows you to remove a link/sample from a downloadable product.
 | 415        | Validation error has occurred.                   |
 | 416        | Unable to remove link. Details in error message. |
 
-### Examples
+<h3>Examples</h3>
 
-#### Request Example SOAP V1
+<h4>Request Example SOAP V1</h4>
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/soap/?wsdl');
@@ -446,7 +446,7 @@ $resultLink = $proxy->call(
 );
 ```
 
-#### Request Example SOAP V2
+<h4>Request Example SOAP V2</h4>
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); // TODO: change url
@@ -456,7 +456,7 @@ $result = $proxy->catalogProductDownloadableLinkRemove($sessionId, '7', 'sample'
 var_dump($result);
 ```
 
-#### Request Example SOAP V2 (WS-I Compliance Mode)
+<h4>Request Example SOAP V2 (WS-I Compliance Mode)</h4>
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl');

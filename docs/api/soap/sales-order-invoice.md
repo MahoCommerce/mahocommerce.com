@@ -4,15 +4,15 @@
 
 Allows you to manage invoices.
 
-### Resource Name
+<h3>Resource Name</h3>
 
 - `sales_order_invoice`
 
-### Aliases
+<h3>Aliases</h3>
 
 - `order_invoice`
 
-### Methods
+<h3>Methods</h3>
 
 - `sales_order_invoice.list` — Retrieve a list of invoices using filters.
 - `sales_order_invoice.info` — Retrieve information about the invoice.
@@ -21,7 +21,7 @@ Allows you to manage invoices.
 - `sales_order_invoice.capture` — Capture an invoice.
 - `sales_order_invoice.cancel` — Cancel an invoice.
 
-### Faults
+<h3>Faults</h3>
 
 | Fault Code | Fault Message                                    |
 |------------|--------------------------------------------------|
@@ -31,7 +31,7 @@ Allows you to manage invoices.
 | 103        | Requested order does not exists                  |
 | 104        | Invoice status not changed.                      |
 
-### Example — Working With Invoices
+<h3>Example — Working With Invoices</h3>
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/soap/?wsdl');
@@ -64,31 +64,31 @@ var_dump($invoice);
 
 ## List
 
-### Method
+<h3>Method</h3>
 
 - `sales_order_invoice.list` (SOAP V1)
 - `salesOrderInvoiceList` (SOAP V2)
 
 Allows you to retrieve the list of order invoices. Additional filters can also be applied.
 
-### Alias
+<h3>Alias</h3>
 
 - `order_invoice.list`
 
-### Arguments
+<h3>Arguments</h3>
 
 | Type   | Name      | Description                                          |
 |--------|-----------|------------------------------------------------------|
 | string | sessionId | Session ID                                           |
 | array  | filters   | Array of filters for the list of invoices (optional) |
 
-### Returns
+<h3>Returns</h3>
 
 | Type  | Name   | Description                      |
 |-------|--------|----------------------------------|
 | array | result | Array of salesOrderInvoiceEntity |
 
-### Content `salesOrderInvoiceEntity`
+<h3>Content `salesOrderInvoiceEntity`</h3>
 
 | Type   | Name                | Description                     |
 |--------|---------------------|---------------------------------|
@@ -100,9 +100,9 @@ Allows you to retrieve the list of order invoices. Additional filters can also b
 | string | grand_total         | Grand total amount invoiced     |
 | string | invoice_id          | Invoice ID                      |
 
-### Examples
+<h3>Examples</h3>
 
-#### Request Example SOAP V1
+<h4>Request Example SOAP V1</h4>
 
 ```php
 $client = new SoapClient('https://mahohost/api/soap/?wsdl');
@@ -115,7 +115,7 @@ var_dump($result);
 $client->endSession($session);
 ```
 
-#### Request Example SOAP V2 (List of All Invoices)
+<h4>Request Example SOAP V2 (List of All Invoices)</h4>
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); // TODO: change url
@@ -125,7 +125,7 @@ $result = $proxy->salesOrderInvoiceList($sessionId);
 var_dump($result);
 ```
 
-#### Request Example SOAP V2 (Complex Filter)
+<h4>Request Example SOAP V2 (Complex Filter)</h4>
 
 ```php
 $client = new SoapClient('https://mahohost/api/v2_soap/?wsdl');
@@ -143,7 +143,7 @@ $result = $client->salesOrderInvoiceList($session, $complexFilter);
 var_dump($result);
 ```
 
-#### Request Example SOAP V2 (WS-I Compliance Mode)
+<h4>Request Example SOAP V2 (WS-I Compliance Mode)</h4>
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); 
@@ -153,7 +153,7 @@ $result = $proxy->salesOrderInvoiceList((object)['sessionId' => $sessionId->resu
 var_dump($result->result);
 ```
 
-#### Response Example SOAP V1
+<h4>Response Example SOAP V1</h4>
 
 ```php
 array
@@ -179,31 +179,31 @@ array
 
 ## Info
 
-### Method
+<h3>Method</h3>
 
 - `sales_order_invoice.info` (SOAP V1)
 - `salesOrderInvoiceInfo` (SOAP V2)
 
 Allows you to retrieve information about the required invoice.
 
-### Alias
+<h3>Alias</h3>
 
 - `order_invoice.info`
 
-### Arguments
+<h3>Arguments</h3>
 
 | Type   | Name               | Description          |
 |--------|--------------------|----------------------|
 | string | sessionId          | Session ID           |
 | string | invoiceIncrementId | Invoice increment ID |
 
-### Returns
+<h3>Returns</h3>
 
 | Type  | Name   | Description                      |
 |-------|--------|----------------------------------|
 | array | result | Array of salesOrderInvoiceEntity |
 
-### Content `salesOrderInvoiceEntity`
+<h3>Content `salesOrderInvoiceEntity`</h3>
 
 | Type   | Name                 | Description                             |
 |--------|----------------------|-----------------------------------------|
@@ -242,7 +242,7 @@ Allows you to retrieve information about the required invoice.
 | array  | items                | Array of salesOrderInvoiceItemEntity    |
 | array  | comments             | Array of salesOrderInvoiceCommentEntity |
 
-### Content `salesOrderInvoiceItemEntity`
+<h3>Content `salesOrderInvoiceItemEntity`</h3>
 
 | Type   | Name                             | Description                                             |
 |--------|----------------------------------|---------------------------------------------------------|
@@ -274,7 +274,7 @@ Allows you to retrieve information about the required invoice.
 | string | product_id                       | Product ID                                              |
 | string | item_id                          | Item ID                                                 |
 
-### Content `salesOrderInvoiceCommentEntity`
+<h3>Content `salesOrderInvoiceCommentEntity`</h3>
 
 | Type   | Name                 | Description                              |
 |--------|----------------------|------------------------------------------|
@@ -287,9 +287,9 @@ Allows you to retrieve information about the required invoice.
 | string | is_customer_notified | Defines whether the customer is notified |
 | string | comment_id           | Comment ID                               |
 
-### Examples
+<h3>Examples</h3>
 
-#### Request Example SOAP V1
+<h4>Request Example SOAP V1</h4>
 
 ```php
 $client = new SoapClient('https://mahohost/api/soap/?wsdl');
@@ -302,7 +302,7 @@ var_dump($result);
 $client->endSession($session);
 ```
 
-#### Request Example SOAP V2
+<h4>Request Example SOAP V2</h4>
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); // TODO: change url
@@ -312,7 +312,7 @@ $result = $proxy->salesOrderInvoiceInfo($sessionId, '200000006');
 var_dump($result);
 ```
 
-#### Request Example SOAP V2 (WS-I Compliance Mode)
+<h4>Request Example SOAP V2 (WS-I Compliance Mode)</h4>
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); 
@@ -322,7 +322,7 @@ $result = $proxy->salesOrderInvoiceInfo((object)['sessionId' => $sessionId->resu
 var_dump($result->result);
 ```
 
-#### Response Example SOAP V1
+<h4>Response Example SOAP V1</h4>
 
 ```php
 array
@@ -416,18 +416,18 @@ array
 
 ## Create
 
-### Method
+<h3>Method</h3>
 
 - `sales_order_invoice.create` (SOAP V1)
 - `salesOrderInvoiceCreate` (SOAP V2)
 
 Allows you to create a new invoice for an order.
 
-### Alias
+<h3>Alias</h3>
 
 - `order_invoice.create`
 
-### Arguments
+<h3>Arguments</h3>
 
 | Type   | Name               | Description                                            |
 |--------|--------------------|--------------------------------------------------------|
@@ -438,22 +438,22 @@ Allows you to create a new invoice for an order.
 | string | email              | Send invoice on email (optional)                       |
 | string | includeComment     | Include comments in email (optional)                   |
 
-### Returns
+<h3>Returns</h3>
 
 | Type   | Description               |
 |--------|---------------------------|
 | string | ID of the created invoice |
 
-### Content `orderItemIdQty`
+<h3>Content `orderItemIdQty`</h3>
 
 | Type   | Name          | Description   |
 |--------|---------------|---------------|
 | int    | order_item_id | Order item ID |
 | double | qty           | Quantity      |
 
-### Examples
+<h3>Examples</h3>
 
-#### Request Example SOAP V1
+<h4>Request Example SOAP V1</h4>
 
 ```php
 $client = new SoapClient('https://mahohost/api/soap/?wsdl');
@@ -471,7 +471,7 @@ var_dump($result);
 $client->endSession($session);
 ```
 
-#### Request Example SOAP V2
+<h4>Request Example SOAP V2</h4>
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); // TODO: change url
@@ -490,7 +490,7 @@ $invoiceIncrementId = $proxy->salesOrderInvoiceCreate(
 var_dump($invoiceIncrementId);
 ```
 
-#### Request Example SOAP V2 (WS-I Compliance Mode)
+<h4>Request Example SOAP V2 (WS-I Compliance Mode)</h4>
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl');
@@ -505,18 +505,18 @@ var_dump($result->result);
 
 ## AddComment
 
-### Method
+<h3>Method</h3>
 
 - `sales_order_invoice.addComment` (SOAP V1)
 - `salesOrderInvoiceAddComment` (SOAP V2)
 
 Allows you to add a new comment to the order invoice.
 
-### Alias
+<h3>Alias</h3>
 
 - `order_invoice.addComment`
 
-### Arguments
+<h3>Arguments</h3>
 
 | Type   | Name               | Description                              |
 |--------|--------------------|------------------------------------------|
@@ -526,15 +526,15 @@ Allows you to add a new comment to the order invoice.
 | int    | email              | Send invoice on email flag (optional)    |
 | int    | includeComment     | Include comment in email flag (optional) |
 
-### Returns
+<h3>Returns</h3>
 
 | Type    | Description                                 |
 |---------|---------------------------------------------|
 | boolean | True if the comment is added to the invoice |
 
-### Examples
+<h3>Examples</h3>
 
-#### Request Example SOAP V1
+<h4>Request Example SOAP V1</h4>
 
 ```php
 $client = new SoapClient('https://mahohost/api/soap/?wsdl');
@@ -547,7 +547,7 @@ var_dump($result);
 $client->endSession($session);
 ```
 
-#### Request Example SOAP V2
+<h4>Request Example SOAP V2</h4>
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); // TODO: change url
@@ -557,7 +557,7 @@ $result = $proxy->salesOrderInvoiceAddComment($sessionId, '200000006');
 var_dump($result);
 ```
 
-#### Request Example SOAP V2 (WS-I Compliance Mode)
+<h4>Request Example SOAP V2 (WS-I Compliance Mode)</h4>
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); 
@@ -569,7 +569,7 @@ var_dump($result->result);
 
 ## Capture
 
-### Method
+<h3>Method</h3>
 
 - `sales_order_invoice.capture` (SOAP V1)
 - `salesOrderInvoiceCapture` (SOAP V2)
@@ -577,24 +577,24 @@ var_dump($result->result);
 Allows you to capture the required invoice. Note that not all order invoices can be captured.
 Only some payment methods support capturing the order invoice (e.g., PayPal Pro).
 
-### Alias
+<h3>Alias</h3>
 
 - `order_invoice.capture`
 
-### Arguments
+<h3>Arguments</h3>
 
 | Type   | Name               | Description          |
 |--------|--------------------|----------------------|
 | string | sessionId          | Session ID           |
 | string | invoiceIncrementId | Invoice increment ID |
 
-### Returns
+<h3>Returns</h3>
 
 | Type       | Description                                |
 |------------|--------------------------------------------|
 | booleanint | True (1) if the order invoice is captured. |
 
-### Notes
+<h3>Notes</h3>
 
 You should check the invoice to see if it can be captured before attempting to capture the invoice.
 Otherwise, the API call will generate an error.
@@ -609,9 +609,9 @@ Also note that there is a method call in the model that checks this for you: `ca
 And it also verifies that the payment can be captured,
 so the invoice state might not be the only condition required to allow it to be captured.
 
-### Examples
+<h3>Examples</h3>
 
-#### Request Example SOAP V1
+<h4>Request Example SOAP V1</h4>
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/soap/?wsdl');
@@ -637,7 +637,7 @@ $result = $proxy->call(
 );
 ```
 
-#### Request Example SOAP V2
+<h4>Request Example SOAP V2</h4>
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl');
@@ -662,7 +662,7 @@ $result = $proxy->salesOrderInvoiceCapture(
 );
 ```
 
-#### Request Example SOAP V2 (WS-I Compliance Mode)
+<h4>Request Example SOAP V2 (WS-I Compliance Mode)</h4>
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); 
@@ -675,7 +675,7 @@ var_dump($result->result);
 
 ## Cancel
 
-### Method
+<h3>Method</h3>
 
 - `sales_order_invoice.cancel` (SOAP V1)
 - `salesOrderInvoiceCancel` (SOAP V2)
@@ -684,26 +684,26 @@ Allows you to cancel the required invoice.
 Note that not all order invoices can be canceled.
 Only some payment methods support canceling the order invoice (e.g., PayPal Express).
 
-### Alias
+<h3>Alias</h3>
 
 - `order_invoice.cancel`
 
-### Arguments
+<h3>Arguments</h3>
 
 | Type   | Name               | Description          |
 |--------|--------------------|----------------------|
 | string | sessionId          | Session ID           |
 | string | invoiceIncrementId | Invoice increment ID |
 
-### Returns
+<h3>Returns</h3>
 
 | Type    | Description                            |
 |---------|----------------------------------------|
 | boolean | True if the order invoice is canceled. |
 
-### Examples
+<h3>Examples</h3>
 
-#### Request Example SOAP V1
+<h4>Request Example SOAP V1</h4>
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/soap/?wsdl');

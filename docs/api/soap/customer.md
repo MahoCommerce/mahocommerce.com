@@ -4,7 +4,7 @@
 
 Allows you to create, retrieve, update, and delete data about customers.
 
-### Methods
+<h3>Methods</h3>
 
 - `customer.list` — Retrieve the list of customers.
 - `customer.create` — Create a new customer.
@@ -12,7 +12,7 @@ Allows you to create, retrieve, update, and delete data about customers.
 - `customer.update` — Update the customer data.
 - `customer.delete` — Delete a required customer.
 
-### Faults
+<h3>Faults</h3>
 
 | Fault Code | Fault Message                                        |
 |------------|------------------------------------------------------|
@@ -21,7 +21,7 @@ Allows you to create, retrieve, update, and delete data about customers.
 | 102        | Customer does not exist.                             |
 | 103        | Customer not deleted. Details in error message.      |
 
-### Examples — View, Create, Update and Delete a Customer
+<h3>Examples — View, Create, Update and Delete a Customer</h3>
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/soap/?wsdl');
@@ -56,27 +56,27 @@ $proxy->call($sessionId, 'customer.delete', $newCustomerId);
 
 ## List
 
-### Method
+<h3>Method</h3>
 
 - `customer.list` (SOAP V1)
 - `customerCustomerList` (SOAP V2)
 
 Allows you to retrieve the list of customers.
 
-### Arguments
+<h3>Arguments</h3>
 
 | Type   | Name      | Description                                        |
 |--------|-----------|----------------------------------------------------|
 | string | sessionId | Session ID                                         |
 | array  | filters   | Array of filters by customer attributes (optional) |
 
-### Returns
+<h3>Returns</h3>
 
 | Type  | Name      | Description                     |
 |-------|-----------|---------------------------------|
 | array | storeView | Array of customerCustomerEntity |
 
-### Content `customerCustomerEntity`
+<h3>Content `customerCustomerEntity`</h3>
 
 | Type    | Name          | Description                           |
 |---------|---------------|---------------------------------------|
@@ -104,9 +104,9 @@ as was used when Maho stored the value.
 If you try to match with an unsalted MD5 hash or any salt other than what Maho used, it will not match.
 This is just a straight string comparison.
 
-### Examples
+<h3>Examples</h3>
 
-#### Request Example SOAP V1
+<h4>Request Example SOAP V1</h4>
 
 ```php
 $client = new SoapClient('https://mahohost/api/soap/?wsdl');
@@ -119,7 +119,7 @@ mp($result);
 $client->endSession($session);
 ```
 
-#### Request Example SOAP V2 (List of All Customers)
+<h4>Request Example SOAP V2 (List of All Customers)</h4>
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); // TODO: change url
@@ -129,7 +129,7 @@ $result = $proxy->customerCustomerList($sessionId);
 mp($result);
 ```
 
-#### Request Example SOAP V2 (Complex Filter)
+<h4>Request Example SOAP V2 (Complex Filter)</h4>
 
 ```php
 $client = new SoapClient('https://mahohost/api/v2_soap/?wsdl');
@@ -147,7 +147,7 @@ $result = $client->customerCustomerList($session, $complexFilter);
 mp($result);
 ```
 
-#### Request Example SOAP V2 (WS-I Compliance Mode)
+<h4>Request Example SOAP V2 (WS-I Compliance Mode)</h4>
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl');
@@ -157,7 +157,7 @@ $result = $proxy->customerCustomerList((object)['sessionId' => $sessionId->resul
 mp($result->result);
 ```
 
-#### Response Example SOAP V1
+<h4>Response Example SOAP V1</h4>
 
 ```php
 array
@@ -199,27 +199,27 @@ array
 
 ## Create
 
-### Method
+<h3>Method</h3>
 
 - `customer.create` (SOAP V1)
 - `customerCustomerCreate` (SOAP V2)
 
 Create a new customer.
 
-### Arguments
+<h3>Arguments</h3>
 
 | Type   | Name         | Description                             |
 |--------|--------------|-----------------------------------------|
 | string | sessionId    | Session ID                              |
 | array  | customerData | Array of customerCustomerEntityToCreate |
 
-### Returns
+<h3>Returns</h3>
 
 | Type | Name   | Description                |
 |------|--------|----------------------------|
 | int  | result | ID of the created customer |
 
-### Content `customerCustomerEntityToCreate`
+<h3>Content `customerCustomerEntityToCreate`</h3>
 
 | Type   | Name       | Description                                      |
 |--------|------------|--------------------------------------------------|
@@ -237,9 +237,9 @@ Create a new customer.
 | int    | gender     | Customer gender: 1 - Male, 2 - Female (optional) |
 | string | middlename | Customer middle name/initial (optional)          |
 
-### Examples
+<h3>Examples</h3>
 
-#### Request Example SOAP V1
+<h4>Request Example SOAP V1</h4>
 
 ```php
 $client = new SoapClient('https://mahohost/api/soap/?wsdl');
@@ -266,7 +266,7 @@ mp($result);
 $client->endSession($session);
 ```
 
-#### Request Example SOAP V2
+<h4>Request Example SOAP V2</h4>
 
 ```php
 $client = new SoapClient('https://mahohost/api/v2_soap/?wsdl');
@@ -287,7 +287,7 @@ $result = $client->customerCustomerCreate(
 mp($result);
 ```
 
-#### Request Example SOAP V2 (WS-I Compliance Mode)
+<h4>Request Example SOAP V2 (WS-I Compliance Mode)</h4>
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); 
@@ -311,14 +311,14 @@ mp($result->result);
 
 ## Info
 
-### Method
+<h3>Method</h3>
 
 - `customer.info` (SOAP V1)
 - `customerCustomerInfo` (SOAP V2)
 
 Retrieve information about the specified customer.
 
-### Arguments
+<h3>Arguments</h3>
 
 | Type          | Name       | Description                 |
 |---------------|------------|-----------------------------|
@@ -329,13 +329,13 @@ Retrieve information about the specified customer.
 **Note:** Only specified attributes will be returned.
 The `customer_id` value is always returned.
 
-### Returns
+<h3>Returns</h3>
 
 | Type  | Name         | Description                     |
 |-------|--------------|---------------------------------|
 | array | customerInfo | Array of customerCustomerEntity |
 
-### Content `customerCustomerEntity`
+<h3>Content `customerCustomerEntity`</h3>
 
 | Type    | Name                | Description                            |
 |---------|---------------------|----------------------------------------|
@@ -360,9 +360,9 @@ The `customer_id` value is always returned.
 | string  | rp_token            | Reset password token                   |
 | string  | rp_token_created_at | Date when the password was reset       |
 
-### Examples
+<h3>Examples</h3>
 
-#### Request Example SOAP V1
+<h4>Request Example SOAP V1</h4>
 
 ```php
 $client = new SoapClient('https://mahohost/api/soap/?wsdl');
@@ -375,7 +375,7 @@ var_dump($result);
 $client->endSession($session);
 ```
 
-#### Request Example SOAP V2
+<h4>Request Example SOAP V2</h4>
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); // TODO: change url
@@ -385,7 +385,7 @@ $result = $proxy->customerCustomerInfo($sessionId, '2');
 var_dump($result);
 ```
 
-#### Request Example SOAP V2 (WS-I Compliance Mode)
+<h4>Request Example SOAP V2 (WS-I Compliance Mode)</h4>
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl');
@@ -395,7 +395,7 @@ $result = $proxy->customerCustomerInfo((object)['sessionId' => $sessionId->resul
 var_dump($result->result);
 ```
 
-#### Response Example SOAP V1
+<h4>Response Example SOAP V1</h4>
 
 ```php
 array
@@ -427,7 +427,7 @@ array
 
 ## Update
 
-### Method
+<h3>Method</h3>
 
 - `customer.update` (SOAP V1)
 - `customerCustomerUpdate` (SOAP V2)
@@ -435,7 +435,7 @@ array
 Update information about the required customer.
 Note that you need to pass only those arguments which you want to be updated.
 
-### Arguments
+<h3>Arguments</h3>
 
 | Type   | Name         | Description                             |
 |--------|--------------|-----------------------------------------|
@@ -443,13 +443,13 @@ Note that you need to pass only those arguments which you want to be updated.
 | int    | customerId   | Customer ID                             |
 | array  | customerData | Array of customerCustomerEntityToCreate |
 
-### Returns
+<h3>Returns</h3>
 
 | Type    | Description                     |
 |---------|---------------------------------|
 | boolean | True if the customer is updated |
 
-### Content `customerCustomerEntityToCreate`
+<h3>Content `customerCustomerEntityToCreate`</h3>
 
 | Type   | Name        | Description                           |
 |--------|-------------|---------------------------------------|
@@ -466,9 +466,9 @@ Note that you need to pass only those arguments which you want to be updated.
 | int    | gender      | Customer gender: 1 - Male, 2 - Female |
 | string | middlename  | Customer middle name/initial          |
 
-### Examples
+<h3>Examples</h3>
 
-#### Request Example SOAP V1
+<h4>Request Example SOAP V1</h4>
 
 ```php
 $client = new SoapClient('https://mahohost/api/soap/?wsdl');
@@ -493,7 +493,7 @@ var_dump($result);
 $client->endSession($session);
 ```
 
-#### Request Example SOAP V2
+<h4>Request Example SOAP V2</h4>
 
 ```php
 $client = new SoapClient('https://mahohost/api/v2_soap/?wsdl');
@@ -515,7 +515,7 @@ $result = $client->customerCustomerUpdate(
 var_dump($result);
 ```
 
-#### Request Example SOAP V2 (WS-I Compliance Mode)
+<h4>Request Example SOAP V2 (WS-I Compliance Mode)</h4>
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); 
@@ -537,29 +537,29 @@ var_dump($result->result);
 
 ## Delete
 
-### Method
+<h3>Method</h3>
 
 - `customer.delete` (SOAP V1)
 - `customerCustomerDelete` (SOAP V2)
 
 Delete the required customer.
 
-### Arguments
+<h3>Arguments</h3>
 
 | Type   | Name       | Description |
 |--------|------------|-------------|
 | string | sessionId  | Session ID  |
 | int    | customerId | Customer ID |
 
-### Returns
+<h3>Returns</h3>
 
 | Type    | Description                     |
 |---------|---------------------------------|
 | boolean | True if the customer is deleted |
 
-### Examples
+<h3>Examples</h3>
 
-#### Request Example SOAP V1
+<h4>Request Example SOAP V1</h4>
 
 ```php
 $client = new SoapClient('https://mahohost/api/soap/?wsdl');
@@ -572,7 +572,7 @@ var_dump($result);
 $client->endSession($session);
 ```
 
-#### Request Example SOAP V2
+<h4>Request Example SOAP V2</h4>
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); // TODO: change url
@@ -582,7 +582,7 @@ $result = $proxy->customerCustomerDelete($sessionId, '2');
 var_dump($result);
 ```
 
-#### Request Example SOAP V2 (WS-I Compliance Mode)
+<h4>Request Example SOAP V2 (WS-I Compliance Mode)</h4>
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); 

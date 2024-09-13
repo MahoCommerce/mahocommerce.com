@@ -4,16 +4,16 @@
 
 Allows you to retrieve and set shipping methods for a shopping cart.
 
-### Resource Name
+<h3>Resource Name</h3>
 
 - `cart_shipping`
 
-### Methods
+<h3>Methods</h3>
 
 - `cart_shipping.method` — Set a shipping method for a shopping cart.
 - `cart_shipping.list` — Retrieve the list of available shipping methods for a shopping cart.
 
-### Faults
+<h3>Faults</h3>
 
 | Fault Code | Fault Message                                                          |
 |------------|------------------------------------------------------------------------|
@@ -31,7 +31,7 @@ Allows you to retrieve and set shipping methods for a shopping cart.
 
 Allows you to set a shipping method for a shopping cart (quote).
 
-### Arguments
+<h3>Arguments</h3>
 
 | Type   | Name      | Description Ω                    |
 |--------|-----------|----------------------------------|
@@ -40,19 +40,19 @@ Allows you to set a shipping method for a shopping cart (quote).
 | string | method    | Shipping method code             |
 | string | storeId   | Store view ID or code (optional) |
 
-### Return
+<h3>Return</h3>
 
 | Type    | Name   | Description                        |
 |---------|--------|------------------------------------|
 | boolean | result | True if the shipping method is set |
 
-### Faults
+<h3>Faults</h3>
 
 _No Faults._
 
-### Examples
+<h3>Examples</h3>
 
-#### Request Example SOAP V1
+<h4>Request Example SOAP V1</h4>
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/soap/?wsdl');
@@ -62,7 +62,7 @@ $result = $proxy->call($sessionId, 'cart_shipping.method', [10, 'freeshipping_fr
 var_dump($result);
 ```
 
-#### Request Example SOAP V2
+<h4>Request Example SOAP V2</h4>
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl');
@@ -72,7 +72,7 @@ $result = $proxy->shoppingCartShippingMethod($sessionId, 10, 'freeshipping_frees
 var_dump($result);
 ```
 
-#### Request Example SOAP V2 (WS-I Compliance Mode)
+<h4>Request Example SOAP V2 (WS-I Compliance Mode)</h4>
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl');
@@ -90,14 +90,14 @@ var_dump($result->result);
 
 ## List
 
-### Method
+<h3>Method</h3>
 
 - `cart_shipping.list` (SOAP V1)
 - `shoppingCartShippingList` (SOAP V2)
 
 Allows you to retrieve the list of available shipping methods for a shopping cart (quote).
 
-### Arguments
+<h3>Arguments</h3>
 
 | Type   | Name      | Description                      |
 |--------|-----------|----------------------------------|
@@ -105,13 +105,13 @@ Allows you to retrieve the list of available shipping methods for a shopping car
 | int    | quoteId   | Shopping cart ID                 |
 | string | storeId   | Store view ID or code (optional) |
 
-### Returns
+<h3>Returns</h3>
 
 | Type  | Name   | Descriptio n                              |
 |-------|--------|-------------------------------------------|
 | array | result | Array of shoppingCartShippingMethodEntity |
 
-### Content `shoppingCartShippingMethodEntity`
+<h3>Content `shoppingCartShippingMethodEntity`</h3>
 
 | Type   | Name               | Description                 |
 |--------|--------------------|-----------------------------|
@@ -123,13 +123,13 @@ Allows you to retrieve the list of available shipping methods for a shopping car
 | string | method_description | Shipping method description |
 | double | price              | Shipping price              |
 
-### Faults 
+<h3>Faults </h3>
 
 _No Faults._
 
-### Examples
+<h3>Examples</h3>
 
-#### Request Example SOAP V1
+<h4>Request Example SOAP V1</h4>
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/soap/?wsdl'); 
@@ -139,7 +139,7 @@ $result = $proxy->call($sessionId, 'cart_shipping.list', 10);
 var_dump($result);
 ```
 
-#### Request Example SOAP V2
+<h4>Request Example SOAP V2</h4>
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); 
@@ -149,7 +149,7 @@ $result = $proxy->shoppingCartShippingList($sessionId, 10);
 var_dump($result);
 ```
 
-#### Request Example SOAP V2 (WS-I Compliance Mode)
+<h4>Request Example SOAP V2 (WS-I Compliance Mode)</h4>
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); 

@@ -4,16 +4,16 @@
 
 Allows you to add customer information and addresses into a shopping cart.
 
-### Resource Name
+<h3>Resource Name</h3>
 
 - `cart_customer`
 
-### Methods
+<h3>Methods</h3>
 
 - `cart_customer.set` — Add customer information into a shopping cart.
 - `cart_customer.addresses` — Set the customer addresses (shipping and billing) into a shopping cart.
 
-### Faults
+<h3>Faults</h3>
 
 | Fault Code | Fault Message                                                          |
 |------------|------------------------------------------------------------------------|
@@ -32,14 +32,14 @@ Allows you to add customer information and addresses into a shopping cart.
 
 ## Set
 
-### Method
+<h3>Method</h3>
 
 - `cart_customer.set` (SOAP V1)
 - `shoppingCartCustomerSet` (SOAP V2)
 
 Allows you to add information about the customer to a shopping cart (quote).
 
-### Arguments
+<h3>Arguments</h3>
 
 | Type   | Name         | Description                         |
 |--------|--------------|-------------------------------------|
@@ -48,13 +48,13 @@ Allows you to add information about the customer to a shopping cart (quote).
 | array  | customerData | Array of shoppingCartCustomerEntity |
 | string | store        | Store view ID or code (optional)    |
 
-### Return
+<h3>Return</h3>
 
 | Type    | Name   | Description                  |
 |---------|--------|------------------------------|
 | boolean | result | True if information is added |
 
-### Content `shoppingCartCustomerEntity`
+<h3>Content `shoppingCartCustomerEntity`</h3>
 
 | Type   | Name         | Description            |
 |--------|--------------|------------------------|
@@ -69,13 +69,13 @@ Allows you to add information about the customer to a shopping cart (quote).
 | int    | store_id     | Store ID               |
 | int    | group_id     | Group ID               |
 
-### Faults 
+<h3>Faults </h3>
 
 _No Faults._
 
-### Examples
+<h3>Examples</h3>
 
-#### Request Example SOAP V1
+<h4>Request Example SOAP V1</h4>
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/soap/?wsdl');
@@ -93,7 +93,7 @@ $customerAsGuest = [
 $resultCustomerSet = $proxy->call($sessionId, 'cart_customer.set', [$shoppingCartId, $customerAsGuest]);
 ```
 
-#### Request Example SOAP V2
+<h4>Request Example SOAP V2</h4>
 
 ```php
 $client = new SoapClient('https://mahohost/api/v2_soap/?wsdl');
@@ -114,14 +114,14 @@ $resultCustomerSet = $client->shoppingCartCustomerSet($session, $quoteId, $custo
 
 ## Addresses
 
-### Method
+<h3>Method</h3>
 
 - `cart_customer.addresses` (SOAP V1)
 - `shoppingCartCustomerAddresses` (SOAP V2)
 
 Allows you to set the customer addresses in the shopping cart (quote).
 
-### Arguments
+<h3>Arguments</h3>
 
 | Type   | Name                | Description                                |
 |--------|---------------------|--------------------------------------------|
@@ -130,13 +130,13 @@ Allows you to set the customer addresses in the shopping cart (quote).
 | array  | customerAddressData | Array of shoppingCartCustomerAddressEntity |
 | string | store               | Store view ID or code (optional)           |
 
-### Return
+<h3>Return</h3>
 
 | Type    | Name   | Description                |
 |---------|--------|----------------------------|
 | boolean | result | True if the address is set |
 
-### Content `shoppingCartCustomerAddressEntity`
+<h3>Content `shoppingCartCustomerAddressEntity`</h3>
 
 | Type   | Name                | Description                                               |
 |--------|---------------------|-----------------------------------------------------------|
@@ -156,13 +156,13 @@ Allows you to set the customer addresses in the shopping cart (quote).
 | int    | is_default_billing  | Defines whether the address is a default billing address  |
 | int    | is_default_shipping | Defines whether the address is a default shipping address |
 
-### Faults
+<h3>Faults</h3>
 
 _No Faults._
 
-### Examples
+<h3>Examples</h3>
 
-#### Request Example SOAP V1
+<h4>Request Example SOAP V1</h4>
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/soap/?wsdl');
@@ -202,7 +202,7 @@ $resultCustomerAddresses = $proxy->call(
 );
 ```
 
-#### Request Example SOAP V2
+<h4>Request Example SOAP V2</h4>
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl');
@@ -229,7 +229,7 @@ $result = $proxy->shoppingCartCustomerAddresses(
 var_dump($result);
 ```
 
-#### Request Example SOAP V2 (WS-I Compliance Mode)
+<h4>Request Example SOAP V2 (WS-I Compliance Mode)</h4>
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl');
