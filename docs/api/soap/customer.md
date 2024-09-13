@@ -113,7 +113,7 @@ $client = new SoapClient('https://mahohost/api/soap/?wsdl');
 $session = $client->login('apiUser', 'apiKey');
 
 $result = $client->call($session, 'customer.list');
-mp ($result);
+mp($result);
 
 // When the session can be closed
 $client->endSession($session);
@@ -144,7 +144,7 @@ $complexFilter = [
     ]
 ];
 $result = $client->customerCustomerList($session, $complexFilter);
-mp ($result);
+mp($result);
 ```
 
 #### Request Example SOAP V2 (WS-I Compliance Mode)
@@ -260,7 +260,7 @@ $result = $client->call(
         ]
     ]
 );
-mp ($result);
+mp($result);
 
 // When the session can be closed
 $client->endSession($session);
@@ -284,7 +284,7 @@ $result = $client->customerCustomerCreate(
         'group_id' => 1
     ]
 );
-mp ($result);
+mp($result);
 ```
 
 #### Request Example SOAP V2 (WS-I Compliance Mode)
