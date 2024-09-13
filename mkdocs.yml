@@ -75,6 +75,7 @@ nav:
       - Cron setup: cron.md
       - FrankenPHP: frankenphp.md
       - Language packs: language-packs.md
+      - Override configs: override-configurations.md
       - Robots.txt: robotstxt.md
     - Reference:
       - REST API:
