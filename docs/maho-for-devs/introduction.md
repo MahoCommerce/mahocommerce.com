@@ -432,7 +432,6 @@ As you might expect, this overriding (or rewriting) is done in the config.xml fi
 
 ```xml
 <models>
-    <!-- does the override for catalog/product-->
     <catalog>
         <rewrite>
             <product>Packagename_Modulename_Model_Foobazproduct</product>
