@@ -1,3 +1,5 @@
+This series of guides was written by [Alana Storm](https://alanastorm.com){target=_blank} for the Magento devdocs website and it's now edited and  adapted for Maho.
+
 ## Code Organized in Modules
 
 Maho organizes its code into individual Modules. In a typical PHP [**Model-View-Controller (MVC)**](https://en.wikipedia.org/wiki/Model–view–controller) application, all the Controllers will be in one folder, all the Models in another, etc. In Maho, files are grouped together based on functionality, which are called **modules** in Maho.
