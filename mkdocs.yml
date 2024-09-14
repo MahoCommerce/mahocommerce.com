@@ -78,6 +78,15 @@ nav:
       - Override configs: override-configurations.md
       - Robots.txt: robotstxt.md
     - Reference:
+      - Development guide:
+          - Introduction: maho-for-devs/introduction.md
+          - The Maho config: maho-for-devs/config.md
+          - Controller dispatch: maho-for-devs/controller-dispatch.md
+          - Layouts, blocks and templates: maho-for-devs/layout-blocks-templates.md
+          - Models and ORM basics: maho-for-devs/models-and-orm.md
+          - Setup resources: maho-for-devs/setup-resources.md
+          - Advanced ORM: maho-for-devs/advanced-orm.md
+          - Data collections: maho-for-devs/data-collections.md
       - REST API:
           - Introduction: api/rest/introduction.md
           - Common HTTP status codes: api/rest/common_http_status_codes.md
