@@ -2,30 +2,30 @@
 
 ## Country List
 
-### Method
+<h3>Method</h3>
 
 - `directory_country.list` (SOAP V1)
 - `directoryCountryList` (SOAP V2)
 
 Retrieve the list of countries from Maho.
 
-### Alias
+<h3>Alias</h3>
 
 - `country.list`
 
-### Arguments
+<h3>Arguments</h3>
 
 | Type   | Name      | Description |
 |--------|-----------|-------------|
 | string | sessionId | Session ID  |
 
-### Returns
+<h3>Returns</h3>
 
 | Type  | Name      | Description                        |
 |-------|-----------|------------------------------------|
 | array | countries | An array of directoryCountryEntity |
 
-### Content `directoryCountryEntity`
+<h3>Content `directoryCountryEntity`</h3>
 
 | Type   | Name       | Description                   |
 |--------|------------|-------------------------------|
@@ -34,9 +34,9 @@ Retrieve the list of countries from Maho.
 | string | iso3_code  | ISO 3-alpha code              |
 | string | name       | Name of the retrieved country |
 
-### Examples
+<h3>Examples</h3>
 
-#### Request Example SOAP V1
+<h4>Request Example SOAP V1</h4>
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/soap/?wsdl');
@@ -46,7 +46,7 @@ $countries = $proxy->call($sessionId, 'country.list');
 var_dump($countries); // Countries list
 ```
 
-#### Request Example SOAP V2
+<h4>Request Example SOAP V2</h4>
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); // TODO: change url
@@ -56,7 +56,7 @@ $result = $proxy->directoryCountryList($sessionId);
 var_dump($result);
 ```
 
-#### Request Example SOAP V2 (WS-I Compliance Mode)
+<h4>Request Example SOAP V2 (WS-I Compliance Mode)</h4>
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); 
@@ -66,7 +66,7 @@ $result = $proxy->directoryCountryList((object)['sessionId' => $sessionId->resul
 var_dump($result->result);
 ```
 
-#### Response Example SOAP V1
+<h4>Response Example SOAP V1</h4>
 
 ```php
 array
@@ -92,31 +92,31 @@ array
 
 ## Region List
 
-### Method
+<h3>Method</h3>
 
 - `directory_region.list` (SOAP V1)
 - `directoryRegionList` (SOAP V2)
 
 Retrieve the list of regions in the specified country.
 
-### Aliases
+<h3>Aliases</h3>
 
 - `region.list`
 
-### Arguments
+<h3>Arguments</h3>
 
 | Type   | Name      | Description                  |
 |--------|-----------|------------------------------|
 | string | sessionId | Session ID                   |
 | string | country   | Country code in ISO2 or ISO3 |
 
-### Returns
+<h3>Returns</h3>
 
 | Type  | Name                       | Description                       |
 |-------|----------------------------|-----------------------------------|
 | array | directoryRegionEntityArray | An array of directoryRegionEntity |
 
-### Content `directoryRegionEntity`
+<h3>Content `directoryRegionEntity`</h3>
 
 | Type   | Name      | Description        |
 |--------|-----------|--------------------|
@@ -124,15 +124,15 @@ Retrieve the list of regions in the specified country.
 | string | code      | Region code        |
 | string | name      | Name of the region |
 
-### Faults
+<h3>Faults</h3>
 
 | Fault Code | Fault Message       |
 |------------|---------------------|
 | 101        | Country not exists. |
 
-### Examples
+<h3>Examples</h3>
 
-#### Request Example SOAP V1
+<h4>Request Example SOAP V1</h4>
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/soap/?wsdl');
@@ -142,7 +142,7 @@ $regions = $proxy->call($sessionId, 'region.list', 'US');
 var_dump($regions); // Region list for USA.
 ```
 
-#### Request Example SOAP V2
+<h4>Request Example SOAP V2</h4>
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); 
@@ -152,7 +152,7 @@ $result = $proxy->directoryRegionList($sessionId, 'US');
 var_dump($result);
 ```
 
-#### Request Example SOAP V2 (WS-I Compliance Mode)
+<h4>Request Example SOAP V2 (WS-I Compliance Mode)</h4>
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); 
@@ -162,7 +162,7 @@ $result = $proxy->directoryRegionList((object)['sessionId' => $sessionId->result
 var_dump($result->result);
 ```
 
-#### Response Example SOAP V1
+<h4>Response Example SOAP V1</h4>
 
 ```php
 array

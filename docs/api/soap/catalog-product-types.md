@@ -4,22 +4,22 @@
 
 Allows you to retrieve product types.
 
-**Resource Name**: catalog_product_type
+<h3>Resource Name</h3>
 
-**Aliases**:
+- `catalog_product_type`
 
--   product_type
+<h3>Alias</h3>
 
-**Methods**:
+- `product_type`
 
-- catalog_product_type.list - Retrieve the list of product types
+<h3>Method</h3>
 
-**Examples**:
+- `catalog_product_type.list` — Retrieve the list of product types.
 
-**Example 1. Retrieving the product types**
+<h3>Example — Retrieving the Product Type</h3>
 
 ```php
-$proxy = new SoapClient('http://magentohost/api/soap/?wsdl');
+$proxy = new SoapClient('https://mahohost/api/soap/?wsdl');
 $sessionId = $proxy->login('apiUser', 'apiKey');
 
 $types = $proxy->call($sessionId, 'product_type.list');
@@ -28,72 +28,72 @@ var_dump($types);
 
 ## List
 
-**Method:**
+<h3>Method</h3>
 
--   catalog_product_type.list (SOAP V1)
--   catalogProductTypeList (SOAP V2)
+- `catalog_product_type.list` (SOAP V1)
+- `catalogProductTypeList` (SOAP V2)
 
 Allows you to retrieve the list of product types.
 
-**Aliases:**
+<h3>Alias</h3>
 
--   product_type.list
+- `product_type.list`
 
-**Arguments:**
+<h3>Arguments</h3>
 
-| Type | Name | Description |
-| --- | --- | --- |
-| string | sessionId | Session ID |
+| Type   | Name      | Description |
+|--------|-----------|-------------|
+| string | sessionId | Session ID  |
 
-**Returns**:
+<h3>Returns</h3>
 
-| Type | Name | Description |
-| --- | --- | --- |
+| Type  | Name   | Description                       |
+|-------|--------|-----------------------------------|
 | array | result | Array of catalogProductTypeEntity |
 
-The **catalogProductTypeEntity** content is as follows:
+<h3>Content `catalogProductTypeEntity`</h3>
 
-| Type | Name | Description |
-| --- | --- | --- |
-| string | type | Product type |
+| Type   | Name  | Description                      |
+|--------|-------|----------------------------------|
+| string | type  | Product type                     |
 | string | label | Product label in the Admin Panel |
 
-**Examples**:
+<h3>Examples</h3>
 
-**Request Example SOAP V1**
+<h4>Request Example SOAP V1</h4>
 
 ```php
-$client = new SoapClient('http://magentohost/api/soap/?wsdl');
+$client = new SoapClient('https://mahohost/api/soap/?wsdl');
 $session = $client->login('apiUser', 'apiKey');
 
 $result = $client->call($session, 'catalog_product_type.list');
 var_dump($result);
 
-// If you don't need the session anymore
-//$client->endSession($session);
+// When the session can be closed
+$client->endSession($session);
 ```
 
-**Request Example SOAP V2**
+<h4>Request Example SOAP V2</h4>
 
 ```php
-$proxy = new SoapClient('http://magentohost/api/v2_soap/?wsdl'); // TODO : change url
-$sessionId = $proxy->login('apiUser', 'apiKey'); // TODO : change login and pwd if necessary
+$proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); // TODO: change url
+$sessionId = $proxy->login('apiUser', 'apiKey'); // TODO: change login and pwd if necessary
 
 $result = $proxy->catalogProductTypeList($sessionId);
 var_dump($result);
 ```
 
-**Request Example SOAP V2 (WS-I Compliance Mode)**
+<h4>Request Example SOAP V2 (WS-I Compliance Mode)</h4>
 
 ```php
-$proxy = new SoapClient('http://magentohost/api/v2_soap/?wsdl');
-$sessionId = $proxy->login((object)array('username' => 'apiUser', 'apiKey' => 'apiKey'));
+$proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl');
+$sessionId = $proxy->login((object)['username' => 'apiUser', 'apiKey' => 'apiKey']);
 
-$result = $proxy->catalogProductTypeList((object)array('sessionId' => $sessionId->result));
+$result = $proxy->catalogProductTypeList((object)['sessionId' => $sessionId->result]);
 var_dump($result->result);
 ```
 
-**Response Example SOAP V1**
+<h4>Response Example SOAP V1</h4>
 
 ```php
 array

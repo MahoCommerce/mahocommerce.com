@@ -4,11 +4,11 @@
 
 Allows you to manage shopping carts.
 
-### Resource Name
+<h3>Resource Name</h3>
 
 - `cart`
 
-### Methods
+<h3>Methods</h3>
 
 - `cart.create` — Create a blank shopping cart.
 - `cart.order` — Create an order from a shopping cart.
@@ -16,7 +16,7 @@ Allows you to manage shopping carts.
 - `cart.totals` — Get all available prices for items in shopping cart, using additional parameters.
 - `cart.license` — Get website license agreement.
 
-### Faults
+<h3>Faults</h3>
 
 | Fault Code | Fault Message                                                                |
 |------------|------------------------------------------------------------------------------|
@@ -29,7 +29,7 @@ Allows you to manage shopping carts.
 | 1007       | Checkout is not available for guest.                                         |
 | 1008       | Can not create an order.                                                     |
 
-### Example
+<h3>Example</h3>
 
 The following example illustrates the work with shopping cart:
 - creating a shopping cart
@@ -183,33 +183,33 @@ $resultOrderCreation = $proxy->call($sessionId, 'cart.order', [$shoppingCartId, 
 
 ## Create
 
-### Method
+<h3>Method</h3>
 
 - `cart.create` (SOAP V1)
 - `shoppingCartCreate` (SOAP V2)
 
 Allows you to create an empty shopping cart.
 
-### Arguments
+<h3>Arguments</h3>
 
 | Type   | Name      | Description                      |
 |--------|-----------|----------------------------------|
 | string | sessionId | Session ID                       |
 | string | storeId   | Store view ID or code (optional) |
 
-### Returns
+<h3>Returns</h3>
 
 | Type | Description                           |
 |------|---------------------------------------|
 | int  | ID of the created empty shopping cart |
 
-### Faults
+<h3>Faults</h3>
 
 _No Faults._
 
-### Examples
+<h3>Examples</h3>
 
-#### Request Example SOAP V1
+<h4>Request Example SOAP V1</h4>
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/soap/?wsdl');
@@ -218,7 +218,7 @@ $sessionId = $proxy->login('apiUser', 'apiKey');
 $shoppingCartIncrementId = $proxy->call($sessionId, 'cart.create', ['maho_store']);
 ```
 
-#### Request Example SOAP V2
+<h4>Request Example SOAP V2</h4>
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); // TODO: change url
@@ -228,7 +228,7 @@ $result = $proxy->shoppingCartCreate($sessionId, '3');
 var_dump($result);
 ```
 
-#### Request Example SOAP V2 (WS-I Compliance Mode)
+<h4>Request Example SOAP V2 (WS-I Compliance Mode)</h4>
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl');
@@ -240,7 +240,7 @@ var_dump($result->result);
 
 ## Order
 
-### Method
+<h3>Method</h3>
 
 - `cart.order` (SOAP V1)
 - `shoppingCartOrder` (SOAP V2)
@@ -248,7 +248,7 @@ var_dump($result->result);
 Allows you to create an order from a shopping cart (quote).  
 Before placing the order, you need to add the customer, customer address, shipping and payment methods.
 
-### Arguments
+<h3>Arguments</h3>
 
 | Type          | Name      | Description                      |
 |---------------|-----------|----------------------------------|
@@ -257,19 +257,19 @@ Before placing the order, you need to add the customer, customer address, shippi
 | string        | storeId   | Store view ID or code (optional) |
 | ArrayOfString | licenses  | Website license ID (optional)    |
 
-### Return
+<h3>Return</h3>
 
 | Type   | Name   | Description                 |
 |--------|--------|-----------------------------|
 | string | result | Result of creating an order |
 
-### Faults
+<h3>Faults</h3>
 
 _No Faults._
 
-### Examples
+<h3>Examples</h3>
 
-#### Request Example SOAP V1
+<h4>Request Example SOAP V1</h4>
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/soap/?wsdl');
@@ -286,7 +286,7 @@ $resultOrderCreation = $proxy->call(
 );
 ```
 
-#### Request Example SOAP V2
+<h4>Request Example SOAP V2</h4>
 
 ```php
 /**
@@ -358,14 +358,14 @@ $orderId = $proxy->shoppingCartOrder($sessionId, $cartId, null, null);
 
 ## Info
 
-### Method
+<h3>Method</h3>
 
 - `cart.info` (SOAP V1)
 - `shoppingCartInfo` (SOAP V2)
 
 Allows you to retrieve full information about the shopping cart (quote).
 
-### Arguments
+<h3>Arguments</h3>
 
 | Type   | Name      | Description                      |
 |--------|-----------|----------------------------------|
@@ -373,13 +373,13 @@ Allows you to retrieve full information about the shopping cart (quote).
 | int    | quoteId   | Shopping cart ID (quote ID)      |
 | string | store     | Store view ID or code (optional) |
 
-### Return
+<h3>Return</h3>
 
 | Type  | Name   | Description                     |
 |-------|--------|---------------------------------|
 | array | result | Array of shoppingCartInfoEntity |
 
-### Content `shoppingCartInfoEntity`
+<h3>Content `shoppingCartInfoEntity`</h3>
 
 | Type   | Name                              | Description                                  |
 |--------|-----------------------------------|----------------------------------------------|
@@ -445,7 +445,7 @@ Allows you to retrieve full information about the shopping cart (quote).
 | array  | items                             | Array of shoppingCartItemEntity              |
 | array  | payment                           | Array of shoppingCartPaymentEntity           |
 
-### Content `shoppingCartAddressEntity`
+<h3>Content `shoppingCartAddressEntity`</h3>
 
 | Type   | Name                 | Description                                                |
 |--------|----------------------|------------------------------------------------------------|
@@ -477,7 +477,7 @@ Allows you to retrieve full information about the shopping cart (quote).
 | string | shipping_description | Shipping description                                       |
 | double | weight               | Weight                                                     |
 
-### Content `shoppingCartItemEntity`
+<h3>Content `shoppingCartItemEntity`</h3>
 
 | Type   | Name                             | Description                                           |
 |--------|----------------------------------|-------------------------------------------------------|
@@ -534,7 +534,7 @@ Allows you to retrieve full information about the shopping cart (quote).
 | double | base_weee_tax_row_disposition    | Fixed product tax row disposition (in base currency)  |
 | string | tax_class_id                     | Tax class ID                                          |
 
-### Content `shoppingCartPaymentEntity`
+<h3>Content `shoppingCartPaymentEntity`</h3>
 
 | Type   | Name                   | Description                            |
 |--------|------------------------|----------------------------------------|
@@ -557,9 +557,9 @@ Allows you to retrieve full information about the shopping cart (quote).
 | string | additional_data        | Additional data                        |
 | string | additional_information | Additional information                 |
 
-### Examples
+<h3>Examples</h3>
 
-#### Request Example SOAP V1
+<h4>Request Example SOAP V1</h4>
 
 ```php
 $client = new SoapClient('https://mahohost/api/soap/?wsdl');
@@ -569,7 +569,7 @@ $result = $client->call($session, 'cart.info', '15');
 var_dump($result);
 ```
 
-#### Request Example SOAP V2
+<h4>Request Example SOAP V2</h4>
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); // TODO: change url
@@ -579,7 +579,7 @@ $result = $proxy->shoppingCartInfo($sessionId, '15');
 var_dump($result);
 ```
 
-#### Request Example SOAP V2 (WS-I Compliance Mode)
+<h4>Request Example SOAP V2 (WS-I Compliance Mode)</h4>
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); 
@@ -591,14 +591,14 @@ var_dump($result->result);
 
 ## Totals
 
-### Method
+<h3>Method</h3>
 
 - `cart.totals` (SOAP V1)
 - `shoppingCartTotals` (SOAP V2)
 
 Allows you to retrieve total prices for a shopping cart (quote).
 
-### Arguments
+<h3>Arguments</h3>
 
 | Type   | Name      | Description                         |
 |--------|-----------|-------------------------------------|
@@ -606,22 +606,22 @@ Allows you to retrieve total prices for a shopping cart (quote).
 | int    | quoteId   | Shopping cart ID (quote identifier) |
 | string | store     | Store view ID or code (optional)    |
 
-### Return
+<h3>Return</h3>
 
 | Type  | Name   | Description                       |
 |-------|--------|-----------------------------------|
 | array | result | Array of shoppingCartTotalsEntity |
 
-### Content `shoppingCartTotalsEntity`
+<h3>Content `shoppingCartTotalsEntity`</h3>
 
 | Type   | Name   | Description  |
 |--------|--------|--------------|
 | string | title  | Title        |
 | float  | amount | Total amount |
 
-### Examples
+<h3>Examples</h3>
 
-#### Request Example SOAP V1
+<h4>Request Example SOAP V1</h4>
 
 ```php
 $client = new SoapClient('https://mahohost/api/soap/?wsdl');
@@ -631,7 +631,7 @@ $result = $client->call($session, 'cart.totals', '15');
 var_dump($result);
 ```
 
-#### Request Example SOAP V2
+<h4>Request Example SOAP V2</h4>
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); // TODO: change url
@@ -641,7 +641,7 @@ $result = $proxy->shoppingCartTotals($sessionId, '15');
 var_dump($result);
 ```
 
-#### Request Example SOAP V2 (WS-I Compliance Mode)
+<h4>Request Example SOAP V2 (WS-I Compliance Mode)</h4>
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); 
@@ -651,7 +651,7 @@ $result = $proxy->shoppingCartTotals((object)['sessionId' => $sessionId->result,
 var_dump($result->result);
 ```
 
-#### Response Example SOAP V1
+<h4>Response Example SOAP V1</h4>
 
 ```php
 array
@@ -683,18 +683,18 @@ array
 
 ## License
 
-### Method
+<h3>Method</h3>
 
 - `cart.license` (SOAP V1)
 - `shoppingCartLicense` (SOAP V2)
 
-### Alias
+<h3>Alias</h3>
 
 - `cart.license`
 
 Allows you to retrieve the website license agreement for the quote according to the website (store).
 
-### Arguments
+<h3>Arguments</h3>
 
 | Type   | Name      | Description                         |
 |--------|-----------|-------------------------------------|
@@ -702,13 +702,13 @@ Allows you to retrieve the website license agreement for the quote according to 
 | int    | quoteId   | Shopping cart ID (quote identifier) |
 | string | store     | Store view ID or code (optional)    |
 
-### Return
+<h3>Return</h3>
 
 | Type  | Name   | Description                        |
 |-------|--------|------------------------------------|
 | array | result | Array of shoppingCartLicenseEntity |
 
-### Content `shoppingCartLicenseEntity`
+<h3>Content `shoppingCartLicenseEntity`</h3>
 
 | Type   | Name         | Description                           |
 |--------|--------------|---------------------------------------|
@@ -718,13 +718,13 @@ Allows you to retrieve the website license agreement for the quote according to 
 | int    | is_active    | Defines whether the license is active |
 | int    | is_html      | Defines whether the license is HTML   |
 
-### Faults
+<h3>Faults</h3>
 
 _No Faults._
 
-### Examples
+<h3>Examples</h3>
 
-#### Request Example SOAP V1
+<h4>Request Example SOAP V1</h4>
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/soap/?wsdl');
@@ -734,7 +734,7 @@ $result = $client->call($session, 'cart.license', '15');
 var_dump($result);
 ```
 
-#### Request Example SOAP V2
+<h4>Request Example SOAP V2</h4>
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); // TODO: change url
@@ -744,7 +744,7 @@ $result = $proxy->shoppingCartLicense($sessionId, '15');
 var_dump($result);
 ```
 
-#### Request Example SOAP V2 (WS-I Compliance Mode)
+<h4>Request Example SOAP V2 (WS-I Compliance Mode)</h4>
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); 
@@ -754,7 +754,7 @@ $result = $proxy->shoppingCartLicense((object)['sessionId' => $sessionId->result
 var_dump($result->result);
 ```
 
-#### Response Example SOAP V1
+<h4>Response Example SOAP V1</h4>
 
 ```php
 array

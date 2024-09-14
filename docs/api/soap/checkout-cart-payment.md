@@ -4,16 +4,16 @@
 
 Allows you to retrieve and set payment methods for a shopping cart.
 
-### Resource Name
+<h3>Resource Name</h3>
 
 - `cart_payment`
 
-### Methods
+<h3>Methods</h3>
 
 - `cart_payment.method` — Set a payment method for a shopping cart.
 - `cart_payment.list` — Get the list of available payment methods for a shopping cart.
 
-### Faults
+<h3>Faults</h3>
 
 | Fault Code | Fault Message                                                             |
 |------------|---------------------------------------------------------------------------|
@@ -27,14 +27,14 @@ Allows you to retrieve and set payment methods for a shopping cart.
 
 ## (Payment) Method
 
-### Method
+<h3>Method</h3>
 
 - `cart_payment.method` (SOAP V1)
 - `shoppingCartPaymentMethod` (SOAP V2)
 
 Allows you to set a payment method for a shopping cart (quote).
 
-### Arguments
+<h3>Arguments</h3>
 
 | Type   | Name      | Description                              |
 |--------|-----------|------------------------------------------|
@@ -43,13 +43,13 @@ Allows you to set a payment method for a shopping cart (quote).
 | array  | method    | Array of shoppingCartPaymentMethodEntity |
 | string | store     | Store view ID or code (optional)         |
 
-### Return
+<h3>Return</h3>
 
 | Type    | Description     |
 |---------|-----------------|
 | boolean | True on success |
 
-### Content `shoppingCartPaymentMethodEntity`
+<h3>Content `shoppingCartPaymentMethodEntity`</h3>
 
 | Type   | Name         | Description                  |
 |--------|--------------|------------------------------|
@@ -62,13 +62,13 @@ Allows you to set a payment method for a shopping cart (quote).
 | string | cc_exp_year  | Credit card expiration year  |
 | string | cc_exp_month | Credit card expiration month |
 
-### Faults 
+<h3>Faults </h3>
 
 _No Faults._
 
-### Examples
+<h3>Examples</h3>
 
-#### Request Example SOAP V1
+<h4>Request Example SOAP V1</h4>
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/soap/?wsdl');
@@ -90,7 +90,7 @@ $resultPaymentMethod = $proxy->call(
 );
 ```
 
-#### Request Example SOAP V2
+<h4>Request Example SOAP V2</h4>
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); 
@@ -109,7 +109,7 @@ $result = $proxy->shoppingCartPaymentMethod($sessionId, 10, [
 var_dump($result);
 ```
 
-#### Request Example SOAP V2 (WS-I Compliance Mode)
+<h4>Request Example SOAP V2 (WS-I Compliance Mode)</h4>
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); 
@@ -130,14 +130,14 @@ var_dump($result->result);
 
 ## List
 
-### Method
+<h3>Method</h3>
 
 - `cart_payment.list` (SOAP V1)
 - `shoppingCartPaymentList` (SOAP V2)
 
 Allows you to retrieve a list of available payment methods for a shopping cart (quote).
 
-### Arguments
+<h3>Arguments</h3>
 
 | Type   | Name      | Description                      |
 |--------|-----------|----------------------------------|
@@ -145,13 +145,13 @@ Allows you to retrieve a list of available payment methods for a shopping cart (
 | int    | quoteId   | Shopping cart ID                 |
 | string | store     | Store view ID or code (optional) |
 
-### Return
+<h3>Return</h3>
 
 | Type  | Name   | Description                                      |
 |-------|--------|--------------------------------------------------|
 | array | result | Array of shoppingCartPaymentMethodResponseEntity |
 
-### Content `shoppingCartPaymentMethodResponseEntity`
+<h3>Content `shoppingCartPaymentMethodResponseEntity`</h3>
 
 | Type             | Name     | Description                |
 |------------------|----------|----------------------------|
@@ -159,9 +159,9 @@ Allows you to retrieve a list of available payment methods for a shopping cart (
 | string           | title    | Payment method title       |
 | associativeArray | cc_types | Array of credit card types |
 
-### Examples
+<h3>Examples</h3>
 
-#### Request Example SOAP V1
+<h4>Request Example SOAP V1</h4>
 
 ```php
 $client = new SoapClient('https://mahohost/api/soap/?wsdl');
@@ -171,7 +171,7 @@ $result = $client->call($session, 'cart_payment.list', 'quoteId');
 var_dump($result);
 ```
 
-#### Response Example SOAP V1
+<h4>Response Example SOAP V1</h4>
 
 ```php
 array

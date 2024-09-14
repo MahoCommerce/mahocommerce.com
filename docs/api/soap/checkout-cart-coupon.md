@@ -4,11 +4,11 @@
 
 Allows you to add and remove coupon codes for a shopping cart.
 
-### Resource Name
+<h3>Resource Name</h3>
 
 - `cart_coupon`
 
-### Methods
+<h3>Methods</h3>
 
 - `cart_coupon.add` — Add a coupon code to a quote.
 - `cart_coupon.remove` — Remove a coupon code from a quote.
@@ -18,7 +18,7 @@ The shopping cart is a wrapper for a quote, and it is used primarily by the fron
 The cart is represented by the `Mage_Checkout_Model_Cart` class
 and the quote is represented by the `Mage_Sales_Model_Quote` class.
 
-### Faults
+<h3>Faults</h3>
 
 | Fault Code | Fault Message                                       |
 |------------|-----------------------------------------------------|
@@ -30,14 +30,14 @@ and the quote is represented by the `Mage_Sales_Model_Quote` class.
 
 ## Add
 
-### Method
+<h3>Method</h3>
 
 - `cart_coupon.add` (SOAP V1)
 - `shoppingCartCouponAdd` (SOAP V2)
 
 Allows you to add a coupon code for a shopping cart (quote). The shopping cart must not be empty.
 
-### Arguments
+<h3>Arguments</h3>
 
 | Type   | Name       | Description                      |
 |--------|------------|----------------------------------|
@@ -46,19 +46,19 @@ Allows you to add a coupon code for a shopping cart (quote). The shopping cart m
 | string | couponCode | Coupon code                      |
 | string | store      | Store view ID or code (optional) |
 
-### Return
+<h3>Return</h3>
 
 | Type    | Description                      |
 |---------|----------------------------------|
 | boolean | True if the coupon code is added |
 
-### Faults
+<h3>Faults</h3>
 
 _No Faults._
 
-### Examples
+<h3>Examples</h3>
 
-#### Request Example SOAP V1
+<h4>Request Example SOAP V1</h4>
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/soap/?wsdl');
@@ -75,7 +75,7 @@ $resultCartCouponRemove = $proxy->call(
 );
 ```
 
-#### Request Example SOAP V2
+<h4>Request Example SOAP V2</h4>
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); // TODO: change url
@@ -85,7 +85,7 @@ $result = $proxy->shoppingCartCouponAdd($sessionId, '15', 'exampleCouponCode');
 var_dump($result);
 ```
 
-#### Request Example SOAP V2 (WS-I Compliance Mode)
+<h4>Request Example SOAP V2 (WS-I Compliance Mode)</h4>
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); 
@@ -104,14 +104,14 @@ var_dump($result->result);
 
 ## Remove
 
-### Method
+<h3>Method</h3>
 
 - `cart_coupon.remove` (SOAP V1)
 - `shoppingCartCouponRemove` (SOAP V2)
 
 Allows you to remove a coupon code from a shopping cart (quote).
 
-### Arguments
+<h3>Arguments</h3>
 
 | Type   | Name      | Description                      |
 |--------|-----------|----------------------------------|
@@ -119,19 +119,19 @@ Allows you to remove a coupon code from a shopping cart (quote).
 | int    | quoteId   | Shopping cart ID                 |
 | string | store     | Store view ID or code (optional) |
 
-### Return
+<h3>Return</h3>
 
 | Type    | Description                        |
 |---------|------------------------------------|
 | boolean | True if the coupon code is removed |
 
-### Faults
+<h3>Faults</h3>
 
 _No Faults._
 
-### Examples
+<h3>Examples</h3>
 
-#### Request Example SOAP V1
+<h4>Request Example SOAP V1</h4>
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/soap/?wsdl');
@@ -147,7 +147,7 @@ $resultCartCouponRemove = $proxy->call(
 );
 ```
 
-#### Request Example SOAP V2
+<h4>Request Example SOAP V2</h4>
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); // TODO: change url
@@ -157,7 +157,7 @@ $result = $proxy->shoppingCartCouponRemove($sessionId, '15');
 var_dump($result);
 ```
 
-#### Request Example SOAP V2 (WS-I Compliance Mode)
+<h4>Request Example SOAP V2 (WS-I Compliance Mode)</h4>
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); 
