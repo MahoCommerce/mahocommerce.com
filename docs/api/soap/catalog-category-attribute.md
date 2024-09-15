@@ -24,7 +24,7 @@ $proxy = new SoapClient('https://mahohost/api/soap/?wsdl');
 $sessionId = $proxy->login('apiUser', 'apiKey');
 $attributes = $proxy->call($sessionId, 'category_attribute.list');
 foreach ($attributes as &$attribute) {
-    $attributeType = $attribute['type'],
+    $attributeType = $attribute['type'];
     if (isset($attributeType)
         && ($attributeType === 'select' || $attributeType === 'multiselect')) {
         $attribute['options'] = $proxy->call($sessionId, 'category_attribute.options', $attribute['code']);
