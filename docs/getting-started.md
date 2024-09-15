@@ -94,6 +94,7 @@ Options:
       --admin_username=ADMIN_USERNAME                          Admin user login
       --admin_password=ADMIN_PASSWORD                          Admin user password
       --encryption_key[=ENCRYPTION_KEY]                        Will be automatically generated and displayed on success, if not specified
+      --sample_data[=SAMPLE_DATA]                              Also install sample data
   -h, --help                                                   Display help for the given command. When no command is given display help for the list command
   -q, --quiet                                                  Do not output any message
   -V, --version                                                Display this application version
@@ -116,19 +117,44 @@ Sample of a complete CLI installation command:
 --admin_password samplepassword
 ```
 
-If you need a list of the available currencies, locales or timezones, simply run one of
-this commands:
+If you need a list of the available currencies, locales or timezones, simply run one of these commands:
 ```
 ./maho sys:currencies
 ./maho sys:locales
 ./maho sys:timezones
 ```
 
+#### Sample data
+
+Maho sample data is a ready-made demo online store that you can play with to learn how Maho works,
+without having to build and configure everything from scratch.
+
+To install Maho with sample data, just add `--sample_data 1` to the installation, eg:
+
+```
+./maho install \
+--license_agreement_accepted yes \
+--locale en_US --timezone Europe/London --default_currency EUR \ 
+--db_host localhost --db_name maho --db_user root --db_pass root \
+--url http://yourdomain.test/ --secure_base_url http://yourdomain.test/ \
+--use_secure 0 --use_secure_admin 0 \
+--admin_lastname admin --admin_firstname admin \
+--admin_email admin@admin.com --admin_username admin \ 
+--admin_password samplepassword \
+--sample_data 1
+```
+
+and everything will be automatically downloaded and setup for you by Maho installer.
+
 ### Installation via the web installer
 
-Simply open your browser to type the URL you configured in your web server, pointing to your
-Maho project `pub` directory, the web installer will start automatically and you'll be guided
+If you're not familiar with the command line, simply open your browser to type the URL
+you configured in your web server, pointing to your Maho project `public` directory,
+the web installer will start automatically, and you'll be guided
 through the complete installation of Maho into your database.
+
+!!! warning
+    Sample data installation is not available using the web installer.
 
 ## Cron setup
 
