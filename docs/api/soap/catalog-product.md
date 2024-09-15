@@ -4,86 +4,116 @@
 
 Allows you to manage products.
 
-**Resource Name**: catalog_product
+<h3>Resource Name</h3>
 
-**Aliases**:
+- `catalog_product`
 
--   product
+<h3>Alias</h3>
 
-**Methods**:
+- `product`
 
-- catalog_product.currentStore - Set/Get the current store view
-- catalog_product.list - Retrieve the list of products using filters
-- catalog_product.info - Retrieve information about the required product
-- catalog_product.create - Create a new product
-- catalog_product.update - Update a required product
-- catalog_product.setSpecialPrice - Set special price for a product
-- catalog_product.getSpecialPrice - Get special price for a product
-- catalog_product.delete - Delete a required product
-- catalog_product.listOfAdditionalAttributes - Get the list of additional attributes
+<h3>Methods</h3>
 
-**Faults**:
+- `catalog_product.currentStore` — Set/Get the current store view.
+- `catalog_product.list` — Retrieve the list of products using filters.
+- `catalog_product.info` — Retrieve information about the required product.
+- `catalog_product.create` — Create a new product.
+- `catalog_product.update` — Update a required product.
+- `catalog_product.setSpecialPrice` — Set special price for a product.
+- `catalog_product.getSpecialPrice` — Get special price for a product.
+- `catalog_product.delete` — Delete a required product.
+- `catalog_product.listOfAdditionalAttributes` — Get the list of additional attributes.
 
-| Fault Code | Fault Message |
-| --- | --- |
-| 100 | Requested store view not found. |
-| 101 | Product not exists. |
-| 102 | Invalid data given. Details in error message. |
-| 103 | Product not deleted. Details in error message. |
+<h3>Faults</h3>
 
-**Examples**:
+| Fault Code | Fault Message                                  |
+|------------|------------------------------------------------|
+| 100        | Requested store view not found.                |
+| 101        | Product not exists.                            |
+| 102        | Invalid data given. Details in error message.  |
+| 103        | Product not deleted. Details in error message. |
 
-**Example 1. Retrieving the product list**
+<h3>Examples</h3>
+
+<h4>Retrieving the Product List</h4>
 
 ```php
-$proxy = new SoapClient('http://magentohost/api/soap/?wsdl');
+$proxy = new SoapClient('https://mahohost/api/soap/?wsdl');
 $sessionId = $proxy->login('apiUser', 'apiKey');
 
-$filters = array(
-    'sku' => array('like'=>'zol%')
-);
+$filters = [
+    'sku' => ['like'=>'zol%']
+];
 
-$products = $proxy->call($sessionId, 'product.list', array($filters));
+$products = $proxy->call($sessionId, 'product.list', [$filters]);
 var_dump($products);
 ```
 
-**Example 2. Creating, viewing, updating, and deleting a product**
+<h4>Creating, Viewing, Updating and Deleting a Product</h4>
 
 ```php
-$proxy = new SoapClient('http://magentohost/api/soap/?wsdl');
+$proxy = new SoapClient('https://mahohost/api/soap/?wsdl');
 $sessionId = $proxy->login('apiUser', 'apiKey');
 
 $attributeSets = $proxy->call($sessionId, 'product_attribute_set.list');
-$set = current($attributeSets);
+$attributeSet = current($attributeSets);
 
-$newProductData = array(
-    'name'              => 'name of product',
-     // websites - Array of website ids to which you want to assign a new product
-    'websites'          => array(1), // array(1,2,3,...)
+$newProductData = [
+    'name' => 'name of product',
+    'websites' => [1],
     'short_description' => 'short description',
-    'description'       => 'description',
-    'status'            => 1,
-    'weight'            => 0,
-    'tax_class_id'      => 1,
-    'categories'    => array(3),    //3 is the category id
-    'price'             => 12.05
-);
+    'description' => 'description',
+    'status' => 1,
+    'weight' => 0,
+    'tax_class_id' => 1,
+    'categories' => [3], // referenced by category IDs
+    'price' => 12.05
+];
 
 // Create new product
-$proxy->call($sessionId, 'product.create', array('simple', $set['set_id'], 'sku_of_product', $newProductData));
-$proxy->call($sessionId, 'product_stock.update', array('sku_of_product', array('qty'=>50, 'is_in_stock'=>1)));
+$proxy->call(
+    $sessionId,
+    'product.create',
+    [
+        'simple',
+        $attributeSet['set_id'],
+        'sku_of_product',
+        $newProductData
+    ]
+);
+$proxy->call(
+    $sessionId,
+    'product_stock.update',
+    [
+        'sku_of_product',
+        [
+            'qty' => 50,
+            'is_in_stock' => 1
+        ]
+    ]
+);
 
 // Get info of created product
 var_dump($proxy->call($sessionId, 'product.info', 'sku_of_product'));
 
 // Update product name on german store view
-$proxy->call($sessionId, 'product.update', array('sku_of_product', array('name'=>'new name of product'), 'german'));
+$proxy->call(
+    $sessionId,
+    'product.update',
+    [
+        'sku_of_product',
+        [
+            'name' => 'new name of product'
+        ],
+        'german'
+    ]
+);
 
 // Get info for default values
 var_dump($proxy->call($sessionId, 'product.info', 'sku_of_product'));
 // Get info for german store view
 
-var_dump($proxy->call($sessionId, 'product.info', array('sku_of_product', 'german')));
+var_dump($proxy->call($sessionId, 'product.info', ['sku_of_product', 'german']));
 
 // Delete product
 $proxy->call($sessionId, 'product.delete', 'sku_of_product');
@@ -92,53 +122,53 @@ try {
     // Ensure that product deleted
     var_dump($proxy->call($sessionId, 'product.info', 'sku_of_product'));
 } catch (SoapFault $e) {
-    echo "Product already deleted";
+    echo 'Product already deleted';
 }
 ```
 
 ## CurrentStore
 
-**Method**:
+<h3>Method</h3>
 
--   catalog_product.currentStore (SOAP V1)
--   catalogProductCurrentStore (SOAP V2)
+- `catalog_product.currentStore` (SOAP V1)
+- `catalogProductCurrentStore` (SOAP V2)
 
 Allows you to set/get the current store view.
 
-**Aliases:**
+<h3>Alias</h3>
 
--   product.currentStore
+- `product.currentStore`
 
-**Arguments:**
+<h3>Arguments</h3>
 
-| Type | Name | Description |
-| --- | --- | --- |
-| string | sessionId | Session ID |
+| Type   | Name      | Description                      |
+|--------|-----------|----------------------------------|
+| string | sessionId | Session ID                       |
 | string | storeView | Store view ID or code (optional) |
 
-**Returns**:
+<h3>Returns</h3>
 
-| Type | Name | Description |
-| --- | --- | --- |
+| Type       | Name      | Description   |
+|------------|-----------|---------------|
 | int/string | storeView | Store view ID |
 
-**Examples**:
+<h3>Examples</h3>
 
-**Request Example SOAP V1**
+<h4>Request Example SOAP V1</h4>
 
 ```php
-$client = new SoapClient('http://magentohost/api/soap/?wsdl');
+$client = new SoapClient('https://mahohost/api/soap/?wsdl');
 $session = $client->login('apiUser', 'apiKey');
 
 $result = $client->call($session, 'catalog_product.currentStore', 'english');
 var_dump($result);
 ```
 
-**Request Example SOAP V2**
+<h4>Request Example SOAP V2</h4>
 
 ```php
-$proxy = new SoapClient('http://magentohost/api/v2_soap/?wsdl'); // TODO : change url
-$sessionId = $proxy->login('apiUser', 'apiKey'); // TODO : change login and pwd if necessary
+$proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); // TODO: change url
+$sessionId = $proxy->login('apiUser', 'apiKey'); // TODO: change login and pwd if necessary
  
 $result = $proxy->catalogProductCurrentStore($sessionId, 'english');
 var_dump($result);
@@ -146,97 +176,97 @@ var_dump($result);
 
 ## List
 
-**Method**:
+<h3>Method</h3>
 
--   catalog_product.list (SOAP V1)
--   catalogProductList (SOAP V2)
+- `catalog_product.list` (SOAP V1)
+- `catalogProductList` (SOAP V2)
 
 Allows you to retrieve the list of products.
 
-**Aliases:**
+<h3>Alias</h3>
 
--   product.list
+- `product.list`
 
-**Arguments:**
+<h3>Arguments</h3>
 
-| Type | Name | Description |
-| --- | --- | --- |
-| string | sessionId | Session ID |
-| array | filters | Array of filters by attributes (optional) |
-| string | storeView | Store view ID or code (optional) |
+| Type   | Name      | Description                               |
+|--------|-----------|-------------------------------------------|
+| string | sessionId | Session ID                                |
+| array  | filters   | Array of filters by attributes (optional) |
+| string | storeView | Store view ID or code (optional)          |
 
-**Returns**:
+<h3>Returns</h3>
 
-| Type | Name | Description |
-| --- | --- | --- |
+| Type  | Name      | Description                   |
+|-------|-----------|-------------------------------|
 | array | storeView | Array of catalogProductEntity |
 
-The **catalogProductEntity** content is as follows:
+<h3>Content `catalogProductEntity`</h3>
 
-| Type | Name | Description |
-| --- | --- | --- |
-| string | product_id | Product ID |
-| string | sku | Product SKU |
-| string | name | Product name |
-| string | set | Product attribute set |
-| string | type | Type of the product |
+| Type          | Name         | Description           |
+|---------------|--------------|-----------------------|
+| string        | product_id   | Product ID            |
+| string        | sku          | Product SKU           |
+| string        | name         | Product name          |
+| string        | set          | Product attribute set |
+| string        | type         | Type of the product   |
 | ArrayOfString | category_ids | Array of category IDs |
-| ArrayOfString | website_ids | Array of website IDs |
+| ArrayOfString | website_ids  | Array of website IDs  |
 
-**Examples**:
+<h3>Examples</h3>
 
-**Request Example SOAP V1**
+<h4>Request Example SOAP V1</h4>
 
 ```php
-$client = new SoapClient('http://magentohost/api/soap/?wsdl');
+$client = new SoapClient('https://mahohost/api/soap/?wsdl');
 $session = $client->login('apiUser', 'apiKey');
 
 $result = $client->call($session, 'catalog_product.list');
 var_dump($result);
 
-// If you don't need the session anymore
-//$client->endSession($session);
+// When the session can be closed
+$client->endSession($session);
 ```
 
-**Request Example SOAP V2** (List of All Products)
+<h4>Request Example SOAP V2 (List of All Products)</h4>
 
 ```php
-$proxy = new SoapClient('http://magentohost/api/v2_soap/?wsdl'); // TODO : change url
-$sessionId = $proxy->login('apiUser', 'apiKey'); // TODO : change login and pwd if necessary
+$proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); // TODO: change url
+$sessionId = $proxy->login('apiUser', 'apiKey'); // TODO: change login and pwd if necessary
 
 $result = $proxy->catalogProductList($sessionId);
 var_dump($result);
 ```
 
-**Request Example SOAP V2** (Complex Filter)
+<h4>Request Example SOAP V2 (Complex Filter)</h4>
 
 ```php
-$client = new SoapClient('http://magentohost/api/v2_soap/?wsdl');
+$client = new SoapClient('https://mahohost/api/v2_soap/?wsdl');
 $session = $client->login('apiUser', 'apiKey');
 
-$complexFilter = array(
-    'complex_filter' => array(
-        array(
+$complexFilter = [
+    'complex_filter' => [
+        [
             'key' => 'type',
-            'value' => array('key' => 'in', 'value' => 'simple,configurable')
-        )
-    )
-);
+            'value' => ['key' => 'in', 'value' => 'simple,configurable']
+        ]
+    ]
+];
 $result = $client->catalogProductList($session, $complexFilter);
 var_dump($result);
 ```
 
-**Request Example SOAP V2 (WS-I Compliance Mode)**
+<h4>Request Example SOAP V2 (WS-I Compliance Mode)</h4>
 
 ```php
-$proxy = new SoapClient('http://magentohost/api/v2_soap/?wsdl');
-$sessionId = $proxy->login((object)array('username' => 'apiUser', 'apiKey' => 'apiKey'));
+$proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl');
+$sessionId = $proxy->login((object)['username' => 'apiUser', 'apiKey' => 'apiKey']);
 
-$result = $proxy->catalogProductList((object)array('sessionId' => $sessionId->result, 'filters' => null));
+$result = $proxy->catalogProductList((object)['sessionId' => $sessionId->result, 'filters' => null]);
 var_dump($result->result);
 ```
 
-**Response Example SOAP V1**
+<h4>Response Example SOAP V1</h4>
 
 ```php
 array
@@ -264,125 +294,125 @@ array
 
 ## Info
 
-**Method**:
+<h3>Method</h3>
 
--   catalog_product.info (SOAP V1)
--   catalogProductInfo (SOAP V2)
+- `catalog_product.info` (SOAP V1)
+- `catalogProductInfo` (SOAP V2)
 
 Allows you to retrieve information about the required product.
 
-**Aliases:**
+<h3>Alias</h3>
 
--   product.info
+- `product.info`
 
-**Arguments:**
+<h3>Arguments</h3>
 
-| Type | Name | Description |
-| --- | --- | --- |
-| string | sessionId | Session ID |
-| string | productId | Product ID or SKU |
-| string | storeView | Store view ID or code (optional) |
-| array | attributes | Array of catalogProductRequestAttributes (optional) |
-| string | identifierType | Defines whether the product ID or SKU value is passed in the "productId" parameter. (optional) |
+| Type   | Name           | Description                                                                                    |
+|--------|----------------|------------------------------------------------------------------------------------------------|
+| string | sessionId      | Session ID                                                                                     |
+| string | productId      | Product ID or SKU                                                                              |
+| string | storeView      | Store view ID or code (optional)                                                               |
+| array  | attributes     | Array of catalogProductRequestAttributes (optional)                                            |
+| string | identifierType | Defines whether the product ID or SKU value is passed in the `productId` parameter. (optional) |
 
-**Returns**:
+<h3>Returns</h3>
 
-| Type | Name | Description |
-| --- | --- | --- |
+| Type  | Name | Description                         |
+|-------|------|-------------------------------------|
 | array | info | Array of catalogProductReturnEntity |
 
-The **catalogProductRequestAttributes** content is as follows:
+<h3>Content `catalogProductRequestAttributes`</h3>
 
-| Type | Name | Description |
-| --- | --- | --- |
-| ArrayOfString | attributes | Array of attributes |
+| Type          | Name                  | Description                    |
+|---------------|-----------------------|--------------------------------|
+| ArrayOfString | attributes            | Array of attributes            |
 | ArrayOfString | additional_attributes | Array of additional attributes |
 
-The **catalogProductReturnEntity** content is as follows:
+<h3>Content `catalogProductReturnEntity`</h3>
 
-| Type | Name | Description |
-| --- | --- | --- |
-| string | product_id | Product ID |
-| string | sku | Product SKU |
-| string | set | Product set |
-| string | type | Product type |
-| ArrayOfString | categories | Array of categories |
-| ArrayOfString | websites | Array of websites |
-| string | created_at | Date when the product was created |
-| string | updated_at | Date when the product was last updated |
-| string | type_id | Type ID |
-| string | name | Product name |
-| string | description | Product description |
-| string | short_description | Short description for a product |
-| string | weight | Product weight |
-| string | status | Status of a product |
-| string | url_key | Relative URL path that can be entered in place of a target path |
-| string | url_path | URL path |
-| string | visibility | Product visibility on the frontend |
-| ArrayOfString | category_ids | Array of category IDs |
-| ArrayOfString | website_ids | Array of website IDs |
-| string | has_options | Defines whether the product has options |
-| string | gift_message_available | Defines whether the gift message is available for the product |
-| string | price | Product price |
-| string | special_price | Product special price |
-| string | special_from_date | Date starting from which the special price is applied to the product |
-| string | special_to_date | Date till which the special price is applied to the product |
-| string | tax_class_id | Tax class ID |
-| array | tier_price | Array of catalogProductTierPriceEntity |
-| string | meta_title | Mate title |
-| string | meta_keyword | Meta keyword |
-| string | meta_description | Meta description |
-| string | custom_design | Custom design |
-| string | custom_layout_update | Custom layout update |
-| string | options_container | Options container |
-| associativeArray | additional_attributes | Array of additional attributes |
-| string | enable_googlecheckout | Defines whether Google Checkout is applied to the product |
+| Type             | Name                   | Description                                                          |
+|------------------|------------------------|----------------------------------------------------------------------|
+| string           | product_id             | Product ID                                                           |
+| string           | sku                    | Product SKU                                                          |
+| string           | set                    | Product set                                                          |
+| string           | type                   | Product type                                                         |
+| ArrayOfString    | categories             | Array of categories                                                  |
+| ArrayOfString    | websites               | Array of websites                                                    |
+| string           | created_at             | Date when the product was created                                    |
+| string           | updated_at             | Date when the product was last updated                               |
+| string           | type_id                | Type ID                                                              |
+| string           | name                   | Product name                                                         |
+| string           | description            | Product description                                                  |
+| string           | short_description      | Short description for a product                                      |
+| string           | weight                 | Product weight                                                       |
+| string           | status                 | Status of a product                                                  |
+| string           | url_key                | Relative URL path that can be entered in place of a target path      |
+| string           | url_path               | URL path                                                             |
+| string           | visibility             | Product visibility on the frontend                                   |
+| ArrayOfString    | category_ids           | Array of category IDs                                                |
+| ArrayOfString    | website_ids            | Array of website IDs                                                 |
+| string           | has_options            | Defines whether the product has options                              |
+| string           | gift_message_available | Defines whether the gift message is available for the product        |
+| string           | price                  | Product price                                                        |
+| string           | special_price          | Product special price                                                |
+| string           | special_from_date      | Date starting from which the special price is applied to the product |
+| string           | special_to_date        | Date till which the special price is applied to the product          |
+| string           | tax_class_id           | Tax class ID                                                         |
+| array            | tier_price             | Array of catalogProductTierPriceEntity                               |
+| string           | meta_title             | Mate title                                                           |
+| string           | meta_keyword           | Meta keyword                                                         |
+| string           | meta_description       | Meta description                                                     |
+| string           | custom_design          | Custom design                                                        |
+| string           | custom_layout_update   | Custom layout update                                                 |
+| string           | options_container      | Options container                                                    |
+| associativeArray | additional_attributes  | Array of additional attributes                                       |
+| string           | enable_googlecheckout  | Defines whether Google Checkout is applied to the product            |
 
-The **catalogProductTierPriceEntity** content is as follows:
+<h3>Content `catalogProductTierPriceEntity`</h3>
 
-| Type | Name | Description |
-| --- | --- | --- |
-| string | customer_group_id | ID of the customer group |
-| string | website | Website |
-| int | qty | Quantity to which the price will be applied |
-| double | price | Price that each item will cost |
+| Type   | Name              | Description                                 |
+|--------|-------------------|---------------------------------------------|
+| string | customer_group_id | ID of the customer group                    |
+| string | website           | Website                                     |
+| int    | qty               | Quantity to which the price will be applied |
+| double | price             | Price that each item will cost              |
 
-**Examples**:
+<h3>Examples</h3>
 
-**Request Example SOAP V1**
+<h4>Request Example SOAP V1</h4>
 
 ```php
-$client = new SoapClient('http://magentohost/api/soap/?wsdl');
+$client = new SoapClient('https://mahohost/api/soap/?wsdl');
 $session = $client->login('apiUser', 'apiKey');
 
 $result = $client->call($session, 'catalog_product.info', '4');
 var_dump($result);
 
-// If you don't need the session anymore
-//$client->endSession($session);
+// When the session can be closed
+$client->endSession($session);
 ```
 
-**Request Example SOAP V2**
+<h4>Request Example SOAP V2</h4>
 
 ```php
-$proxy = new SoapClient('http://magentohost/api/v2_soap/?wsdl'); // TODO : change url
-$sessionId = $proxy->login('apiUser', 'apiKey'); // TODO : change login and pwd if necessary
+$proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); // TODO: change url
+$sessionId = $proxy->login('apiUser', 'apiKey'); // TODO: change login and pwd if necessary
 
 $result = $proxy->catalogProductInfo($sessionId, '4');
 var_dump($result);
 ```
 
-**Request Example SOAP V2 (WS-I Compliance Mode)**
+<h4>Request Example SOAP V2 (WS-I Compliance Mode)</h4>
 
 ```php
-$proxy = new SoapClient('http://magentohost/api/v2_soap/?wsdl');
-$sessionId = $proxy->login((object)array('username' => 'apiUser', 'apiKey' => 'apiKey'));
+$proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl');
+$sessionId = $proxy->login((object)['username' => 'apiUser', 'apiKey' => 'apiKey']);
 
-$result = $proxy->catalogProductInfo((object)array('sessionId' => $sessionId->result, 'productId' => '4'));
+$result = $proxy->catalogProductInfo((object)['sessionId' => $sessionId->result, 'productId' => '4']);
 var_dump($result->result);
 ```
 
-**Response Example SOAP V1**
+<h4>Response Example SOAP V1</h4>
 
 ```php
 array
@@ -455,192 +485,206 @@ The PowerShot A630 packs a vast array of advanced features into a remarkably com
 
 ## Create
 
-**Method**:
+<h3>Method</h3>
 
--   catalog_product.create (SOAP V1)
--   catalogProductCreate (SOAP V2)
+- `catalog_product.create` (SOAP V1)
+- `catalogProductCreate` (SOAP V2)
 
 Allows you to create a new product and return ID of the created product.
 
-**Aliases:**
+<h3>Alias</h3>
 
--   product.create
+- `product.create`
 
-**Note:**
+**Note:** Although the API accepts up to four digits of precision for all price arguments,
+Maho strongly recommends you pass in two digits to reduce inaccuracy in the tax calculation process.
+(That is, use a price like `12.35` and not `12.3487`).
 
-Although the API accepts up to four digits of precision for all price arguments, Magento strongly recommends you pass in two digits to reduce inaccuracy in the tax calculation process. (That is, use a price like 12.35 and not 12.3487).
+<h3>Arguments</h3>
 
-**Arguments:**
+| Type   | Name        | Description                         |
+|--------|-------------|-------------------------------------|
+| string | sessionId   | Session ID                          |
+| string | type        | Product type                        |
+| string | set         | ID of the product attribute set     |
+| string | sku         | Product SKU                         |
+| array  | productData | Array of catalogProductCreateEntity |
+| string | storeView   | Store view ID or code               |
 
-| Type | Name | Description |
-| --- | --- | --- |
-| string | sessionId | Session ID |
-| string | type | Product type |
-| string | set | ID of the product attribute set |
-| string | sku | Product SKU |
-| array | productData | Array of catalogProductCreateEntity |
-| string | storeView | Store view ID or code |
+<h3>Returns</h3>
 
-**Returns**:
+| Type | Name   | Description               |
+|------|--------|---------------------------|
+| int  | result | ID of the created product |
 
-| Type | Name | Description |
-| --- | --- | --- |
-| int | result | ID of the created product |
+<h3>Content `catalogProductCreateEntity`</h3>
 
-The **catalogProductCreateEntity** content is as follows:
+| Type          | Name                   | Description                                                               |
+|---------------|------------------------|---------------------------------------------------------------------------|
+| ArrayOfString | categories             | Array of categories                                                       |
+| ArrayOfString | websites               | Array of websites                                                         |
+| string        | name                   | Product name                                                              |
+| string        | description            | Product description                                                       |
+| string        | short_description      | Product short description                                                 |
+| string        | weight                 | Product weight                                                            |
+| string        | status                 | Product status                                                            |
+| string        | url_key                | URL key                                                                   |
+| string        | url_path               | URL path                                                                  |
+| string        | visibility             | Product visibility on the frontend                                        |
+| ArrayOfString | category_ids           | Array of category IDs                                                     |
+| ArrayOfString | website_ids            | Array of website IDs                                                      |
+| string        | has_options            | Defines whether the product has options                                   |
+| string        | gift_message_available | Defines whether the gift message is available for the product             |
+| string        | price                  | Product price                                                             |
+| string        | special_price          | Product special price                                                     |
+| string        | special_from_date      | Date starting from which the special price will be applied to the product |
+| string        | special_to_date        | Date till which the special price will be applied to the product          |
+| string        | tax_class_id           | Tax class ID                                                              |
+| array         | tier_price             | Array of catalogProductTierPriceEntity                                    |
+| string        | meta_title             | Meta title                                                                |
+| string        | meta_keyword           | Meta keyword                                                              |
+| string        | meta_description       | Meta description                                                          |
+| string        | custom_design          | Custom design                                                             |
+| string        | custom_layout_update   | Custom layout update                                                      |
+| string        | options_container      | Options container                                                         |
+| array         | additional_attributes  | Array of catalogProductAdditionalAttributesEntity                         |
+| array         | stock_data             | Array of catalogInventoryStockItemUpdateEntity                            |
 
-| Type | Name | Description |
-| --- | --- | --- |
-| ArrayOfString | categories | Array of categories |
-| ArrayOfString | websites | Array of websites |
-| string | name | Product name |
-| string | description | Product description |
-| string | short_description | Product short description |
-| string | weight | Product weight |
-| string | status | Product status |
-| string | url_key | URL key |
-| string | url_path | URL path |
-| string | visibility | Product visibility on the frontend |
-| ArrayOfString | category_ids | Array of category IDs |
-| ArrayOfString | website_ids | Array of website IDs |
-| string | has_options | Defines whether the product has options |
-| string | gift_message_available | Defines whether the gift message is available for the product |
-| string | price | Product price |
-| string | special_price | Product special price |
-| string | special_from_date | Date starting from which the special price will be applied to the product |
-| string | special_to_date | Date till which the special price will be applied to the product |
-| string | tax_class_id | Tax class ID |
-| array | tier_price | Array of catalogProductTierPriceEntity |
-| string | meta_title | Meta title |
-| string | meta_keyword | Meta keyword |
-| string | meta_description | Meta description |
-| string | custom_design | Custom design |
-| string | custom_layout_update | Custom layout update |
-| string | options_container | Options container |
-| array | additional_attributes | Array of catalogProductAdditionalAttributesEntity |
-| array | stock_data | Array of catalogInventoryStockItemUpdateEntity |
+**Note:** The `websites` and `website_ids` or `categories` and `category_ids` parameters are interchangeable.
+You can specify an array of website IDs (int)
+and then you don't need to specify the array of website codes (string) and vice versa.
 
-**Notes**: The "websites" and "website_ids" or "categories" and "category_ids" parameters are interchangeable. In other words, you can specify an array of website IDs (int) and then you don't need to specify the array of website codes (string) and vice versa.
+<h3>Content `catalogProductTierPriceEntity`</h3>
 
-The **catalogProductTierPriceEntity** content is as follows:
-
-| Type | Name | Description |
-| --- | --- | --- |
+| Type   | Name              | Description       |
+|--------|-------------------|-------------------|
 | string | customer_group_id | Customer group ID |
-| string | website | Website |
-| int | qty | Quantity |
-| double | price | Tier price |
+| string | website           | Website           |
+| int    | qty               | Quantity          |
+| double | price             | Tier price        |
 
-The **catalogInventoryStockItemUpdateEntity** content is as follows:
+<h3>Content `catalogInventoryStockItemUpdateEntity`</h3>
 
-| Type | Name | Description |
-| --- | --- | --- |
-| string | qty | Quantity of items |
-| int | is_in_stock | Defines whether the item is in stock |
-| int | manage_stock | Manage stock |
-| int | use_config_manage_stock | Use config manage stock |
-| int | min_qty | Minimum quantity for items to be in stock |
-| int | use_config_min_qty | Use config settings flag (value defined in the Inventory System Configuration) |
-| int | min_sale_qty | Minimum quantity allowed in the shopping cart |
-| int | use_config_min_sale_qty | Use config settings flag |
-| int | max_sale_qty | Maximum quantity allowed in the shopping cart |
-| int | use_config_max_sale_qty | Use config settings flag |
-| int | is_qty_decimal | Defines whether the quantity is decimal |
-| int | backorders | Backorders status |
-| int | use_config_backorders | Use config settings flag (for backorders) |
-| int | notify_stock_qty | Stock quantity below which a notification will appear |
-| int | use_config_notify_stock_qty | Use config settings flag (for stock quantity) |
+| Type   | Name                        | Description                                                                    |
+|--------|-----------------------------|--------------------------------------------------------------------------------|
+| string | qty                         | Quantity of items                                                              |
+| int    | is_in_stock                 | Defines whether the item is in stock                                           |
+| int    | manage_stock                | Manage stock                                                                   |
+| int    | use_config_manage_stock     | Use config manage stock                                                        |
+| int    | min_qty                     | Minimum quantity for items to be in stock                                      |
+| int    | use_config_min_qty          | Use config settings flag (value defined in the Inventory System Configuration) |
+| int    | min_sale_qty                | Minimum quantity allowed in the shopping cart                                  |
+| int    | use_config_min_sale_qty     | Use config settings flag                                                       |
+| int    | max_sale_qty                | Maximum quantity allowed in the shopping cart                                  |
+| int    | use_config_max_sale_qty     | Use config settings flag                                                       |
+| int    | is_qty_decimal              | Defines whether the quantity is decimal                                        |
+| int    | backorders                  | Backorders status                                                              |
+| int    | use_config_backorders       | Use config settings flag (for backorders)                                      |
+| int    | notify_stock_qty            | Stock quantity below which a notification will appear                          |
+| int    | use_config_notify_stock_qty | Use config settings flag (for stock quantity)                                  |
 
-The **catalogProductAdditionalAttributesEntity** content is as follows:
+<h3>Content `catalogProductAdditionalAttributesEntity`</h3>
 
-| Type | Name |
-| --- | --- |
-| associativeMultiArray | multi_data |
-| associativeArray | single_data |
+| Type                  | Name                                                                |
+|-----------------------|---------------------------------------------------------------------|
+| associativeMultiArray | multi_data (array of attributes which could contain several values) |
+| associativeArray      | single_data (array of attributes with only single value)            |
 
-Single Data: array of attributes with only single value  
-Multi Data: array of attributes which could contain several values
+<h3>Faults</h3>
 
-**Faults:**
+| Fault Code | Fault Message                                                   |
+|------------|-----------------------------------------------------------------|
+| 100        | Requested store view not found.                                 |
+| 102        | Invalid data given. Details in error message.                   |
+| 104        | Product type is not in allowed types.                           |
+| 105        | Product attribute set is not existed                            |
+| 106        | Product attribute set is not belong catalog product entity type |
 
-| Fault Code | Fault Message |
-| --- | --- |
-| 100 | Requested store view not found. |
-| 102 | Invalid data given. Details in error message. |
-| 104 | Product type is not in allowed types. |
-| 105 | Product attribute set is not existed |
-| 106 | Product attribute set is not belong catalog product entity type |
+<h3>Examples</h3>
 
-**Examples**:
-
-**Request Example SOAP V1**
+<h4>Request Example SOAP V1</h4>
 
 ```php
-$client = new SoapClient('http://magentohost/api/soap/?wsdl');
+$client = new SoapClient('https://mahohost/api/soap/?wsdl');
 $session = $client->login('apiUser', 'apiKey');
 
 // get attribute set
 $attributeSets = $client->call($session, 'product_attribute_set.list');
 $attributeSet = current($attributeSets);
 
-$result = $client->call($session, 'catalog_product.create', array('simple', $attributeSet['set_id'], 'product_sku', array(
-    'categories' => array(2),
-    'websites' => array(1),
-    'name' => 'Product name',
-    'description' => 'Product description',
-    'short_description' => 'Product short description',
-    'weight' => '10',
-    'status' => '1',
-    'url_key' => 'product-url-key',
-    'url_path' => 'product-url-path',
-    'visibility' => '4',
-    'price' => '100',
-    'tax_class_id' => 1,
-    'meta_title' => 'Product meta title',
-    'meta_keyword' => 'Product meta keyword',
-    'meta_description' => 'Product meta description'
-)));
+$result = $client->call(
+    $session,
+    'catalog_product.create',
+    [
+        'simple',
+        $attributeSet['set_id'],
+        'product_sku',
+        [
+            'categories' => [2],
+            'websites' => [1],
+            'name' => 'Product name',
+            'description' => 'Product description',
+            'short_description' => 'Product short description',
+            'weight' => '10',
+            'status' => '1',
+            'url_key' => 'product-url-key',
+            'url_path' => 'product-url-path',
+            'visibility' => '4',
+            'price' => '100',
+            'tax_class_id' => 1,
+            'meta_title' => 'Product meta title',
+            'meta_keyword' => 'Product meta keyword',
+            'meta_description' => 'Product meta description'
+        ]
+    ]
+);
 var_dump($result);
 ```
 
-**Request Example SOAP V2**
+<h4>Request Example SOAP V2</h4>
 
 ```php
-$client = new SoapClient('http://magentohost/api/v2_soap/?wsdl');
+$client = new SoapClient('https://mahohost/api/v2_soap/?wsdl');
 $session = $client->login('apiUser', 'apiKey');
 
 // get attribute set
 $attributeSets = $client->catalogProductAttributeSetList($session);
 $attributeSet = current($attributeSets);
 
-$result = $client->catalogProductCreate($session, 'simple', $attributeSet->set_id, 'product_sku', array(
-    'categories' => array(2),
-    'websites' => array(1),
-    'name' => 'Product name',
-    'description' => 'Product description',
-    'short_description' => 'Product short description',
-    'weight' => '10',
-    'status' => '1',
-    'url_key' => 'product-url-key',
-    'url_path' => 'product-url-path',
-    'visibility' => '4',
-    'price' => '100',
-    'tax_class_id' => 1,
-    'meta_title' => 'Product meta title',
-    'meta_keyword' => 'Product meta keyword',
-    'meta_description' => 'Product meta description'
-));
+$result = $client->catalogProductCreate(
+    $session,
+    'simple',
+    $attributeSet['set_id'],
+    'product_sku',
+    [
+        'categories' => [2],
+        'websites' => [1],
+        'name' => 'Product name',
+        'description' => 'Product description',
+        'short_description' => 'Product short description',
+        'weight' => '10',
+        'status' => '1',
+        'url_key' => 'product-url-key',
+        'url_path' => 'product-url-path',
+        'visibility' => '4',
+        'price' => '100',
+        'tax_class_id' => 1,
+        'meta_title' => 'Product meta title',
+        'meta_keyword' => 'Product meta keyword',
+        'meta_description' => 'Product meta description'
+    ]
+);
 var_dump($result);
 ```
 
-**Request Example SOAP V2 (WS-I Compliance Mode)**
+<h4>Request Example SOAP V2 (WS-I Compliance Mode)</h4>
 
 ```php
-$proxy = new SoapClient('http://magentohost/api/v2_soap/?wsdl');
-$sessionId = $proxy->login((object)array('username' => 'apiUser', 'apiKey' => 'apiKey'));
+$proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl');
+$sessionId = $proxy->login((object)['username' => 'apiUser', 'apiKey' => 'apiKey']);
 
-$result = $proxy->catalogProductCreate((object)array('sessionId' => $sessionId->result, 'type' => 'simple', 'set' => '4', 'sku' => 'simple_sku',
-'productData' => ((object)array(
+$result = $proxy->catalogProductCreate((object)['sessionId' => $sessionId->result, 'type' => 'simple', 'set' => '4', 'sku' => 'simple_sku',
+'productData' => (object)[
     'name' => 'Product name',
     'description' => 'Product description',
     'short_description' => 'Product short description',
@@ -649,335 +693,364 @@ $result = $proxy->catalogProductCreate((object)array('sessionId' => $sessionId->
     'visibility' => '4',
     'price' => '100',
     'tax_class_id' => 1,
-))));
+]]);
 var_dump($result->result);
 ```
 
 ## Update
 
-**Method**:
+<h3>Method</h3>
 
--   catalog_product.update (SOAP V1)
--   catalogProductUpdate (SOAP V2)
+- `catalog_product.update` (SOAP V1)
+- `catalogProductUpdate` (SOAP V2)
 
 Allows you to update the required product. Note that you should specify only those parameters which you want to be updated.
 
-**Aliases:**
+<h3>Alias</h3>
 
--   product.update
+- `product.update`
 
-**Note:**
+**Note:** Although the API accepts up to four digits of precision for all price arguments,
+Maho strongly recommends you pass in two digits to reduce inaccuracy in the tax calculation process.
+(That is, use a price like `12.35` and not `12.3487`).
 
-Although the API accepts up to four digits of precision for all price arguments, Magento strongly recommends you pass in two digits to reduce inaccuracy in the tax calculation process. (That is, use a price like 12.35 and not 12.3487).
+<h3>Arguments</h3>
 
-**Arguments:**
-
-| Type | Name | Description |
-| --- | --- | --- |
-| string | sessionId | Session ID |
-| string | productproductId | Product ID |
-| array | productData | Array of catalogProductCreateEntity |
-| string | storeView | Store view ID or code (optional) |
+| Type   | Name           | Description                                                                |
+|--------|----------------|----------------------------------------------------------------------------|
+| string | sessionId      | Session ID                                                                 |
+| string | productId      | Product ID                                                                 |
+| array  | productData    | Array of catalogProductCreateEntity                                        |
+| string | storeView      | Store view ID or code (optional)                                           |
 | string | identifierType | Defines whether the product ID or SKU is passed in the 'product' parameter |
 
-**Returns**:
+<h3>Returns</h3>
 
-| Type | Description |
-| --- | --- |
+| Type    | Description                    |
+|---------|--------------------------------|
 | boolean | True if the product is updated |
 
-The **catalogProductCreateEntity** content is as follows:
+<h3>Content `catalogProductCreateEntity`</h3>
 
-| Type | Name | Description |
-| --- | --- | --- |
-| ArrayOfString | categories | Array of categories |
-| ArrayOfString | websites | Array of websites |
-| string | name | Product name |
-| string | description | Product description |
-| string | short_description | Product short description |
-| string | weight | Product weight |
-| string | status | Product status |
-| string | url_key | A relative URL path that can be entered in place of the target path |
-| string | url_path | URL path |
-| string | visibility | Product visibility on the frontend |
-| ArrayOfString | category_ids | Array of category IDs |
-| ArrayOfString | website_ids | Array of website IDs |
-| string | has_options | Defines whether the product has options |
-| string | gift_message_available | Defines whether the gift message is available for the product |
-| string | price | Product price |
-| string | special_price | Product special price |
-| string | special_from_date | Date starting from which the special price will be applied to the product |
-| string | special_to_date | Date till which the special price will be applied to the product |
-| string | tax_class_id | Tax class ID |
-| array | tier_price | Array of catalogProductTierPriceEntity |
-| string | meta_title | Meta title |
-| string | meta_keyword | Meta keyword |
-| string | meta_description | Meta description |
-| string | custom_design | Custom design |
-| string | custom_layout_update | Custom layout update |
-| string | options_container | Options container |
-| associativeArray | additional_attributes | Array of catalogProductAdditionalAttributesEntity |
-| array | stock_data | Array of catalogInventoryStockItemUpdateEntity |
+| Type             | Name                   | Description                                                               |
+|------------------|------------------------|---------------------------------------------------------------------------|
+| ArrayOfString    | categories             | Array of categories                                                       |
+| ArrayOfString    | websites               | Array of websites                                                         |
+| string           | name                   | Product name                                                              |
+| string           | description            | Product description                                                       |
+| string           | short_description      | Product short description                                                 |
+| string           | weight                 | Product weight                                                            |
+| string           | status                 | Product status                                                            |
+| string           | url_key                | A relative URL path that can be entered in place of the target path       |
+| string           | url_path               | URL path                                                                  |
+| string           | visibility             | Product visibility on the frontend                                        |
+| ArrayOfString    | category_ids           | Array of category IDs                                                     |
+| ArrayOfString    | website_ids            | Array of website IDs                                                      |
+| string           | has_options            | Defines whether the product has options                                   |
+| string           | gift_message_available | Defines whether the gift message is available for the product             |
+| string           | price                  | Product price                                                             |
+| string           | special_price          | Product special price                                                     |
+| string           | special_from_date      | Date starting from which the special price will be applied to the product |
+| string           | special_to_date        | Date till which the special price will be applied to the product          |
+| string           | tax_class_id           | Tax class ID                                                              |
+| array            | tier_price             | Array of catalogProductTierPriceEntity                                    |
+| string           | meta_title             | Meta title                                                                |
+| string           | meta_keyword           | Meta keyword                                                              |
+| string           | meta_description       | Meta description                                                          |
+| string           | custom_design          | Custom design                                                             |
+| string           | custom_layout_update   | Custom layout update                                                      |
+| string           | options_container      | Options container                                                         |
+| associativeArray | additional_attributes  | Array of catalogProductAdditionalAttributesEntity                         |
+| array            | stock_data             | Array of catalogInventoryStockItemUpdateEntity                            |
 
-**Notes**: The "websites" and "website_ids" or "categories" and "category_ids" parameters are interchangeable. In other words, you can specify an array of website IDs (int) and then you don't need to specify the array of website codes (string) and vice versa.
+**Note:** The `websites` and `website_ids` or `categories` and `category_ids` parameters are interchangeable.
+You can specify an array of website IDs (int)
+and then you don't need to specify the array of website codes (string) and vice versa.
 
-The **catalogProductTierPriceEntity** content is as follows:
+<h3>Content `catalogProductTierPriceEntity`</h3>
 
-| Type | Name | Description |
-| --- | --- | --- |
-| string | customer_group_id | Customer group ID |
-| string | website | Website |
-| int | qty | Quantity of items to which the price will be applied |
-| double | price | Price that each item will cost |
+| Type   | Name              | Description                                          |
+|--------|-------------------|------------------------------------------------------|
+| string | customer_group_id | Customer group ID                                    |
+| string | website           | Website                                              |
+| int    | qty               | Quantity of items to which the price will be applied |
+| double | price             | Price that each item will cost                       |
 
-The **catalogInventoryStockItemUpdateEntity** content is as follows:
+<h3>Content `catalogInventoryStockItemUpdateEntity`</h3>
 
-| Type | Name | Description |
-| --- | --- | --- |
-| string | qty | Quantity of items |
-| int | is_in_stock | Defines whether the item is in stock |
-| int | manage_stock | Manage stock |
-| int | use_config_manage_stock | Use config manage stock |
-| int | min_qty | Minimum quantity for items to be in stock |
-| int | use_config_min_qty | Use config settings flag (value defined in the Inventory System Configuration) |
-| int | min_sale_qty | Minimum quantity allowed in the shopping cart |
-| int | use_config_min_sale_qty | Use config settings flag |
-| int | max_sale_qty | Maximum quantity allowed in the shopping cart |
-| int | use_config_max_sale_qty | Use config settings flag |
-| int | is_qty_decimal | Defines whether the quantity is decimal |
-| int | backorders | Backorders status |
-| int | use_config_backorders | Use config settings flag (for backorders) |
-| int | notify_stock_qty | Stock quantity below which a notification will appear |
-| int | use_config_notify_stock_qty | Use config settings flag (for stock quantity) |
+| Type   | Name                        | Description                                                                    |
+|--------|-----------------------------|--------------------------------------------------------------------------------|
+| string | qty                         | Quantity of items                                                              |
+| int    | is_in_stock                 | Defines whether the item is in stock                                           |
+| int    | manage_stock                | Manage stock                                                                   |
+| int    | use_config_manage_stock     | Use config manage stock                                                        |
+| int    | min_qty                     | Minimum quantity for items to be in stock                                      |
+| int    | use_config_min_qty          | Use config settings flag (value defined in the Inventory System Configuration) |
+| int    | min_sale_qty                | Minimum quantity allowed in the shopping cart                                  |
+| int    | use_config_min_sale_qty     | Use config settings flag                                                       |
+| int    | max_sale_qty                | Maximum quantity allowed in the shopping cart                                  |
+| int    | use_config_max_sale_qty     | Use config settings flag                                                       |
+| int    | is_qty_decimal              | Defines whether the quantity is decimal                                        |
+| int    | backorders                  | Backorders status                                                              |
+| int    | use_config_backorders       | Use config settings flag (for backorders)                                      |
+| int    | notify_stock_qty            | Stock quantity below which a notification will appear                          |
+| int    | use_config_notify_stock_qty | Use config settings flag (for stock quantity)                                  |
 
-The **catalogProductAdditionalAttributesEntity** content is as follows:
+<h3>Content `catalogProductAdditionalAttributesEntity`</h3>
 
-| Type | Name |
-| --- | --- |
-| associativeMultiArray | multi_data |
-| associativeArray | single_data |
+| Type                  | Name                                                                |
+|-----------------------|---------------------------------------------------------------------|
+| associativeMultiArray | multi_data (array of attributes which could contain several values) |
+| associativeArray      | single_data (array of attributes with only single value)            |
 
-Single Data: array of attributes with only single value  
-Multi Data: array of attributes which could contain several values
+<h3>Faults</h3>
 
-**Faults:**
+| Fault Code | Fault Message                                 |
+|------------|-----------------------------------------------|
+| 100        | Requested store view not found.               |
+| 101        | Product not exists.                           |
+| 102        | Invalid data given. Details in error message. |
 
-| Fault Code | Fault Message |
-| --- | --- |
-| 100 | Requested store view not found. |
-| 101 | Product not exists. |
-| 102 | Invalid data given. Details in error message. |
+<h3>Examples</h3>
 
-**Examples**:
-
-**Request Example SOAP V1**
+<h4>Request Example SOAP V1</h4>
 
 ```php
-$client = new SoapClient('http://magentohost/api/soap/?wsdl');
+$client = new SoapClient('https://mahohost/api/soap/?wsdl');
 $session = $client->login('apiUser', 'apiKey');
 
-$result = $client->call($session, 'catalog_product.update', array('product_sku', array(
-    'categories' => array(2),
-    'websites' => array(1),
-    'name' => 'Product name new 2',
-    'description' => 'Product description',
-    'short_description' => 'Product short description',
-    'weight' => '10',
-    'status' => '1',
-    'url_key' => 'product-url-key',
-    'url_path' => 'product-url-path',
-    'visibility' => '4',
-    'price' => '100',
-    'tax_class_id' => 1,
-    'meta_title' => 'Product meta title',
-    'meta_keyword' => 'Product meta keyword',
-    'meta_description' => 'Product meta description'
-)));
+$result = $client->call(
+    $session,
+    'catalog_product.update',
+    [
+        'product_sku',
+        [
+            'categories' => [2],
+            'websites' => [1],
+            'name' => 'Product name new 2',
+            'description' => 'Product description',
+            'short_description' => 'Product short description',
+            'weight' => '10',
+            'status' => '1',
+            'url_key' => 'product-url-key',
+            'url_path' => 'product-url-path',
+            'visibility' => '4',
+            'price' => '100',
+            'tax_class_id' => 1,
+            'meta_title' => 'Product meta title',
+            'meta_keyword' => 'Product meta keyword',
+            'meta_description' => 'Product meta description'
+        ]
+    ]
+);
 var_dump($result);
 ```
 
-**Request Example SOAP V2**
+<h4>Request Example SOAP V2</h4>
 
 ```php
-$client = new SoapClient('http://magentohost/api/v2_soap/?wsdl');
+$client = new SoapClient('https://mahohost/api/v2_soap/?wsdl');
 $session = $client->login('apiUser', 'apiKey');
 
-$result = $client->catalogProductUpdate($session, 'product_sku', array(
-    'categories' => array(2),
-    'websites' => array(1),
-    'name' => 'Product name new',
-    'description' => 'Product description',
-    'short_description' => 'Product short description',
-    'weight' => '10',
-    'status' => '1',
-    'url_key' => 'product-url-key',
-    'url_path' => 'product-url-path',
-    'visibility' => '4',
-    'price' => '100',
-    'tax_class_id' => 1,
-    'meta_title' => 'Product meta title',
-    'meta_keyword' => 'Product meta keyword',
-    'meta_description' => 'Product meta description'
-));
+$result = $client->catalogProductUpdate(
+    $session,
+    'product_sku',
+    [
+        'categories' => [2],
+        'websites' => [1],
+        'name' => 'Product name new',
+        'description' => 'Product description',
+        'short_description' => 'Product short description',
+        'weight' => '10',
+        'status' => '1',
+        'url_key' => 'product-url-key',
+        'url_path' => 'product-url-path',
+        'visibility' => '4',
+        'price' => '100',
+        'tax_class_id' => 1,
+        'meta_title' => 'Product meta title',
+        'meta_keyword' => 'Product meta keyword',
+        'meta_description' => 'Product meta description'
+    ]
+);
 var_dump($result);
 ```
 
-**Request Example SOAP V2 (WS-I Compliance Mode)**
+<h4>Request Example SOAP V2 (WS-I Compliance Mode)</h4>
 
 ```php
-$proxy = new SoapClient('http://magentohost/api/v2_soap/?wsdl');
-$sessionId = $proxy->login((object)array('username' => 'apiUser', 'apiKey' => 'apiKey'));
+$proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl');
+$sessionId = $proxy->login((object)['username' => 'apiUser', 'apiKey' => 'apiKey']);
 
-$result = $proxy->catalogProductUpdate((object)array('sessionId' => $sessionId->result, 'productId' => '1',
-'productData' => ((object)array(
+$result = $proxy->catalogProductUpdate((object)['sessionId' => $sessionId->result, 'productId' => '1',
+'productData' => (object)[
     'name' => 'Product name updated',
     'status' => '1',
-))));
+]]);
 var_dump($result->result);
 ```
 
 ## SetSpecialPrice
 
-**Method**:
+<h3>Method</h3>
 
--   catalog_product.setSpecialPrice (SOAP V1)
--   catalogProductSetSpecialPrice (SOAP V2)
+- `catalog_product.setSpecialPrice` (SOAP V1)
+- `catalogProductSetSpecialPrice` (SOAP V2)
 
-Allows you to set the product special price.
+Allows you to set the product's special price.
 
-**Aliases:**
+<h3>Aliases</h3>
 
--   product.setSpecialPrice
+- `product.setSpecialPrice`
 
-**Note:**
+**Note:** Although the API accepts up to four digits of precision for all price arguments,
+Maho strongly recommends you pass in two digits to reduce inaccuracy in the tax calculation process.
+(That is, use a price like `12.35` and not `12.3487`).
 
-Although the API accepts up to four digits of precision for all price arguments, Magento strongly recommends you pass in two digits to reduce inaccuracy in the tax calculation process. (That is, use a price like 12.35 and not 12.3487).
+<h3>Arguments</h3>
 
-**Arguments:**
-
-| Type | Name | Description |
-| --- | --- | --- |
-| string | sessionId | Session ID |
-| string | productId | Product ID or SKU |
-| string | specialPrice | Product special price |
-| string | fromDate | Date starting from which special price will be applied |
-| string | toDate | Date till which special price will be applied |
-| string | storeView | Store view ID or code (optional) |
+| Type   | Name                  | Description                                                                             |
+|--------|-----------------------|-----------------------------------------------------------------------------------------|
+| string | sessionId             | Session ID                                                                              |
+| string | productId             | Product ID or SKU                                                                       |
+| string | specialPrice          | Product special price                                                                   |
+| string | fromDate              | Date starting from which special price will be applied                                  |
+| string | toDate                | Date till which special price will be applied                                           |
+| string | storeView             | Store view ID or code (optional)                                                        |
 | string | productIdentifierType | Defines whether the product ID or SKU is passed in the 'productId' parameter (optional) |
 
-**Returns**:
+<h3>Returns</h3>
 
-| Type | Name | Description |
-| --- | --- | --- |
+| Type        | Name   | Description                                          |
+|-------------|--------|------------------------------------------------------|
 | boolean/int | result | True (1) if the special price is set for the product |
 
-**Examples**:
+<h3>Examples</h3>
 
-**Request Example SOAP V1**
+<h4>Request Example SOAP V1</h4>
 
 ```php
-$client = new SoapClient('http://magentohost/api/soap/?wsdl');
+$client = new SoapClient('https://mahohost/api/soap/?wsdl');
 $session = $client->login('apiUser', 'apiKey');
 
-$result = $client->call($session, 'catalog_product.setSpecialPrice', array('product' => 'testproduct', 'specialPrice' => '77.5', 'fromDate' => '2012-03-29 12:30:51', 'toDate' => '2012-04-29 12:30:51'));
+$result = $client->call($session, 'catalog_product.setSpecialPrice', ['product' => 'testproduct', 'specialPrice' => '77.5', 'fromDate' => '2012-03-29 12:30:51', 'toDate' => '2012-04-29 12:30:51']);
 var_dump($result);
 
-// If you don't need the session anymore
-//$client->endSession($session);
+// When the session can be closed
+$client->endSession($session);
 ```
 
-**Request Example SOAP V2**
+<h4>Request Example SOAP V2</h4>
 
 ```php
-$proxy = new SoapClient('http://magentohost/api/v2_soap/?wsdl'); // TODO : change url
-$sessionId = $proxy->login('apiUser', 'apiKey'); // TODO : change login and pwd if necessary
+$proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); // TODO: change url
+$sessionId = $proxy->login('apiUser', 'apiKey'); // TODO: change login and pwd if necessary
 
-$result = $proxy->catalogProductSetSpecialPrice($sessionId, '2', '77.5', '2012-03-29 12:30:51', '2012-04-29 12:30:51');
+$result = $proxy->catalogProductSetSpecialPrice(
+    $sessionId,
+    '2',
+    '77.5',
+    '2012-03-29 12:30:51',
+    '2012-04-29 12:30:51'
+);
 var_dump($result);
 ```
 
-**Request Example SOAP V2 (WS-I Compliance Mode)**
+<h4>Request Example SOAP V2 (WS-I Compliance Mode)</h4>
 
 ```php
-$proxy = new SoapClient('http://magentohost/api/v2_soap/?wsdl');
-$sessionId = $proxy->login((object)array('username' => 'apiUser', 'apiKey' => 'apiKey'));
+$proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl');
+$sessionId = $proxy->login((object)['username' => 'apiUser', 'apiKey' => 'apiKey']);
 
-$result = $proxy->catalogProductSetSpecialPrice((object)array('sessionId' => $sessionId->result, 'productId' => '2', 'specialPrice' => '77.5', 'fromDate' => '2012-03-29 12:30:51', 'toDate' => '2012-04-29 12:30:51'));
+$result = $proxy->catalogProductSetSpecialPrice(
+    (object)[
+        'sessionId' => $sessionId->result,
+        'productId' => '2',
+        'specialPrice' => '77.5',
+        'fromDate' => '2012-03-29 12:30:51',
+        'toDate' => '2012-04-29 12:30:51'
+    ]
+);
 var_dump($result->result);
 ```
 
 ## GetSpecialPrice
 
-**Method**:
+<h3>Method</h3>
 
--   catalog_product.getSpecialPrice (SOAP V1)
--   catalogProductGetSpecialPrice (SOAP V2)
+- `catalog_product.getSpecialPrice` (SOAP V1)
+- `catalogProductGetSpecialPrice` (SOAP V2)
 
 Allows you to get the product special price data.
 
-**Aliases:**
+<h3>Alias</h3>
 
--   product.getSpecialPrice
+- `product.getSpecialPrice`
 
-**Arguments:**
+<h3>Arguments</h3>
 
-| Type | Name | Description |
-| --- | --- | --- |
-| string | sessionId | Session ID |
-| string | productproductId | Product ID or SKU |
-| string | storeView | Store view ID or code |
+| Type   | Name           | Description                                                                |
+|--------|----------------|----------------------------------------------------------------------------|
+| string | sessionId      | Session ID                                                                 |
+| string | productId      | Product ID or SKU                                                          |
+| string | storeView      | Store view ID or code                                                      |
 | string | identifierType | Defines whether the product ID or SKU is passed in the 'product' parameter |
 
-**Returns**:
+<h3>Returns</h3>
 
-| Type | Name | Description |
-| --- | --- | --- |
+| Type  | Name   | Description                         |
+|-------|--------|-------------------------------------|
 | array | result | Array of catalogProductReturnEntity |
 
-The **catalogProductReturnEntity** content is as follows:
+<h3>Content `catalogProductReturnEntity`</h3>
 
-| Type | Name | Description |
-| --- | --- | --- |
-| string | special_price | Product special price |
+| Type   | Name              | Description                                                          |
+|--------|-------------------|----------------------------------------------------------------------|
+| string | special_price     | Product special price                                                |
 | string | special_from_date | Date starting from which the special price is applied to the product |
-| string | special_to_date | Date till which the special price is applied to the product |
+| string | special_to_date   | Date till which the special price is applied to the product          |
 
-**Examples**:
+<h3>Examples</h3>
 
-**Request Example SOAP V1**
+<h4>Request Example SOAP V1</h4>
 
-```
-$client = new SoapClient('http://magentohost/api/soap/?wsdl');
+```php
+$client = new SoapClient('https://mahohost/api/soap/?wsdl');
 $session = $client->login('apiUser', 'apiKey');
 
 $result = $client->call($session, 'catalog_product.getSpecialPrice', '1');
 var_dump($result);
 
-// If you don't need the session anymore
-//$client->endSession($session);
+// When the session can be closed
+$client->endSession($session);
 ```
 
-**Request Example SOAP V2**
+<h4>Request Example SOAP V2</h4>
 
 ```php
-$proxy = new SoapClient('http://magentohost/api/v2_soap/?wsdl'); // TODO : change url
-$sessionId = $proxy->login('apiUser', 'apiKey'); // TODO : change login and pwd if necessary
+$proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); // TODO: change url
+$sessionId = $proxy->login('apiUser', 'apiKey'); // TODO: change login and pwd if necessary
 
 $result = $proxy->catalogProductGetSpecialPrice($sessionId, '1');
 var_dump($result);
 ```
 
-**Request Example SOAP V2 (WS-I Compliance Mode)**
+<h4>Request Example SOAP V2 (WS-I Compliance Mode)</h4>
 
 ```php
-$proxy = new SoapClient('http://magentohost/api/v2_soap/?wsdl');
-$sessionId = $proxy->login((object)array('username' => 'apiUser', 'apiKey' => 'apiKey'));
+$proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl');
+$sessionId = $proxy->login((object)['username' => 'apiUser', 'apiKey' => 'apiKey']);
 
-$result = $proxy->catalogProductGetSpecialPrice((object)array('sessionId' => $sessionId->result, 'productId' => '1'));
+$result = $proxy->catalogProductGetSpecialPrice(
+    (object)[
+        'sessionId' => $sessionId->result,
+        'productId' => '1'
+    ]
+);
 var_dump($result->result);
 ```
 
-**Response Example SOAP V1**
+<h4>Response Example SOAP V1</h4>
 
 ```php
 array
@@ -988,130 +1061,136 @@ array
 
 ## Delete
 
-**Method**:
+<h3>Method</h3>
 
--   catalog_product.delete (SOAP V1)
--   catalogProductDelete (SOAP V2)
+- `catalog_product.delete` (SOAP V1)
+- `catalogProductDelete` (SOAP V2)
 
 Allows you to delete the required product.
 
-**Aliases:**
+<h3>Aliases</h3>
 
--   product.delete
+- `product.delete`
 
-**Arguments:**
+<h3>Arguments</h3>
 
-| Type | Name | Description |
-| --- | --- | --- |
-| string | sessionId | Session ID |
-| string | productproductId | Product ID or SKU |
+| Type   | Name           | Description                                                                |
+|--------|----------------|----------------------------------------------------------------------------|
+| string | sessionId      | Session ID                                                                 |
+| string | productId      | Product ID or SKU                                                          |
 | string | identifierType | Defines whether the product ID or SKU is passed in the 'product' parameter |
 
-**Returns**:
+<h3>Returns</h3>
 
-| Type | Name | Description |
-| --- | --- | --- |
+| Type        | Name   | Description                        |
+|-------------|--------|------------------------------------|
 | boolean/int | result | True (1) if the product is deleted |
 
-**Examples**:
+<h3>Examples</h3>
 
-**Request Example SOAP V1**
+<h4>Request Example SOAP V1</h4>
 
 ```php
-$client = new SoapClient('http://magentohost/api/soap/?wsdl');
+$client = new SoapClient('https://mahohost/api/soap/?wsdl');
 $session = $client->login('apiUser', 'apiKey');
 
 $result = $client->call($session, 'catalog_product.delete', '6');
 var_dump($result);
 
-// If you don't need the session anymore
-//$client->endSession($session);
+// When the session can be closed
+$client->endSession($session);
 ```
 
-**Request Example SOAP V2**
+<h4>Request Example SOAP V2</h4>
 
 ```php
-$proxy = new SoapClient('http://magentohost/api/v2_soap/?wsdl'); // TODO : change url
-$sessionId = $proxy->login('apiUser', 'apiKey'); // TODO : change login and pwd if necessary
+$proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); // TODO: change url
+$sessionId = $proxy->login('apiUser', 'apiKey'); // TODO: change login and pwd if necessary
 
 $result = $proxy->catalogProductDelete($sessionId, '6');
 var_dump($result);
 ```
 
-**Request Example SOAP V2 (WS-I Compliance Mode)**
+<h4>Request Example SOAP V2 (WS-I Compliance Mode)</h4>
 
 ```php
-$proxy = new SoapClient('http://magentohost/api/v2_soap/?wsdl');
-$sessionId = $proxy->login((object)array('username' => 'apiUser', 'apiKey' => 'apiKey'));
+$proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl');
+$sessionId = $proxy->login((object)['username' => 'apiUser', 'apiKey' => 'apiKey']);
 
-$result = $proxy->catalogProductDelete((object)array('sessionId' => $sessionId->result, 'productId' => '21'));
+$result = $proxy->catalogProductDelete(
+    (object)[
+        'sessionId' => $sessionId->result,
+        'productId' => '21'
+    ]
+);
 var_dump($result->result);
 ```
 
 ## ListOfAdditionalAttributes
 
-**Method**:
+<h3>Method</h3>
 
--   product.listOfAdditionalAttributes (SOAP V1)
--   catalogProductListOfAdditionalAttributes (SOAP V2)
+- `product.listOfAdditionalAttributes` (SOAP V1)
+- `catalogProductListOfAdditionalAttributes` (SOAP V2)
 
-Get the list of additional attributes. Additional attributes are attributes that are not in the default set of attributes.
+Get the list of additional attributes.
+Additional attributes are attributes that are not in the default set of attributes.
 
-**Arguments**:
+<h3>Arguments</h3>
 
-| Type | Name | Description |
-| --- | --- | --- |
-| string | sessionId | Session ID |
-| string | productType | Product type (e.g., simple) |
-| string | attributeSetId | Attribute set ID |
+| Type   | Name           | Description                  |
+|--------|----------------|------------------------------|
+| string | sessionId      | Session ID                   |
+| string | productType    | Product type (e.g. `simple`) |
+| string | attributeSetId | Attribute set ID             |
 
-**Returns**:
+<h3>Returns</h3>
 
-| Type | Name | Description |
-| --- | --- | --- |
-| int | attribute_id | Attribute ID |
-| string | code | Attribute code |
-| string | type | Attribute type (e.g., text, select, date, etc.) |
-| string | required | Defines whether the attribute is required |
-| string | scope | Attribute scope (global, website, or store) |
+| Type   | Name         | Description                                          |
+|--------|--------------|------------------------------------------------------|
+| int    | attribute_id | Attribute ID                                         |
+| string | code         | Attribute code                                       |
+| string | type         | Attribute type (e.g. `text`, `select`, `date`, etc.) |
+| string | required     | Defines whether the attribute is required            |
+| string | scope        | Attribute scope (global, website, or store)          |
 
-**Faults**:
+<h3>Faults</h3>
 
-| Fault Code | Fault Message |
-| --- | --- |
-| 104 | Product type is not in allowed types. |
-| 105 | Product attribute set is not existed |
-| 106 | Product attribute set is not belong catalog product entity type |
+| Fault Code | Fault Message                                                   |
+|------------|-----------------------------------------------------------------|
+| 104        | Product type is not in allowed types.                           |
+| 105        | Product attribute set is not existed                            |
+| 106        | Product attribute set is not belong catalog product entity type |
 
-**Examples**:
+<h3>Examples</h3>
 
-**Request Example SOAP V1**
+<h4>Request Example SOAP V1</h4>
 
 ```php
-$proxy = new SoapClient('http://magentohost/api/soap/?wsdl');
+$proxy = new SoapClient('https://mahohost/api/soap/?wsdl');
 $sessionId = $proxy->login('apiUser', 'apiKey');
 
 $listAttributes = $proxy->call(
     $sessionId,
     'product.listOfAdditionalAttributes',
-    array(
+    [
         'simple',
         13
-    )
+    ]
 );
 ```
 
-**Request Example SOAP V2**
+<h4>Request Example SOAP V2</h4>
 
 ```php
-$proxy = new SoapClient('http://magentohost/api/v2_soap/?wsdl'); // TODO : change url
-$sessionId = $proxy->login('apiUser', 'apiKey'); // TODO : change login and pwd if necessary
+$proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); // TODO: change url
+$sessionId = $proxy->login('apiUser', 'apiKey'); // TODO: change login and pwd if necessary
 
 $result = $proxy->catalogProductListOfAdditionalAttributes($sessionId, 'simple', '13');
 var_dump($result);
 ```
 
-**Response Example SOAP V1**
+<h4>Response Example SOAP V1</h4>
 
 ```php
 array
