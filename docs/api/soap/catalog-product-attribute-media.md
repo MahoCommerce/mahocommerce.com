@@ -4,122 +4,129 @@
 
 Allows you to manage product images.
 
-**Resource Name**: catalog_product_attribute_media
+<h3>Resource Name</h3>
 
-**Aliases**:
+- `catalog_product_attribute_media`
 
--   product_attribute_media
--   product_media
+<h3>Aliases</h3>
 
-**Methods**:
+- `product_attribute_media`
+- `product_media`
 
-- catalog_product_attribute_media.currentStore - Set/Get the current store view
-- catalog_product_attribute_media.list - Retrieve the product images
-- catalog_product_attribute_media.info - Retrieve the specified product image
-- catalog_product_attribute_media.types - Retrieve product image types
-- catalog_product_attribute_media.create - Upload a new image for a product
-- catalog_product_attribute_media.update - Update an image for a product
-- catalog_product_attribute_media.remove - Remove an image for a product
+<h3>Methods</h3>
 
-**Faults**:
+- `catalog_product_attribute_media.currentStore` — Set/Get the current store view.
+- `catalog_product_attribute_media.list` — Retrieve the product images.
+- `catalog_product_attribute_media.info` — Retrieve the specified product image.
+- `catalog_product_attribute_media.types` — Retrieve product image types.
+- `catalog_product_attribute_media.create` — Upload a new image for a product.
+- `catalog_product_attribute_media.update` — Update an image for a product.
+- `catalog_product_attribute_media.remove` — Remove an image for a product.
 
-| Fault Code | Fault Message |
-| --- | --- |
-| 100 | Requested store view not found. |
-| 101 | Product not exists. |
-| 102 | Invalid data given. Details in error message. |
-| 103 | Requested image not exists in product images’ gallery. |
-| 104 | Image creation failed. Details in error message. |
-| 105 | Image not updated. Details in error message. |
-| 106 | Image not removed. Details in error message. |
-| 107 | Requested product doesn’t support images |
+<h3>Faults</h3>
 
-**Examples**:
+| Fault Code | Fault Message                                          |
+|------------|--------------------------------------------------------|
+| 100        | Requested store view not found.                        |
+| 101        | Product not exists.                                    |
+| 102        | Invalid data given. Details in error message.          |
+| 103        | Requested image not exists in product images’ gallery. |
+| 104        | Image creation failed. Details in error message.       |
+| 105        | Image not updated. Details in error message.           |
+| 106        | Image not removed. Details in error message.           |
+| 107        | Requested product doesn’t support images               |
 
-**Example 1. Working with product images**
+<h3>Example — Working With Product Images</h3>
 
 ```php
-$proxy = new SoapClient('http://magentohost/api/soap/?wsdl');
+$proxy = new SoapClient('https://mahohost/api/soap/?wsdl');
 $sessionId = $proxy->login('apiUser', 'apiKey');
 
-$newImage = array(
-    'file' => array(
+$newImage = [
+    'file' => [
         'name' => 'file_name',
         'content' => base64_encode(file_get_contents('product.jpg')),
-        'mime'    => 'image/jpeg'
-    ),
-    'label'    => 'Cool Image Through Soap',
+        'mime' => 'image/jpeg'
+    ],
+    'label' => 'Cool Image Through Soap',
     'position' => 2,
-    'types'    => array('small_image'),
-    'exclude'  => 0
-);
+    'types' => ['small_image'],
+    'exclude' => 0
+];
 
-$imageFilename = $proxy->call($sessionId, 'product_media.create', array('Sku', $newImage));
+$imageFilename = $proxy->call($sessionId, 'product_media.create', ['sku', $newImage]);
 var_dump($imageFilename);
 
 // Newly created image file
-var_dump($proxy->call($sessionId, 'product_media.list', 'Sku'));
+var_dump($proxy->call($sessionId, 'product_media.list', 'sku'));
 
-$proxy->call($sessionId, 'product_media.update', array(
-    'Sku',
-    $imageFilename,
-    array('position' => 2, 'types' => array('image') /* Lets do it main image for product */)
-));
+$proxy->call(
+    $sessionId,
+    'product_media.update',
+    [
+        'sku',
+        $imageFilename,
+        [
+            'position' => 2,
+            'types' => ['image']
+        ]
+    ]
+);
 
 // Updated image file
-var_dump($proxy->call($sessionId, 'product_media.list', 'Sku'));
+var_dump($proxy->call($sessionId, 'product_media.list', 'sku'));
 
 // Remove image file
-$proxy->call($sessionId, 'product_media.remove', array('Sku', $imageFilename));
+$proxy->call($sessionId, 'product_media.remove', ['sku', $imageFilename]);
 
 // Images without our file
-var_dump($proxy->call($sessionId, 'product_media.list', 'Sku'));
+var_dump($proxy->call($sessionId, 'product_media.list', 'sku'));
 ```
 
 ## CurrentStore
 
-**Method**:
+<h3>Method</h3>
 
--   catalog_product_attribute_media.currentStore (SOAP V1)
--   catalogProductAttributeMediaCurrentStore (SOAP V2)
+- `catalog_product_attribute_media.currentStore` (SOAP V1)
+- `catalogProductAttributeMediaCurrentStore` (SOAP V2)
 
 Allows you to set/get the current store view.
 
-**Aliases:**
+<h3>Aliases</h3>
 
--   product_attribute_media.currentStore
--   product_media.currentStore
+- `product_attribute_media.currentStore`
+- `product_media.currentStore`
 
-**Arguments:**
+<h3>Arguments</h3>
 
-| Type | Name | Description |
-| --- | --- | --- |
-| string | sessionId | Session ID |
+| Type   | Name      | Description                      |
+|--------|-----------|----------------------------------|
+| string | sessionId | Session ID                       |
 | string | storeView | Store view ID or code (optional) |
 
-**Returns**:
+<h3>Returns</h3>
 
-| Type | Name | Description |
-| --- | --- | --- |
-| int | storeView | Store view ID |
+| Type | Name      | Description   |
+|------|-----------|---------------|
+| int  | storeView | Store view ID |
 
-**Examples**:
+<h3>Examples</h3>
 
-**Request Example SOAP V1**
+<h4>Request Example SOAP V1</h4>
 
 ```php
-$client = new SoapClient('http://magentohost/api/soap/?wsdl');
+$client = new SoapClient('https://mahohost/api/soap/?wsdl');
 $session = $client->login('apiUser', 'apiKey');
 
 $result = $client->call($session, 'catalog_product_attribute_media.currentStore', 'english');
 var_dump($result);
 ```
 
-**Request Example SOAP V2**
+<h4>Request Example SOAP V2</h4>
 
 ```php
-$proxy = new SoapClient('http://magentohost/api/v2_soap/?wsdl'); // TODO : change url
-$sessionId = $proxy->login('apiUser', 'apiKey'); // TODO : change login and pwd if necessary
+$proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); // TODO: change url
+$sessionId = $proxy->login('apiUser', 'apiKey'); // TODO: change login and pwd if necessary
  
 $result = $proxy->catalogProductAttributeMediaCurrentStore($sessionId, 'english');
 var_dump($result);
@@ -127,80 +134,85 @@ var_dump($result);
 
 ## List
 
-**Method**:
+<h3>Method</h3>
 
--   catalog_product_attribute_media.list (SOAP V1)
--   catalogProductAttributeMediaList (SOAP V2)
+- `catalog_product_attribute_media.list` (SOAP V1)
+- `catalogProductAttributeMediaList` (SOAP V2)
 
 Allows you to retrieve the list of product images.
 
-**Aliases:**
+<h3>Aliases</h3>
 
--   product_attribute_media.list
--   product_media.list
+- `product_attribute_media.list`
+- `product_media.list`
 
-**Arguments:**
+<h3>Arguments</h3>
 
-| Type | Name | Description |
-| --- | --- | --- |
-| string | sessionId | Session ID |
-| string | productproductId | Product ID or SKU |
-| string | storeView | Store view ID or code (optional) |
+| Type   | Name           | Description                                                                |
+|--------|----------------|----------------------------------------------------------------------------|
+| string | sessionId      | Session ID                                                                 |
+| string | productId      | Product ID or SKU                                                          |
+| string | storeView      | Store view ID or code (optional)                                           |
 | string | identifierType | Defines whether the product ID or sku is passed in the 'product' parameter |
 
-**Returns**:
+<h3>Returns</h3>
 
-| Type | Name | Description |
-| --- | --- | --- |
+| Type  | Name   | Description                        |
+|-------|--------|------------------------------------|
 | array | result | Array of catalogProductImageEntity |
 
-The **catalogProductImageEntity** content is as follows:
+<h3>Content `catalogProductImageEntity`</h3>
 
-| Type | Name | Description |
-| --- | --- | --- |
-| string | file | Image file name |
-| string | label | Image label |
-| string | position | Image position |
-| string | exclude | Defines whether the image will associate only to one of three image types |
-| string | url | Image URL |
-| ArrayOfString | types | Array of types |
+| Type          | Name     | Description                                                               |
+|---------------|----------|---------------------------------------------------------------------------|
+| string        | file     | Image file name                                                           |
+| string        | label    | Image label                                                               |
+| string        | position | Image position                                                            |
+| string        | exclude  | Defines whether the image will associate only to one of three image types |
+| string        | url      | Image URL                                                                 |
+| ArrayOfString | types    | Array of types                                                            |
 
-**Examples**:
+<h3>Examples</h3>
 
-**Request Example SOAP V1**
+<h4>Request Example SOAP V1</h4>
 
 ```php
-$client = new SoapClient('http://magentohost/api/soap/?wsdl');
+$client = new SoapClient('https://mahohost/api/soap/?wsdl');
 $session = $client->login('apiUser', 'apiKey');
 
 $result = $client->call($session, 'catalog_product_attribute_media.list', '2');
 var_dump($result);
 
-// If you don't need the session anymore
-//$client->endSession($session);
+// When the session can be closed
+$client->endSession($session);
 ```
 
-**Request Example SOAP V2**
+<h4>Request Example SOAP V2</h4>
 
 ```php
-$proxy = new SoapClient('http://magentohost/api/v2_soap/?wsdl'); // TODO : change url
-$sessionId = $proxy->login('apiUser', 'apiKey'); // TODO : change login and pwd if necessary
+$proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); // TODO: change url
+$sessionId = $proxy->login('apiUser', 'apiKey'); // TODO: change login and pwd if necessary
 
 $result = $proxy->catalogProductAttributeMediaList($sessionId, '2');
 var_dump($result);
 ```
 
-**Request Example SOAP V2 (WS-I Compliance Mode)**
+<h4>Request Example SOAP V2 (WS-I Compliance Mode)</h4>
 
 ```php
-$proxy = new SoapClient('http://magentohost/api/v2_soap/?wsdl');
-$sessionId = $proxy->login((object)array('username' => 'apiUser', 'apiKey' => 'apiKey'));
+$proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl');
+$sessionId = $proxy->login((object)['username' => 'apiUser', 'apiKey' => 'apiKey']);
 
-$result = $proxy->catalogProductAttributeMediaList((object)array('sessionId' => $sessionId->result, 'productId' => '2'));
+$result = $proxy->catalogProductAttributeMediaList(
+    (object)[
+        'sessionId' => $sessionId->result,
+        'productId' => '2'
+    ]
+);
 var_dump($result->result);
 ```
 
-**Response Example SOAP V1**
+<h4>Response Example SOAP V1</h4>
 
 ```php
 array
@@ -210,7 +222,7 @@ array
       'label' => string '' (length=0)
       'position' => string '1' (length=1)
       'exclude' => string '0' (length=1)
-      'url' => string 'http://magentopath/blackberry8100_2.jpg' (length=71)
+      'url' => string 'https://mahohost/blackberry8100_2.jpg' (length=71)
       'types' =>
         array
           0 => string 'image' (length=5)
@@ -218,83 +230,96 @@ array
           2 => string 'thumbnail' (length=9)
 ```
 
-## Info
+## Info
 
-**Method**:
+<h3>Method</h3>
 
--   catalog_product_attribute_media.info (SOAP V1)
--   catalogProductAttributeMediaInfo (SOAP V2)
+- `catalog_product_attribute_media.info` (SOAP V1)
+- `catalogProductAttributeMediaInfo` (SOAP V2)
 
 Allows you to retrieve information about the specified product image.
 
-**Aliases:**
+<h3>Aliases</h3>
 
--   product_attribute_media.info
--   product_media.info
+- `product_attribute_media.info`
+- `product_media.info`
 
-**Arguments:**
+<h3>Arguments</h3>
 
-| Type | Name | Description |
-| --- | --- | --- |
-| string | sessionId | Session ID |
-| string | productproductId | Product ID or SKU |
-| string | file | Name of the image file (e.g., /b/l/blackberry8100_2.jpg) |
-| string | storeView | Store view ID or code (optional) |
+| Type   | Name           | Description                                                                |
+|--------|----------------|----------------------------------------------------------------------------|
+| string | sessionId      | Session ID                                                                 |
+| string | productId      | Product ID or SKU                                                          |
+| string | file           | Name of the image file incl. path (e.g. '/b/l/blackberry8100_2.jpg')       |
+| string | storeView      | Store view ID or code (optional)                                           |
 | string | identifierType | Defines whether the product ID or SKU is passed in the 'product' parameter |
 
-**Returns**:
+<h3>Returns</h3>
 
-| Type | Name | Description |
-| --- | --- | --- |
+| Type  | Name   | Description                        |
+|-------|--------|------------------------------------|
 | array | result | Array of catalogProductImageEntity |
 
-The **catalogProductImageEntity** content is as follows:
+<h3>Content `catalogProductImageEntity`</h3>
 
-| Type | Name | Description |
-| --- | --- | --- |
-| string | file | Image file name |
-| string | label | Image file label |
-| string | position | Image file position |
-| string | exclude | Defines whether the image will associate only to one of three image types |
-| string | url | Image URL |
-| ArrayOfString | types | Array of types |
+| Type          | Name     | Description                                                               |
+|---------------|----------|---------------------------------------------------------------------------|
+| string        | file     | Image file name                                                           |
+| string        | label    | Image file label                                                          |
+| string        | position | Image file position                                                       |
+| string        | exclude  | Defines whether the image will associate only to one of three image types |
+| string        | url      | Image URL                                                                 |
+| ArrayOfString | types    | Array of types                                                            |
 
-**Examples**:
+<h3>Examples</h3>
 
-**Request Example SOAP V1**
+<h4>Request Example SOAP V1</h4>
 
 ```php
-$client = new SoapClient('http://magentohost/api/soap/?wsdl');
+$client = new SoapClient('https://mahohost/api/soap/?wsdl');
 $session = $client->login('apiUser', 'apiKey');
 
-$result = $client->call($session, 'catalog_product_attribute_media.info', array('product' => '2', 'file' => '/b/l/blackberry8100_2.jpg'));
+$result = $client->call(
+    $session,
+    'catalog_product_attribute_media.info',
+    [
+        'product' => '2',
+        'file' => '/b/l/blackberry8100_2.jpg'
+    ]
+);
 var_dump($result);
 
-// If you don't need the session anymore
-//$client->endSession($session);
+// When the session can be closed
+$client->endSession($session);
 ```
 
-**Request Example SOAP V2**
+<h4>Request Example SOAP V2</h4>
 
 ```php
-$proxy = new SoapClient('http://magentohost/api/v2_soap/?wsdl'); // TODO : change url
-$sessionId = $proxy->login('apiUser', 'apiKey'); // TODO : change login and pwd if necessary
+$proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); // TODO: change url
+$sessionId = $proxy->login('apiUser', 'apiKey'); // TODO: change login and pwd if necessary
 
 $result = $proxy->catalogProductAttributeMediaInfo($sessionId, '2', '/b/l/blackberry8100_2.jpg');
 var_dump($result);
 ```
 
-**Request Example SOAP V2 (WS-I Compliance Mode)**
+<h4>Request Example SOAP V2 (WS-I Compliance Mode)</h4>
 
 ```php
-$proxy = new SoapClient('http://magentohost/api/v2_soap/?wsdl');
-$sessionId = $proxy->login((object)array('username' => 'apiUser', 'apiKey' => 'apiKey'));
+$proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl');
+$sessionId = $proxy->login((object)['username' => 'apiUser', 'apiKey' => 'apiKey']);
 
-$result = $proxy->catalogProductAttributeMediaInfo((object)array('sessionId' => $sessionId->result, 'productId' => '1', 'file' => '/i/m/image.png'));
+$result = $proxy->catalogProductAttributeMediaInfo(
+    (object)[
+        'sessionId' => $sessionId->result,
+        'productId' => '1',
+        'file' => '/i/m/image.png'
+    ]
+);
 var_dump($result->result);
 ```
 
-**Response Example SOAP V1**
+<h4>Response Example SOAP V1</h4>
 
 ```php
 array
@@ -302,7 +327,7 @@ array
   'label' => string '' (length=0)
   'position' => string '1' (length=1)
   'exclude' => string '0' (length=1)
-  'url' => string 'http://magentohost/media/catalog/product/b/l/blackberry8100_2.jpg' (length=71)
+  'url' => string 'https://mahohost/media/catalog/product/b/l/blackberry8100_2.jpg' (length=71)
   'types' =>
     array
       0 => string 'image' (length=5)
@@ -312,74 +337,81 @@ array
 
 ## Types
 
-**Method**:
+<h3>Method</h3>
 
--   catalog_product_attribute_media.types (SOAP V1)
--   catalogProductAttributeMediaTypes (SOAP V2)
+- `catalog_product_attribute_media.types` (SOAP V1)
+- `catalogProductAttributeMediaTypes` (SOAP V2)
 
-Allows you to retrieve product image types including standard image, small_image, thumbnail, etc. Note that if the product attribute set contains attributes of the Media Image type (**Catalog Input Type for Store Owner > Media Image**), it will also be returned in the response.
+Allows you to retrieve product image types including standard `image`, `small_image`, `thumbnail` etc.
+Note that if the product attribute set contains attributes of the media image type
+(**Catalog Input Type for Store Owner > Media Image**), it will also be returned in the response.
 
-**Aliases:**
+<h4>Aliases</h4>
 
--   product_attribute_media.types
--   product_media.types
+- `product_attribute_media.types`
+- `product_media.types`
 
-**Arguments:**
+<h3>Arguments</h3>
 
-| Type | Name | Description |
-| --- | --- | --- |
-| string | sessionId | Session ID |
-| string | setId | ID of the product attribute set |
+| Type   | Name      | Description                     |
+|--------|-----------|---------------------------------|
+| string | sessionId | Session ID                      |
+| string | setId     | ID of the product attribute set |
 
-**Returns**:
+<h3>Returns</h3>
 
-| Type | Name | Description |
-| --- | --- | --- |
-| array | result | Array of catalogProductAttributeMediaTypeEntity |
+| Type   | Name   | Description                                     |
+|--------|--------|-------------------------------------------------|
+| array  | result | Array of catalogProductAttributeMediaTypeEntity |
 
-The **catalogProductAttributeMediaTypeEntity** content is as follows:
+<h3>Content `catalogProductAttributeMediaTypeEntity`</h3>
 
-| Type | Name | Description |
-| --- | --- | --- |
-| string | code | Image type code |
+| Type   | Name  | Description                             |
+|--------|-------|-----------------------------------------|
+| string | code  | Image type code                         |
 | string | scope | Image scope (store, website, or global) |
 
-**Examples**:
+<h3>Examples</h3>
 
-**Request Example SOAP V1**
+<h4>Request Example SOAP V1</h4>
 
 ```php
-$client = new SoapClient('http://magentohost/api/soap/?wsdl');
+$client = new SoapClient('https://mahohost/api/soap/?wsdl');
 $session = $client->login('apiUser', 'apiKey');
 
 $result = $client->call($session, 'catalog_product_attribute_media.types', '4');
 var_dump($result);
 
-// If you don't need the session anymore
-//$client->endSession($session);
+// When the session can be closed
+$client->endSession($session);
 ```
 
-**Request Example SOAP V2**
+<h4>Request Example SOAP V2</h4>
 
 ```php
-$proxy = new SoapClient('http://magentohost/api/v2_soap/?wsdl'); // TODO : change url
-$sessionId = $proxy->login('apiUser', 'apiKey'); // TODO : change login and pwd if necessary
+$proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); // TODO: change url
+$sessionId = $proxy->login('apiUser', 'apiKey'); // TODO: change login and pwd if necessary
 
 $result = $proxy->catalogProductAttributeMediaTypes($sessionId, '4');
 var_dump($result);
 ```
 
-**Request Example SOAP V2 (WS-I Compliance Mode)**
+<h4>Request Example SOAP V2 (WS-I Compliance Mode)</h4>
 
 ```php
-$proxy = new SoapClient('http://magentohost/api/v2_soap/?wsdl');
-$sessionId = $proxy->login((object)array('username' => 'apiUser', 'apiKey' => 'apiKey'));
+$proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl');
+$sessionId = $proxy->login((object)['username' => 'apiUser', 'apiKey' => 'apiKey']);
 
-$result = $proxy->catalogProductAttributeMediaTypes((object)array('sessionId' => $sessionId->result, 'setId' => '4'));
+$result = $proxy->catalogProductAttributeMediaTypes(
+    (object)[
+        'sessionId' => $sessionId->result,
+        'setId' => '4'
+    ]
+);
 var_dump($result->result);
 ```
 
-**Response Example SOAP V1**
+<h4>Response Example SOAP V1</h4>
 
 ```php
 array
@@ -399,291 +431,343 @@ array
 
 ## Create
 
-**Method**:
+<h3>Method</h3>
 
--   catalog_product_attribute_media.create (SOAP V1)
--   catalogProductAttributeMediaCreate (SOAP V2)
+- `catalog_product_attribute_media.create` (SOAP V1)
+- `catalogProductAttributeMediaCreate` (SOAP V2)
 
 Allows you to upload a new product image.
 
-**Aliases:**
+<h3>Aliases</h3>
 
--   product_attribute_media.create
--   product_media.create
+- `product_attribute_media.create`
+- `product_media.create`
 
-**Arguments:**
+<h3>Arguments</h3>
 
-| Type | Name | Description |
-| --- | --- | --- |
-| string | sessionId | Session ID |
-| string | product | Product ID or code |
-| array | data | Array of catalogProductAttributeMediaCreateEntity |
-| string | storeView | Store view ID or code (optional) |
+| Type   | Name           | Description                                                                |
+|--------|----------------|----------------------------------------------------------------------------|
+| string | sessionId      | Session ID                                                                 |
+| string | product        | Product ID or code                                                         |
+| array  | data           | Array of catalogProductAttributeMediaCreateEntity                          |
+| string | storeView      | Store view ID or code (optional)                                           |
 | string | identifierType | Defines whether the product ID or SKU is passed in the 'product' parameter |
 
-**Returns**:
+<h3>Returns</h3>
 
-| Type | Name | Description |
-| --- | --- | --- |
-| string | result | Image file name (e.g., "/i/m/image.png") |
+| Type   | Name   | Description                                        |
+|--------|--------|----------------------------------------------------|
+| string | result | Image file name incl. path (e.g. '/i/m/image.png') |
 
-The **catalogProductAttributeMediaCreateEntity** content is as follows:
+<h3>Content `catalogProductAttributeMediaCreateEntity`</h3>
 
-| Type | Name | Description |
-| --- | --- | --- |
-| array | file | Array of catalogProductImageFileEntity |
-| string | label | Image label |
-| string | position | Image position |
-| ArrayOfString | types | Array of types |
-| string | exclude | Defines whether the image will associate only to one of three image types |
-| string | remove | Remove image flag |
+| Type          | Name     | Description                                                               |
+|---------------|----------|---------------------------------------------------------------------------|
+| array         | file     | Array of catalogProductImageFileEntity                                    |
+| string        | label    | Image label                                                               |
+| string        | position | Image position                                                            |
+| ArrayOfString | types    | Array of types                                                            |
+| string        | exclude  | Defines whether the image will associate only to one of three image types |
+| string        | remove   | Remove image flag                                                         |
 
-The **catalogProductImageFileEntity** content is as follows:
+<h3>Content `catalogProductImageFileEntity`</h3>
 
-| Type | Name | Description |
-| --- | --- | --- |
-| string | content | Image content (base_64 encoded) |
-| string | mime | Image mime type (e.g., image/jpeg) |
-| string | name | Image name |
+| Type   | Name    | Description                        |
+|--------|---------|------------------------------------|
+| string | content | Image content (base_64 encoded)    |
+| string | mime    | Image mime type (e.g., image/jpeg) |
+| string | name    | Image name                         |
 
-**Examples**:
+<h3>Examples</h3>
 
-**Request Example SOAP V1**
+<h4>Request Example SOAP V1</h4>
 
 ```php
-$proxy = new SoapClient('http://magentohost/api/soap/?wsdl');
+$proxy = new SoapClient('https://mahohost/api/soap/?wsdl');
 $sessionId = $proxy->login('apiUser', 'apiKey');
 
 $productId = 2;
-$file = array(
-	'content' => '/9j/4AAQSkZJRgABAQEAYABgAAD/2wBDAAIBAQIBAQICAgICAgICAwUDAwMDAwYEBAMFBwYHBwcGBwcICQsJCAgKCAcHCg0KCgsMDAwMBwkODw0MDgsMDAz/2wBDAQICAgMDAwYDAwYMCAcIDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAz/wAARCAAXABcDASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwDLooor8XP4DCiiigAooooAKKKKAP/Z',
-	'mime' => 'image/jpeg'
-);
+$file = [
+	'content' => 'R0lGODlhAQABAIAAAAAAAAAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==',
+	'mime' => 'image/gif'
+];
 
 $result = $proxy->call(
 	$session,
 	'catalog_product_attribute_media.create',
-	array(
+	[
 		$productId,
-		array('file'=>$file, 'label'=>'Label', 'position'=>'100', 'types'=>array('thumbnail'), 'exclude'=>0)
-	)
+		[
+		    'file' => $file,
+		    'label' => 'Label',
+		    'position' => '100',
+		    'types' => ['thumbnail'],
+		    'exclude' => 0
+        ]
+	]
 );
 ```
 
-**Request Example SOAP V2**
+<h4>Request Example SOAP V2</h4>
 
 ```php
-$proxy = new SoapClient('http://magentohost/api/soap/?wsdl');
+$proxy = new SoapClient('https://mahohost/api/soap/?wsdl');
 $sessionId = $proxy->login('apiUser', 'apiKey');
 
 $productId = 2;
-$file = array(
-	'content' => '/9j/4AAQSkZJRgABAQEAYABgAAD/2wBDAAIBAQIBAQICAgICAgICAwUDAwMDAwYEBAMFBwYHBwcGBwcICQsJCAgKCAcHCg0KCgsMDAwMBwkODw0MDgsMDAz/2wBDAQICAgMDAwYDAwYMCAcIDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAz/wAARCAAXABcDASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwDLooor8XP4DCiiigAooooAKKKKAP/Z',
-	'mime' => 'image/jpeg'
-);
+$file = [
+	'content' => 'R0lGODlhAQABAIAAAAAAAAAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==',
+	'mime' => 'image/gif'
+];
 
 $result = $proxy->catalogProductAttributeMediaCreate(
 	$session,
 	$productId,
-	array('file' => $file, 'label' => 'Label', 'position' => '100', 'types' => array('thumbnail'), 'exclude' => 0)
+	[
+	    'file' => $file,
+	    'label' => 'Label',
+	    'position' => '100',
+	    'types' => ['thumbnail'],
+	    'exclude' => 0
+    ]
 );
 ```
 
-**Request Example SOAP V2 (WS-I Compliance Mode)**
+<h4>Request Example SOAP V2 (WS-I Compliance Mode)</h4>
 
 ```php
-$proxy = new SoapClient('http://magentohost/api/v2_soap/?wsdl');
-$sessionId = $proxy->login((object)array('username' => 'apiUser', 'apiKey' => 'apiKey'));
+$proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl');
+$sessionId = $proxy->login((object)['username' => 'apiUser', 'apiKey' => 'apiKey']);
 
-$result = $proxy->catalogProductAttributeMediaCreate((object)array('sessionId' => $sessionId->result, 'productId' => '1', 'data' => ((object)array(
-    'label' => 'image_label',
-    'position' => '1',
-    'types' => array('thumbnail'),
-    'exclude' => '0',
-    'file' => ((object)array(
-    'content' => '/9j/4AAQSkZJRgABAQEAYABgAAD/2wBDAAIBAQIBAQICAgICAgICAwUDAwMDAwYEBAMFBwYHBwcGBwcICQsJCAgKCAcHCg0KCgsMDAwMBwkODw0MDgsMDAz/2wBDAQICAgMDAwYDAwYMCAcIDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAz/wAARCAAXABcDASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwDLooor8XP4DCiiigAooooAKKKKAP/Z',
-    'mime' => 'image/png',
-    'name' => 'image'
-))))));
+$result = $proxy->catalogProductAttributeMediaCreate(
+    (object)[
+        'sessionId' => $sessionId->result,
+        'productId' => '1',
+        'data' => (object)[
+            'label' => 'image_label',
+            'position' => '1',
+            'types' => ['thumbnail'],
+            'exclude' => '0',
+            'file' => (object)[
+                'content' => 'R0lGODlhAQABAIAAAAAAAAAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==',
+                'mime' => 'image/png',
+                'name' => 'image'
+            ]
+        ]
+    ]
+);
 var_dump($result->result);
 ```
 
-## Update
+## Update
 
-**Method**:
+<h3>Method</h3>
 
--   catalog_product_attribute_media.update (SOAP V1)
--   catalogProductAttributeMediaUpdate (SOAP V2)
+- `catalog_product_attribute_media.update` (SOAP V1)
+- `catalogProductAttributeMediaUpdate` (SOAP V2)
 
 Allows you to update the product image.
 
-**Aliases:**
+<h3>Aliases</h3>
 
--   product_attribute_media.update
--   product_media.update
+- `product_attribute_media.update`
+- `product_media.update`
 
-**Arguments:**
+<h3>Arguments</h3>
 
-| Type | Name | Description |
-| --- | --- | --- |
-| string | sessionId | Session ID |
-| string | productproductId | Product ID or code |
-| string | file | Image file name (e.g., /i/m/image.jpeg) |
-| array | data | Array of catalogProductAttributeMediaCreateEntity |
-| string | storeView | Store view ID or code |
+| Type   | Name           | Description                                                                |
+|--------|----------------|----------------------------------------------------------------------------|
+| string | sessionId      | Session ID                                                                 |
+| string | productId      | Product ID or code                                                         |
+| string | file           | Image file name (e.g. '/i/m/image.jpeg')                                   |
+| array  | data           | Array of catalogProductAttributeMediaCreateEntity                          |
+| string | storeView      | Store view ID or code                                                      |
 | string | identifierType | Defines whether the product ID or SKU is passed in the 'product' parameter |
 
-**Notes**: You should specify only those parameters which you want to be updated. Parameters that were not specified in the request, will preserve the previous values.
+**Notes:** You should specify only those parameters which you want to be updated.
+Parameters not specified in the request will preserve the previous values.
 
-**Returns**:
+<h3>Returns</h3>
 
-| Type | Name | Description |
-| --- | --- | --- |
+| Type    | Name   | Description                      |
+|---------|--------|----------------------------------|
 | boolean | result | Result of product image updating |
 
-The **catalogProductAttributeMediaCreateEntity** content is as follows:
+<h3>Content `catalogProductAttributeMediaCreateEntity`</h3>
 
-| Type | Name | Description |
-| --- | --- | --- |
-| array | file | Array of catalogProductImageFileEntity |
-| string | label | Product image label |
-| string | position | Product image position |
-| ArrayOfString | types | Array of types |
-| string | exclude | Defines whether the image will associate only to one of three image types |
-| string | remove | Image remove flag |
+| Type          | Name     | Description                                                               |
+|---------------|----------|---------------------------------------------------------------------------|
+| array         | file     | Array of catalogProductImageFileEntity                                    |
+| string        | label    | Product image label                                                       |
+| string        | position | Product image position                                                    |
+| ArrayOfString | types    | Array of types                                                            |
+| string        | exclude  | Defines whether the image will associate only to one of three image types |
+| string        | remove   | Image remove flag                                                         |
 
-The **catalogProductImageFileEntity** content is as follows:
+<h3>Content `catalogProductImageFileEntity`</h3>
 
-| Type | Name | Description |
-| --- | --- | --- |
+| Type   | Name    | Description                             |
+|--------|---------|-----------------------------------------|
 | string | content | Product image content (base_64 encoded) |
-| string | mime | Image mime type (e.g., image/jpeg) |
-| string | name | Image name |
+| string | mime    | Image mime type (e.g., image/jpeg)      |
+| string | name    | Image name                              |
 
-**Examples**:
+<h3>Examples</h3>
 
-**Request Example SOAP V1**
+<h4>Request Example SOAP V1</h4>
 
 ```php
-$proxy = new SoapClient('http://magentohost/api/soap/?wsdl');
+$proxy = new SoapClient('https://mahohost/api/soap/?wsdl');
 $sessionId = $proxy->login('apiUser', 'apiKey');
 
 $productId = 1;
 $file = '/i/m/image.jpg';
 
-$newFile = array(
-	'content' => '/9j/4AAQSkZJRgABAQEAYABgAAD/2wBDAAIBAQIBAQICAgICAgICAwUDAwMDAwYEBAMFBwYHBwcGBwcICQsJCAgKCAcHCg0KCgsMDAwMBwkODw0MDgsMDAz/2wBDAQICAgMDAwYDAwYMCAcIDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAz/wAARCAAXABcDASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwDLooor8XP4DCiiigAooooAKKKKAP/Z',
+$newFile = [
+	'content' => 'R0lGODlhAQABAIAAAAAAAAAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==',
 	'mime' => 'image/jpeg'
-);
+];
 
 $result = $client->call(
 	$session,
 	'catalog_product_attribute_media.update',
-	array(
+	[
 		$productId,
 		$file,
-		array('file' => $newFile, 'label' => 'New label', 'position' => '50', 'types' => array('image'), 'exclude' => 1)
-	)
+		[
+		    'file' => $newFile,
+            'label' => 'New label',
+            'position' => '50',
+            'types' => ['image'],
+            'exclude' => 1
+        ]
+	]
 );
 ```
 
-**Request Example SOAP V2**
+<h4>Request Example SOAP V2</h4>
 
 ```php
-$proxy = new SoapClient('http://magentohost/api/soap/?wsdl');
+$proxy = new SoapClient('https://mahohost/api/soap/?wsdl');
 $sessionId = $proxy->login('apiUser', 'apiKey');
 
 $productId = 1;
 $file = '/i/m/image.jpg';
 
-$newFile = array(
-    'content' => '/9j/4AAQSkZJRgABAQEAYABgAAD/2wBDAAIBAQIBAQICAgICAgICAwUDAwMDAwYEBAMFBwYHBwcGBwcICQsJCAgKCAcHCg0KCgsMDAwMBwkODw0MDgsMDAz/2wBDAQICAgMDAwYDAwYMCAcIDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAz/wAARCAAXABcDASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwDLooor8XP4DCiiigAooooAKKKKAP/Z',
+$newFile = [
+    'content' => 'R0lGODlhAQABAIAAAAAAAAAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==',
     'mime' => 'image/jpeg'
-);
+];
 
 $result = $client->catalogProductAttributeMediaUpdate(
     $session,
     $productId,
     $file,
-    array('file' => $newFile, 'label' => 'New label', 'position' => '50', 'types' => array('image'), 'exclude' => 1)
+    [
+        'file' => $newFile,
+        'label' => 'New label',
+        'position' => '50',
+        'types' => ['image'],
+        'exclude' => 1
+    ]
 );
 ```
 
-**Request Example SOAP V2 (WS-I Compliance Mode)**
+<h4>Request Example SOAP V2 (WS-I Compliance Mode)</h4>
 
 ```php
-$proxy = new SoapClient('http://magentohost/api/v2_soap/?wsdl');
-$sessionId = $proxy->login((object)array('username' => 'apiUser', 'apiKey' => 'apiKey'));
+$proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl');
+$sessionId = $proxy->login((object)['username' => 'apiUser', 'apiKey' => 'apiKey']);
 
-$result = $proxy->catalogProductAttributeMediaUpdate((object)array('sessionId' => $sessionId->result, 'productId' => '1', 'file' => '/t/u/tulips.jpg', 'data' => ((object)array(
-    'label' => 'tulips',
-    'position' => '1',
-    'remove' => '0',
-    'types' => array('small_image')
-))));
+$result = $proxy->catalogProductAttributeMediaUpdate(
+    (object)[
+        'sessionId' => $sessionId->result,
+        'productId' => '1',
+        'file' => '/t/u/tulips.jpg',
+        'data' => (object)[
+            'label' => 'tulips',
+            'position' => '1',
+            'remove' => '0',
+            'types' => ['small_image']
+        ]
+    ]
+);
 var_dump($result->result);
 ```
 
-## Remove
+## Remove
 
-**Method**:
+<h3>Method</h3>
 
--   catalog_product_attribute_media.remove (SOAP V1)
--   catalogProductAttributeMediaRemove (SOAP V2)
+- `catalog_product_attribute_media.remove` (SOAP V1)
+- `catalogProductAttributeMediaRemove` (SOAP V2)
 
 Allows you to remove the image from a product.
 
-**Aliases:**
+<h3>Aliases</h3>
 
--   product_attribute_media.remove
--   product_media.remove
+- `product_attribute_media.remove`
+- `product_media.remove`
 
-**Arguments:**
+<h3>Arguments</h3>
 
-| Type | Name | Description |
-| --- | --- | --- |
-| string | sessionId | Session ID |
-| string | productproductId | Product ID or SKU |
-| string | file | Image file name (e.g., /b/l/blackberry8100_2.jpg) |
+| Type   | Name           | Description                                                                |
+|--------|----------------|----------------------------------------------------------------------------|
+| string | sessionId      | Session ID                                                                 |
+| string | productId      | Product ID or SKU                                                          |
+| string | file           | Image file name (e.g. '/b/l/blackberry8100_2.jpg')                         |
 | string | identifierType | Defines whether the product ID or SKU is passed in the 'product' parameter |
 
-**Returns**:
+<h3>Returns</h3>
 
-| Type | Description |
-| --- | --- |
+| Type       | Description                                     |
+|------------|-------------------------------------------------|
 | booleanint | True (1) if the image is removed from a product |
 
-**Examples**:
+<h3>Examples</h3>
 
-**Request Example SOAP V1**
+<h4>Request Example SOAP V1</h4>
 
 ```php
-$client = new SoapClient('http://magentohost/api/soap/?wsdl');
+$client = new SoapClient('https://mahohost/api/soap/?wsdl');
 $session = $client->login('apiUser', 'apiKey');
 
-$result = $client->call($session, 'catalog_product_attribute_media.remove', array('product' => '3', 'file' => '/b/l/blackberry8100_2.jpg'));
+$result = $client->call(
+    $session,
+    'catalog_product_attribute_media.remove',
+    [
+        'product' => '3',
+        'file' => '/b/l/blackberry8100_2.jpg'
+    ]
+);
 var_dump($result);
 
-// If you don't need the session anymore
-//$client->endSession($session);
+// When the session can be closed
+$client->endSession($session);
 ```
 
-**Request Example SOAP V2**
+<h4>Request Example SOAP V2</h4>
 
 ```php
-$proxy = new SoapClient('http://magentohost/api/v2_soap/?wsdl'); // TODO : change url
-$sessionId = $proxy->login('apiUser', 'apiKey'); // TODO : change login and pwd if necessary
+$proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); // TODO: change url
+$sessionId = $proxy->login('apiUser', 'apiKey'); // TODO: change login and pwd if necessary
 
 $result = $proxy->catalogProductAttributeMediaRemove($sessionId, '3', '/b/l/blackberry8100_2.jpg');
 var_dump($result);
 ```
 
-**Request Example SOAP V2 (WS-I Compliance Mode)**
+<h4>Request Example SOAP V2 (WS-I Compliance Mode)</h4>
 
 ```php
-$proxy = new SoapClient('http://magentohost/api/v2_soap/?wsdl');
-$sessionId = $proxy->login((object)array('username' => 'apiUser', 'apiKey' => 'apiKey'));
+$proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl');
+$sessionId = $proxy->login((object)['username' => 'apiUser', 'apiKey' => 'apiKey']);
 
-$result = $proxy->catalogProductAttributeMediaRemove((object)array('sessionId' => $sessionId->result, 'productId' => '3', 'file' => '/b/l/blackberry8100_2.jpg'));
+$result = $proxy->catalogProductAttributeMediaRemove(
+    (object)[
+        'sessionId' => $sessionId->result,
+        'productId' => '3',
+        'file' => '/b/l/blackberry8100_2.jpg'
+    ]
+);
 var_dump($result->result);
 ```

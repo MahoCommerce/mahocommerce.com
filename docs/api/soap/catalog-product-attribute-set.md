@@ -4,208 +4,209 @@
 
 Allows you to retrieve product attribute sets.
 
-**Resource Name**: catalog_product_attribute_set
+<h3>Resource Name</h3>
 
-**Aliases**:
+- `catalog_product_attribute_set`
 
--   product_attribute_set
+<h3>Alias</h3>
 
-**Methods**:
+- `product_attribute_set`
 
-- product_attribute_set.list - Retrieve the list of product attribute sets
-- product_attribute_set.create - Create a new attribute set
-- product_attribute_set.remove - Remove an attribute set
-- product_attribute_set.attributeAdd - Add an attribute to the attribute set
-- product_attribute_set.attributeRemove - Remove an attribute from an attribute set
-- product_attribute_set.groupAdd - Add a new group for attributes in the attribute set
-- product_attribute_set.groupRemove - Remove a group of attributes from an attribute set
-- product_attribute_set.groupRename - Rename a group of attributes in an attribute set
+<h3>Methods</h3>
 
-**Faults**:
+- `product_attribute_set.list` — Retrieve the list of product attribute sets.
+- `product_attribute_set.create` — Create a new attribute set.
+- `product_attribute_set.remove` — Remove an attribute set.
+- `product_attribute_set.attributeAdd` — Add an attribute to the attribute set.
+- `product_attribute_set.attributeRemove` — Remove an attribute from an attribute set.
+- `product_attribute_set.groupAdd` — Add a new group for attributes in the attribute set.
+- `product_attribute_set.groupRemove` — Remove a group of attributes from an attribute set.
+- `product_attribute_set.groupRename` — Rename a group of attributes in an attribute set.
 
-| Fault Code | Fault Message |
-| --- | --- |
-| 100 | Attribute set with requested id does not exist. |
-| 101 | Invalid data given. |
-| 102 | Error while creating attribute set. Details in error message. |
-| 103 | Error while removing attribute set. Details in error message. |
-| 104 | Attribute set with requested id does not exist. |
-| 105 | Unable to remove attribute set as it has related goods. Use forceProductsRemove parameter to remove attribute set with all goods. |
-| 106 | Attribute with requested id does not exist. |
-| 107 | Error while adding attribute to attribute set. Details in error message. |
-| 108 | Attribute group with requested id does not exist. |
-| 109 | Requested attribute is already in requested attribute set. |
-| 110 | Error while removing attribute from attribute set. Details in error message. |
-| 111 | Requested attribute is not in requested attribute set. |
-| 112 | Requested group exist already in requested attribute set. |
-| 113 | Error while adding group to attribute set. Details in error message. |
-| 114 | Error while renaming group. Details in error message. |
-| 115 | Error while removing group from attribute set. Details in error message. |
-| 116 | Group can not be removed as it contains system attributes. |
-| 117 | Group can not be removed as it contains attributes, used in configurable products. |
+<h3>Faults</h3>
 
-**Example**:
+| Fault Code | Fault Message                                                                                                                     |
+|------------|-----------------------------------------------------------------------------------------------------------------------------------|
+| 100        | Attribute set with requested id does not exist.                                                                                   |
+| 101        | Invalid data given.                                                                                                               |
+| 102        | Error while creating attribute set. Details in error message.                                                                     |
+| 103        | Error while removing attribute set. Details in error message.                                                                     |
+| 104        | Attribute set with requested id does not exist.                                                                                   |
+| 105        | Unable to remove attribute set as it has related goods. Use forceProductsRemove parameter to remove attribute set with all goods. |
+| 106        | Attribute with requested id does not exist.                                                                                       |
+| 107        | Error while adding attribute to attribute set. Details in error message.                                                          |
+| 108        | Attribute group with requested id does not exist.                                                                                 |
+| 109        | Requested attribute is already in requested attribute set.                                                                        |
+| 110        | Error while removing attribute from attribute set. Details in error message.                                                      |
+| 111        | Requested attribute is not in requested attribute set.                                                                            |
+| 112        | Requested group exist already in requested attribute set.                                                                         |
+| 113        | Error while adding group to attribute set. Details in error message.                                                              |
+| 114        | Error while renaming group. Details in error message.                                                                             |
+| 115        | Error while removing group from attribute set. Details in error message.                                                          |
+| 116        | Group can not be removed as it contains system attributes.                                                                        |
+| 117        | Group can not be removed as it contains attributes, used in configurable products.                                                |
+
+<h3>Example</h3>
 
 ```php
-$proxy = new SoapClient('http://magentohost/api/soap/?wsdl');
+$proxy = new SoapClient('https://mahohost/api/soap/?wsdl');
 $sessionId = $proxy->login('apiUser', 'apiKey');
 
-echo "<pre>";
-// create new set
-$setName = "New Test Set";
+echo '<pre>';
+// Create new attribute set
+$attributeSetName = 'New Test Attribute Set';
 $skeletonId = 4;
 
 $setId = $proxy->call(
     $sessionId,
-    "product_attribute_set.create",
-    array(
-         $setName,
+    'product_attribute_set.create',
+    [
+         $attributeSetName,
          $skeletonId
-    )
+    ]
 );
 
-// Get list
-$setList = $proxy->call(
+// Get attribute set list
+$attributeSetList = $proxy->call(
     $sessionId,
-    "product_attribute_set.list"
+    'product_attribute_set.list'
 );
-echo "Set list:n";
-print_r($setList);
+print_r($attributeSetList);
 
-// create group
-$groupName = "Test Group";
+// Create group
+$groupName = 'Test Group';
 $groupId = $proxy->call(
     $sessionId,
-    "product_attribute_set.groupAdd",
-    array(
+    'product_attribute_set.groupAdd',
+    [
          $setId,
          $groupName
-    )
+    ]
 );
 
-// rename group
-$newGroupName = "New Test Group";
+// Rename group
+$newGroupName = 'New Test Group';
 $result = $proxy->call(
     $sessionId,
-    "product_attribute_set.groupRename",
-    array(
+    'product_attribute_set.groupRename',
+    [
          $groupId,
          $newGroupName
-    )
+    ]
 );
 
-// add attribute
+// Add attribute
 $attributeId = 83;
 $result = $proxy->call(
     $sessionId,
-    "product_attribute_set.attributeAdd",
-    array(
+    'product_attribute_set.attributeAdd',
+    [
          $attributeId,
-         $setId
-    )
+         $attributeSetId
+    ]
 );
 
-//remove attribute
+// Remove attribute
 $result = $proxy->call(
     $sessionId,
-    "product_attribute_set.attributeRemove",
-    array(
+    'product_attribute_set.attributeRemove',
+    [
          $attributeId,
-         $setId
-    )
+         $attributeSetId
+    ]
 );
 
-// remove group
+// Remove group
 $result = $proxy->call(
     $sessionId,
-    "product_attribute_set.groupRemove",
-    array(
+    'product_attribute_set.groupRemove',
+    [
          $groupId
-    )
+    ]
 );
 
-// remove set
+// Remove attribute set
 $result = $proxy->call(
     $sessionId,
-    "product_attribute_set.remove",
-    array(
-         $setId
-    )
+    'product_attribute_set.remove',
+    [
+         $attributeSetId
+    ]
 );
 ```
 
 ## List
 
-**Method**:
+<h3>Method</h3>
 
--   catalog_product_attribute_set.list (SOAP V1)
--   catalogProductAttributeSetList (SOAP V2)
+- `catalog_product_attribute_set.list` (SOAP V1)
+- `catalogProductAttributeSetList` (SOAP V2)
 
 Allows you to retrieve the list of product attribute sets.
 
-**Aliases:**
+<h3>Alias</h3>
 
--   product_attribute_set.list
+- `product_attribute_set.list`
 
-**Arguments:**
+<h3>Arguments</h3>
 
-| Type | Name | Description |
-| --- | --- | --- |
-| string | sessionId | Session ID |
+| Type   | Name      | Description |
+|--------|-----------|-------------|
+| string | sessionId | Session ID  |
 
-**Returns**:
+<h3>Returns</h3>
 
-| Type | Name | Description |
-| --- | --- | --- |
+| Type  | Name   | Description                               |
+|-------|--------|-------------------------------------------|
 | array | result | Array of catalogProductAttributeSetEntity |
 
-The **catalogProductAttributeSetEntity** content is as follows:
+<h3>Content `catalogProductAttributeSetEntity`</h3>
 
-| Type | Name | Description |
-| --- | --- | --- |
-| int | set_id | ID of the attribute set |
-| string | name | Attribute set name |
+| Type   | Name   | Description             |
+|--------|--------|-------------------------|
+| int    | set_id | ID of the attribute set |
+| string | name   | Attribute set name      |
 
-**Faults:**
+<h3>Faults</h3>
 
-_No faults._
+_No Faults._
 
-**Examples**
+<h3>Examples</h3>
 
-**Request Example SOAP V1**
+<h4>Request Example SOAP V1</h4>
 
 ```php
-$client = new SoapClient('http://magentohost/api/soap/?wsdl');
+$client = new SoapClient('https://mahohost/api/soap/?wsdl');
 $session = $client->login('apiUser', 'apiKey');
 
 $result = $client->call($session, 'catalog_product_attribute_set.list');
 var_dump($result);
 
-// If you don't need the session anymore
-//$client->endSession($session);
+// When the session can be closed
+$client->endSession($session);
 ```
 
-**Request Example SOAP V2**
+<h4>Request Example SOAP V2</h4>
 
 ```php
-$proxy = new SoapClient('http://magentohost/api/v2_soap/?wsdl'); // TODO : change url
-$sessionId = $proxy->login('apiUser', 'apiKey'); // TODO : change login and pwd if necessary
+$proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); // TODO: change url
+$sessionId = $proxy->login('apiUser', 'apiKey'); // TODO: change login and pwd if necessary
 
 $result = $proxy->catalogProductAttributeSetList($sessionId);
 var_dump($result);
 ```
 
-**Request Example SOAP V2 (WS-I Compliance Mode)**
+<h4>Request Example SOAP V2 (WS-I Compliance Mode)</h4>
 
 ```php
-$proxy = new SoapClient('http://magentohost/api/v2_soap/?wsdl');
-$sessionId = $proxy->login((object)array('username' => 'apiUser', 'apiKey' => 'apiKey'));
+$proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl');
+$sessionId = $proxy->login((object)['username' => 'apiUser', 'apiKey' => 'apiKey']);
 
-$result = $proxy->catalogProductAttributeSetList((object)array('sessionId' => $sessionId->result));
+$result = $proxy->catalogProductAttributeSetList((object)['sessionId' => $sessionId->result]);
 var_dump($result->result);
 ```
 
-**Response Example SOAP V1**
+<h4>Response Example SOAP V1</h4>
 
 ```php
 array
@@ -221,60 +222,60 @@ array
 
 ## Create
 
-**Method**:
+<h3>Method</h3>
 
--   product_attribute_set.create (SOAP V1)
--   catalogProductAttributeSetCreate (SOAP V2)
+- `product_attribute_set.create` (SOAP V1)
+- `catalogProductAttributeSetCreate` (SOAP V2)
 
 Allows you to create a new attribute set based on another attribute set.
 
-**Arguments:**
+<h3>Arguments</h3>
 
-| Type | Name | Description |
-| --- | --- | --- |
-| string | sessionId | Session ID |
-| string | attributeSetName | Attribute set name |
-| string | skeletonSetId | Attribute set ID basing on which the new attribute set will be created |
+| Type   | Name             | Description                                                            |
+|--------|------------------|------------------------------------------------------------------------|
+| string | sessionId        | Session ID                                                             |
+| string | attributeSetName | Attribute set name                                                     |
+| string | skeletonSetId    | Attribute set ID basing on which the new attribute set will be created |
 
-**Return:**
+<h3>Return</h3>
 
-| Type | Name | Description |
-| --- | --- | --- |
-| int | setId | ID of the created attribute set |
+| Type | Name  | Description                     |
+|------|-------|---------------------------------|
+| int  | setId | ID of the created attribute set |
 
-**Faults:**
+<h3>Faults</h3>
 
-| Fault Code | Fault Message |
-| --- | --- |
-| 100 | Attribute set with requested id does not exist. |
-| 101 | Invalid data given. |
-| 102 | Error while creating attribute set. Details in error message. |
+| Fault Code | Fault Message                                                 |
+|------------|---------------------------------------------------------------|
+| 100        | Attribute set with requested id does not exist.               |
+| 101        | Invalid data given.                                           |
+| 102        | Error while creating attribute set. Details in error message. |
 
-**Examples**
+<h3>Examples</h3>
 
-**Request Example SOAP V1**
+<h4>Request Example SOAP V1</h4>
 
 ```php
-$proxy = new SoapClient('http://magentohost/api/soap/?wsdl');
+$proxy = new SoapClient('https://mahohost/api/soap/?wsdl');
 $sessionId = $proxy->login('apiUser', 'apiKey');
 
-$setName = "New Attribute Set";
+$attributeSetName = 'New Attribute Set';
 $skeletonId = 4;
 
 $newSetId = $proxy->call(
     $sessionId,
-    "product_attribute_set.create",
-    array(
-         $setName,
+    'product_attribute_set.create',
+    [
+         $attributeSetName,
          $skeletonId
-    )
+    ]
 );
 ```
 
-**Request Example SOAP V2**
+<h4>Request Example SOAP V2</h4>
 
 ```php
-$proxy = new SoapClient('http://magentohost/api/v2_soap/?wsdl');
+$proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl');
 $sessionId = $proxy->login('apiUser', 'apiKey');
 
 $attributeSetName = 'New Attribute Set';
@@ -287,446 +288,493 @@ $result = $client->catalogProductAttributeSetCreate(
 );
 ```
 
-**Request Example SOAP V2 (WS-I Compliance Mode)**
+<h4>Request Example SOAP V2 (WS-I Compliance Mode)</h4>
 
 ```php
-$proxy = new SoapClient('http://magentohost/api/v2_soap/?wsdl');
-$sessionId = $proxy->login((object)array('username' => 'apiUser', 'apiKey' => 'apiKey'));
+$proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl');
+$sessionId = $proxy->login((object)['username' => 'apiUser', 'apiKey' => 'apiKey']);
 
-$result = $proxy->catalogProductAttributeSetCreate((object)array('sessionId' => $sessionId->result, 'attributeSetName' => 'New Attribute Set', 'skeletonSetId' => '4'));
+$result = $proxy->catalogProductAttributeSetCreate(
+    (object)[
+        'sessionId' => $sessionId->result,
+        'attributeSetName' => 'New Attribute Set',
+        'skeletonSetId' => '4'
+    ]
+);
 var_dump($result->result);
 ```
 
 ## Remove
 
-**Method**:
+<h3>Method</h3>
 
--   product_attribute_set.remove (SOAP V1)
--   catalogProductAttributeSetRemove (SOAP V2)
+- `product_attribute_set.remove` (SOAP V1)
+- `catalogProductAttributeSetRemove` (SOAP V2)
 
 Allows you to remove an existing attribute set.
 
-**Arguments:**
+<h3>Arguments</h3>
 
-| Type | Name | Description |
-| --- | --- | --- |
-| string | sessionId | Session ID |
-| string | attributeSetId | Attribute set ID |
+| Type   | Name                | Description                          |
+|--------|---------------------|--------------------------------------|
+| string | sessionId           | Session ID                           |
+| string | attributeSetId      | Attribute set ID                     |
 | string | forceProductsRemove | Force product remove flag (optional) |
 
-**Return:**
+<h3>Return</h3>
 
-| Type | Name | Description |
-| --- | --- | --- |
+| Type       | Name      | Description                              |
+|------------|-----------|------------------------------------------|
 | booleanint | isRemoved | True (1) if the attribute set is removed |
 
-**Faults:**
+<h3>Faults</h3>
 
-| Fault Code | Fault Message |
-| --- | --- |
-| 103 | Error while removing attribute set. Details in error message. |
-| 104 | Attribute set with requested id does not exist. |
-| 105 | Unable to remove attribute set as it has related goods. Use forceProductsRemove parameter to remove attribute set with all goods. |
+| Fault Code | Fault Message                                                                                                                     |
+|------------|-----------------------------------------------------------------------------------------------------------------------------------|
+| 103        | Error while removing attribute set. Details in error message.                                                                     |
+| 104        | Attribute set with requested id does not exist.                                                                                   |
+| 105        | Unable to remove attribute set as it has related goods. Use forceProductsRemove parameter to remove attribute set with all goods. |
 
-**Examples**
+<h3>Examples</h3>
 
-**Request Example SOAP V1**
+<h4>Request Example SOAP V1</h4>
 
 ```php
-$proxy = new SoapClient('http://magentohost/api/soap/?wsdl');
+$proxy = new SoapClient('https://mahohost/api/soap/?wsdl');
 $sessionId = $proxy->login('apiUser', 'apiKey');
 
-$setId = 5;
+$attributeSetId = 5;
 
 $result = $proxy->call(
     $sessionId,
-    "product_attribute_set.remove",
-    array(
-         $setId
-    )
+    'product_attribute_set.remove',
+    [
+         $attributeSetId
+    ]
 );
 ```
 
-**Request Example SOAP V2**
+<h4>Request Example SOAP V2</h4>
 
 ```php
-$proxy = new SoapClient('http://magentohost/api/v2_soap/?wsdl'); // TODO : change url
-$sessionId = $proxy->login('apiUser', 'apiKey'); // TODO : change login and pwd if necessary
+$proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); // TODO: change url
+$sessionId = $proxy->login('apiUser', 'apiKey'); // TODO: change login and pwd if necessary
 
 $result = $proxy->catalogProductAttributeSetRemove($sessionId, '5');
 var_dump($result);
 ```
 
-**Request Example SOAP V2 (WS-I Compliance Mode)**
+<h4>Request Example SOAP V2 (WS-I Compliance Mode)</h4>
 
 ```php
-$proxy = new SoapClient('http://magentohost/api/v2_soap/?wsdl');
-$sessionId = $proxy->login((object)array('username' => 'apiUser', 'apiKey' => 'apiKey'));
+$proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl');
+$sessionId = $proxy->login((object)['username' => 'apiUser', 'apiKey' => 'apiKey']);
 
-$result = $proxy->catalogProductAttributeSetRemove((object)array('sessionId' => $sessionId->result, 'attributeSetId' => '5'));
+$result = $proxy->catalogProductAttributeSetRemove(
+    (object)[
+        'sessionId' => $sessionId->result,
+        'attributeSetId' => '5'
+    ]
+);
 var_dump($result->result);
 ```
 
 ## AttributeAdd
 
-**Method**:
+<h3>Method</h3>
 
--   product_attribute_set.attributeAdd (SOAP V1)
--   catalogProductAttributeSetAttributeAdd (SOAP V2)
+- `product_attribute_set.attributeAdd` (SOAP V1)
+- `catalogProductAttributeSetAttributeAdd` (SOAP V2)
 
 Allows you to add an existing attribute to an attribute set.
 
-**Arguments:**
+<h3>Arguments</h3>
 
-| Type | Name | Description |
-| --- | --- | --- |
-| string | sessionId | Session ID |
-| string | attributeId | Attribute ID |
-| string | attributeSetId | Attribute set ID |
-| string | attributeGroupId | Group ID (optional) |
-| string | sortOrder | Sort order (optional) |
+| Type   | Name             | Description           |
+|--------|------------------|-----------------------|
+| string | sessionId        | Session ID            |
+| string | attributeId      | Attribute ID          |
+| string | attributeSetId   | Attribute set ID      |
+| string | attributeGroupId | Group ID (optional)   |
+| string | sortOrder        | Sort order (optional) |
 
-**Note**: If the _attributeGroupId_ parameter is not passed, the attribute is added to the _General_ group by default.
+**Note:** If the `attributeGroupId` parameter is not passed, the attribute is added to the `General` group by default.
 
-**Returns:**
+<h3>Returns</h3>
 
-| Type | Name | Description |
-| --- | --- | --- |
+| Type    | Name    | Description                                        |
+|---------|---------|----------------------------------------------------|
 | boolean | isAdded | True if the attribute is added to an attribute set |
 
-**Faults:**
+<h3>Faults</h3>
 
-| Fault Code | Fault Message |
-| --- | --- |
-| 104 | Attribute set with requested id does not exist. |
-| 106 | Attribute with requested id does not exist. |
-| 107 | Error while adding attribute to attribute set. Details in error message. |
-| 108 | Attribute group with requested id does not exist. |
-| 109 | Requested attribute is already in requested attribute set. |
+| Fault Code | Fault Message                                                            |
+|------------|--------------------------------------------------------------------------|
+| 104        | Attribute set with requested id does not exist.                          |
+| 106        | Attribute with requested id does not exist.                              |
+| 107        | Error while adding attribute to attribute set. Details in error message. |
+| 108        | Attribute group with requested id does not exist.                        |
+| 109        | Requested attribute is already in requested attribute set.               |
 
-**Examples**
+<h3>Examples</h3>
 
-**Request Example SOAP V1**
+<h4>Request Example SOAP V1</h4>
 
 ```php
-$proxy = new SoapClient('http://magentohost/api/soap/?wsdl');
+$proxy = new SoapClient('https://mahohost/api/soap/?wsdl');
 $sessionId = $proxy->login('apiUser', 'apiKey');
 
-$setId = 5;
+$attributeSetId = 5;
 $attributeId = 83;
 
 $result = $proxy->call(
     $sessionId,
-    "product_attribute_set.attributeAdd",
-    array(
+    'product_attribute_set.attributeAdd',
+    [
          $attributeId,
-         $setId
-    )
+         $attributeSetId
+    ]
 );
 ```
 
-**Request Example SOAP V2**
+<h4>Request Example SOAP V2</h4>
 
 ```php
-$proxy = new SoapClient('http://magentohost/api/v2_soap/?wsdl');
+$proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl');
 $sessionId = $proxy->login('apiUser', 'apiKey');
 
-$setId = 5;
+$attributeSetId = 5;
 $attributeId = 83;
 
 $result = $proxy->catalogProductAttributeSetAttributeAdd(
     $sessionId,
     $attributeId,
-    $setId
+    $attributeSetId
 );
 ```
 
-**Request Example SOAP V2 (WS-I Compliance Mode)**
+<h4>Request Example SOAP V2 (WS-I Compliance Mode)</h4>
 
 ```php
-$proxy = new SoapClient('http://magentohost/api/v2_soap/?wsdl');
-$sessionId = $proxy->login((object)array('username' => 'apiUser', 'apiKey' => 'apiKey'));
+$proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl');
+$sessionId = $proxy->login((object)['username' => 'apiUser', 'apiKey' => 'apiKey']);
 
-$result = $proxy->catalogProductAttributeSetAttributeAdd((object)array('sessionId' => $sessionId->result, 'attributeId' => '5', 'attributeSetId' => '83'));
+$result = $proxy->catalogProductAttributeSetAttributeAdd(
+    (object)[
+        'sessionId' => $sessionId->result,
+        'attributeId' => '5',
+        'attributeSetId' => '83'
+    ]
+);
 var_dump($result->result);
 ```
 
 ## AttributeRemove
 
-**Method**:
+<h3>Method</h3>
 
--   product_attribute_set.attributeRemove (SOAP V1)
--   catalogProductAttributeSetAttributeRemove (SOAP V2)
+- `product_attribute_set.attributeRemove` (SOAP V1)
+- `catalogProductAttributeSetAttributeRemove` (SOAP V2)
 
 Allows you to remove an existing attribute from an attribute set.
 
-**Arguments:**
+<h3>Arguments</h3>
 
-| Type | Name | Description |
-| --- | --- | --- |
-| string | sessionId | Session ID |
-| string | attributeId | Attribute ID |
+| Type   | Name           | Description      |
+|--------|----------------|------------------|
+| string | sessionId      | Session ID       |
+| string | attributeId    | Attribute ID     |
 | string | attributeSetId | Attribute set ID |
 
-**Returns:**
+<h3>Returns</h3>
 
-| Type | Name | Description |
-| --- | --- | --- |
+| Type    | Name      | Description                                            |
+|---------|-----------|--------------------------------------------------------|
 | boolean | isRemoved | True if the attribute is removed from an attribute set |
 
-**Faults:**
+<h3>Faults</h3>
 
-| Fault Code | Fault Message |
-| --- | --- |
-| 104 | Attribute set with requested id does not exist. |
-| 106 | Attribute with requested id does not exist. |
-| 110 | Error while removing attribute from attribute set. Details in error message. |
-| 111 | Requested attribute is not in requested attribute set. |
+| Fault Code | Fault Message                                                                |
+|------------|------------------------------------------------------------------------------|
+| 104        | Attribute set with requested id does not exist.                              |
+| 106        | Attribute with requested id does not exist.                                  |
+| 110        | Error while removing attribute from attribute set. Details in error message. |
+| 111        | Requested attribute is not in requested attribute set.                       |
 
-**Examples**
+<h3>Examples</h3>
 
-**Request Example SOAP V1**
+<h4>Request Example SOAP V1</h4>
 
 ```php
-$proxy = new SoapClient('http://magentohost/api/soap/?wsdl');
+$proxy = new SoapClient('https://mahohost/api/soap/?wsdl');
 $sessionId = $proxy->login('apiUser', 'apiKey');
 
-$setId = 5;
+$attributeSetId = 5;
 $attributeId = 83;
 
 $result = $proxy->call(
     $sessionId,
-    "product_attribute_set.attributeRemove",
-    array(
+    'product_attribute_set.attributeRemove',
+    [
          $attributeId,
-         $setId
-    )
+         $attributeSetId
+    ]
 );
 ```
 
-**Request Example SOAP V2**
+<h4>Request Example SOAP V2</h4>
 
 ```php
-$proxy = new SoapClient('http://magentohost/api/v2_soap/?wsdl'); // TODO : change url
-$sessionId = $proxy->login('apiUser', 'apiKey'); // TODO : change login and pwd if necessary
+$proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); // TODO: change url
+$sessionId = $proxy->login('apiUser', 'apiKey'); // TODO: change login and pwd if necessary
 
 $result = $proxy->catalogProductAttributeSetAttributeRemove($sessionId, '5', '83');
 var_dump($result);
 ```
 
-**Request Example SOAP V2 (WS-I Compliance Mode)**
+<h4>Request Example SOAP V2 (WS-I Compliance Mode)</h4>
 
 ```php
-$proxy = new SoapClient('http://magentohost/api/v2_soap/?wsdl');
-$sessionId = $proxy->login((object)array('username' => 'apiUser', 'apiKey' => 'apiKey'));
+$proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl');
+$sessionId = $proxy->login((object)['username' => 'apiUser', 'apiKey' => 'apiKey']);
 
-$result = $proxy->catalogProductAttributeSetAttributeRemove((object)array('sessionId' => $sessionId->result, 'attributeId' => '5', 'attributeSetId' => '83'));
+$result = $proxy->catalogProductAttributeSetAttributeRemove(
+    (object)[
+        'sessionId' => $sessionId->result,
+        'attributeId' => '5',
+        'attributeSetId' => '83'
+    ]
+);
 var_dump($result->result);
 ```
 
 ## GroupAdd
 
-**Method**:
+<h3>Method</h3>
 
--   product_attribute_set.groupAdd (SOAP V1)
--   catalogProductAttributeSetGroupAdd (SOAP V2)
+- `product_attribute_set.groupAdd` (SOAP V1)
+- `catalogProductAttributeSetGroupAdd` (SOAP V2)
 
 Allows you to add a new group for attributes to the attribute set.
 
-**Arguments:**
+<h3>Arguments</h3>
 
-| Type | Name | Description |
-| --- | --- | --- |
-| string | sessionId | Session ID |
+| Type   | Name           | Description      |
+|--------|----------------|------------------|
+| string | sessionId      | Session ID       |
 | string | attributeSetId | Attribute set ID |
-| string | groupName | Group name |
+| string | groupName      | Group name       |
 
-**Return:**
+<h3>Return</h3>
 
-| Type | Name | Description |
-| --- | --- | --- |
-| int | result | ID of the created group |
+| Type | Name   | Description             |
+|------|--------|-------------------------|
+| int  | result | ID of the created group |
 
-**Faults:**
+<h3>Faults</h3>
 
-| Fault Code | Fault Message |
-| --- | --- |
-| 112 | Requested group exist already in requested attribute set. |
-| 113 | Error while adding group to attribute set. Details in error message. |
+| Fault Code | Fault Message                                                        |
+|------------|----------------------------------------------------------------------|
+| 112        | Requested group exist already in requested attribute set.            |
+| 113        | Error while adding group to attribute set. Details in error message. |
 
-**Examples**
+<h3>Examples</h3>
 
-**Request Example SOAP V1**
+<h4>Request Example SOAP V1</h4>
 
 ```php
-$client = new SoapClient('http://magentohost/api/soap/?wsdl');
+$client = new SoapClient('https://mahohost/api/soap/?wsdl');
 $session = $client->login('apiUser', 'apiKey');
 
-$result = $client->call($session, 'product_attribute_set.groupAdd', array('attributeSetId' => '9', 'groupName' => 'new_group'));
+$result = $client->call(
+    $session,
+    'product_attribute_set.groupAdd',
+    [
+        'attributeSetId' => '9',
+        'groupName' => 'new_group'
+    ]
+);
 var_dump($result);
 
-// If you don't need the session anymore
-//$client->endSession($session);
+// When the session can be closed
+$client->endSession($session);
 ```
 
-**Request Example SOAP V2**
+<h4>Request Example SOAP V2</h4>
 
 ```php
-$proxy = new SoapClient('http://magentohost/api/v2_soap/?wsdl'); // TODO : change url
-$sessionId = $proxy->login('apiUser', 'apiKey'); // TODO : change login and pwd if necessary
+$proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); // TODO: change url
+$sessionId = $proxy->login('apiUser', 'apiKey'); // TODO: change login and pwd if necessary
 
 $result = $proxy->catalogProductAttributeSetGroupAdd($sessionId, '9', 'new_group');
 var_dump($result);
 ```
 
-**Request Example SOAP V2 (WS-I Compliance Mode)**
+<h4>Request Example SOAP V2 (WS-I Compliance Mode)</h4>
 
 ```php
 $proxy = new SoapClient('http://maentohost/api/v2_soap/?wsdl');
-$sessionId = $proxy->login((object)array('username' => 'apiUser', 'apiKey' => 'apiKey'));
+$sessionId = $proxy->login((object)['username' => 'apiUser', 'apiKey' => 'apiKey']);
 
-$result = $proxy->catalogProductAttributeSetGroupAdd((object)array('sessionId' => $sessionId->result, 'attributeSetId' => '9', 'groupName' => 'new_group'));
+$result = $proxy->catalogProductAttributeSetGroupAdd(
+    (object)[
+        'sessionId' => $sessionId->result,
+        'attributeSetId' => '9',
+        'groupName' => 'new_group'
+    ]
+);
 var_dump($result->result);
 ```
 
 ## GroupRemove
 
-**Method**:
+<h3>Method</h3>
 
--   product_attribute_set.groupRemove (SOAP V1)
--   catalogProductAttributeSetGroupRemove (SOAP V2)
+- `product_attribute_set.groupRemove` (SOAP V1)
+- `catalogProductAttributeSetGroupRemove` (SOAP V2)
 
 Allows you to remove a group from an attribute set.
 
-**Arguments:**
+<h3>Arguments</h3>
 
-| Type | Name | Description |
-| --- | --- | --- |
-| string | sessionId | Session ID |
-| string | attributeGroupId | Group ID |
+| Type   | Name             | Description |
+|--------|------------------|-------------|
+| string | sessionId        | Session ID  |
+| string | attributeGroupId | Group ID    |
 
-**Return:**
+<h3>Return</h3>
 
-| Type | Description |
-| --- | --- |
+| Type       | Description                      |
+|------------|----------------------------------|
 | booleanint | True (1) if the group is removed |
 
-**Faults:**
+<h3>Faults</h3>
 
-| Fault Code | Fault Message |
-| --- | --- |
-| 108 | Attribute group with requested id does not exist. |
-| 115 | Error while removing group from attribute set. Details in error message. |
-| 116 | Group can not be removed as it contains system attributes. |
-| 117 | Group can not be removed as it contains attributes, used in configurable products. |
+| Fault Code | Fault Message                                                                      |
+|------------|------------------------------------------------------------------------------------|
+| 108        | Attribute group with requested id does not exist.                                  |
+| 115        | Error while removing group from attribute set. Details in error message.           |
+| 116        | Group can not be removed as it contains system attributes.                         |
+| 117        | Group can not be removed as it contains attributes, used in configurable products. |
 
-**Examples**
+<h3>Examples</h3>
 
-**Request Example SOAP V1**
+<h4>Request Example SOAP V1</h4>
 
 ```php
-$proxy = new SoapClient('http://magentohost/api/soap/?wsdl');
+$proxy = new SoapClient('https://mahohost/api/soap/?wsdl');
 $sessionId = $proxy->login('apiUser', 'apiKey');
 
 $groupId = 70;
 
 $result = $proxy->call(
     $sessionId,
-    "product_attribute_set.groupRemove",
-    array(
+    'product_attribute_set.groupRemove',
+    [
          $groupId
-    )
+    ]
 );
 ```
 
-**Request Example SOAP V2**
+<h4>Request Example SOAP V2</h4>
 
 ```php
-$proxy = new SoapClient('http://magentohost/api/v2_soap/?wsdl'); // TODO : change url
-$sessionId = $proxy->login('apiUser', 'apiKey'); // TODO : change login and pwd if necessary
+$proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); // TODO: change url
+$sessionId = $proxy->login('apiUser', 'apiKey'); // TODO: change login and pwd if necessary
 
 $result = $proxy->catalogProductAttributeSetGroupRemove($sessionId, '70');
 var_dump($result);
 ```
 
-**Request Example SOAP V2 (WS-I Compliance Mode)**
+<h4>Request Example SOAP V2 (WS-I Compliance Mode)</h4>
 
 ```php
-$proxy = new SoapClient('http://magentohost/api/v2_soap/?wsdl');
-$sessionId = $proxy->login((object)array('username' => 'apiUser', 'apiKey' => 'apiKey'));
+$proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl');
+$sessionId = $proxy->login((object)['username' => 'apiUser', 'apiKey' => 'apiKey']);
 
-$result = $proxy->catalogProductAttributeSetGroupRemove((object)array('sessionId' => $sessionId->result, 'attributeGroupId' => '70'));
+$result = $proxy->catalogProductAttributeSetGroupRemove(
+    (object)[
+        'sessionId' => $sessionId->result,
+        'attributeGroupId' => '70'
+    ]
+);
 var_dump($result->result);
 ```
 
 ## GroupRename
 
-**Method**:
+<h3>Method</h3>
 
--   product_attribute_set.groupRename (SOAP V1)
--   catalogProductAttributeSetGroupRename (SOAP V2)
+- `product_attribute_set.groupRename` (SOAP V1)
+- `catalogProductAttributeSetGroupRename` (SOAP V2)
 
 Allows you to rename a group in the attribute set.
 
-**Arguments:**
+<h3>Arguments</h3>
 
-| Type | Name | Description |
-| --- | --- | --- |
-| string | sessionId | Session ID |
-| string | groupId | ID of the group that will be renamed |
-| string | groupName | New name for the group |
+| Type   | Name      | Description                          |
+|--------|-----------|--------------------------------------|
+| string | sessionId | Session ID                           |
+| string | groupId   | ID of the group that will be renamed |
+| string | groupName | New name for the group               |
 
-**Return:**
+<h3>Return</h3>
 
-| Type | Description |
-| --- | --- |
+| Type       | Description                      |
+|------------|----------------------------------|
 | booleanint | True (1) if the group is renamed |
 
-**Faults:**
+<h3>Faults</h3>
 
-| Fault Code | Fault Message |
-| --- | --- |
-| 108 | Attribute group with requested id does not exist. |
-| 114 | Error while renaming group. Details in error message. |
+| Fault Code | Fault Message                                         |
+|------------|-------------------------------------------------------|
+| 108        | Attribute group with requested id does not exist.     |
+| 114        | Error while renaming group. Details in error message. |
 
-**Examples**
+<h3>Examples</h3>
 
-**Request Example SOAP V1**
+<h4>Request Example SOAP V1</h4>
 
 ```php
-$proxy = new SoapClient('http://magentohost/api/soap/?wsdl');
+$proxy = new SoapClient('https://mahohost/api/soap/?wsdl');
 $sessionId = $proxy->login('apiUser', 'apiKey');
 
 $groupId = 100;
-$groupName = "New Group";
+$groupName = 'New Group';
 
-echo "Renaming group...";
+echo 'Renaming group...';
 $result = $proxy->call(
     $sessionId,
-    "product_attribute_set.groupRename",
-    array(
+    'product_attribute_set.groupRename',
+    [
          $groupId,
          $groupName
-    )
+    ]
 );
 ```
 
-**Request Example SOAP V2**
+<h4>Request Example SOAP V2</h4>
 
 ```php
-$proxy = new SoapClient('http://magentohost/api/v2_soap/?wsdl'); // TODO : change url
-$sessionId = $proxy->login('apiUser', 'apiKey'); // TODO : change login and pwd if necessary
+$proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); // TODO: change url
+$sessionId = $proxy->login('apiUser', 'apiKey'); // TODO: change login and pwd if necessary
 
 $result = $proxy->catalogProductAttributeSetGroupRename($sessionId, '100', 'New Group');
 var_dump($result);
 ```
 
-**Request Example SOAP V2 (WS-I Compliance Mode)**
+<h4>Request Example SOAP V2 (WS-I Compliance Mode)</h4>
 
 ```php
-$proxy = new SoapClient('http://magentohost/api/v2_soap/?wsdl');
-$sessionId = $proxy->login((object)array('username' => 'apiUser', 'apiKey' => 'apiKey'));
+$proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl');
+$sessionId = $proxy->login((object)['username' => 'apiUser', 'apiKey' => 'apiKey']);
 
-$result = $proxy->catalogProductAttributeSetGroupRename((object)array('sessionId' => $sessionId->result, 'groupId' => '100', 'groupName' => 'New Group'));
+$result = $proxy->catalogProductAttributeSetGroupRename(
+    (object)[
+        'sessionId' => $sessionId->result,
+        'groupId' => '100',
+        'groupName' => 'New Group'
+    ]
+);
 var_dump($result->result);
 ```
