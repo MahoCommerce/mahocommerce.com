@@ -1,7 +1,7 @@
 We think that it's extremely important, both for the team and the users, to have a clear and public roadmap.
 That's why we manage it through GitHub projects.
 
-[Check Maho's public roadmap](https://github.com/orgs/MahoCommerce/projects/2/views/1){:target="_blank" .md-button .md-button--primary}
+[Check Maho's public roadmap](https://github.com/MahoCommerce/maho/discussions/categories/roadmaps){:target="_blank" .md-button .md-button--primary}
 
 ## Make it your own
 
