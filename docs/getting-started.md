@@ -1,9 +1,5 @@
 # Getting Started
 
-!!! danger ""
-    Maho is under heavy development, so currently we suggest that you install it only if you want to
-    see what's going on and to give it a try.
-
 ## System requirements
 
 - PHP 8.2+
@@ -14,7 +10,7 @@
 ## Create your project
 
 ```bash
-composer create-project -s dev mahocommerce/maho-starter yourproject
+composer create-project mahocommerce/maho-starter yourproject
 ```
 
 !!! info
