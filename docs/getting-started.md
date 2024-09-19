@@ -14,7 +14,6 @@ composer create-project mahocommerce/maho-starter yourproject
 ```
 
 !!! info
-    - `-s dev` is a temporary flag that will be removed when the final release is ready
     - `yourproject` is the name of the directory where you want to create the project
 
 ## Configure your web server
