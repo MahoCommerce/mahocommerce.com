@@ -1,4 +1,4 @@
-In an era dominated by SaaS solutions, the e-commerce world needs a robust, modern, and lean on-premise platform.
+In an era dominated by SaaS solutions, the e-commerce world needs a robust, modern, and lean on-premises platform.
 That's where Maho comes in – and where you can make a real difference.
 
 We're building more than just another e-commerce platform.  

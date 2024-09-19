@@ -15,7 +15,7 @@ This ongoing integration ensures that Maho benefits from the latest improvements
 while maintaining its unique features and direction.
 
 Maho is leveraging established e-commerce heritage while embracing a modern forward-looking approach
-to provide a powerful, flexible, and future-proof on-premise solution for online businesses and pave
+to provide a powerful, flexible, and future-proof on-premises solution for online businesses and pave
 the way for future innovations in the e-commerce space.
 
 ## Meaning and pronunciation of Maho

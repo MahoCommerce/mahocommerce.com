@@ -6,7 +6,7 @@
     </div>
 </div>
 
-<h1 id="homeh1"><span>Maho - </span>open on-premise ecommerce platform</h1>
+<h1 id="homeh1"><span>Maho - </span>open on-premises ecommerce platform</h1>
 <h2 id="homeh2">#StrongRoots #ForwardThinking #FamiliarYetDifferent</h2>
 
 **Maho** is a free and **open source ecommerce platform**, created in 2024 by
@@ -24,11 +24,11 @@ past stop the innovation we need to bring to developers and store owners.
 
 <div class="grid cards" markdown>
 - **Maho**  
-  Perfect for on-premise medium-to-small projects seeking a modern, streamlined platform
+  Perfect for on-premises medium-to-small projects seeking a modern, streamlined platform
 - **OpenMage**  
   Suited for more conservative projects that desire complete control
 - **Magento2/MageOS**  
-  Ideal for large or enterprise on-premise projects
+  Ideal for large or enterprise on-premises projects
 - **Shopify**  
   Best for medium-to-small SaaS projects
 </div>
