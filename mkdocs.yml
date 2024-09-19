@@ -67,6 +67,7 @@ nav:
   - Home: index.md
   - Documentation:
     - Getting started: getting-started.md
+    - Release strategy: release-strategy.md
     - Origins: origins.md
     - Differences: differences.md
     - Roadmap: roadmap.md
