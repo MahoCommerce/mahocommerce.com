@@ -11,7 +11,7 @@ Differences between Maho and Magento 1 are documented in
 
 ## Differences between Maho and OpenMage
 
-![Structure of a basic Maho project](/assets/basic-project-structure.png){ width=200 loading=lazy align=left }
+![Structure of a basic Maho project](/assets/basic-project-structure.png){ width=200 align=left }
 
 ### Project structure
 
