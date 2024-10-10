@@ -15,8 +15,9 @@ Differences between Maho and Magento 1 are documented in
 
 ### Project structure
 
-The first task we wanted to develop was a complete overhaul of the store's project structure, without the need for the
-original M1 composer plugin to copy (and duplicate) all the files from the core to the project's root directory.
+The first task we developed was a complete overhaul of the store's project structure thanks to a new sets of
+[autoloaders](autoloaders.md), removing the need for the original M1 composer plugin to copy (and duplicate)
+all the files from the core to the project's root directory.
 
 This allows for a modern and lean project structure, like any other PHP-based project you can work on since quite
 some years.

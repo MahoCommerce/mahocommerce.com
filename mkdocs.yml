@@ -72,6 +72,7 @@ nav:
     - Differences: differences.md
     - Roadmap: roadmap.md
     - Technical doc:
+      - Autoloaders: autoloaders.md
       - CLI tool: cli-tool.md
       - Cron setup: cron.md
       - FrankenPHP: frankenphp.md
