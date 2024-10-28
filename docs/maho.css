@@ -14,18 +14,18 @@
     .md-sidebar .md-nav__title {font-size: 0}
 }
 
-/* hide sidebar for blog index */
+/* hide sidebar for some pages */
 @media screen and (min-width: 60em) {
     body:has(h1[id=blog]) .md-sidebar {
         visibility: hidden;
     }
-    body:has(#homeh1) .md-sidebar {
+    body:has(#homeh1, #sponsorsh1) .md-sidebar {
         display: none;
     }
-    body:has(#homeh1) .md-main__inner {
+    body:has(#homeh1, #sponsorsh1) .md-main__inner {
         align-items: center;
     }
-    body:has(#homeh1) .md-content {
+    body:has(#homeh1, #sponsorsh1) .md-content {
         max-width: 736px;
         margin: auto;
     }

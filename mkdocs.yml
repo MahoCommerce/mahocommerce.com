@@ -147,6 +147,7 @@ nav:
       - Contributing: community/contributing.md
       - Community projects:
           - Docker Starter: community/projects/docker-starter.md
+  - Sponsors: sponsors.md
 
 extra:
   generator: false
