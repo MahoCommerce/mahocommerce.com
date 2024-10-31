@@ -67,6 +67,31 @@ All commands should be self-explanatory, also thanks to the inline descriptions.
 
 ## Add your custom commands
 
+### Using the built-in command generator
+
+The easiest way to create a new command is to run:
+
+```bash
+$ ./maho create-command
+```
+
+The generator will prompt you for:
+
+1. Command name (e.g., `my-custom-command` or `cache:clean`)
+2. Command description
+
+It will automatically:
+
+- Create the command file in the correct location (`lib/MahoCLI/Commands`)
+- Set up the proper namespace and class name
+- Add all necessary imports and boilerplate code
+
+Now you can edit your newly create file in `lib/MahoCLI/Commands`.
+
+### Manual creation
+
+Alternatively, you can create commands manually:
+
 1. Create `lib/MahoCLI/Commands` in the main directory of your project
 2. Create your command file, e.g. `MyCustomCommand.php` in `lib/MahoCLI/Commands` just like:
 ```php
@@ -74,6 +99,7 @@ All commands should be self-explanatory, also thanks to the inline descriptions.
 
 namespace MahoCLI\Commands;
 
+use Mage;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
@@ -87,6 +113,8 @@ class MyCustomCommand extends BaseMahoCommand
 {
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
+        $this->iniMaho();
+
         $output->writeln("<info>IT WORKED!</info>");
         return Command::SUCCESS;
     }
