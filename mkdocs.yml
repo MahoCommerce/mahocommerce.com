@@ -67,6 +67,7 @@ nav:
   - Home: index.md
   - Documentation:
     - Getting started: getting-started.md
+    - Migrate to Maho: migrate-to-maho.md
     - Release strategy: release-strategy.md
     - Origins: origins.md
     - Differences: differences.md
