@@ -42,8 +42,8 @@ Maho is not 100% backward compatible with the M1 platform.
 Our goal has always been clear: modernizing the M1 platform, which necessitates changes.
 
 Each Maho release will include incompatible changes that must be considered during migration/updating.
-While we minimize breaking changes where possible, please carefully
-[review Maho's release notes](https://github.com/MahoCommerce/maho/releases){target=_blank}
+While we minimize breaking changes where possible, please carefully review
+[Maho's release notes](https://github.com/MahoCommerce/maho/releases){target=_blank}
 for each version to understand what requires additional testing and potential adaptation in your codebase.
 
 ## Health Check
