@@ -122,3 +122,18 @@ article:has(#homeh1) .md-source-file {display: none}
         transform: translateX(0);
     }
 }
+
+.sponsorgallery {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2em 5em;
+}
+
+.sponsorgallery > * {
+    flex: 1;
+}
+
+.sponsorgallery img {
+    height: 50px;
+    max-width: none;
+}

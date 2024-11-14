@@ -11,14 +11,16 @@ By sponsoring us, you're not just supporting our work - you're investing in the 
 
 <h2 style="margin-bottom:1em">Bronze sponsors</h2>
 
-<div style="display: flex; gap: 5em">
-    <a href="https://e-gear.dk" title="e-Gear.dk" target="_blank"><img style="height: 50px" src="/assets/sponsors/egear.png" alt="e-Gear.dk"></a>
-    <a href="https://magemega.com" title="MageMega" target="_blank"><img style="height: 50px" src="/assets/sponsors/magemega.png" alt="MageMega"></a>
+<div class="sponsorgallery">
+    <a href="https://e-gear.dk" title="e-Gear.dk" target="_blank"><img src="/assets/sponsors/egear.png" alt="e-Gear.dk"></a>
+    <a href="https://magemega.com" title="MageMega" target="_blank"><img src="/assets/sponsors/magemega.png" alt="MageMega"></a>
 </div>
 
 <h2 style="margin-top:2em;margin-bottom:1em">Technology partners</h2>
 
-<div style="display: flex; gap: 5em">
-    <a href="https://blackfire.io" title="Blackfire" target="_blank"><img style="height: 50px" src="/assets/sponsors/blackfire.png" alt="Blackfire"></a>
-    <a href="https://cloudflare.com" title="Cloudflare" target="_blank"><img style="height: 50px" src="/assets/sponsors/cloudflare.jpg" alt="Cloudflare"></a>
+<div class="sponsorgallery">
+    <a href="https://www.bhoost.com" title="Bhoost" target="_blank"><img src="/assets/sponsors/bhoost.png" alt="Bhoost"></a>
+    <a href="https://blackfire.io" title="Blackfire" target="_blank"><img src="/assets/sponsors/blackfire.png" alt="Blackfire"></a>
+    <a href="https://cloudflare.com" title="Cloudflare" target="_blank"><img src="/assets/sponsors/cloudflare.jpg" alt="Cloudflare"></a>
+    <a href="https://www.magentiamo.it" title="Magentiamo" target="_blank"><img src="/assets/sponsors/magentiamo.png" alt="Magentiamo"></a>
 </div>
