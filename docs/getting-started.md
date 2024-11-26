@@ -141,6 +141,10 @@ To install Maho with sample data, just add `--sample_data 1` to the installation
 
 and everything will be automatically downloaded and setup for you by Maho installer.
 
+!!! info
+    Remember to revise and adapt all the parameters above, like the database host/username/password,
+    the admin password and so on.
+
 ### Installation via the web installer
 
 If you're not familiar with the command line, simply open your browser to type the URL
