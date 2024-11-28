@@ -9,6 +9,12 @@ By sponsoring us, you're not just supporting our work - you're investing in the 
 
 [:fontawesome-regular-heart: Become a sponsor :fontawesome-regular-heart:](https://github.com/sponsors/fballiano){target=_blank .md-button .md-button--primary}
 
+<h2 style="margin-bottom:1em">Silver sponsors</h2>
+
+<div class="sponsorgallery">
+    <a href="https://www.deinetuer.de" title="Deine Tür" target="_blank"><img src="/assets/sponsors/deinetuer.svg" alt="Deine Tür"></a>
+</div>
+
 <h2 style="margin-bottom:1em">Bronze sponsors</h2>
 
 <div class="sponsorgallery">
