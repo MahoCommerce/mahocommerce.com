@@ -4,14 +4,30 @@
     --md-accent-fg-color: #858a11;
 }
 
+html {font-size: 22px}
+.md-grid {max-width: none}
+
 .md-header__button {transition: transform .2s}
 .md-header__button:hover {transform: scale(1.1); opacity: 1;}
 .md-logo img {zoom: 1.8; margin: -5px 0 -10px;}
 .md-sidebar__inner .md-logo img {zoom: 1; margin-inline: auto}
 .md-header--shadow .md-logo img {margin-top: -10px}
 .md-header__topic {visibility: hidden}
+.md-sidebar--primary .md-sidebar__inner {border-right: 1px solid var(--md-typeset-a-color)}
+.md-sidebar--secondary .md-sidebar__inner {border-left: 1px solid var(--md-typeset-a-color)}
+.md-typeset h1 {margin-bottom: 0; font-weight: 500}
+.md-typeset h2, .md-typeset h3, .md-typeset h4 {font-weight: 500}
+.md-typeset h2:first-of-type {margin-top: 0.5em}
+.md-main__inner {margin-top: 0.2rem}
+.md-nav__item .md-nav__link--active, .md-nav__item .md-nav__link--active code {font-weight: bold}
 @media screen and (max-width: 76.25em) {
     .md-sidebar .md-nav__title {font-size: 0}
+}
+@media screen and (min-width: 76.25em) {
+    [data-md-color-primary=white] .md-tabs {
+        aborder-bottom: 0.05rem solid var(--md-typeset-a-color);
+        border-bottom: none;
+    }
 }
 
 /* hide sidebar for some pages */
