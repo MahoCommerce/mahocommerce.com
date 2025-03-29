@@ -20,6 +20,7 @@ html {font-size: 22px}
 .md-typeset h2:first-of-type {margin-top: 0.5em}
 .md-main__inner {margin-top: 0.2rem}
 .md-nav__item .md-nav__link--active, .md-nav__item .md-nav__link--active code {font-weight: bold}
+.md-social__link svg {max-height: 1.2rem}
 @media screen and (max-width: 76.25em) {
     .md-sidebar .md-nav__title {font-size: 0}
 }
