@@ -26,7 +26,6 @@ html {font-size: 22px}
 }
 @media screen and (min-width: 76.25em) {
     [data-md-color-primary=white] .md-tabs {
-        aborder-bottom: 0.05rem solid var(--md-typeset-a-color);
         border-bottom: none;
     }
 }
