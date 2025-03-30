@@ -88,7 +88,6 @@ Options:
       --admin_email=ADMIN_EMAIL                                Admin user email
       --admin_username=ADMIN_USERNAME                          Admin user login
       --admin_password=ADMIN_PASSWORD                          Admin user password
-      --encryption_key[=ENCRYPTION_KEY]                        Will be automatically generated and displayed on success, if not specified
       --sample_data[=SAMPLE_DATA]                              Also install sample data
   -h, --help                                                   Display help for the given command. When no command is given display help for the list command
   -q, --quiet                                                  Do not output any message
