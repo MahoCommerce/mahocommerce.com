@@ -18,38 +18,55 @@ Options:
   -v|vv|vvv, --verbose  Increase the verbosity of messages: 1 for normal output, 2 for more verbose output and 3 for debug
 
 Available commands:
-  completion                  Dump the shell completion script
-  help                        Display help for a command
-  install                     Install Maho
-  list                        List commands
-  serve                       Run Maho with the built in web server
+  completion                    Dump the shell completion script
+  create-command                Create a new command that will integrate into your project's Maho CLI set of commands
+  health-check                  Health check your Maho project
+  help                          Display help for a command
+  install                       Install Maho
+  list                          List commands
+  serve                         Run Maho with the built in web server
  admin
-  admin:user:change-password  List all admin users
-  admin:user:disable          Enable an admin user
-  admin:user:enable           Enable an admin user
-  admin:user:list             List all admin users
+  admin:user:change-password    Change password of an admin users
+  admin:user:create             Create an admin user
+  admin:user:disable            Enable an admin user
+  admin:user:enable             Enable an admin user
+  admin:user:list               List all admin users
  cache
-  cache:disable               Disable all caches
-  cache:enable                Enable all caches
-  cache:flush                 Flush cache
+  cache:disable                 Disable all caches
+  cache:enable                  Enable all caches
+  cache:flush                   Flush cache
  cron
-  cron:history                List cron jobs executions stored in the database
-  cron:list                   List cron jobs configured in the XML files
-  cron:run                    Run a group of cron processes (default/always) or a single job_code (eg: newsletter_send_all)
+  cron:history                  List cron jobs executions stored in the database
+  cron:list                     List cron jobs configured in the XML files
+  cron:run                      Run a group of cron processes (default/always) or a single job_code (eg: newsletter_send_all)
  customer
-  customer:delete             Delete customers
-  customer:list               List all customers
+  customer:change-password      Change password of a customers
+  customer:create               Create a customer
+  customer:delete               Delete customers
+  customer:list                 List all customers
+ db
+  db:connect                    Opens the MySQL command-line interface using the database credentials from your local.xml file
+ email
+  email:test:send               Send a test email
  index
-  index:list                  List all indexes
-  index:reindex               Reindex a single index
-  index:reindex:all           Reindex all indexes
+  index:list                    List all indexes
+  index:reindex                 Reindex a single index
+  index:reindex:all             Reindex all indexes
+ legacy
+  legacy:rename-mysql4-classes  Search for old Mysql4 classes and replaces them with Resource classes
  log
-  log:clean                   Clean log tables in the database
-  log:status                  Show status for log tables in the database
+  log:clean                     Clean log tables in the database
+  log:status                    Show status for log tables in the database
+ phpstorm
+  phpstorm:metadata:generate    Generate PhpStorm metadata files for better IDE support
  sys
-  sys:currencies              Get all available currencies
-  sys:locales                 Get all available locales
-  sys:timezones               Get all available timezones
+  sys:currencies                Get all available currencies
+  sys:encryptionkey:regenerate  Generate a new encryption key and save it to local.xml
+  sys:locales                   Get all available locales
+  sys:timezones                 Get all available timezones
+ translations
+  translations:missing          Display used translations strings that are missing from csv files
+  translations:unused           Display defined translations strings that are not used in templates
 ```
 
 This tool is inspired by [Laravel Artisan](https://laravel.com/docs/11.x/artisan){:target="_blank"},
