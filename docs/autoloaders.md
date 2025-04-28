@@ -1,8 +1,7 @@
 # Autoloaders
 
 Maho is tightly built around composer, meaning that, in a Maho project, all the autoloading is done
-by composer through
-[our composer plugin](https://github.com/MahoCommerce/maho-composer-plugin){target=_blank}.
+by composer through [our composer plugin](composer-plugin.md).
 
 This means:
 
@@ -19,8 +18,8 @@ Characteristics of Maho's composer plugin:
 - Passes PHPStan at level 10 with strict rules!
 - License under MIT.
 
-If you want to know more about the technical implementation,
-[please refer to this PR](https://github.com/MahoCommerce/maho/pull/63){target=_blank}.
+If you want to know more about the technical implementation, check the
+[Maho Composer Plugin documentation](composer-plugin.md).
 
 ## Optimized autoloader
 

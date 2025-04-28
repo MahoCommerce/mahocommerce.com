@@ -75,6 +75,7 @@ nav:
     - Technical doc:
       - Autoloaders: autoloaders.md
       - CLI tool: cli-tool.md
+      - Composer plugin: composer-plugin.md
       - Cron setup: cron.md
       - FrankenPHP: frankenphp.md
       - Language packs: language-packs.md
