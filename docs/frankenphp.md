@@ -9,6 +9,13 @@ and the PHP runtime, all in a single process and with great performance!
 It also has a lot of great features (HTTP3, early hints and so much more),
 check the official documentation for all the details.
 
+## Maho's official docker images
+
+Maho provides **official Docker images based on FrankenPHP**, making it easy to run Maho in containerized environments.
+These images are automatically built via Docker Cloud Build and are available on
+[hub.docker.com/r/mahocommerce/maho](https://hub.docker.com/r/mahocommerce/maho){target=_blank}.
+
+
 ## Static binary building
 
 Creating a static binary for your application means bundling all the files of your PHP application
