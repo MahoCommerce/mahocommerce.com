@@ -159,3 +159,19 @@ article:has(#homeh1) .md-source-file {display: none}
 body:has(h1[id=blog]) .md-post--excerpt ul li {
     margin-block: 0;
 }
+body:has(h1[id=blog]) .md-typeset .admonition,
+body:has(h1[id=blog]) .md-typeset details {
+    border-width: 0;
+    border-left-width: 4px;
+}
+body:has(h1[id=blog]) .md-typeset .admonition.tip {
+    border-color: var(--md-typeset-a-color);
+}
+body:has(h1[id=blog]) .md-typeset .tip>.admonition-title:before,
+body:has(h1[id=blog]) .md-typeset .tip>summary:before {
+    background-color: var(--md-typeset-a-color);
+}
+body:has(h1[id=blog]) .md-typeset .tip>.admonition-title,
+body:has(h1[id=blog]) .md-typeset .tip>summary {
+    background-color: #ADB41A1a;
+}
