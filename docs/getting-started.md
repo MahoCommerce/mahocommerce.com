@@ -45,8 +45,9 @@ Serving Maho on http://127.0.0.1:8000, press CTRL+C to exit...
 
 ### Do you like docker?
 
-If docker is your go-to choice then we suggest you check the [Docker Starter](community/projects/docker-starter.md)
-community project by Simone Fantini.
+If Docker is your go-to choice, we suggest you check
+[Maho's official Docker images](https://hub.docker.com/r/mahocommerce/maho){target=_blank}
+or the [Docker Starter](community/projects/docker-starter.md) community project by Simone Fantini.
 
 ## Install Maho
 
@@ -153,6 +154,30 @@ through the complete installation of Maho into your database.
 
 !!! warning
     Sample data installation is not available using the web installer.
+
+## Configuring Redis as cache storage
+
+Since [Maho 25.5](blog/posts/2025-05-15-maho-25.5-announcement.md) adds a completely new cache subsystem
+based on [symfony/cache](https://symfony.com/doc/current/components/cache.html){target=_blank}, Maho
+supports Redis cache storage out of the box, no 3rd party plugin needed.
+
+If you want to enable it, and you've a Redis database available, simple head out to your `local.xml` file
+and configure the `global/cache` section this way:
+
+```xml
+<global>
+    <cache>
+        <lifetime>86400</lifetime> <!-- optional, default is 7200 -->
+        <backend>file|redis</backend> <!-- optional, default is file -->
+        <backend_options> <!-- optional for "file", required for "redis" -->
+            <dsn>redis://localhost?dbindex=0</dsn>
+        </backend_options>
+    </cache>
+</global>
+```
+
+The `dsn` element supports many possible options, check out of the
+[full documentation at Symfony's website](https://symfony.com/doc/current/components/cache/adapters/redis_adapter.html#configure-the-connection){target=_blank}.
 
 ## Cron setup
 
