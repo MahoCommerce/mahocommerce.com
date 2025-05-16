@@ -139,6 +139,7 @@ article:has(#homeh1) .md-source-file {display: none}
     }
 }
 
+/* SPONSORS */
 .sponsorgallery {
     display: flex;
     flex-wrap: wrap;
@@ -152,4 +153,9 @@ article:has(#homeh1) .md-source-file {display: none}
 .sponsorgallery img {
     height: 50px;
     max-width: none;
+}
+
+/* BLOG */
+body:has(h1[id=blog]) .md-post--excerpt ul li {
+    margin-block: 0;
 }
