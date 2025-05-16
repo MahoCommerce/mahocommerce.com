@@ -51,5 +51,5 @@ every Maho project will have the modern theme for the backend.
 
 ### Other differences
 
-There are many more minor differences, it's challenging to list them all, please refer to our changelog and our release
-notes for a complete list release-by-release.
+There are so many more differences that it's challenging to list them all, please refer to
+[our release notes](/blog) for a complete list release-by-release.
