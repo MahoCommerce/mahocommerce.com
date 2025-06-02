@@ -170,7 +170,7 @@ and configure the `global/cache` section this way:
         <lifetime>86400</lifetime> <!-- optional, default is 7200 -->
         <backend>file|redis</backend> <!-- optional, default is file -->
         <backend_options> <!-- optional for "file", required for "redis" -->
-            <dsn>redis://localhost?dbindex=0</dsn>
+            <dsn>redis://localhost/0</dsn> <!-- uses database number 0 -->
         </backend_options>
     </cache>
 </global>
