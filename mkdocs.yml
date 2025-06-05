@@ -142,6 +142,7 @@ nav:
             - Credit Memo: api/soap/sales-order-credit-memo.md
             - Invoice: api/soap/sales-order-invoice.md
             - Shipment: api/soap/sales-order-shipment.md
+      - JSON-RPC API: api/jsonrpc.md
       - phpDoc code reference: code-reference.md
   - Blog: blog/index.md
   - Community:
