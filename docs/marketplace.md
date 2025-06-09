@@ -3,6 +3,8 @@
 Discover and install powerful modules to enhance your Maho store. All modules are open source and community-maintained.
 
 <style>
+.md-sidebar.md-sidebar--primary {display: none}
+
 .app-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
