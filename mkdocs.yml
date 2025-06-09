@@ -148,6 +148,7 @@ nav:
   - Community:
       - Get Involved: community/get-involved.md
       - Contributing: community/contributing.md
+      - App Store: app-store.md
       - Community projects:
           - Docker Starter: community/projects/docker-starter.md
   - Sponsors: sponsors.md
