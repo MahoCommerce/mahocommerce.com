@@ -1,4 +1,4 @@
-# Maho App Store
+# Maho Marketplace
 
 Discover and install powerful modules to enhance your Maho store. All modules are open source and community-maintained.
 
@@ -460,7 +460,7 @@ Discover and install powerful modules to enhance your Maho store. All modules ar
 
 ## Submit Your Module
 
-Have you created a module for Maho? We'd love to feature it in our App Store!
+Have you created a module for Maho? We'd love to feature it in our Marketplace!
 
 <div style="margin-top: 24px; padding: 24px; background: var(--md-code-bg-color); border-radius: 8px;">
     <h3 style="margin-top: 0;">Requirements for Submission</h3>
