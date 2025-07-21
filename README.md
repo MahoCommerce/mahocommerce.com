@@ -17,3 +17,9 @@ Alternatively, run `./start.sh` which does all of the above.
 - https://jsonformatter.org/json-pretty-print
 
 ...and a lot of manual work. :)
+
+## To upgrade `requirements.txt`
+
+```bash
+docker run --rm -v "$(pwd):/app" -w /app python:3.12-slim sh -c "pip install --upgrade pip && pip install pip-upgrader && python3 -m pip install --upgrade setuptools && pip-upgrade --skip-virtualenv-check"
+```
