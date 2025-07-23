@@ -259,23 +259,6 @@ Discover and install powerful modules to enhance your Maho store. All modules ar
         </div>
     </div>
 
-    <!-- Defer JavaScripts -->
-    <div class="app-card" data-category="performance">
-        <span class="app-category">Performance</span>
-        <h3 class="app-title">Defer JavaScripts</h3>
-        <p class="app-description">Improve page load performance by deferring JavaScript execution. Implements modern loading strategies to boost Core Web Vitals scores and overall site speed.</p>
-        <div class="app-footer">
-            <div class="app-actions">
-                <button class="app-button app-button-primary" onclick="showInstallModal('fballiano/openmage-defer-javascripts')">
-                    ↓ Install
-                </button>
-                <a href="https://github.com/fballiano/openmage-defer-javascripts" class="app-button app-button-primary" target="_blank">
-                    View Details →
-                </a>
-            </div>
-        </div>
-    </div>
-
     <!-- Image Cleaner -->
     <div class="app-card" data-category="media">
         <span class="app-category">Media</span>
