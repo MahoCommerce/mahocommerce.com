@@ -79,6 +79,7 @@ nav:
       - CLI tool: cli-tool.md
       - Composer plugin: composer-plugin.md
       - Cron setup: cron.md
+      - Email sending (SMTP): email-sending-configuration.md
       - FrankenPHP: frankenphp.md
       - Language packs: language-packs.md
       - Override configs: override-configurations.md
