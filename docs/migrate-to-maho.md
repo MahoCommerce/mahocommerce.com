@@ -29,7 +29,7 @@ While this may seem more complex initially, it will pay off in the long run.
 8. Convert any custom scripts in the `shell` folder to maho-cli-commands
 
 ## PHP Compatibility
-Maho (as of 24.11) requires PHP 8.2+.
+Maho (as of 24.11) requires PHP 8.2+, as of 25.7 requires PHP 8.3+.
 Custom code and third-party modules will likely need adaptation to the new PHP version.
 
 !!! note

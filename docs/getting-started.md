@@ -2,7 +2,7 @@
 
 ## System requirements
 
-- PHP 8.2+
+- PHP 8.3+
 - Apache/Nginx/Caddy/FrankenPHP[^1]
 - MySQL 5.7+ (8.0+ recommended) or MariaDB
 - `patch` command 2.7+ (or `gpatch` on macOS/HomeBrew)
