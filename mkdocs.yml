@@ -84,6 +84,7 @@ nav:
       - Import / Export:
         - Categories: category-import-export.md
       - Language packs: language-packs.md
+      - Logging: logging.md
       - Override configs: override-configurations.md
       - Robots.txt: robotstxt.md
     - Reference:
