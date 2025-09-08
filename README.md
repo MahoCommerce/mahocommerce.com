@@ -21,5 +21,5 @@ Alternatively, run `./start.sh` which does all of the above.
 ## To upgrade `requirements.txt`
 
 ```bash
-docker run --rm -v "$(pwd):/app" -w /app python:3.12-slim sh -c "pip install --upgrade pip && pip install pip-upgrader && python3 -m pip install --upgrade setuptools && pip-upgrade --skip-virtualenv-check"
+docker run --rm -v "$(pwd):/app" -w /app python:3.12-slim sh -c "pip install --upgrade pip && pip install pip-upgrader && python3 -m pip install --upgrade setuptools && pip-upgrade --skip-virtualenv-check -p all"
 ```
