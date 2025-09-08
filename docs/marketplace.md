@@ -417,6 +417,23 @@ Discover and install powerful modules to enhance your Maho store. All modules ar
         </div>
     </div>
 
+    <!-- PagBank Connect -->
+    <div class="app-card" data-category="payment">
+        <span class="app-category">Payment</span>
+        <h3 class="app-title">PagBank Connect</h3>
+        <p class="app-description">Brazilian stores can now accept local payments like PIX, Boleto and Credit Card (with 3D Secure, installments, etc) via PagBank UOL.</p>
+        <div class="app-footer">
+            <div class="app-actions">
+                <button class="app-button app-button-primary" onclick="showInstallModal('ricardomartins/pagbank-magento1')">
+                    ↓ Install
+                </button>
+                <a href="https://github.com/r-martins/PagBank-Magento1" class="app-button app-button-primary" target="_blank">
+                    View Details →
+                </a>
+            </div>
+        </div>
+    </div>
+
     <!-- Stripe Payment Gateway -->
     <div class="app-card" data-category="payment">
         <span class="app-category">Payment</span>
