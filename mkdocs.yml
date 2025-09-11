@@ -82,6 +82,7 @@ nav:
       - Email sending (SMTP): email-sending-configuration.md
       - FrankenPHP: frankenphp.md
       - Import / Export:
+        - Array Import Adapter: array-import-adapter.md
         - Categories: category-import-export.md
       - Language packs: language-packs.md
       - Logging: logging.md
