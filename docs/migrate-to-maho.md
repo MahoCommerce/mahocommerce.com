@@ -15,18 +15,21 @@ While this may seem more complex initially, it will pay off in the long run.
 
 3. Copy `app/code/community` and `app/code/local`
 
-4. Important: Remove the `app/code/local/Mage` folder, which contains direct core override files. Although override functionality is still supported, these old files will likely be incompatible with Maho's core files.
+4. Copy the corresponding module declaration XML files from `app/etc/modules` for your custom modules.
+   These XML files tell Maho about your modules and are required for them to be recognized by the system.
 
-5. Copy custom-only `js`/`skin` files/folders to `public/js` and `public/skin`  
+5. Remove the `app/code/local/Mage` folder, which contains direct core override files. Although override functionality is still supported, these old files will likely be incompatible with Maho's core files.
+
+6. Copy custom-only `js`/`skin` files/folders to `public/js` and `public/skin`
    (avoid copying core Magento/OpenMage folders/files)
 
-6. Copy custom theme folders from `app/design/frontend`  
+7. Copy custom theme folders from `app/design/frontend`
    (copy only your custom theme folders, not core themes)
 
-7. Review and copy files from your old document root (e.g., favicons, robots.txt, Google domain verifications)
+8. Review and copy files from your old document root (e.g., favicons, robots.txt, Google domain verifications)
    Also review any custom modifications to .htaccess if using Apache
 
-8. Convert any custom scripts in the `shell` folder to maho-cli-commands
+9. Convert any custom scripts in the `shell` folder to maho-cli-commands
 
 ## PHP Compatibility
 Maho (as of 24.11) requires PHP 8.2+, as of 25.7 requires PHP 8.3+.
