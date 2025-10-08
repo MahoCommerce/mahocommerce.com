@@ -11,7 +11,11 @@
 
 <div class="intro-section" markdown>
 
-Maho is a **free, open-source ecommerce platform** created in 2024 by [a former maintainer of OpenMage](https://fabrizioballiano.com){:target="_blank"}. We've taken the proven stability of the M1 platform and transformed it with modern technology, delivering **exceptional performance** without sacrificing the **vast ecosystem** you depend on.
+**Maho** is a **complete, modern, open-source ecommerce you'll actually love using**. Built in 2024, this **free platform** takes a battle-tested foundation and brings it into the modern era with PHP 8.3+, contemporary architecture, and zero legacy baggage.
+
+With smart **customer segmentation** for **personalized campaigns**, **dynamic categories** that save hours of manual work, **built-in blogging** for marketing/SEO content, and **exceptional performance** that turns browsers into buyers, Maho is **fully featured with enterprise-level capabilities**.
+
+Tap into the **collective knowledge of thousands of developers worldwide** and a proven ecosystem refined over decades—without the price tag or complexity.
 
 <div class="value-props" markdown>
 
