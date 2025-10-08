@@ -289,6 +289,7 @@ article:has(#homeh1) {
 .audience-header:hover h2 {
     transform: translateX(8px);
     color: #ADB41A;
+    text-shadow: 0 0 0 rgba(0, 0, 0, 1);
 }
 
 .audience-header:hover p {
