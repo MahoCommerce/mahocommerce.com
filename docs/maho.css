@@ -191,6 +191,42 @@ article:has(#homeh1) {
     line-height: 1.6;
 }
 
+/* Audience Sections */
+.audience-section {
+    margin: 4em 0;
+    padding: 4em 2em;
+    border-radius: 16px;
+    position: relative;
+    background: linear-gradient(180deg, rgba(173, 180, 26, 0.03) 0%, transparent 100%);
+}
+
+.audience-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    border-radius: 16px 16px 0 0;
+    background: linear-gradient(90deg, #ADB41A 0%, #858a11 100%);
+}
+
+.audience-section h2 {
+    text-align: center;
+    font-size: 2.2em;
+    margin-bottom: 0.3em;
+    font-weight: 600;
+}
+
+.audience-intro {
+    text-align: center;
+    font-size: 1.15em;
+    color: #555;
+    margin: 0 auto 3em;
+    max-width: 700px;
+    line-height: 1.6;
+}
+
 /* Features Section */
 .features-section {
     margin: 6em 0;
@@ -351,8 +387,22 @@ article:has(#homeh1) {
 /* Final CTA */
 .final-cta {
     text-align: center;
-    margin: 6em 2em 4em;
-    padding: 4em 2em;
+    margin: 1.5em 2em 4em;
+    padding: 2em 2em;
+    border-radius: 16px;
+    position: relative;
+    background: linear-gradient(180deg, rgba(173, 180, 26, 0.03) 0%, transparent 100%);
+}
+
+.final-cta::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    border-radius: 16px 16px 0 0;
+    background: linear-gradient(90deg, #ADB41A 0%, #858a11 100%);
 }
 
 .final-cta h2 {
@@ -400,6 +450,19 @@ article:has(#homeh1) {
         margin-right: -1em;
         padding-left: 1em;
         padding-right: 1em;
+    }
+
+    .audience-section {
+        padding: 3em 1.5em;
+        margin: 2em 0;
+    }
+
+    .audience-section h2 {
+        font-size: 1.8em;
+    }
+
+    .audience-intro {
+        font-size: 1em;
     }
 }
 
