@@ -50,10 +50,14 @@ Clean, intuitive, and ready to scale with your business
 
 <div class="audience-section store-owners" markdown>
 
-## :material-storefront: For Store Owners
-
-<div class="audience-intro" markdown>
-Run your store with enterprise features that actually help you sell more - without the enterprise price tag or complexity.
+<div class="audience-header">
+<div class="audience-image">
+<img src="assets/storemanager.png" alt="Store Owner">
+</div>
+<div class="audience-text">
+<h2>For Store Owners</h2>
+<p>Run your store with enterprise features that actually help you sell more, without the enterprise price tag or complexity.</p>
+</div>
 </div>
 
 <div class="features-grid" markdown>
@@ -124,10 +128,14 @@ Regular updates with real improvements like **customer segmentation** (25.9), **
 
 <div class="audience-section agencies" markdown>
 
-## :material-briefcase: For Agencies
-
-<div class="audience-intro" markdown>
-Deliver professional ecommerce solutions to clients with a platform that's proven, powerful, and cost-effective.
+<div class="audience-header">
+<div class="audience-image">
+<img src="assets/webagency.png" alt="Agency Team">
+</div>
+<div class="audience-text">
+<h2>For Agencies</h2>
+<p>Deliver professional ecommerce solutions to clients with a platform that's proven, powerful, and cost-effective.</p>
+</div>
 </div>
 
 <div class="features-grid" markdown>
@@ -198,10 +206,14 @@ Comprehensive **API documentation** (REST, SOAP, JSON-RPC), **developer guides**
 
 <div class="audience-section developers" markdown>
 
-## :material-code-braces: For Developers
-
-<div class="audience-intro" markdown>
-Build with a modern tech stack and clean architecture - no legacy baggage, just great developer experience.
+<div class="audience-header">
+<div class="audience-image">
+<img src="assets/developer.png" alt="Developer Coding">
+</div>
+<div class="audience-text">
+<h2>For Developers</h2>
+<p>Build with a modern tech stack and clean architecture, no legacy baggage, just great developer experience.</p>
+</div>
 </div>
 
 <div class="features-grid" markdown>
