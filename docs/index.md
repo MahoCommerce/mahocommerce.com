@@ -52,7 +52,7 @@ Clean, intuitive, and ready to scale with your business
 
 <div class="audience-header">
 <div class="audience-image">
-<img src="assets/storemanager.png" alt="Store Owner">
+<img src="assets/storemanager.webp" alt="Store Owner">
 </div>
 <div class="audience-text">
 <h2>For Store Owners</h2>
@@ -130,7 +130,7 @@ Regular updates with real improvements like **customer segmentation** (25.9), **
 
 <div class="audience-header">
 <div class="audience-image">
-<img src="assets/webagency.png" alt="Agency Team">
+<img src="assets/webagency.webp" alt="Agency Team">
 </div>
 <div class="audience-text">
 <h2>For Agencies</h2>
@@ -208,7 +208,7 @@ Comprehensive **API documentation** (REST, SOAP, JSON-RPC), **developer guides**
 
 <div class="audience-header">
 <div class="audience-image">
-<img src="assets/developer.png" alt="Developer Coding">
+<img src="assets/developer.webp" alt="Developer Coding">
 </div>
 <div class="audience-text">
 <h2>For Developers</h2>
