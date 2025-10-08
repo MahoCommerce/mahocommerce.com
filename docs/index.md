@@ -289,7 +289,6 @@ Full **REST API** with **OAuth authentication**, **SOAP API** for legacy integra
 Whether you're launching your first store, delivering client projects, or building custom solutions - Maho gives you the foundation to succeed.
 
 [Get Started with Maho](getting-started.md){.md-button .md-button--primary .cta-button}
-[View Documentation](getting-started.md){.md-button .cta-button}
 [Join Community :fontawesome-brands-discord:](https://discord.gg/dWgcVUFTrS){.md-button .cta-button}
 
 </div>

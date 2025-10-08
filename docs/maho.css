@@ -489,6 +489,14 @@ article:has(#homeh1) {
 
 .final-cta p:last-child {
     margin-top: 2em;
+    display: flex;
+    gap: 1em;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.final-cta .md-button {
+    margin: 0;
 }
 
 /* Responsive Design */
@@ -533,6 +541,18 @@ article:has(#homeh1) {
         border-radius: 16px;
     }
 
+    .audience-header::after {
+        background: linear-gradient(180deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.85) 100%);
+    }
+
+    .audience-image {
+        max-width: 100%;
+    }
+
+    .audience-image::before {
+        display: none;
+    }
+
     .audience-text {
         padding: 2.5em 2em;
         text-align: center;
@@ -546,6 +566,30 @@ article:has(#homeh1) {
 
     .audience-text p {
         font-size: 1.15em;
+    }
+
+    .final-cta {
+        padding: 2em 1.5em;
+    }
+
+    .audience-header:hover {
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        transform: none;
+    }
+
+    .audience-header:hover h2 {
+        transform: none;
+        color: #000;
+        text-shadow: none;
+    }
+
+    .audience-header:hover p {
+        transform: none;
+        color: #333;
+    }
+
+    .audience-header:hover .audience-image img {
+        filter: saturate(0.9) contrast(1.05) brightness(0.95);
     }
 }
 
