@@ -15,36 +15,9 @@
 
 Tap into the **collective knowledge of thousands of developers worldwide** and a proven ecosystem refined over decades - without the price tag or complexity.
 
-<div class="value-props" markdown>
-
-<div class="value-prop" markdown>
-
-**High Performance**
-Lightning-fast speeds that convert browsers into buyers
-
-:material-trending-up:{ .value-icon }
-
-</div>
-
-<div class="value-prop" markdown>
-
-**Modern Architecture**
-Built with PHP 8.3+ and contemporary best practices
-
-:material-star-circle:{ .value-icon }
-
-</div>
-
-<div class="value-prop" markdown>
-
-**Zero Hassles**
-Clean, intuitive, and ready to scale with your business
-
-:material-puzzle:{ .value-icon }
-
-</div>
-
-</div>
+[Get Started with Maho](getting-started.md){.md-button .md-button--primary .cta-button}
+[Try the Demo :material-open-in-new:](https://demo.mahocommerce.com/){.md-button .cta-button target="_blank"}
+[Join Community :fontawesome-brands-discord:](https://discord.gg/dWgcVUFTrS){.md-button .cta-button}
 
 </div>
 
@@ -289,6 +262,7 @@ Full **REST API** with **OAuth authentication**, **SOAP API** for legacy integra
 Whether you're launching your first store, delivering client projects, or building custom solutions - Maho gives you the foundation to succeed.
 
 [Get Started with Maho](getting-started.md){.md-button .md-button--primary .cta-button}
+[Try the Demo :material-open-in-new:](https://demo.mahocommerce.com/){.md-button .cta-button target="_blank"}
 [Join Community :fontawesome-brands-discord:](https://discord.gg/dWgcVUFTrS){.md-button .cta-button}
 
 </div>

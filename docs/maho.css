@@ -111,84 +111,16 @@ article:has(#homeh1) {
     margin-right: auto;
 }
 
-.value-props {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 2em;
-    margin-top: 3em;
+.intro-section > p:has(.md-button) {
+    display: flex;
+    gap: 1em;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 2em;
 }
 
-.value-prop {
-    padding: 2em;
-    border-radius: 16px;
-    background: #fff;
-    border: 1px solid #e8e8e8;
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    position: relative;
-    overflow: hidden;
-    min-height: 180px;
-}
-
-.value-prop:hover {
-    border-color: rgba(173, 180, 26, 0.4);
-    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.06);
-    transform: translateY(-6px);
-    background: linear-gradient(135deg, #fff 0%, rgba(173, 180, 26, 0.02) 100%);
-}
-
-.value-prop p:has(.value-icon) {
-    position: absolute !important;
-    bottom: 0;
-    left: 0;
-    margin: 0 !important;
-    padding: 0 !important;
-    width: 6em;
-    height: 6em;
-    overflow: visible;
-}
-
-.value-prop .value-icon {
-    font-size: 6em !important;
-    color: rgba(173, 180, 26, 0.18) !important;
-    line-height: 1 !important;
-    position: absolute !important;
-    bottom: -0.3em !important;
-    left: -0.3em !important;
-    transition: all 0.4s ease !important;
-    z-index: 0 !important;
-    pointer-events: none !important;
-    display: block !important;
-    margin: 0 !important;
-    padding: 0 !important;
-}
-
-.value-prop .value-icon svg {
-    display: block !important;
-    width: 1em !important;
-    height: 1em !important;
-}
-
-.value-prop:hover .value-icon {
-    color: rgba(173, 180, 26, 0.25) !important;
-    transform: scale(1.05) !important;
-}
-
-.value-prop strong {
-    display: block;
-    font-size: 1.2em;
-    margin-bottom: 0.5em;
-    color: #000;
-    position: relative;
-    z-index: 1;
-    font-weight: 600;
-}
-
-.value-prop p:not(:has(.value-icon)) {
-    position: relative;
-    z-index: 1;
+.intro-section .md-button {
     margin: 0;
-    color: #666;
-    line-height: 1.6;
 }
 
 /* Audience Sections */
@@ -273,17 +205,29 @@ article:has(#homeh1) {
     font-size: 3.2em;
     margin-bottom: 0.5em;
     font-weight: 700;
-    line-height: 1.1;
+    line-height: 1.4;
     color: #000;
     transition: all 0.4s ease;
+    text-shadow:
+        2px 2px 8px rgba(255, 255, 255, 0.9),
+        -2px -2px 8px rgba(255, 255, 255, 0.9),
+        2px -2px 8px rgba(255, 255, 255, 0.9),
+        -2px 2px 8px rgba(255, 255, 255, 0.9),
+        0 0 20px rgba(255, 255, 255, 0.8);
 }
 
 .audience-text p {
     font-size: 1.35em;
-    color: #333;
-    line-height: 1.6;
+    color: #000;
+    line-height: 1.8;
     margin: 0;
     transition: all 0.4s ease;
+    text-shadow:
+        2px 2px 6px rgba(255, 255, 255, 0.95),
+        -2px -2px 6px rgba(255, 255, 255, 0.95),
+        2px -2px 6px rgba(255, 255, 255, 0.95),
+        -2px 2px 6px rgba(255, 255, 255, 0.95),
+        0 0 15px rgba(255, 255, 255, 0.85);
 }
 
 .audience-header:hover h2 {
@@ -513,10 +457,6 @@ article:has(#homeh1) {
         grid-template-columns: 1fr;
     }
 
-    .value-props {
-        grid-template-columns: 1fr;
-    }
-
     .platform-grid {
         grid-template-columns: 1fr;
     }
@@ -536,17 +476,31 @@ article:has(#homeh1) {
     }
 
     .audience-header {
-        min-height: 350px;
-        margin-bottom: 2.5em;
+        min-height: auto;
+        margin-bottom: 3em;
         border-radius: 16px;
+        background: linear-gradient(135deg, rgba(173, 180, 26, 0.08) 0%, rgba(173, 180, 26, 0.02) 100%);
+        border: 2px solid rgba(173, 180, 26, 0.3);
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
     }
 
     .audience-header::after {
-        background: linear-gradient(180deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.85) 100%);
+        display: none;
+    }
+
+    .audience-header::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 4px;
+        border-radius: 16px 16px 0 0;
+        background: linear-gradient(90deg, #ADB41A 0%, #858a11 100%);
     }
 
     .audience-image {
-        max-width: 100%;
+        display: none;
     }
 
     .audience-image::before {
@@ -554,9 +508,9 @@ article:has(#homeh1) {
     }
 
     .audience-text {
-        padding: 2.5em 2em;
+        padding: 3em 2em;
         text-align: center;
-        min-height: 350px;
+        min-height: auto;
         max-width: 100%;
     }
 
