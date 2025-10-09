@@ -13,7 +13,7 @@
 
 **Maho** is a **complete, modern, open-source ecommerce platform built for 2024 and beyond**. This **free platform** takes a battle-tested foundation and brings it into the modern era with PHP 8.3+, contemporary architecture, and zero legacy baggage.
 
-Tap into the **collective knowledge of thousands of developers worldwide** and a proven ecosystem refined over decades - without the price tag or complexity.
+Tap into the **collective knowledge of thousands of developers worldwide** and a proven ecosystem refined over decades, without the price tag or complexity.
 
 [Get Started with Maho](getting-started.md){.md-button .md-button--primary .cta-button}
 [Try the Demo :material-open-in-new:](https://demo.mahocommerce.com/){.md-button .cta-button target="_blank"}
