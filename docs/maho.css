@@ -461,11 +461,9 @@ article:has(#homeh1) {
         grid-template-columns: 1fr;
     }
 
-    .hero-section,
-    .comparison-section,
-    .final-cta {
-        margin-left: -1em;
-        margin-right: -1em;
+    .hero-section, .comparison-section, .final-cta {
+        margin-left: 0;
+        margin-right: 0;
         padding-left: 1em;
         padding-right: 1em;
     }
