@@ -717,3 +717,16 @@ body:has(h1[id=blog]) .md-typeset .tip>summary {
     background-color: #fff;
     color: #000;
 }
+
+.version-badge {
+    display: inline-block;
+    background: var(--md-typeset-a-color);
+    color: white;
+    padding: 3px 10px;
+    border-radius: 4px;
+    font-size: 0.7em;
+    font-weight: 600;
+    margin-left: 10px;
+    vertical-align: text-bottom;
+    white-space: nowrap;
+}

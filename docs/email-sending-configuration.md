@@ -1,6 +1,6 @@
-# Email Sending Configuration
+# Email Sending Configuration <span class="version-badge">v25.3+</span>
 
-Starting from Maho 25.3.0, the platform includes **built-in SMTP support** for reliable email delivery. This modern implementation uses Symfony Mailer to replace legacy email mechanisms, ensuring your store can send transactional emails like order confirmations, password resets, and customer notifications.
+Maho includes **built-in SMTP support** for reliable email delivery. This modern implementation uses Symfony Mailer to replace legacy email mechanisms, ensuring your store can send transactional emails like order confirmations, password resets, and customer notifications.
 
 **No third-party modules required** - SMTP functionality is included in Maho core.
 

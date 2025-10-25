@@ -44,6 +44,29 @@ This is why, at Maho, we decided to maintain internally both the [CLI tool](cli-
 [composer plugin](https://github.com/MahoCommerce/maho-composer-plugin){:target="_blank"} and the
 [PHPStan plugin](https://github.com/MahoCommerce/maho-phpstan-plugin){:target="_blank"}.
 
+### Complete Zend Framework removal
+
+One of the most significant modernization efforts in Maho is the **complete elimination of all Zend Framework 1 dependencies**. The entire codebase has been migrated to modern, actively maintained alternatives:
+
+- **Database layer**: Migrated from `Zend_Db` to **Doctrine DBAL 4.3**
+- **HTTP client**: Replaced `Zend_Http` with **Symfony HttpClient**
+- **Validation**: Migrated from `Zend_Validate` to **Symfony Validator**
+- **Logging**: Replaced `Zend_Log` with **Monolog**
+- **JSON handling**: Using native PHP JSON functions
+- **Date/Time**: Migrated to native PHP DateTime with HTML5 date inputs
+- **PDF generation**: Replaced `Zend_Pdf` with **DomPDF**
+
+This isn't just about removing old code - it's about building on a foundation that's actively maintained, well-documented, and will continue to evolve. No more security vulnerabilities from abandoned 2000s-era libraries.
+
+### Modern frontend libraries
+
+**PrototypeJS has been completely removed** from the codebase and replaced with modern vanilla JavaScript. The admin interface now uses:
+
+- **TipTap editor** for rich text editing (CMS pages, product descriptions, blog posts)
+- **Native HTML5 date inputs** with proper timezone handling
+- **intervention/image** for modern image manipulation
+- **Modern CSS** with CSS variables for theming
+
 ### Legacy backend theme
 
 The legacy theme for the backend (the one we all know from Magento1) is deprecated and not selectable anymore,

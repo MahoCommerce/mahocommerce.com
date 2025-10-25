@@ -1,7 +1,5 @@
 # Category Import/Export
 
-## Overview
-
 The Category Import/Export feature allows you to bulk manage categories in Maho using CSV files. This system supports creating new categories, updating existing ones, deleting categories, and managing multi-store data.
 
 ## GUI Usage

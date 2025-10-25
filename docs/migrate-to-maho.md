@@ -57,3 +57,71 @@ Run it with:
 ```bash
 $ ./maho health-check
 ```
+
+### Zend Framework Removal
+
+One of the most significant changes in Maho is the **complete removal of all Zend Framework 1 components**. If your custom code uses any Zend classes, you'll need to update them:
+
+**Database layer changes:**
+```php
+// OLD - No longer works
+$select = new Zend_Db_Select($adapter);
+$adapter->quoteInto('field = ?', $value);
+
+// NEW - Use Maho\Db classes
+$select = $adapter->select();
+$adapter->quoteInto('field = ?', $value); // Still works via Maho adapter
+```
+
+**HTTP client changes:**
+```php
+// OLD - No longer works
+$client = new Varien_Http_Client($url);
+$client = new Zend_Http_Client($url);
+
+// NEW - Use Symfony HttpClient
+$client = \Symfony\Component\HttpClient\HttpClient::create(['timeout' => 30]);
+$response = $client->request('GET', $url);
+```
+
+**Validation changes:**
+```php
+// OLD - No longer works
+Zend_Validate::is($value, 'EmailAddress');
+
+// NEW - Use Core Helper
+Mage::helper('core')->isValidEmail($value);
+```
+
+**Logging changes:**
+```php
+// OLD - No longer works
+Mage::log($message, Zend_Log::ERR);
+
+// NEW - Use Mage constants
+Mage::log($message, Mage::LOG_ERROR);
+```
+
+**Date handling changes:**
+```php
+// OLD - No longer works
+$date = new Zend_Date();
+Varien_Date::now();
+
+// NEW - Use native PHP DateTime
+$date = new DateTime();
+Mage_Core_Model_Locale::now();
+```
+
+**JSON handling changes:**
+```php
+// OLD - No longer works
+Zend_Json::encode($data);
+Zend_Json::decode($json);
+
+// NEW - Use Core Helper
+Mage::helper('core')->jsonEncode($data);
+Mage::helper('core')->jsonDecode($json);
+```
+
+For complete migration details, see the [CLAUDE.md file](https://github.com/MahoCommerce/maho/blob/main/CLAUDE.md){target=_blank} in the Maho repository which documents all modern alternatives.

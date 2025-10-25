@@ -195,7 +195,7 @@ Comprehensive **API documentation** (REST, SOAP, JSON-RPC), **developer guides**
 
 ### Modern Tech Stack
 
-**PHP 8.3+** with contemporary dependencies: **Symfony cache** subsystem, **libsodium encryption**, **intervention/image** for media, **TipTap editor**. **PrototypeJS completely removed**, replaced with modern JavaScript. Zero legacy cruft.
+**PHP 8.3+** built on industry-standard libraries: **Doctrine DBAL 4.3** for database operations, **Symfony HttpClient** for HTTP requests, **Symfony Validator** for data validation, **Monolog** for logging, and **DomPDF** for documents. **Vanilla JavaScript only** throughout. Contemporary, actively-maintained dependencies you can trust.
 
 :material-language-php:{ .feature-icon }
 
@@ -235,7 +235,7 @@ Full **REST API** with **OAuth authentication**, **SOAP API** for legacy integra
 
 ### Actively Developed
 
-**Regular releases** with substantial improvements - not just patches. Recent updates **replaced Zend components**, **migrated to modern encryption**, **rewrote cache system**, and **removed legacy dependencies**. This is a living, breathing project.
+**Regular releases** with substantial improvements - not just patches. Recent additions: **Doctrine DBAL 4.3** database layer, **native HTML5 date inputs** with timezone support, **Symfony Cache** subsystem, **libsodium encryption**, **customer segmentation**, and **dynamic categories**. Continuous modernization with real features that matter.
 
 :material-update:{ .feature-icon }
 

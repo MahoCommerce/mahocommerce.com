@@ -1,8 +1,4 @@
-# Array Import Adapter
-
-!!! info "Available since Maho 25.11"
-
-## Overview
+# Array Import Adapter <span class="version-badge">v25.11+</span>
 
 The Array Import Adapter extends Maho's native ImportExport functionality by enabling direct imports from PHP arrays, eliminating the need for intermediate files. This feature provides developers with programmatic import capabilities while maintaining full compatibility with Maho's existing ImportExport pipeline.
 

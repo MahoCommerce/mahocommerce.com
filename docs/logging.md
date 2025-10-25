@@ -1,4 +1,4 @@
-# Logging in Maho
+# Logging in Maho <span class="version-badge">v25.9+</span>
 
 Maho uses [Monolog 3.x](https://github.com/Seldaek/monolog) for logging, providing a robust and flexible logging system that maintains backward compatibility with existing `Mage::log()` calls while offering advanced features for modern development.
 

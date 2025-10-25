@@ -79,8 +79,12 @@ nav:
       - CLI tool: cli-tool.md
       - Composer plugin: composer-plugin.md
       - Cron setup: cron.md
+      - Customer Segments: customer-segments.md
+      - Email Automation: email-automation.md
+      - Database layer: database-layer.md
       - Email sending (SMTP): email-sending-configuration.md
       - FrankenPHP: frankenphp.md
+      - Icons library: icons-library.md
       - Import / Export:
         - Array Import Adapter: array-import-adapter.md
         - Categories: category-import-export.md
@@ -88,6 +92,7 @@ nav:
       - Logging: logging.md
       - Override configs: override-configurations.md
       - Robots.txt: robotstxt.md
+      - SVG uploads: svg-support.md
     - Reference:
       - Development guide:
           - Introduction: maho-for-devs/introduction.md
@@ -98,6 +103,8 @@ nav:
           - Setup resources: maho-for-devs/setup-resources.md
           - Advanced ORM: maho-for-devs/advanced-orm.md
           - Data collections: maho-for-devs/data-collections.md
+          - Customer Segments: maho-for-devs/customer-segments.md
+          - Email Automation: maho-for-devs/email-automation.md
       - REST API:
           - Introduction: api/rest/introduction.md
           - Common HTTP status codes: api/rest/common_http_status_codes.md
