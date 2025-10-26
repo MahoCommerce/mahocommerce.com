@@ -1303,16 +1303,3 @@ public function getConditionsSql(
 
 - [Customer Segments User Guide](../customer-segments.md)
 - [Email Automation](email-automation.md)
-- [Models and ORM Basics](models-and-orm.md)
-- [Advanced ORM](advanced-orm.md)
-
-## Support
-
-Questions or found a bug?
-
-- 💬 [Discord Community](https://discord.gg/dWgcVUFTrS)
-- 🐛 [GitHub Issues](https://github.com/MahoCommerce/maho/issues)
-
----
-
-**Build powerful customer segmentation with Maho!** 🎯

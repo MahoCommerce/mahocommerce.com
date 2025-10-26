@@ -879,18 +879,5 @@ public function syncSegmentToCrm(Varien_Event_Observer $observer)
 
 ## Further Reading
 
-- [Email Automation](email-automation.md)
-- [Sales Rules & Promotions](https://mahocommerce.com)
 - [Developer Guide: Customer Segments](maho-for-devs/customer-segments.md)
-
-## Support
-
-Need help with customer segments?
-
-- 💬 [Discord Community](https://discord.gg/dWgcVUFTrS)
-- 🐛 [GitHub Issues](https://github.com/MahoCommerce/maho/issues)
-- 📧 Contact the Maho team
-
----
-
-**Unlock the power of precision targeting with Maho Customer Segments!** 🎯
+- [Email Automation](email-automation.md)
