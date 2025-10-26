@@ -6,26 +6,30 @@ This guide covers the technical implementation of Maho's Customer Segmentation s
 
 Customer Segments in Maho use a rule-based condition system that generates optimized SQL queries for matching customers against complex criteria.
 
+<div align="center">
+
+```mermaid
+graph TD
+    A[Segment Definition] --> B[Condition Tree Builder]
+    B --> C[SQL Query Generator]
+    C --> D[Membership Cache]
+
+    style A fill:#e1f5ff
+    style B fill:#e1f5ff
+    style C fill:#e1f5ff
+    style D fill:#e1f5ff
+
+    classDef default stroke:#333,stroke-width:2px
 ```
-┌─────────────────────────┐
-│   Segment Definition    │  (Conditions, rules, config)
-└───────────┬─────────────┘
-            │
-            ↓
-┌─────────────────────────┐
-│  Condition Tree Builder │  (Nested AND/OR logic)
-└───────────┬─────────────┘
-            │
-            ↓
-┌─────────────────────────┐
-│   SQL Query Generator   │  (Optimized SELECT statements)
-└───────────┬─────────────┘
-            │
-            ↓
-┌─────────────────────────┐
-│  Membership Cache       │  (customer_segment_customer table)
-└─────────────────────────┘
-```
+
+</div>
+
+**Flow**:
+
+1. **Segment Definition** - Conditions, rules, and configuration
+2. **Condition Tree Builder** - Nested AND/OR logic structure
+3. **SQL Query Generator** - Optimized SELECT statements
+4. **Membership Cache** - Materialized in `customer_segment_customer` table
 
 ### Key Components
 
