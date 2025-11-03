@@ -47,6 +47,16 @@ Create **rule-based customer segments** and **dynamic categories** that update *
 
 <div class="feature-card" markdown>
 
+### Email Automation That Works While You Sleep
+
+Build **multi-step email campaigns** that trigger automatically based on customer behavior. Send **personalized coupon codes**, nurture leads, and re-engage customers with **customizable delays** between messages. **GDPR-compliant** tracking ensures you stay on the right side of privacy laws.
+
+:material-email-multiple:{ .feature-icon }
+
+</div>
+
+<div class="feature-card" markdown>
+
 ### Marketing Tools Built Right In
 
 Integrated **blog module** for content marketing and SEO, **Meta Pixel** for conversion tracking, professional **SMTP** email sending, and advanced **payment method restrictions**. Everything you need to market and sell strategically, **no third-party plugins** required.
@@ -89,7 +99,7 @@ Protect your business with **2-factor authentication**, **passkey support** for 
 
 ### Always Getting Better
 
-Regular updates with real improvements like **customer segmentation** (25.9), **dynamic categories** (25.7), **modern content editor** (25.7), and **enhanced security** (25.3). Maho evolves with your business needs.
+Regular updates with real improvements like **email automation** (25.11), **customer segmentation** (25.9), **dynamic categories** (25.7), **modern content editor** (25.7), and **enhanced security** (25.3). Maho evolves with your business needs.
 
 :material-rocket-launch:{ .feature-icon }
 
