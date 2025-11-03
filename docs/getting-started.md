@@ -4,8 +4,7 @@
 
 - PHP 8.3+
 - Apache/Nginx/Caddy/FrankenPHP[^1]
-- MySQL 5.7+ (8.0+ recommended) or MariaDB
-- `patch` command 2.7+ (or `gpatch` on macOS/HomeBrew)
+- MySQL 8.0+ or MariaDB
 
 ## Create your project
 
