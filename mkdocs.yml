@@ -26,6 +26,7 @@ extra_css:
   - maho.css
 extra_javascript:
   - maho.js
+  - https://cdn.jsdelivr.net/npm/party-js@latest/bundle/party.min.js
 
 plugins:
   - search

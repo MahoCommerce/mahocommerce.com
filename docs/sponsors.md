@@ -7,22 +7,24 @@ we can dedicate more time to development, improve our infrastructure, and keep e
 Every sponsor, big or small, plays a crucial role in keeping this project alive and growing.
 By sponsoring us, you're not just supporting our work - you're investing in the future of your ecommerce platform.
 
-[:fontawesome-regular-heart: Become a sponsor :fontawesome-regular-heart:](https://github.com/sponsors/fballiano){target=_blank .md-button .md-button--primary}
+[:fontawesome-regular-heart: Become a sponsor :fontawesome-regular-heart:](https://github.com/sponsors/fballiano){target=_blank .md-button .md-button--primary .affiliate-button}
 
-<h2 style="margin-bottom:1em">Silver sponsors</h2>
+## Sponsors
+
+### Silver sponsors
 
 <div class="sponsorgallery">
     <a href="https://www.deinetuer.de" title="Deine Tür" target="_blank"><img src="/assets/sponsors/deinetuer.svg" alt="Deine Tür"></a>
 </div>
 
-<h2 style="margin-bottom:1em">Bronze sponsors</h2>
+### Bronze sponsors
 
 <div class="sponsorgallery">
     <a href="https://e-gear.dk" title="e-Gear.dk" target="_blank"><img src="/assets/sponsors/egear.png" alt="e-Gear.dk"></a>
     <a href="https://magemega.com" title="MageMega" target="_blank"><img src="/assets/sponsors/magemega.png" alt="MageMega"></a>
 </div>
 
-<h2 style="margin-top:2em;margin-bottom:1em">Technology partners</h2>
+### Technology partners
 
 <div class="sponsorgallery">
     <a href="https://www.bhoost.com" title="Bhoost" target="_blank"><img src="/assets/sponsors/bhoost.png" alt="Bhoost"></a>
@@ -37,3 +39,48 @@ By sponsoring us, you're not just supporting our work - you're investing in the 
             </g><defs><clipPath id="clip0_1117_94"><path fill="#fff" d="M0 0h1739v559H0z"></path></clipPath></defs></svg>
     </a>
 </div>
+
+## Affiliate partnerships
+
+**Support Maho at no cost to you!** When you sign up for services through our affiliate links below, you pay the exact same price, but we receive a small commission that helps fund Maho's development.
+
+**We carefully select affiliate partnerships only with services that we genuinely believe are the best choices for Maho users.** This is a simple way to support the project while getting access to quality services that we trust and recommend.
+
+**Ready to help?** Choose a service below and sign up through our affiliate link:
+
+### <img src="/assets/affiliates/cookiebot.svg" alt="Cookiebot" style="height: 2.5em; vertical-align: middle;"> <span style="position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0,0,0,0); border: 0;">Cookiebot</span>
+
+GDPR and privacy compliance is essential for any e-commerce platform. Cookiebot provides comprehensive cookie consent management, helping you stay compliant with privacy regulations across different regions. It automatically scans and categorizes cookies, generates compliant consent banners, and maintains detailed compliance reports.
+
+<p style="text-align: center; margin: 2em 0;">
+    <a href="https://manage.cookiebot.com/goto/signup?rid=C0KDP" target="_blank" class="md-button affiliate-button" style="padding: 0.8em 1.5em; display: inline-flex; align-items: center; gap: 2em; font-size: 0.9em; line-height: 1.4; background-color: #f5f5f5; color: #333; border: 2px solid #e0e0e0;">
+        <img src="/assets/affiliates/cookiebot.svg" alt="Cookiebot" style="height: 35px; flex-shrink: 0;">
+        <span style="text-align: left;">Sign up with Cookiebot<br><small style="font-size: 0.85em; opacity: 0.8;">and support Maho</small></span>
+    </a>
+</p>
+
+**Already have a Cookiebot account?** You can still support Maho! Send me a message at [info@mahocommerce.com](mailto:info@mahocommerce.com) and I'll send you an affiliate invite.
+
+### <img src="/assets/affiliates/maileroo.svg" alt="Maileroo" style="height: 2.5em; vertical-align: middle;"> <span style="position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0,0,0,0); border: 0;">Maileroo</span>
+
+Reliable email delivery is critical for e-commerce success. Maileroo offers a powerful email delivery service with excellent deliverability rates, perfect for sending order confirmations, shipping notifications, marketing campaigns, and customer communications. With **one of the best free plans available (3,000 emails/month)**, it's perfect for small stores just starting out. The straightforward integration and competitive pricing make it an ideal choice for Maho stores of all sizes.
+
+<p style="text-align: center; margin: 2em 0;">
+    <a href="https://maileroo.com/?r=maho" target="_blank" class="md-button affiliate-button" style="padding: 0.8em 1.5em; display: inline-flex; align-items: center; gap: 2em; font-size: 0.9em; line-height: 1.4; background-color: #f5f5f5; color: #333; border: 2px solid #e0e0e0;">
+        <img src="/assets/affiliates/maileroo.svg" alt="Maileroo" style="height: 35px; flex-shrink: 0;">
+        <span style="text-align: left;">Get started with Maileroo<br><small style="font-size: 0.85em; opacity: 0.8;">and support Maho</small></span>
+    </a>
+</p>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('.affiliate-button').forEach(button => {
+        button.addEventListener('mouseenter', function() {
+            party.confetti(this, {
+                count: party.variation.range(30, 40),
+                speed: party.variation.range(400, 600)
+            });
+        });
+    });
+});
+</script>

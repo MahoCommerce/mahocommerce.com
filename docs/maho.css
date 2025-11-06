@@ -35,7 +35,7 @@ html {font-size: 22px}
     body:has(h1[id=blog]) .md-sidebar {
         visibility: hidden;
     }
-    body:has(#homeh1, #sponsorsh1) .md-sidebar {
+    body:has(#homeh1) .md-sidebar, body:has(#sponsorsh1) .md-sidebar--primary {
         display: none;
     }
     body:has(#homeh1, #sponsorsh1) .md-main__inner {
@@ -727,4 +727,54 @@ body:has(h1[id=blog]) .md-typeset .tip>summary {
     margin-left: 10px;
     vertical-align: text-bottom;
     white-space: nowrap;
+}
+
+/* AFFILIATE BUTTONS */
+.md-button.affiliate-button {
+    position: relative;
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.md-button.affiliate-button::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(173, 180, 26, 0.1);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s ease, height 0.6s ease;
+    z-index: -1;
+}
+
+.md-button.affiliate-button:hover {
+    transform: translateY(-4px) scale(1.02);
+    box-shadow: 0 12px 24px rgba(173, 180, 26, 0.15);
+    border-color: var(--md-typeset-a-color);
+}
+
+.md-button.affiliate-button:hover::before {
+    width: 400px;
+    height: 400px;
+}
+
+.md-button.affiliate-button img {
+    transition: transform 0.4s ease;
+}
+
+.md-button.affiliate-button:hover img {
+    transform: scale(1.1) rotate(5deg);
+}
+
+.md-button.affiliate-button span {
+    position: relative;
+    z-index: 1;
+}
+
+.md-button.affiliate-button:active {
+    transform: translateY(-2px) scale(1.01);
 }
