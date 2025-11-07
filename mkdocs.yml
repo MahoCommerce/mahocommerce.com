@@ -93,6 +93,7 @@ nav:
       - Import / Export:
         - Array Import Adapter: array-import-adapter.md
         - Categories: category-import-export.md
+      - Magic Link Authentication: magic-link-authentication.md
       - Language packs: language-packs.md
       - Logging: logging.md
       - Override configs: override-configurations.md
