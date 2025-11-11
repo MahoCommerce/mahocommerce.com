@@ -86,6 +86,7 @@ nav:
       - Cron setup: cron.md
       - Customer Segments: customer-segments.md
       - Email Automation: email-automation.md
+      - Product Relationship Rules: product-relationship-rules.md
       - Database layer: database-layer.md
       - Email sending (SMTP): email-sending-configuration.md
       - FrankenPHP: frankenphp.md
