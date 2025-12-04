@@ -80,26 +80,26 @@ nav:
     - Differences: differences.md
     - Roadmap: roadmap.md
     - User Guide:
-      - Product Types: user-guide/product-types.md
+      - Product Types: product-types.md
+      - Category Import/Export: category-import-export.md
+      - Product Relationship Rules: product-relationship-rules.md
+      - Customer Segments: customer-segments.md
+      - Email Automation: email-automation.md
     - Technical doc:
       - Autoloaders: autoloaders.md
       - CLI tool: cli-tool.md
       - Composer plugin: composer-plugin.md
       - Cron setup: cron.md
-      - Customer Segments: customer-segments.md
-      - Email Automation: email-automation.md
       - Database layer: database-layer.md
       - Email sending (SMTP): email-sending-configuration.md
       - FrankenPHP: frankenphp.md
       - Icons library: icons-library.md
       - Import / Export:
         - Array Import Adapter: array-import-adapter.md
-        - Categories: category-import-export.md
-      - Magic Link Authentication: magic-link-authentication.md
       - Language packs: language-packs.md
       - Logging: logging.md
+      - Magic Link Authentication: magic-link-authentication.md
       - Override configs: override-configurations.md
-      - Product Relationship Rules: product-relationship-rules.md
       - Robots.txt: robotstxt.md
       - SVG uploads: svg-support.md
     - Reference:
