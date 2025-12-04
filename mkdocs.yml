@@ -79,6 +79,8 @@ nav:
     - Origins: origins.md
     - Differences: differences.md
     - Roadmap: roadmap.md
+    - User Guide:
+      - Product Types: user-guide/product-types.md
     - Technical doc:
       - Autoloaders: autoloaders.md
       - CLI tool: cli-tool.md

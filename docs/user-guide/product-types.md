@@ -1,0 +1,282 @@
+# Product Types
+
+Understanding product types is essential for setting up your catalog effectively. Maho offers six product types, each designed for different selling scenarios. Choosing the right type ensures your customers have the best shopping experience and you can manage inventory efficiently.
+
+## Quick Comparison
+
+| Product Type | Physical Shipping | Has Variations | Sold Individually | Best For |
+|--------------|-------------------|----------------|-------------------|----------|
+| **Simple** | Yes | No | Yes | Single items with no options |
+| **Configurable** | Yes | Yes (one parent) | Via child products | Products with size, color, etc. |
+| **Grouped** | Yes | Yes (collection) | Each item separate | Related items sold together |
+| **Virtual** | No | No | Yes | Services, warranties |
+| **Bundle** | Yes | Yes (customizable) | As a kit | Build-your-own kits |
+| **Downloadable** | No | No | Yes | Digital files, software, media |
+
+## Simple Products
+
+A Simple Product is the most basic and commonly used product type. It represents a single, physical item with no variations.
+
+### When to Use
+
+- The product has no options (no sizes, colors, or other choices)
+- Each variation has its own SKU and should be listed separately
+- You're selling books, single items, or products that don't need customization
+
+### Real-World Examples
+
+- A paperback book
+- A coffee mug with a fixed design
+- A pack of batteries
+- A kitchen utensil
+- A specific model of headphones (e.g., "Sony WH-1000XM5 - Black")
+
+### Key Characteristics
+
+- Has its own SKU and inventory count
+- Can have custom options (like engraving text) but not configurable variations
+- Straightforward to set up and manage
+- Shows directly in search and category listings
+
+---
+
+## Configurable Products
+
+A Configurable Product allows customers to choose from a set of variations (like size and color) before adding to cart. Behind the scenes, each variation is actually a Simple Product linked to a parent Configurable Product.
+
+### When to Use
+
+- The product comes in multiple variations (size, color, material, etc.)
+- You want one product page where customers select their options
+- Each variation has different inventory levels or SKUs
+- You want a cleaner catalog without listing every variation separately
+
+### Real-World Examples
+
+- A t-shirt available in S, M, L, XL and in 5 colors
+- Running shoes in different sizes
+- A laptop with different RAM and storage configurations
+- A phone case available in multiple colors
+- Furniture available in different fabrics or finishes
+
+### Key Characteristics
+
+- Parent product is not sold directly (it's a container)
+- Each variation (child) is a Simple Product with its own SKU and stock
+- Customers select options using dropdowns or swatches on the product page
+- Price can vary by option (e.g., larger size costs more)
+- Only one unit is added to cart at a time
+
+### Configurable vs. Simple with Custom Options
+
+| Scenario | Use Configurable | Use Simple + Custom Options |
+|----------|------------------|----------------------------|
+| Need separate inventory per option | ✅ | ❌ |
+| Price varies significantly by option | ✅ | ✅ (with price modifiers) |
+| Options don't affect inventory | ❌ | ✅ |
+| Example: Shirt sizes | ✅ | ❌ |
+| Example: Gift wrap yes/no | ❌ | ✅ |
+
+---
+
+## Grouped Products
+
+A Grouped Product displays multiple related Simple Products together on one page. Unlike Configurable Products, each item in a group is purchased separately with its own quantity.
+
+### When to Use
+
+- You're selling related items that are often bought together
+- Customers should be able to choose quantities for each item
+- Items can also be sold individually elsewhere in your store
+- You want to showcase a collection without forcing bundle purchase
+
+### Real-World Examples
+
+- A furniture set (table + 4 chairs, each priced separately)
+- A workout equipment collection (dumbbells, mat, resistance bands)
+- A skincare routine set (cleanser, toner, moisturizer)
+- Camera body shown with compatible lenses
+- Wine collection (3 different bottles that complement each other)
+
+### Key Characteristics
+
+- Each item in the group is a Simple Product
+- Customers enter quantity for each item (can choose 0 for items they don't want)
+- Each item has its own price displayed
+- Items can exist in the catalog independently
+- No "parent" inventory - stock is tracked per individual item
+- Great for cross-selling related products
+
+### Grouped vs. Configurable
+
+| Aspect | Grouped | Configurable |
+|--------|---------|--------------|
+| Customer selects | Quantity of each item | One option combination |
+| Added to cart | Multiple line items | Single line item |
+| Items sold separately | Yes, as Simple Products | Child products can be hidden |
+| Use case | "Buy these together" | "Choose your options" |
+
+---
+
+## Virtual Products
+
+A Virtual Product is a non-physical product that doesn't require shipping. It's perfect for services and intangible goods that aren't downloaded files.
+
+### When to Use
+
+- You're selling a service
+- The product doesn't require shipping or download
+- You need to track purchases of intangible items
+- Combining with physical products in the same store
+
+### Real-World Examples
+
+- Extended warranty or insurance
+- Installation service
+- Online consultation or coaching session
+- Event tickets
+- Gift cards (simple implementation)
+- Donation options
+
+### Key Characteristics
+
+- No weight or shipping dimensions
+- Skips shipping step in checkout (if cart contains only virtual products)
+- Can still require billing address
+- Has inventory management (if you limit quantity, like event seats)
+- Often used alongside physical products (add warranty to electronics)
+
+---
+
+## Bundle Products
+
+A Bundle Product lets customers build their own product by choosing from a set of options. Think of it as "build your own kit" where some choices may be required and others optional.
+
+### When to Use
+
+- Customers should customize what's included in a package
+- You want to offer a discount for buying items together
+- Creating build-your-own or pick-and-choose products
+- Offering tiered packages with different component options
+
+### Real-World Examples
+
+- Build-your-own computer (choose processor, RAM, storage, etc.)
+- Custom gift basket (pick chocolates, wine, and accessories)
+- Meal kit (choose protein, sides, and sauce)
+- Camera kit (body + choice of lens + optional accessories)
+- Customizable jewelry set (necklace + choice of pendant + chain length)
+- Software bundle (base product + optional add-ons)
+
+### Key Characteristics
+
+- Contains "bundle options" - groups of products to choose from
+- Options can be required or optional
+- Can allow single or multiple selections per option group
+- Pricing can be fixed or calculated from components ("dynamic pricing")
+- Inventory can track individual components or the bundle itself
+- Components are typically Simple or Virtual products
+
+### Bundle Options Types
+
+| Option Type | Description | Example |
+|-------------|-------------|---------|
+| **Drop-down** | Select one from a list | Choose your processor |
+| **Radio Buttons** | Select one, displayed as buttons | Choose your size (S/M/L) |
+| **Checkbox** | Select multiple | Add accessories (can pick several) |
+| **Multi-Select** | Select multiple from dropdown | Choose included games |
+
+### Bundle Pricing Options
+
+- **Fixed Price**: Bundle has one set price regardless of selections
+- **Dynamic Price**: Price calculated from selected components (allows showing "save X%")
+
+---
+
+## Downloadable Products
+
+A Downloadable Product provides customers with files to download after purchase. It combines the storefront experience of physical products with automatic digital delivery.
+
+### When to Use
+
+- Selling digital files (software, music, ebooks, etc.)
+- Customers should receive files immediately after payment
+- You need to control download access (limits, expiration)
+- Combining digital and physical products in one store
+
+### Real-World Examples
+
+- eBooks or PDF guides
+- Software and applications
+- Music albums or individual tracks
+- Stock photos or design assets
+- Video courses or tutorials
+- Printable artwork or templates
+- Fonts or icon packs
+
+### Key Characteristics
+
+- Attach multiple files to a single product (links)
+- Provide free samples before purchase
+- Set download limits (max number of downloads)
+- Set link expiration (days after purchase)
+- Customers access downloads from their account
+- No shipping required (skips shipping in checkout)
+- Can combine with physical shipping if needed (e.g., CD + digital download)
+
+### Download Links vs. Samples
+
+| Type | Purpose | Access |
+|------|---------|--------|
+| **Links** | The purchased content | After payment only |
+| **Samples** | Preview content | Before purchase (free) |
+
+**Example**: For an eBook, you might offer Chapter 1 as a free sample and the full book as the purchasable download link.
+
+---
+
+## Choosing the Right Product Type
+
+Use this decision guide to select the appropriate product type:
+
+### Start Here
+
+**Is your product physical (requires shipping)?**
+
+- **No** → Is it a downloadable file?
+  - **Yes** → Use **Downloadable**
+  - **No** → Use **Virtual**
+- **Yes** → Continue below
+
+**Does the customer choose from variations (size, color, etc.)?**
+
+- **No** → Use **Simple**
+- **Yes** → Continue below
+
+**How are variations purchased?**
+
+- **One at a time** (customer picks options, adds one item) → Use **Configurable**
+- **Multiple items with quantities** (customer picks how many of each) → Use **Grouped**
+- **Build a custom kit** (customer picks components from option groups) → Use **Bundle**
+
+### Common Scenarios
+
+| Scenario | Recommended Type |
+|----------|------------------|
+| Single item, no options | Simple |
+| Shirt with size/color dropdowns | Configurable |
+| Living room furniture set | Grouped |
+| Extended warranty add-on | Virtual |
+| Build-your-own PC | Bundle |
+| PDF course or eBook | Downloadable |
+| Service appointment | Virtual |
+| Gift box with customer-selected items | Bundle |
+| Album available in CD + digital | Simple (CD) + Downloadable, or Bundle |
+
+### Combining Product Types
+
+Some scenarios work best with multiple product types:
+
+- **Physical + Warranty**: Simple/Configurable product with Virtual warranty as a related product
+- **Physical + Digital**: Bundle with a Simple product and Downloadable component
+- **Service + Materials**: Grouped product with Virtual service and Simple physical items
