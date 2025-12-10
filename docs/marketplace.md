@@ -362,6 +362,9 @@ Discover and install powerful modules to enhance your Maho store. All modules ar
         <p class="app-description">Accept credit cards, PayPal, Apple Pay, and Google Pay with Braintree. Features 3D Secure support, vault storage, and comprehensive payment options.</p>
         <div class="app-footer">
             <div class="app-actions">
+                <button class="app-button app-button-primary" onclick="showInstallModal('mahocommerce/module-braintree')">
+                    ↓ Install
+                </button>
                 <a href="https://github.com/MahoCommerce/module-braintree" class="app-button app-button-primary" target="_blank">
                     View Details →
                 </a>
