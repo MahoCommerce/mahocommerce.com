@@ -32,14 +32,6 @@ One nice thing is that it will tell you which classes conflict, and which one it
 
 It should definitely speed things up in production, you should enable it.
 
-## Zend overrides
-
-There are now no problems in overriding Zend, or any other class in `lib`.
-Both myzend/override and zend/override work.
-
-You also don't have to explicitly define PSR-0 classes in your composer.json or delete the vendor folder.
-Just put the file in your module's or starter kit's lib folder and it will work.
-
 ## Breaking changes
 
 1. Class names are case-sensitive now, i.e. mage_core_model_abstract doesn't work anymore.
