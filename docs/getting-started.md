@@ -4,7 +4,7 @@
 
 - PHP 8.3+
 - Apache/Nginx/Caddy/FrankenPHP[^1]
-- MySQL 8.0+ or MariaDB
+- MySQL 8.0+ / MariaDB or PostgreSQL 14+ (beta, since v26.1)
 
 ## Create your project
 
@@ -72,6 +72,7 @@ Options:
       --locale=LOCALE                                          Locale
       --timezone=TIMEZONE                                      Timezone
       --default_currency=DEFAULT_CURRENCY                      Default currency
+      --db_engine[=DB_ENGINE]                                  Database engine: mysql or pgsql [default: "mysql"]
       --db_host=DB_HOST                                        You can specify server port (localhost:3307) or UNIX socket (/var/run/mysqld/mysqld.sock)
       --db_name=DB_NAME                                        Database name
       --db_user=DB_USER                                        Database username

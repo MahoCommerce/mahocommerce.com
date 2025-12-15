@@ -205,7 +205,7 @@ Comprehensive **API documentation** (REST, SOAP, JSON-RPC), **developer guides**
 
 ### Modern Tech Stack
 
-**PHP 8.3+** built on industry-standard libraries: **Doctrine DBAL 4.3** for database operations, **Symfony HttpClient** for HTTP requests, **Symfony Validator** for data validation, **Monolog** for logging, and **DomPDF** for documents. **Vanilla JavaScript only** throughout. Contemporary, actively-maintained dependencies you can trust.
+**PHP 8.3+** built on industry-standard libraries: **Doctrine DBAL 4.4** for database operations, **Symfony HttpClient** for HTTP requests, **Symfony Validator** for data validation, **Monolog** for logging, and **DomPDF** for documents. **Vanilla JavaScript only** throughout. Contemporary, actively-maintained dependencies you can trust.
 
 :material-language-php:{ .feature-icon }
 
@@ -243,9 +243,19 @@ Full **REST API** with **OAuth authentication**, **SOAP API** for legacy integra
 
 <div class="feature-card" markdown>
 
+### Multi-Database Support
+
+Choose the database that fits your infrastructure. **MySQL**, **MariaDB**, and **PostgreSQL** are all supported through **Doctrine DBAL**, with automatic SQL dialect handling. Your code works across all engines without modification.
+
+:material-database:{ .feature-icon }
+
+</div>
+
+<div class="feature-card" markdown>
+
 ### Actively Developed
 
-**Regular releases** with substantial improvements - not just patches. Recent additions: **Doctrine DBAL 4.3** database layer, **native HTML5 date inputs** with timezone support, **Symfony Cache** subsystem, **libsodium encryption**, **customer segmentation**, and **dynamic categories**. Continuous modernization with real features that matter.
+**Regular releases** with substantial improvements - not just patches. Recent additions: **Doctrine DBAL 4.4** database layer, **native HTML5 date inputs** with timezone support, **Symfony Cache** subsystem, **libsodium encryption**, **customer segmentation**, and **dynamic categories**. Continuous modernization with real features that matter.
 
 :material-update:{ .feature-icon }
 

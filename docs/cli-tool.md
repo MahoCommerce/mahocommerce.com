@@ -45,7 +45,7 @@ Available commands:
   customer:delete               Delete customers
   customer:list                 List all customers
  db
-  db:connect                    Opens the MySQL command-line interface using the database credentials from your local.xml file
+  db:connect                    Opens the database command-line interface using the credentials from your local.xml file
  email
   email:test:send               Send a test email
  index

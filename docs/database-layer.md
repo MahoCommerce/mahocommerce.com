@@ -1,18 +1,33 @@
 # Database Layer in Maho <span class="version-badge">v25.11+</span>
 
-Maho uses [Doctrine DBAL 4.3](https://www.doctrine-project.org/projects/dbal.html){target=_blank} for all database operations, providing a modern, actively maintained foundation while maintaining 100% backward compatibility with existing code.
+Maho uses [Doctrine DBAL 4.4](https://www.doctrine-project.org/projects/dbal.html){target=_blank} for all database operations, providing a modern, actively maintained foundation while maintaining 100% backward compatibility with existing code.
 
 ## Overview
 
 The database layer in Maho provides:
 
 - **100% backward compatibility** with existing Zend_Db code
-- **Modern foundation** built on Doctrine DBAL 4.3
+- **Modern foundation** built on Doctrine DBAL 4.4
+- **Multi-database support** for MySQL/MariaDB and PostgreSQL (beta)
 - **Type-safe queries** with proper parameter binding
 - **Advanced query methods** for complex operations
 - **Nested transaction support** with automatic level tracking
 - **DDL cache** for performance-critical schema introspection
 - **Debug and profiling** tools for development
+
+## Supported Database Engines <span class="version-badge">v26.1+</span>
+
+Maho supports the following database engines:
+
+| Engine | Status | Notes |
+|--------|--------|-------|
+| MySQL 8.0+ | Stable | Fully supported, recommended for production |
+| MariaDB | Stable | Fully supported, recommended for production |
+| PostgreSQL 14+ | Beta | Experimental support, use with caution in production |
+
+To use PostgreSQL, specify `--db_engine pgsql` during installation (see [Getting Started](getting-started.md)).
+
+The database layer automatically handles SQL dialect differences between engines. For example, string concatenation uses `CONCAT()` in MySQL but the `||` operator in PostgreSQL - Maho's SQL helper methods abstract these differences so your code works on both engines.
 
 ## Why Doctrine DBAL?
 

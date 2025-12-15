@@ -48,7 +48,7 @@ This is why, at Maho, we decided to maintain internally both the [CLI tool](cli-
 
 One of the most significant modernization efforts in Maho is the **complete elimination of all Zend Framework 1 dependencies**. The entire codebase has been migrated to modern, actively maintained alternatives:
 
-- **Database layer**: Migrated from `Zend_Db` to **Doctrine DBAL 4.3**
+- **Database layer**: Migrated from `Zend_Db` to **Doctrine DBAL 4.4**
 - **HTTP client**: Replaced `Zend_Http` with **Symfony HttpClient**
 - **Validation**: Migrated from `Zend_Validate` to **Symfony Validator**
 - **Logging**: Replaced `Zend_Log` with **Monolog**
