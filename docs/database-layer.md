@@ -8,7 +8,7 @@ The database layer in Maho provides:
 
 - **100% backward compatibility** with existing Zend_Db code
 - **Modern foundation** built on Doctrine DBAL 4.4
-- **Multi-database support** for MySQL/MariaDB and PostgreSQL (beta)
+- **Multi-database support** for MySQL/MariaDB, PostgreSQL (beta), and SQLite (beta)
 - **Type-safe queries** with proper parameter binding
 - **Advanced query methods** for complex operations
 - **Nested transaction support** with automatic level tracking
@@ -24,10 +24,13 @@ Maho supports the following database engines:
 | MySQL 8.0+ | Stable | Fully supported, recommended for production |
 | MariaDB | Stable | Fully supported, recommended for production |
 | PostgreSQL 14+ | Beta | Experimental support, use with caution in production |
+| SQLite | Beta | Lightweight option for development/testing |
 
 To use PostgreSQL, specify `--db_engine pgsql` during installation (see [Getting Started](getting-started.md)).
 
-The database layer automatically handles SQL dialect differences between engines. For example, string concatenation uses `CONCAT()` in MySQL but the `||` operator in PostgreSQL - Maho's SQL helper methods abstract these differences so your code works on both engines.
+To use SQLite, specify `--db_engine sqlite` during installation. SQLite stores data in a single file, making it ideal for development, testing, or small deployments. The adapter includes SQLite-specific optimizations like WAL mode and memory-mapped I/O.
+
+The database layer automatically handles SQL dialect differences between engines. For example, string concatenation uses `CONCAT()` in MySQL but the `||` operator in PostgreSQL/SQLite - Maho's SQL helper methods abstract these differences so your code works on all engines.
 
 ## Why Doctrine DBAL?
 

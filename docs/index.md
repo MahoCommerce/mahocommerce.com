@@ -245,7 +245,7 @@ Full **REST API** with **OAuth authentication**, **SOAP API** for legacy integra
 
 ### Multi-Database Support
 
-Choose the database that fits your infrastructure. **MySQL**, **MariaDB**, and **PostgreSQL** are all supported through **Doctrine DBAL**, with automatic SQL dialect handling. Your code works across all engines without modification.
+Choose the database that fits your infrastructure. **MySQL**, **MariaDB**, **PostgreSQL**, and **SQLite** are all supported through **Doctrine DBAL**, with automatic SQL dialect handling. Your code works across all engines without modification.
 
 :material-database:{ .feature-icon }
 
