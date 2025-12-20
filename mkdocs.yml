@@ -99,6 +99,7 @@ nav:
       - Language packs: language-packs.md
       - Logging: logging.md
       - Magic Link Authentication: magic-link-authentication.md
+      - Maintenance mode: maintenance-mode.md
       - Override configs: override-configurations.md
       - Robots.txt: robotstxt.md
       - SVG uploads: svg-support.md
