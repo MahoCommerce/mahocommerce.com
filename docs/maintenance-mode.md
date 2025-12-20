@@ -45,7 +45,7 @@ To allow multiple IPs, separate them with commas:
 ./maho maintenance:disable
 ```
 
-This removes the `maintenance.flag` file and any IP whitelist, making the store accessible to all visitors again.
+This removes the `maintenance.flag` file and any IP allowlist, making the store accessible to all visitors again.
 
 ### Check Status
 
@@ -61,7 +61,7 @@ When maintenance mode is enabled:
 
 1. A `maintenance.flag` file is created in the project root
 2. If IPs are specified, a `maintenance.ip` file is created with the allowed addresses
-3. All requests (except from whitelisted IPs) receive a 503 Service Unavailable response
+3. All requests (except from allowlisted IPs) receive a 503 Service Unavailable response
 4. The response includes `Retry-After` and `X-Robots-Tag: noindex` headers to prevent search engine issues
 
 ## Customizing the Maintenance Page
@@ -178,7 +178,7 @@ If you prefer not to use the CLI, you can manage maintenance mode manually:
 # Enable
 touch maintenance.flag
 
-# Enable with IP whitelist
+# Enable with IP allowlist
 touch maintenance.flag
 echo "192.168.1.100" > maintenance.ip
 
