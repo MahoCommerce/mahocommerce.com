@@ -85,6 +85,7 @@ nav:
       - Product Relationship Rules: product-relationship-rules.md
       - Customer Segments: customer-segments.md
       - Email Automation: email-automation.md
+      - Gift Cards: gift-cards.md
     - Technical doc:
       - Autoloaders: autoloaders.md
       - CLI tool: cli-tool.md
@@ -116,6 +117,7 @@ nav:
           - Data collections: maho-for-devs/data-collections.md
           - Customer Segments: maho-for-devs/customer-segments.md
           - Email Automation: maho-for-devs/email-automation.md
+          - Gift Cards: maho-for-devs/gift-cards.md
       - REST API:
           - Introduction: api/rest/introduction.md
           - Common HTTP status codes: api/rest/common_http_status_codes.md
