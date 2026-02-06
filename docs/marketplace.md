@@ -225,6 +225,7 @@ Discover and install powerful modules to enhance your Maho store. All modules ar
     <button class="category-btn" onclick="filterApps('security')">Security</button>
     <button class="category-btn" onclick="filterApps('maintenance')">Maintenance</button>
     <button class="category-btn" onclick="filterApps('payment')">Payment</button>
+    <button class="category-btn" onclick="filterApps('localization')">Localization</button>
 </div>
 
 <div class="app-grid">
@@ -445,6 +446,23 @@ Discover and install powerful modules to enhance your Maho store. All modules ar
         <div class="app-footer">
             <div class="app-actions">
                 <a href="https://github.com/stripe-archive/stripe-magento1-releases" class="app-button app-button-primary" target="_blank">
+                    View Details →
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Brazilian Market -->
+    <div class="app-card" data-category="localization">
+        <span class="app-category">Localization</span>
+        <h3 class="app-title">Brazilian Market</h3>
+        <p class="app-description">Localize your Maho store for Brazil with address field customization, CPF/CNPJ validation with input masking, and automatic formatting for phone numbers and documents.</p>
+        <div class="app-footer">
+            <div class="app-actions">
+                <button class="app-button app-button-primary" onclick="showInstallModal('ricardomartins/brazilian-market-maho')">
+                    ↓ Install
+                </button>
+                <a href="https://github.com/r-martins/BrazilianMarket-Maho" class="app-button app-button-primary" target="_blank">
                     View Details →
                 </a>
             </div>
