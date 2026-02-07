@@ -37,71 +37,71 @@ Tap into the **collective knowledge of thousands of developers worldwide** and a
 
 <div class="feature-card" markdown>
 
+:material-auto-fix:{ .feature-icon }
+
 ### Smart Automation That Saves Time
 
 Create **rule-based customer segments** and **dynamic categories** that update **automatically**. Target the right customers with personalized campaigns while products organize themselves based on rules you define. Spend less time on manual work, more time growing.
 
-:material-auto-fix:{ .feature-icon }
-
 </div>
 
 <div class="feature-card" markdown>
+
+:material-email-multiple:{ .feature-icon }
 
 ### Email Automation That Works While You Sleep
 
 Build **multi-step email campaigns** that trigger automatically based on customer behavior. Send **personalized coupon codes**, nurture leads, and re-engage customers with **customizable delays** between messages. **GDPR-compliant** tracking ensures you stay on the right side of privacy laws.
 
-:material-email-multiple:{ .feature-icon }
-
 </div>
 
 <div class="feature-card" markdown>
+
+:material-bullhorn:{ .feature-icon }
 
 ### Marketing Tools Built Right In
 
 Integrated **blog module** for content marketing and SEO, **Meta Pixel** for conversion tracking, professional **SMTP** email sending, and advanced **payment method restrictions**. Everything you need to market and sell strategically, **no third-party plugins** required.
 
-:material-bullhorn:{ .feature-icon }
-
 </div>
 
 <div class="feature-card" markdown>
+
+:material-shopping:{ .feature-icon }
 
 ### Checkout That Converts
 
 Modern **minimal checkout layout**, **offcanvas navigation**, and blazing-fast **autocomplete search** create a smooth shopping experience. Fast page loads mean happy customers and **better conversion rates**.
 
-:material-shopping:{ .feature-icon }
-
 </div>
 
 <div class="feature-card" markdown>
+
+:material-image-edit:{ .feature-icon }
 
 ### Professional Content Creation
 
 **Edit and optimize product images** directly in the **media library**. Create beautiful product descriptions, CMS pages, and **engaging slideshows** with the modern **TipTap editor** - intuitive, powerful, and **no external tools** needed.
 
-:material-image-edit:{ .feature-icon }
-
 </div>
 
 <div class="feature-card" markdown>
+
+:material-shield-check:{ .feature-icon }
 
 ### Enterprise-Level Security
 
 Protect your business with **2-factor authentication**, **passkey support** for backend login, **admin activity logging**, **GDPR-compliant captcha**, and modern **libsodium encryption**. Sleep well knowing your store is secure.
 
-:material-shield-check:{ .feature-icon }
-
 </div>
 
 <div class="feature-card" markdown>
 
+:material-rocket-launch:{ .feature-icon }
+
 ### Always Getting Better
 
 Regular updates with real improvements like **email automation** (25.11), **customer segmentation** (25.9), **dynamic categories** (25.7), **modern content editor** (25.7), and **enhanced security** (25.3). Maho evolves with your business needs.
-
-:material-rocket-launch:{ .feature-icon }
 
 </div>
 
@@ -125,61 +125,61 @@ Regular updates with real improvements like **email automation** (25.11), **cust
 
 <div class="feature-card" markdown>
 
+:material-monitor-dashboard:{ .feature-icon }
+
 ### Client-Ready Platform
 
 Clean, modern **admin interface** with professional features clients expect: **media management**, **content editor**, **activity logs**, and comprehensive reporting. Built-in **blog and marketing tools** mean you deliver more value out of the box.
 
-:material-monitor-dashboard:{ .feature-icon }
-
 </div>
 
 <div class="feature-card" markdown>
+
+:material-rocket:{ .feature-icon }
 
 ### Fast Project Deployment
 
 **Docker support** for consistent environments, **environment variable configuration** for easy setup, and modern development tools. Get client projects live **faster with less friction**.
 
-:material-rocket:{ .feature-icon }
-
 </div>
 
 <div class="feature-card" markdown>
+
+:material-cash-multiple:{ .feature-icon }
 
 ### Enterprise Features, Zero Licensing
 
 **Multi-store capabilities**, advanced permissions, comprehensive **APIs** (REST, SOAP, JSON-RPC), and all the features enterprise clients demand. **No per-client licensing fees**, **no SaaS subscriptions** - pure profit margin.
 
-:material-cash-multiple:{ .feature-icon }
-
 </div>
 
 <div class="feature-card" markdown>
+
+:material-account-group:{ .feature-icon }
 
 ### Proven Ecosystem
 
 Tap into **decades of refinement** and **thousands of developers** worldwide. Extensive documentation, active community, and a mature **extension ecosystem** mean you're never stuck. Solutions exist for virtually any client requirement.
 
-:material-account-group:{ .feature-icon }
-
 </div>
 
 <div class="feature-card" markdown>
+
+:material-book-open-page-variant:{ .feature-icon }
 
 ### Complete Documentation
 
 Comprehensive **API documentation** (REST, SOAP, JSON-RPC), **developer guides** covering MVC, ORM, and architecture, plus detailed technical docs. Onboard new team members quickly and reduce training costs.
 
-:material-book-open-page-variant:{ .feature-icon }
-
 </div>
 
 <div class="feature-card" markdown>
 
+:material-server:{ .feature-icon }
+
 ### On-Premises Control
 
 **Self-hosted** means your clients **own their data** and you control the infrastructure. **No vendor lock-in**, **no platform fees** eating margins, **no forced migrations**. Perfect for clients with compliance requirements.
-
-:material-server:{ .feature-icon }
 
 </div>
 
@@ -203,71 +203,71 @@ Comprehensive **API documentation** (REST, SOAP, JSON-RPC), **developer guides**
 
 <div class="feature-card" markdown>
 
+:material-language-php:{ .feature-icon }
+
 ### Modern Tech Stack
 
 **PHP 8.3+** built on industry-standard libraries: **Doctrine DBAL 4.4** for database operations, **Symfony HttpClient** for HTTP requests, **Symfony Validator** for data validation, **Monolog** for logging, and **DomPDF** for documents. **Vanilla JavaScript only** throughout. Contemporary, actively-maintained dependencies you can trust.
 
-:material-language-php:{ .feature-icon }
-
 </div>
 
 <div class="feature-card" markdown>
+
+:material-layers:{ .feature-icon }
 
 ### Clean Architecture
 
 Well-designed **MVC pattern**, powerful **ORM with collections**, **event-driven system**, and **modular architecture**. Code that makes sense, patterns you recognize, structure you can extend confidently.
 
-:material-layers:{ .feature-icon }
-
 </div>
 
 <div class="feature-card" markdown>
+
+:material-api:{ .feature-icon }
 
 ### Comprehensive APIs
 
 Full **REST API** with **OAuth authentication**, **SOAP API** for legacy integrations, and **JSON-RPC** for modern applications. Detailed permission settings, role configuration, and extensive attribute control.
 
-:material-api:{ .feature-icon }
-
 </div>
 
 <div class="feature-card" markdown>
+
+:material-tools:{ .feature-icon }
 
 ### Great Developer Tools
 
 **CLI tool** for common tasks, **Composer plugin** for module management, **5800+ icon library**, **CSS variables** for theming, and **environment-based configuration**. Tools that actually improve your workflow.
 
-:material-tools:{ .feature-icon }
-
 </div>
 
 <div class="feature-card" markdown>
+
+:material-database:{ .feature-icon }
 
 ### Multi-Database Support
 
 Choose the database that fits your infrastructure. **MySQL**, **MariaDB**, **PostgreSQL**, and **SQLite** are all supported through **Doctrine DBAL**, with automatic SQL dialect handling. Your code works across all engines without modification.
 
-:material-database:{ .feature-icon }
-
 </div>
 
 <div class="feature-card" markdown>
+
+:material-update:{ .feature-icon }
 
 ### Actively Developed
 
 **Regular releases** with substantial improvements - not just patches. Recent additions: **Doctrine DBAL 4.4** database layer, **native HTML5 date inputs** with timezone support, **Symfony Cache** subsystem, **libsodium encryption**, **customer segmentation**, and **dynamic categories**. Continuous modernization with real features that matter.
 
-:material-update:{ .feature-icon }
-
 </div>
 
 <div class="feature-card" markdown>
 
+:material-puzzle-outline:{ .feature-icon }
+
 ### Extensible by Design
 
 **Module system** for clean extensions, **setup resources** for database migrations, **event observers** for behavior modification, **layout XML** for frontend customization. Build what you need without fighting the framework.
-
-:material-puzzle-outline:{ .feature-icon }
 
 </div>
 
