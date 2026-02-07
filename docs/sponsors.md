@@ -48,7 +48,7 @@ By sponsoring us, you're not just supporting our work - you're investing in the 
 
 **Ready to help?** Choose a service below and sign up through our affiliate link:
 
-### <img src="/assets/affiliates/cookiebot.svg" alt="Cookiebot" style="height: 2.5em; vertical-align: middle;"> <span style="position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0,0,0,0); border: 0;">Cookiebot</span>
+### <img src="/assets/affiliates/cookiebot.svg" alt="Cookiebot" style="height: 2.5em; vertical-align: middle;"> <span style="position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0,0,0,0); border: 0;">Cookiebot</span> { #affiliate-cookiebot }
 
 GDPR and privacy compliance is essential for any e-commerce platform. Cookiebot provides comprehensive cookie consent management, helping you stay compliant with privacy regulations across different regions. It automatically scans and categorizes cookies, generates compliant consent banners, and maintains detailed compliance reports.
 
