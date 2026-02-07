@@ -698,7 +698,6 @@ article:has(#homeh1)::before {
     text-shadow: none;
 }
 
-
 /* --- Agencies: Flipped Layout (image left, text right) --- */
 .agencies .audience-image {
     right: auto;
@@ -861,7 +860,7 @@ article:has(#homeh1)::before {
     border-color: rgba(173, 180, 26, 0.35);
     box-shadow: var(--maho-shadow-lg);
     transform: translateY(-4px);
-    background: linear-gradient(160deg, var(--maho-surface) 0%, rgba(173, 180, 26, 0.03) 100%);
+    background: #ffffff;
 }
 
 
@@ -1377,9 +1376,8 @@ body:has(h1[id=blog]) .md-post--excerpt .md-post__header h2 a:hover {
 
 /* Blog date/meta styling */
 body:has(h1[id=blog]) .md-post__meta {
-    font-size: 0.8em;
+    font-size: 0.65rem;
     color: var(--maho-text-tertiary);
-    font-weight: 500;
 }
 
 
