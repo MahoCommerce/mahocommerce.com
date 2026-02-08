@@ -283,27 +283,20 @@ For full details, see the [Gift Cards guide](gift-cards.md) and the [Gift Cards 
 
 Use this decision guide to select the appropriate product type:
 
-### Start Here
-
-**Is your product physical (requires shipping)?**
-
-- **No** → Is it a gift card?
-  - **Yes** → Use **Gift Card**
-  - **No** → Is it a downloadable file?
-      - **Yes** → Use **Downloadable**
-      - **No** → Use **Virtual**
-- **Yes** → Continue below
-
-**Does the customer choose from variations (size, color, etc.)?**
-
-- **No** → Use **Simple**
-- **Yes** → Continue below
-
-**How are variations purchased?**
-
-- **One at a time** (customer picks options, adds one item) → Use **Configurable**
-- **Multiple items with quantities** (customer picks how many of each) → Use **Grouped**
-- **Build a custom kit** (customer picks components from option groups) → Use **Bundle**
+``` mermaid
+flowchart TD
+    A{Physical product?} -->|No| B{Gift card?}
+    B -->|Yes| GC([Gift Card])
+    B -->|No| C{Downloadable file?}
+    C -->|Yes| DL([Downloadable])
+    C -->|No| VI([Virtual])
+    A -->|Yes| D{Has variations?}
+    D -->|No| SI([Simple])
+    D -->|Yes| E{How are variations purchased?}
+    E -->|One at a time| CO([Configurable])
+    E -->|Multiple items\nwith quantities| GR([Grouped])
+    E -->|Build a custom kit| BU([Bundle])
+```
 
 ### Common Scenarios
 
