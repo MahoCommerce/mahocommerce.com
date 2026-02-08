@@ -1,6 +1,6 @@
 # Product Types
 
-Understanding product types is essential for setting up your catalog effectively. Maho offers six product types, each designed for different selling scenarios. Choosing the right type ensures your customers have the best shopping experience and you can manage inventory efficiently.
+Understanding product types is essential for setting up your catalog effectively. Maho offers seven product types, each designed for different selling scenarios. Choosing the right type ensures your customers have the best shopping experience and you can manage inventory efficiently.
 
 ## Quick Comparison
 
@@ -12,6 +12,7 @@ Understanding product types is essential for setting up your catalog effectively
 | **Virtual** | No | No | Yes | Services, warranties |
 | **Bundle** | Yes | Yes (customizable) | As a kit | Build-your-own kits |
 | **Downloadable** | No | No | Yes | Digital files, software, media |
+| **Gift Card** | No | No | Yes | Gift cards with email delivery |
 
 ## Simple Products
 
@@ -135,7 +136,6 @@ A Virtual Product is a non-physical product that doesn't require shipping. It's 
 - Installation service
 - Online consultation or coaching session
 - Event tickets
-- Gift cards (simple implementation)
 - Donation options
 
 ### Key Characteristics
@@ -235,6 +235,50 @@ A Downloadable Product provides customers with files to download after purchase.
 
 ---
 
+## Gift Card Products <span class="version-badge">v26.1+</span>
+
+A Gift Card Product lets customers purchase a gift card that can be sent to a recipient via email and redeemed at checkout. Gift cards are a dedicated product type with built-in support for email delivery, scheduled sending, balance tracking, and flexible redemption.
+
+### When to Use
+
+- You want to sell gift cards with fixed or custom amounts
+- Recipients should receive a redeemable code via email
+- You need balance tracking, partial redemption, and expiration handling
+- You want full integration with orders, invoices, and credit memos
+
+### Real-World Examples
+
+- Birthday or holiday gift cards in preset amounts ($25, $50, $100)
+- Custom-amount gift cards for corporate gifting
+- Promotional gift cards for marketing campaigns
+- Admin-created gift cards for customer service situations
+
+### Key Characteristics
+
+- Virtual product (no shipping required, delivered via email)
+- Supports fixed amounts, custom amounts, or both
+- Generates unique redeemable codes upon invoice payment
+- Customers can schedule delivery for a future date
+- Personalized messages and optional QR codes/barcodes
+- Partial redemption with balance carried forward
+- Multiple gift cards can be combined on a single order
+- Full audit trail with balance history
+
+### Gift Card vs. Virtual Product
+
+| Scenario | Use Gift Card | Use Virtual |
+|----------|---------------|-------------|
+| Redeemable gift card with balance | ✅ | ❌ |
+| Code-based redemption at checkout | ✅ | ❌ |
+| Email delivery with personalization | ✅ | ❌ |
+| Balance tracking and partial use | ✅ | ❌ |
+| Service or warranty (no redemption) | ❌ | ✅ |
+| Event ticket or appointment | ❌ | ✅ |
+
+For full details, see the [Gift Cards guide](gift-cards.md) and the [Gift Cards developer reference](maho-for-devs/gift-cards.md).
+
+---
+
 ## Choosing the Right Product Type
 
 Use this decision guide to select the appropriate product type:
@@ -243,9 +287,11 @@ Use this decision guide to select the appropriate product type:
 
 **Is your product physical (requires shipping)?**
 
-- **No** → Is it a downloadable file?
-  - **Yes** → Use **Downloadable**
-  - **No** → Use **Virtual**
+- **No** → Is it a gift card?
+  - **Yes** → Use **Gift Card**
+  - **No** → Is it a downloadable file?
+      - **Yes** → Use **Downloadable**
+      - **No** → Use **Virtual**
 - **Yes** → Continue below
 
 **Does the customer choose from variations (size, color, etc.)?**
@@ -270,6 +316,8 @@ Use this decision guide to select the appropriate product type:
 | Build-your-own PC | Bundle |
 | PDF course or eBook | Downloadable |
 | Service appointment | Virtual |
+| Store gift card with email delivery | Gift Card |
+| Gift card for promotions or gifting | Gift Card |
 | Gift box with customer-selected items | Bundle |
 | Album available in CD + digital | Simple (CD) + Downloadable, or Bundle |
 
@@ -280,3 +328,4 @@ Some scenarios work best with multiple product types:
 - **Physical + Warranty**: Simple/Configurable product with Virtual warranty as a related product
 - **Physical + Digital**: Bundle with a Simple product and Downloadable component
 - **Service + Materials**: Grouped product with Virtual service and Simple physical items
+- **Gift Card + Product**: Offer gift cards alongside regular products in bundles or as upsells at checkout
