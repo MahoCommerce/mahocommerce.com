@@ -1,3 +1,6 @@
+!!! tip "Deep dive"
+    For AI-generated documentation with architecture diagrams and source-level explanations, see the [DeepWiki documentation](https://deepwiki.com/MahoCommerce/maho){:target="_blank"}.
+
 This series of guides was written by [Alana Storm](https://alanastorm.com){target=_blank} for the Magento devdocs website and it's now edited and  adapted for Maho.
 
 ## Code Organized in Modules

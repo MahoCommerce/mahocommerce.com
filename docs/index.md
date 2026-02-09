@@ -169,7 +169,7 @@ Tap into **decades of refinement** and **thousands of developers** worldwide. Ex
 
 ### Complete Documentation
 
-Comprehensive **API documentation** (REST, SOAP, JSON-RPC), **developer guides** covering MVC, ORM, and architecture, plus detailed technical docs. Onboard new team members quickly and reduce training costs.
+Comprehensive **API documentation** (REST, SOAP, JSON-RPC), **developer guides** covering MVC, ORM, and architecture, plus **[AI-powered deep code documentation](https://deepwiki.com/MahoCommerce/maho){:target="_blank"}** via DeepWiki. Onboard new team members quickly and reduce training costs.
 
 </div>
 

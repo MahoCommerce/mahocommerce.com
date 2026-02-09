@@ -171,6 +171,7 @@ nav:
             - Shipment: api/soap/sales-order-shipment.md
       - JSON-RPC API: api/jsonrpc.md
       - phpDoc code reference: code-reference.md
+      - DeepWiki AI docs: deepwiki.md
   - Blog: blog/index.md
   - Community:
       - Get Involved: community/get-involved.md
