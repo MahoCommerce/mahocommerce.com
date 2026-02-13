@@ -20,6 +20,35 @@ composer create-project mahocommerce/maho-starter yourproject
 With Maho you have to point your web server's document root to the `/public` directory.  
 This is a necessary step to ensure the highest level of security.
 
+### Shared hosting (cPanel, Plesk, etc.)
+
+On shared hosting platforms like cPanel or Plesk, the document root is typically set to `public_html/`
+and you may not have full control over your web server configuration.
+
+The key requirement is that **only the `public/` directory should be accessible from the web**.
+This is a standard practice adopted by virtually all modern PHP frameworks and applications
+(Laravel, Symfony, Magento 2, etc.) because keeping configuration files, vendor libraries,
+and application code outside of the document root prevents them from ever being accidentally
+served to visitors, even in case of a web server misconfiguration.
+
+To achieve this you need to:
+
+1. Install Maho **outside** of `public_html/`, for example in your home directory:
+    ```
+    ~/maho/          ← project root (not web accessible)
+    ~/public_html/   ← your domain's document root
+    ```
+
+2. Remove or empty the existing `public_html/` directory and create a **symbolic link**
+   from `public_html` to Maho's `public/` directory:
+    ```bash
+    rm -rf ~/public_html
+    ln -s ~/maho/public ~/public_html
+    ```
+
+Alternatively, if your hosting panel lets you change the document root for your domain
+(or for a subdomain), point it directly to the `public/` directory.
+
 ### Local development server
 
 Alternatively, if you're just developing on your computer, you can run `./maho serve` 
