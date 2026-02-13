@@ -20,6 +20,34 @@ composer create-project mahocommerce/maho-starter yourproject
 With Maho you have to point your web server's document root to the `/public` directory.  
 This is a necessary step to ensure the highest level of security.
 
+### Local development server
+
+Alternatively, if you're just developing on your computer, you can run `./maho serve` 
+to start the built-in PHP web server (you will still need a database tho).
+
+```
+./maho serve --help
+Description:
+  Run Maho with the built in server
+
+Usage:
+  serve [<port>]
+
+Arguments:
+  port                  Default is 8000 [default: 8000]
+```
+
+```
+./maho serve
+Serving Maho on http://127.0.0.1:8000, press CTRL+C to exit...
+```
+
+### Do you like docker?
+
+If Docker is your go-to choice, we suggest you check
+[Maho's official Docker images](https://hub.docker.com/r/mahocommerce/maho){target=_blank}
+or the [Docker Starter](community/projects/docker-starter.md) community project by Simone Fantini.
+
 ### Shared hosting (cPanel, Plesk, etc.)
 
 On shared hosting platforms like cPanel or Plesk, the document root is typically set to `public_html/`
@@ -48,34 +76,6 @@ To achieve this you need to:
 
 Alternatively, if your hosting panel lets you change the document root for your domain
 (or for a subdomain), point it directly to the `public/` directory.
-
-### Local development server
-
-Alternatively, if you're just developing on your computer, you can run `./maho serve` 
-to start the built-in PHP web server (you will still need a database tho).
-
-```
-./maho serve --help
-Description:
-  Run Maho with the built in server
-
-Usage:
-  serve [<port>]
-
-Arguments:
-  port                  Default is 8000 [default: 8000]
-```
-
-```
-./maho serve
-Serving Maho on http://127.0.0.1:8000, press CTRL+C to exit...
-```
-
-### Do you like docker?
-
-If Docker is your go-to choice, we suggest you check
-[Maho's official Docker images](https://hub.docker.com/r/mahocommerce/maho){target=_blank}
-or the [Docker Starter](community/projects/docker-starter.md) community project by Simone Fantini.
 
 ## Install Maho
 
