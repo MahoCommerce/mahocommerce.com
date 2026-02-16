@@ -4,6 +4,7 @@ Discover and install powerful modules to enhance your Maho store. All modules ar
 
 <style>
 .md-sidebar.md-sidebar--primary {display: none}
+.md-sidebar.md-sidebar--secondary {display: none}
 
 .app-grid {
     display: grid;
@@ -213,6 +214,16 @@ Discover and install powerful modules to enhance your Maho store. All modules ar
     color: var(--md-default-fg-color);
 }
 </style>
+
+<div style="padding: 24px; background: var(--md-code-bg-color); border-radius: 8px; display: flex; align-items: center; gap: 24px;">
+    <div style="flex: 1; text-wrap: balance;">
+        <strong>Have you created a module for Maho?</strong> We'd love to feature it in our Marketplace!<br />
+        Open source license (MIT, BSD3, OSL3, Apache), active maintenance, and good documentation required.
+    </div>
+    <a href="https://github.com/MahoCommerce/mahocommerce.com/issues/new?title=App%20Store%20Submission:%20[Module%20Name]&body=Module%20Name:%20%0ARepository%20URL:%20%0ACategory:%20%0ADescription:%20%0ALicense:%20" class="app-button app-button-primary" target="_blank" style="white-space: nowrap; flex-shrink: 0;">
+        + Submit Module
+    </a>
+</div>
 
 ## Featured Modules
 
@@ -495,24 +506,6 @@ Discover and install powerful modules to enhance your Maho store. All modules ar
         <button class="copy-button" onclick="copyInstallCommand()">Copy</button>
     </div>
 </dialog>
-
-## Submit Your Module
-
-Have you created a module for Maho? We'd love to feature it in our Marketplace!
-
-<div style="margin-top: 24px; padding: 24px; background: var(--md-code-bg-color); border-radius: 8px;">
-    <h3 style="margin-top: 0;">Requirements for Submission</h3>
-    <ul>
-        <li>Open source license compatible with OSL3 (MIT, BSD3, OSL3, Apache)</li>
-        <li>Active maintenance and support</li>
-        <li>Well-documented</li>
-    </ul>
-    <p>
-        <a href="https://github.com/MahoCommerce/mahocommerce.com/issues/new?title=App%20Store%20Submission:%20[Module%20Name]&body=Module%20Name:%20%0ARepository%20URL:%20%0ACategory:%20%0ADescription:%20%0ALicense:%20" class="app-button app-button-primary" target="_blank">
-            + Submit Module
-        </a>
-    </p>
-</div>
 
 <script>
 function filterApps(category) {
