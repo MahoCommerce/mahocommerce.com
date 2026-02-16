@@ -218,59 +218,43 @@ Discover and install powerful modules to enhance your Maho store. All modules ar
 
 <div class="category-filter">
     <button class="category-btn active" onclick="filterApps('all')">All Modules</button>
-    <button class="category-btn" onclick="filterApps('performance')">Performance</button>
-    <button class="category-btn" onclick="filterApps('marketing')">Marketing</button>
     <button class="category-btn" onclick="filterApps('developer-tools')">Developer Tools</button>
-    <button class="category-btn" onclick="filterApps('media')">Media</button>
-    <button class="category-btn" onclick="filterApps('security')">Security</button>
-    <button class="category-btn" onclick="filterApps('maintenance')">Maintenance</button>
-    <button class="category-btn" onclick="filterApps('payment')">Payment</button>
     <button class="category-btn" onclick="filterApps('localization')">Localization</button>
+    <button class="category-btn" onclick="filterApps('marketing')">Marketing</button>
+    <button class="category-btn" onclick="filterApps('payment')">Payment</button>
+    <button class="category-btn" onclick="filterApps('performance')">Performance</button>
+    <button class="category-btn" onclick="filterApps('security')">Security</button>
 </div>
 
 <div class="app-grid">
-    <!-- CSS/JS Versioning -->
-    <div class="app-card" data-category="performance">
-        <span class="app-category">Performance</span>
-        <h3 class="app-title">CSS/JS Versioning</h3>
-        <p class="app-description">Automatically version your CSS and JavaScript files to ensure browser cache busting when you deploy updates. Improves site performance and prevents stale cache issues.</p>
+    <!-- Braintree Payment Gateway -->
+    <div class="app-card" data-category="payment">
+        <span class="app-category">Payment</span>
+        <h3 class="app-title">Braintree Payment Gateway</h3>
+        <p class="app-description">Accept credit cards, PayPal, Apple Pay, and Google Pay with Braintree. Features 3D Secure support, vault storage, and comprehensive payment options.</p>
         <div class="app-footer">
             <div class="app-actions">
-                <button class="app-button app-button-primary" onclick="showInstallModal('fballiano/openmage-cssjs-versioning')">
+                <button class="app-button app-button-primary" onclick="showInstallModal('mahocommerce/module-braintree')">
                     ↓ Install
                 </button>
-                <a href="https://github.com/fballiano/openmage-cssjs-versioning" class="app-button app-button-primary" target="_blank">
+                <a href="https://github.com/MahoCommerce/module-braintree" class="app-button app-button-primary" target="_blank">
                     View Details →
                 </a>
             </div>
         </div>
     </div>
 
-    <!-- Product Badges -->
-    <div class="app-card" data-category="marketing">
-        <span class="app-category">Marketing</span>
-        <h3 class="app-title">Product Badges</h3>
-        <p class="app-description">Add customizable badges to your products like "New", "Sale", "Best Seller" and more. Highly configurable with support for custom conditions and styling.</p>
+    <!-- Brazilian Market -->
+    <div class="app-card" data-category="localization">
+        <span class="app-category">Localization</span>
+        <h3 class="app-title">Brazilian Market</h3>
+        <p class="app-description">Localize your Maho store for Brazil with address field customization, CPF/CNPJ validation with input masking, and automatic formatting for phone numbers and documents.</p>
         <div class="app-footer">
             <div class="app-actions">
-                <a href="https://github.com/customgento/CustomGento_ProductBadges" class="app-button app-button-primary" target="_blank">
-                    View Details →
-                </a>
-            </div>
-        </div>
-    </div>
-
-    <!-- Image Cleaner -->
-    <div class="app-card" data-category="media">
-        <span class="app-category">Media</span>
-        <h3 class="app-title">Image Cleaner</h3>
-        <p class="app-description">Clean up unused product images from your media folder. Safely removes orphaned images to free up disk space and keep your media directory organized.</p>
-        <div class="app-footer">
-            <div class="app-actions">
-                <button class="app-button app-button-primary" onclick="showInstallModal('fballiano/openmage-image-cleaner')">
+                <button class="app-button app-button-primary" onclick="showInstallModal('ricardomartins/brazilian-market-maho')">
                     ↓ Install
                 </button>
-                <a href="https://github.com/fballiano/openmage-image-cleaner" class="app-button app-button-primary" target="_blank">
+                <a href="https://github.com/r-martins/BrazilianMarket-Maho" class="app-button app-button-primary" target="_blank">
                     View Details →
                 </a>
             </div>
@@ -294,6 +278,37 @@ Discover and install powerful modules to enhance your Maho store. All modules ar
         </div>
     </div>
 
+    <!-- CSS/JS Versioning -->
+    <div class="app-card" data-category="performance">
+        <span class="app-category">Performance</span>
+        <h3 class="app-title">CSS/JS Versioning</h3>
+        <p class="app-description">Automatically version your CSS and JavaScript files to ensure browser cache busting when you deploy updates. Improves site performance and prevents stale cache issues.</p>
+        <div class="app-footer">
+            <div class="app-actions">
+                <button class="app-button app-button-primary" onclick="showInstallModal('fballiano/openmage-cssjs-versioning')">
+                    ↓ Install
+                </button>
+                <a href="https://github.com/fballiano/openmage-cssjs-versioning" class="app-button app-button-primary" target="_blank">
+                    View Details →
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- HiPay Fullservice -->
+    <div class="app-card" data-category="payment">
+        <span class="app-category">Payment</span>
+        <h3 class="app-title">HiPay Fullservice</h3>
+        <p class="app-description">Complete payment solution supporting 150+ payment methods worldwide. Includes fraud protection, one-click payments, and multi-currency support.</p>
+        <div class="app-footer">
+            <div class="app-actions">
+                <a href="https://github.com/hipay/hipay-fullservice-sdk-magento1" class="app-button app-button-primary" target="_blank">
+                    View Details →
+                </a>
+            </div>
+        </div>
+    </div>
+
     <!-- HoneySpam -->
     <div class="app-card" data-category="security">
         <span class="app-category">Security</span>
@@ -302,20 +317,6 @@ Discover and install powerful modules to enhance your Maho store. All modules ar
         <div class="app-footer">
             <div class="app-actions">
                 <a href="https://github.com/magento-hackathon/HoneySpam" class="app-button app-button-primary" target="_blank">
-                    View Details →
-                </a>
-            </div>
-        </div>
-    </div>
-
-    <!-- reCAPTCHA -->
-    <div class="app-card" data-category="security">
-        <span class="app-category">Security</span>
-        <h3 class="app-title">reCAPTCHA</h3>
-        <p class="app-description">Add Google reCAPTCHA v2 or v3 to protect your store forms from spam and automated attacks. Supports contact, registration, and review forms.</p>
-        <div class="app-footer">
-            <div class="app-actions">
-                <a href="https://github.com/empiricompany/reCaptcha" class="app-button app-button-primary" target="_blank">
                     View Details →
                 </a>
             </div>
@@ -339,55 +340,41 @@ Discover and install powerful modules to enhance your Maho store. All modules ar
         </div>
     </div>
 
-    <!-- Orphaned Config Cleaner -->
-    <div class="app-card" data-category="maintenance">
-        <span class="app-category">Maintenance</span>
-        <h3 class="app-title">Orphaned Config Cleaner</h3>
-        <p class="app-description">Clean up orphaned configuration entries from your database. Helps maintain a clean system by removing obsolete configuration values.</p>
+    <!-- Image Cleaner -->
+    <div class="app-card" data-category="developer-tools">
+        <span class="app-category">Developer Tools</span>
+        <h3 class="app-title">Image Cleaner</h3>
+        <p class="app-description">Clean up unused product images from your media folder. Safely removes orphaned images to free up disk space and keep your media directory organized.</p>
         <div class="app-footer">
             <div class="app-actions">
-                <button class="app-button app-button-primary" onclick="showInstallModal('hirale/openmage-orphaned-config')">
+                <button class="app-button app-button-primary" onclick="showInstallModal('fballiano/openmage-image-cleaner')">
                     ↓ Install
                 </button>
-                <a href="https://github.com/hirale/openmage-orphaned-config" class="app-button app-button-primary" target="_blank">
+                <a href="https://github.com/fballiano/openmage-image-cleaner" class="app-button app-button-primary" target="_blank">
                     View Details →
                 </a>
             </div>
         </div>
     </div>
 
-    <!-- Braintree Payment Gateway -->
-    <div class="app-card" data-category="payment">
-        <span class="app-category">Payment</span>
-        <h3 class="app-title">Braintree Payment Gateway</h3>
-        <p class="app-description">Accept credit cards, PayPal, Apple Pay, and Google Pay with Braintree. Features 3D Secure support, vault storage, and comprehensive payment options.</p>
+    <!-- Maho DataSync -->
+    <div class="app-card" data-category="developer-tools">
+        <span class="app-category">Developer Tools</span>
+        <h3 class="app-title">Maho DataSync</h3>
+        <p class="app-description">Synchronize data between Maho/OpenMage instances with full entity support. Easily transfer products, customers, and other data across environments.</p>
         <div class="app-footer">
             <div class="app-actions">
-                <button class="app-button app-button-primary" onclick="showInstallModal('mahocommerce/module-braintree')">
+                <button class="app-button app-button-primary" onclick="showInstallModal('mageaustralia/maho-datasync')">
                     ↓ Install
                 </button>
-                <a href="https://github.com/MahoCommerce/module-braintree" class="app-button app-button-primary" target="_blank">
+                <a href="https://github.com/mageaustralia/maho-datasync" class="app-button app-button-primary" target="_blank">
                     View Details →
                 </a>
             </div>
         </div>
     </div>
 
-    <!-- HiPay Payment Gateway -->
-    <div class="app-card" data-category="payment">
-        <span class="app-category">Payment</span>
-        <h3 class="app-title">HiPay Fullservice</h3>
-        <p class="app-description">Complete payment solution supporting 150+ payment methods worldwide. Includes fraud protection, one-click payments, and multi-currency support.</p>
-        <div class="app-footer">
-            <div class="app-actions">
-                <a href="https://github.com/hipay/hipay-fullservice-sdk-magento1" class="app-button app-button-primary" target="_blank">
-                    View Details →
-                </a>
-            </div>
-        </div>
-    </div>
-
-    <!-- Mollie Payment Gateway -->
+    <!-- Mollie Payments -->
     <div class="app-card" data-category="payment">
         <span class="app-category">Payment</span>
         <h3 class="app-title">Mollie Payments</h3>
@@ -404,17 +391,17 @@ Discover and install powerful modules to enhance your Maho store. All modules ar
         </div>
     </div>
 
-    <!-- PayPal Pay Later Banner -->
-    <div class="app-card" data-category="payment">
-        <span class="app-category">Payment</span>
-        <h3 class="app-title">PayPal Pay Later Banner</h3>
-        <p class="app-description">Display PayPal Pay Later promotional banners and messaging. Increase conversions by showing installment payment options to customers.</p>
+    <!-- Orphaned Config Cleaner -->
+    <div class="app-card" data-category="developer-tools">
+        <span class="app-category">Developer Tools</span>
+        <h3 class="app-title">Orphaned Config Cleaner</h3>
+        <p class="app-description">Clean up orphaned configuration entries from your database. Helps maintain a clean system by removing obsolete configuration values.</p>
         <div class="app-footer">
             <div class="app-actions">
-                <button class="app-button app-button-primary" onclick="showInstallModal('empiricompany/openmage-paypal-pay-later-banner-info')">
+                <button class="app-button app-button-primary" onclick="showInstallModal('hirale/openmage-orphaned-config')">
                     ↓ Install
                 </button>
-                <a href="https://github.com/empiricompany/openmage-paypal-pay-later-banner-info" class="app-button app-button-primary" target="_blank">
+                <a href="https://github.com/hirale/openmage-orphaned-config" class="app-button app-button-primary" target="_blank">
                     View Details →
                 </a>
             </div>
@@ -438,7 +425,52 @@ Discover and install powerful modules to enhance your Maho store. All modules ar
         </div>
     </div>
 
-    <!-- Stripe Payment Gateway -->
+    <!-- PayPal Pay Later Banner -->
+    <div class="app-card" data-category="payment">
+        <span class="app-category">Payment</span>
+        <h3 class="app-title">PayPal Pay Later Banner</h3>
+        <p class="app-description">Display PayPal Pay Later promotional banners and messaging. Increase conversions by showing installment payment options to customers.</p>
+        <div class="app-footer">
+            <div class="app-actions">
+                <button class="app-button app-button-primary" onclick="showInstallModal('empiricompany/openmage-paypal-pay-later-banner-info')">
+                    ↓ Install
+                </button>
+                <a href="https://github.com/empiricompany/openmage-paypal-pay-later-banner-info" class="app-button app-button-primary" target="_blank">
+                    View Details →
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Product Badges -->
+    <div class="app-card" data-category="marketing">
+        <span class="app-category">Marketing</span>
+        <h3 class="app-title">Product Badges</h3>
+        <p class="app-description">Add customizable badges to your products like "New", "Sale", "Best Seller" and more. Highly configurable with support for custom conditions and styling.</p>
+        <div class="app-footer">
+            <div class="app-actions">
+                <a href="https://github.com/customgento/CustomGento_ProductBadges" class="app-button app-button-primary" target="_blank">
+                    View Details →
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- reCAPTCHA -->
+    <div class="app-card" data-category="security">
+        <span class="app-category">Security</span>
+        <h3 class="app-title">reCAPTCHA</h3>
+        <p class="app-description">Add Google reCAPTCHA v2 or v3 to protect your store forms from spam and automated attacks. Supports contact, registration, and review forms.</p>
+        <div class="app-footer">
+            <div class="app-actions">
+                <a href="https://github.com/empiricompany/reCaptcha" class="app-button app-button-primary" target="_blank">
+                    View Details →
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Stripe Payments -->
     <div class="app-card" data-category="payment">
         <span class="app-category">Payment</span>
         <h3 class="app-title">Stripe Payments</h3>
@@ -446,23 +478,6 @@ Discover and install powerful modules to enhance your Maho store. All modules ar
         <div class="app-footer">
             <div class="app-actions">
                 <a href="https://github.com/stripe-archive/stripe-magento1-releases" class="app-button app-button-primary" target="_blank">
-                    View Details →
-                </a>
-            </div>
-        </div>
-    </div>
-
-    <!-- Brazilian Market -->
-    <div class="app-card" data-category="localization">
-        <span class="app-category">Localization</span>
-        <h3 class="app-title">Brazilian Market</h3>
-        <p class="app-description">Localize your Maho store for Brazil with address field customization, CPF/CNPJ validation with input masking, and automatic formatting for phone numbers and documents.</p>
-        <div class="app-footer">
-            <div class="app-actions">
-                <button class="app-button app-button-primary" onclick="showInstallModal('ricardomartins/brazilian-market-maho')">
-                    ↓ Install
-                </button>
-                <a href="https://github.com/r-martins/BrazilianMarket-Maho" class="app-button app-button-primary" target="_blank">
                     View Details →
                 </a>
             </div>
