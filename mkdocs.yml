@@ -85,6 +85,7 @@ nav:
       - Product Relationship Rules: product-relationship-rules.md
       - Customer Segments: customer-segments.md
       - Email Automation: email-automation.md
+      - Feed Manager: feed-manager.md
       - Gift Cards: gift-cards.md
     - Technical doc:
       - Autoloaders: autoloaders.md
