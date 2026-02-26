@@ -11,7 +11,8 @@ Usage:
 
 Options:
   -h, --help            Display help for the given command. When no command is given display help for the list command
-  -q, --quiet           Do not output any message
+      --silent          Do not output any message
+  -q, --quiet           Only errors are displayed. All other output is suppressed
   -V, --version         Display this application version
       --ansi|--no-ansi  Force (or disable --no-ansi) ANSI output
   -n, --no-interaction  Do not ask any interactive question
@@ -24,7 +25,9 @@ Available commands:
   help                          Display help for a command
   install                       Install Maho
   list                          List commands
+  migrate                       Apply pending database schema and data updates from modules
   serve                         Run Maho with the built in web server
+  shell                         Opens an interactive PHP shell with Maho bootstrapped
  admin
   admin:user:change-password    Change password of an admin users
   admin:user:create             Create an admin user
@@ -35,6 +38,11 @@ Available commands:
   cache:disable                 Disable all caches
   cache:enable                  Enable all caches
   cache:flush                   Flush cache
+  cache:minify:flush            Flush minified CSS/JS cache
+ config
+  config:delete                 Delete configuration values from core_config_data table
+  config:get                    Get specific configuration path values
+  config:set                    Set configuration values in core_config_data table
  cron
   cron:history                  List cron jobs executions stored in the database
   cron:list                     List cron jobs configured in the XML files
@@ -45,22 +53,41 @@ Available commands:
   customer:delete               Delete customers
   customer:list                 List all customers
  db
-  db:connect                    Opens the database command-line interface using the credentials from your local.xml file
+  db:connect                    Opens the database command-line interface using credentials from your local.xml file
+  db:query                      Execute a SQL query using the database credentials from your local.xml file
  email
+  email:config:show             Show email configuration and settings
+  email:queue:clear             Clear emails from the queue
+  email:queue:process           Manually process the email queue
+  email:test:queue              Send a test email via the queue system
   email:test:send               Send a test email
+ feed
+  feed:generate                 Generate a specific feed
+  feed:generate:all             Generate all enabled feeds
+  feed:list                     List all feeds with status
+  feed:validate                 Validate an existing feed file without regenerating
+ frontend
+  frontend:layout:debug         Debug layout for a given URL showing handles, XML files, and block tree
+  frontend:theme:create         Create a new frontend theme with proper scaffolding
  index
   index:list                    List all indexes
   index:reindex                 Reindex a single index
   index:reindex:all             Reindex all indexes
+  index:reindex:product         Reindex specific product(s) across all or specified indexers
  legacy
   legacy:rename-mysql4-classes  Search for old Mysql4 classes and replaces them with Resource classes
  log
   log:clean                     Clean log tables in the database
   log:status                    Show status for log tables in the database
+ maintenance
+  maintenance:disable           Disable maintenance mode
+  maintenance:enable            Enable maintenance mode
+  maintenance:status            Show maintenance mode status
  phpstorm
   phpstorm:metadata:generate    Generate PhpStorm metadata files for better IDE support
  sys
   sys:currencies                Get all available currencies
+  sys:directory:regions:import  Import states/provinces for a country from ISO 3166-2 standard with localization
   sys:encryptionkey:regenerate  Generate a new encryption key and save it to local.xml
   sys:locales                   Get all available locales
   sys:timezones                 Get all available timezones
