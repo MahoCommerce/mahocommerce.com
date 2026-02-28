@@ -42,9 +42,27 @@ Arguments:
 Serving Maho on http://127.0.0.1:8000, press CTRL+C to exit...
 ```
 
-### Do you like docker?
+### Do you like Docker?
 
-If Docker is your go-to choice, we suggest you check
+#### Quick test with Docker
+
+If you just want to try Maho as fast as possible, run:
+
+```bash
+docker run -p 54321:443 mahocommerce/maho:nightly
+```
+
+Then open [https://localhost:54321](https://localhost:54321){target=_blank} in your browser
+and follow the web installer, selecting **SQLite** as the database engine so you don't need
+to set up any external database.
+
+!!! warning
+    This is meant for quick testing only. When you stop the container, all data is lost.
+    For a proper Docker-based setup, see the section below.
+
+#### Docker for development and production
+
+For a more complete Docker setup, check out
 [Maho's official Docker images](https://hub.docker.com/r/mahocommerce/maho){target=_blank}
 or the [Docker Starter](community/projects/docker-starter.md) community project by Simone Fantini.
 
