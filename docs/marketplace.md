@@ -234,6 +234,7 @@ Discover and install powerful modules to enhance your Maho store. All modules ar
     <button class="category-btn" onclick="filterApps('marketing')">Marketing</button>
     <button class="category-btn" onclick="filterApps('payment')">Payment</button>
     <button class="category-btn" onclick="filterApps('performance')">Performance</button>
+    <button class="category-btn" onclick="filterApps('seo')">SEO</button>
     <button class="category-btn" onclick="filterApps('security')">Security</button>
 </div>
 
@@ -475,6 +476,23 @@ Discover and install powerful modules to enhance your Maho store. All modules ar
         <div class="app-footer">
             <div class="app-actions">
                 <a href="https://github.com/empiricompany/reCaptcha" class="app-button app-button-primary" target="_blank">
+                    View Details →
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- URL Manager -->
+    <div class="app-card" data-category="seo">
+        <span class="app-category">SEO</span>
+        <h3 class="app-title">404 URL Manager</h3>
+        <p class="app-description">Advanced 404 URL manager for tracking, redirecting, and managing 404 errors with smart suggestions and email notifications.</p>
+        <div class="app-footer">
+            <div class="app-actions">
+                <button class="app-button app-button-primary" onclick="showInstallModal('mageaus/urlmanager')">
+                    ↓ Install
+                </button>
+                <a href="https://github.com/mageaustralia/mageaus-urlmanager" class="app-button app-button-primary" target="_blank">
                     View Details →
                 </a>
             </div>
