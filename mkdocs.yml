@@ -116,6 +116,7 @@ nav:
           - Setup resources: maho-for-devs/setup-resources.md
           - Advanced ORM: maho-for-devs/advanced-orm.md
           - Data collections: maho-for-devs/data-collections.md
+          - JavaScript deferral: maho-for-devs/javascript-defer.md
           - Customer Segments: maho-for-devs/customer-segments.md
           - Email Automation: maho-for-devs/email-automation.md
           - Gift Cards: maho-for-devs/gift-cards.md
