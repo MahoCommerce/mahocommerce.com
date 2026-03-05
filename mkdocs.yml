@@ -87,6 +87,7 @@ nav:
       - Email Automation: email-automation.md
       - Feed Manager: feed-manager.md
       - Gift Cards: gift-cards.md
+      - Shipping Bridge: shipping-bridge.md
     - Technical doc:
       - Autoloaders: autoloaders.md
       - CLI tool: cli-tool.md
