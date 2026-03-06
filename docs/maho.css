@@ -402,6 +402,31 @@ aside.md-source-file * {
 }
 
 
+/* === FIGURE CAPTIONS === */
+.md-typeset figure {
+    border: 1px solid var(--maho-border);
+    border-radius: var(--maho-radius-md);
+    overflow: hidden;
+    padding: 0;
+}
+
+.md-typeset figure img {
+    display: block;
+    margin: 0 !important;
+    padding: 0.5em 0.5em 0;
+}
+
+.md-typeset figcaption {
+    background: var(--maho-surface-warm);
+    border-top: 1px solid var(--maho-border-light);
+    padding: 0.6em 1em;
+    font-size: 0.8em;
+    margin-bottom: 0;
+    max-width: none;
+    color: var(--maho-text-secondary);
+}
+
+
 /* === VERSION BADGE === */
 .version-badge {
     display: inline-block;

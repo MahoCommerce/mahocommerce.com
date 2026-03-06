@@ -12,6 +12,11 @@ Traditional carrier integrations require a dedicated module for every shipping p
 - **Flexible authentication**: None, Bearer token, or custom header
 - **Multi-store support**: Configuration is scoped per website
 
+<figure markdown="span">
+![Shipping Bridge methods displayed in the checkout](assets/shipping-bridge-frontend.png)
+<figcaption>Shipping methods from the Bridge API in the checkout</figcaption>
+</figure>
+
 ## Use Cases
 
 ### Third-party Shipping API
@@ -43,6 +48,8 @@ flowchart TD
 ## Configuration
 
 Navigate to **System > Configuration > Sales > Shipping Methods > Shipping Bridge**.
+
+![Shipping Bridge configuration in the admin panel](assets/shipping-bridge-backend.png)
 
 ### Settings Reference
 
@@ -257,4 +264,3 @@ URL: https://api.example.com/rates
 Shipping Bridge Response:
 {"methods":[{"code":"standard","title":"Standard","price":5.99}]}
 ```
-
