@@ -16,7 +16,7 @@
 Tap into the **collective knowledge of thousands of developers worldwide** and a proven ecosystem refined over decades, without the price tag or complexity.
 
 [Get Started with Maho](getting-started.md){.md-button .md-button--primary .cta-button}
-[Try the Demo :material-open-in-new:](https://demo.mahocommerce.com/){.md-button .cta-button target="_blank"}
+[Try the Demo :material-open-in-new:](demo.md){.md-button .cta-button}
 [Join Community :fontawesome-brands-discord:](https://discord.gg/dWgcVUFTrS){.md-button .cta-button}
 
 </div>
@@ -282,7 +282,7 @@ Choose the database that fits your infrastructure. **MySQL**, **MariaDB**, **Pos
 Whether you're launching your first store, delivering client projects, or building custom solutions - Maho gives you the foundation to succeed.
 
 [Get Started with Maho](getting-started.md){.md-button .md-button--primary .cta-button}
-[Try the Demo :material-open-in-new:](https://demo.mahocommerce.com/){.md-button .cta-button target="_blank"}
+[Try the Demo :material-open-in-new:](demo.md){.md-button .cta-button}
 [Join Community :fontawesome-brands-discord:](https://discord.gg/dWgcVUFTrS){.md-button .cta-button}
 
 </div>

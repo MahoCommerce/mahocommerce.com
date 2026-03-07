@@ -1,5 +1,9 @@
 # Getting Started
 
+!!! tip "Just want to look around?"
+    Try our [live demo](demo.md) — full storefront and admin access, no installation required.
+    The demo resets automatically every 3 hours.
+
 ## System requirements
 
 - PHP 8.3+

@@ -1682,6 +1682,21 @@ body:has(h1[id=blog]) .md-post__meta {
 }
 
 
+/* === DEMO PAGE === */
+.md-typeset .grid.cards > ul > li {
+    display: flex;
+    flex-direction: column;
+}
+
+.md-typeset .grid.cards > ul > li > center {
+    margin-top: auto;
+}
+
+.demo-credentials {
+    margin-top: 0.5em !important;
+}
+
+
 /* === 404 PAGE === */
 .maho-404 {
     text-align: center;
