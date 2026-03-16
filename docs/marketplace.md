@@ -499,6 +499,23 @@ Discover and install powerful modules to enhance your Maho store. All modules ar
         </div>
     </div>
 
+    <!-- TikTok Tracking -->
+    <div class="app-card" data-category="marketing">
+        <span class="app-category">Marketing</span>
+        <h3 class="app-title">TikTok Tracking</h3>
+        <p class="app-description">TikTok Pixel integration with automatic e-commerce event tracking. Track page views, product views, add to cart, and purchase events for TikTok advertising campaigns.</p>
+        <div class="app-footer">
+            <div class="app-actions">
+                <button class="app-button app-button-primary" onclick="showInstallModal('empiricompany/openmage-tiktok-tracking')">
+                    ↓ Install
+                </button>
+                <a href="https://github.com/empiricompany/openmage-tiktok-tracking" class="app-button app-button-primary" target="_blank">
+                    View Details →
+                </a>
+            </div>
+        </div>
+    </div>
+
     <!-- Stripe Payments -->
     <div class="app-card" data-category="payment">
         <span class="app-category">Payment</span>
