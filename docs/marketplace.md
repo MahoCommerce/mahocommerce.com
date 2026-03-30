@@ -437,23 +437,6 @@ Discover and install powerful modules to enhance your Maho store. All modules ar
         </div>
     </div>
 
-    <!-- PayPal Pay Later Banner -->
-    <div class="app-card" data-category="payment">
-        <span class="app-category">Payment</span>
-        <h3 class="app-title">PayPal Pay Later Banner</h3>
-        <p class="app-description">Display PayPal Pay Later promotional banners and messaging. Increase conversions by showing installment payment options to customers.</p>
-        <div class="app-footer">
-            <div class="app-actions">
-                <button class="app-button app-button-primary" onclick="showInstallModal('empiricompany/openmage-paypal-pay-later-banner-info')">
-                    ↓ Install
-                </button>
-                <a href="https://github.com/empiricompany/openmage-paypal-pay-later-banner-info" class="app-button app-button-primary" target="_blank">
-                    View Details →
-                </a>
-            </div>
-        </div>
-    </div>
-
     <!-- Product Badges -->
     <div class="app-card" data-category="marketing">
         <span class="app-category">Marketing</span>
@@ -523,7 +506,7 @@ Discover and install powerful modules to enhance your Maho store. All modules ar
         <p class="app-description">Accept payments with Stripe's modern payment infrastructure. Supports cards, wallets, and local payment methods with built-in fraud protection.</p>
         <div class="app-footer">
             <div class="app-actions">
-                <a href="https://github.com/stripe-archive/stripe-magento1-releases" class="app-button app-button-primary" target="_blank">
+                <a href="https://github.com/mageaustralia/maho-module-stripe" class="app-button app-button-primary" target="_blank">
                     View Details →
                 </a>
             </div>
