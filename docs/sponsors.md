@@ -27,9 +27,9 @@ By sponsoring us, you're not just supporting our work - you're investing in the 
 ### Technology partners
 
 <div class="sponsorgallery">
-    <a href="https://www.bhoost.com" title="Bhoost" target="_blank"><img src="/assets/sponsors/bhoost.png" alt="Bhoost"></a>
-    <a href="https://blackfire.io" title="Blackfire" target="_blank"><img src="/assets/sponsors/blackfire.png" alt="Blackfire"></a>
+<a href="https://blackfire.io" title="Blackfire" target="_blank"><img src="/assets/sponsors/blackfire.png" alt="Blackfire"></a>
     <a href="https://cloudflare.com" title="Cloudflare" target="_blank"><img src="/assets/sponsors/cloudflare.jpg" alt="Cloudflare"></a>
+    <a href="https://www.jetbrains.com" title="JetBrains" target="_blank"><img src="/assets/sponsors/jetbrains.svg" alt="JetBrains"></a>
     <a href="https://www.magentiamo.it" title="Magentiamo" target="_blank"><img src="/assets/sponsors/magentiamo.png" alt="Magentiamo"></a>
     <a href="https://sevalla.com" title="Sevalla" target="_blank">
         <svg fill="none" viewBox="0 0 1739 559" id="sevalla-logo-new" class="w-28 md:w-32">

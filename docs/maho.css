@@ -1328,15 +1328,14 @@ article:has(#homeh1)::before {
 .sponsorgallery {
     display: flex;
     flex-wrap: wrap;
-    gap: 2em 5em;
+    align-items: center;
+    gap: 2em 4em;
 }
 
-.sponsorgallery > * {
-    flex: 1;
-}
-
-.sponsorgallery img {
+.sponsorgallery img,
+.sponsorgallery svg {
     height: 50px;
+    width: auto;
     max-width: none;
 }
 
