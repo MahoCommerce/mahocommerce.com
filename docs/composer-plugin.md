@@ -34,6 +34,8 @@ The plugin consists of three main components, each handling different aspects of
 
 Manages the autoloading functionality, enabling Maho to use Composer's efficient autoloading mechanisms rather than legacy custom autoloaders. This eliminates the need for `Varien_Autoload` and other custom autoloading solutions from previous platforms.
 
+Since v26.5, the AutoloadPlugin also **compiles PHP attributes** (`#[Observer]` and `#[CronJob]`) into `vendor/composer/maho_attributes.php` during `composer dump-autoload`. See [Event observers](observers.md) and [Cron jobs](cron.md) for the full reference.
+
 ### 2. FileCopyPlugin
 
 Handles the copying of necessary assets and files from vendor packages to the correct locations in your project structure, ensuring everything is in place without duplicating the entire codebase.

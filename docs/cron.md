@@ -1,3 +1,64 @@
+# Cron jobs
+
+Maho uses a cron system to run scheduled background tasks — things like sending queued emails, cleaning up old logs, generating sitemaps, and applying catalog price rules.
+
+## Defining cron jobs
+
+!!! info "v26.5+"
+    Since v26.5, cron jobs are defined using PHP attributes directly on the method. Previously they were configured in XML — see [Migrating from XML](#migrating-from-xml) if you're upgrading an existing module.
+
+Place the `#[Maho\Config\CronJob]` attribute on a public method to register it as a cron job:
+
+```php
+class Maho_AdminActivityLog_Model_Observer
+{
+    #[Maho\Config\CronJob('adminactivitylog_clean_old_logs', schedule: '0 2 * * *')]
+    public function cleanOldLogs(): void
+    {
+        // Runs daily at 2:00 AM
+    }
+}
+```
+
+After adding or changing any cron job attribute, run:
+
+```bash
+composer dump-autoload
+```
+
+This compiles all attributes into `vendor/composer/maho_attributes.php`, which is what the runtime reads.
+
+### Parameters
+
+| Parameter    | Type     | Default      | Description |
+|--------------|----------|--------------|-------------|
+| `id`         | `string` | *(required)* | Job identifier (e.g. `'sitemap_generate'`, `'core_clean_cache'`) |
+| `schedule`   | `?string`| `null`       | Cron expression (e.g. `'0 2 * * *'`, `'*/5 * * * *'`) |
+| `configPath` | `?string`| `null`       | Config path for admin-configurable schedule |
+
+### Fixed schedule
+
+Use the `schedule` parameter with a standard cron expression:
+
+```php
+#[Maho\Config\CronJob('giftcard_process_scheduled_emails', schedule: '*/5 * * * *')]
+public function processScheduledEmails(): void { }
+```
+
+### Admin-configurable schedule
+
+Use `configPath` instead of `schedule` when the cron expression should be configurable from the admin panel:
+
+```php
+#[Maho\Config\CronJob('customersegmentation_refresh_segments', configPath: 'customer/customer_segments/cron_schedule')]
+public function refreshSegments(): void { }
+```
+
+!!! note
+    Provide either `schedule` or `configPath`, not both. If neither is set, the job can only be triggered manually via `./maho cron:run <job_id>`.
+
+Individual cron job failures are caught and recorded without stopping the rest of the cron run.
+
 ## Deploy to production
 
 When you deploy a Maho project in production, you need to set up cron this way:
@@ -51,28 +112,7 @@ these two commands:
 +-------------+---------------------------+---------+----------+---------------------+---------------------+-------------+-------------+
 | 167         | core_email_queue_send_all | pending |          | 2024-08-10 23:09:41 | 2024-08-10 23:09:00 |             |             |
 | 168         | core_email_queue_send_all | pending |          | 2024-08-10 23:09:41 | 2024-08-10 23:10:00 |             |             |
-| 169         | core_email_queue_send_all | pending |          | 2024-08-10 23:09:41 | 2024-08-10 23:11:00 |             |             |
-| 170         | core_email_queue_send_all | pending |          | 2024-08-10 23:09:41 | 2024-08-10 23:12:00 |             |             |
-| 171         | core_email_queue_send_all | pending |          | 2024-08-10 23:09:41 | 2024-08-10 23:13:00 |             |             |
-| 172         | core_email_queue_send_all | pending |          | 2024-08-10 23:09:41 | 2024-08-10 23:14:00 |             |             |
-| 173         | core_email_queue_send_all | pending |          | 2024-08-10 23:09:41 | 2024-08-10 23:15:00 |             |             |
-| 174         | core_email_queue_send_all | pending |          | 2024-08-10 23:09:41 | 2024-08-10 23:16:00 |             |             |
-| 175         | core_email_queue_send_all | pending |          | 2024-08-10 23:09:41 | 2024-08-10 23:17:00 |             |             |
-| 176         | core_email_queue_send_all | pending |          | 2024-08-10 23:09:41 | 2024-08-10 23:18:00 |             |             |
-| 177         | core_email_queue_send_all | pending |          | 2024-08-10 23:09:41 | 2024-08-10 23:19:00 |             |             |
-| 178         | core_email_queue_send_all | pending |          | 2024-08-10 23:09:41 | 2024-08-10 23:20:00 |             |             |
-| 179         | core_email_queue_send_all | pending |          | 2024-08-10 23:09:41 | 2024-08-10 23:21:00 |             |             |
-| 180         | core_email_queue_send_all | pending |          | 2024-08-10 23:09:41 | 2024-08-10 23:22:00 |             |             |
-| 181         | core_email_queue_send_all | pending |          | 2024-08-10 23:09:41 | 2024-08-10 23:23:00 |             |             |
-| 182         | core_email_queue_send_all | pending |          | 2024-08-10 23:09:41 | 2024-08-10 23:24:00 |             |             |
-| 183         | core_email_queue_send_all | pending |          | 2024-08-10 23:09:41 | 2024-08-10 23:25:00 |             |             |
-| 184         | core_email_queue_send_all | pending |          | 2024-08-10 23:09:41 | 2024-08-10 23:26:00 |             |             |
-| 185         | core_email_queue_send_all | pending |          | 2024-08-10 23:09:41 | 2024-08-10 23:27:00 |             |             |
-| 186         | core_email_queue_send_all | pending |          | 2024-08-10 23:09:41 | 2024-08-10 23:28:00 |             |             |
-| 187         | newsletter_send_all       | pending |          | 2024-08-10 23:09:41 | 2024-08-10 23:10:00 |             |             |
-| 188         | newsletter_send_all       | pending |          | 2024-08-10 23:09:41 | 2024-08-10 23:15:00 |             |             |
-| 189         | newsletter_send_all       | pending |          | 2024-08-10 23:09:41 | 2024-08-10 23:20:00 |             |             |
-| 190         | newsletter_send_all       | pending |          | 2024-08-10 23:09:41 | 2024-08-10 23:25:00 |             |             |
+| ...         | ...                       | ...     | ...      | ...                 | ...                 | ...         | ...         |
 +-------------+---------------------------+---------+----------+---------------------+---------------------+-------------+-------------+
 ```
 
@@ -92,3 +132,43 @@ core_email_queue_send_all executed successfully
     If there's a record in the `cron_schedule` table for the specified `job_code` with status
     of `pending`, that record will be "burnt" otherwise no record will be created but the job
     will be executed anyway.
+
+## Migrating from XML
+
+If you're upgrading a module that used XML-based cron configuration:
+
+**Before (config.xml):**
+
+```xml
+<config>
+    <crontab>
+        <jobs>
+            <newsletter_send_all>
+                <schedule><cron_expr>*/5 * * * *</cron_expr></schedule>
+                <run><model>newsletter/observer::scheduledSend</model></run>
+            </newsletter_send_all>
+        </jobs>
+    </crontab>
+</config>
+```
+
+**After (PHP attribute):**
+
+```php
+#[Maho\Config\CronJob('newsletter_send_all', schedule: '*/5 * * * *')]
+public function scheduledSend(Mage_Cron_Model_Schedule $schedule): void { }
+```
+
+For config-driven schedules:
+
+```xml
+<!-- Before -->
+<schedule><config_path>crontab/jobs/catalog_product_alert/schedule/cron_expr</config_path></schedule>
+```
+
+```php
+// After
+#[Maho\Config\CronJob('catalog_product_alert', configPath: 'crontab/jobs/catalog_product_alert/schedule/cron_expr')]
+```
+
+Remove the corresponding XML blocks from `config.xml` after migrating — both sources are read at runtime, and duplicates will cause issues.
