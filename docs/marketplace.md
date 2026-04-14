@@ -437,6 +437,23 @@ Discover and install powerful modules to enhance your Maho store. All modules ar
         </div>
     </div>
 
+    <!-- Przelewy24 -->
+    <div class="app-card" data-category="payment">
+        <span class="app-category">Payment</span>
+        <h3 class="app-title">Przelewy24</h3>
+        <p class="app-description">Accept payments through Przelewy24, one of Poland's most popular payment processors. Features gateway redirect flow, webhook support with SHA384 verification, automatic polling safety net, and sandbox mode for testing.</p>
+        <div class="app-footer">
+            <div class="app-actions">
+                <button class="app-button app-button-primary" onclick="showInstallModal('mahocommerce/module-przelewy24')">
+                    ↓ Install
+                </button>
+                <a href="https://github.com/MahoCommerce/module-przelewy24" class="app-button app-button-primary" target="_blank">
+                    View Details →
+                </a>
+            </div>
+        </div>
+    </div>
+
     <!-- Product Badges -->
     <div class="app-card" data-category="marketing">
         <span class="app-category">Marketing</span>
