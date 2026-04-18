@@ -226,14 +226,11 @@ html {
     margin-top: 1.2em !important;
 }
 
-.md-sidebar .md-nav__link {
-    padding: 0.5em 0.6rem !important;
-}
-
 .md-nav__item .md-nav__link {
     transition: color var(--maho-duration) var(--maho-ease),
                 padding-left var(--maho-duration) var(--maho-ease);
     border-radius: var(--maho-radius-sm);
+    padding-block: .2rem;
 }
 
 .md-nav__item .md-nav__link:hover {
