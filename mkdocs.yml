@@ -5,7 +5,7 @@ repo_url: https://github.com/MahoCommerce/maho
 repo_name: MahoCommerce/maho
 
 theme:
-  name: material
+  name: materialx
   logo: assets/maho-logo.svg
   favicon: assets/maho-symbol.svg
   custom_dir: docs/overrides

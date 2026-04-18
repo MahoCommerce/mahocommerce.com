@@ -218,6 +218,18 @@ html {
     border-left: 1px solid var(--maho-border-light);
 }
 
+.md-sidebar .md-nav__item {
+    margin: 0 !important;
+}
+
+.md-sidebar .md-nav__item--section {
+    margin-top: 1.2em !important;
+}
+
+.md-sidebar .md-nav__link {
+    padding: 0.5em 0.6rem !important;
+}
+
 .md-nav__item .md-nav__link {
     transition: color var(--maho-duration) var(--maho-ease),
                 padding-left var(--maho-duration) var(--maho-ease);
@@ -231,7 +243,7 @@ html {
 .md-nav__item .md-nav__link--active,
 .md-nav__item .md-nav__link--active code {
     font-weight: bold;
-    color: var(--maho-brand-dark);
+    color: var(--maho-brand-dark) !important;
 }
 
 @media screen and (max-width: 76.25em) {

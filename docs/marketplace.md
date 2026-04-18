@@ -31,9 +31,10 @@ Discover and install powerful modules to enhance your Maho store. All modules ar
 
 .app-category {
     width: fit-content;
-    background: #ADB41A;
-    color: white;
-    padding: 4px 12px;
+    background: transparent;
+    color: #858a11;
+    border: 1px solid #ADB41A;
+    padding: 1px 8px;
     border-radius: 8px;
     font-size: 0.8em;
 }
