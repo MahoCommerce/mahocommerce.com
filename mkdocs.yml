@@ -94,6 +94,7 @@ nav:
       - CLI tool: cli-tool.md
       - Composer plugin: composer-plugin.md
       - Cron jobs: cron.md
+      - Date & time handling: date-handling.md
       - Event observers: observers.md
       - Database layer: database-layer.md
       - Email sending (SMTP): email-sending-configuration.md
