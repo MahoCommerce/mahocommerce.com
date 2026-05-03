@@ -95,8 +95,9 @@ nav:
       - Composer plugin: composer-plugin.md
       - Cron jobs: cron.md
       - Date & time handling: date-handling.md
-      - Event observers: observers.md
       - Database layer: database-layer.md
+      - Edge caching integration: edge-caching.md
+      - Event observers: observers.md
       - Email sending (SMTP): email-sending-configuration.md
       - FrankenPHP: frankenphp.md
       - Icons library: icons-library.md

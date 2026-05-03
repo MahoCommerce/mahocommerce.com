@@ -123,6 +123,12 @@ The `replaces` value accepts:
 - Observer ordering follows **module dependency**, regardless of whether the observer was defined via XML or attribute.
 - Individual observer failures are isolated and logged without breaking the rest of the dispatch.
 
+## Notable built-in events
+
+Maho dispatches events throughout the request lifecycle, model save flows, and admin actions. A few are designed as integration points for cross-cutting concerns:
+
+- **`controller_action_predispatch_session_start`** <span class="version-badge">v26.5+</span> — fires in `Mage_Core_Controller_Varien_Action::preDispatch()` immediately before the session-start guard. Lets observers flip `FLAG_NO_START_SESSION` at runtime to skip session start on cacheable anonymous GETs, so the response carries no `Set-Cookie` and no empty session row is written. See [Edge caching integration](edge-caching.md).
+
 ## Migrating from XML
 
 If you're upgrading a module that used XML-based observer configuration:
