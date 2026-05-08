@@ -171,4 +171,16 @@ For config-driven schedules:
 #[Maho\Config\CronJob('catalog_product_alert', configPath: 'crontab/jobs/catalog_product_alert/schedule/cron_expr')]
 ```
 
-Remove the corresponding XML blocks from `config.xml` after migrating — both sources are read at runtime, and duplicates will cause issues.
+Remove the corresponding XML blocks from `config.xml` after migrating; both sources are read at runtime, and duplicates will cause issues.
+
+### Automated migration
+
+Two commands cover this end-to-end:
+
+```bash
+./maho health-check                    # detect remaining <crontab><jobs> blocks
+./maho legacy:migrate-cron --dry-run   # preview the rewrite
+./maho legacy:migrate-cron             # apply
+```
+
+`legacy:migrate-cron` scans `app/code/local` and `app/code/community`, parses each `<run><model>alias::method</model>`, resolves the alias, inserts `#[Maho\Config\CronJob]` above the target method, and removes the migrated `<crontab><jobs>` block. It reads `<schedule><cron_expr>` (emitted as `schedule:`) or `<schedule><config_path>` (emitted as `configPath:`). Run `composer dump-autoload` (or click *Recompile PHP Attributes* on the cache page) after applying. See [Automated migration in routing.md](routing.md#automated-migration) for the full list of migration commands.

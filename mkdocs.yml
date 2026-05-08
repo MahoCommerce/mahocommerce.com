@@ -109,6 +109,7 @@ nav:
       - Maintenance mode: maintenance-mode.md
       - Override configs: override-configurations.md
       - Robots.txt: robotstxt.md
+      - Routing: routing.md
       - SVG uploads: svg-support.md
       - Theme development: theme-development.md
     - Reference:

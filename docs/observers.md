@@ -168,4 +168,16 @@ The area mapping:
 | `<adminhtml><events>`    | `area: 'adminhtml'`                   |
 | `<crontab><events>`      | `area: 'crontab'`                     |
 
-Remove the corresponding XML blocks from `config.xml` after migrating — both sources are read at runtime, and duplicates will cause issues.
+Remove the corresponding XML blocks from `config.xml` after migrating; both sources are read at runtime, and duplicates will cause issues.
+
+### Automated migration
+
+Two commands cover this end-to-end:
+
+```bash
+./maho health-check                         # detect remaining <events> blocks
+./maho legacy:migrate-observers --dry-run   # preview the rewrite
+./maho legacy:migrate-observers             # apply
+```
+
+`legacy:migrate-observers` scans `app/code/local` and `app/code/community`, resolves each `<class>` alias to a concrete class via `Mage::getConfig()`, inserts `#[Maho\Config\Observer]` above the target method, and removes the migrated XML block. The legacy `<observer_name>` is preserved as an explicit `id:` argument so any `replaces:` references in third-party modules continue to resolve. Run `composer dump-autoload` (or click *Recompile PHP Attributes* on the cache page) after applying. See [Automated migration in routing.md](routing.md#automated-migration) for the full list of migration commands and the route command's caveats.

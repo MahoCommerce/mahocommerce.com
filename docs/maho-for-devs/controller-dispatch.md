@@ -91,9 +91,39 @@ Finally, we ensure the module is active:
 
 ### Configuring Routes
 
-Next, we're going to configure a route. A route will turn a URL into an Action Controller and a method. Unlike other convention based PHP MVC systems, with Maho you need to explicitly define a route in the global Maho config.
+Next, we're going to configure a route. A route will turn a URL into an Action Controller and a method.
 
-In your config.xml file(at path app/code/local/Mahotutorial/Helloworld/etc/config.xml), add the following section:
+Maho supports two ways to declare routes: PHP attributes (recommended, since v26.5) and XML (legacy, still supported as a back-compatibility shim).
+
+#### PHP attributes <span class="version-badge">v26.5+</span>
+
+Since v26.5, the recommended approach is to declare routes with the `#[Maho\Config\Route]` attribute directly on the action method. No XML, no front-name registration. See [Routing](../routing.md) for the full reference.
+
+```php
+class Mahotutorial_Helloworld_IndexController extends Mage_Core_Controller_Front_Action
+{
+    #[Maho\Config\Route('/helloworld', name: 'helloworld.index')]
+    #[Maho\Config\Route('/helloworld/index', name: 'helloworld.index.index')]
+    public function indexAction()
+    {
+        echo 'Hello World';
+    }
+}
+```
+
+After adding the attribute, run:
+
+```bash
+composer dump-autoload
+```
+
+Maho compiles the route into `vendor/composer/maho_url_matcher.php`. No `config.xml` route block is needed.
+
+#### XML routers (legacy)
+
+Modules upgraded from older Maho or OpenMage versions still use the XML form. It continues to work via a back-compatibility shim, so you don't need to migrate immediately.
+
+In your config.xml file (at path app/code/local/Mahotutorial/Helloworld/etc/config.xml), add the following section:
 
 ```xml
 <config>    

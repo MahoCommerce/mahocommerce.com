@@ -75,6 +75,9 @@ Available commands:
   index:reindex:all             Reindex all indexes
   index:reindex:product         Reindex specific product(s) across all or specified indexers
  legacy
+  legacy:migrate-cron           Migrate XML <crontab><jobs> declarations to #[Maho\Config\CronJob] attributes
+  legacy:migrate-observers      Migrate XML <events> observer declarations to #[Maho\Config\Observer] attributes
+  legacy:migrate-routes         Migrate XML <routers> declarations to #[Maho\Config\Route] attributes
   legacy:rename-mysql4-classes  Search for old Mysql4 classes and replaces them with Resource classes
  log
   log:clean                     Clean log tables in the database
