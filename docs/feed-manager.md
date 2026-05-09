@@ -29,7 +29,7 @@ Welcome to **Maho FeedManager** - a powerful module for exporting your product c
 - **Visual Mapping Builders** - Drag-and-drop interface for XML, CSV, and JSON feeds
 - **Category Taxonomy Mapping** - Map store categories to platform taxonomies (e.g., Google Product Categories)
 - **Dynamic Rules** - Conditional logic for computed values (stock status, sale prices, etc.)
-- **Configurable Product Handling** - Smart parent/child product relationships
+- **Configurable Variant Handling** - "Use Parent" attribute resolution lets simple children of configurables inherit values from the parent (bundle, grouped, virtual, and downloadable products are exported as standalone entries)
 - **Transformers** - Modify data on-the-fly (price adjustments, text formatting)
 - **Formats & Regional Settings** - Per-feed price formatting, currency, and tax configuration
 - **Automated Scheduling** - Hourly, daily, or custom generation schedules
@@ -87,6 +87,20 @@ In the **Filters** tab, configure which products to include:
 - **Exclude Out of Stock** - Skip products with no stock
 - **Product Types** - Select which product types to include (simple, configurable, grouped, bundle, virtual, downloadable)
 - **Product Conditions** - Standard rule conditions for advanced filtering (see [Product Filtering](#10-product-filtering))
+
+!!! info "How Each Product Type Is Exported"
+    All six product types are fully supported and each selected product becomes a single feed entry. Inclusion is driven entirely by the **Product Types** multiselect:
+
+    | Product Type | Export Behaviour |
+    |---|---|
+    | **Simple** | Exported as a single feed entry. Children of configurables can pull values from the parent via the [Use Parent](#5-using-parent-product-data) feature in attribute mapping. |
+    | **Configurable** | Exported as a single feed entry. To export the simple variants underneath instead (or as well), select **Simple** in the Product Types filter -- the simples are then enriched with parent-product data automatically. See [Section 5](#5-using-parent-product-data). |
+    | **Grouped** | Exported as a single feed entry for the grouped product itself. Its associated simple products are *not* expanded automatically -- include them via the Simple type filter if you need them. |
+    | **Bundle** | Exported as a single feed entry for the bundle product itself. Bundle selections are *not* expanded into separate feed entries. |
+    | **Virtual** | Exported as a single feed entry, like simple products. |
+    | **Downloadable** | Exported as a single feed entry, like simple products. |
+
+    **Tip:** the most common Google Shopping setup is to select **Simple** only -- this exports each variant as its own item with `item_group_id` linking it back to the configurable parent.
 
 ### Step 3: Attribute Mapping
 
@@ -170,6 +184,9 @@ Create nested JSON objects with arrays and proper data types.
 
 When exporting configurable product children, you often need data from the parent product. FeedManager's **"Use Parent"** feature handles this elegantly.
 
+!!! note "Configurable Products Only"
+    The **Use Parent** feature applies to configurable products only -- it works by looking up a simple product's configurable parent via `catalog_product_super_link`. Bundle and grouped products are exported as standalone entries (see the table in [Step 2](#step-2-product-selection)) -- their child/associated products are not automatically pulled in or merged, and the Use Parent dropdown has no effect on them.
+
 ### Use Parent Modes
 
 | Mode | Behavior | Best For |
@@ -191,10 +208,10 @@ When exporting configurable product children, you often need data from the paren
     | Price | Never | Each variant may have different pricing |
     | Size | Never | Variant-specific attribute |
     | Color | Never | Variant-specific attribute |
-    | item_group_id | N/A | Automatically set to parent's entity_id |
+    | item_group_id | Always | Resolves to the parent configurable's SKU |
 
 !!! tip "Item Group ID"
-    When exporting configurable product children, FeedManager automatically adds `item_group_id` to link variants together. This tells platforms like Google Shopping that these products are variations of the same item.
+    The Google, Facebook, Bing, and Pinterest mapping templates ship with an `item_group_id` field pre-configured as `sku` with **Use Parent: Always**. When you export simple children of configurables, this resolves to the parent's SKU, telling these platforms that the variants belong to the same item. The field is part of the default mapping -- you can edit or remove it like any other.
 
 ---
 
