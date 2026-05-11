@@ -80,6 +80,7 @@ nav:
     - Origins: origins.md
     - Differences: differences.md
     - Roadmap: roadmap.md
+    - Security & SBOMs: sboms.md
     - User Guide:
       - Product Types: product-types.md
       - Category Import/Export: category-import-export.md
