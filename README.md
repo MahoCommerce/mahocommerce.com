@@ -1,14 +1,6 @@
 # Source of the mahocommerce.com website
 
-Please test your changes with
-
-```bash
-docker run --rm -it -p 8000:8000 -v .:/docs squidfunk/mkdocs-material
-```
-
-then open your browser to [http://localhost:8000](http://localhost:8000).
-
-Alternatively, run `./start.sh` which does all of the above.
+Please test your changes by running `./start.sh`, which builds the local Docker image (based on `mkdocs-materialx`) and serves the site at [http://localhost:8000](http://localhost:8000).
 
 ## Tools used to convert old docs
 
@@ -20,6 +12,4 @@ Alternatively, run `./start.sh` which does all of the above.
 
 ## To upgrade `requirements.txt`
 
-```bash
-docker run --rm -v "$(pwd):/app" -w /app python:3.12-slim sh -c "pip install --upgrade pip && pip install pip-upgrader && python3 -m pip install --upgrade setuptools && pip-upgrade --skip-virtualenv-check -p all"
-```
+Run `./upgrade-deps.sh`, which uses a temporary Docker container to upgrade dependencies via [`pur`](https://pypi.org/project/pur/).
