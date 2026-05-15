@@ -100,7 +100,7 @@ You only need to pass `area:` explicitly when the auto-detection produces the wr
 
 ### Admin routes & the `{_adminFrontName}` placeholder
 
-Admin URLs include a configurable front name segment that defaults to `admin` and can be changed via `use_custom_admin_path` (e.g. `/secret-admin/...`). The compiler resolves this at runtime, so you don't hard-code it.
+Admin URLs include a configurable front name segment that defaults to `admin` (e.g. `/admin/...`) and can be changed to something less guessable (e.g. `/backoffice/...`). The compiler resolves this at runtime, so you don't hard-code it.
 
 Two equivalent forms work for admin routes:
 
@@ -115,7 +115,47 @@ public function editAction() { }
 public function editAction() { }
 ```
 
-Both compile to the same route. Existing core admin controllers use the `/admin`-prefixed form for visual continuity. The runtime validates the matched front name against the configured admin path, so forged admin URLs (e.g. someone hitting `/admin/...` when you've configured `/secret-admin`) fall through to noroute.
+Both compile to the same route. Existing core admin controllers use the `/admin`-prefixed form for visual continuity. The runtime validates the matched front name against the configured admin path, so forged admin URLs (e.g. someone hitting `/admin/...` when you've configured `/backoffice`) fall through to noroute.
+
+#### Configuring the admin frontname
+
+There are two supported ways to set it:
+
+**1. `app/etc/local.xml`** (file-tracked, deploy-time):
+
+```xml
+<config>
+    <admin>
+        <base_path>backoffice</base_path>
+    </admin>
+</config>
+```
+
+This is the value the installer writes via `--admin_frontname` and is the right place for fixed, environment-pinned configuration. Run `./maho cache:flush` after editing.
+
+**2. System Configuration UI** (DB-backed, runtime-toggled):
+
+*System → Configuration → Advanced → Admin → Admin Base URL*:
+
+- **Use Custom Admin Path**: `Yes`
+- **Custom Admin Path**: `backoffice`
+
+This stores `admin/url/use_custom_path` and `admin/url/custom_path` in `core_config_data`. Use it when the admin can change their own admin path without touching files. The DB value takes precedence over `<admin><base_path>` when `Use Custom Admin Path` is `Yes`.
+
+Either way, the runtime compares the configured value against the URL segment, so `/admin/...` stops working as soon as you set a custom path, regardless of which mechanism you used.
+
+#### Migrating from the legacy `<frontName>` declaration
+
+Pre-26.5 Maho (and M1/OpenMage) stored this at `<admin><routers><adminhtml><args><frontName>`. The new runtime reads `<admin><base_path>` only, so the old node is silently ignored and a custom frontname declared there leaves the admin reachable only at `/admin/...`.
+
+Existing installations carry the legacy declaration in `app/etc/local.xml`. To migrate:
+
+```bash
+./maho legacy:migrate-routes        # rewrites local.xml in place
+./maho cache:flush
+```
+
+`./maho health-check` (and *System → Tools → Healthcheck* in the backend) reports the legacy declaration if it's still present.
 
 ## Overriding controllers
 
