@@ -391,13 +391,13 @@ Discover and install powerful modules to enhance your Maho store. All modules ar
     <div class="app-card" data-category="payment">
         <span class="app-category">Payment</span>
         <h3 class="app-title">Mollie Payments</h3>
-        <p class="app-description">European payment gateway supporting iDEAL, Bancontact, credit cards, PayPal, and more. Simple integration with competitive pricing.</p>
+        <p class="app-description">Mollie payment gateway with 28 methods including iDEAL, Bancontact, credit cards (inline via Mollie Components), PayPal, Apple Pay, Google Pay, SEPA and EU-local options. Online refunds and webhook reconciliation included.</p>
         <div class="app-footer">
             <div class="app-actions">
-                <button class="app-button app-button-primary" onclick="showInstallModal('mollie/magento')">
+                <button class="app-button app-button-primary" onclick="showInstallModal('mahocommerce/module-mollie')">
                     ↓ Install
                 </button>
-                <a href="https://github.com/mollie/Magento" class="app-button app-button-primary" target="_blank">
+                <a href="https://github.com/MahoCommerce/module-mollie" class="app-button app-button-primary" target="_blank">
                     View Details →
                 </a>
             </div>
