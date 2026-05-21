@@ -469,6 +469,23 @@ Discover and install powerful modules to enhance your Maho store. All modules ar
         </div>
     </div>
 
+    <!-- Revolut -->
+    <div class="app-card" data-category="payment">
+        <span class="app-category">Payment</span>
+        <h3 class="app-title">Revolut</h3>
+        <p class="app-description">Accept payments via Revolut Pay with a hosted redirect checkout. Includes automatic webhook registration, signing secret management, and support for Authorize Only or Authorize and Capture flows.</p>
+        <div class="app-footer">
+            <div class="app-actions">
+                <button class="app-button app-button-primary" onclick="showInstallModal('mahocommerce/module-revolut')">
+                    ↓ Install
+                </button>
+                <a href="https://github.com/MahoCommerce/module-revolut" class="app-button app-button-primary" target="_blank">
+                    View Details →
+                </a>
+            </div>
+        </div>
+    </div>
+
     <!-- reCAPTCHA -->
     <div class="app-card" data-category="security">
         <span class="app-category">Security</span>
