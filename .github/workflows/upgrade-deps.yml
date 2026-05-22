@@ -5,15 +5,21 @@ on:
     - cron: '0 6 * * 1'
   workflow_dispatch:
 
-permissions:
-  contents: write
-  pull-requests: write
-
 jobs:
   upgrade:
     runs-on: ubuntu-latest
     steps:
+      - name: Generate token
+        id: generate_token
+        uses: actions/create-github-app-token@v3
+        with:
+          app-id: ${{ secrets.SYNC_L10N_APP_ID }}
+          private-key: ${{ secrets.SYNC_L10N_APP_PRIVATE_KEY }}
+          owner: MahoCommerce
+
       - uses: actions/checkout@v6
+        with:
+          token: ${{ steps.generate_token.outputs.token }}
 
       - uses: actions/setup-python@v6
         with:
@@ -31,12 +37,21 @@ jobs:
         run: mkdocs build
 
       - name: Open pull request
-        uses: peter-evans/create-pull-request@v8
-        with:
-          branch: chore/upgrade-deps
-          title: "chore: upgrade python dependencies"
-          commit-message: "chore: upgrade python dependencies"
-          body: |
-            Automated dependency upgrade via `pur`.
-            `mkdocs build` passed in CI.
-          delete-branch: true
+        env:
+          GITHUB_TOKEN: ${{ steps.generate_token.outputs.token }}
+        run: |
+          if git diff --quiet requirements.txt; then
+            echo "No dependency changes."
+            exit 0
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email 'github-actions[bot]@users.noreply.github.com'
+          git checkout -B chore/upgrade-deps
+          git add requirements.txt
+          git commit -m "chore: upgrade python dependencies"
+          git push -f origin chore/upgrade-deps
+          gh pr create \
+            --title "chore: upgrade python dependencies" \
+            --body "Automated dependency upgrade via \`pur\`. \`mkdocs build\` passed in CI." \
+            --head chore/upgrade-deps \
+            --base main || true
