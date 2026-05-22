@@ -1,0 +1,42 @@
+name: Upgrade dependencies
+
+on:
+  schedule:
+    - cron: '0 6 * * 1'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  upgrade:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Upgrade requirements.txt with pur
+        run: |
+          pip install pur
+          pur -r requirements.txt
+
+      - name: Install upgraded dependencies
+        run: pip install -r requirements.txt
+
+      - name: Verify build
+        run: mkdocs build --strict
+
+      - name: Open pull request
+        uses: peter-evans/create-pull-request@v7
+        with:
+          branch: chore/upgrade-deps
+          title: "chore: upgrade python dependencies"
+          commit-message: "chore: upgrade python dependencies"
+          body: |
+            Automated dependency upgrade via `pur`.
+            `mkdocs build --strict` passed in CI.
+          delete-branch: true

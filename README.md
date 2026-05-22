@@ -9,7 +9,3 @@ Please test your changes by running `./start.sh`, which builds the local Docker 
 - https://jsonformatter.org/json-pretty-print
 
 ...and a lot of manual work. :)
-
-## To upgrade `requirements.txt`
-
-Run `./upgrade-deps.sh`, which uses a temporary Docker container to upgrade dependencies via [`pur`](https://pypi.org/project/pur/).
