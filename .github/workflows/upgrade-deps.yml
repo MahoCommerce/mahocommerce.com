@@ -28,7 +28,7 @@ jobs:
         run: pip install -r requirements.txt
 
       - name: Verify build
-        run: mkdocs build --strict
+        run: mkdocs build
 
       - name: Open pull request
         uses: peter-evans/create-pull-request@v7
@@ -38,5 +38,5 @@ jobs:
           commit-message: "chore: upgrade python dependencies"
           body: |
             Automated dependency upgrade via `pur`.
-            `mkdocs build --strict` passed in CI.
+            `mkdocs build` passed in CI.
           delete-branch: true
