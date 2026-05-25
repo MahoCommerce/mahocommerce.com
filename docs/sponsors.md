@@ -21,6 +21,7 @@ By sponsoring us, you're not just supporting our work - you're investing in the 
 
 <div class="sponsorgallery">
     <a href="https://e-gear.dk" title="e-Gear.dk" target="_blank"><img src="/assets/sponsors/egear.png" alt="e-Gear.dk"></a>
+    <a href="https://mageaustralia.com.au" title="Mage Australia" target="_blank"><img src="/assets/sponsors/mageaustralia.png" alt="Mage Australia"></a>
     <a href="https://magemega.com" title="MageMega" target="_blank"><img src="/assets/sponsors/magemega.png" alt="MageMega"></a>
 </div>
 
