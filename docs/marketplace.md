@@ -274,6 +274,20 @@ Discover and install powerful modules to enhance your Maho store. All modules ar
         </div>
     </div>
 
+    <!-- Cache Buster -->
+    <div class="app-card" data-category="performance">
+        <span class="app-category">Performance</span>
+        <h3 class="app-title">Cache Buster</h3>
+        <p class="app-description">Appends <code>?v=&lt;filemtime&gt;</code> to same-origin /skin/, /js/, /media/ asset URLs so browsers and CDNs refetch each file when it changes. No webserver rewrite rules required; works alongside built-in CSS/JS merging.</p>
+        <div class="app-footer">
+            <div class="app-actions">
+                <a href="https://github.com/mageaustralia/maho-module-cachebuster" class="app-button app-button-primary" target="_blank">
+                    View Details →
+                </a>
+            </div>
+        </div>
+    </div>
+
     <!-- Cloudflare Turnstile -->
     <div class="app-card" data-category="security">
         <span class="app-category">Security</span>
