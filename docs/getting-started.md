@@ -6,9 +6,14 @@
 
 ## System requirements
 
-- PHP 8.3+
+- PHP 8.3 / 8.4 / 8.5
 - Apache/Nginx/Caddy/FrankenPHP[^1]
 - MySQL 8.0+ / MariaDB 10.6+ / PostgreSQL 14+ (beta) / SQLite (beta)
+
+??? info "PHP version support policy"
+    Maho supports the **three most recent stable PHP releases**. Today that means **8.3, 8.4, and 8.5**.
+
+    When a new PHP minor is released (e.g. 8.6), we add it and drop the oldest — so support would shift to **8.4, 8.5, and 8.6**, and so on. When a new PHP **major** version is released, we'll reevaluate this policy.
 
 ??? info "Supported database versions (only actively maintained releases)"
     | Database   | Version | EOL        |
