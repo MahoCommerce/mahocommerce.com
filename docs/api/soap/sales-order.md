@@ -14,12 +14,12 @@ Allows you to manage orders.
 
 <h3>Methods</h3>
 
-- `sales_order.list` — Retrieve the list of orders using filters.
-- `sales_order.info` — Retrieve the order information.
-- `sales_order.addComment` — Add a comment to an order.
-- `sales_order.hold` — Hold an order.
-- `sales_order.unhold` — Unhold an order.
-- `sales_order.cancel` — Cancel an order.
+- `sales_order.list` - Retrieve the list of orders using filters.
+- `sales_order.info` - Retrieve the order information.
+- `sales_order.addComment` - Add a comment to an order.
+- `sales_order.hold` - Hold an order.
+- `sales_order.unhold` - Unhold an order.
+- `sales_order.cancel` - Cancel an order.
 
 <h3>Faults</h3>
 
@@ -30,7 +30,7 @@ Allows you to manage orders.
 | 102        | Invalid data given. Details in error message.       |
 | 103        | Order status not changed. Details in error message. |
 
-<h3>Example — Working With Orders</h3>
+<h3>Example - Working With Orders</h3>
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/soap/?wsdl');

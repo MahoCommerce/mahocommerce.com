@@ -10,8 +10,8 @@ Allows you to add and remove coupon codes for a shopping cart.
 
 <h3>Methods</h3>
 
-- `cart_coupon.add` — Add a coupon code to a quote.
-- `cart_coupon.remove` — Remove a coupon code from a quote.
+- `cart_coupon.add` - Add a coupon code to a quote.
+- `cart_coupon.remove` - Remove a coupon code from a quote.
 
 **Note:** In Maho, quotes and shopping carts are logically related, but technically different.
 The shopping cart is a wrapper for a quote, and it is used primarily by the frontend logic.

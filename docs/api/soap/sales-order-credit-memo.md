@@ -14,11 +14,11 @@ Allows you to operate with credit memos for orders.
 
 <h3>Methods</h3>
 
-- `sales_order_creditmemo.list` — Retrieve the list of credit memos by filters.
-- `sales_order_creditmemo.info` — Retrieve the credit memo information.
-- `sales_order_creditmemo.create` — Create a new credit memo for order.
-- `sales_order_creditmemo.addComment` — Add a new comment to the credit memo.
-- `sales_order_creditmemo.cancel` — Cancel the credit memo.
+- `sales_order_creditmemo.list` - Retrieve the list of credit memos by filters.
+- `sales_order_creditmemo.info` - Retrieve the credit memo information.
+- `sales_order_creditmemo.create` - Create a new credit memo for order.
+- `sales_order_creditmemo.addComment` - Add a new comment to the credit memo.
+- `sales_order_creditmemo.cancel` - Cancel the credit memo.
 
 <h3>Faults</h3>
 

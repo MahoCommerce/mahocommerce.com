@@ -8,7 +8,7 @@ The API lives on `Mage_Core_Model_Locale` (accessed via `Mage::app()->getLocale(
 
 Three rules, worth internalizing before you read the API:
 
-1. **DB columns are always UTC**, formatted as `'Y-m-d H:i:s'` (or `'Y-m-d'` for date-only). Never store a store-local string in the DB — it's ambiguous across stores, and it breaks the invariant that the rest of the codebase relies on.
+1. **DB columns are always UTC**, formatted as `'Y-m-d H:i:s'` (or `'Y-m-d'` for date-only). Never store a store-local string in the DB - it's ambiguous across stores, and it breaks the invariant that the rest of the codebase relies on.
 2. **Convert on the way in, and on the way out.** `storeToUtc()` for user input heading toward the DB; `utcToStore()` for DB values heading toward display or computation.
 3. **Method names encode the timezone.** Reading `nowUtc()` or `utcToStore()` at a call site should be enough to tell you which timezone the resulting value is in. You shouldn't need to read a docblock.
 
@@ -19,21 +19,21 @@ Everything below follows from those three rules.
 ```php
 $locale = Mage::app()->getLocale();
 
-// DB-bound strings — formatDateForDb is the single entry point for DB columns
-$locale->formatDateForDb('now');                               // 'Y-m-d H:i:s' (UTC) — current time for DB
-$locale->formatDateForDb('now', withTime: false);              // 'Y-m-d' (UTC) — current date for DB
+// DB-bound strings - formatDateForDb is the single entry point for DB columns
+$locale->formatDateForDb('now');                               // 'Y-m-d H:i:s' (UTC) - current time for DB
+$locale->formatDateForDb('now', withTime: false);              // 'Y-m-d' (UTC) - current date for DB
 $locale->formatDateForDb($date);                               // normalize arbitrary input to 'Y-m-d H:i:s'
 $locale->formatDateForDb($date, withTime: false);              // normalize arbitrary input to 'Y-m-d'
 
-// Non-DB UTC strings — logs, CSV exports, API payloads, etc.
+// Non-DB UTC strings - logs, CSV exports, API payloads, etc.
 $locale->nowUtc();                                             // 'Y-m-d H:i:s' (UTC)
 $locale->todayUtc();                                           // 'Y-m-d' (UTC)
 
-// Convert between timezones — always returns DateTimeImmutable
+// Convert between timezones - always returns DateTimeImmutable
 $storeDate = $locale->utcToStore($store, $utcInput);           // DateTimeImmutable in store TZ
 $utcDate   = $locale->storeToUtc($store, $storeInput);         // DateTimeImmutable in UTC
 
-// "Now" in the store's timezone — for computation or display
+// "Now" in the store's timezone - for computation or display
 $locale->utcToStore();                                         // DateTimeImmutable in store TZ (current moment)
 $locale->utcToStore()->format('Y-m-d');                        // today's date, in the store's timezone
 
@@ -59,19 +59,19 @@ $locale->formatDateForDb(null);                                // null (empty pa
 $locale->formatDateForDb('');                                  // null
 ```
 
-Does not perform timezone conversion. Strings and integers are treated as UTC. For `DateTime` / `DateTimeImmutable` inputs, the method formats whatever timezone the object carries — so convert to UTC *first* if the input is store-local (see `storeToUtc()` below).
+Does not perform timezone conversion. Strings and integers are treated as UTC. For `DateTime` / `DateTimeImmutable` inputs, the method formats whatever timezone the object carries - so convert to UTC *first* if the input is store-local (see `storeToUtc()` below).
 
 This method is the single choke point for DB-bound date formatting. Even though its output for `'now'` happens to equal `nowUtc()`'s output, the call site announces its intent: "this string is going to a DB column."
 
 ### `nowUtc(): string`
 
-Returns the current UTC date and time as a `'Y-m-d H:i:s'` string. Use for non-DB purposes — log lines, CSV exports, API payloads, anywhere you need a UTC string outside the ORM.
+Returns the current UTC date and time as a `'Y-m-d H:i:s'` string. Use for non-DB purposes - log lines, CSV exports, API payloads, anywhere you need a UTC string outside the ORM.
 
 ```php
 $locale->nowUtc();                                             // '2026-04-18 14:32:05'
 ```
 
-For DB writes, use `formatDateForDb('now')` instead. The string output is identical (both use `gmdate()` under the hood), but the call site expresses different intent — and keeping `formatDateForDb()` as the single DB-bound entry point makes refactors and audits tractable.
+For DB writes, use `formatDateForDb('now')` instead. The string output is identical (both use `gmdate()` under the hood), but the call site expresses different intent - and keeping `formatDateForDb()` as the single DB-bound entry point makes refactors and audits tractable.
 
 ### `todayUtc(): string`
 
@@ -100,14 +100,14 @@ $dt->format(Mage_Core_Model_Locale::HTML5_DATETIME_FORMAT);    // 'Y-m-d\TH:i'
 
 The `$store` parameter accepts anything `Mage::app()->getStore()` accepts: store ID, store code, `Mage_Core_Model_Store` instance, or `null` for the current store.
 
-The `$date` parameter accepts a string, an int timestamp, a `DateTime`, a `DateTimeImmutable`, or `null` (= "now"). When given a `DateTime` / `DateTimeImmutable`, the method preserves the object's existing timezone as the *source* timezone — so make sure the object you're passing is actually in UTC.
+The `$date` parameter accepts a string, an int timestamp, a `DateTime`, a `DateTimeImmutable`, or `null` (= "now"). When given a `DateTime` / `DateTimeImmutable`, the method preserves the object's existing timezone as the *source* timezone - so make sure the object you're passing is actually in UTC.
 
 ### `storeToUtc($store = null, $date = null): DateTimeImmutable`
 
 The inverse of `utcToStore()`. Converts a store-local date to UTC. Always returns a `DateTimeImmutable`.
 
 ```php
-// User submits "2026-04-18 09:00:00" in the store's timezone — convert for the DB
+// User submits "2026-04-18 09:00:00" in the store's timezone - convert for the DB
 $utcForDb = $locale->formatDateForDb(
     $locale->storeToUtc($store, '2026-04-18 09:00:00')
 );
@@ -118,7 +118,7 @@ $expires = $locale->formatDateForDb(
 );
 ```
 
-When the result is going to a DB column, wrap it in `formatDateForDb()` rather than calling `->format()` directly — that keeps `formatDateForDb()` as the single entry point for DB-bound date strings.
+When the result is going to a DB column, wrap it in `formatDateForDb()` rather than calling `->format()` directly - that keeps `formatDateForDb()` as the single entry point for DB-bound date strings.
 
 ### `Mage::helper('core')->formatDate($date, $format, $withTime, $useTimezone): string`
 
@@ -156,23 +156,23 @@ $object->setUpdatedAt($locale->formatDateForDb('now'));
 // User submits a date in the store's timezone
 $input = $this->getRequest()->getParam('start_date');          // '2026-04-18 09:00:00'
 
-// ✅ Do — convert to UTC, then format through formatDateForDb
+// ✅ Do - convert to UTC, then format through formatDateForDb
 $utc = $locale->storeToUtc($store, $input);
 $object->setStartDate($locale->formatDateForDb($utc));
 ```
 
-The conversion and the DB-formatting are two separate concerns: `storeToUtc()` handles the timezone shift, `formatDateForDb()` produces the DB-bound string. Always route DB-bound writes through `formatDateForDb()`, even when you already have a `DateTimeImmutable` in hand — it keeps the method as the single choke point for anything going into a date column.
+The conversion and the DB-formatting are two separate concerns: `storeToUtc()` handles the timezone shift, `formatDateForDb()` produces the DB-bound string. Always route DB-bound writes through `formatDateForDb()`, even when you already have a `DateTimeImmutable` in hand - it keeps the method as the single choke point for anything going into a date column.
 
 ### Displaying a DB value to the user
 
 ```php
 $createdAtUtc = $object->getCreatedAt();                       // '2026-04-18 14:30:00' (UTC)
 
-// ✅ Do — locale-aware display
+// ✅ Do - locale-aware display
 echo Mage::helper('core')->formatDate($createdAtUtc, 'medium', withTime: true);
 // en_US: 'Apr 18, 2026, 10:30:00 AM' (if store is in America/New_York)
 
-// ✅ Do — machine-readable, still timezone-converted
+// ✅ Do - machine-readable, still timezone-converted
 echo $locale->utcToStore(null, $createdAtUtc)
     ->format(Mage_Core_Model_Locale::DATETIME_FORMAT);
 // '2026-04-18 10:30:00'
@@ -188,25 +188,25 @@ $today = $locale->utcToStore()->format('Y-m-d');               // '2026-04-18' i
 ### Extending an expiration by N days
 
 ```php
-// ✅ Do — convert + modify, then format through formatDateForDb
+// ✅ Do - convert + modify, then format through formatDateForDb
 $expiresAt = $locale->storeToUtc()->modify("+{$days} days");
 $object->setExpiresAt($locale->formatDateForDb($expiresAt));
 
-// ❌ Don't — silent no-op on DateTimeImmutable
+// ❌ Don't - silent no-op on DateTimeImmutable
 $expiration = $locale->storeToUtc();
 $expiration->modify("+{$days} days");                          // return value discarded!
 $object->setExpiresAt($locale->formatDateForDb($expiration));  // still "now"
 ```
 
-Mutators on `DateTimeImmutable` return a **new instance** — they do not modify the original. Either chain directly (`->modify(...)`) or reassign (`$d = $d->modify(...)`). A bare `$d->modify(...)` with the return value discarded is a silent no-op.
+Mutators on `DateTimeImmutable` return a **new instance** - they do not modify the original. Either chain directly (`->modify(...)`) or reassign (`$d = $d->modify(...)`). A bare `$d->modify(...)` with the return value discarded is a silent no-op.
 
 ### Writing to a log file or CSV export
 
 ```php
-// ✅ Do — non-DB UTC string
+// ✅ Do - non-DB UTC string
 $log->info("Job started at " . $locale->nowUtc());
 
-// ✅ Do — for a CSV export column
+// ✅ Do - for a CSV export column
 $row[] = $locale->todayUtc();
 ```
 
@@ -219,13 +219,13 @@ $row[] = $locale->todayUtc();
     `nowUtc()` returns a UTC string. If you need "now" in the store's timezone, use `$locale->utcToStore()` and format from the `DateTimeImmutable`.
 
 !!! warning "`utcToStore()` / `storeToUtc()` return `DateTimeImmutable`"
-    Mutators like `->setTime()`, `->modify()`, `->add()`, `->sub()`, `->setDate()`, `->setTimezone()` return a **new instance** — they do not modify the original. Either chain directly (`->modify('+1 day')->format(...)`) or reassign (`$d = $d->modify('+1 day')`). A bare `$d->modify(...)` with the return value discarded is a silent no-op.
+    Mutators like `->setTime()`, `->modify()`, `->add()`, `->sub()`, `->setDate()`, `->setTimezone()` return a **new instance** - they do not modify the original. Either chain directly (`->modify('+1 day')->format(...)`) or reassign (`$d = $d->modify('+1 day')`). A bare `$d->modify(...)` with the return value discarded is a silent no-op.
 
 !!! warning "DateTime inputs preserve their own timezone"
-    When you pass a `DateTime` or `DateTimeImmutable` into `utcToStore()` / `storeToUtc()`, the method uses the object's existing timezone as the *source* timezone — not UTC (for `utcToStore`) or the store TZ (for `storeToUtc`). If you construct a `DateTime` from an ambiguous string (`new DateTime('2026-04-18 12:00:00')`), it'll adopt PHP's default timezone, which may not be what you want. Pass strings or timestamps when precision matters, or construct DateTime objects with an explicit `DateTimeZone`.
+    When you pass a `DateTime` or `DateTimeImmutable` into `utcToStore()` / `storeToUtc()`, the method uses the object's existing timezone as the *source* timezone - not UTC (for `utcToStore`) or the store TZ (for `storeToUtc`). If you construct a `DateTime` from an ambiguous string (`new DateTime('2026-04-18 12:00:00')`), it'll adopt PHP's default timezone, which may not be what you want. Pass strings or timestamps when precision matters, or construct DateTime objects with an explicit `DateTimeZone`.
 
 !!! info "PHP's default timezone is UTC in Maho"
-    Maho forces PHP's default timezone to UTC at bootstrap. `nowUtc()` and `todayUtc()` use `gmdate()` internally, so they're correct regardless. Most other code is also correct as a result — but be careful when constructing `new DateTime('...')` without an explicit timezone if the underlying server ever runs with a different default.
+    Maho forces PHP's default timezone to UTC at bootstrap. `nowUtc()` and `todayUtc()` use `gmdate()` internally, so they're correct regardless. Most other code is also correct as a result - but be careful when constructing `new DateTime('...')` without an explicit timezone if the underlying server ever runs with a different default.
 
 ## Why there's no `nowStore()` / `todayStore()`
 
@@ -233,7 +233,7 @@ This is a deliberate omission. A store-local datetime *string* has no timezone t
 
 - Storing one in a DB column breaks the "DB is always UTC" invariant.
 - In a multi-store setup, two stores with different timezones would write different instants into the same column under the same string.
-- For computation or display you want a `DateTimeImmutable` anyway — `utcToStore()` with no args returns exactly that.
+- For computation or display you want a `DateTimeImmutable` anyway - `utcToStore()` with no args returns exactly that.
 
 If you catch yourself wanting "now as a store-local string," step back and figure out what you actually need:
 
@@ -260,9 +260,9 @@ The following methods still work but will emit deprecation notices. They will be
 
 The reasoning behind each deprecation:
 
-- **`date()` / `dateMutable()` / `dateImmutable()`** conflated three concerns in one overloaded signature: parsing, timezone conversion, and format-string handling. The new methods separate them — `utcToStore` / `storeToUtc` do conversion, the caller does formatting.
+- **`date()` / `dateMutable()` / `dateImmutable()`** conflated three concerns in one overloaded signature: parsing, timezone conversion, and format-string handling. The new methods separate them - `utcToStore` / `storeToUtc` do conversion, the caller does formatting.
 - **`storeDate()` / `utcDate()`** had boolean flags that changed the return type between `DateTime` and `string` depending on the `$format` argument. Non-obvious at call sites. The replacement always returns `DateTimeImmutable`; the caller formats explicitly.
-- **`storeTimeStamp()`** returned an int that looked like a Unix timestamp but was actually derived from the store's wall-clock time — a footgun in anything that assumed it was seconds-since-epoch.
+- **`storeTimeStamp()`** returned an int that looked like a Unix timestamp but was actually derived from the store's wall-clock time - a footgun in anything that assumed it was seconds-since-epoch.
 - **`formatDate()` on resource classes** was a thin wrapper with a magic `true` value for "now." The replacement is more direct: `$locale->formatDateForDb('now')` or `$locale->formatDateForDb($input)`.
 
 ## Migration examples
@@ -285,11 +285,11 @@ $object->setCreatedAt(Mage::app()->getLocale()->formatDateForDb('now'));
 // ❌ Old
 $display = $locale->storeDate($store, $createdAt, true);       // returned DateTime or string (!)
 
-// ✅ New — machine-readable
+// ✅ New - machine-readable
 $display = $locale->utcToStore($store, $createdAt)
     ->format(Mage_Core_Model_Locale::DATETIME_FORMAT);
 
-// ✅ New — locale-aware
+// ✅ New - locale-aware
 $display = Mage::helper('core')->formatDate($createdAt, 'medium', withTime: true);
 ```
 
@@ -300,7 +300,7 @@ $display = Mage::helper('core')->formatDate($createdAt, 'medium', withTime: true
 $utc = $locale->utcDate($store, $userInput, true)
     ->toString(Mage_Core_Model_Locale::DATETIME_FORMAT);
 
-// ✅ New — route DB-bound writes through formatDateForDb()
+// ✅ New - route DB-bound writes through formatDateForDb()
 $utc = $locale->formatDateForDb(
     $locale->storeToUtc($store, $userInput)
 );
@@ -310,12 +310,12 @@ $utc = $locale->formatDateForDb(
 
 ```php
 // ❌ Old
-$ts = $locale->storeTimeStamp($store);                         // ambiguous — wall-clock or real epoch?
+$ts = $locale->storeTimeStamp($store);                         // ambiguous - wall-clock or real epoch?
 
-// ✅ New — real Unix timestamp of the current moment in store TZ
+// ✅ New - real Unix timestamp of the current moment in store TZ
 $ts = $locale->utcToStore($store)->getTimestamp();
 
-// ✅ New — if you actually wanted seconds-since-epoch
+// ✅ New - if you actually wanted seconds-since-epoch
 $ts = time();
 ```
 
@@ -327,7 +327,7 @@ $start = $locale->utcToStore();
 $start->setTime(0, 0, 0);                                      // used to mutate in place
 $startStr = $start->format('Y-m-d H:i:s');
 
-// ✅ New (utcToStore returns DateTimeImmutable — mutators return new instances)
+// ✅ New (utcToStore returns DateTimeImmutable - mutators return new instances)
 $startStr = $locale->utcToStore()
     ->setTime(0, 0, 0)
     ->format('Y-m-d H:i:s');
@@ -360,13 +360,13 @@ $locale->formatDateForDb('now');
 
 ### Why UTC-in-DB?
 
-A timestamp with no timezone attached is ambiguous — `'2026-04-18 09:00:00'` refers to different instants in America/New_York vs. Europe/Paris. If your DB stores such strings without a timezone discipline, then:
+A timestamp with no timezone attached is ambiguous - `'2026-04-18 09:00:00'` refers to different instants in America/New_York vs. Europe/Paris. If your DB stores such strings without a timezone discipline, then:
 
 - Reports and analytics across stores produce inconsistent results.
 - Moving a store to a new timezone retroactively changes the meaning of historical data.
 - Cross-store operations (shared catalogs, multi-warehouse inventory) silently corrupt time ordering.
 
-Picking UTC as the canonical storage timezone eliminates all of that: `'2026-04-18 09:00:00'` in the DB always means the same instant, regardless of which store wrote it or which store reads it. The tradeoff is that display code has to convert — which is what `utcToStore()` is for.
+Picking UTC as the canonical storage timezone eliminates all of that: `'2026-04-18 09:00:00'` in the DB always means the same instant, regardless of which store wrote it or which store reads it. The tradeoff is that display code has to convert - which is what `utcToStore()` is for.
 
 ### DST handling
 
@@ -374,7 +374,7 @@ Picking UTC as the canonical storage timezone eliminates all of that: `'2026-04-
 
 - **Spring-forward gap.** 2:30 AM on the second Sunday of March doesn't exist in America/New_York. If you pass such a string, PHP picks the next valid instant. Usually fine for user-facing flows, but worth knowing when writing tests.
 - **Fall-back overlap.** 1:30 AM on the first Sunday of November occurs twice in America/New_York. PHP picks the first occurrence (pre-DST, still EDT).
-- **Half-hour offsets.** Timezones like Asia/Kolkata (UTC+5:30) and Asia/Kathmandu (UTC+5:45) work correctly — the conversion is minute-accurate.
+- **Half-hour offsets.** Timezones like Asia/Kolkata (UTC+5:30) and Asia/Kathmandu (UTC+5:45) work correctly - the conversion is minute-accurate.
 
 The integration test suite covers all these edge cases; see `tests/Backend/Integration/Core/Model/LocaleDateIntegrationTest.php` for worked examples.
 

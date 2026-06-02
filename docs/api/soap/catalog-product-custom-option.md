@@ -12,12 +12,12 @@
 
 <h3>Methods</h3>
 
-- `product_custom_option.add` — Add a new custom option to a product.
-- `product_custom_option.update` — Update the product custom option.
-- `product_custom_option.types` — Get the list of available custom option types.
-- `product_custom_option.list` — Retrieve the list of product custom options.
-- `product_custom_option.info` — Get full information about the custom option in a product.
-- `product_custom_option.remove` — Remove the custom option.
+- `product_custom_option.add` - Add a new custom option to a product.
+- `product_custom_option.update` - Update the product custom option.
+- `product_custom_option.types` - Get the list of available custom option types.
+- `product_custom_option.list` - Retrieve the list of product custom options.
+- `product_custom_option.info` - Get full information about the custom option in a product.
+- `product_custom_option.remove` - Remove the custom option.
 
 <h3>Faults</h3>
 

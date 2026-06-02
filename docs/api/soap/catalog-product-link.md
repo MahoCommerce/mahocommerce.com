@@ -14,12 +14,12 @@ Allows you to manage links for products (including related), cross-sells, upsell
 
 <h3>Methods</h3>
 
-- `catalog_product_link.list` — Retrieve products linked to the specified product.
-- `catalog_product_link.assign` — Link a product to another product.
-- `catalog_product_link.update` — Update a product link.
-- `catalog_product_link.remove` — Remove a product link.
-- `catalog_product_link.types` — Retrieve product link types.
-- `catalog_product_link.attributes` — Retrieve product link type attributes.
+- `catalog_product_link.list` - Retrieve products linked to the specified product.
+- `catalog_product_link.assign` - Link a product to another product.
+- `catalog_product_link.update` - Update a product link.
+- `catalog_product_link.remove` - Remove a product link.
+- `catalog_product_link.types` - Retrieve product link types.
+- `catalog_product_link.attributes` - Retrieve product link type attributes.
 
 <h3>Faults</h3>
 
@@ -30,7 +30,7 @@ Allows you to manage links for products (including related), cross-sells, upsell
 | 102        | Invalid data given. Details in error message. |
 | 104        | Product link not removed.                     |
 
-<h3>Example — Working With Product Links</h3>
+<h3>Example - Working With Product Links</h3>
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/soap/?wsdl');

@@ -14,11 +14,11 @@ Allows you to operate with product tags.
 
 <h3>Methods</h3>
 
-- `product_tag.list` — Retrieve the list of tags by the product ID.
-- `product_tag.info` — Retrieve information about a product tag.
-- `product_tag.add` — Add one or more tags to a product.
-- `product_tag.update` — Update an existing product tag.
-- `product_tag.remove` — Remove a product tag.
+- `product_tag.list` - Retrieve the list of tags by the product ID.
+- `product_tag.info` - Retrieve information about a product tag.
+- `product_tag.add` - Add one or more tags to a product.
+- `product_tag.update` - Update an existing product tag.
+- `product_tag.remove` - Remove a product tag.
 
 <h3>Faults</h3>
 

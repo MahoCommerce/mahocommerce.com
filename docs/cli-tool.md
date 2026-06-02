@@ -140,7 +140,7 @@ Now you can edit your newly create file in `lib/MahoCLI/Commands`.
 Alternatively, you can create commands manually:
 
 1. Create `lib/MahoCLI/Commands` in the main directory of your project
-2. Create your command file, e.g. `MyCustomCommand.php` in `lib/MahoCLI/Commands`. You can also organize commands into subdirectories (e.g. `lib/MahoCLI/Commands/Catalog/ImportCommand.php`) — they will be discovered automatically as long as the namespace matches the directory structure:
+2. Create your command file, e.g. `MyCustomCommand.php` in `lib/MahoCLI/Commands`. You can also organize commands into subdirectories (e.g. `lib/MahoCLI/Commands/Catalog/ImportCommand.php`) - they will be discovered automatically as long as the namespace matches the directory structure:
 ```php
 <?php
 

@@ -24,7 +24,7 @@ Maho Models don't contain any code for connecting to the database. Instead, each
 
 ## Enable developer mode
 
-Something you should do in development—but _never_ in production—is to enable Maho's _developer mode_ which, among other things, displays exceptions in your browser. It's useful for debugging your code.
+Something you should do in development, but _never_ in production, is to enable Maho's _developer mode_ which, among other things, displays exceptions in your browser. It's useful for debugging your code.
 
 ## Creating a Basic Model
 

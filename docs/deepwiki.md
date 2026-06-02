@@ -10,17 +10,17 @@ It covers architecture, internals, and code-level details that complement this d
 
 Topics covered include:
 
-- Core architecture — bootstrap process, request flow, module system, layout and event systems
-- Database layer — multi-database support, models, EAV system, indexing
-- Core services — caching, security, sessions, email, logging, cron, localization
-- Frontend system — theme architecture, blocks, checkout, CSS/JS
-- Admin interface — admin architecture, WYSIWYG editor, forms and grids
-- Catalog module — products, categories, attributes, pricing, inventory
-- CLI tools — command architecture and available commands
-- Extension development — custom modules, observers, commands, product types
-- API reference — static classes, configuration APIs, helpers, database interfaces
+- Core architecture - bootstrap process, request flow, module system, layout and event systems
+- Database layer - multi-database support, models, EAV system, indexing
+- Core services - caching, security, sessions, email, logging, cron, localization
+- Frontend system - theme architecture, blocks, checkout, CSS/JS
+- Admin interface - admin architecture, WYSIWYG editor, forms and grids
+- Catalog module - products, categories, attributes, pricing, inventory
+- CLI tools - command architecture and available commands
+- Extension development - custom modules, observers, commands, product types
+- API reference - static classes, configuration APIs, helpers, database interfaces
 
 ## Other repositories
 
-- [MahoCommerce/maho-composer-plugin](https://deepwiki.com/MahoCommerce/maho-composer-plugin){:target="_blank"} — Composer plugin internals
-- [MahoCommerce/maho-phpstan-plugin](https://deepwiki.com/MahoCommerce/maho-phpstan-plugin){:target="_blank"} — PHPStan plugin for Maho
+- [MahoCommerce/maho-composer-plugin](https://deepwiki.com/MahoCommerce/maho-composer-plugin){:target="_blank"} - Composer plugin internals
+- [MahoCommerce/maho-phpstan-plugin](https://deepwiki.com/MahoCommerce/maho-phpstan-plugin){:target="_blank"} - PHPStan plugin for Maho

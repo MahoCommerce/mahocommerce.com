@@ -6,13 +6,13 @@ Allows you to manage shipments and tracking numbers.
 
 <h3>Methods</h3>
 
-- `sales_order_shipment.list` — Retrieve the list of shipments using filters.
-- `sales_order_shipment.info` — Retrieve information about the shipment.
-- `sales_order_shipment.create` — Create a new shipment for an order.
-- `sales_order_shipment.addComment` — Add a new comment to a shipment.
-- `sales_order_shipment.addTrack` — Add a new tracking number to a shipment.
-- `sales_order_shipment.removeTrack` — Remove tracking number from a shipment.
-- `sales_order_shipment.getCarriers` — Retrieve the list of allowed carriers for an order.
+- `sales_order_shipment.list` - Retrieve the list of shipments using filters.
+- `sales_order_shipment.info` - Retrieve information about the shipment.
+- `sales_order_shipment.create` - Create a new shipment for an order.
+- `sales_order_shipment.addComment` - Add a new comment to a shipment.
+- `sales_order_shipment.addTrack` - Add a new tracking number to a shipment.
+- `sales_order_shipment.removeTrack` - Remove tracking number from a shipment.
+- `sales_order_shipment.getCarriers` - Retrieve the list of allowed carriers for an order.
 
 <h3>Faults</h3>
 
@@ -25,7 +25,7 @@ Allows you to manage shipments and tracking numbers.
 | 104        | Requested tracking not exists.                   |
 | 105        | Tracking not deleted. Details in error message.  |
 
-<h3>Example — Working With Shipments</h3>
+<h3>Example - Working With Shipments</h3>
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/soap/?wsdl');

@@ -34,7 +34,7 @@ so you can experience both the storefront and the admin panel.
 </div>
 
 !!! info "Auto-reset every 3 hours"
-    The demo instance is automatically reset every 3 hours, so feel free to experiment —
+    The demo instance is automatically reset every 3 hours, so feel free to experiment  - 
     you can't break anything permanently. Any changes you make will be wiped on the next reset.
 
 !!! warning

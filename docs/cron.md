@@ -1,11 +1,11 @@
 # Cron jobs
 
-Maho uses a cron system to run scheduled background tasks — things like sending queued emails, cleaning up old logs, generating sitemaps, and applying catalog price rules.
+Maho uses a cron system to run scheduled background tasks - things like sending queued emails, cleaning up old logs, generating sitemaps, and applying catalog price rules.
 
 ## Defining cron jobs
 
 !!! info "v26.5+"
-    Since v26.5, cron jobs are defined using PHP attributes directly on the method. Previously they were configured in XML — see [Migrating from XML](#migrating-from-xml) if you're upgrading an existing module.
+    Since v26.5, cron jobs are defined using PHP attributes directly on the method. Previously they were configured in XML - see [Migrating from XML](#migrating-from-xml) if you're upgrading an existing module.
 
 Place the `#[Maho\Config\CronJob]` attribute on a public method to register it as a cron job:
 

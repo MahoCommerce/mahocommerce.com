@@ -50,7 +50,7 @@ Navigate to **System > Configuration > AI**. Configuration is grouped into the s
 | **Safety** | Input validator + output sanitiser toggles, blocked-pattern regex list, PII detection |
 | **Queue** | Master enable, cron schedule, batch size, retry timeout |
 
-Saving an API key (or the Ollama base URL) auto-fetches the provider's `/models` endpoint and caches the result, so dropdowns populate themselves on reload — no manual refresh.
+Saving an API key (or the Ollama base URL) auto-fetches the provider's `/models` endpoint and caches the result, so dropdowns populate themselves on reload - no manual refresh.
 
 ### Picking a Default Platform
 

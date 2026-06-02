@@ -15,8 +15,8 @@ Allows you to retrieve and update product tier prices.
 
 <h3>Methods</h3>
 
-- `catalog_product_attribute_tier_price.info` — Retrieve information about product tier prices.
-- `catalog_product_attribute_tier_price.update` — Update the product tier prices.
+- `catalog_product_attribute_tier_price.info` - Retrieve information about product tier prices.
+- `catalog_product_attribute_tier_price.update` - Update the product tier prices.
 
 <h3>Faults</h3>
 

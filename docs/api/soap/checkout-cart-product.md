@@ -10,11 +10,11 @@ Allows you to manage products in a shopping cart.
 
 <h3>Methods</h3>
 
-- `cart_product.add` — Add one or more products to a shopping cart.
-- `cart_product.update` — Update one or more products in a shopping cart.
-- `cart_product.remove` — Remove one or more products from a shopping cart.
-- `cart_product.list` — Get a list of products in a shopping cart.
-- `cart_product.moveToCustomerQuote` — Move one or more products from the quote to the customer shopping cart.
+- `cart_product.add` - Add one or more products to a shopping cart.
+- `cart_product.update` - Update one or more products in a shopping cart.
+- `cart_product.remove` - Remove one or more products from a shopping cart.
+- `cart_product.list` - Get a list of products in a shopping cart.
+- `cart_product.moveToCustomerQuote` - Move one or more products from the quote to the customer shopping cart.
 
 <h3>Faults</h3>
 

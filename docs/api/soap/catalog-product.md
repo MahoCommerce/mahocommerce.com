@@ -14,15 +14,15 @@ Allows you to manage products.
 
 <h3>Methods</h3>
 
-- `catalog_product.currentStore` — Set/Get the current store view.
-- `catalog_product.list` — Retrieve the list of products using filters.
-- `catalog_product.info` — Retrieve information about the required product.
-- `catalog_product.create` — Create a new product.
-- `catalog_product.update` — Update a required product.
-- `catalog_product.setSpecialPrice` — Set special price for a product.
-- `catalog_product.getSpecialPrice` — Get special price for a product.
-- `catalog_product.delete` — Delete a required product.
-- `catalog_product.listOfAdditionalAttributes` — Get the list of additional attributes.
+- `catalog_product.currentStore` - Set/Get the current store view.
+- `catalog_product.list` - Retrieve the list of products using filters.
+- `catalog_product.info` - Retrieve information about the required product.
+- `catalog_product.create` - Create a new product.
+- `catalog_product.update` - Update a required product.
+- `catalog_product.setSpecialPrice` - Set special price for a product.
+- `catalog_product.getSpecialPrice` - Get special price for a product.
+- `catalog_product.delete` - Delete a required product.
+- `catalog_product.listOfAdditionalAttributes` - Get the list of additional attributes.
 
 <h3>Faults</h3>
 

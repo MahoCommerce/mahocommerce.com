@@ -15,13 +15,13 @@ Allows you to manage product images.
 
 <h3>Methods</h3>
 
-- `catalog_product_attribute_media.currentStore` — Set/Get the current store view.
-- `catalog_product_attribute_media.list` — Retrieve the product images.
-- `catalog_product_attribute_media.info` — Retrieve the specified product image.
-- `catalog_product_attribute_media.types` — Retrieve product image types.
-- `catalog_product_attribute_media.create` — Upload a new image for a product.
-- `catalog_product_attribute_media.update` — Update an image for a product.
-- `catalog_product_attribute_media.remove` — Remove an image for a product.
+- `catalog_product_attribute_media.currentStore` - Set/Get the current store view.
+- `catalog_product_attribute_media.list` - Retrieve the product images.
+- `catalog_product_attribute_media.info` - Retrieve the specified product image.
+- `catalog_product_attribute_media.types` - Retrieve product image types.
+- `catalog_product_attribute_media.create` - Upload a new image for a product.
+- `catalog_product_attribute_media.update` - Update an image for a product.
+- `catalog_product_attribute_media.remove` - Remove an image for a product.
 
 <h3>Faults</h3>
 
@@ -36,7 +36,7 @@ Allows you to manage product images.
 | 106        | Image not removed. Details in error message.           |
 | 107        | Requested product doesn’t support images               |
 
-<h3>Example — Working With Product Images</h3>
+<h3>Example - Working With Product Images</h3>
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/soap/?wsdl');

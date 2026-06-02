@@ -24,16 +24,16 @@ A more aggressive optimization that delays JavaScript execution until the user a
 
 ### How it works
 
-1. **Neutralization** — All `<script>` tags have their `type` attribute changed to `text/plain` and receive a `data-maho-script` index attribute. This prevents the browser from executing them.
+1. **Neutralization** - All `<script>` tags have their `type` attribute changed to `text/plain` and receive a `data-maho-script` index attribute. This prevents the browser from executing them.
 
-2. **Intent detection** — The loader script (`maho-load-on-intent.js`) listens for the first user interaction via any of these events:
+2. **Intent detection** - The loader script (`maho-load-on-intent.js`) listens for the first user interaction via any of these events:
     - `click`, `keydown`, `mousemove`, `mouseover`, `touchstart`, `scroll`, `wheel`, `focusin`, `change`
 
-3. **Parallel preload** — When an interaction is detected, all external scripts are immediately preloaded in parallel using `<link rel="preload" as="script">` tags.
+3. **Parallel preload** - When an interaction is detected, all external scripts are immediately preloaded in parallel using `<link rel="preload" as="script">` tags.
 
-4. **Sequential execution** — Scripts are then executed one by one in their original order. External scripts wait for their `onload` event before the next script runs, ensuring dependency order is preserved.
+4. **Sequential execution** - Scripts are then executed one by one in their original order. External scripts wait for their `onload` event before the next script runs, ensuring dependency order is preserved.
 
-5. **Synthetic lifecycle events** — After all scripts have executed, the loader fires synthetic `DOMContentLoaded` and `load` events, and sets `document.readyState` to `"complete"`. This ensures scripts that rely on these lifecycle signals still work correctly.
+5. **Synthetic lifecycle events** - After all scripts have executed, the loader fires synthetic `DOMContentLoaded` and `load` events, and sets `document.readyState` to `"complete"`. This ensures scripts that rely on these lifecycle signals still work correctly.
 
 !!! warning "Experimental"
     Load on Intent mode is designed for pages with vanilla JavaScript. It may not work correctly with legacy libraries or complex third-party scripts that make assumptions about load timing. Test thoroughly before enabling in production.
@@ -65,11 +65,11 @@ Common use cases for `data-maho-nodefer`:
 
 The deferral system is automatically skipped in the following cases:
 
-- **Admin panel** — All admin pages load scripts normally
-- **Checkout pages** — The `checkout` module is excluded to avoid breaking payment flows
-- **Non-HTML responses** — JSON, XML, and other non-HTML content types are not processed
-- **Speculation rules** — Scripts with `type="speculationrules"` are never deferred
-- **Already processed** — Pages that have already been processed are not processed again
+- **Admin panel** - All admin pages load scripts normally
+- **Checkout pages** - The `checkout` module is excluded to avoid breaking payment flows
+- **Non-HTML responses** - JSON, XML, and other non-HTML content types are not processed
+- **Speculation rules** - Scripts with `type="speculationrules"` are never deferred
+- **Already processed** - Pages that have already been processed are not processed again
 
 ## Programmatic Configuration
 

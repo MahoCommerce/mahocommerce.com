@@ -6,11 +6,11 @@ Allows you to create, retrieve, update, and delete data about customers.
 
 <h3>Methods</h3>
 
-- `customer.list` — Retrieve the list of customers.
-- `customer.create` — Create a new customer.
-- `customer.info` — Retrieve the customer data.
-- `customer.update` — Update the customer data.
-- `customer.delete` — Delete a required customer.
+- `customer.list` - Retrieve the list of customers.
+- `customer.create` - Create a new customer.
+- `customer.info` - Retrieve the customer data.
+- `customer.update` - Update the customer data.
+- `customer.delete` - Delete a required customer.
 
 <h3>Faults</h3>
 
@@ -21,7 +21,7 @@ Allows you to create, retrieve, update, and delete data about customers.
 | 102        | Customer does not exist.                             |
 | 103        | Customer not deleted. Details in error message.      |
 
-<h3>Examples — View, Create, Update and Delete a Customer</h3>
+<h3>Examples - View, Create, Update and Delete a Customer</h3>
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/soap/?wsdl');

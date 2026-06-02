@@ -6,9 +6,9 @@ Allows you to retrieve the list of category attributes and options.
 
 <h3>Methods</h3>
 
-- `catalog_category_attribute.currentStore` — Set/Get the current store view.
-- `catalog_category_attribute.list` — Retrieve the category attributes.
-- `catalog_category_attribute.options` — Retrieve the attribute options.
+- `catalog_category_attribute.currentStore` - Set/Get the current store view.
+- `catalog_category_attribute.list` - Retrieve the category attributes.
+- `catalog_category_attribute.options` - Retrieve the attribute options.
 
 <h3>Faults</h3>
 
@@ -17,7 +17,7 @@ Allows you to retrieve the list of category attributes and options.
 | 100        | Requested store view not found.    |
 | 101        | Requested attribute not found.     |
 
-<h3>Example — Retrieving Attributes and Options</h3>
+<h3>Example - Retrieving Attributes and Options</h3>
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/soap/?wsdl');

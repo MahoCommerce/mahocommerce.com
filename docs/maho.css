@@ -841,7 +841,7 @@ article:has(#homeh1)::before {
     color: rgba(255, 255, 255, 0.65);
 }
 
-/* Developer icon — green on dark */
+/* Developer icon - green on dark */
 .developers .feature-card .feature-icon {
     background: none !important;
     color: var(--maho-brand-light) !important;
@@ -898,7 +898,7 @@ article:has(#homeh1)::before {
 }
 
 
-/* --- Feature Card Icon — decorative bottom-right watermark --- */
+/* --- Feature Card Icon - decorative bottom-right watermark --- */
 .feature-card p:has(.feature-icon) {
     margin: 0 !important;
     padding: 0 !important;

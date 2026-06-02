@@ -6,7 +6,7 @@ Customers of traditional stores and online web stores love coupons. Typically, a
 
 ### Coupon Auto Generation and the Magento REST API
 
-Magento CE 1.7 introduced a new method of creating coupon codes—_auto generation_. Auto generating coupons means Magento programmatically creates several coupon codes at one time quickly and easily. However, if Magento generates the coupon codes, you'd have to manually distribute them to customers.
+Magento CE 1.7 introduced a new method of creating coupon codes - _auto generation_. Auto generating coupons means Magento programmatically creates several coupon codes at one time quickly and easily. However, if Magento generates the coupon codes, you'd have to manually distribute them to customers.
 
 Magento's REST API is extensible and can easily be called by an outside program to auto generate coupon codes. You can use this feature, for example, to e-mail coupon codes to your top 100 customers.
 
@@ -15,7 +15,7 @@ No programming is necessary to implement the extension module discussed in this 
 The Coupon AutoGen API enables any authorized external program to instruct Magento to:
 
 *   Auto-generate the specified number of coupon codes
-*   Return these codes to the calling program—simulated in this guide using a simple `.php` file
+*   Return these codes to the calling program - simulated in this guide using a simple `.php` file
 
 ### Implementation Details
 
@@ -458,7 +458,7 @@ To use the Magento Admin Panel to create a role for the Coupon AutoGen API:
 
 1.  Log in to the Magento Admin Panel as an administrator.
 2.  Click **System** > **Web Services** > **REST - Roles**.
-3.  On the REST—Roles page, click **Add Admin Role**.
+3.  On the REST - Roles page, click **Add Admin Role**.
 4.  In the **Role Name** field, enter `Coupon Auto Generate Demo`.
 5.  Click **Save Role**.
 6.  In the left navigation bar, click **Role API Resources**.  
@@ -476,7 +476,7 @@ Now that you have a role, you must add users to give them permission to call the
 1.  In the left navigation bar, click **Role Users**.
 2.  Click **Reset Filter** (in the upper-right corner of the page).  
     The page displays all registered users.
-3.  Select the checkbox next to each user to grant the user privileges to access the resources available to the Coupon Auto Generate Demo REST role—that is, permission to call the Coupon AutoGen API.
+3.  Select the checkbox next to each user to grant the user privileges to access the resources available to the Coupon Auto Generate Demo REST role - that is, permission to call the Coupon AutoGen API.
 
     **Note**: If a warning dialog box displays, click **OK** to dismiss it. This warning is not relevant when adding users to REST roles.
 

@@ -8,9 +8,9 @@
 
 <h3>Methods</h3>
 
-- `product_downloadable_link.add` — Add a new link to the downloadable product.
-- `product_downloadable_link.list` — Get the list of links for a downloadable product.
-- `product_downloadable_link.remove` — Remove a link from a downloadable product.
+- `product_downloadable_link.add` - Add a new link to the downloadable product.
+- `product_downloadable_link.list` - Get the list of links for a downloadable product.
+- `product_downloadable_link.remove` - Remove a link from a downloadable product.
 
 ## Add
 

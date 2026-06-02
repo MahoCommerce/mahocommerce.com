@@ -14,14 +14,14 @@ Allows you to retrieve product attribute sets.
 
 <h3>Methods</h3>
 
-- `product_attribute_set.list` — Retrieve the list of product attribute sets.
-- `product_attribute_set.create` — Create a new attribute set.
-- `product_attribute_set.remove` — Remove an attribute set.
-- `product_attribute_set.attributeAdd` — Add an attribute to the attribute set.
-- `product_attribute_set.attributeRemove` — Remove an attribute from an attribute set.
-- `product_attribute_set.groupAdd` — Add a new group for attributes in the attribute set.
-- `product_attribute_set.groupRemove` — Remove a group of attributes from an attribute set.
-- `product_attribute_set.groupRename` — Rename a group of attributes in an attribute set.
+- `product_attribute_set.list` - Retrieve the list of product attribute sets.
+- `product_attribute_set.create` - Create a new attribute set.
+- `product_attribute_set.remove` - Remove an attribute set.
+- `product_attribute_set.attributeAdd` - Add an attribute to the attribute set.
+- `product_attribute_set.attributeRemove` - Remove an attribute from an attribute set.
+- `product_attribute_set.groupAdd` - Add a new group for attributes in the attribute set.
+- `product_attribute_set.groupRemove` - Remove a group of attributes from an attribute set.
+- `product_attribute_set.groupRename` - Rename a group of attributes in an attribute set.
 
 <h3>Faults</h3>
 

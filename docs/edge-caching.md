@@ -6,8 +6,8 @@ Maho dispatches a core event that lets full-page-cache (FPC) or edge-cache modul
 
 `Mage_Core_Controller_Varien_Action::preDispatch()` always starts the session unless `FLAG_NO_START_SESSION` was set in the constructor. Today that flag is only set in 3 controllers (Api + 2 OAuth), so for anonymous traffic on CMS, category, or product routes, Maho:
 
-1. emits `Set-Cookie: <session>` on the response, which makes the HTML unsafe to cache in any shared / edge cache (Cloudflare, Bunny, Varnish) — per RFC, `Set-Cookie` combined with `Cache-Control: public` is unsafe.
-2. writes an empty session row on every anonymous hit and later garbage-collects it — non-trivial write amplification under crawler / bot traffic.
+1. emits `Set-Cookie: <session>` on the response, which makes the HTML unsafe to cache in any shared / edge cache (Cloudflare, Bunny, Varnish) - per RFC, `Set-Cookie` combined with `Cache-Control: public` is unsafe.
+2. writes an empty session row on every anonymous hit and later garbage-collects it - non-trivial write amplification under crawler / bot traffic.
 
 ## The opt-out event
 
@@ -37,10 +37,10 @@ public function maybeSkipSession(Maho\Event\Observer $observer): void
 }
 ```
 
-The observer module decides what counts as a cacheable route — typically by matching the controller's module / controller / action against a configured allowlist.
+The observer module decides what counts as a cacheable route - typically by matching the controller's module / controller / action against a configured allowlist.
 
 ## Caveat: form key on the first POST
 
-If session start is skipped, `getFormKey()` returns empty for that response. The first state-changing POST from an anonymous visitor (e.g. add-to-cart) will fail `_validateFormKey()` and redirect — at that point the session establishes normally and subsequent requests work as usual.
+If session start is skipped, `getFormKey()` returns empty for that response. The first state-changing POST from an anonymous visitor (e.g. add-to-cart) will fail `_validateFormKey()` and redirect - at that point the session establishes normally and subsequent requests work as usual.
 
-This "first POST establishes session" pattern is acceptable in practice. The observing module is responsible for handling it — for example, by injecting a fresh form key client-side after the cached HTML is served, or by configuring the cache to bypass routes that submit forms.
+This "first POST establishes session" pattern is acceptable in practice. The observing module is responsible for handling it - for example, by injecting a fresh form key client-side after the cached HTML is served, or by configuring the cache to bypass routes that submit forms.

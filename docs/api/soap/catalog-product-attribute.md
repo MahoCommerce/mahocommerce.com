@@ -14,16 +14,16 @@ Allows you to retrieve product attributes and options.
 
 <h3>Methods</h3>
 
-- `product_attribute.currentStore` — Set/Get the current store view.
-- `product_attribute.list` — Retrieve the attribute list.
-- `product_attribute.options` — Retrieve the attribute options.
-- `product_attribute.addOption` — Add a new option for attributes with selectable fields.
-- `product_attribute.create` — Create a new attribute.
-- `product_attribute.info` — Get full information about an attribute with the list of options.
-- `product_attribute.remove` — Remove the required attribute.
-- `product_attribute.removeOption` — Remove an option for attributes with selectable fields.
-- `product_attribute.types` — Get the list of possible attribute types.
-- `product_attribute.update` — Update the required attribute.
+- `product_attribute.currentStore` - Set/Get the current store view.
+- `product_attribute.list` - Retrieve the attribute list.
+- `product_attribute.options` - Retrieve the attribute options.
+- `product_attribute.addOption` - Add a new option for attributes with selectable fields.
+- `product_attribute.create` - Create a new attribute.
+- `product_attribute.info` - Get full information about an attribute with the list of options.
+- `product_attribute.remove` - Remove the required attribute.
+- `product_attribute.removeOption` - Remove an option for attributes with selectable fields.
+- `product_attribute.types` - Get the list of possible attribute types.
+- `product_attribute.update` - Update the required attribute.
 
 <h3>Faults</h3>
 

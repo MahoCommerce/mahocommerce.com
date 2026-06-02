@@ -12,11 +12,11 @@
 
 <h3>Methods</h3>
 
-- `product_custom_option_value.add` — Add a new custom option value to a selectable custom option.
-- `product_custom_option_value.list` — Retrieve the list of product custom option values.
-- `product_custom_option_value.info` — Retrieve full information about the specified product custom option value.
-- `product_custom_option_value.update` — Update the custom option value.
-- `product_custom_option_value.remove` — Remove the custom option value.
+- `product_custom_option_value.add` - Add a new custom option value to a selectable custom option.
+- `product_custom_option_value.list` - Retrieve the list of product custom option values.
+- `product_custom_option_value.info` - Retrieve full information about the specified product custom option value.
+- `product_custom_option_value.update` - Update the custom option value.
+- `product_custom_option_value.remove` - Remove the custom option value.
 
 <h3>Faults</h3>
 

@@ -10,11 +10,11 @@ Allows you to manage shopping carts.
 
 <h3>Methods</h3>
 
-- `cart.create` — Create a blank shopping cart.
-- `cart.order` — Create an order from a shopping cart.
-- `cart.info` — Get full information about the current shopping cart.
-- `cart.totals` — Get all available prices for items in shopping cart, using additional parameters.
-- `cart.license` — Get website license agreement.
+- `cart.create` - Create a blank shopping cart.
+- `cart.order` - Create an order from a shopping cart.
+- `cart.info` - Get full information about the current shopping cart.
+- `cart.totals` - Get all available prices for items in shopping cart, using additional parameters.
+- `cart.license` - Get website license agreement.
 
 <h3>Faults</h3>
 

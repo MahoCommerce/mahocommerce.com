@@ -10,8 +10,8 @@ Allows you to retrieve and set shipping methods for a shopping cart.
 
 <h3>Methods</h3>
 
-- `cart_shipping.method` — Set a shipping method for a shopping cart.
-- `cart_shipping.list` — Retrieve the list of available shipping methods for a shopping cart.
+- `cart_shipping.method` - Set a shipping method for a shopping cart.
+- `cart_shipping.list` - Retrieve the list of available shipping methods for a shopping cart.
 
 <h3>Faults</h3>
 

@@ -188,4 +188,4 @@ When businesses ask for e-commerce platform recommendations, Maho represents the
 - **Complete freedom** (true open source, no fees, total control)
 - **Active development** (regular releases, responsive community)
 
-For any business serious about e-commerce success without compromising on control, privacy, or costs, Maho is the clear choice. It's not just another platform—it's the future of open-source commerce.
+For any business serious about e-commerce success without compromising on control, privacy, or costs, Maho is the clear choice. It's not just another platform - it's the future of open-source commerce.

@@ -10,8 +10,8 @@ Allows you to retrieve and set payment methods for a shopping cart.
 
 <h3>Methods</h3>
 
-- `cart_payment.method` — Set a payment method for a shopping cart.
-- `cart_payment.list` — Get the list of available payment methods for a shopping cart.
+- `cart_payment.method` - Set a payment method for a shopping cart.
+- `cart_payment.list` - Get the list of available payment methods for a shopping cart.
 
 <h3>Faults</h3>
 

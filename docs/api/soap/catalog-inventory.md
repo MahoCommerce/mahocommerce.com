@@ -4,8 +4,8 @@
 
 <h3>Methods</h3>
 
-- `cataloginventory_stock_item.list` — Retrieve the list of stock data by product IDs.
-- `cataloginventory_stock_item.update` — Update the stock data for a list of products.
+- `cataloginventory_stock_item.list` - Retrieve the list of stock data by product IDs.
+- `cataloginventory_stock_item.update` - Update the stock data for a list of products.
 
 <h3>Faults</h3>
 

@@ -14,12 +14,12 @@ Allows you to manage invoices.
 
 <h3>Methods</h3>
 
-- `sales_order_invoice.list` — Retrieve a list of invoices using filters.
-- `sales_order_invoice.info` — Retrieve information about the invoice.
-- `sales_order_invoice.create` — Create a new invoice for an order.
-- `sales_order_invoice.addComment` — Add a new comment to an invoice.
-- `sales_order_invoice.capture` — Capture an invoice.
-- `sales_order_invoice.cancel` — Cancel an invoice.
+- `sales_order_invoice.list` - Retrieve a list of invoices using filters.
+- `sales_order_invoice.info` - Retrieve information about the invoice.
+- `sales_order_invoice.create` - Create a new invoice for an order.
+- `sales_order_invoice.addComment` - Add a new comment to an invoice.
+- `sales_order_invoice.capture` - Capture an invoice.
+- `sales_order_invoice.cancel` - Cancel an invoice.
 
 <h3>Faults</h3>
 
@@ -31,7 +31,7 @@ Allows you to manage invoices.
 | 103        | Requested order does not exists                  |
 | 104        | Invoice status not changed.                      |
 
-<h3>Example — Working With Invoices</h3>
+<h3>Example - Working With Invoices</h3>
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/soap/?wsdl');

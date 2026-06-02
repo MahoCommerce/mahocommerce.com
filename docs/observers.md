@@ -1,6 +1,6 @@
 # Event observers
 
-Maho uses an **observer pattern** to let modules react to events dispatched throughout the system. When something significant happens — a product is saved, a customer logs in, an order is placed — the system fires a named event, and any registered observer method is called.
+Maho uses an **observer pattern** to let modules react to events dispatched throughout the system. When something significant happens (a product is saved, a customer logs in, an order is placed), the system fires a named event, and any registered observer method is called.
 
 ## Dispatching events
 
@@ -15,7 +15,7 @@ The second argument is an associative array of data made available to observers 
 ## Registering observers
 
 !!! info "v26.5+"
-    Since v26.5, observers are defined using PHP attributes directly on the method. Previously they were configured in XML — see [Migrating from XML](#migrating-from-xml) if you're upgrading an existing module.
+    Since v26.5, observers are defined using PHP attributes directly on the method. Previously they were configured in XML - see [Migrating from XML](#migrating-from-xml) if you're upgrading an existing module.
 
 Place the `#[Maho\Config\Observer]` attribute on a public method to register it as an event observer:
 
@@ -51,7 +51,7 @@ This compiles all attributes into `vendor/composer/maho_attributes.php`, which i
 
 ### Area scoping
 
-By default, observers are **global** — they fire regardless of the current area. Use the `area` parameter only when the observer must be restricted to a specific area:
+By default, observers are **global** - they fire regardless of the current area. Use the `area` parameter only when the observer must be restricted to a specific area:
 
 ```php
 // Only fires in the frontend
@@ -72,7 +72,7 @@ public function handleBothAreas(Maho\Event\Observer $observer): void { }
 
 ### Multiple events on one method
 
-The attribute is repeatable — apply it multiple times to listen to different events:
+The attribute is repeatable - apply it multiple times to listen to different events:
 
 ```php
 #[Maho\Config\Observer('controller_action_predispatch_checkout_onepage_savebilling', area: 'frontend')]
@@ -95,7 +95,7 @@ public function createGiftcardsOnInvoicePaid(Maho\Event\Observer $observer) { }
 
 ### Singleton instantiation type
 
-By default, observers use `model` (a fresh instance per dispatch), which is the safer choice — no risk of leaked state between event handlers. Use `type: 'singleton'` only when your observer needs to share state across multiple dispatches within the same request:
+By default, observers use `model` (a fresh instance per dispatch), which is the safer choice - no risk of leaked state between event handlers. Use `type: 'singleton'` only when your observer needs to share state across multiple dispatches within the same request:
 
 ```php
 #[Maho\Config\Observer('catalog_product_save_after', type: 'singleton')]
@@ -127,7 +127,7 @@ The `replaces` value accepts:
 
 Maho dispatches events throughout the request lifecycle, model save flows, and admin actions. A few are designed as integration points for cross-cutting concerns:
 
-- **`controller_action_predispatch_session_start`** <span class="version-badge">v26.5+</span> — fires in `Mage_Core_Controller_Varien_Action::preDispatch()` immediately before the session-start guard. Lets observers flip `FLAG_NO_START_SESSION` at runtime to skip session start on cacheable anonymous GETs, so the response carries no `Set-Cookie` and no empty session row is written. See [Edge caching integration](edge-caching.md).
+- **`controller_action_predispatch_session_start`** <span class="version-badge">v26.5+</span> - fires in `Mage_Core_Controller_Varien_Action::preDispatch()` immediately before the session-start guard. Lets observers flip `FLAG_NO_START_SESSION` at runtime to skip session start on cacheable anonymous GETs, so the response carries no `Set-Cookie` and no empty session row is written. See [Edge caching integration](edge-caching.md).
 
 ## Migrating from XML
 

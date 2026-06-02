@@ -14,9 +14,9 @@ Allows you to retrieve product types.
 
 <h3>Method</h3>
 
-- `catalog_product_type.list` — Retrieve the list of product types.
+- `catalog_product_type.list` - Retrieve the list of product types.
 
-<h3>Example — Retrieving the Product Type</h3>
+<h3>Example - Retrieving the Product Type</h3>
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/soap/?wsdl');

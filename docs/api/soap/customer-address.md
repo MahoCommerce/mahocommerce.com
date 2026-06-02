@@ -4,11 +4,11 @@
 
 <h3>Methods</h3>
 
-- `customer_address.list` — Retrieve the list of customer addresses.
-- `customer_address.create` — Create a new address for a customer.
-- `customer_address.info` — Retrieve the specified customer address.
-- `customer_address.update` — Update the customer address.
-- `customer_address.delete` — Delete the customer address.
+- `customer_address.list` - Retrieve the list of customer addresses.
+- `customer_address.create` - Create a new address for a customer.
+- `customer_address.info` - Retrieve the specified customer address.
+- `customer_address.update` - Update the customer address.
+- `customer_address.delete` - Delete the customer address.
 
 <h3>Faults</h3>
 
@@ -19,7 +19,7 @@
 | 102        | Address not exists.                             |
 | 103        | Address not deleted. Details in error message.  |
 
-## Example — Working With Customer Address
+## Example - Working With Customer Address
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/?wsdl');
