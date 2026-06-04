@@ -32,7 +32,7 @@ While this may seem more complex initially, it will pay off in the long run.
 9. Convert any custom scripts in the `shell` folder to maho-cli-commands
 
 ## PHP Compatibility
-Maho (as of 24.11) requires PHP 8.2+, as of 25.7 requires PHP 8.3+.
+Maho (as of 25.7) requires PHP 8.3+.
 Custom code and third-party modules will likely need adaptation to the new PHP version.
 
 !!! note
@@ -48,15 +48,6 @@ Each Maho release will include incompatible changes that must be considered duri
 While we minimize breaking changes where possible, please carefully review
 [Maho's release notes](https://github.com/MahoCommerce/maho/releases){target=_blank}
 for each version to understand what requires additional testing and potential adaptation in your codebase.
-
-## Health Check
-[Maho's CLI tool](cli-tool.md) includes a `health-check` command that can be run periodically to monitor
-your project's health. It's particularly useful during migration/update phases to ensure nothing important is missed.
-Run it with:
-
-```bash
-$ ./maho health-check
-```
 
 ### Zend Framework Removal
 
@@ -124,4 +115,33 @@ Mage::helper('core')->jsonEncode($data);
 Mage::helper('core')->jsonDecode($json);
 ```
 
-For complete migration details, see the [CLAUDE.md file](https://github.com/MahoCommerce/maho/blob/main/CLAUDE.md){target=_blank} in the Maho repository which documents all modern alternatives.
+### POST-only routes for state-changing actions <span class="version-badge">v26.5+</span>
+
+With the [new routing layer](routing.md), actions that modify state (add to cart, update cart, delete, apply coupon, etc.) now accept **POST only**. A `GET` request to one of these routes returns `405 Method Not Allowed`.
+
+The most common case is adding a product to the cart. Magento/OpenMage themes often navigated to `/checkout/cart/add/` with a plain link or `setLocation()` (a GET request). That no longer works:
+
+```javascript
+// OLD - GET request, now returns 405 Method Not Allowed
+setLocation('/checkout/cart/add/?form_key=xxx&product=549&uenc=yyy');
+```
+
+Submit these requests as POST instead, either with a real `<form method="post">` or with Maho's `customFormSubmit()` helper:
+
+```javascript
+// NEW - submits via POST with the form key
+customFormSubmit(url, formKey, 'post');
+```
+
+**Why this is more secure.** The HTTP spec treats `GET` as a *safe* method: fetching a URL must not change server state. Anything that follows links automatically (browser prefetch, link preview, search-engine crawlers, antivirus and email link scanners, a chat app unfurling a pasted URL) issues `GET` requests. When add-to-cart accepted `GET`, any of those could silently mutate a visitor's cart just by encountering the URL, and an attacker could trigger it cross-site with a plain `<img src="...">` tag. Requiring `POST` (combined with the form-key check) means a state change only happens on a deliberate form submission from your own pages, never as a side effect of a link being fetched. The restriction is applied consistently to every state-changing route, not just add to cart. See [HTTP method restrictions](routing.md#http-method-restrictions) for how to declare these on your own controllers.
+
+## Health Check
+[Maho's CLI tool](cli-tool.md) includes a `health-check` command that can be run periodically to monitor
+your project's health. It's particularly useful during migration/update phases to ensure nothing important is missed.
+Run it with:
+
+```bash
+$ ./maho health-check
+```
+
+The same health check is also available in the admin backend under **System > Tools > Health Check**.
