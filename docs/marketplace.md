@@ -422,7 +422,7 @@ Discover and install powerful modules to enhance your Maho store. All modules ar
     <div class="app-card" data-category="performance">
         <span class="app-category">Performance</span>
         <h3 class="app-title">No Cache Header</h3>
-        <p class="app-description">Adds <code>Cache-Control: no-store, no-cache, must-revalidate</code> and <code>Pragma: no-cache</code> headers globally on all frontend pages, restoring OpenMage default behavior. Useful for legacy themes without modern cache-refresh handlers. Configurable via admin.</p>
+        <p class="app-description">Disables browser caching on all frontend pages by sending <code>Cache-Control: no-store, no-cache, must-revalidate</code> and <code>Pragma: no-cache</code> headers.</p>
         <div class="app-footer">
             <div class="app-actions">
                 <button class="app-button app-button-primary" onclick="showInstallModal('empiricompany/maho-nocacheheader')">
