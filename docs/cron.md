@@ -68,6 +68,43 @@ When you deploy a Maho project in production, you need to set up cron this way:
 */5 * * * * cd /var/www/mahoproject; php ./maho cron:run always >/dev/null 2>&1
 ```
 
+Each `cron:run` invocation takes a lock and exits immediately if a previous run
+of the same group (`default`, `always`, ...) is still going, so overlapping runs
+can't pile up. You don't need to wrap these lines in `flock(1)` or a `ps` guard
+yourself.
+
+### Locking across multiple servers
+
+!!! info "v26.7+"
+    The configurable lock backend described below is available since v26.7.
+
+Maho serializes background work (cron dispatch, reindexing, order placement, ...)
+with named locks. The backend is configured in `app/etc/local.xml` and defaults
+to `file`:
+
+```xml
+<global>
+    <!-- ... -->
+    <lock>
+        <backend>file</backend> <!-- default; omit the whole block to use it -->
+    </lock>
+</global>
+```
+
+- **`file`** (default): kernel `flock` in `var/locks`, released the instant the
+  holding process exits or crashes. Correct for single-server setups.
+- **`db`**: the database server's advisory locks (MySQL `GET_LOCK`, PostgreSQL
+  advisory locks). Use this when **multiple application servers share one
+  database** so they don't both run the same job at once — file locks are local
+  to each machine and won't see each other.
+
+!!! warning
+    Don't use the `db` backend on Galera-style clusters (no advisory lock
+    support) or on SQLite (only emulated via an expiring lock table). Advisory
+    locks also belong to the DB session: if the connection drops mid-run (e.g.
+    MySQL `wait_timeout` on a long job), the server releases the lock while PHP
+    keeps running.
+
 ## Check job status
 
 Using [Maho's CLI tool](cli-tool.md) you can get info about jobs and their status with
