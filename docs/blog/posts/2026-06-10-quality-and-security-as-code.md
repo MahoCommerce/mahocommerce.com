@@ -54,6 +54,16 @@ A tag can be rewritten. A commit hash can't. That whole class of attack simply h
 
 On top of that, every repo has **dependency alerts** and **automated security updates** turned on. We even take care of the old corners: a small compatibility module re-encrypts data coming from legacy Magento 1 stores with modern **libsodium** crypto, so moving onto Maho is easy *and* safe.
 
+## Full traceability, the way the enterprise expects it
+
+If you've ever been through an enterprise procurement or a security audit, you know the questions: *what exactly is in this software? where did each component come from? how do you track its vulnerabilities over time?* These days a **Software Bill of Materials (SBOM)** is often a hard requirement, and we wanted Maho to walk into that conversation already prepared.
+
+So for every repository in the org we publish a complete, machine-readable SBOM: a full inventory of every third-party component that ships with it, one [CycloneDX](https://cyclonedx.org/) file per release, refreshed daily. Every dependency is accounted for and traceable, all the way down.
+
+Then we scan those SBOMs **every day** with two independent engines, [Grype](https://github.com/anchore/grype) and [Trivy](https://github.com/aquasecurity/trivy), and merge the results so nobody has to reconcile two reports by hand.
+
+All of it is public and version-controlled in the [`sboms`](https://github.com/MahoCommerce/sboms) repo, with a [live summary right here on the site](/sboms/). Whether you're an enterprise vetting Maho before adoption or a security team auditing what's already in production, the answers are sitting there waiting for you, no NDA, no sales call, no scanning a single line yourself.
+
 ## What this means for your store
 
 Honestly? You'll probably never notice any of it, and that's the point. Every piece of the platform running your shop, core, modules, tools, is built to the same standard and the same security baseline, with no weak link drifting off on its own.
