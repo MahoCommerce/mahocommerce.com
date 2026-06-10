@@ -28,3 +28,222 @@ document.addEventListener("DOMContentLoaded", function(event) {
         });
     });
 });
+
+
+/* ============================================================
+   HOME PAGE MOTION
+   Terminal "typing" cascade + scroll-reveal for content blocks.
+   Pure progressive enhancement: if this never runs, the page is
+   fully visible and usable. Honors prefers-reduced-motion.
+   ============================================================ */
+function mahoReducedMotion() {
+    return window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+}
+
+/* Pending terminal timers, tracked so we can cancel the loop and avoid
+   duplicate cycles across Material "instant" navigations. */
+var mahoTermTimers = [];
+function mahoClearTerm() {
+    mahoTermTimers.forEach(function (id) { clearTimeout(id); });
+    mahoTermTimers = [];
+}
+function mahoTermDelay(fn, ms) {
+    var id = setTimeout(fn, ms);
+    mahoTermTimers.push(id);
+    return id;
+}
+
+/* Hide every line of a scene so it can be typed out from blank. */
+function mahoBlankScene(scene) {
+    var lines = Array.prototype.slice.call(scene.querySelectorAll('.mh-ln'));
+    var cursor = scene.querySelector('.mh-cur');
+    lines.forEach(function (ln) {
+        ln.style.transition = 'none';
+        ln.style.opacity = '0';
+        ln.style.clipPath = 'inset(0 100% 0 0)';
+    });
+    if (cursor) cursor.style.opacity = '0';
+}
+
+/* Reveal a scene's lines one after another with a left-to-right "typing"
+   wipe — command lines take longer than output lines. Calls onDone when the
+   last line (and cursor) have settled. */
+function mahoTypeScene(scene, onDone) {
+    mahoBlankScene(scene);
+    var lines = Array.prototype.slice.call(scene.querySelectorAll('.mh-ln'));
+    var cursor = scene.querySelector('.mh-cur');
+
+    var t = 0;
+    lines.forEach(function (ln) {
+        var isCmd = !!ln.querySelector('.p');
+        var len = (ln.textContent || '').length;
+        var dur = isCmd ? Math.min(900, Math.max(420, len * 16)) : 150;
+        mahoTermDelay(function () {
+            ln.style.transition = 'clip-path ' + dur + 'ms linear, opacity 120ms ease';
+            ln.style.opacity = '1';
+            ln.style.clipPath = 'inset(0 0 0 0)';
+        }, t);
+        t += dur + (isCmd ? 150 : 80);
+    });
+    if (cursor) mahoTermDelay(function () { cursor.style.opacity = ''; }, t);
+    if (onDone) mahoTermDelay(onDone, t);
+}
+
+/* Flip the whole terminal window backwards: rotate to edge-on, run swap()
+   while it's hidden, then flip back in and call done(). */
+function mahoFlipTerminal(term, swap, done) {
+    var EASE = 'cubic-bezier(0.45, 0.05, 0.55, 0.95)';
+    var HALF = 360;
+    term.style.animation = 'none'; // release the entrance animation's transform
+    term.style.transition = 'transform ' + HALF + 'ms ' + EASE;
+    term.style.transform = 'rotateX(-90deg)';
+
+    mahoTermDelay(function () {
+        swap(); // swap the visible scene while the panel is edge-on (invisible)
+        term.style.transition = 'none';
+        term.style.transform = 'rotateX(90deg)';
+        void term.offsetWidth; // commit the jump before flipping back in
+        term.style.transition = 'transform ' + HALF + 'ms ' + EASE;
+        term.style.transform = 'rotateX(0deg)';
+        mahoTermDelay(done, HALF);
+    }, HALF);
+}
+
+/* Drive the terminal: type the active scene, hold, flip to the next scene,
+   type it, and repeat. A single scene just types once. */
+function mahoCycleTerminal(term) {
+    if (!term) return;
+    var scenes = Array.prototype.slice.call(term.querySelectorAll('.mh-term-scene'));
+    if (!scenes.length) return;
+
+    var HOLD = 3400; // dwell on a finished scene before flipping away
+    var i = 0;
+
+    function activate(idx) {
+        scenes.forEach(function (s, k) { s.classList.toggle('is-active', k === idx); });
+    }
+
+    function typeCurrent() {
+        mahoTypeScene(scenes[i], function () {
+            if (scenes.length < 2) return; // single scene: type once and stop
+            mahoTermDelay(function () {
+                mahoFlipTerminal(term, function () {
+                    i = (i + 1) % scenes.length;
+                    activate(i);
+                    mahoBlankScene(scenes[i]); // blank before it flips into view
+                }, typeCurrent);
+            }, HOLD);
+        });
+    }
+
+    activate(0);
+    mahoBlankScene(scenes[0]);
+    mahoTermDelay(typeCurrent, 360); // let the panel slide in first
+}
+
+/* Fade/slide content blocks in as they enter the viewport. */
+function mahoSetupReveal() {
+    var selector = '.mh-strip-item, .audience-section, .feature-card, .final-cta, .comparison-section, .platform-card';
+    var targets = Array.prototype.slice.call(document.querySelectorAll(selector));
+    if (!targets.length) return;
+
+    targets.forEach(function (el) {
+        // small stagger between siblings sharing a parent
+        var sibs = Array.prototype.slice.call(el.parentNode.children).filter(function (c) {
+            return c.matches && c.matches(selector);
+        });
+        var idx = sibs.indexOf(el);
+        if (idx > 0) el.style.transitionDelay = Math.min(idx * 70, 350) + 'ms';
+        el.classList.add('mh-reveal');
+    });
+
+    if (!('IntersectionObserver' in window)) {
+        // No observer support: just show everything.
+        targets.forEach(function (el) { el.classList.add('mh-in'); });
+        return;
+    }
+
+    var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('mh-in');
+                io.unobserve(entry.target);
+            }
+        });
+    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.12 });
+
+    targets.forEach(function (el) { io.observe(el); });
+}
+
+/* Gently auto-advance each feature carousel as a "scrollable" hint.
+   Only runs while the carousel is on screen, and backs off completely
+   as soon as the visitor interacts with it. */
+var mahoCarouselTimers = [];
+
+function mahoClearCarousels() {
+    mahoCarouselTimers.forEach(function (id) { clearInterval(id); });
+    mahoCarouselTimers = [];
+}
+
+function mahoSetupCarousels() {
+    var grids = Array.prototype.slice.call(document.querySelectorAll('.features-grid'));
+    grids.forEach(function (grid) {
+        var cards = grid.querySelectorAll('.feature-card');
+        if (cards.length < 2) return;
+
+        var state = { visible: false, paused: false, idle: null };
+
+        if ('IntersectionObserver' in window) {
+            new IntersectionObserver(function (entries) {
+                entries.forEach(function (e) { state.visible = e.isIntersecting; });
+            }, { threshold: 0.35 }).observe(grid);
+        } else {
+            state.visible = true;
+        }
+
+        // Any genuine user interaction pauses auto-advance for a while.
+        function pause() {
+            state.paused = true;
+            clearTimeout(state.idle);
+            state.idle = setTimeout(function () { state.paused = false; }, 7000);
+        }
+        ['pointerenter', 'pointerdown', 'touchstart', 'wheel', 'keydown', 'focusin']
+            .forEach(function (ev) { grid.addEventListener(ev, pause, { passive: true }); });
+
+        var id = setInterval(function () {
+            if (!state.visible || state.paused || document.hidden) return;
+            var cardList = grid.querySelectorAll('.feature-card');
+            var step = cardList.length > 1
+                ? (cardList[1].offsetLeft - cardList[0].offsetLeft)
+                : cardList[0].offsetWidth;
+            var atEnd = grid.scrollLeft + grid.clientWidth >= grid.scrollWidth - 4;
+            if (atEnd) {
+                grid.scrollTo({ left: 0, behavior: 'smooth' });   // loop back
+            } else {
+                grid.scrollBy({ left: step, behavior: 'smooth' }); // next card
+            }
+        }, 4500);
+
+        mahoCarouselTimers.push(id);
+    });
+}
+
+function mahoInitHome() {
+    var hero = document.querySelector('.mh-hero');
+    if (!hero) return;            // only on the home page
+    if (mahoReducedMotion()) return; // CSS keeps everything visible
+
+    mahoClearCarousels(); // avoid duplicate timers across instant navigations
+    mahoClearTerm();
+    document.documentElement.classList.add('mh-anim');
+    mahoCycleTerminal(document.querySelector('.mh-term'));
+    mahoSetupReveal();
+    mahoSetupCarousels();
+}
+
+// Run on first load, and again after Material "instant" navigations.
+if (typeof window !== 'undefined' && window.document$ && typeof window.document$.subscribe === 'function') {
+    window.document$.subscribe(mahoInitHome);
+} else {
+    document.addEventListener('DOMContentLoaded', mahoInitHome);
+}

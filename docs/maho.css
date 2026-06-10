@@ -3,6 +3,8 @@
    Brand color: #ADB41A (olive-green)
    ============================================================ */
 
+@import url("https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500&display=swap");
+
 /* --- Design Tokens / Custom Properties --- */
 :root, [data-md-color-scheme=default] {
     /* Brand palette */
@@ -13,6 +15,7 @@
     --maho-brand-subtle: rgba(173, 180, 26, 0.08);
     --maho-brand-muted: rgba(173, 180, 26, 0.15);
     --maho-brand-text: #5f6310; /* WCAG AA accessible on white */
+    --maho-brand-ink: #0a0a0a; /* near-black text on brand fills */
 
     /* Section accent colors */
     --maho-accent-warm: #f5f3ee;
@@ -59,6 +62,7 @@
 /* === GLOBAL TYPOGRAPHY === */
 html {
     font-size: 20px;
+    scroll-behavior: smooth;
 }
 
 .md-typeset {
@@ -246,6 +250,28 @@ html {
 @media screen and (max-width: 76.25em) {
     .md-sidebar .md-nav__title {
         font-size: 0;
+    }
+
+    /* Mobile nav drawer header: show only the logo, hide the long site name.
+       Matches the theme's own .md-nav .md-nav__title[for=__drawer] specificity. */
+    .md-nav--primary > .md-nav__title[for="__drawer"] {
+        font-size: 0;
+    }
+
+    .md-nav--primary > .md-nav__title[for="__drawer"] .md-logo {
+        font-size: 1rem; /* keep the logo box from collapsing */
+        width: 100%;
+        height: auto;
+        padding: 0;
+        margin: 0;
+    }
+
+    .md-nav--primary > .md-nav__title[for="__drawer"] .md-logo img,
+    .md-nav--primary > .md-nav__title[for="__drawer"] .md-logo svg {
+        width: auto;
+        height: 2.4rem;
+        max-width: 100%;
+        max-height: none;
     }
 }
 
@@ -530,7 +556,446 @@ article:has(#homeh1)::before {
 }
 
 
-/* --- Hero / Logo Section --- */
+/* ============================================================
+   MARKETING HERO (Claude Design handoff — light surface "B")
+   Dark-canvas marketing layout recreated on the site's light
+   theme: split hero + terminal, feature strip, layered motion.
+   ============================================================ */
+.mh-hero,
+.mh-strip {
+    font-family: "Geist", "Inter", ui-sans-serif, system-ui, sans-serif;
+}
+
+.mh-hero {
+    max-width: 1180px;
+    margin: 0.5em auto 0;
+    padding: 1.5em 2em 0;
+    display: grid;
+    grid-template-columns: 1.32fr 1fr;
+    gap: 4.5em;
+    align-items: center;
+}
+
+.mh-hero-copy {
+    min-width: 0;
+}
+
+/* Right column: animated logo sitting above the terminal. */
+.mh-hero-side {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+}
+
+.mh-hero-side > .mh-logo {
+    margin: 0 auto 1.4em;
+    max-width: 17em;
+    width: 100%;
+    animation: none; /* keep its own lp1/lp2/lp3 fade-in */
+}
+
+@media screen and (max-width: 60em) {
+    /* Keep the logo first in the stacked layout, above the terminal. */
+    .mh-hero-side > .mh-logo { max-width: 15em; margin-bottom: 1em; }
+}
+
+/* Eyebrow */
+.mh-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6em;
+    font-family: "Geist Mono", ui-monospace, "SF Mono", Menlo, monospace;
+    font-size: 0.62em;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: var(--maho-brand-text);
+    font-weight: 500;
+}
+
+.mh-eyebrow .mh-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--maho-brand);
+    box-shadow: 0 0 0 0 rgba(173, 180, 26, 0.5);
+    animation: mhPulse 2.4s var(--maho-ease) infinite;
+}
+
+@keyframes mhPulse {
+    0%   { box-shadow: 0 0 0 0 rgba(173, 180, 26, 0.45); }
+    70%  { box-shadow: 0 0 0 8px rgba(173, 180, 26, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(173, 180, 26, 0); }
+}
+
+/* Headline */
+#homeh1.mh-headline {
+    text-align: left;
+    font-size: 4.05em;
+    font-weight: 600;
+    line-height: 1.0;
+    letter-spacing: -0.04em;
+    color: var(--maho-text-primary);
+    margin: 0.45em 0 0.35em;
+}
+
+#homeh1.mh-headline .mh-sr {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+#homeh1.mh-headline em {
+    font-style: normal;
+    color: var(--maho-brand-ink, #0a0a0a);
+    background: var(--maho-brand);
+    padding: 0 0.09em;
+    border-radius: var(--maho-radius-sm);
+    display: inline-block;
+    transform: skew(-3deg);
+    box-decoration-break: clone;
+    -webkit-box-decoration-break: clone;
+}
+
+.mh-lede {
+    font-size: 0.98em;
+    line-height: 1.6;
+    color: var(--maho-text-secondary);
+    max-width: 46ch;
+    margin: 0 0 1.6em;
+}
+
+/* CTAs */
+.mh-ctas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.7em;
+    align-items: center;
+}
+
+.mh-ctas .mh-btn {
+    margin: 0;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5em;
+    font-weight: 500;
+}
+
+.mh-ctas .mh-btn svg {
+    flex-shrink: 0;
+}
+
+.mh-ctas .mh-btn-ghost {
+    border-color: transparent;
+    color: var(--maho-text-secondary);
+}
+
+.mh-ctas .mh-btn-ghost:hover {
+    color: var(--maho-brand-dark);
+    border-color: var(--maho-border);
+    background: var(--maho-surface-warm);
+}
+
+/* Meta row */
+.mh-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.6em;
+    margin-top: 1.8em;
+    font-family: "Geist Mono", ui-monospace, "SF Mono", Menlo, monospace;
+    font-size: 0.6em;
+    letter-spacing: 0.04em;
+    color: var(--maho-text-tertiary);
+}
+
+.mh-meta span {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45em;
+    white-space: nowrap;
+}
+
+.mh-meta .mh-bullet {
+    color: var(--maho-brand);
+    font-size: 0.7em;
+}
+
+/* ---- Terminal panel ---- */
+.mh-term {
+    background: #14150f;
+    border: 1px solid #2a2d20;
+    border-radius: var(--maho-radius-lg);
+    overflow: hidden;
+    box-shadow: 0 30px 60px rgba(15, 15, 11, 0.16), 0 4px 12px rgba(15, 15, 11, 0.08);
+}
+
+.mh-term-top {
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+    padding: 0.7em 0.9em;
+    background: #0c0d08;
+    border-bottom: 1px solid #2a2d20;
+}
+
+.mh-term-top .mh-d {
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
+    background: #3a3931;
+}
+
+.mh-term-top .mh-d:nth-child(1) { background: #e0696a; }
+.mh-term-top .mh-d:nth-child(2) { background: #e3c04c; }
+.mh-term-top .mh-d:nth-child(3) { background: #8bc34a; }
+
+.mh-term-top .mh-term-title {
+    font-family: "Geist Mono", ui-monospace, "SF Mono", Menlo, monospace;
+    font-size: 0.55em;
+    color: #77756a;
+    margin-left: 0.6em;
+}
+
+.mh-term-body {
+    padding: 1.1em 1.3em 1.3em;
+    font-family: "Geist Mono", ui-monospace, "SF Mono", Menlo, monospace;
+    font-size: 0.62em;
+    line-height: 1.85;
+    color: #d2d0c3;
+    overflow-x: auto;
+}
+
+.mh-term-body .mh-ln {
+    white-space: pre;
+}
+
+.mh-term-body .mh-ln:nth-last-child(2) {
+    margin-bottom: 0.5em;
+}
+
+.mh-term-body .c { color: #77756a; }
+.mh-term-body .p { color: var(--maho-brand-light); }
+.mh-term-body .k { color: #6fb0ff; }
+.mh-term-body .s { color: #c9a8ff; }
+
+.mh-term-body .mh-cur {
+    display: inline-block;
+    width: 7px;
+    height: 1.05em;
+    background: var(--maho-brand);
+    vertical-align: -0.18em;
+    margin-left: 2px;
+    animation: mhBlink 1s steps(2) infinite;
+}
+
+@keyframes mhBlink { 50% { opacity: 0; } }
+
+/* ---- Terminal: auto-cycling Composer / Docker scenes ----
+   The cycle is JS-driven (maho.js): a scene types out line by line, holds,
+   then the whole window flips backwards and the next scene types out. CSS
+   positions the scenes, sets up the 3D flip, and gates visibility while the
+   animation is running. Without JS / reduced motion: just the Composer scene. */
+.mh-term-stage {
+    position: relative;
+}
+
+/* 3D context for the card flip (perspective on the parent, transform on the term). */
+.mh-hero-side {
+    perspective: 1600px;
+}
+
+html.mh-anim .mh-term {
+    transform-origin: center center;
+    transform-style: preserve-3d;
+    backface-visibility: hidden;
+    will-change: transform;
+}
+
+/* First scene sits in flow and defines the stage height. */
+.mh-scene-composer {
+    position: relative;
+}
+
+/* Second scene overlays the first; only shown once JS drives the cycle,
+   so without JS (or reduced motion) the terminal is just the Composer scene. */
+.mh-scene-docker {
+    position: absolute;
+    inset: 0;
+    display: none;
+}
+
+html.mh-anim .mh-scene-docker {
+    display: block;
+}
+
+html.mh-anim .mh-term-scene {
+    opacity: 0;
+    transition: opacity 0.25s var(--maho-ease);
+}
+
+html.mh-anim .mh-term-scene.is-active {
+    opacity: 1;
+}
+
+/* ---- Logo marquee (social proof: stores + partners) ---- */
+.mh-marquee {
+    max-width: 1180px;
+    margin: 3.2em auto 0;
+    padding: 0.4em 0;
+}
+
+.mh-marquee .mh-marquee-label {
+    margin: 0 0 2.4em;
+    text-align: center;
+    font-size: 0.7em;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--maho-text-secondary);
+}
+
+/* Edge fade so logos slide in/out of view instead of popping. */
+.mh-marquee-viewport {
+    overflow: hidden;
+    -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 9%, #000 91%, transparent 100%);
+            mask-image: linear-gradient(90deg, transparent 0, #000 9%, #000 91%, transparent 100%);
+}
+
+/* The whole strip is one link to the sponsors page. */
+.mh-marquee-link {
+    display: block;
+    cursor: pointer;
+}
+
+.mh-marquee-track {
+    display: flex;
+    width: max-content;
+    animation: mhMarquee 42s linear infinite;
+}
+
+/* Two identical groups; track shifts by exactly one group (-50%) → seamless loop. */
+.mh-marquee-group {
+    display: flex;
+    align-items: center;
+    gap: 4em;
+    padding-right: 4em;
+    flex-shrink: 0;
+}
+
+.mh-marquee-group img,
+.mh-marquee-group svg {
+    height: 34px;
+    width: auto;
+    max-width: none;
+    object-fit: contain;
+    filter: grayscale(1);
+    opacity: 0.55;
+}
+
+@keyframes mhMarquee {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+}
+
+/* ---- Hero entrance animation (above the fold, pure CSS, no FOUC) ----
+   Uses animation-fill-mode: both so the hidden start-state applies
+   immediately at first paint, with no dependency on JS. */
+.mh-hero-copy > *,
+.mh-term {
+    will-change: transform, opacity;
+    animation: mhRise 0.7s var(--maho-ease-out) both;
+}
+
+.mh-eyebrow         { animation-delay: 0.05s; }
+#homeh1.mh-headline { animation-delay: 0.14s; }
+.mh-lede            { animation-delay: 0.24s; }
+.mh-ctas           { animation-delay: 0.34s; }
+.mh-meta           { animation-delay: 0.44s; }
+.mh-term           { animation: mhRiseTerm 0.85s var(--maho-ease-out) 0.22s both; }
+
+@keyframes mhRise {
+    from { opacity: 0; transform: translateY(22px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes mhRiseTerm {
+    from { opacity: 0; transform: translateY(30px) scale(0.97); }
+    to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* The highlight chip "wipes" in just after the headline appears */
+#homeh1.mh-headline em {
+    animation: mhWipe 0.55s var(--maho-ease-out) 0.5s both;
+}
+
+@keyframes mhWipe {
+    from { clip-path: inset(0 100% 0 0); }
+    to   { clip-path: inset(0 0 0 0); }
+}
+
+/* ---- Scroll reveal (applied to content sections via JS) ---- */
+html.mh-anim .mh-reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s var(--maho-ease-out),
+                transform 0.6s var(--maho-ease-out);
+    will-change: transform, opacity;
+}
+
+html.mh-anim .mh-reveal.mh-in {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ---- Hero responsive ---- */
+@media screen and (max-width: 60em) {
+    .mh-hero {
+        grid-template-columns: 1fr;
+        gap: 2.6em;
+        margin-top: 1em;
+    }
+    #homeh1.mh-headline { font-size: 3.1em; }
+    .mh-term { max-width: 560px; }
+}
+
+@media screen and (max-width: 768px) {
+    .mh-hero { padding: 1em 1.2em 0; text-align: left; }
+    #homeh1.mh-headline { font-size: 2.35em; }
+    .mh-lede { font-size: 0.92em; }
+    .mh-marquee { margin-top: 2.2em; }
+    .mh-marquee-group { gap: 2.8em; padding-right: 2.8em; }
+    .mh-marquee-group img,
+    .mh-marquee-group svg { height: 28px; }
+    .mh-meta { gap: 1em 1.4em; }
+}
+
+/* Honor reduced-motion: no entrance/reveal motion, no blink/pulse */
+@media (prefers-reduced-motion: reduce) {
+    .mh-hero-copy > *,
+    .mh-term,
+    html.mh-anim .mh-reveal {
+        opacity: 1 !important;
+        transform: none !important;
+        animation: none !important;
+    }
+    #homeh1.mh-headline em { clip-path: none !important; animation: none !important; }
+    .mh-term-body .mh-cur,
+    .mh-eyebrow .mh-dot { animation: none !important; }
+    /* Static, wrapped, fully visible logo row instead of a moving track. */
+    .mh-marquee-track { animation: none !important; width: 100%; flex-wrap: wrap; justify-content: center; }
+    .mh-marquee-group { flex-wrap: wrap; justify-content: center; padding-right: 0; }
+    .mh-marquee-group[aria-hidden="true"] { display: none; }
+    .mh-marquee-viewport { -webkit-mask-image: none; mask-image: none; }
+    .mh-marquee-group img,
+    .mh-marquee-group svg { filter: none; opacity: 1; }
+}
+
+/* --- Hero / Logo Section (legacy — retained for other pages) --- */
 #homeh1 {
     text-align: center;
     font-size: 1.7em;
@@ -592,22 +1057,197 @@ article:has(#homeh1)::before {
 }
 
 
-/* --- Audience Sections (shared base) --- */
+/* --- Audience Sections (shared base) ---
+   Each section is one integrated "sheet": a bordered, rounded panel that
+   holds the banner (flush at the top) and the feature carousel directly
+   below it, so the two read as a single unit with minimal wasted space. */
+/* "Whoever you are" jump-to selector - full-bleed green band above the sheets */
+.mh-audience-nav {
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
+    margin-top: 3em;
+    margin-bottom: 2.5em;
+    padding: 1.6em 0;
+    background: linear-gradient(90deg, var(--maho-brand) 0%, var(--maho-brand-dark) 100%);
+    font-family: "Geist", "Inter", ui-sans-serif, system-ui, sans-serif;
+}
+
+.mh-audience-nav-inner {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 0 2em;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1em 1.5em;
+}
+
+.mh-audience-nav-title {
+    font-size: 1.4em;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    line-height: 1.3;
+    text-wrap: balance;
+    background: #1a1a17;
+    color: #fff;
+    padding: 0.12em 0.5em;
+    border-radius: 8px;
+    box-decoration-break: clone;
+    -webkit-box-decoration-break: clone;
+}
+
+.mh-audience-nav-title em {
+    font-style: normal;
+}
+
+.mh-audience-nav-btns {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 0.6em;
+}
+
+.mh-audience-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55em;
+    padding: 0.7em 1.4em;
+    border-radius: var(--maho-radius-md);
+    border: 1px solid transparent;
+    background: #fff;
+    color: var(--maho-brand-text);
+    font-size: 0.92em;
+    font-weight: 600;
+    line-height: 1;
+    text-decoration: none !important;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.14);
+    transition: transform var(--maho-duration) var(--maho-ease),
+                background var(--maho-duration) var(--maho-ease),
+                color var(--maho-duration) var(--maho-ease),
+                box-shadow var(--maho-duration) var(--maho-ease);
+}
+
+.mh-audience-pill .mh-pill-icon {
+    color: var(--maho-brand-dark);
+    flex-shrink: 0;
+    transition: color var(--maho-duration) var(--maho-ease),
+                transform var(--maho-duration) var(--maho-ease);
+}
+
+/* Arrow stays collapsed until hover, then slides in */
+.mh-audience-pill .mh-pill-arrow {
+    flex-shrink: 0;
+    width: 0;
+    opacity: 0;
+    margin-left: -0.3em;
+    transform: translateX(-4px);
+    transition: width var(--maho-duration) var(--maho-ease),
+                opacity var(--maho-duration) var(--maho-ease),
+                transform var(--maho-duration) var(--maho-ease),
+                margin var(--maho-duration) var(--maho-ease);
+}
+
+.mh-audience-pill:hover,
+.mh-audience-pill:hover .mh-pill-label {
+    color: #fff !important;
+}
+
+.mh-audience-pill:hover {
+    transform: translateY(-3px);
+    background: #1a1a17;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.28);
+}
+
+.mh-audience-pill:hover .mh-pill-icon {
+    color: var(--maho-brand);
+    transform: scale(1.08);
+}
+
+.mh-audience-pill:hover .mh-pill-arrow {
+    width: 18px;
+    opacity: 1;
+    margin-left: 0;
+    transform: translateX(0);
+}
+
+@media screen and (max-width: 60em) {
+    .mh-audience-nav-inner {
+        flex-direction: column;
+        align-items: center;
+        gap: 1.4em;
+    }
+
+    .mh-audience-nav-title {
+        text-align: center;
+        font-size: 1.3em;
+    }
+
+    /* Group the three into one segmented bar on a single line */
+    .mh-audience-nav-btns {
+        flex-direction: row;
+        flex-wrap: nowrap;
+        align-items: stretch;
+        width: 100%;
+        gap: 0;
+        background: #fff;
+        border-radius: 16px;
+        box-shadow: 0 4px 14px rgba(0, 0, 0, 0.16);
+        overflow: hidden;
+    }
+
+    .mh-audience-pill {
+        flex: 1 1 0;
+        min-width: 0;
+        flex-direction: column;
+        justify-content: center;
+        gap: 0.35em;
+        padding: 0.85em 0.4em;
+        font-size: 0.72em;
+        background: transparent;
+        border-radius: 0;
+        box-shadow: none;
+        white-space: nowrap;
+    }
+
+    .mh-audience-pill + .mh-audience-pill {
+        border-left: 1px solid var(--maho-border-light);
+    }
+
+    .mh-audience-pill .mh-pill-arrow {
+        display: none;
+    }
+
+    .mh-audience-pill:hover {
+        transform: none;
+        box-shadow: none;
+    }
+}
+
 .audience-section {
-    margin: 2em 0;
-    padding: 2em 2em 3em;
+    margin: 2.5em 0;
+    padding: 0 0 1.1em; /* bottom room so the carousel dots aren't clipped */
     border-radius: var(--maho-radius-xl);
+    overflow: hidden;
+    background: var(--maho-surface);
+    border: 1px solid var(--maho-border-light);
+    box-shadow: var(--maho-shadow-md);
+    transition: box-shadow var(--maho-duration-slow) var(--maho-ease);
+    scroll-margin-top: 4em; /* keep sheet clear of the sticky header on jump */
+}
+
+.audience-section:hover {
+    box-shadow: var(--maho-shadow-lg);
 }
 
 .audience-header {
     position: relative;
-    margin-bottom: 3em;
-    border-radius: var(--maho-radius-xl);
+    margin-bottom: 0;
+    border-radius: 0;
     overflow: hidden;
     display: flex;
     align-items: stretch;
     transition: all var(--maho-duration-slow) var(--maho-ease);
-    box-shadow: var(--maho-shadow-md);
 }
 
 .audience-header::before {
@@ -619,17 +1259,8 @@ article:has(#homeh1)::before {
     height: 3px;
     background: linear-gradient(90deg, var(--maho-brand) 0%, var(--maho-brand-dark) 100%);
     z-index: 3;
-    opacity: 0;
+    opacity: 1; /* always-on accent ties the banner to the sheet top */
     transition: opacity var(--maho-duration-slow) var(--maho-ease);
-}
-
-.audience-header:hover::before {
-    opacity: 1;
-}
-
-.audience-header:hover {
-    box-shadow: var(--maho-shadow-xl);
-    transform: translateY(-4px);
 }
 
 .audience-header::after {
@@ -648,10 +1279,11 @@ article:has(#homeh1)::before {
     position: absolute;
     top: 0;
     right: 0;
-    width: 100%;
-    max-width: 900px;
+    width: 52%;
+    max-width: 560px;
     height: 100%;
-    min-height: 400px;
+    min-height: 260px;
+    overflow: hidden;
 }
 
 .audience-image::before {
@@ -669,6 +1301,7 @@ article:has(#homeh1)::before {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    object-position: center center; /* centered now the panel is taller and narrower */
     filter: saturate(0.85) contrast(1.05) brightness(0.95);
     transition: filter var(--maho-duration-slow) var(--maho-ease),
                 transform var(--maho-duration-slow) var(--maho-ease);
@@ -682,17 +1315,17 @@ article:has(#homeh1)::before {
 .audience-text {
     position: relative;
     z-index: 2;
-    padding: 3.5em 4em;
+    padding: 2.6em 3em;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    min-height: 380px;
-    max-width: 700px;
+    min-height: 300px;
+    max-width: 600px;
 }
 
 .audience-section h2 {
-    font-size: 2.8em;
-    margin-bottom: 0.5em;
+    font-size: 2.3em;
+    margin-bottom: 0.4em;
     font-weight: 800;
     line-height: 1.15;
     color: var(--maho-text-primary);
@@ -741,11 +1374,11 @@ article:has(#homeh1)::before {
 .agencies .audience-image::before {
     left: auto;
     right: 0;
-    background: linear-gradient(270deg, rgba(255, 255, 255, 1) 0%, transparent 100%);
+    background: linear-gradient(270deg, rgba(245, 243, 238, 1) 0%, transparent 100%);
 }
 
 .agencies .audience-header::after {
-    background: linear-gradient(270deg, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0.97) 30%, rgba(255, 255, 255, 0.5) 55%, transparent 80%);
+    background: linear-gradient(270deg, rgba(245, 243, 238, 1) 0%, rgba(245, 243, 238, 0.97) 30%, rgba(245, 243, 238, 0.5) 55%, transparent 80%);
 }
 
 .agencies .audience-text {
@@ -768,8 +1401,9 @@ article:has(#homeh1)::before {
 /* --- Developers: Dark Section --- */
 .audience-section.developers {
     background: var(--maho-accent-dark);
-    padding: 3em;
-    margin: 3em 0 2em;
+    padding: 0 0 1.1em;
+    margin: 2.5em 0;
+    border-color: rgba(255, 255, 255, 0.08);
 }
 
 .developers .audience-header {
@@ -872,22 +1506,97 @@ article:has(#homeh1)::before {
     letter-spacing: -0.02em;
 }
 
+/* --- Feature carousel (CSS-only: scroll-snap + native scroll markers) ---
+   Each audience section's feature list becomes a horizontal carousel.
+   Base behaviour (swipe / trackpad / scroll with snapping) works in every
+   browser; prev/next buttons and dots are progressive enhancement for
+   browsers that support CSS carousel pseudo-elements. */
 .features-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 1.5em;
-    margin-top: 1.5em;
+    display: flex;
+    gap: 1.25em;
+    margin-top: 0;
+    padding: 1.6em 1.8em 0.4em;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    scroll-padding-left: 1.8em;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+    scrollbar-color: var(--maho-border) transparent;
+}
+
+.features-grid > .feature-card {
+    flex: 0 0 calc((100% - 2.5em) / 3); /* 3 cards in view (2 gaps of 1.25em) */
+    min-width: 250px;
+    scroll-snap-align: start;
+}
+
+/* Thin, branded scrollbar for the carousels */
+.features-grid::-webkit-scrollbar { height: 8px; }
+.features-grid::-webkit-scrollbar-track { background: transparent; }
+.features-grid::-webkit-scrollbar-thumb {
+    background: var(--maho-border);
+    border-radius: var(--maho-radius-pill, 999px);
+}
+.features-grid:hover::-webkit-scrollbar-thumb { background: var(--maho-brand); }
+
+/* Progressive enhancement: native CSS carousel dots + arrows
+   (Chrome 135+ / supporting browsers). Degrades to plain scroll-snap. */
+@supports (scroll-marker-group: after) {
+    .features-grid { scroll-marker-group: after; }
+
+    .features-grid::scroll-marker-group {
+        display: flex;
+        justify-content: center;
+        gap: 0.6em;
+        padding-top: 1em;
+    }
+
+    .features-grid > .feature-card::scroll-marker {
+        content: "";
+        width: 9px;
+        height: 9px;
+        border-radius: 50%;
+        background: rgba(85, 83, 72, 0.3);
+        border: 0;
+        cursor: pointer;
+        transition: background var(--maho-duration) var(--maho-ease),
+                    transform var(--maho-duration) var(--maho-ease);
+    }
+
+    .features-grid > .feature-card::scroll-marker:hover { background: var(--maho-brand-light); }
+
+    .features-grid > .feature-card::scroll-marker:target-current {
+        background: var(--maho-brand);
+        transform: scale(1.25);
+    }
+
+    /* Dark section: lighter inactive dots */
+    .developers .features-grid > .feature-card::scroll-marker {
+        background: rgba(255, 255, 255, 0.2);
+    }
+    .developers .features-grid > .feature-card::scroll-marker:target-current {
+        background: var(--maho-brand-light);
+    }
+}
+
+/* Tablet: two cards per view */
+@media screen and (min-width: 48.0625em) and (max-width: 64em) {
+    .features-grid > .feature-card {
+        flex-basis: calc((100% - 1.25em) / 2);
+    }
 }
 
 .feature-card {
-    padding: 2em 2em 2.5em;
-    border-radius: var(--maho-radius-lg);
-    background: var(--maho-surface);
-    border: 1px solid var(--maho-border);
+    padding: 1.6em 1.7em 1.9em;
+    border-radius: var(--maho-radius-md);
+    background: var(--maho-surface-warm);
+    border: 1px solid var(--maho-border-light);
     transition: all var(--maho-duration-slow) var(--maho-ease);
     position: relative;
     overflow: hidden;
-    min-height: 200px;
+    min-height: 160px;
 }
 
 .feature-card:hover {
@@ -1201,8 +1910,14 @@ article:has(#homeh1)::before {
     }
 
     .features-grid {
-        grid-template-columns: 1fr;
         gap: 1em;
+        padding: 1.2em 1.2em 1.1em;
+        scroll-padding-left: 1.2em;
+    }
+
+    .features-grid > .feature-card {
+        flex-basis: 86%; /* one card with a peek of the next */
+        min-width: 0;
     }
 
     .platform-grid {
@@ -1217,29 +1932,28 @@ article:has(#homeh1)::before {
     }
 
     .audience-section {
-        padding: 2em 1em;
+        padding: 0 0 1em;
         margin: 1.5em 0;
         border-radius: var(--maho-radius-lg);
     }
 
     .audience-section.developers {
-        padding: 2em 1em;
+        padding: 0 0 1em;
         margin: 1.5em 0;
     }
 
     .audience-header {
         min-height: auto;
-        margin-bottom: 2em;
-        border-radius: var(--maho-radius-lg);
-        background: linear-gradient(160deg, rgba(173, 180, 26, 0.06) 0%, rgba(173, 180, 26, 0.01) 100%);
-        border: 1px solid rgba(173, 180, 26, 0.25);
-        box-shadow: var(--maho-shadow-sm);
+        margin-bottom: 0;
+        border-radius: 0;
+        background: linear-gradient(160deg, rgba(173, 180, 26, 0.08) 0%, rgba(173, 180, 26, 0) 100%);
+        border: 0;
+        box-shadow: none;
     }
 
-    /* Dark cards for developers on mobile */
+    /* Slightly stronger header tint for the dark developers sheet */
     .developers .audience-header {
-        background: linear-gradient(160deg, rgba(173, 180, 26, 0.1) 0%, rgba(173, 180, 26, 0.03) 100%);
-        border-color: rgba(173, 180, 26, 0.3);
+        background: linear-gradient(160deg, rgba(173, 180, 26, 0.12) 0%, rgba(173, 180, 26, 0.02) 100%);
     }
 
     .audience-header::after {
@@ -1253,7 +1967,7 @@ article:has(#homeh1)::before {
         left: 0;
         right: 0;
         height: 3px;
-        border-radius: var(--maho-radius-lg) var(--maho-radius-lg) 0 0;
+        border-radius: 0;
         background: linear-gradient(90deg, var(--maho-brand) 0%, var(--maho-brand-dark) 100%);
         opacity: 1;
     }
@@ -1283,14 +1997,16 @@ article:has(#homeh1)::before {
         font-size: 2em;
     }
 
-    /* Developer h2 on mobile - back to dark */
-    .developers .audience-text h2 {
-        color: var(--maho-text-primary);
+    /* Developer sheet stays dark on mobile, so keep its text light */
+    .developers .audience-text h2,
+    .developers .audience-header:hover h2 {
+        color: #ffffff;
         text-shadow: none;
     }
 
-    .developers .audience-text p {
-        color: var(--maho-text-secondary);
+    .developers .audience-text p,
+    .developers .audience-header:hover p {
+        color: rgba(255, 255, 255, 0.8);
         text-shadow: none;
     }
 

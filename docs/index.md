@@ -1,27 +1,110 @@
-<div class="logo">
-<div class="lp">
-<div class="lp1"><img alt="" src="assets/maho-symbol.svg" width="90" height="89"></div>
-<div class="lp2"><img alt="" src="assets/maho-logo-only-name.svg" width="326" height="91"></div>
-<div class="lp3"><img alt="" src="assets/maho-logo-dot.svg" width="24" height="24"></div>
-</div>
-</div>
+<section class="mh-hero" aria-label="Maho - open-source on-premises ecommerce platform">
+  <div class="mh-hero-copy">
+    <span class="mh-eyebrow"><span class="mh-dot"></span>#StrongRoots · #ForwardThinking · #FamiliarYetDifferent</span>
+    <h1 id="homeh1" class="mh-headline"><span class="mh-sr">Maho - </span>Your store, <em>your rules</em>.</h1>
+    <p class="mh-lede">The ecommerce platform you actually own. Lean at the core, fully featured out of the box, and open to extend however you like. All self-hosted, with no fees skimming your margins and no vendor holding the keys.</p>
+    <div class="mh-ctas">
+      <a class="md-button md-button--primary mh-btn" href="demo/">Try the live demo →</a>
+      <a class="md-button mh-btn mh-btn-ghost" href="https://discord.gg/dWgcVUFTrS">Join the community</a>
+      <a class="md-button mh-btn" href="getting-started/">Tech doc</a>
+    </div>
+    <div class="mh-meta">
+      <span><span class="mh-bullet">●</span> Forever free · OSL-3.0</span>
+      <span><span class="mh-bullet">●</span> PHP 8.3+</span>
+      <span><span class="mh-bullet">●</span> Self-host anywhere</span>
+    </div>
+  </div>
 
-<h1 id="homeh1"><span>Maho - </span>open-source on-premises ecommerce platform</h1>
-<h2 id="homeh2">#StrongRoots #ForwardThinking #FamiliarYetDifferent</h2>
+  <div class="mh-hero-side">
+  <div class="logo mh-logo">
+    <div class="lp">
+      <div class="lp1"><img alt="" src="assets/maho-symbol.svg" width="90" height="89"></div>
+      <div class="lp2"><img alt="" src="assets/maho-logo-only-name.svg" width="326" height="91"></div>
+      <div class="lp3"><img alt="" src="assets/maho-logo-dot.svg" width="24" height="24"></div>
+    </div>
+  </div>
+  <div class="mh-term" aria-hidden="true">
+    <div class="mh-term-top">
+      <span class="mh-d"></span><span class="mh-d"></span><span class="mh-d"></span>
+    </div>
+    <div class="mh-term-stage">
+      <div class="mh-term-body mh-term-scene mh-scene-composer">
+        <div class="mh-ln"><span class="c"># spin up a new store in one line</span></div>
+        <div class="mh-ln"><span class="p">$</span> composer <span class="k">create-project</span> <span class="s">mahocommerce/maho-starter</span> my-shop</div>
+        <div class="mh-ln"><span class="c">  ✓ Installing mahocommerce/maho</span></div>
+        <div class="mh-ln"><span class="c">  ✓ Generating autoload files</span></div>
+        <div class="mh-ln"><span class="c">  ✓ Running database migrations</span></div>
+        <div class="mh-ln"><span class="c">  ✓ Maho installed · admin at /admin</span></div>
+        <div class="mh-ln"><span class="p">$</span> cd my-shop && ./maho serve<span class="mh-cur"></span></div>
+      </div>
+      <div class="mh-term-body mh-term-scene mh-scene-docker">
+        <div class="mh-ln"><span class="c"># prefer containers? try it instantly</span></div>
+        <div class="mh-ln"><span class="p">$</span> docker <span class="k">run</span> -p 54321:443 <span class="s">mahocommerce/maho:nightly</span></div>
+        <div class="mh-ln"><span class="c">  ✓ Pulling mahocommerce/maho:nightly</span></div>
+        <div class="mh-ln"><span class="c">  ✓ Starting Maho · SQLite, zero config</span></div>
+        <div class="mh-ln"><span class="c">  ✓ Web installer ready</span></div>
+        <div class="mh-ln"><span class="c">  ✓ Running at https://localhost:54321</span></div>
+        <div class="mh-ln"><span class="p">$</span> open https://localhost:54321<span class="mh-cur"></span></div>
+      </div>
+    </div>
+  </div>
+  </div>
+</section>
 
-<div class="intro-section" markdown>
+<section class="mh-marquee" aria-label="Stores running Maho and the partners behind it">
+  <p class="mh-marquee-label">Powering real stores · backed by great partners</p>
+  <a class="mh-marquee-link" href="sponsors/" title="Meet the stores and partners behind Maho">
+    <div class="mh-marquee-viewport">
+      <div class="mh-marquee-track">
+        <div class="mh-marquee-group">
+          <img src="assets/sponsors/deinetuer.svg" alt="Deine Tür" loading="lazy">
+          <img src="assets/sponsors/egear.png" alt="e-Gear.dk" loading="lazy">
+          <img src="assets/sponsors/mageaustralia.png" alt="Mage Australia" loading="lazy">
+          <img src="assets/sponsors/magemega.png" alt="MageMega" loading="lazy">
+          <img src="assets/sponsors/blackfire.png" alt="Blackfire" loading="lazy">
+          <img src="assets/sponsors/cloudflare.jpg" alt="Cloudflare" loading="lazy">
+          <img src="assets/sponsors/jetbrains.svg" alt="JetBrains" loading="lazy">
+          <img src="assets/sponsors/magentiamo.png" alt="Magentiamo" loading="lazy">
+        </div>
+        <div class="mh-marquee-group" aria-hidden="true">
+          <img src="assets/sponsors/deinetuer.svg" alt="" loading="lazy">
+          <img src="assets/sponsors/egear.png" alt="" loading="lazy">
+          <img src="assets/sponsors/mageaustralia.png" alt="" loading="lazy">
+          <img src="assets/sponsors/magemega.png" alt="" loading="lazy">
+          <img src="assets/sponsors/blackfire.png" alt="" loading="lazy">
+          <img src="assets/sponsors/cloudflare.jpg" alt="" loading="lazy">
+          <img src="assets/sponsors/jetbrains.svg" alt="" loading="lazy">
+          <img src="assets/sponsors/magentiamo.png" alt="" loading="lazy">
+        </div>
+      </div>
+    </div>
+  </a>
+</section>
 
-**Maho** is a **complete, modern, open-source ecommerce platform built for 2024 and beyond**. This **free platform** takes a battle-tested foundation and brings it into the modern era with PHP 8.3+, contemporary architecture, and zero legacy baggage.
+<nav class="mh-audience-nav" aria-label="Find the right Maho for you">
+  <div class="mh-audience-nav-inner">
+    <span class="mh-audience-nav-title">Whoever you are, <em>Maho is for you</em></span>
+    <div class="mh-audience-nav-btns">
+      <a class="mh-audience-pill" href="#for-store-owners">
+        <svg class="mh-pill-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 9 4.5 4h15L21 9M4 9v10a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1V9M4 9h16M9 13a3 3 0 0 0 6 0"/></svg>
+        <span class="mh-pill-label">Store owner</span>
+        <svg class="mh-pill-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+      <a class="mh-audience-pill" href="#for-agencies">
+        <svg class="mh-pill-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+        <span class="mh-pill-label">Agency</span>
+        <svg class="mh-pill-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+      <a class="mh-audience-pill" href="#for-developers">
+        <svg class="mh-pill-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m16 18 6-6-6-6M8 6l-6 6 6 6"/></svg>
+        <span class="mh-pill-label">Developer</span>
+        <svg class="mh-pill-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+    </div>
+  </div>
+</nav>
 
-Tap into the **collective knowledge of thousands of developers worldwide** and a proven ecosystem refined over decades, without the price tag or complexity.
-
-[Get Started with Maho](getting-started.md){.md-button .md-button--primary .cta-button}
-[Try the Demo :material-open-in-new:](demo.md){.md-button .cta-button}
-[Join Community :fontawesome-brands-discord:](https://discord.gg/dWgcVUFTrS){.md-button .cta-button}
-
-</div>
-
-<div class="audience-section store-owners" markdown>
+<div class="audience-section store-owners" id="for-store-owners" markdown>
 
 <div class="audience-header">
 <div class="audience-image">
@@ -109,7 +192,7 @@ Regular updates with real improvements like **email automation** (25.11), **cust
 
 </div>
 
-<div class="audience-section agencies" markdown>
+<div class="audience-section agencies" id="for-agencies" markdown>
 
 <div class="audience-header">
 <div class="audience-image">
@@ -187,7 +270,7 @@ Comprehensive **API documentation** (REST, SOAP, JSON-RPC), **developer guides**
 
 </div>
 
-<div class="audience-section developers" markdown>
+<div class="audience-section developers" id="for-developers" markdown>
 
 <div class="audience-header">
 <div class="audience-image">
