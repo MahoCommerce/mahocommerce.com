@@ -8,6 +8,9 @@ The `Maho_Revocation` module provides the mandatory online revocation (withdrawa
 !!! warning "Not legal advice"
     Maho ships this as a tool to help you comply, it is not legal advice. Confirm the exact wording, placement, and process with your own counsel for the markets you sell into.
 
+!!! tip "Try it in the live demo"
+    The revocation button is enabled on our [live demo](demo.md). The public storefront form is at [demo.mahocommerce.com/revocation/](https://demo.mahocommerce.com/revocation/), and you can see the matching admin workflow under **Sales → Revocation Requests** in the [demo admin panel](demo.md).
+
 ## Overview
 
 The module adds a self-contained revocation channel to your store:
