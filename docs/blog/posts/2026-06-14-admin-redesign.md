@@ -10,7 +10,7 @@ So we rebuilt it. Maho's admin panel has been **completely redesigned**: a moder
 
 <!-- more -->
 
-![The new Maho admin dashboard](https://github.com/user-attachments/assets/1fcd3767-c6be-478c-8804-b762aa0887d1)
+![The new Maho admin dashboard](https://github.com/user-attachments/assets/cddb2598-4e57-4959-98c1-7a003b4323fa)
 
 ## Why the admin deserved this
 
