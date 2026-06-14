@@ -52,6 +52,10 @@ So we shut that door completely. Across every repo, each GitHub Action is now pi
 
 A tag can be rewritten. A commit hash can't. That whole class of attack simply has nowhere to land, and **Dependabot** keeps the pins fresh automatically as real new releases come out.
 
+We hold ourselves to the same standard we expect from our dependencies. Every Maho repository now ships **immutable releases**: once we publish a release, its tag and artifacts are permanently frozen and can never be overwritten, deleted, or re-pointed at different code. The exact bytes you downloaded and audited today are guaranteed to be the exact bytes anyone downloads from that release forever.
+
+This is the best defense for one simple reason: it removes trust from the equation. The `tj-actions` attack worked precisely because a published release could be quietly changed after the fact, so a version you'd already vetted could turn malicious overnight. Immutable releases make that impossible by design rather than by policy. There's no window where a compromised maintainer account, a leaked token, or a mistaken force-push can rewrite history. What shipped, shipped, and every checksum, lockfile, and pinned hash that points at one of our releases stays valid permanently.
+
 On top of that, every repo has **dependency alerts** and **automated security updates** turned on. We even take care of the old corners: a small compatibility module re-encrypts data coming from legacy Magento 1 stores with modern **libsodium** crypto, so moving onto Maho is easy *and* safe.
 
 ## Full traceability, the way the enterprise expects it
