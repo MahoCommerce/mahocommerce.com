@@ -10,7 +10,7 @@ So we rebuilt it. Maho's admin panel has been **completely redesigned**: a moder
 
 <!-- more -->
 
-![The new Maho admin dashboard](https://github.com/user-attachments/assets/cddb2598-4e57-4959-98c1-7a003b4323fa)
+![The new Maho admin dashboard](/assets/admin-screens/dashboard-light.png)
 
 ## Why the admin deserved this
 
@@ -20,7 +20,7 @@ This redesign is about respecting that time. Cleaner layouts, consistent control
 
 ## Dark mode, done right
 
-![A product edit screen in dark mode](https://github.com/user-attachments/assets/b5bb98df-4715-4934-86c7-d38da6b2b871){ align=right width=420 }
+![A product edit screen in dark mode](/assets/admin-screens/product-edit-dark.png){ align=right width=420 }
 
 This is the headline, and we didn't cut corners on it.
 
@@ -30,7 +30,7 @@ Under the hood it's built on the modern CSS `light-dark()` function rather than 
 
 ## One design system, everywhere
 
-![Product grids in the redesigned admin](https://github.com/user-attachments/assets/7ab65d10-6946-4a25-8c3a-249048f88d88){ align=right width=420 }
+![Product grids in the redesigned admin](/assets/admin-screens/products-grid-light.png){ align=right width=420 }
 
 The biggest win is consistency. The whole interface is now driven by a single set of **design tokens**: one place that defines every colour, surface, border, spacing step, and radius the admin uses.
 
@@ -38,7 +38,7 @@ That means a button looks like a button everywhere. A data grid in Sales behaves
 
 ## Lighter and cleaner under the hood
 
-![The redesigned System Health Check screen](https://github.com/user-attachments/assets/d16991bc-19e2-47bf-8ac7-08856aa630dd){ align=right width=420 }
+![The redesigned System Health Check screen](/assets/admin-screens/health-check-light.png){ align=right width=420 }
 
 A redesign is also a chance to throw out a lot of baggage. We deleted **more than 70 legacy images**, the old GIF and PNG sprites for buttons, gradients, arrows, and tree icons the backend had carried for years. They're gone, replaced by crisp CSS and SVG that stay sharp on any screen.
 

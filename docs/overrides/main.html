@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{#
+  Load the brand fonts from the document head with preconnect so the
+  browser discovers them early (in parallel with the stylesheets) instead
+  of after parsing maho.css. This avoids the flash of fallback text (FOUT)
+  that made the nav look like a different font on first load.
+#}
+{% block extrahead %}
+  {{ super() }}
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Geist:wght@300..700&family=Geist+Mono:wght@400;500&display=swap">
+{% endblock %}

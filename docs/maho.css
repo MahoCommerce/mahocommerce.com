@@ -1,49 +1,58 @@
 /* ============================================================
-   MAHO COMMERCE - Premium Documentation Theme
-   Brand color: #ADB41A (olive-green)
+   MAHO COMMERCE - "Ink & Chartreuse" design system
+   Electric chartreuse (#d7df22, straight from the logo) on deep
+   olive ink, over a warm paper reading surface.
+   Display type: Bricolage Grotesque · Body: Geist · Code: Geist Mono
+   Fonts are loaded from the document head (see overrides/main.html) so the
+   browser discovers them early and avoids a flash of fallback text.
    ============================================================ */
 
-@import url("https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500&display=swap");
-
-/* --- Design Tokens / Custom Properties --- */
+/* --- Design tokens --- */
 :root, [data-md-color-scheme=default] {
-    /* Brand palette */
-    --maho-brand: #ADB41A;
+    /* Brand */
+    --maho-chartreuse: #d7df22;
+    --maho-chartreuse-soft: #e4ea5e;
+    --maho-brand: #adb41a;
     --maho-brand-dark: #858a11;
-    --maho-brand-darker: #6b6f0e;
-    --maho-brand-light: #c5cc3a;
+    --maho-brand-text: #5f6310;          /* AA on paper */
     --maho-brand-subtle: rgba(173, 180, 26, 0.08);
-    --maho-brand-muted: rgba(173, 180, 26, 0.15);
-    --maho-brand-text: #5f6310; /* WCAG AA accessible on white */
-    --maho-brand-ink: #0a0a0a; /* near-black text on brand fills */
+    --maho-brand-muted: rgba(173, 180, 26, 0.16);
 
-    /* Section accent colors */
-    --maho-accent-warm: #f5f3ee;
-    --maho-accent-dark: #111118;
-    --maho-accent-dark-surface: #1a1a24;
-    --maho-accent-dark-border: rgba(173, 180, 26, 0.18);
+    /* Ink (dark canvas) */
+    --maho-ink: #0e0f08;
+    --maho-ink-soft: #15170c;
+    --maho-ink-raised: #1c1f10;
+    --maho-ink-border: rgba(244, 245, 232, 0.1);
+    --maho-ink-border-brand: rgba(215, 223, 34, 0.22);
+    --maho-on-ink: #f4f5e8;
+    --maho-on-ink-soft: #b9bca3;
+    --maho-on-ink-faint: #80836c;
 
-    /* Surface & text */
+    /* Paper (light canvas) */
+    --maho-paper: #fafafa;
     --maho-surface: #ffffff;
-    --maho-surface-warm: #fafaf7;
-    --maho-surface-elevated: #ffffff;
-    --maho-border: #e5e5e0;
-    --maho-border-light: #eeeeea;
-    --maho-text-primary: #1a1a1a;
-    --maho-text-secondary: #555550;
-    --maho-text-tertiary: #888883;
+    --maho-surface-warm: #f5f5ea;
+    --maho-border: #e3e3d4;
+    --maho-border-light: #ecece0;
+    --maho-text-primary: #191a10;
+    --maho-text-secondary: #54564a;
+    --maho-text-tertiary: #8b8d7d;
+
+    /* Type */
+    --maho-display: "Bricolage Grotesque", "Geist", ui-sans-serif, system-ui, sans-serif;
+    --maho-sans: "Geist", ui-sans-serif, system-ui, sans-serif;
+    --maho-mono: "Geist Mono", ui-monospace, "SF Mono", Menlo, monospace;
 
     /* Shadows */
-    --maho-shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.06);
-    --maho-shadow-md: 0 4px 12px rgba(0, 0, 0, 0.06), 0 2px 4px rgba(0, 0, 0, 0.04);
-    --maho-shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.08), 0 4px 8px rgba(0, 0, 0, 0.04);
-    --maho-shadow-xl: 0 20px 48px rgba(0, 0, 0, 0.1), 0 8px 16px rgba(0, 0, 0, 0.05);
-    --maho-shadow-brand: 0 8px 24px rgba(173, 180, 26, 0.18);
+    --maho-shadow-sm: 0 1px 3px rgba(20, 21, 10, 0.05), 0 1px 2px rgba(20, 21, 10, 0.06);
+    --maho-shadow-md: 0 4px 14px rgba(20, 21, 10, 0.07), 0 2px 4px rgba(20, 21, 10, 0.04);
+    --maho-shadow-lg: 0 14px 36px rgba(20, 21, 10, 0.1), 0 4px 10px rgba(20, 21, 10, 0.05);
+    --maho-glow: 0 0 0 1px var(--maho-ink-border-brand), 0 18px 70px rgba(215, 223, 34, 0.13);
 
-    /* Transitions */
+    /* Motion */
     --maho-ease: cubic-bezier(0.4, 0, 0.2, 1);
-    --maho-ease-out: cubic-bezier(0.0, 0, 0.2, 1);
-    --maho-duration: 0.25s;
+    --maho-ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+    --maho-duration: 0.22s;
     --maho-duration-slow: 0.4s;
 
     /* Radii */
@@ -53,9 +62,13 @@
     --maho-radius-xl: 24px;
 
     /* MkDocs Material overrides */
-    --md-default-fg-color--light: #1a1a1a !important;
+    --md-default-bg-color: var(--maho-paper);
+    --md-default-fg-color--light: var(--maho-text-primary) !important;
     --md-typeset-a-color: var(--maho-brand-text);
     --md-accent-fg-color: var(--maho-brand-dark);
+    --md-primary-fg-color: var(--maho-ink);
+    --md-text-font-family: var(--maho-sans);
+    --md-code-font-family: var(--maho-mono);
 }
 
 
@@ -65,24 +78,35 @@ html {
     scroll-behavior: smooth;
 }
 
+body {
+    font-family: var(--maho-sans);
+    background: var(--maho-paper);
+}
+
 .md-typeset {
     line-height: 1.7;
     color: var(--maho-text-primary);
 }
 
-.md-typeset h1 {
-    margin-bottom: 0;
+.md-typeset h1,
+.md-typeset h2,
+.md-typeset h3 {
+    font-family: var(--maho-display);
     font-weight: 700;
-    letter-spacing: -0.03em;
-    line-height: 1.2;
+    letter-spacing: -0.025em;
+    line-height: 1.18;
+    color: var(--maho-text-primary);
     text-wrap: balance;
 }
 
-.md-typeset h2, .md-typeset h3, .md-typeset h4 {
+.md-typeset h1 {
+    margin-bottom: 0;
     font-weight: 700;
-    letter-spacing: -0.02em;
-    line-height: 1.25;
-    text-wrap: balance;
+}
+
+.md-typeset h4, .md-typeset h5 {
+    font-weight: 650;
+    letter-spacing: -0.01em;
 }
 
 .md-typeset h2:first-of-type {
@@ -96,11 +120,11 @@ html {
 
 /* === LAYOUT === */
 .md-grid {
-    max-width: 1200px;
+    max-width: 1240px;
 }
 
 .md-main__inner {
-    margin-top: 0.2rem;
+    margin-top: 0.4rem;
 }
 
 
@@ -115,37 +139,34 @@ html {
 }
 
 ::-webkit-scrollbar-thumb {
-    background: rgba(0, 0, 0, 0.15);
+    background: rgba(25, 26, 16, 0.18);
     border-radius: 99px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background: rgba(0, 0, 0, 0.25);
+    background: rgba(25, 26, 16, 0.3);
 }
 
 * {
     scrollbar-width: thin;
-    scrollbar-color: rgba(0, 0, 0, 0.15) transparent;
+    scrollbar-color: rgba(25, 26, 16, 0.18) transparent;
 }
 
 
-/* === HEADER & TABS - Frosted Glass === */
+/* === HEADER & TABS - dark ink, site-wide === */
 .md-header,
 .md-tabs {
-    backdrop-filter: blur(16px) saturate(1.3);
-    -webkit-backdrop-filter: blur(16px) saturate(1.3);
-    background: rgba(255, 255, 255, 0.75) !important;
-    transition: box-shadow var(--maho-duration) var(--maho-ease),
-                background var(--maho-duration) var(--maho-ease);
+    background: var(--maho-ink) !important;
+    color: var(--maho-on-ink);
+    transition: box-shadow var(--maho-duration) var(--maho-ease);
+}
+
+.md-tabs {
+    border-bottom: 1px solid var(--maho-ink-border);
 }
 
 .md-header--shadow {
-    box-shadow: 0 2px 16px rgba(0, 0, 0, 0.08), 0 1px 3px rgba(0, 0, 0, 0.06);
-}
-
-.md-header--shadow,
-.md-header--shadow ~ .md-container .md-tabs {
-    background: rgba(255, 255, 255, 0.88) !important;
+    box-shadow: 0 2px 20px rgba(8, 9, 4, 0.45);
 }
 
 .md-header__button {
@@ -154,66 +175,107 @@ html {
 }
 
 .md-header__button:hover {
-    transform: scale(1.1);
+    transform: scale(1.08);
     opacity: 1;
 }
 
 .md-logo img {
-    zoom: 1.8;
-    margin: -5px 0 -10px;
-}
-
-.md-sidebar__inner .md-logo img {
-    zoom: 1;
-    margin-inline: auto;
-}
-
-.md-header--shadow .md-logo img {
-    margin-top: -10px;
+    zoom: 1.7;
+    margin: -6px 0;
 }
 
 .md-header__topic {
     visibility: hidden;
 }
 
-/* Search bar refinement */
+/* Search bar: dark inset until opened, light text while idle */
 .md-search__form {
     border-radius: var(--maho-radius-md);
-    transition: box-shadow var(--maho-duration) var(--maho-ease);
+    background: rgba(244, 245, 232, 0.1);
+    transition: background var(--maho-duration) var(--maho-ease);
 }
 
 .md-search__form:hover {
-    box-shadow: var(--maho-shadow-sm);
+    background: rgba(244, 245, 232, 0.16);
+}
+
+.md-search__input {
+    color: var(--maho-on-ink);
+}
+
+.md-search__input::placeholder,
+.md-search__input ~ .md-search__icon {
+    color: rgba(244, 245, 232, 0.6);
+}
+
+/* Open search: the form goes light, so flip the text dark again */
+[data-md-toggle=search]:checked ~ .md-header .md-search__input {
+    color: var(--maho-text-primary);
+}
+
+[data-md-toggle=search]:checked ~ .md-header .md-search__input::placeholder,
+[data-md-toggle=search]:checked ~ .md-header .md-search__input ~ .md-search__icon {
+    color: var(--maho-text-tertiary);
+}
+
+[data-md-toggle=search]:checked ~ .md-header .md-search__form {
+    border-radius: var(--maho-radius-md) var(--maho-radius-md) 0 0;
+}
+
+.md-search__output {
+    border-radius: 0 0 var(--maho-radius-md) var(--maho-radius-md);
+}
+
+/* Source (GitHub) chip */
+.md-source {
+    font-family: var(--maho-mono);
+    font-size: 0.6rem;
 }
 
 
 /* === TABS === */
-@media screen and (min-width: 76.25em) {
-    [data-md-color-primary=white] .md-tabs {
-        border-bottom: none;
-    }
-}
-
 .md-tabs__link {
+    font-weight: 500;
+    opacity: 0.72;
     transition: color var(--maho-duration) var(--maho-ease),
                 opacity var(--maho-duration) var(--maho-ease);
     position: relative;
+    margin-top: 0.55rem;
+    margin-bottom: 0.5rem;
 }
 
-.md-tabs__link--active::after {
+/* Let the tab bar height follow its content so there's no empty band below */
+.md-tabs__list,
+.md-tabs__item {
+    height: auto;
+}
+
+.md-tabs__link:hover {
+    opacity: 1;
+    color: var(--maho-chartreuse);
+}
+
+.md-tabs__link--active,
+.md-tabs__item--active .md-tabs__link {
+    opacity: 1;
+    color: var(--maho-chartreuse);
+}
+
+.md-tabs__link--active::after,
+.md-tabs__item--active .md-tabs__link::after {
     content: '';
     position: absolute;
-    bottom: 0;
+    bottom: -0.4em;
     left: 50%;
     transform: translateX(-50%);
-    width: 24px;
-    height: 3px;
-    background: var(--maho-brand);
-    border-radius: 3px 3px 0 0;
+    width: 100%;
+    height: 2px;
+    background: var(--maho-chartreuse);
+    border-radius: 2px 2px 0 0;
 }
 
 
-/* === SIDEBAR === */
+/* === SIDEBAR NAV === */
 .md-sidebar--primary .md-sidebar__inner {
     border-right: 1px solid var(--maho-border-light);
 }
@@ -227,14 +289,23 @@ html {
 }
 
 .md-sidebar .md-nav__item--section {
-    margin-top: 1.2em !important;
+    margin-top: 0.3em !important;
+}
+
+.md-nav {
+    font-size: 0.7rem;
+}
+
+.md-nav__item--section > .md-nav__link {
+    font-family: var(--maho-sans);
+    font-weight: 700;
+    color: var(--maho-text-secondary) !important;
 }
 
 .md-nav__item .md-nav__link {
-    transition: color var(--maho-duration) var(--maho-ease),
-                padding-left var(--maho-duration) var(--maho-ease);
+    transition: color var(--maho-duration) var(--maho-ease);
     border-radius: var(--maho-radius-sm);
-    padding-block: .2rem;
+    padding-block: 0.35rem;
 }
 
 .md-nav__item .md-nav__link:hover {
@@ -243,8 +314,26 @@ html {
 
 .md-nav__item .md-nav__link--active,
 .md-nav__item .md-nav__link--active code {
-    font-weight: bold;
-    color: var(--maho-brand-dark) !important;
+    font-weight: 600;
+    color: var(--maho-brand-text) !important;
+    background: var(--maho-brand-muted) !important;
+}
+
+@media screen and (min-width: 76.25em) {
+    .md-nav__link--active {
+        position: relative;
+    }
+
+    .md-sidebar--primary .md-nav__link--active::before {
+        content: '';
+        position: absolute;
+        left: -0.6rem;
+        top: 0.32rem;
+        bottom: 0.32rem;
+        width: 3px;
+        border-radius: 3px;
+        background: var(--maho-chartreuse);
+    }
 }
 
 @media screen and (max-width: 76.25em) {
@@ -252,42 +341,64 @@ html {
         font-size: 0;
     }
 
-    /* Mobile nav drawer header: show only the logo, hide the long site name.
-       Matches the theme's own .md-nav .md-nav__title[for=__drawer] specificity. */
+    /* Uniform white drawer (avoid paper/surface mismatch reading as gray) */
+    .md-sidebar--primary,
+    .md-sidebar--primary .md-sidebar__scrollwrap,
+    .md-nav--primary {
+        background: var(--maho-surface);
+    }
+
+    /* Larger, finger-friendly tap targets in the drawer */
+    .md-nav--primary,
+    .md-nav--primary .md-nav {
+        font-size: 0.82rem;
+    }
+
+    .md-nav--primary .md-nav__item .md-nav__link {
+        padding-block: 0.6rem;
+    }
+
+    /* Mobile drawer header: light surface with the dark logo only */
     .md-nav--primary > .md-nav__title[for="__drawer"] {
         font-size: 0;
+        background: var(--maho-surface);
+    }
+
+    /* Swap the white header logo for the dark-on-light variant */
+    .md-nav--primary > .md-nav__title[for="__drawer"] .md-logo img {
+        content: url("assets/maho-logo.svg");
     }
 
     .md-nav--primary > .md-nav__title[for="__drawer"] .md-logo {
-        font-size: 1rem; /* keep the logo box from collapsing */
+        font-size: 1rem;
         width: 100%;
         height: auto;
-        padding: 0;
+        padding: 0.6rem 0;
         margin: 0;
     }
 
     .md-nav--primary > .md-nav__title[for="__drawer"] .md-logo img,
     .md-nav--primary > .md-nav__title[for="__drawer"] .md-logo svg {
         width: auto;
-        height: 2.4rem;
+        height: 2.2rem;
         max-width: 100%;
         max-height: none;
     }
 }
 
 
-/* === LINKS (accessible color) === */
-.md-content a:not(.md-button) {
+/* === LINKS === */
+.md-content a:not(.md-button):not(.mh-btn) {
     color: var(--maho-brand-text);
     text-decoration: underline;
-    text-decoration-color: rgba(173, 180, 26, 0.35);
+    text-decoration-color: rgba(173, 180, 26, 0.4);
     text-underline-offset: 2px;
     text-decoration-thickness: 1px;
     transition: color var(--maho-duration) var(--maho-ease),
                 text-decoration-color var(--maho-duration) var(--maho-ease);
 }
 
-.md-content a:not(.md-button):hover {
+.md-content a:not(.md-button):not(.mh-btn):hover {
     color: var(--maho-brand-dark);
     text-decoration-color: var(--maho-brand);
 }
@@ -297,31 +408,37 @@ html {
 }
 
 
-/* === CODE BLOCKS (enhanced) === */
+/* === CODE === */
 .md-typeset code {
     border-radius: var(--maho-radius-sm);
     padding: 0.1em 0.4em;
     font-size: 0.85em;
-    border: 1px solid var(--maho-border-light);
+    border: 1px solid var(--maho-border);
     background: var(--maho-surface-warm);
+    color: var(--maho-text-primary);
 }
 
+/* Code blocks go dark ink: terminal-grade, with chartreuse hairline */
 .md-typeset pre {
     border-radius: var(--maho-radius-md);
-    border: 1px solid var(--maho-border);
+    border: 1px solid var(--maho-ink-raised);
     overflow: hidden;
     position: relative;
+    box-shadow: var(--maho-shadow-md);
 }
 
-.md-typeset pre > code {
+.md-typeset pre > code,
+.md-typeset .highlight pre,
+.md-typeset .highlighttable .code {
+    background: var(--maho-ink-soft) !important;
+    color: #e6e7d6;
     border: none;
     border-radius: 0;
     padding: 1em 1.2em;
-    font-size: 0.82em;
-    line-height: 1.65;
+    font-size: 0.88em;
+    line-height: 1.7;
 }
 
-/* Code block subtle left accent */
 .md-typeset pre::before {
     content: '';
     position: absolute;
@@ -329,9 +446,25 @@ html {
     left: 0;
     bottom: 0;
     width: 3px;
-    background: linear-gradient(180deg, var(--maho-brand) 0%, var(--maho-brand-dark) 100%);
-    opacity: 0.4;
+    background: var(--maho-chartreuse);
+    opacity: 0.55;
     z-index: 1;
+}
+
+/* Copy button on dark blocks */
+.md-typeset .md-clipboard {
+    color: var(--maho-on-ink-faint);
+}
+
+.md-typeset .md-clipboard:hover {
+    color: var(--maho-chartreuse);
+}
+
+/* Line number gutter (anchor_linenums tables) */
+.md-typeset .highlighttable .linenos {
+    background: var(--maho-ink) !important;
+    color: var(--maho-on-ink-faint);
+    border: none;
 }
 
 
@@ -342,13 +475,47 @@ html {
     border-width: 0;
     border-left-width: 3px;
     box-shadow: var(--maho-shadow-sm);
+    background: var(--maho-surface);
     overflow: hidden;
+    font-size: 0.72rem;
 }
 
 .md-typeset .admonition-title,
 .md-typeset details > summary {
     font-weight: 600;
     letter-spacing: -0.01em;
+}
+
+/* Recolor the teal/cyan families to sit with the palette:
+   tip becomes brand olive, info becomes a calm slate blue */
+.md-typeset .admonition.tip,
+.md-typeset details.tip {
+    border-color: var(--maho-brand);
+}
+
+.md-typeset .tip > .admonition-title,
+.md-typeset .tip > summary {
+    background-color: rgba(173, 180, 26, 0.14);
+}
+
+.md-typeset .tip > .admonition-title::before,
+.md-typeset .tip > summary::before {
+    background-color: var(--maho-brand-dark);
+}
+
+.md-typeset .admonition.info,
+.md-typeset details.info {
+    border-color: #6d87a8;
+}
+
+.md-typeset .info > .admonition-title,
+.md-typeset .info > summary {
+    background-color: rgba(109, 135, 168, 0.12);
+}
+
+.md-typeset .info > .admonition-title::before,
+.md-typeset .info > summary::before {
+    background-color: #5b7da8;
 }
 
 
@@ -360,14 +527,20 @@ html {
     display: table;
     border-collapse: separate;
     border-spacing: 0;
+    box-shadow: var(--maho-shadow-sm);
+    background: var(--maho-surface);
 }
 
 .md-typeset table:not([class]) th {
-    background: var(--maho-surface-warm);
-    font-weight: 600;
-    letter-spacing: -0.01em;
-    border-bottom: 2px solid var(--maho-border);
-    padding: 0.8em 1em;
+    background: var(--maho-ink);
+    color: var(--maho-on-ink);
+    font-family: var(--maho-mono);
+    font-weight: 500;
+    font-size: 0.62rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    border-bottom: none;
+    padding: 0.7em 1em;
 }
 
 .md-typeset table:not([class]) td {
@@ -388,21 +561,25 @@ html {
 }
 
 
-/* === BUTTONS === */
+/* === BUTTONS (Material .md-button, used across docs pages) === */
 .md-button {
     border-radius: var(--maho-radius-md) !important;
-    padding: 0.65em 1.6em !important;
+    padding: 0.6em 1.5em !important;
     font-weight: 600 !important;
-    font-size: 0.88em !important;
+    font-size: 0.85em !important;
     letter-spacing: -0.01em;
     transition: all var(--maho-duration) var(--maho-ease) !important;
-    border-width: 2px !important;
+    border: 1px solid var(--maho-text-primary) !important;
+    color: var(--maho-text-primary) !important;
     text-decoration: none !important;
 }
 
 .md-button:hover {
     transform: translateY(-2px);
     box-shadow: var(--maho-shadow-md);
+    background: var(--maho-surface) !important;
+    border-color: var(--maho-text-primary) !important;
+    color: var(--maho-text-primary) !important;
 }
 
 .md-button:active {
@@ -410,22 +587,24 @@ html {
 }
 
 .md-button--primary {
-    background: var(--maho-brand) !important;
-    border-color: var(--maho-brand) !important;
-    color: #fff !important;
+    background: var(--maho-chartreuse) !important;
+    border-color: var(--maho-chartreuse) !important;
+    color: var(--maho-ink) !important;
 }
 
 .md-button--primary:hover {
-    background: var(--maho-brand-dark) !important;
-    border-color: var(--maho-brand-dark) !important;
-    box-shadow: var(--maho-shadow-brand) !important;
+    background: var(--maho-chartreuse-soft) !important;
+    border-color: var(--maho-chartreuse-soft) !important;
+    color: var(--maho-ink) !important;
+    box-shadow: 0 10px 26px rgba(173, 180, 26, 0.3) !important;
 }
 
 
-/* === SOCIAL LINKS === */
+/* === SOCIAL LINKS (theme default, replaced by custom footer) === */
 .md-social {
     display: none;
 }
+
 .md-social__link svg {
     max-height: 1.2rem;
 }
@@ -437,12 +616,13 @@ aside.md-source-file * {
 }
 
 
-/* === FIGURE CAPTIONS === */
+/* === FIGURES === */
 .md-typeset figure {
     border: 1px solid var(--maho-border);
     border-radius: var(--maho-radius-md);
     overflow: hidden;
     padding: 0;
+    background: var(--maho-surface);
 }
 
 .md-typeset figure img {
@@ -465,17 +645,26 @@ aside.md-source-file * {
 /* === VERSION BADGE === */
 .version-badge {
     display: inline-block;
-    background: linear-gradient(135deg, var(--maho-brand) 0%, var(--maho-brand-dark) 100%);
-    color: white;
-    padding: 2px 10px;
+    background: var(--maho-ink);
+    color: var(--maho-chartreuse);
+    font-family: var(--maho-mono);
+    padding: 3px 12px;
     border-radius: 99px;
-    font-size: 0.65em;
-    font-weight: 600;
-    margin-left: 10px;
+    font-size: 0.55em;
+    font-weight: 500;
+    margin-left: 12px;
     vertical-align: middle;
     white-space: nowrap;
-    letter-spacing: 0.02em;
-    box-shadow: 0 2px 6px rgba(173, 180, 26, 0.3);
+    letter-spacing: 0.04em;
+}
+
+
+/* === CONTENT TABS === */
+.md-typeset .tabbed-labels > label {
+    font-weight: 600;
+    font-size: 0.85em;
+    letter-spacing: -0.01em;
+    transition: color var(--maho-duration) var(--maho-ease);
 }
 
 
@@ -483,7 +672,7 @@ aside.md-source-file * {
    HOMEPAGE
    ============================================================ */
 
-/* Hide sidebar on home and other special pages */
+/* Hide sidebars and unwrap content on home and special pages */
 @media screen and (min-width: 60em) {
     body:has(h1[id=blog]) .md-sidebar {
         visibility: hidden;
@@ -509,6 +698,24 @@ aside.md-source-file * {
     }
 }
 
+body:has(#homeh1) .md-main__inner {
+    margin-top: 0;
+}
+
+body:has(#homeh1) .md-content__inner {
+    margin: 0;
+    padding: 0;
+}
+
+body:has(#homeh1) .md-content__inner::before {
+    display: none;
+}
+
+/* Full-bleed bands use 100vw; clip the residual scrollbar overflow */
+body:has(#homeh1) .md-container {
+    overflow-x: clip;
+}
+
 article:has(#homeh1) .md-source-file {
     display: none;
 }
@@ -516,63 +723,55 @@ article:has(#homeh1) .md-source-file {
 article:has(#homeh1) {
     max-width: 100% !important;
     margin: 0 auto;
+    font-family: var(--maho-sans);
 }
 
-/* --- Hero Animated Gradient Mesh --- */
-article:has(#homeh1)::before {
+/* Full-bleed band helper applied to home sections */
+.mh-hero,
+.mh-proof,
+.mh-audience-nav,
+.audience-section.agencies,
+.audience-section.developers,
+.final-cta {
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
+}
+
+
+/* ---- HERO: deep ink, chartreuse glow, blueprint grid ---- */
+.mh-hero {
+    position: relative;
+    background:
+        radial-gradient(ellipse 75% 90% at 78% -10%, rgba(215, 223, 34, 0.16) 0%, transparent 55%),
+        radial-gradient(ellipse 50% 70% at 8% 110%, rgba(215, 223, 34, 0.07) 0%, transparent 60%),
+        var(--maho-ink);
+    color: var(--maho-on-ink);
+    overflow: hidden;
+    padding-bottom: 4.4em;
+}
+
+/* Blueprint grid, fading toward the bottom */
+.mh-hero::before {
     content: '';
     position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 750px;
+    inset: 0;
     background:
-        radial-gradient(ellipse 80% 60% at 15% 20%, rgba(173, 180, 26, 0.14) 0%, transparent 60%),
-        radial-gradient(ellipse 60% 70% at 85% 15%, rgba(133, 138, 17, 0.10) 0%, transparent 55%),
-        radial-gradient(ellipse 70% 50% at 50% 70%, rgba(173, 180, 26, 0.07) 0%, transparent 60%),
-        radial-gradient(ellipse 40% 40% at 70% 50%, rgba(197, 204, 58, 0.06) 0%, transparent 50%);
-    animation: heroMesh 25s ease-in-out infinite alternate;
+        linear-gradient(rgba(244, 245, 232, 0.045) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(244, 245, 232, 0.045) 1px, transparent 1px);
+    background-size: 44px 44px;
+    -webkit-mask-image: linear-gradient(180deg, #000 0%, rgba(0,0,0,0.4) 55%, transparent 92%);
+            mask-image: linear-gradient(180deg, #000 0%, rgba(0,0,0,0.4) 55%, transparent 92%);
     pointer-events: none;
-    z-index: -1;
 }
 
-@keyframes heroMesh {
-    0% {
-        opacity: 1;
-        transform: scale(1) translate(0, 0);
-    }
-    33% {
-        opacity: 0.85;
-        transform: scale(1.05) translate(-10px, -5px);
-    }
-    66% {
-        opacity: 0.95;
-        transform: scale(1.02) translate(5px, -10px);
-    }
-    100% {
-        opacity: 1;
-        transform: scale(1.08) translate(-5px, -15px);
-    }
-}
-
-
-/* ============================================================
-   MARKETING HERO (Claude Design handoff — light surface "B")
-   Dark-canvas marketing layout recreated on the site's light
-   theme: split hero + terminal, feature strip, layered motion.
-   ============================================================ */
-.mh-hero,
-.mh-strip {
-    font-family: "Geist", "Inter", ui-sans-serif, system-ui, sans-serif;
-}
-
-.mh-hero {
+.mh-hero-inner {
+    position: relative;
     max-width: 1180px;
-    margin: 0.5em auto 0;
-    padding: 1.5em 2em 0;
+    margin: 0 auto;
+    padding: 2.2em 2em 2.6em;
     display: grid;
-    grid-template-columns: 1.32fr 1fr;
-    gap: 4.5em;
+    grid-template-columns: 1.18fr 1fr;
+    gap: 4em;
     align-items: center;
 }
 
@@ -580,62 +779,48 @@ article:has(#homeh1)::before {
     min-width: 0;
 }
 
-/* Right column: animated logo sitting above the terminal. */
-.mh-hero-side {
-    display: flex;
-    flex-direction: column;
-    min-width: 0;
-}
-
-.mh-hero-side > .mh-logo {
-    margin: 0 auto 1.4em;
-    max-width: 17em;
-    width: 100%;
-    animation: none; /* keep its own lp1/lp2/lp3 fade-in */
-}
-
-@media screen and (max-width: 60em) {
-    /* Keep the logo first in the stacked layout, above the terminal. */
-    .mh-hero-side > .mh-logo { max-width: 15em; margin-bottom: 1em; }
-}
-
 /* Eyebrow */
 .mh-eyebrow {
     display: inline-flex;
     align-items: center;
-    gap: 0.6em;
-    font-family: "Geist Mono", ui-monospace, "SF Mono", Menlo, monospace;
-    font-size: 0.62em;
+    gap: 0.7em;
+    font-family: var(--maho-mono);
+    font-size: 0.6em;
     text-transform: uppercase;
-    letter-spacing: 0.16em;
-    color: var(--maho-brand-text);
+    letter-spacing: 0.18em;
+    color: var(--maho-chartreuse);
     font-weight: 500;
+    padding: 0.6em 1.1em;
+    border: 1px solid var(--maho-ink-border-brand);
+    border-radius: 99px;
+    background: rgba(215, 223, 34, 0.05);
 }
 
 .mh-eyebrow .mh-dot {
-    width: 8px;
-    height: 8px;
+    width: 7px;
+    height: 7px;
     border-radius: 50%;
-    background: var(--maho-brand);
-    box-shadow: 0 0 0 0 rgba(173, 180, 26, 0.5);
+    background: var(--maho-chartreuse);
+    box-shadow: 0 0 0 0 rgba(215, 223, 34, 0.5);
     animation: mhPulse 2.4s var(--maho-ease) infinite;
 }
 
 @keyframes mhPulse {
-    0%   { box-shadow: 0 0 0 0 rgba(173, 180, 26, 0.45); }
-    70%  { box-shadow: 0 0 0 8px rgba(173, 180, 26, 0); }
-    100% { box-shadow: 0 0 0 0 rgba(173, 180, 26, 0); }
+    0%   { box-shadow: 0 0 0 0 rgba(215, 223, 34, 0.45); }
+    70%  { box-shadow: 0 0 0 8px rgba(215, 223, 34, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(215, 223, 34, 0); }
 }
 
 /* Headline */
 #homeh1.mh-headline {
+    font-family: var(--maho-display);
     text-align: left;
-    font-size: 4.05em;
-    font-weight: 600;
-    line-height: 1.0;
-    letter-spacing: -0.04em;
-    color: var(--maho-text-primary);
-    margin: 0.45em 0 0.35em;
+    font-size: 4.1em;
+    font-weight: 750;
+    line-height: 0.98;
+    letter-spacing: -0.035em;
+    color: var(--maho-on-ink);
+    margin: 0.4em 0 0.32em;
 }
 
 #homeh1.mh-headline .mh-sr {
@@ -652,25 +837,34 @@ article:has(#homeh1)::before {
 
 #homeh1.mh-headline em {
     font-style: normal;
-    color: var(--maho-brand-ink, #0a0a0a);
-    background: var(--maho-brand);
-    padding: 0 0.09em;
-    border-radius: var(--maho-radius-sm);
+    color: var(--maho-chartreuse);
+    position: relative;
     display: inline-block;
-    transform: skew(-3deg);
-    box-decoration-break: clone;
-    -webkit-box-decoration-break: clone;
+}
+
+/* Hand-drawn underline stroke beneath the accent words */
+#homeh1.mh-headline em::after {
+    content: '';
+    position: absolute;
+    left: 0.02em;
+    right: 0.14em;
+    bottom: -0.06em;
+    height: 0.085em;
+    background: var(--maho-chartreuse);
+    opacity: 0.35;
+    border-radius: 99px;
+    transform: skewX(-12deg);
 }
 
 .mh-lede {
-    font-size: 0.98em;
-    line-height: 1.6;
-    color: var(--maho-text-secondary);
+    font-size: 0.95em;
+    line-height: 1.65;
+    color: var(--maho-on-ink-soft);
     max-width: 46ch;
-    margin: 0 0 1.6em;
+    margin: 0 0 1.7em;
 }
 
-/* CTAs */
+/* ---- Button system (used on dark home bands) ---- */
 .mh-ctas {
     display: flex;
     flex-wrap: wrap;
@@ -678,60 +872,116 @@ article:has(#homeh1)::before {
     align-items: center;
 }
 
-.mh-ctas .mh-btn {
-    margin: 0;
+.mh-btn {
     display: inline-flex;
     align-items: center;
     gap: 0.5em;
-    font-weight: 500;
+    margin: 0;
+    padding: 0.68em 1.4em;
+    border-radius: var(--maho-radius-md);
+    border: 1px solid transparent;
+    font-size: 0.78em;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    line-height: 1;
+    text-decoration: none !important;
+    cursor: pointer;
+    transition: transform var(--maho-duration) var(--maho-ease),
+                background var(--maho-duration) var(--maho-ease),
+                color var(--maho-duration) var(--maho-ease),
+                border-color var(--maho-duration) var(--maho-ease),
+                box-shadow var(--maho-duration) var(--maho-ease);
 }
 
-.mh-ctas .mh-btn svg {
+.mh-btn:active {
+    transform: translateY(0);
+}
+
+.mh-btn svg {
     flex-shrink: 0;
+    transition: transform var(--maho-duration) var(--maho-ease);
 }
 
-.mh-ctas .mh-btn-ghost {
-    border-color: transparent;
-    color: var(--maho-text-secondary);
+.mh-btn:hover svg {
+    transform: translateX(3px);
 }
 
-.mh-ctas .mh-btn-ghost:hover {
-    color: var(--maho-brand-dark);
-    border-color: var(--maho-border);
-    background: var(--maho-surface-warm);
+.mh-btn-solid {
+    background: var(--maho-chartreuse);
+    color: var(--maho-ink) !important;
 }
 
-/* Meta row */
+.mh-btn-solid:hover {
+    background: var(--maho-chartreuse-soft);
+    transform: translateY(-2px);
+    box-shadow: 0 12px 32px rgba(215, 223, 34, 0.28);
+}
+
+.mh-btn-line {
+    border-color: rgba(244, 245, 232, 0.28);
+    color: var(--maho-on-ink) !important;
+}
+
+.mh-btn-line:hover {
+    border-color: var(--maho-chartreuse);
+    color: var(--maho-chartreuse) !important;
+    transform: translateY(-2px);
+}
+
+.mh-btn-ghost {
+    color: var(--maho-on-ink-soft) !important;
+}
+
+.mh-btn-ghost:hover {
+    color: var(--maho-chartreuse) !important;
+    background: rgba(215, 223, 34, 0.07);
+}
+
+/* Meta facts row */
 .mh-meta {
     display: flex;
     flex-wrap: wrap;
-    gap: 1.6em;
-    margin-top: 1.8em;
-    font-family: "Geist Mono", ui-monospace, "SF Mono", Menlo, monospace;
-    font-size: 0.6em;
+    gap: 0.7em 1.6em;
+    margin: 0 0 1.7em;
+    font-family: var(--maho-mono);
+    font-size: 0.58em;
     letter-spacing: 0.04em;
-    color: var(--maho-text-tertiary);
+    color: var(--maho-on-ink-soft);
 }
 
 .mh-meta span {
     display: inline-flex;
     align-items: center;
-    gap: 0.45em;
+    gap: 0.5em;
     white-space: nowrap;
 }
 
 .mh-meta .mh-bullet {
-    color: var(--maho-brand);
+    color: var(--maho-chartreuse);
     font-size: 0.7em;
 }
 
 /* ---- Terminal panel ---- */
+.mh-hero-side {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+}
+
+/* Static shell carries the glow so it doesn't sweep over the caption
+   when the inner terminal does its 3D flip. */
+.mh-term-shell {
+    position: relative;
+    border-radius: var(--maho-radius-lg);
+    box-shadow: var(--maho-glow), 0 30px 60px rgba(0, 0, 0, 0.5);
+    perspective: 1600px;
+}
+
 .mh-term {
-    background: #14150f;
-    border: 1px solid #2a2d20;
+    background: #0a0b05;
+    border: 1px solid var(--maho-ink-border-brand);
     border-radius: var(--maho-radius-lg);
     overflow: hidden;
-    box-shadow: 0 30px 60px rgba(15, 15, 11, 0.16), 0 4px 12px rgba(15, 15, 11, 0.08);
 }
 
 .mh-term-top {
@@ -739,8 +989,8 @@ article:has(#homeh1)::before {
     align-items: center;
     gap: 0.5em;
     padding: 0.7em 0.9em;
-    background: #0c0d08;
-    border-bottom: 1px solid #2a2d20;
+    background: #11130a;
+    border-bottom: 1px solid rgba(215, 223, 34, 0.12);
 }
 
 .mh-term-top .mh-d {
@@ -755,18 +1005,18 @@ article:has(#homeh1)::before {
 .mh-term-top .mh-d:nth-child(3) { background: #8bc34a; }
 
 .mh-term-top .mh-term-title {
-    font-family: "Geist Mono", ui-monospace, "SF Mono", Menlo, monospace;
+    font-family: var(--maho-mono);
     font-size: 0.55em;
-    color: #77756a;
+    color: var(--maho-on-ink-faint);
     margin-left: 0.6em;
 }
 
 .mh-term-body {
     padding: 1.1em 1.3em 1.3em;
-    font-family: "Geist Mono", ui-monospace, "SF Mono", Menlo, monospace;
-    font-size: 0.62em;
-    line-height: 1.85;
-    color: #d2d0c3;
+    font-family: var(--maho-mono);
+    font-size: 0.6em;
+    line-height: 1.9;
+    color: #d6d8c6;
     overflow-x: auto;
 }
 
@@ -774,12 +1024,8 @@ article:has(#homeh1)::before {
     white-space: pre;
 }
 
-.mh-term-body .mh-ln:nth-last-child(2) {
-    margin-bottom: 0.5em;
-}
-
-.mh-term-body .c { color: #77756a; }
-.mh-term-body .p { color: var(--maho-brand-light); }
+.mh-term-body .c { color: #797d63; }
+.mh-term-body .p { color: var(--maho-chartreuse); }
 .mh-term-body .k { color: #6fb0ff; }
 .mh-term-body .s { color: #c9a8ff; }
 
@@ -787,7 +1033,7 @@ article:has(#homeh1)::before {
     display: inline-block;
     width: 7px;
     height: 1.05em;
-    background: var(--maho-brand);
+    background: var(--maho-chartreuse);
     vertical-align: -0.18em;
     margin-left: 2px;
     animation: mhBlink 1s steps(2) infinite;
@@ -795,18 +1041,20 @@ article:has(#homeh1)::before {
 
 @keyframes mhBlink { 50% { opacity: 0; } }
 
-/* ---- Terminal: auto-cycling Composer / Docker scenes ----
-   The cycle is JS-driven (maho.js): a scene types out line by line, holds,
-   then the whole window flips backwards and the next scene types out. CSS
-   positions the scenes, sets up the 3D flip, and gates visibility while the
-   animation is running. Without JS / reduced motion: just the Composer scene. */
-.mh-term-stage {
-    position: relative;
+.mh-term-caption {
+    margin-top: 1.1em;
+    text-align: center;
+    font-family: var(--maho-mono);
+    font-size: 0.55em;
+    letter-spacing: 0.03em;
+    color: var(--maho-on-ink-soft);
 }
 
-/* 3D context for the card flip (perspective on the parent, transform on the term). */
-.mh-hero-side {
-    perspective: 1600px;
+/* ---- Terminal: auto-cycling Composer / Docker scenes ----
+   JS-driven (maho.js): a scene types out, holds, the window flips and the
+   next scene types. Without JS / reduced motion: just the Composer scene. */
+.mh-term-stage {
+    position: relative;
 }
 
 html.mh-anim .mh-term {
@@ -816,13 +1064,10 @@ html.mh-anim .mh-term {
     will-change: transform;
 }
 
-/* First scene sits in flow and defines the stage height. */
 .mh-scene-composer {
     position: relative;
 }
 
-/* Second scene overlays the first; only shown once JS drives the cycle,
-   so without JS (or reduced motion) the terminal is just the Composer scene. */
 .mh-scene-docker {
     position: absolute;
     inset: 0;
@@ -842,31 +1087,319 @@ html.mh-anim .mh-term-scene.is-active {
     opacity: 1;
 }
 
-/* ---- Logo marquee (social proof: stores + partners) ---- */
-.mh-marquee {
-    max-width: 1180px;
-    margin: 3.2em auto 0;
-    padding: 0.4em 0;
+/* ---- Hero entrance (pure CSS, fill-mode both, no FOUC) ---- */
+.mh-hero-copy > *,
+.mh-hero-side {
+    will-change: transform, opacity;
+    animation: mhRise 0.7s var(--maho-ease-out) both;
 }
 
-.mh-marquee .mh-marquee-label {
-    margin: 0 0 2.4em;
-    text-align: center;
-    font-size: 0.7em;
-    font-weight: 500;
-    letter-spacing: 0.08em;
+.mh-eyebrow         { animation-delay: 0.05s; }
+#homeh1.mh-headline { animation-delay: 0.12s; }
+.mh-lede            { animation-delay: 0.22s; }
+.mh-ctas            { animation-delay: 0.32s; }
+.mh-meta            { animation-delay: 0.42s; }
+.mh-hero-side       { animation: mhRiseTerm 0.85s var(--maho-ease-out) 0.2s both; }
+.mh-showcase        { will-change: transform, opacity; animation: mhRise 0.8s var(--maho-ease-out) 0.5s both; }
+
+@keyframes mhRise {
+    from { opacity: 0; transform: translateY(22px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes mhRiseTerm {
+    from { opacity: 0; transform: translateY(30px) scale(0.97); }
+    to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* Accent words sweep in just after the headline lands */
+#homeh1.mh-headline em {
+    animation: mhWipe 0.55s var(--maho-ease-out) 0.55s both;
+}
+
+@keyframes mhWipe {
+    from { clip-path: inset(0 100% 0 0); }
+    to   { clip-path: inset(0 0 0 0); }
+}
+
+
+/* ---- Hero admin showcase: light/dark before-after comparison ---- */
+.mh-showcase {
+    position: relative;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 2em;
+}
+
+/* Window frame, matched to the terminal chrome above.
+   overflow is visible so the nav arrows can straddle the edges; the
+   chrome top and image bottom corners are rounded explicitly instead. */
+.mh-shot-window {
+    position: relative;
+    background: #0a0b05;
+    border: 1px solid var(--maho-ink-border-brand);
+    border-radius: var(--maho-radius-lg);
+    box-shadow: var(--maho-glow), 0 30px 60px rgba(0, 0, 0, 0.5);
+}
+
+.mh-shot-window .mh-term-top {
+    position: relative;
+    border-top-left-radius: calc(var(--maho-radius-lg) - 1px);
+    border-top-right-radius: calc(var(--maho-radius-lg) - 1px);
+}
+
+.mh-shot-window .mh-shot-light,
+.mh-shot-window .mh-shot-dark,
+.mh-shot-window .mh-shot-hold {
+    border-bottom-left-radius: calc(var(--maho-radius-lg) - 1px);
+    border-bottom-right-radius: calc(var(--maho-radius-lg) - 1px);
+}
+
+/* Lightbulb toggle + its attention hint sit at the right of the chrome */
+.mh-bulb-wrap {
+    margin-left: auto;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55em;
+}
+
+/* Animated "Try dark mode →" nudge, dismissed after the first press */
+.mh-bulb-hint {
+    font-family: var(--maho-mono);
+    font-size: 0.5rem;
     text-transform: uppercase;
-    color: var(--maho-text-secondary);
+    letter-spacing: 0.12em;
+    color: var(--maho-chartreuse);
+    white-space: nowrap;
+    opacity: 0.9;
+    cursor: pointer;
+    transition: opacity 0.35s var(--maho-ease), transform 0.35s var(--maho-ease);
 }
 
-/* Edge fade so logos slide in/out of view instead of popping. */
+.mh-bulb-hint:hover { opacity: 1; }
+
+.mh-bulb-arrow {
+    display: inline-block;
+    will-change: transform;
+}
+
+.mh-shot-window:not(.is-hint-done) .mh-bulb-arrow {
+    animation: mhNudge 1.2s ease-in-out infinite;
+}
+
+.mh-shot-window:not(.is-hint-done) .mh-bulb {
+    animation: mhBulbPulse 2.2s var(--maho-ease-out) infinite;
+}
+
+@keyframes mhNudge {
+    0%, 100% { transform: translateX(0); }
+    50%      { transform: translateX(4px); }
+}
+
+@keyframes mhBulbPulse {
+    0%   { box-shadow: 0 0 12px -2px rgba(215, 223, 34, 0.5), 0 0 0 0 rgba(215, 223, 34, 0.5); }
+    70%  { box-shadow: 0 0 12px -2px rgba(215, 223, 34, 0.5), 0 0 0 9px rgba(215, 223, 34, 0); }
+    100% { box-shadow: 0 0 12px -2px rgba(215, 223, 34, 0.5), 0 0 0 0 rgba(215, 223, 34, 0); }
+}
+
+.mh-bulb {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 26px;
+    height: 26px;
+    padding: 0;
+    border-radius: 50%;
+    border: 1px solid var(--maho-ink-border);
+    background: rgba(244, 245, 232, 0.04);
+    color: var(--maho-on-ink-faint);
+    cursor: pointer;
+    transition:
+        color 0.25s var(--maho-ease),
+        border-color 0.25s var(--maho-ease),
+        background 0.25s var(--maho-ease),
+        box-shadow 0.25s var(--maho-ease);
+}
+
+.mh-bulb:hover,
+.mh-bulb:focus-visible {
+    color: var(--maho-on-ink);
+    border-color: var(--maho-ink-border-brand);
+    outline: none;
+}
+
+/* Lit when showing the light theme: glowing chartreuse bulb */
+.mh-bulb[aria-pressed="false"] {
+    color: var(--maho-chartreuse);
+    border-color: var(--maho-ink-border-brand);
+    background: rgba(215, 223, 34, 0.1);
+    box-shadow: 0 0 12px -2px rgba(215, 223, 34, 0.5);
+}
+
+/* The screenshot stage: light base with a dark layer crossfaded on top */
+.mh-shot-stage {
+    position: relative;
+    background: var(--maho-ink-soft);
+}
+
+/* Frame wraps the two image layers so navigation can animate them
+   without moving the arrows / chrome. */
+.mh-shot-frame {
+    position: relative;
+    z-index: 1;
+}
+
+/* Outgoing screenshot held behind the frame so the crossfade never
+   exposes the dark stage background (no black flash). */
+.mh-shot-hold {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top left;
+    z-index: 0;
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* New screenshot crossfades up over the held one */
+.mh-shot-frame.mh-shot-fade { animation: mhShotFade 0.45s var(--maho-ease); }
+
+@keyframes mhShotFade {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+/* Loading spinner shown while the next screenshot decodes */
+.mh-shot-spinner {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 42px;
+    height: 42px;
+    margin: -21px 0 0 -21px;
+    border-radius: 50%;
+    border: 3px solid rgba(244, 245, 232, 0.22);
+    border-top-color: var(--maho-chartreuse);
+    z-index: 4;
+    pointer-events: none;
+    animation: mhSpin 0.75s linear infinite;
+}
+
+.mh-shot-spinner[hidden] { display: none; }
+
+@keyframes mhSpin { to { transform: rotate(360deg); } }
+
+.mh-shot-light {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+.mh-shot-dark {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity 0.35s var(--maho-ease);
+}
+
+.mh-shot-stage.is-dark .mh-shot-dark {
+    opacity: 1;
+}
+
+/* Prev / next arrows straddling the stage edges, vertically centred */
+.mh-shot-nav {
+    position: absolute;
+    top: 50%;
+    z-index: 3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 52px;
+    height: 52px;
+    padding: 0;
+    border: 1px solid var(--maho-ink-border-brand);
+    border-radius: 50%;
+    color: var(--maho-on-ink);
+    background: rgba(14, 15, 8, 0.72);
+    -webkit-backdrop-filter: blur(4px);
+            backdrop-filter: blur(4px);
+    cursor: pointer;
+    opacity: 0.92;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.5);
+    transition:
+        background 0.2s var(--maho-ease),
+        color 0.2s var(--maho-ease),
+        opacity 0.2s var(--maho-ease),
+        box-shadow 0.2s var(--maho-ease);
+}
+
+/* Half in, half out: centre each arrow on the stage's left / right edge */
+.mh-shot-prev { left: 0;  transform: translate(-50%, -50%); }
+.mh-shot-next { right: 0; transform: translate(50%, -50%); }
+
+.mh-shot-nav:hover,
+.mh-shot-nav:focus-visible {
+    opacity: 1;
+    color: var(--maho-ink);
+    background: var(--maho-chartreuse);
+    border-color: var(--maho-chartreuse);
+    box-shadow: var(--maho-glow), 0 6px 18px rgba(0, 0, 0, 0.5);
+    outline: none;
+}
+
+.mh-shots-caption {
+    max-width: 1000px;
+    margin: 1.2em auto 0;
+    text-align: center;
+    font-size: 0.86em;
+    color: var(--maho-on-ink-soft);
+}
+
+.mh-shots-caption a {
+    color: var(--maho-chartreuse);
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.mh-shots-caption a:hover { text-decoration: underline; }
+
+
+/* ---- PROOF BAND: paper, logo marquee ---- */
+.mh-proof {
+    background: var(--maho-surface);
+    border-bottom: 1px solid var(--maho-border-light);
+    padding: 2.6em 0 2.8em;
+}
+
+.mh-proof-inner {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 0 2em;
+}
+
+.mh-proof-label {
+    margin: 0 0 2em;
+    text-align: center;
+    font-family: var(--maho-mono);
+    font-size: 0.58em;
+    font-weight: 500;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--maho-text-tertiary);
+}
+
+/* Edge fade so logos slide in/out instead of popping */
 .mh-marquee-viewport {
     overflow: hidden;
     -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 9%, #000 91%, transparent 100%);
             mask-image: linear-gradient(90deg, transparent 0, #000 9%, #000 91%, transparent 100%);
 }
 
-/* The whole strip is one link to the sponsors page. */
 .mh-marquee-link {
     display: block;
     cursor: pointer;
@@ -878,7 +1411,7 @@ html.mh-anim .mh-term-scene.is-active {
     animation: mhMarquee 42s linear infinite;
 }
 
-/* Two identical groups; track shifts by exactly one group (-50%) → seamless loop. */
+/* Two identical groups; track shifts by one group (-50%) for a seamless loop */
 .mh-marquee-group {
     display: flex;
     align-items: center;
@@ -889,7 +1422,7 @@ html.mh-anim .mh-term-scene.is-active {
 
 .mh-marquee-group img,
 .mh-marquee-group svg {
-    height: 34px;
+    height: 32px;
     width: auto;
     max-width: none;
     object-fit: contain;
@@ -902,174 +1435,11 @@ html.mh-anim .mh-term-scene.is-active {
     to   { transform: translateX(-50%); }
 }
 
-/* ---- Hero entrance animation (above the fold, pure CSS, no FOUC) ----
-   Uses animation-fill-mode: both so the hidden start-state applies
-   immediately at first paint, with no dependency on JS. */
-.mh-hero-copy > *,
-.mh-term {
-    will-change: transform, opacity;
-    animation: mhRise 0.7s var(--maho-ease-out) both;
-}
 
-.mh-eyebrow         { animation-delay: 0.05s; }
-#homeh1.mh-headline { animation-delay: 0.14s; }
-.mh-lede            { animation-delay: 0.24s; }
-.mh-ctas           { animation-delay: 0.34s; }
-.mh-meta           { animation-delay: 0.44s; }
-.mh-term           { animation: mhRiseTerm 0.85s var(--maho-ease-out) 0.22s both; }
-
-@keyframes mhRise {
-    from { opacity: 0; transform: translateY(22px); }
-    to   { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes mhRiseTerm {
-    from { opacity: 0; transform: translateY(30px) scale(0.97); }
-    to   { opacity: 1; transform: translateY(0) scale(1); }
-}
-
-/* The highlight chip "wipes" in just after the headline appears */
-#homeh1.mh-headline em {
-    animation: mhWipe 0.55s var(--maho-ease-out) 0.5s both;
-}
-
-@keyframes mhWipe {
-    from { clip-path: inset(0 100% 0 0); }
-    to   { clip-path: inset(0 0 0 0); }
-}
-
-/* ---- Scroll reveal (applied to content sections via JS) ---- */
-html.mh-anim .mh-reveal {
-    opacity: 0;
-    transform: translateY(30px);
-    transition: opacity 0.6s var(--maho-ease-out),
-                transform 0.6s var(--maho-ease-out);
-    will-change: transform, opacity;
-}
-
-html.mh-anim .mh-reveal.mh-in {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-/* ---- Hero responsive ---- */
-@media screen and (max-width: 60em) {
-    .mh-hero {
-        grid-template-columns: 1fr;
-        gap: 2.6em;
-        margin-top: 1em;
-    }
-    #homeh1.mh-headline { font-size: 3.1em; }
-    .mh-term { max-width: 560px; }
-}
-
-@media screen and (max-width: 768px) {
-    .mh-hero { padding: 1em 1.2em 0; text-align: left; }
-    #homeh1.mh-headline { font-size: 2.35em; }
-    .mh-lede { font-size: 0.92em; }
-    .mh-marquee { margin-top: 2.2em; }
-    .mh-marquee-group { gap: 2.8em; padding-right: 2.8em; }
-    .mh-marquee-group img,
-    .mh-marquee-group svg { height: 28px; }
-    .mh-meta { gap: 1em 1.4em; }
-}
-
-/* Honor reduced-motion: no entrance/reveal motion, no blink/pulse */
-@media (prefers-reduced-motion: reduce) {
-    .mh-hero-copy > *,
-    .mh-term,
-    html.mh-anim .mh-reveal {
-        opacity: 1 !important;
-        transform: none !important;
-        animation: none !important;
-    }
-    #homeh1.mh-headline em { clip-path: none !important; animation: none !important; }
-    .mh-term-body .mh-cur,
-    .mh-eyebrow .mh-dot { animation: none !important; }
-    /* Static, wrapped, fully visible logo row instead of a moving track. */
-    .mh-marquee-track { animation: none !important; width: 100%; flex-wrap: wrap; justify-content: center; }
-    .mh-marquee-group { flex-wrap: wrap; justify-content: center; padding-right: 0; }
-    .mh-marquee-group[aria-hidden="true"] { display: none; }
-    .mh-marquee-viewport { -webkit-mask-image: none; mask-image: none; }
-    .mh-marquee-group img,
-    .mh-marquee-group svg { filter: none; opacity: 1; }
-}
-
-/* --- Hero / Logo Section (legacy — retained for other pages) --- */
-#homeh1 {
-    text-align: center;
-    font-size: 1.7em;
-    font-weight: 800;
-    line-height: 1.15;
-    letter-spacing: -0.035em;
-    color: var(--maho-text-primary);
-}
-
-#homeh1 span {
-    display: none;
-}
-
-#homeh2 {
-    text-align: center;
-    margin-top: 0;
-    font-size: 1.15em;
-    font-style: italic;
-    font-weight: 400;
-    color: var(--maho-text-tertiary);
-    letter-spacing: 0.02em;
-}
-
-
-/* --- Intro Section --- */
-.intro-section {
-    text-align: center;
-    margin: 2em auto;
-    padding: 0 2em;
-}
-
-.intro-section h2 {
-    font-size: 1.9em;
-    margin-bottom: 1em;
-    font-weight: 700;
-    letter-spacing: -0.02em;
-}
-
-.intro-section > p {
-    font-size: 1.05em;
-    line-height: 1.8;
-    color: var(--maho-text-secondary);
-    margin-bottom: 1.5em;
-    max-width: 860px;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.intro-section > p:has(.md-button) {
-    display: flex;
-    gap: 0.8em;
-    justify-content: center;
-    flex-wrap: wrap;
-    margin-top: 2em;
-}
-
-.intro-section .md-button {
-    margin: 0;
-}
-
-
-/* --- Audience Sections (shared base) ---
-   Each section is one integrated "sheet": a bordered, rounded panel that
-   holds the banner (flush at the top) and the feature carousel directly
-   below it, so the two read as a single unit with minimal wasted space. */
-/* "Whoever you are" jump-to selector - full-bleed green band above the sheets */
+/* ---- AUDIENCE NAV: chartreuse strip ---- */
 .mh-audience-nav {
-    width: 100vw;
-    margin-left: calc(50% - 50vw);
-    margin-top: 3em;
-    margin-bottom: 2.5em;
-    padding: 1.6em 0;
-    background: linear-gradient(90deg, var(--maho-brand) 0%, var(--maho-brand-dark) 100%);
-    font-family: "Geist", "Inter", ui-sans-serif, system-ui, sans-serif;
+    background: var(--maho-chartreuse);
+    padding: 1.5em 0;
 }
 
 .mh-audience-nav-inner {
@@ -1084,465 +1454,272 @@ html.mh-anim .mh-reveal.mh-in {
 }
 
 .mh-audience-nav-title {
+    font-family: var(--maho-display);
     font-size: 1.4em;
-    font-weight: 700;
-    letter-spacing: -0.01em;
-    line-height: 1.3;
+    font-weight: 750;
+    letter-spacing: -0.02em;
+    line-height: 1.25;
+    color: var(--maho-ink);
     text-wrap: balance;
-    background: #1a1a17;
-    color: #fff;
-    padding: 0.12em 0.5em;
-    border-radius: 8px;
-    box-decoration-break: clone;
-    -webkit-box-decoration-break: clone;
-}
-
-.mh-audience-nav-title em {
-    font-style: normal;
 }
 
 .mh-audience-nav-btns {
     display: flex;
     flex-wrap: wrap;
     justify-content: flex-end;
-    gap: 0.6em;
+    gap: 0.5em;
 }
 
 .mh-audience-pill {
     display: inline-flex;
     align-items: center;
-    gap: 0.55em;
-    padding: 0.7em 1.4em;
-    border-radius: var(--maho-radius-md);
+    gap: 0.5em;
+    padding: 0.62em 1.2em;
+    border-radius: 99px;
     border: 1px solid transparent;
-    background: #fff;
-    color: var(--maho-brand-text);
-    font-size: 0.92em;
+    background: rgba(251, 251, 244, 0.92);
+    color: var(--maho-brand-text) !important;
+    font-size: 0.78em;
     font-weight: 600;
     line-height: 1;
     text-decoration: none !important;
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.14);
+    box-shadow: 0 2px 8px rgba(14, 15, 8, 0.12);
     transition: transform var(--maho-duration) var(--maho-ease),
                 background var(--maho-duration) var(--maho-ease),
                 color var(--maho-duration) var(--maho-ease),
+                border-color var(--maho-duration) var(--maho-ease),
                 box-shadow var(--maho-duration) var(--maho-ease);
 }
 
 .mh-audience-pill .mh-pill-icon {
     color: var(--maho-brand-dark);
     flex-shrink: 0;
-    transition: color var(--maho-duration) var(--maho-ease),
-                transform var(--maho-duration) var(--maho-ease);
-}
-
-/* Arrow stays collapsed until hover, then slides in */
-.mh-audience-pill .mh-pill-arrow {
-    flex-shrink: 0;
-    width: 0;
-    opacity: 0;
-    margin-left: -0.3em;
-    transform: translateX(-4px);
-    transition: width var(--maho-duration) var(--maho-ease),
-                opacity var(--maho-duration) var(--maho-ease),
-                transform var(--maho-duration) var(--maho-ease),
-                margin var(--maho-duration) var(--maho-ease);
-}
-
-.mh-audience-pill:hover,
-.mh-audience-pill:hover .mh-pill-label {
-    color: #fff !important;
+    transition: color var(--maho-duration) var(--maho-ease);
 }
 
 .mh-audience-pill:hover {
-    transform: translateY(-3px);
-    background: #1a1a17;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.28);
+    transform: translateY(-2px);
+    background: var(--maho-ink);
+    border-color: var(--maho-ink);
+    color: var(--maho-on-ink) !important;
+    box-shadow: 0 8px 20px rgba(14, 15, 8, 0.3);
 }
 
 .mh-audience-pill:hover .mh-pill-icon {
-    color: var(--maho-brand);
-    transform: scale(1.08);
+    color: var(--maho-chartreuse);
 }
 
-.mh-audience-pill:hover .mh-pill-arrow {
-    width: 18px;
-    opacity: 1;
-    margin-left: 0;
-    transform: translateX(0);
-}
 
-@media screen and (max-width: 60em) {
-    .mh-audience-nav-inner {
-        flex-direction: column;
-        align-items: center;
-        gap: 1.4em;
-    }
-
-    .mh-audience-nav-title {
-        text-align: center;
-        font-size: 1.3em;
-    }
-
-    /* Group the three into one segmented bar on a single line */
-    .mh-audience-nav-btns {
-        flex-direction: row;
-        flex-wrap: nowrap;
-        align-items: stretch;
-        width: 100%;
-        gap: 0;
-        background: #fff;
-        border-radius: 16px;
-        box-shadow: 0 4px 14px rgba(0, 0, 0, 0.16);
-        overflow: hidden;
-    }
-
-    .mh-audience-pill {
-        flex: 1 1 0;
-        min-width: 0;
-        flex-direction: column;
-        justify-content: center;
-        gap: 0.35em;
-        padding: 0.85em 0.4em;
-        font-size: 0.72em;
-        background: transparent;
-        border-radius: 0;
-        box-shadow: none;
-        white-space: nowrap;
-    }
-
-    .mh-audience-pill + .mh-audience-pill {
-        border-left: 1px solid var(--maho-border-light);
-    }
-
-    .mh-audience-pill .mh-pill-arrow {
-        display: none;
-    }
-
-    .mh-audience-pill:hover {
-        transform: none;
-        box-shadow: none;
-    }
-}
-
+/* ---- AUDIENCE SECTIONS ---- */
 .audience-section {
-    margin: 2.5em 0;
-    padding: 0 0 1.1em; /* bottom room so the carousel dots aren't clipped */
-    border-radius: var(--maho-radius-xl);
-    overflow: hidden;
-    background: var(--maho-surface);
-    border: 1px solid var(--maho-border-light);
-    box-shadow: var(--maho-shadow-md);
-    transition: box-shadow var(--maho-duration-slow) var(--maho-ease);
-    scroll-margin-top: 4em; /* keep sheet clear of the sticky header on jump */
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 6em 2em;
+    scroll-margin-top: 3.4em;
 }
 
-.audience-section:hover {
-    box-shadow: var(--maho-shadow-lg);
+/* Section header: copy (title / lede) + restrained accent image */
+.mh-sec-head {
+    margin-bottom: 0.6em;
 }
 
-.audience-header {
+.mh-sec-head:has(.mh-sec-media) {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 480px;
+    gap: 3.4em;
+    align-items: start;
     position: relative;
-    margin-bottom: 0;
-    border-radius: 0;
-    overflow: hidden;
-    display: flex;
-    align-items: stretch;
-    transition: all var(--maho-duration-slow) var(--maho-ease);
-}
-
-.audience-header::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 3px;
-    background: linear-gradient(90deg, var(--maho-brand) 0%, var(--maho-brand-dark) 100%);
-    z-index: 3;
-    opacity: 1; /* always-on accent ties the banner to the sheet top */
-    transition: opacity var(--maho-duration-slow) var(--maho-ease);
-}
-
-.audience-header::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(90deg, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0.97) 30%, rgba(255, 255, 255, 0.5) 55%, transparent 80%);
-    z-index: 1;
-    pointer-events: none;
-}
-
-.audience-image {
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 52%;
-    max-width: 560px;
-    height: 100%;
-    min-height: 260px;
-    overflow: hidden;
-}
-
-.audience-image::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 200px;
-    height: 100%;
-    background: linear-gradient(90deg, rgba(255, 255, 255, 1) 0%, transparent 100%);
     z-index: 1;
 }
 
-.audience-image img {
+.mh-sec-copy {
+    max-width: 720px;
+    align-self: center;
+}
+
+/* Accent image: a duotone photo mapped into the brand palette so it reads as
+   an intentional, editorial asset rather than a pasted-in stock photo. It sits
+   on an offset chartreuse block - the one spot of brand colour - which keeps
+   the photo itself quiet ("not too present") while feeling deliberately placed. */
+.mh-sec-media {
+    position: relative;
+    z-index: 1;
+    /* landscape framing, center-cropped */
+    aspect-ratio: 16 / 9;
+    isolation: isolate;
+    /* the image extends downward past the header so its lower edge tucks
+       BEHIND the carousel cards (see the .features-grid z-index below) -
+       the photo appears to rise out from behind the top of the carousel */
+    margin-bottom: -70px;
+}
+
+/* offset chartreuse block peeking out behind the photo, top-left */
+.mh-sec-media::before {
+    content: '';
+    position: absolute;
+    inset: -13px 13px 13px -13px;
+    background: var(--maho-chartreuse);
+    border-radius: var(--maho-radius-lg);
+    z-index: 0;
+    transition: transform var(--maho-duration-slow) var(--maho-ease-out);
+}
+
+.mh-sec-media img {
+    position: relative;
+    z-index: 1;
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: center center; /* centered now the panel is taller and narrower */
-    filter: saturate(0.85) contrast(1.05) brightness(0.95);
-    transition: filter var(--maho-duration-slow) var(--maho-ease),
-                transform var(--maho-duration-slow) var(--maho-ease);
+    object-position: center center;
+    display: block;
+    border-radius: var(--maho-radius-lg);
+    filter: url(#maho-duo-ink) contrast(1.12) brightness(1.02);
+    box-shadow: var(--maho-shadow-lg);
+    transition: transform var(--maho-duration-slow) var(--maho-ease-out);
 }
 
-.audience-header:hover .audience-image img {
-    filter: saturate(1) contrast(1.08) brightness(1);
-    transform: scale(1.02);
+/* on hover, photo and block slide apart slightly - a small, deliberate moment */
+.mh-sec-head:hover .mh-sec-media img {
+    transform: translate(3px, -3px);
 }
 
-.audience-text {
-    position: relative;
-    z-index: 2;
-    padding: 2.6em 3em;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    min-height: 300px;
-    max-width: 600px;
+.mh-sec-head:hover .mh-sec-media::before {
+    transform: translate(-3px, 3px);
 }
 
-.audience-section h2 {
-    font-size: 2.3em;
-    margin-bottom: 0.4em;
-    font-weight: 800;
-    line-height: 1.15;
-    color: var(--maho-text-primary);
-    letter-spacing: -0.035em;
-    transition: all var(--maho-duration-slow) var(--maho-ease);
-    text-shadow:
-        2px 2px 8px rgba(255, 255, 255, 0.9),
-        -2px -2px 8px rgba(255, 255, 255, 0.9),
-        2px -2px 8px rgba(255, 255, 255, 0.9),
-        -2px 2px 8px rgba(255, 255, 255, 0.9),
-        0 0 20px rgba(255, 255, 255, 0.8);
-}
-
-.audience-text p {
-    font-size: 1.2em;
-    color: var(--maho-text-primary);
-    line-height: 1.7;
-    margin: 0;
-    transition: all var(--maho-duration-slow) var(--maho-ease);
-    text-shadow:
-        2px 2px 6px rgba(255, 255, 255, 0.95),
-        -2px -2px 6px rgba(255, 255, 255, 0.95),
-        2px -2px 6px rgba(255, 255, 255, 0.95),
-        -2px 2px 6px rgba(255, 255, 255, 0.95),
-        0 0 15px rgba(255, 255, 255, 0.85);
-}
-
-.audience-header:hover h2 {
-    transform: translateX(6px);
-    color: var(--maho-brand-dark);
-    text-shadow: none;
-}
-
-.audience-header:hover p {
-    transform: translateX(6px);
-    color: var(--maho-text-primary);
-    text-shadow: none;
-}
-
-/* --- Agencies: Flipped Layout (image left, text right) --- */
-.agencies .audience-image {
-    right: auto;
-    left: 0;
-}
-
-.agencies .audience-image::before {
-    left: auto;
-    right: 0;
-    background: linear-gradient(270deg, rgba(245, 243, 238, 1) 0%, transparent 100%);
-}
-
-.agencies .audience-header::after {
-    background: linear-gradient(270deg, rgba(245, 243, 238, 1) 0%, rgba(245, 243, 238, 0.97) 30%, rgba(245, 243, 238, 0.5) 55%, transparent 80%);
-}
-
-.agencies .audience-text {
-    margin-left: auto;
-    text-align: right;
-}
-
-.agencies .audience-header:hover h2,
-.agencies .audience-header:hover p {
-    transform: translateX(-6px);
-}
-
-
-/* --- Agencies: Warm background tint --- */
-.audience-section.agencies {
-    background: var(--maho-accent-warm);
-}
-
-
-/* --- Developers: Dark Section --- */
-.audience-section.developers {
-    background: var(--maho-accent-dark);
-    padding: 0 0 1.1em;
-    margin: 2.5em 0;
-    border-color: rgba(255, 255, 255, 0.08);
-}
-
-.developers .audience-header {
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-}
-
-.developers .audience-header::after {
-    background: linear-gradient(90deg,
-        rgba(17, 17, 24, 1) 0%,
-        rgba(17, 17, 24, 0.97) 30%,
-        rgba(17, 17, 24, 0.5) 55%,
-        transparent 80%
-    );
-}
-
-.developers .audience-image::before {
-    background: linear-gradient(90deg, rgba(17, 17, 24, 1) 0%, transparent 100%);
-}
-
-.developers .audience-header:hover {
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(173, 180, 26, 0.2);
-}
-
-.developers .audience-section h2,
-.developers .audience-text h2 {
-    color: #ffffff;
-    text-shadow:
-        2px 2px 8px rgba(17, 17, 24, 0.9),
-        -2px -2px 8px rgba(17, 17, 24, 0.9),
-        0 0 20px rgba(17, 17, 24, 0.8);
-}
-
-.developers .audience-text p {
-    color: rgba(255, 255, 255, 0.8);
-    text-shadow:
-        2px 2px 6px rgba(17, 17, 24, 0.95),
-        -2px -2px 6px rgba(17, 17, 24, 0.95),
-        0 0 15px rgba(17, 17, 24, 0.85);
-}
-
-.developers .audience-header:hover h2 {
-    color: var(--maho-brand-light);
-    text-shadow: none;
-}
-
-.developers .audience-header:hover p {
-    color: rgba(255, 255, 255, 0.9);
-    text-shadow: none;
-}
-
-/* Developer feature cards - dark theme */
-.developers .feature-card {
-    background: var(--maho-accent-dark-surface);
-    border-color: var(--maho-accent-dark-border);
-    color: rgba(255, 255, 255, 0.85);
-}
-
-.developers .feature-card:hover {
-    border-color: rgba(173, 180, 26, 0.4);
-    background: linear-gradient(160deg, var(--maho-accent-dark-surface) 0%, rgba(173, 180, 26, 0.06) 100%);
-    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(173, 180, 26, 0.15);
-}
-
-.developers .feature-card h3 {
-    color: #ffffff;
-}
-
-.developers .feature-card p {
-    color: rgba(255, 255, 255, 0.65);
-}
-
-/* Developer icon - green on dark */
-.developers .feature-card .feature-icon {
-    background: none !important;
-    color: var(--maho-brand-light) !important;
-    opacity: 0.1 !important;
-}
-
-.developers .feature-card .feature-icon svg {
-    fill: var(--maho-brand-light) !important;
-    color: var(--maho-brand-light) !important;
-}
-
-.developers .feature-card:hover .feature-icon {
-    opacity: 0.18 !important;
-}
-
-
-/* --- Features Grid --- */
-.features-section {
-    margin: 6em 0;
-    padding: 0 2em;
-}
-
-.features-section h2 {
-    text-align: center;
-    font-size: 2em;
-    margin-bottom: 1.5em;
+.md-typeset .mh-sec-title {
+    font-family: var(--maho-display);
+    font-size: 2.7em;
     font-weight: 700;
-    letter-spacing: -0.02em;
+    letter-spacing: -0.03em;
+    line-height: 1.08;
+    margin: 0 0 0.4em;
 }
 
-/* --- Feature carousel (CSS-only: scroll-snap + native scroll markers) ---
-   Each audience section's feature list becomes a horizontal carousel.
-   Base behaviour (swipe / trackpad / scroll with snapping) works in every
-   browser; prev/next buttons and dots are progressive enhancement for
-   browsers that support CSS carousel pseudo-elements. */
+.md-typeset .mh-sec-title strong {
+    font-weight: 750;
+    color: inherit;
+    background: linear-gradient(transparent 68%, rgba(215, 223, 34, 0.5) 68%);
+    padding: 0 0.06em;
+    box-decoration-break: clone;
+    -webkit-box-decoration-break: clone;
+}
+
+.mh-sec-lede {
+    font-size: 0.92em;
+    line-height: 1.65;
+    color: var(--maho-text-secondary);
+    margin: 0;
+    max-width: 56ch;
+}
+
+/* Agencies section: full-bleed white band, a clear break from
+   the paper store-owners section above it */
+.audience-section.agencies {
+    max-width: none;
+    margin: 0 0 0 calc(50% - 50vw);
+    padding: 6em 0 2.5em;
+    background: var(--maho-surface);
+    border-top: 1px solid var(--maho-border-light);
+    border-bottom: 1px solid var(--maho-border-light);
+}
+
+.agencies .feature-card {
+    background: var(--maho-paper);
+}
+
+/* Developers section: full-bleed dark band */
+.audience-section.developers {
+    max-width: none;
+    margin: 0 0 0 calc(50% - 50vw);
+    padding: 6em 0 2.5em;
+    background: var(--maho-ink);
+    color: var(--maho-on-ink);
+}
+
+.audience-section.agencies .mh-sec-head,
+.audience-section.agencies .features-grid,
+.audience-section.developers .mh-sec-head,
+.audience-section.developers .features-grid {
+    max-width: 1180px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.audience-section.agencies .mh-sec-head,
+.audience-section.developers .mh-sec-head {
+    padding: 0 2em;
+    max-width: 1180px;
+}
+
+.audience-section.agencies .mh-sec-head > *,
+.audience-section.developers .mh-sec-head > * {
+    max-width: 720px;
+}
+
+.developers .md-typeset .mh-sec-title,
+.md-typeset .developers .mh-sec-title {
+    color: var(--maho-on-ink);
+}
+
+.developers .md-typeset .mh-sec-title strong,
+.md-typeset .developers .mh-sec-title strong {
+    background: none;
+    color: var(--maho-chartreuse);
+}
+
+.developers .mh-sec-lede {
+    color: var(--maho-on-ink-soft);
+}
+
+/* On the dark developers band, keep the same neutral monochrome (no green),
+   brightened a touch so it reads on the ink background; the brand accent comes
+   from the chartreuse glow around the photo, not a colour cast on it. */
+.developers .mh-sec-media::before {
+    background: var(--maho-ink-raised);
+    inset: -13px 13px 13px -13px;
+}
+
+.developers .mh-sec-media img {
+    filter: url(#maho-duo-ink) contrast(1.12) brightness(1.12);
+    box-shadow: var(--maho-glow);
+}
+
+
+/* ---- Feature carousel (CSS scroll-snap + native scroll markers) ---- */
 .features-grid {
     display: flex;
-    gap: 1.25em;
+    gap: 1.1em;
     margin-top: 0;
-    padding: 1.6em 1.8em 0.4em;
+    /* sits above the header so the section accent image tucks behind the cards */
+    position: relative;
+    z-index: 2;
+    padding: 1.6em 0.2em 0.8em;
     overflow-x: auto;
     overflow-y: hidden;
     scroll-snap-type: x mandatory;
-    scroll-padding-left: 1.8em;
+    scroll-padding-left: 0.2em;
     scroll-behavior: smooth;
     -webkit-overflow-scrolling: touch;
-    scrollbar-width: thin;
-    scrollbar-color: var(--maho-border) transparent;
+    scrollbar-width: none;
+}
+
+.agencies .features-grid,
+.developers .features-grid {
+    padding-left: 2em;
+    padding-right: 2em;
+    scroll-padding-left: 2em;
 }
 
 .features-grid > .feature-card {
-    flex: 0 0 calc((100% - 2.5em) / 3); /* 3 cards in view (2 gaps of 1.25em) */
+    flex: 0 0 calc((100% - 2.2em) / 3);
     min-width: 250px;
     scroll-snap-align: start;
 }
 
-/* Thin, branded scrollbar for the carousels */
-.features-grid::-webkit-scrollbar { height: 8px; }
-.features-grid::-webkit-scrollbar-track { background: transparent; }
-.features-grid::-webkit-scrollbar-thumb {
-    background: var(--maho-border);
-    border-radius: var(--maho-radius-pill, 999px);
-}
-.features-grid:hover::-webkit-scrollbar-thumb { background: var(--maho-brand); }
+.features-grid::-webkit-scrollbar { display: none; }
 
-/* Progressive enhancement: native CSS carousel dots + arrows
-   (Chrome 135+ / supporting browsers). Degrades to plain scroll-snap. */
+/* Native CSS carousel dots (Chrome 135+); degrades to plain scroll-snap */
 @supports (scroll-marker-group: after) {
     .features-grid { scroll-marker-group: after; }
 
@@ -1550,64 +1727,66 @@ html.mh-anim .mh-reveal.mh-in {
         display: flex;
         justify-content: center;
         gap: 0.6em;
-        padding-top: 1em;
+        padding-top: 1.1em;
     }
 
     .features-grid > .feature-card::scroll-marker {
         content: "";
-        width: 9px;
-        height: 9px;
+        width: 8px;
+        height: 8px;
         border-radius: 50%;
-        background: rgba(85, 83, 72, 0.3);
+        background: rgba(84, 86, 74, 0.25);
         border: 0;
         cursor: pointer;
         transition: background var(--maho-duration) var(--maho-ease),
                     transform var(--maho-duration) var(--maho-ease);
     }
 
-    .features-grid > .feature-card::scroll-marker:hover { background: var(--maho-brand-light); }
+    .features-grid > .feature-card::scroll-marker:hover { background: var(--maho-brand); }
 
     .features-grid > .feature-card::scroll-marker:target-current {
-        background: var(--maho-brand);
-        transform: scale(1.25);
+        background: var(--maho-brand-dark);
+        transform: scale(1.3);
     }
 
-    /* Dark section: lighter inactive dots */
     .developers .features-grid > .feature-card::scroll-marker {
-        background: rgba(255, 255, 255, 0.2);
+        background: rgba(244, 245, 232, 0.18);
     }
     .developers .features-grid > .feature-card::scroll-marker:target-current {
-        background: var(--maho-brand-light);
+        background: var(--maho-chartreuse);
     }
 }
 
-/* Tablet: two cards per view */
 @media screen and (min-width: 48.0625em) and (max-width: 64em) {
     .features-grid > .feature-card {
-        flex-basis: calc((100% - 1.25em) / 2);
+        flex-basis: calc((100% - 1.1em) / 2);
     }
 }
 
+/* ---- Feature cards ---- */
 .feature-card {
-    padding: 1.6em 1.7em 1.9em;
-    border-radius: var(--maho-radius-md);
-    background: var(--maho-surface-warm);
-    border: 1px solid var(--maho-border-light);
-    transition: all var(--maho-duration-slow) var(--maho-ease);
+    padding: 1.5em 1.5em 1.7em;
+    border-radius: var(--maho-radius-lg);
+    background: var(--maho-surface);
+    border: 1px solid var(--maho-border);
+    transition: border-color var(--maho-duration-slow) var(--maho-ease),
+                box-shadow var(--maho-duration-slow) var(--maho-ease),
+                transform var(--maho-duration-slow) var(--maho-ease);
     position: relative;
-    overflow: hidden;
     min-height: 160px;
 }
 
 .feature-card:hover {
-    border-color: rgba(173, 180, 26, 0.35);
+    border-color: var(--maho-brand);
     box-shadow: var(--maho-shadow-lg);
     transform: translateY(-4px);
-    background: #ffffff;
 }
 
+/* Icon: decorative watermark in the lower-right corner */
+.feature-card {
+    overflow: hidden;
+}
 
-/* --- Feature Card Icon - decorative bottom-right watermark --- */
 .feature-card p:has(.feature-icon) {
     margin: 0 !important;
     padding: 0 !important;
@@ -1619,6 +1798,7 @@ html.mh-anim .mh-reveal.mh-in {
     overflow: visible;
     z-index: 0 !important;
     pointer-events: none !important;
+    line-height: 1 !important;
 }
 
 .feature-card .feature-icon {
@@ -1633,13 +1813,13 @@ html.mh-anim .mh-reveal.mh-in {
     color: var(--maho-brand-dark) !important;
     font-size: 1em !important;
     line-height: 1 !important;
-    position: relative !important;
-    transition: all var(--maho-duration-slow) var(--maho-ease) !important;
-    z-index: 0 !important;
-    pointer-events: none !important;
     margin: 0 !important;
     opacity: 0.12 !important;
     transform: rotate(0deg) !important;
+    transition: opacity var(--maho-duration-slow) var(--maho-ease),
+                transform var(--maho-duration-slow) var(--maho-ease) !important;
+    z-index: 0 !important;
+    pointer-events: none !important;
 }
 
 .feature-card .feature-icon svg {
@@ -1656,142 +1836,290 @@ html.mh-anim .mh-reveal.mh-in {
 }
 
 .feature-card h3 {
-    font-size: 1.15em;
-    margin: 0 0 0.6em;
+    font-family: var(--maho-display);
+    font-size: 1.05em;
+    margin: 0 0 0.55em;
     font-weight: 700;
     color: var(--maho-text-primary);
-    line-height: 1.3;
-    position: relative;
-    z-index: 1;
+    line-height: 1.25;
     letter-spacing: -0.02em;
 }
 
 .feature-card p {
     color: var(--maho-text-secondary);
-    line-height: 1.65;
+    line-height: 1.62;
     margin: 0;
-    font-size: 0.9em;
-    position: relative;
-    z-index: 1;
+    font-size: 0.82em;
 }
 
-
-/* --- Comparison Section --- */
-.comparison-section {
-    margin: 5em 2em;
-    padding: 3.5em 2em;
-    background: var(--maho-surface-warm);
-    border-radius: var(--maho-radius-lg);
-    border: 1px solid var(--maho-border-light);
-}
-
-.comparison-section h2 {
-    text-align: center;
-    font-size: 2em;
-    margin-bottom: 2em;
-    font-weight: 700;
-    letter-spacing: -0.02em;
-}
-
-.platform-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    gap: 1.25em;
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-.platform-card {
-    padding: 1.8em;
-    border-radius: var(--maho-radius-md);
-    background: var(--maho-surface);
-    border: 1px solid var(--maho-border);
-    text-align: center;
-    transition: all var(--maho-duration) var(--maho-ease);
-}
-
-.platform-card:hover {
-    box-shadow: var(--maho-shadow-md);
-    transform: translateY(-3px);
-}
-
-.platform-card.maho-card {
-    background: linear-gradient(160deg, rgba(173, 180, 26, 0.08) 0%, rgba(173, 180, 26, 0.02) 100%);
-    border: 2px solid var(--maho-brand);
-}
-
-.platform-card.maho-card:hover {
-    box-shadow: var(--maho-shadow-brand);
-}
-
-.platform-card h3 {
-    font-size: 1.3em;
-    margin: 0 0 0.7em;
-    font-weight: 700;
+.feature-card p strong {
     color: var(--maho-text-primary);
-    letter-spacing: -0.01em;
+    font-weight: 600;
 }
 
-.platform-card.maho-card h3 {
-    color: var(--maho-brand-dark);
+/* Dark variant inside the developers band */
+.developers .feature-card {
+    background: var(--maho-ink-soft);
+    border-color: var(--maho-ink-raised);
+    color: var(--maho-on-ink-soft);
 }
 
-.platform-card p {
-    color: var(--maho-text-secondary);
-    line-height: 1.6;
-    margin: 0;
+.developers .feature-card:hover {
+    border-color: var(--maho-ink-border-brand);
+    background: var(--maho-ink-raised);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.45);
+}
+
+.developers .feature-card h3 {
+    color: var(--maho-on-ink);
+}
+
+.developers .feature-card p {
+    color: var(--maho-on-ink-soft);
+}
+
+.developers .feature-card p strong {
+    color: var(--maho-on-ink);
+}
+
+.developers .feature-card .feature-icon {
+    color: var(--maho-chartreuse) !important;
+    opacity: 0.1 !important;
+}
+
+.developers .feature-card .feature-icon svg {
+    fill: var(--maho-chartreuse) !important;
+    color: var(--maho-chartreuse) !important;
+}
+
+.developers .feature-card:hover .feature-icon {
+    opacity: 0.18 !important;
 }
 
 
-/* --- Final CTA --- */
+/* ---- FINAL CTA: paper band (same surface as the store-owners
+   section) between the ink developers band and the ink footer ---- */
 .final-cta {
+    background: var(--maho-paper);
+    color: var(--maho-text-primary);
     text-align: center;
-    margin: 1.5em 2em 4em;
-    padding: 3.5em 2em;
-    border-radius: var(--maho-radius-xl);
-    position: relative;
-    background: linear-gradient(180deg, rgba(173, 180, 26, 0.06) 0%, rgba(173, 180, 26, 0.02) 100%);
-    border: 1px solid rgba(173, 180, 26, 0.15);
-    overflow: hidden;
+    padding: 4.6em 0 4.8em;
+    margin-bottom: 0;
 }
 
-.final-cta::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 3px;
-    background: linear-gradient(90deg, var(--maho-brand) 0%, var(--maho-brand-dark) 100%);
+.final-cta-inner {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 0 2em;
 }
 
-.final-cta h2 {
-    font-size: 2.2em;
-    margin-bottom: 0.5em;
-    font-weight: 800;
+.md-typeset .final-cta h2 {
+    font-family: var(--maho-display);
+    font-size: 2.6em;
+    margin: 0 0 0.4em;
+    font-weight: 750;
     letter-spacing: -0.03em;
+    line-height: 1.05;
+    color: var(--maho-text-primary);
+}
+
+.final-cta h2 em {
+    font-style: normal;
+    color: inherit;
+    background: linear-gradient(transparent 68%, rgba(215, 223, 34, 0.5) 68%);
+    padding: 0 0.06em;
+    box-decoration-break: clone;
+    -webkit-box-decoration-break: clone;
 }
 
 .final-cta p {
-    font-size: 1.1em;
+    font-size: 0.95em;
     color: var(--maho-text-secondary);
-    margin-bottom: 1.5em;
+    margin: 0 auto 2em;
+    max-width: 54ch;
 }
 
-.final-cta p:last-child {
-    margin-top: 1.5em;
-    display: flex;
-    gap: 0.8em;
+.final-cta .mh-ctas {
     justify-content: center;
-    flex-wrap: wrap;
 }
 
-.final-cta .md-button {
-    margin: 0;
+/* Line and ghost buttons adjusted for the light surface */
+.final-cta .mh-btn-line {
+    border-color: rgba(25, 26, 16, 0.3);
+    color: var(--maho-text-primary) !important;
+}
+
+.final-cta .mh-btn-line:hover {
+    border-color: var(--maho-text-primary);
+    color: var(--maho-text-primary) !important;
+}
+
+.final-cta .mh-btn-ghost {
+    color: var(--maho-text-secondary) !important;
+}
+
+.final-cta .mh-btn-ghost:hover {
+    color: var(--maho-brand-dark) !important;
+    background: var(--maho-brand-subtle);
+}
+
+/* Kill the gap between the final CTA and the footer */
+body:has(#homeh1) .md-content {
+    padding-bottom: 0;
+}
+
+body:has(#homeh1) .md-main__inner {
+    margin-bottom: 0;
 }
 
 
-/* === LOGO ANIMATION === */
+/* ---- Scroll reveal (applied via JS) ---- */
+html.mh-anim .mh-reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.6s var(--maho-ease-out),
+                transform 0.6s var(--maho-ease-out);
+    will-change: transform, opacity;
+}
+
+html.mh-anim .mh-reveal.mh-in {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+
+/* ---- Home responsive ---- */
+@media screen and (max-width: 64em) {
+    .mh-hero-inner {
+        grid-template-columns: 1fr;
+        gap: 2.8em;
+        padding: 2.6em 1.5em 3em;
+    }
+
+    #homeh1.mh-headline { font-size: 3.1em; }
+
+    .mh-hero-side { max-width: 600px; }
+
+    /* tighter accent-image column on narrower viewports */
+    .mh-sec-head:has(.mh-sec-media) {
+        grid-template-columns: minmax(0, 1fr) 340px;
+        gap: 2em;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    #homeh1.mh-headline { font-size: 2.4em; }
+
+    .mh-lede { font-size: 0.92em; }
+
+    /* Hero CTAs: first two share a 50/50 row, the ghost link centered below */
+    .mh-ctas {
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: stretch;
+        gap: 0.6em;
+    }
+    .mh-ctas .mh-btn-solid,
+    .mh-ctas .mh-btn-line {
+        flex: 1 1 0;
+        min-width: 0;
+        justify-content: center;
+    }
+    .mh-ctas .mh-btn-ghost {
+        flex-basis: 100%;
+        justify-content: center;
+    }
+
+    .mh-showcase { padding: 0 1.5em; }
+    .mh-bulb-hint { display: none; } /* keep the pulsing bulb, drop the label */
+    .mh-shot-nav { width: 42px; height: 42px; }
+
+    .mh-proof { padding: 2em 0 2.2em; }
+    .mh-marquee-group { gap: 2.6em; padding-right: 2.6em; }
+    .mh-marquee-group img,
+    .mh-marquee-group svg { height: 26px; }
+
+    .mh-audience-nav { padding: 1.3em 0; }
+
+    .mh-audience-nav-inner {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1em;
+    }
+
+    .mh-audience-nav-btns {
+        justify-content: flex-start;
+        flex-wrap: nowrap;
+        gap: 0.4em;
+        max-width: 100%;
+        overflow-x: auto;
+    }
+
+    .mh-audience-pill {
+        flex: 0 0 auto;
+        white-space: nowrap;
+        padding: 0.55em 0.9em;
+    }
+
+    .audience-section { padding: 3.6em 1.2em; }
+
+    .audience-section.agencies,
+    .audience-section.developers { padding: 3.6em 0; }
+    .audience-section.agencies .mh-sec-head,
+    .audience-section.developers .mh-sec-head { padding: 0 1.2em; }
+
+    /* drop the accent image on phones: it's decorative, and stacking it
+       would only push the features carousel down */
+    .mh-sec-head:has(.mh-sec-media) { display: block; }
+    .mh-sec-media { display: none; }
+    .agencies .features-grid,
+    .developers .features-grid {
+        padding-left: 1.2em;
+        padding-right: 1.2em;
+        scroll-padding-left: 1.2em;
+    }
+
+    .md-typeset .mh-sec-title { font-size: 1.8em; }
+
+    .features-grid {
+        gap: 0.9em;
+    }
+
+    .features-grid > .feature-card {
+        flex-basis: 86%;
+        min-width: 0;
+    }
+
+    .final-cta { padding: 3.6em 0 4em; }
+    .md-typeset .final-cta h2 { font-size: 1.9em; }
+}
+
+/* Honor reduced motion: everything visible, nothing moves */
+@media (prefers-reduced-motion: reduce) {
+    .mh-hero-copy > *,
+    .mh-hero-side,
+    .mh-showcase,
+    html.mh-anim .mh-reveal {
+        opacity: 1 !important;
+        transform: none !important;
+        animation: none !important;
+    }
+    #homeh1.mh-headline em { clip-path: none !important; animation: none !important; }
+    .mh-term-body .mh-cur,
+    .mh-eyebrow .mh-dot,
+    .mh-bulb,
+    .mh-bulb-arrow,
+    .mh-shot-frame { animation: none !important; } /* hint label stays visible, just static */
+    .mh-marquee-track { animation: none !important; width: 100%; flex-wrap: wrap; justify-content: center; }
+    .mh-marquee-group { flex-wrap: wrap; justify-content: center; padding-right: 0; }
+    .mh-marquee-group[aria-hidden="true"] { display: none; }
+    .mh-marquee-viewport { -webkit-mask-image: none; mask-image: none; }
+    .mh-marquee-group img,
+    .mh-marquee-group svg { filter: none; opacity: 1; }
+}
+
+
+/* === LEGACY LOGO ANIMATION (used outside the home page) === */
 .logo {
     width: 100%;
     max-width: 30em;
@@ -1881,174 +2209,6 @@ html.mh-anim .mh-reveal.mh-in {
 }
 
 
-/* === SCROLL-DRIVEN ANIMATIONS (progressive enhancement) === */
-/* Reveal-on-scroll for feature cards only (not structural elements) */
-@keyframes scrollReveal {
-    from {
-        opacity: 0;
-        transform: translateY(30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-@supports (animation-timeline: view()) {
-    .feature-card {
-        animation: scrollReveal linear both;
-        animation-timeline: view();
-        animation-range: entry 0% entry 25%;
-    }
-}
-
-
-/* === RESPONSIVE DESIGN === */
-@media screen and (max-width: 768px) {
-    #homeh1 {
-        font-size: 1.35em;
-    }
-
-    .features-grid {
-        gap: 1em;
-        padding: 1.2em 1.2em 1.1em;
-        scroll-padding-left: 1.2em;
-    }
-
-    .features-grid > .feature-card {
-        flex-basis: 86%; /* one card with a peek of the next */
-        min-width: 0;
-    }
-
-    .platform-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .hero-section, .comparison-section, .final-cta {
-        margin-left: 0;
-        margin-right: 0;
-        padding-left: 1em;
-        padding-right: 1em;
-    }
-
-    .audience-section {
-        padding: 0 0 1em;
-        margin: 1.5em 0;
-        border-radius: var(--maho-radius-lg);
-    }
-
-    .audience-section.developers {
-        padding: 0 0 1em;
-        margin: 1.5em 0;
-    }
-
-    .audience-header {
-        min-height: auto;
-        margin-bottom: 0;
-        border-radius: 0;
-        background: linear-gradient(160deg, rgba(173, 180, 26, 0.08) 0%, rgba(173, 180, 26, 0) 100%);
-        border: 0;
-        box-shadow: none;
-    }
-
-    /* Slightly stronger header tint for the dark developers sheet */
-    .developers .audience-header {
-        background: linear-gradient(160deg, rgba(173, 180, 26, 0.12) 0%, rgba(173, 180, 26, 0.02) 100%);
-    }
-
-    .audience-header::after {
-        display: none;
-    }
-
-    .audience-header::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        height: 3px;
-        border-radius: 0;
-        background: linear-gradient(90deg, var(--maho-brand) 0%, var(--maho-brand-dark) 100%);
-        opacity: 1;
-    }
-
-    .audience-image {
-        display: none;
-    }
-
-    .audience-image::before {
-        display: none;
-    }
-
-    .audience-text {
-        padding: 2.5em 1.5em;
-        text-align: center;
-        min-height: auto;
-        max-width: 100%;
-    }
-
-    /* Fix agencies text alignment on mobile */
-    .agencies .audience-text {
-        text-align: center;
-        margin-left: 0;
-    }
-
-    .audience-section h2 {
-        font-size: 2em;
-    }
-
-    /* Developer sheet stays dark on mobile, so keep its text light */
-    .developers .audience-text h2,
-    .developers .audience-header:hover h2 {
-        color: #ffffff;
-        text-shadow: none;
-    }
-
-    .developers .audience-text p,
-    .developers .audience-header:hover p {
-        color: rgba(255, 255, 255, 0.8);
-        text-shadow: none;
-    }
-
-    .audience-text p {
-        font-size: 1.05em;
-    }
-
-    .final-cta {
-        padding: 2em 1.5em;
-    }
-
-    .audience-header:hover {
-        box-shadow: var(--maho-shadow-sm);
-        transform: none;
-    }
-
-    .audience-header:hover h2 {
-        transform: none;
-        color: var(--maho-text-primary);
-        text-shadow: none;
-    }
-
-    .audience-header:hover p {
-        transform: none;
-        color: var(--maho-text-secondary);
-    }
-
-    .audience-header:hover .audience-image img {
-        filter: saturate(0.85) contrast(1.05) brightness(0.95);
-    }
-
-    .intro-section {
-        padding: 0 1em;
-    }
-
-    .feature-card {
-        padding: 1.5em;
-        min-height: 160px;
-    }
-}
-
-
 /* === SPONSORS === */
 .sponsorgallery {
     display: flex;
@@ -2066,7 +2226,7 @@ html.mh-anim .mh-reveal.mh-in {
 }
 
 
-/* === BLOG ENHANCEMENTS === */
+/* === BLOG === */
 body:has(h1[id=blog]) .md-post--excerpt ul li {
     margin-block: 0;
 }
@@ -2083,7 +2243,7 @@ body:has(h1[id=blog]) .md-typeset .admonition.tip {
 
 body:has(h1[id=blog]) .md-typeset .tip > .admonition-title:before,
 body:has(h1[id=blog]) .md-typeset .tip > summary:before {
-    background-color: var(--maho-brand);
+    background-color: var(--maho-brand-dark);
 }
 
 body:has(h1[id=blog]) .md-typeset .tip > .admonition-title,
@@ -2091,7 +2251,6 @@ body:has(h1[id=blog]) .md-typeset .tip > summary {
     background-color: rgba(173, 180, 26, 0.1);
 }
 
-/* Blog post list - better visual separation */
 body:has(h1[id=blog]) .md-post {
     padding-bottom: 2em;
     margin-bottom: 2.5em;
@@ -2106,27 +2265,27 @@ body:has(h1[id=blog]) .md-post__header {
     margin-bottom: 0.5em;
 }
 
-/* Blog post title styling */
 body:has(h1[id=blog]) .md-post--excerpt .md-post__header h2 {
+    font-family: var(--maho-display);
     font-size: 1.6em;
-    font-weight: 800;
+    font-weight: 750;
     letter-spacing: -0.03em;
-    line-height: 1.2;
+    line-height: 1.15;
 }
 
-body:has(h1[id=blog]) .md-post--excerpt .md-post__header h2 a {
+body:has(h1[id=blog]) .md-content .md-post h2 a:not(.md-button):not(.mh-btn) {
     text-decoration: none !important;
     color: var(--maho-text-primary);
     transition: color var(--maho-duration) var(--maho-ease);
 }
 
-body:has(h1[id=blog]) .md-post--excerpt .md-post__header h2 a:hover {
+body:has(h1[id=blog]) .md-content .md-post h2 a:not(.md-button):not(.mh-btn):hover {
     color: var(--maho-brand-dark);
 }
 
-/* Blog date/meta styling */
 body:has(h1[id=blog]) .md-post__meta {
-    font-size: 0.65rem;
+    font-family: var(--maho-mono);
+    font-size: 0.6rem;
     color: var(--maho-text-tertiary);
 }
 
@@ -2149,7 +2308,7 @@ body:has(h1[id=blog]) .md-post__meta {
     position: absolute;
     top: 0;
     left: 0;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(14, 15, 8, 0.6);
     color: #fff;
     display: flex;
     align-items: center;
@@ -2188,8 +2347,9 @@ body:has(h1[id=blog]) .md-post__meta {
 }
 
 .video_wrapper .video-btn:hover {
-    background-color: #fff;
-    color: #000;
+    background-color: var(--maho-chartreuse);
+    border-color: var(--maho-chartreuse);
+    color: var(--maho-ink);
 }
 
 
@@ -2201,29 +2361,10 @@ body:has(h1[id=blog]) .md-post__meta {
     box-shadow: var(--maho-shadow-sm);
 }
 
-.md-button.affiliate-button::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 0;
-    height: 0;
-    border-radius: 50%;
-    background: rgba(173, 180, 26, 0.08);
-    transform: translate(-50%, -50%);
-    transition: width 0.5s var(--maho-ease), height 0.5s var(--maho-ease);
-    z-index: -1;
-}
-
 .md-button.affiliate-button:hover {
-    transform: translateY(-3px) scale(1.02);
-    box-shadow: var(--maho-shadow-brand);
-    border-color: var(--maho-brand);
-}
-
-.md-button.affiliate-button:hover::before {
-    width: 400px;
-    height: 400px;
+    transform: translateY(-3px);
+    box-shadow: var(--maho-shadow-md);
+    border-color: var(--maho-brand) !important;
 }
 
 .md-button.affiliate-button img {
@@ -2231,68 +2372,51 @@ body:has(h1[id=blog]) .md-post__meta {
 }
 
 .md-button.affiliate-button:hover img {
-    transform: scale(1.1) rotate(5deg);
-}
-
-.md-button.affiliate-button span {
-    position: relative;
-    z-index: 1;
-}
-
-.md-button.affiliate-button:active {
-    transform: translateY(-1px) scale(1.01);
+    transform: scale(1.08);
 }
 
 
-/* === CONTENT TABS === */
-.md-typeset .tabbed-labels > label {
-    font-weight: 600;
-    font-size: 0.88em;
-    letter-spacing: -0.01em;
-    transition: color var(--maho-duration) var(--maho-ease);
-}
-
-
-/* === FOOTER === */
+/* === FOOTER: same ink as the header === */
 .md-footer {
     border-top: none;
 }
 
 .md-footer-meta {
-    background: #1a1a1a;
+    background: var(--maho-ink);
 }
 
 .maho-footer {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 2.5rem;
-    padding: 2.5rem 2rem 1.5rem;
+    padding: 2.8rem 2rem 1.5rem;
     max-width: 1200px;
     margin: 0 auto;
     font-size: 0.75rem;
     line-height: 1.6;
-    color: rgba(255, 255, 255, 0.75);
+    color: var(--maho-on-ink-soft);
 }
 .maho-footer a {
-    color: rgba(255, 255, 255, 0.85);
+    color: var(--maho-on-ink);
     text-decoration: none;
     transition: color 0.2s ease;
 }
 .maho-footer a:hover {
-    color: var(--maho-brand);
+    color: var(--maho-chartreuse);
 }
 .maho-footer-brand p {
     margin: 0.75rem 0 0;
     font-size: 0.7rem;
-    color: rgba(255, 255, 255, 0.55);
+    color: var(--maho-on-ink-soft);
     line-height: 1.7;
 }
 .maho-footer-heading {
-    font-size: 0.65rem;
-    font-weight: 600;
+    font-family: var(--maho-mono);
+    font-size: 0.6rem;
+    font-weight: 500;
     text-transform: uppercase;
-    letter-spacing: 0.08em;
-    color: rgba(255, 255, 255, 0.45);
+    letter-spacing: 0.14em;
+    color: var(--maho-on-ink-faint);
     margin: 0 0 1rem;
 }
 .maho-footer-social {
@@ -2306,25 +2430,27 @@ body:has(h1[id=blog]) .md-post__meta {
     justify-content: center;
     width: 2rem;
     height: 2rem;
-    border-radius: 6px;
-    background: rgba(255, 255, 255, 0.08);
-    transition: background 0.2s ease, transform 0.2s ease;
+    border-radius: var(--maho-radius-sm);
+    background: rgba(244, 245, 232, 0.07);
+    border: 1px solid var(--maho-ink-border);
+    transition: background 0.2s ease, transform 0.2s ease, border-color 0.2s ease;
 }
 .maho-footer-social a:hover {
-    background: rgba(173, 180, 26, 0.25);
+    background: rgba(215, 223, 34, 0.12);
+    border-color: var(--maho-ink-border-brand);
     transform: translateY(-2px);
 }
 .maho-footer-social svg {
     width: 1rem;
     height: 1rem;
-    fill: rgba(255, 255, 255, 0.8);
+    fill: var(--maho-on-ink-soft);
 }
 .maho-footer-social a:hover svg {
-    fill: var(--maho-brand);
+    fill: var(--maho-chartreuse);
 }
 .maho-footer-subscribe p {
     margin: 0 0 0.25rem;
-    color: rgba(255, 255, 255, 0.6);
+    color: var(--maho-on-ink-soft);
     font-size: 0.7rem;
 }
 .maho-footer-newsletter-form {
@@ -2335,28 +2461,30 @@ body:has(h1[id=blog]) .md-post__meta {
 .maho-footer-newsletter-input {
     flex: 1;
     padding: 0.5rem 0.75rem;
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    border-radius: 6px;
-    background: rgba(255, 255, 255, 0.06);
-    color: #fff;
+    border: 1px solid var(--maho-ink-border);
+    border-radius: var(--maho-radius-sm);
+    background: rgba(244, 245, 232, 0.06);
+    color: var(--maho-on-ink);
+    font-family: var(--maho-sans);
     font-size: 0.7rem;
     outline: none;
     transition: border-color 0.2s ease, background 0.2s ease;
     min-width: 0;
 }
 .maho-footer-newsletter-input::placeholder {
-    color: rgba(255, 255, 255, 0.35);
+    color: var(--maho-on-ink-faint);
 }
 .maho-footer-newsletter-input:focus {
-    border-color: rgba(173, 180, 26, 0.6);
-    background: rgba(255, 255, 255, 0.1);
+    border-color: var(--maho-ink-border-brand);
+    background: rgba(244, 245, 232, 0.1);
 }
 .maho-footer-newsletter-btn {
     padding: 0.5rem 1rem;
     border: none;
-    border-radius: 6px;
-    background: var(--maho-brand);
-    color: #000;
+    border-radius: var(--maho-radius-sm);
+    background: var(--maho-chartreuse);
+    color: var(--maho-ink);
+    font-family: var(--maho-sans);
     font-size: 0.7rem;
     font-weight: 600;
     cursor: pointer;
@@ -2364,7 +2492,7 @@ body:has(h1[id=blog]) .md-post__meta {
     white-space: nowrap;
 }
 .maho-footer-newsletter-btn:hover {
-    background: var(--maho-brand-light);
+    background: var(--maho-chartreuse-soft);
     transform: translateY(-1px);
 }
 .maho-footer-newsletter-btn:active {
@@ -2373,24 +2501,25 @@ body:has(h1[id=blog]) .md-post__meta {
 .maho-footer-newsletter-msg {
     font-size: 0.65rem;
     margin-top: 0.5rem;
-    color: rgba(255, 255, 255, 0.5);
+    color: var(--maho-on-ink-faint);
 }
 .maho-footer-bottom {
     padding: 1rem 2rem;
-    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    border-top: 1px solid var(--maho-ink-border);
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 0.6rem;
-    color: rgba(255, 255, 255, 0.35);
+    font-family: var(--maho-mono);
+    font-size: 0.55rem;
+    color: var(--maho-on-ink-faint);
 }
 .maho-footer-bottom a {
-    color: rgba(255, 255, 255, 0.45);
+    color: var(--maho-on-ink-soft);
     text-decoration: none;
     transition: color 0.2s ease;
 }
 .maho-footer-bottom a:hover {
-    color: var(--maho-brand);
+    color: var(--maho-chartreuse);
 }
 @media screen and (max-width: 768px) {
     .maho-footer {
@@ -2411,6 +2540,15 @@ body:has(h1[id=blog]) .md-post__meta {
 .md-typeset .grid.cards > ul > li {
     display: flex;
     flex-direction: column;
+    border-radius: var(--maho-radius-lg);
+    border-color: var(--maho-border);
+    transition: border-color var(--maho-duration) var(--maho-ease),
+                box-shadow var(--maho-duration) var(--maho-ease);
+}
+
+.md-typeset .grid.cards > ul > li:hover {
+    border-color: var(--maho-brand);
+    box-shadow: var(--maho-shadow-md);
 }
 
 .md-typeset .grid.cards > ul > li > center {
@@ -2431,8 +2569,9 @@ body:has(h1[id=blog]) .md-post__meta {
 }
 
 .maho-404 h1 {
+    font-family: var(--maho-display);
     font-size: 2.5em;
-    font-weight: 800;
+    font-weight: 750;
     letter-spacing: -0.03em;
     margin: 0 0 0.5rem;
     color: var(--maho-text-primary);

@@ -66,7 +66,7 @@ function mahoBlankScene(scene) {
 }
 
 /* Reveal a scene's lines one after another with a left-to-right "typing"
-   wipe — command lines take longer than output lines. Calls onDone when the
+   wipe - command lines take longer than output lines. Calls onDone when the
    last line (and cursor) have settled. */
 function mahoTypeScene(scene, onDone) {
     mahoBlankScene(scene);
@@ -143,7 +143,7 @@ function mahoCycleTerminal(term) {
 
 /* Fade/slide content blocks in as they enter the viewport. */
 function mahoSetupReveal() {
-    var selector = '.mh-strip-item, .audience-section, .feature-card, .final-cta, .comparison-section, .platform-card';
+    var selector = '.mh-proof, .mh-sec-head, .feature-card, .final-cta-inner';
     var targets = Array.prototype.slice.call(document.querySelectorAll(selector));
     if (!targets.length) return;
 
@@ -228,9 +228,116 @@ function mahoSetupCarousels() {
     });
 }
 
+/* ---- Hero admin showcase: lightbulb toggle + prev/next arrows ----
+   One screenshot at a time; a lightbulb in the window chrome crossfades
+   between the light and dark capture. Big arrows step through the screens
+   (wrapping), keeping the current mode: the frame is hidden behind a
+   spinner until the next capture decodes, then slides in from the chosen
+   direction. Progressive enhancement: without JS the first shot shows. */
+function mahoSetupShots() {
+    var stage = document.getElementById('mh-shot-stage');
+    if (!stage) return;
+    var bulb = document.getElementById('mh-bulb');
+    var title = document.getElementById('mh-shot-title');
+    var frame = document.getElementById('mh-shot-frame');
+    var spinner = document.getElementById('mh-shot-spinner');
+    var hold = document.getElementById('mh-shot-hold');
+    var light = document.getElementById('mh-shot-light');
+    var dark = document.getElementById('mh-shot-dark');
+    var win = document.getElementById('mh-shot-window');
+
+    var screens = Array.prototype.map.call(
+        document.querySelectorAll('#mh-shot-screens > [data-title]'),
+        function (el) {
+            return {
+                light: el.getAttribute('data-light'),
+                dark: el.getAttribute('data-dark'),
+                title: el.getAttribute('data-title')
+            };
+        }
+    );
+    if (!screens.length) return;
+    var i = 0;
+    var navToken = 0;
+
+    var hintText = document.getElementById('mh-bulb-text');
+
+    function render() {
+        var s = screens[i];
+        var isDark = stage.classList.contains('is-dark');
+        bulb.setAttribute('aria-pressed', isDark ? 'true' : 'false');
+        bulb.setAttribute('aria-label', isDark ? 'Switch the screenshot to light mode' : 'Switch the screenshot to dark mode');
+        if (title) title.textContent = 'maho-admin · ' + (isDark ? 'dark' : 'light');
+        if (hintText) hintText.textContent = isDark ? 'Turn on the lights' : 'Try dark mode';
+        light.setAttribute('alt', s.title + ' in the redesigned admin, ' + (isDark ? 'dark' : 'light') + ' mode');
+    }
+
+    function decode(img) {
+        if (!img.decode) {
+            return new Promise(function (res) {
+                if (img.complete) { res(); return; }
+                img.onload = img.onerror = res;
+            });
+        }
+        return img.decode().catch(function () {});
+    }
+
+    function go(step) {
+        var token = ++navToken;
+        i = (i + step + screens.length) % screens.length;
+        var s = screens[i];
+
+        // Keep the current screenshot on screen; preload the next one
+        // off-screen and only swap once it's decoded.
+        spinner.hidden = false;
+        var preL = new Image();
+        var preD = new Image();
+        preL.src = s.light;
+        preD.src = s.dark;
+
+        Promise.all([decode(preL), decode(preD)]).then(function () {
+            if (token !== navToken) return;     // a newer navigation superseded this one
+            spinner.hidden = true;
+
+            // Park the currently-visible capture on the hold layer so the
+            // crossfade reveals it (not the dark stage) behind the new one.
+            hold.src = stage.classList.contains('is-dark') ? dark.src : light.src;
+            hold.style.opacity = '1';
+
+            light.src = s.light;                // instant: already in cache
+            dark.src = s.dark;
+            render();                           // update the chrome name to match
+
+            frame.classList.remove('mh-shot-fade');
+            void frame.offsetWidth;             // restart the crossfade
+            frame.classList.add('mh-shot-fade');
+        });
+    }
+
+    // Once the new frame has fully faded in, drop the held outgoing image.
+    frame.addEventListener('animationend', function () {
+        hold.style.opacity = '0';
+    });
+
+    function toggleMode() {
+        stage.classList.toggle('is-dark');
+        if (win) win.classList.add('is-hint-done'); // stop the attention hint
+        render();
+    }
+    bulb.addEventListener('click', toggleMode);
+    var hint = document.getElementById('mh-bulb-hint');
+    if (hint) hint.addEventListener('click', toggleMode); // the hint label toggles too
+
+    document.getElementById('mh-shot-prev').addEventListener('click', function () { go(-1); });
+    document.getElementById('mh-shot-next').addEventListener('click', function () { go(1); });
+
+    render();
+}
+
 function mahoInitHome() {
     var hero = document.querySelector('.mh-hero');
     if (!hero) return;            // only on the home page
+    mahoSetupShots();             // works with or without motion
     if (mahoReducedMotion()) return; // CSS keeps everything visible
 
     mahoClearCarousels(); // avoid duplicate timers across instant navigations
