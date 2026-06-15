@@ -1,5 +1,7 @@
 ---
 date: 2026-06-10
+categories:
+  - Engineering
 ---
 
 # Raising the bar on quality and security

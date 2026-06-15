@@ -1,5 +1,7 @@
 ---
 date: 2024-09-08
+categories:
+  - Feature spotlight
 ---
 
 # 15-Year-Long quest for perfect language packs

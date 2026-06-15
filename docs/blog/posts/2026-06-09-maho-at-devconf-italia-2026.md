@@ -1,5 +1,7 @@
 ---
 date: 2026-06-09
+categories:
+  - Events
 ---
 
 # Maho at DevConf 2026!

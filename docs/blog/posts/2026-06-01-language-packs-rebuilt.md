@@ -1,5 +1,7 @@
 ---
 date: 2026-06-01
+categories:
+  - Feature spotlight
 ---
 
 # Language packs, rebuilt, and three new languages

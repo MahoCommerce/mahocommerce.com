@@ -1,5 +1,7 @@
 ---
 date: 2024-07-24
+categories:
+  - Development log
 ---
 
 # Maho is born: A new chapter in e-commerce

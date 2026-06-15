@@ -1,5 +1,7 @@
 ---
 date: 2024-08-01
+categories:
+  - Development log
 ---
 
 # A week of Maho

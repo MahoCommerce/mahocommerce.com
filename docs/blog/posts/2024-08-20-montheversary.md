@@ -1,5 +1,7 @@
 ---
 date: 2024-08-20
+categories:
+  - Development log
 ---
 
 # The first montheversary

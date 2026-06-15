@@ -1,5 +1,7 @@
 ---
 date: 2026-06-14
+categories:
+  - Feature spotlight
 ---
 
 # A brand-new admin panel, in light and dark

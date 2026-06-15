@@ -1,5 +1,7 @@
 ---
 date: 2024-09-13
+categories:
+  - Events
 ---
 
 # Maho at MagentiamoDay 2024 in Milan!

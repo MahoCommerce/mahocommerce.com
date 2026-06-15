@@ -40,6 +40,12 @@ plugins:
       blog_dir: blog
       post_date_format: full
       post_url_format: "{date}/{slug}"
+      categories_allowed:
+        - Release announcement
+        - Feature spotlight
+        - Development log
+        - Events
+        - Engineering
   - minify:
       minify_html: true
 
@@ -186,7 +192,8 @@ nav:
       - JSON-RPC API: api/jsonrpc.md
       - phpDoc code reference: code-reference.md
       - DeepWiki AI docs: deepwiki.md
-  - Blog: blog/index.md
+  - Blog:
+      - blog/index.md
   - Community:
       - Get Involved: community/get-involved.md
       - Contributing: community/contributing.md

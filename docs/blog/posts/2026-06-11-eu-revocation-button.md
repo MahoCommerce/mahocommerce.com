@@ -1,5 +1,7 @@
 ---
 date: 2026-06-11
+categories:
+  - Feature spotlight
 ---
 
 # The EU revocation button is mandatory on June 19. Maho has you covered.

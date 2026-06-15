@@ -1,5 +1,7 @@
 ---
 date: 2024-08-14
+categories:
+  - Development log
 ---
 
 # Third week of development

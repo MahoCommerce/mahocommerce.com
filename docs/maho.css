@@ -451,13 +451,30 @@ body {
     z-index: 1;
 }
 
-/* Copy button on dark blocks */
-.md-typeset .md-clipboard {
-    color: var(--maho-on-ink-faint);
+/* Code block action buttons (copy/select/download) on dark blocks.
+   This materialx fork uses .md-code__button inside .md-code__nav (NOT .md-clipboard).
+   The fork's default light chip background reads as a murky gray box on our dark
+   blocks, so we drop it and render a clean icon: soft tone at rest, chartreuse on hover. */
+.md-typeset .md-code__nav {
+    background: transparent;
+    top: 0;
+    right: 0;
 }
 
-.md-typeset .md-clipboard:hover {
-    color: var(--maho-chartreuse);
+.md-typeset .md-code__button {
+    color: var(--maho-on-ink-soft);
+    box-sizing: content-box;
+    padding: 0.3rem;
+    border-radius: 0.4rem;
+    transition: color .15s ease, background-color .15s ease;
+}
+
+.md-typeset .md-code__button:hover,
+.md-typeset .md-code__button.focus-visible,
+.md-typeset .md-code__button:focus-visible,
+.md-typeset .md-code__button--active {
+    color: var(--maho-ink);
+    background: var(--maho-chartreuse);
 }
 
 /* Line number gutter (anchor_linenums tables) */
@@ -674,7 +691,7 @@ aside.md-source-file * {
 
 /* Hide sidebars and unwrap content on home and special pages */
 @media screen and (min-width: 60em) {
-    body:has(h1[id=blog]) .md-sidebar {
+    body:has(h1[id=blog]) .md-sidebar--secondary {
         visibility: hidden;
     }
     body:has(#homeh1) .md-sidebar, body:has(#sponsorsh1) .md-sidebar--primary {
