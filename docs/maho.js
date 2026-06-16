@@ -331,6 +331,27 @@ function mahoSetupShots() {
     document.getElementById('mh-shot-prev').addEventListener('click', function () { go(-1); });
     document.getElementById('mh-shot-next').addEventListener('click', function () { go(1); });
 
+    // Touch: swipe left/right to browse screens (mainly for mobile).
+    // Track the first touch, and on release fire a navigation only when the
+    // gesture is clearly horizontal so vertical page scrolling stays intact.
+    var swipeX = 0, swipeY = 0, swiping = false;
+    stage.addEventListener('touchstart', function (e) {
+        if (e.touches.length !== 1) { swiping = false; return; }
+        swipeX = e.touches[0].clientX;
+        swipeY = e.touches[0].clientY;
+        swiping = true;
+    }, { passive: true });
+    stage.addEventListener('touchend', function (e) {
+        if (!swiping) return;
+        swiping = false;
+        var t = e.changedTouches[0];
+        var dx = t.clientX - swipeX;
+        var dy = t.clientY - swipeY;
+        if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy) * 1.5) {
+            go(dx < 0 ? 1 : -1);   // swipe left = next, swipe right = previous
+        }
+    }, { passive: true });
+
     render();
 }
 
