@@ -120,6 +120,7 @@ nav:
       - Magic Link Authentication: magic-link-authentication.md
       - Maintenance mode: maintenance-mode.md
       - Override configs: override-configurations.md
+      - Redis (cache & sessions): redis.md
       - Robots.txt: robotstxt.md
       - Routing: routing.md
       - SVG uploads: svg-support.md
