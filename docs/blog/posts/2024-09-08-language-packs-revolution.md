@@ -55,7 +55,7 @@ Our new localization system is designed with collaboration and ease of use in mi
 
 ## Official documentation
 
-We invite our users and the broader community to [explore and test these new language packs](../../language-packs.md),
+We invite our users and the broader community to [explore and test these new language packs](../../developer/language-packs.md),
 provide feedback, and contribute to making Maho's localization even better.
 Together, we can ensure that Maho speaks your language, wherever you are in the world.
 

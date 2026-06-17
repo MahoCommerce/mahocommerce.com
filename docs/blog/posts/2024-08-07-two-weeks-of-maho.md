@@ -29,7 +29,7 @@ forward-looking compass. We think a compass is a powerful symbol that symbolizes
 ## Website updates
 
 A few documentation pages were created and the rest (especially the community section) was refined.
-Also, the [roadmap](../../roadmap.md) got some love too.
+Also, the [roadmap](../../about/roadmap.md) got some love too.
 
 ## Platform updates
 

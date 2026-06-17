@@ -369,9 +369,25 @@ function mahoInitHome() {
     mahoSetupCarousels();
 }
 
+/* ---- Blog & Community sidebars: keep their groups expanded ----
+   The collapsible sidebar (navigation.sections is off, which keeps the large
+   docs sidebar short) collapses nested groups by default. On the small blog and
+   community sections we want their groups open, the way they were before, so
+   check every nested toggle in the primary sidebar on each load. The path guard
+   leaves the big docs sidebars collapsible. */
+function mahoExpandSectionNav() {
+    var p = location.pathname;
+    if (p.indexOf('/blog/') === -1 && p.indexOf('/community/') === -1) return;
+    document.querySelectorAll('.md-sidebar--primary .md-nav__item--nested > input.md-nav__toggle').forEach(function (toggle) {
+        toggle.checked = true;
+    });
+}
+
 // Run on first load, and again after Material "instant" navigations.
 if (typeof window !== 'undefined' && window.document$ && typeof window.document$.subscribe === 'function') {
     window.document$.subscribe(mahoInitHome);
+    window.document$.subscribe(mahoExpandSectionNav);
 } else {
     document.addEventListener('DOMContentLoaded', mahoInitHome);
+    document.addEventListener('DOMContentLoaded', mahoExpandSectionNav);
 }

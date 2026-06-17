@@ -8,6 +8,7 @@ RUN pip install --no-cache-dir \
     mkdocs-git-revision-date-localized-plugin \
     mkdocs-awesome-pages-plugin \
     mkdocs-minify-plugin \
+    mkdocs-redirects \
     pillow \
     cairosvg
 ARG CACHEBUST=1

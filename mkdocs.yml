@@ -18,7 +18,6 @@ theme:
     - instant
     - content.code.copy
     - navigation.tabs
-    - navigation.sections
     - navigation.top
     - search.suggest
     - search.highlight
@@ -48,6 +47,71 @@ plugins:
         - Engineering
   - minify:
       minify_html: true
+  - redirects:
+      redirect_maps:
+        ai.md: user-guide/ai.md
+        array-import-adapter.md: developer/array-import-adapter.md
+        autoloaders.md: developer/autoloaders.md
+        category-import-export.md: user-guide/category-import-export.md
+        cli-tool.md: developer/cli-tool.md
+        code-reference.md: api/code-reference.md
+        composer-plugin.md: developer/composer-plugin.md
+        cron.md: hosting/cron.md
+        customer-segments.md: user-guide/customer-segments.md
+        database-layer.md: developer/database-layer.md
+        date-handling.md: developer/date-handling.md
+        declarative-database-schema.md: developer/declarative-database-schema.md
+        deepwiki.md: api/deepwiki.md
+        demo.md: about/demo.md
+        differences.md: about/differences.md
+        edge-caching.md: hosting/edge-caching.md
+        email-automation.md: user-guide/email-automation.md
+        email-sending-configuration.md: hosting/email-sending-configuration.md
+        feed-manager.md: user-guide/feed-manager.md
+        frankenphp.md: hosting/frankenphp.md
+        getting-started.md: about/getting-started.md
+        gift-cards.md: user-guide/gift-cards.md
+        icons-library.md: developer/icons-library.md
+        language-packs.md: developer/language-packs.md
+        logging.md: hosting/logging.md
+        magic-link-authentication.md: user-guide/magic-link-authentication.md
+        maho-for-devs/advanced-orm.md: developer/guide/advanced-orm.md
+        maho-for-devs/config.md: developer/guide/config.md
+        maho-for-devs/controller-dispatch.md: developer/guide/controller-dispatch.md
+        maho-for-devs/customer-segments.md: developer/guide/customer-segments.md
+        maho-for-devs/data-collections.md: developer/guide/data-collections.md
+        maho-for-devs/email-automation.md: developer/guide/email-automation.md
+        maho-for-devs/gift-cards.md: developer/guide/gift-cards.md
+        maho-for-devs/introduction.md: developer/guide/introduction.md
+        maho-for-devs/javascript-defer.md: developer/guide/javascript-defer.md
+        maho-for-devs/layout-blocks-templates.md: developer/guide/layout-blocks-templates.md
+        maho-for-devs/models-and-orm.md: developer/guide/models-and-orm.md
+        maho-for-devs/setup-resources.md: developer/guide/setup-resources.md
+        maintenance-mode.md: hosting/maintenance-mode.md
+        migrate-to-maho.md: about/migrate-to-maho.md
+        observers.md: developer/observers.md
+        origins.md: about/origins.md
+        override-configurations.md: developer/override-configurations.md
+        product-relationship-rules.md: user-guide/product-relationship-rules.md
+        product-types.md: user-guide/product-types.md
+        redis.md: hosting/redis.md
+        release-strategy.md: about/release-strategy.md
+        revocation-button.md: user-guide/revocation-button.md
+        roadmap.md: about/roadmap.md
+        robotstxt.md: hosting/robotstxt.md
+        routing.md: developer/routing.md
+        sboms.md: about/sboms.md
+        seo.md: user-guide/seo.md
+        shipping-bridge.md: user-guide/shipping-bridge.md
+        svg-support.md: hosting/svg-support.md
+        theme-development.md: developer/theme-development.md
+
+validation:
+  links:
+    not_found: warn
+    anchors: warn
+    absolute_links: warn
+    unrecognized_links: warn
 
 markdown_extensions:
   - pymdownx.emoji:
@@ -79,120 +143,128 @@ markdown_extensions:
 
 nav:
   - Home: index.md
-  - Documentation:
-    - Getting started: getting-started.md
-    - Live demo: demo.md
-    - Migrate to Maho: migrate-to-maho.md
-    - Release strategy: release-strategy.md
-    - Origins: origins.md
-    - Differences: differences.md
-    - Roadmap: roadmap.md
-    - Security & SBOMs: sboms.md
-    - User Guide:
-      - Product Types: product-types.md
-      - Category Import/Export: category-import-export.md
-      - Product Relationship Rules: product-relationship-rules.md
-      - Customer Segments: customer-segments.md
-      - Email Automation: email-automation.md
-      - Feed Manager: feed-manager.md
-      - Gift Cards: gift-cards.md
-      - Revocation Button: revocation-button.md
-      - Artificial Intelligence: ai.md
-      - SEO: seo.md
-      - Shipping Bridge: shipping-bridge.md
-    - Technical doc:
-      - Autoloaders: autoloaders.md
-      - CLI tool: cli-tool.md
-      - Composer plugin: composer-plugin.md
-      - Cron jobs: cron.md
-      - Date & time handling: date-handling.md
-      - Database layer: database-layer.md
-      - Declarative DB schema: declarative-database-schema.md
-      - Edge caching integration: edge-caching.md
-      - Event observers: observers.md
-      - Email sending (SMTP): email-sending-configuration.md
-      - FrankenPHP: frankenphp.md
-      - Icons library: icons-library.md
-      - Import / Export:
-        - Array Import Adapter: array-import-adapter.md
-      - Language packs: language-packs.md
-      - Logging: logging.md
-      - Magic Link Authentication: magic-link-authentication.md
-      - Maintenance mode: maintenance-mode.md
-      - Override configs: override-configurations.md
-      - Redis (cache & sessions): redis.md
-      - Robots.txt: robotstxt.md
-      - Routing: routing.md
-      - SVG uploads: svg-support.md
-      - Theme development: theme-development.md
-    - Reference:
-      - Development guide:
-          - Introduction: maho-for-devs/introduction.md
-          - The Maho config: maho-for-devs/config.md
-          - Controller dispatch: maho-for-devs/controller-dispatch.md
-          - Layouts, blocks and templates: maho-for-devs/layout-blocks-templates.md
-          - Models and ORM basics: maho-for-devs/models-and-orm.md
-          - Setup resources: maho-for-devs/setup-resources.md
-          - Advanced ORM: maho-for-devs/advanced-orm.md
-          - Data collections: maho-for-devs/data-collections.md
-          - JavaScript deferral: maho-for-devs/javascript-defer.md
-          - Customer Segments: maho-for-devs/customer-segments.md
-          - Email Automation: maho-for-devs/email-automation.md
-          - Gift Cards: maho-for-devs/gift-cards.md
-      - REST API:
-          - Introduction: api/rest/introduction.md
-          - Common HTTP status codes: api/rest/common_http_status_codes.md
-          - HTTP methods: api/rest/http_methods.md
-          - GET Filters: api/rest/get_filters.md
-          - Response formats: api/rest/response_formats.md
-          - Testing: api/rest/testing_rest_resources.md
-          - Authentication:
-            - OAuth authentication: api/rest/authentication/oauth_authentication.md
-            - OAuth configuration: api/rest/authentication/oauth_configuration.md
-          - Permission settings:
-            - Introduction: api/rest/permission_settings/introduction.md
-            - Roles configuration: api/rest/permission_settings/roles_configuration.md
-            - Attributes configuration: api/rest/permission_settings/attributes_configuration.md
-            - Attributes description: api/rest/permission_settings/attributes_description.md
-          - Extending REST API: api/rest/extending.md
-      - SOAP API:
-          - Introduction: api/soap.md
-          - Catalog Category: api/soap/catalog-category.md
-          - Catalog Category Attribute: api/soap/catalog-category-attribute.md
-          - Catalog Product:
-            - Product: api/soap/catalog-product.md
-            - Product Attribute: api/soap/catalog-product-attribute.md
-            - Product Attribute Media: api/soap/catalog-product-attribute-media.md
-            - Product Attribute Set: api/soap/catalog-product-attribute-set.md
-            - Product Custom Option: api/soap/catalog-product-custom-option.md
-            - Product Custom Option Value: api/soap/catalog-product-custom-option-value.md
-            - Product Downloadable Link: api/soap/catalog-product-downloadable-link.md
-            - Product Link: api/soap/catalog-product-link.md
-            - Product Tag: api/soap/catalog-product-tag.md
-            - Product Tier Price: api/soap/catalog-product-tier-price.md
-            - Product Types: api/soap/catalog-product-types.md
-          - Catalog Inventory: api/soap/catalog-inventory.md
-          - Checkout Cart:
-            - Checkout Cart: api/soap/checkout-cart.md
-            - Checkout Cart Coupon: api/soap/checkout-cart-coupon.md
-            - Checkout Cart Customer: api/soap/checkout-cart-customer.md
-            - Checkout Cart Payment: api/soap/checkout-cart-payment.md
-            - Checkout Cart Product: api/soap/checkout-cart-product.md
-            - Checkout Cart Shipping: api/soap/checkout-cart-shipping.md
-          - Customer:
-            - Customer: api/soap/customer.md
-            - Customer Group: api/soap/customer-group.md
-            - Customer Address: api/soap/customer-address.md
-          - Directory: api/soap/directory.md
-          - Store: api/soap/store.md
-          - Sales Order:
-            - Order: api/soap/sales-order.md
-            - Credit Memo: api/soap/sales-order-credit-memo.md
-            - Invoice: api/soap/sales-order-invoice.md
-            - Shipment: api/soap/sales-order-shipment.md
-      - JSON-RPC API: api/jsonrpc.md
-      - phpDoc code reference: code-reference.md
-      - DeepWiki AI docs: deepwiki.md
+  - User Guide:
+    - About:
+      - Live demo: about/demo.md
+      - Differences: about/differences.md
+      - Origins: about/origins.md
+      - Release strategy: about/release-strategy.md
+      - Roadmap: about/roadmap.md
+    - Catalog:
+        - Product Types: user-guide/product-types.md
+        - Product Relationship Rules: user-guide/product-relationship-rules.md
+        - Category Import/Export: user-guide/category-import-export.md
+    - Customers & Marketing:
+        - Customer Segments: user-guide/customer-segments.md
+        - Email Automation: user-guide/email-automation.md
+        - Gift Cards: user-guide/gift-cards.md
+        - Revocation Button: user-guide/revocation-button.md
+        - Magic Link Authentication: user-guide/magic-link-authentication.md
+    - Storefront & Growth:
+        - SEO: user-guide/seo.md
+        - Artificial Intelligence: user-guide/ai.md
+        - Shipping Bridge: user-guide/shipping-bridge.md
+        - Feed Manager: user-guide/feed-manager.md
+  - Developer Docs:
+    - Getting started: about/getting-started.md
+    - Migrate to Maho: about/migrate-to-maho.md
+    - Security & SBOMs: about/sboms.md
+    - Hosting & Operations:
+      - Redis (cache & sessions): hosting/redis.md
+      - Edge caching integration: hosting/edge-caching.md
+      - FrankenPHP: hosting/frankenphp.md
+      - Cron jobs: hosting/cron.md
+      - Maintenance mode: hosting/maintenance-mode.md
+      - Logging: hosting/logging.md
+      - Email sending (SMTP): hosting/email-sending-configuration.md
+      - Robots.txt: hosting/robotstxt.md
+      - SVG uploads: hosting/svg-support.md
+    - Developer Guide:
+      - Tutorial:
+          - Introduction: developer/guide/introduction.md
+          - The Maho config: developer/guide/config.md
+          - Controller dispatch: developer/guide/controller-dispatch.md
+          - Layouts, blocks and templates: developer/guide/layout-blocks-templates.md
+          - Models and ORM basics: developer/guide/models-and-orm.md
+          - Setup resources: developer/guide/setup-resources.md
+          - Advanced ORM: developer/guide/advanced-orm.md
+          - Data collections: developer/guide/data-collections.md
+          - JavaScript deferral: developer/guide/javascript-defer.md
+          - Customer Segments: developer/guide/customer-segments.md
+          - Email Automation: developer/guide/email-automation.md
+          - Gift Cards: developer/guide/gift-cards.md
+      - Core & architecture:
+          - Routing: developer/routing.md
+          - Event observers: developer/observers.md
+          - Autoloaders: developer/autoloaders.md
+          - Override configs: developer/override-configurations.md
+      - Database:
+          - Database layer: developer/database-layer.md
+          - Declarative DB schema: developer/declarative-database-schema.md
+      - Frontend & theming:
+          - Theme development: developer/theme-development.md
+          - Icons library: developer/icons-library.md
+      - Utilities & tooling:
+          - CLI tool: developer/cli-tool.md
+          - Composer plugin: developer/composer-plugin.md
+          - Date & time handling: developer/date-handling.md
+          - Language packs: developer/language-packs.md
+          - Array Import Adapter: developer/array-import-adapter.md
+    - API Reference:
+        - REST API:
+            - Introduction: api/rest/introduction.md
+            - Common HTTP status codes: api/rest/common_http_status_codes.md
+            - HTTP methods: api/rest/http_methods.md
+            - GET Filters: api/rest/get_filters.md
+            - Response formats: api/rest/response_formats.md
+            - Testing: api/rest/testing_rest_resources.md
+            - Authentication:
+              - OAuth authentication: api/rest/authentication/oauth_authentication.md
+              - OAuth configuration: api/rest/authentication/oauth_configuration.md
+            - Permission settings:
+              - Introduction: api/rest/permission_settings/introduction.md
+              - Roles configuration: api/rest/permission_settings/roles_configuration.md
+              - Attributes configuration: api/rest/permission_settings/attributes_configuration.md
+              - Attributes description: api/rest/permission_settings/attributes_description.md
+            - Extending REST API: api/rest/extending.md
+        - SOAP API:
+            - Introduction: api/soap.md
+            - Catalog Category: api/soap/catalog-category.md
+            - Catalog Category Attribute: api/soap/catalog-category-attribute.md
+            - Catalog Product:
+              - Product: api/soap/catalog-product.md
+              - Product Attribute: api/soap/catalog-product-attribute.md
+              - Product Attribute Media: api/soap/catalog-product-attribute-media.md
+              - Product Attribute Set: api/soap/catalog-product-attribute-set.md
+              - Product Custom Option: api/soap/catalog-product-custom-option.md
+              - Product Custom Option Value: api/soap/catalog-product-custom-option-value.md
+              - Product Downloadable Link: api/soap/catalog-product-downloadable-link.md
+              - Product Link: api/soap/catalog-product-link.md
+              - Product Tag: api/soap/catalog-product-tag.md
+              - Product Tier Price: api/soap/catalog-product-tier-price.md
+              - Product Types: api/soap/catalog-product-types.md
+            - Catalog Inventory: api/soap/catalog-inventory.md
+            - Checkout Cart:
+              - Checkout Cart: api/soap/checkout-cart.md
+              - Checkout Cart Coupon: api/soap/checkout-cart-coupon.md
+              - Checkout Cart Customer: api/soap/checkout-cart-customer.md
+              - Checkout Cart Payment: api/soap/checkout-cart-payment.md
+              - Checkout Cart Product: api/soap/checkout-cart-product.md
+              - Checkout Cart Shipping: api/soap/checkout-cart-shipping.md
+            - Customer:
+              - Customer: api/soap/customer.md
+              - Customer Group: api/soap/customer-group.md
+              - Customer Address: api/soap/customer-address.md
+            - Directory: api/soap/directory.md
+            - Store: api/soap/store.md
+            - Sales Order:
+              - Order: api/soap/sales-order.md
+              - Credit Memo: api/soap/sales-order-credit-memo.md
+              - Invoice: api/soap/sales-order-invoice.md
+              - Shipment: api/soap/sales-order-shipment.md
+        - JSON-RPC API: api/jsonrpc.md
+        - phpDoc code reference: api/code-reference.md
+        - DeepWiki AI docs: api/deepwiki.md
   - Blog:
       - blog/index.md
   - Community:
