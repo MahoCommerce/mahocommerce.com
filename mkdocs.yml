@@ -163,6 +163,7 @@ nav:
     - Storefront & Growth:
         - SEO: user-guide/seo.md
         - Artificial Intelligence: user-guide/ai.md
+        - Captcha: user-guide/captcha.md
         - Shipping Bridge: user-guide/shipping-bridge.md
         - Feed Manager: user-guide/feed-manager.md
   - Developer Docs:
@@ -198,6 +199,7 @@ nav:
           - Event observers: developer/observers.md
           - Autoloaders: developer/autoloaders.md
           - Override configs: developer/override-configurations.md
+          - Rate limiting & honeypot: developer/rate-limiting-honeypot.md
       - Database:
           - Database layer: developer/database-layer.md
           - Declarative DB schema: developer/declarative-database-schema.md
