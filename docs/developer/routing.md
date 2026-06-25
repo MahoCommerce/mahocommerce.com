@@ -161,11 +161,32 @@ Existing installations carry the legacy declaration in `app/etc/local.xml`. To m
 
 ## Overriding controllers
 
-Maho preserves Magento 1's "module chain" override semantics. If you want a third-party module to replace a core controller, declare an entry in the chain via `config.xml` and ship a subclass; you don't redeclare the route.
+!!! info "v26.7+"
+    Since v26.7, the preferred way to replace a core controller is to **subclass it** — no XML, no attribute. The legacy `<routers><args><modules>` chain still works as a back-compatibility shim (see [Legacy XML chain](#legacy-xml-chain-back-compatibility)).
 
-### Admin overrides
+At `composer dump-autoload` the compiler detects any controller that extends a route-owning controller and declares no `#[Route]` of its own, and points that route at your subclass. This works in **every area** — frontend, admin, and install:
 
-Register your module under the admin chain in your `etc/config.xml`:
+```php
+// Just works — no XML, no attribute. Run `composer dump-autoload` after adding it.
+class Vendor_MyModule_Checkout_CartController extends Mage_Checkout_CartController
+{
+    #[\Override]
+    public function indexAction()
+    {
+        // your override
+    }
+}
+```
+
+- **Precedence is structural.** When several modules override the same controller they should form a single inheritance chain (`C extends B extends Core`); the most-derived class wins, deterministically and independent of module load order.
+- Two *sibling* subclasses extending the same base independently are a **conflict**: the compiler logs an error naming both and falls back to module load order (local/community over core). Resolve it by having one override extend the other.
+- A subclass that adds **new** actions still needs its own `#[Route]` for those actions — inheritance only carries over the base's existing routes.
+
+### Legacy XML chain (back-compatibility)
+
+Magento 1's "module chain" override declared in `config.xml` still works, and **wins over the compiled inheritance override**, so existing modules behave identically until you choose to migrate.
+
+**Admin** — register your module under the admin chain and ship a subclass with the same controller name:
 
 ```xml
 <config>
@@ -183,8 +204,6 @@ Register your module under the admin chain in your `etc/config.xml`:
 </config>
 ```
 
-Then ship a subclass with the same controller name:
-
 ```php
 class Vendor_MyModule_Adminhtml_Catalog_ProductController extends Mage_Adminhtml_Catalog_ProductController
 {
@@ -196,11 +215,7 @@ class Vendor_MyModule_Adminhtml_Catalog_ProductController extends Mage_Adminhtml
 }
 ```
 
-The runtime walks the chain at dispatch time, ordered by the `before`/`after` attributes. Your subclass wins over the core controller automatically. No `#[Route]` redeclaration needed.
-
-### Frontend overrides
-
-Same pattern via `<frontend>`, with the router code matching the front name you're overriding (here `customer`):
+**Frontend** — same pattern via `<frontend>`, with the router code matching the front name you're overriding (here `customer`):
 
 ```xml
 <config>
@@ -220,9 +235,22 @@ Same pattern via `<frontend>`, with the router code matching the front name you'
 
 A `Vendor_MyModule_AccountController extends Mage_Customer_AccountController` then takes precedence over the core controller.
 
-### Install overrides
+The runtime walks the chain at dispatch time, ordered by the `before`/`after` attributes, *before* falling back to the compiled lookup — so an XML override always wins over an inheritance-based one.
 
-The install area has no chain. To override an installer controller, redeclare the relevant `#[Route]` attribute on a custom controller subclass and let route precedence resolve it.
+### Migrating an override chain
+
+`legacy:migrate-routes` migrates these `<modules>` override chains too: because override controllers already extend the core controller, the inheritance compiler auto-registers them, so migrating just means deleting the XML.
+
+```bash
+./maho legacy:migrate-routes --dry-run   # preview
+./maho legacy:migrate-routes             # apply, then run composer dump-autoload
+```
+
+A `<modules>` node is removed **only** when every declared override is a clean subclass of a routed controller that re-implements inherited actions. Anything needing a human is reported and the XML left untouched, so re-running after a manual fix is safe:
+
+- a controller that isn't a subclass of a routed controller;
+- one that adds un-routed actions (add a `#[Route]` for them first);
+- sibling modules overriding the same controller with no shared inheritance chain (detected even when the conflicting overrides live in *separate* module `config.xml` files) — make one extend the other.
 
 ## Generating URLs
 
@@ -274,7 +302,7 @@ After writing, the action calls `opcache_reset()` so the next request picks up t
 
 - **Matching** uses Symfony's `CompiledUrlMatcher` reading the static array dumped to `vendor/composer/maho_url_matcher.php`. The compiled form is opcached, so route lookup is effectively a hash table read.
 - **Generation** uses Symfony's `CompiledUrlGenerator` reading `maho_url_generator.php`, also opcached.
-- **Module override chains** (admin and frontend) are walked by `Maho\Routing\ControllerDispatcher` *before* falling back to the compiled `controllerLookup`, so XML-declared overrides win over the compiled base module, preserving Magento 1's "first declared wins" semantics.
+- **Controller overrides** are resolved by `Maho\Routing\ControllerDispatcher` in three tiers: the XML `<args><modules>` chain (M1 BC) is walked first, then the compiled `controllerLookup` — which already points at the most-derived inheritance-based override of a route-owning base — and finally the route's own controller. So an XML-declared override wins over an inheritance-based one, which wins over the base, preserving Magento 1's "first declared wins" semantics.
 - **Legacy XML routes** (`<frontend><routers><MyMod><use>standard</use>...`) are matched by `ControllerDispatcher::dispatchLegacyPath()` *after* the Symfony matcher misses, so attribute-defined routes always take priority. A single `LOG_NOTICE` is emitted once per process listing legacy front names that are still in use.
 - **Performance**: 6.3 μs mean / 8 μs p99 per match in the new system, vs 46 μs / 93 μs in the legacy router chain (40k matches, opcache on).
 
@@ -302,7 +330,7 @@ Three commands automate the bulk of the XML → PHP-attribute migration. Each sc
 |---------|----------|-------|
 | `legacy:migrate-observers` | `<events>` blocks under any scope | Resolves the `<class>` alias via `Mage::getConfig()`. The XML `<observer_name>` is preserved as an explicit `id:` argument so any `replaces:` references in third-party modules keep working. |
 | `legacy:migrate-cron` | `<crontab><jobs>` declarations with `<run><model>alias::method</model>` | Reads `<schedule><cron_expr>` or `<schedule><config_path>` and emits `schedule:` / `configPath:` accordingly. |
-| `legacy:migrate-routes` | `<frontend\|admin\|install><routers>` declarations with `<use>standard\|admin\|install</use>` | Walks every `*Controller.php` file in the module and emits one `#[Route]` per `*Action` method. Default-action paths are expanded into the M1-equivalent shorter forms (e.g. `IndexController::indexAction` gets routes for `/front`, `/front/index`, and `/front/index/index`). |
+| `legacy:migrate-routes` | `<frontend\|admin\|install><routers>` declarations with `<use>standard\|admin\|install</use>`, plus `<args><modules>` controller-override chains | Walks every `*Controller.php` file in the module and emits one `#[Route]` per `*Action` method. Default-action paths are expanded into the M1-equivalent shorter forms (e.g. `IndexController::indexAction` gets routes for `/front`, `/front/index`, and `/front/index/index`). Override `<modules>` chains are dropped once their controllers are clean subclasses (see [Migrating an override chain](#migrating-an-override-chain)). |
 
 After running any of them, run `composer dump-autoload` (or click *Recompile PHP Attributes* on the cache page) so the new attributes get compiled.
 
