@@ -745,8 +745,7 @@ article:has(#homeh1) {
 
 /* Full-bleed band helper applied to home sections */
 .mh-hero,
-.mh-proof,
-.mh-audience-nav,
+.mh-stores,
 .audience-section.agencies,
 .audience-section.developers,
 .final-cta {
@@ -1386,80 +1385,11 @@ html.mh-anim .mh-term-scene.is-active {
 .mh-shots-caption a:hover { text-decoration: underline; }
 
 
-/* ---- PROOF BAND: paper, logo marquee ---- */
-.mh-proof {
-    background: var(--maho-surface);
-    border-bottom: 1px solid var(--maho-border-light);
-    padding: 2.6em 0 2.8em;
-}
-
-.mh-proof-inner {
-    max-width: 1180px;
-    margin: 0 auto;
-    padding: 0 2em;
-}
-
-.mh-proof-head {
-    max-width: 640px;
-    margin: 0 auto 2.6em;
-    text-align: center;
-}
-
-.mh-proof-title {
-    margin: 0 0 0.4em;
-    font-size: 2em;
-    line-height: 1.1;
-    letter-spacing: -0.02em;
-    color: var(--maho-text-primary);
-}
-
-/* Edge fade so logos slide in/out instead of popping */
-.mh-marquee-viewport {
-    overflow: hidden;
-    -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 9%, #000 91%, transparent 100%);
-            mask-image: linear-gradient(90deg, transparent 0, #000 9%, #000 91%, transparent 100%);
-}
-
-.mh-marquee-link {
-    display: block;
-    cursor: pointer;
-}
-
-.mh-marquee-track {
-    display: flex;
-    width: max-content;
-    animation: mhMarquee 42s linear infinite;
-}
-
-/* Two identical groups; track shifts by one group (-50%) for a seamless loop */
-.mh-marquee-group {
-    display: flex;
-    align-items: center;
-    gap: 4em;
-    padding-right: 4em;
-    flex-shrink: 0;
-}
-
-.mh-marquee-group img,
-.mh-marquee-group svg {
-    height: 32px;
-    width: auto;
-    max-width: none;
-    object-fit: contain;
-    filter: grayscale(1);
-    opacity: 0.55;
-}
-
-@keyframes mhMarquee {
-    from { transform: translateX(0); }
-    to   { transform: translateX(-50%); }
-}
-
-
-/* ---- STORES: real merchants running Maho ---- */
+/* ---- STORES: real merchants running Maho ----
+   White (vs the page's #fafafa) so the section reads as a distinct band */
 .mh-stores {
-    background: var(--maho-paper);
-    padding: 4.4em 0 4.6em;
+    background: var(--maho-surface);
+    padding: 4.4em 0 0;
 }
 
 .mh-stores-inner {
@@ -1468,34 +1398,10 @@ html.mh-anim .mh-term-scene.is-active {
     padding: 0 2em;
 }
 
+/* shares the audience sections' heading style (.mh-sec-title / .mh-sec-lede) */
 .mh-stores-head {
-    max-width: 640px;
-    margin: 0 0 2.6em;
-}
-
-.mh-stores-label {
-    margin: 0 0 0.8em;
-    font-family: var(--maho-mono);
-    font-size: 0.58em;
-    font-weight: 500;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    color: var(--maho-brand-text);
-}
-
-.mh-stores-title {
-    margin: 0 0 0.4em;
-    font-size: 2em;
-    line-height: 1.1;
-    letter-spacing: -0.02em;
-    color: var(--maho-text-primary);
-}
-
-.mh-stores-lede {
-    margin: 0;
-    font-size: 1.02em;
-    line-height: 1.55;
-    color: var(--maho-text-secondary);
+    max-width: 720px;
+    margin: 0 0 2.2em;
 }
 
 .mh-stores-carousel {
@@ -1574,7 +1480,7 @@ html.mh-anim .mh-term-scene.is-active {
     border: 1px solid var(--maho-border-light);
     border-radius: 14px;
     overflow: hidden;
-    text-decoration: none;
+    text-decoration: none !important;
     color: inherit;
     /* !important is needed because the theme's `.md-typeset a` sets
        transition-property: color,text-decoration-color and wins the cascade,
@@ -1637,13 +1543,20 @@ html.mh-anim .mh-term-scene.is-active {
     color: var(--maho-text-secondary);
 }
 
-
-/* ---- AUDIENCE NAV: chartreuse strip ---- */
-.mh-audience-nav {
-    background: var(--maho-chartreuse);
+/* Audience routing folded into the stores section: "whoever you are" + pills,
+   a calm closer that hands off to the audience deep-dives below */
+.mh-stores-audience {
+    /* full-bleed chartreuse band (the original audience-nav style: title left,
+       pills right), now folded in right after the stores carousel */
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
+    margin-top: 3em;
     padding: 1.5em 0;
+    background: var(--maho-chartreuse);
 }
 
+
+/* ---- AUDIENCE ROUTING: title + pills (folded into the stores section) ---- */
 .mh-audience-nav-inner {
     max-width: 1180px;
     margin: 0 auto;
@@ -1718,6 +1631,11 @@ html.mh-anim .mh-term-scene.is-active {
     margin: 0 auto;
     padding: 6em 2em;
     scroll-margin-top: 3.4em;
+}
+
+/* first deep-dive sits right under the "whoever you are" pills, so pull it up */
+.audience-section.store-owners {
+    padding-top: 2.8em;
 }
 
 /* Section header: copy (title / lede) + restrained accent image */
@@ -2238,13 +2156,6 @@ html.mh-anim .mh-reveal.mh-in {
     .mh-shot-nav { width: 42px; height: 42px; }
     .mh-stores-arrow { width: 42px; height: 42px; }
 
-    .mh-proof { padding: 2em 0 2.2em; }
-    .mh-marquee-group { gap: 2.6em; padding-right: 2.6em; }
-    .mh-marquee-group img,
-    .mh-marquee-group svg { height: 26px; }
-
-    .mh-audience-nav { padding: 1.3em 0; }
-
     .mh-audience-nav-inner {
         flex-direction: column;
         align-items: flex-start;
@@ -2314,12 +2225,6 @@ html.mh-anim .mh-reveal.mh-in {
     .mh-bulb,
     .mh-bulb-arrow,
     .mh-shot-frame { animation: none !important; } /* hint label stays visible, just static */
-    .mh-marquee-track { animation: none !important; width: 100%; flex-wrap: wrap; justify-content: center; }
-    .mh-marquee-group { flex-wrap: wrap; justify-content: center; padding-right: 0; }
-    .mh-marquee-group[aria-hidden="true"] { display: none; }
-    .mh-marquee-viewport { -webkit-mask-image: none; mask-image: none; }
-    .mh-marquee-group img,
-    .mh-marquee-group svg { filter: none; opacity: 1; }
 }
 
 
@@ -2338,11 +2243,8 @@ html.mh-anim .mh-reveal.mh-in {
 
     .mh-stores { padding: 3.2em 0 3.4em; }
     .mh-stores-track .mh-store-card { flex-basis: 100%; }
-    .mh-stores-title,
-    .mh-proof-title { font-size: 1.6em; }
 
     .mh-stores-cta { flex-wrap: wrap; }
-    .mh-stores-cta-go { margin-left: 0; padding-left: 0; width: 100%; }
 }
 
 .lp {

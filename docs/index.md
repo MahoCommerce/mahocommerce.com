@@ -109,46 +109,11 @@
   </div>
 </section>
 
-<section class="mh-proof" aria-label="The partners and sponsors behind Maho">
-  <div class="mh-proof-inner">
-    <div class="mh-proof-head">
-      <h2 class="mh-proof-title">Partners &amp; sponsors</h2>
-    </div>
-    <a class="mh-marquee-link" href="sponsors/" title="Meet the partners and sponsors behind Maho">
-      <div class="mh-marquee-viewport">
-        <div class="mh-marquee-track">
-          <div class="mh-marquee-group">
-            <img src="assets/sponsors/deinetuer.svg" alt="Deine Tür" loading="lazy">
-            <img src="assets/sponsors/egear.png" alt="e-Gear.dk" loading="lazy">
-            <img src="assets/sponsors/mageaustralia.png" alt="Mage Australia" loading="lazy">
-            <img src="assets/sponsors/magemega.png" alt="MageMega" loading="lazy">
-            <img src="assets/sponsors/blackfire.png" alt="Blackfire" loading="lazy">
-            <img src="assets/sponsors/cloudflare.jpg" alt="Cloudflare" loading="lazy">
-            <img src="assets/sponsors/jetbrains.svg" alt="JetBrains" loading="lazy">
-            <img src="assets/sponsors/magentiamo.png" alt="Magentiamo" loading="lazy">
-          </div>
-          <div class="mh-marquee-group" aria-hidden="true">
-            <img src="assets/sponsors/deinetuer.svg" alt="" loading="lazy">
-            <img src="assets/sponsors/egear.png" alt="" loading="lazy">
-            <img src="assets/sponsors/mageaustralia.png" alt="" loading="lazy">
-            <img src="assets/sponsors/magemega.png" alt="" loading="lazy">
-            <img src="assets/sponsors/blackfire.png" alt="" loading="lazy">
-            <img src="assets/sponsors/cloudflare.jpg" alt="" loading="lazy">
-            <img src="assets/sponsors/jetbrains.svg" alt="" loading="lazy">
-            <img src="assets/sponsors/magentiamo.png" alt="" loading="lazy">
-          </div>
-        </div>
-      </div>
-    </a>
-  </div>
-</section>
-
 <section class="mh-stores" aria-label="Real stores running Maho">
   <div class="mh-stores-inner">
     <div class="mh-stores-head">
-      <p class="mh-stores-label">Live stores, real businesses</p>
-      <h2 class="mh-stores-title">Selling on Maho right now</h2>
-      <p class="mh-stores-lede">Worldwide merchants run their storefronts on Maho. Click through and see for yourself.</p>
+      <h2 class="mh-sec-title">Selling on Maho <strong>right now</strong></h2>
+      <p class="mh-sec-lede">Worldwide merchants run their storefronts on Maho. Click through and see for yourself.</p>
     </div>
     <div class="mh-stores-carousel">
       <button class="mh-stores-arrow mh-stores-prev" type="button" aria-label="Previous stores">
@@ -195,28 +160,27 @@
       <a class="mh-btn mh-btn-solid" href="mailto:info@mahocommerce.com?subject=Add%20my%20store%20to%20mahocommerce.com&amp;body=Store%20name%3A%0AStore%20URL%3A%0ACountry%3A%0AWhat%20you%20sell%3A%0A%0AHappy%20for%20Maho%20to%20feature%20my%20store%3A%20yes">Showcase it here
         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
     </div>
-  </div>
-</section>
-
-<nav class="mh-audience-nav" aria-label="Find the right Maho for you">
-  <div class="mh-audience-nav-inner">
-    <span class="mh-audience-nav-title">Whoever you are, Maho is for you</span>
-    <div class="mh-audience-nav-btns">
-      <a class="mh-audience-pill" href="#for-store-owners">
-        <svg class="mh-pill-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 9 4.5 4h15L21 9M4 9v10a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1V9M4 9h16M9 13a3 3 0 0 0 6 0"/></svg>
-        <span class="mh-pill-label">Store owners</span>
-      </a>
-      <a class="mh-audience-pill" href="#for-agencies">
-        <svg class="mh-pill-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
-        <span class="mh-pill-label">Agencies</span>
-      </a>
-      <a class="mh-audience-pill" href="#for-developers">
-        <svg class="mh-pill-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m16 18 6-6-6-6M8 6l-6 6 6 6"/></svg>
-        <span class="mh-pill-label">Developers</span>
-      </a>
+    <div class="mh-stores-audience">
+      <div class="mh-audience-nav-inner">
+        <span class="mh-audience-nav-title">Whoever you are, Maho is for you</span>
+        <div class="mh-audience-nav-btns">
+          <a class="mh-audience-pill" href="#for-store-owners">
+          <svg class="mh-pill-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 9 4.5 4h15L21 9M4 9v10a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1V9M4 9h16M9 13a3 3 0 0 0 6 0"/></svg>
+          <span class="mh-pill-label">Store owners</span>
+        </a>
+        <a class="mh-audience-pill" href="#for-agencies">
+          <svg class="mh-pill-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+          <span class="mh-pill-label">Agencies</span>
+        </a>
+        <a class="mh-audience-pill" href="#for-developers">
+          <svg class="mh-pill-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m16 18 6-6-6-6M8 6l-6 6 6 6"/></svg>
+          <span class="mh-pill-label">Developers</span>
+        </a>
+        </div>
+      </div>
     </div>
   </div>
-</nav>
+</section>
 
 <div class="audience-section store-owners" id="for-store-owners" markdown>
 
