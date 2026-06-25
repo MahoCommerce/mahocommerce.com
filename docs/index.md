@@ -109,10 +109,12 @@
   </div>
 </section>
 
-<section class="mh-proof" aria-label="Stores running Maho and the partners behind it">
+<section class="mh-proof" aria-label="The partners and sponsors behind Maho">
   <div class="mh-proof-inner">
-    <p class="mh-proof-label">Powering real stores · Backed by great partners</p>
-    <a class="mh-marquee-link" href="sponsors/" title="Meet the stores and partners behind Maho">
+    <div class="mh-proof-head">
+      <h2 class="mh-proof-title">Partners &amp; sponsors</h2>
+    </div>
+    <a class="mh-marquee-link" href="sponsors/" title="Meet the partners and sponsors behind Maho">
       <div class="mh-marquee-viewport">
         <div class="mh-marquee-track">
           <div class="mh-marquee-group">
@@ -138,6 +140,61 @@
         </div>
       </div>
     </a>
+  </div>
+</section>
+
+<section class="mh-stores" aria-label="Real stores running Maho">
+  <div class="mh-stores-inner">
+    <div class="mh-stores-head">
+      <p class="mh-stores-label">Live stores, real businesses</p>
+      <h2 class="mh-stores-title">Selling on Maho right now</h2>
+      <p class="mh-stores-lede">Worldwide merchants run their storefronts on Maho. Click through and see for yourself.</p>
+    </div>
+    <div class="mh-stores-carousel">
+      <button class="mh-stores-arrow mh-stores-prev" type="button" aria-label="Previous stores">
+        <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg>
+      </button>
+      <div class="mh-stores-viewport">
+        <div class="mh-stores-track">
+          <a class="mh-store-card" href="https://www.parkerbrand.co.uk" target="_blank" rel="noopener">
+            <span class="mh-store-shot"><img src="assets/stores/parkerbrand.jpg" alt="Parker Brand storefront" loading="lazy" width="900" height="640"></span>
+            <span class="mh-store-meta">
+              <span class="mh-store-name">Parker Brand</span>
+              <span class="mh-store-loc">🇬🇧 United Kingdom · Garden &amp; workshop</span>
+            </span>
+          </a>
+          <a class="mh-store-card" href="https://www.deinetuer.de" target="_blank" rel="noopener">
+            <span class="mh-store-shot"><img src="assets/stores/deinetuer.jpg" alt="Deine Tür storefront" loading="lazy" width="900" height="640"></span>
+            <span class="mh-store-meta">
+              <span class="mh-store-name">Deine Tür</span>
+              <span class="mh-store-loc">🇪🇺 Europe-wide · Doors &amp; interiors</span>
+            </span>
+          </a>
+          <a class="mh-store-card" href="https://www.mooremilitaria.com" target="_blank" rel="noopener">
+            <span class="mh-store-shot"><img src="assets/stores/mooremilitaria.jpg" alt="Moore Militaria storefront" loading="lazy" width="900" height="640"></span>
+            <span class="mh-store-meta">
+              <span class="mh-store-name">Moore Militaria</span>
+              <span class="mh-store-loc">🇺🇸 United States · Militaria &amp; collectibles</span>
+            </span>
+          </a>
+          <a class="mh-store-card" href="https://www.eylinda.de" target="_blank" rel="noopener">
+            <span class="mh-store-shot"><img src="assets/stores/eylinda.jpg" alt="ey Linda storefront" loading="lazy" width="900" height="640"></span>
+            <span class="mh-store-meta">
+              <span class="mh-store-name">ey Linda</span>
+              <span class="mh-store-loc">🇩🇪 Germany · Fashion &amp; apparel</span>
+            </span>
+          </a>
+        </div>
+      </div>
+      <button class="mh-stores-arrow mh-stores-next" type="button" aria-label="More stores">
+        <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>
+      </button>
+    </div>
+    <div class="mh-stores-cta">
+      <span class="mh-stores-cta-text">Is your store running on Maho?</span>
+      <a class="mh-btn mh-btn-solid" href="mailto:info@mahocommerce.com?subject=Add%20my%20store%20to%20mahocommerce.com&amp;body=Store%20name%3A%0AStore%20URL%3A%0ACountry%3A%0AWhat%20you%20sell%3A%0A%0AHappy%20for%20Maho%20to%20feature%20my%20store%3A%20yes">Showcase it here
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+    </div>
   </div>
 </section>
 

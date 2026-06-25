@@ -355,10 +355,37 @@ function mahoSetupShots() {
     render();
 }
 
+/* Stores carousel: arrows page the scroll-snap viewport a screen at a time,
+   wrapping around at the ends like the admin showcase. */
+function mahoSetupStores() {
+    var carousel = document.querySelector('.mh-stores-carousel');
+    if (!carousel || carousel.dataset.mhStores === 'on') return;
+    carousel.dataset.mhStores = 'on';
+
+    var vp = carousel.querySelector('.mh-stores-viewport');
+    var prev = carousel.querySelector('.mh-stores-prev');
+    var next = carousel.querySelector('.mh-stores-next');
+    if (!vp) return;
+
+    var behavior = mahoReducedMotion() ? 'auto' : 'smooth';
+
+    function page(dir) {
+        var max = vp.scrollWidth - vp.clientWidth;
+        var target = vp.scrollLeft + vp.clientWidth * dir;
+        if (dir > 0 && vp.scrollLeft >= max - 4) target = 0;     // wrap to start
+        else if (dir < 0 && vp.scrollLeft <= 4) target = max;    // wrap to end
+        vp.scrollTo({ left: target, behavior: behavior });
+    }
+
+    if (prev) prev.addEventListener('click', function () { page(-1); });
+    if (next) next.addEventListener('click', function () { page(1); });
+}
+
 function mahoInitHome() {
     var hero = document.querySelector('.mh-hero');
     if (!hero) return;            // only on the home page
     mahoSetupShots();             // works with or without motion
+    mahoSetupStores();            // carousel arrows, motion-independent
     if (mahoReducedMotion()) return; // CSS keeps everything visible
 
     mahoClearCarousels(); // avoid duplicate timers across instant navigations

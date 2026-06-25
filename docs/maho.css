@@ -388,7 +388,7 @@ body {
 
 
 /* === LINKS === */
-.md-content a:not(.md-button):not(.mh-btn) {
+.md-content a:not(.md-button):not(.mh-btn):not(.mh-store-card) {
     color: var(--maho-brand-text);
     text-decoration: underline;
     text-decoration-color: rgba(173, 180, 26, 0.4);
@@ -398,7 +398,7 @@ body {
                 text-decoration-color var(--maho-duration) var(--maho-ease);
 }
 
-.md-content a:not(.md-button):not(.mh-btn):hover {
+.md-content a:not(.md-button):not(.mh-btn):not(.mh-store-card):hover {
     color: var(--maho-brand-dark);
     text-decoration-color: var(--maho-brand);
 }
@@ -1399,15 +1399,18 @@ html.mh-anim .mh-term-scene.is-active {
     padding: 0 2em;
 }
 
-.mh-proof-label {
-    margin: 0 0 2em;
+.mh-proof-head {
+    max-width: 640px;
+    margin: 0 auto 2.6em;
     text-align: center;
-    font-family: var(--maho-mono);
-    font-size: 0.58em;
-    font-weight: 500;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    color: var(--maho-text-tertiary);
+}
+
+.mh-proof-title {
+    margin: 0 0 0.4em;
+    font-size: 2em;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    color: var(--maho-text-primary);
 }
 
 /* Edge fade so logos slide in/out instead of popping */
@@ -1450,6 +1453,188 @@ html.mh-anim .mh-term-scene.is-active {
 @keyframes mhMarquee {
     from { transform: translateX(0); }
     to   { transform: translateX(-50%); }
+}
+
+
+/* ---- STORES: real merchants running Maho ---- */
+.mh-stores {
+    background: var(--maho-paper);
+    padding: 4.4em 0 4.6em;
+}
+
+.mh-stores-inner {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 0 2em;
+}
+
+.mh-stores-head {
+    max-width: 640px;
+    margin: 0 0 2.6em;
+}
+
+.mh-stores-label {
+    margin: 0 0 0.8em;
+    font-family: var(--maho-mono);
+    font-size: 0.58em;
+    font-weight: 500;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--maho-brand-text);
+}
+
+.mh-stores-title {
+    margin: 0 0 0.4em;
+    font-size: 2em;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    color: var(--maho-text-primary);
+}
+
+.mh-stores-lede {
+    margin: 0;
+    font-size: 1.02em;
+    line-height: 1.55;
+    color: var(--maho-text-secondary);
+}
+
+.mh-stores-carousel {
+    position: relative;
+}
+
+.mh-stores-viewport {
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    /* small side room so a hovered card's lift + shadow aren't clipped */
+    padding: 16px 4px 38px;
+}
+
+.mh-stores-viewport::-webkit-scrollbar { display: none; }
+
+.mh-stores-track {
+    display: flex;
+    gap: 1.4em;
+}
+
+/* Two cards per view (gap split across the pair) */
+.mh-stores-track .mh-store-card {
+    flex: 0 0 calc((100% - 1.4em) / 2);
+    scroll-snap-align: start;
+}
+
+/* Arrows sit on the card edges, half-overlapping them, in the same dark
+   translucent style as the admin-showcase nav (.mh-shot-nav) */
+.mh-stores-arrow {
+    position: absolute;
+    top: 50%;
+    z-index: 3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 52px;
+    height: 52px;
+    padding: 0;
+    border: 1px solid var(--maho-ink-border-brand);
+    border-radius: 50%;
+    color: var(--maho-on-ink);
+    background: rgba(14, 15, 8, 0.72);
+    -webkit-backdrop-filter: blur(4px);
+            backdrop-filter: blur(4px);
+    cursor: pointer;
+    opacity: 0.92;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.5);
+    transition:
+        background 0.2s var(--maho-ease),
+        color 0.2s var(--maho-ease),
+        opacity 0.2s var(--maho-ease),
+        box-shadow 0.2s var(--maho-ease);
+}
+
+.mh-stores-prev { left: 0;  transform: translate(-50%, -50%); }
+.mh-stores-next { right: 0; transform: translate(50%, -50%); }
+
+.mh-stores-arrow:hover,
+.mh-stores-arrow:focus-visible {
+    opacity: 1;
+    color: var(--maho-ink);
+    background: var(--maho-chartreuse);
+    border-color: var(--maho-chartreuse);
+    box-shadow: var(--maho-glow), 0 6px 18px rgba(0, 0, 0, 0.5);
+    outline: none;
+}
+
+.mh-stores .mh-store-card {
+    display: flex;
+    flex-direction: column;
+    background: var(--maho-surface);
+    border: 1px solid var(--maho-border-light);
+    border-radius: 14px;
+    overflow: hidden;
+    text-decoration: none;
+    color: inherit;
+    /* !important is needed because the theme's `.md-typeset a` sets
+       transition-property: color,text-decoration-color and wins the cascade,
+       which would otherwise strip transform/box-shadow and make the hover snap */
+    transition: transform 0.28s ease, box-shadow 0.28s ease, border-color 0.28s ease !important;
+}
+
+.mh-stores .mh-store-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--maho-border);
+    box-shadow: 0 20px 44px -24px rgba(0, 0, 0, 0.5);
+}
+
+.mh-store-shot {
+    display: block;
+    aspect-ratio: 16 / 10;
+    overflow: hidden;
+    background: var(--maho-paper);
+    border-bottom: 1px solid var(--maho-border-light);
+}
+
+.mh-store-shot img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top center;
+    display: block;
+}
+
+.mh-store-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25em;
+    padding: 1em 1.15em 1.1em;
+}
+
+.mh-store-name {
+    font-weight: 650;
+    font-size: 1.04em;
+    color: var(--maho-text-primary);
+}
+
+.mh-store-loc {
+    font-size: 0.82em;
+    color: var(--maho-text-secondary);
+}
+
+/* CTA below the carousel: a short prompt + a compact button, centered */
+.mh-stores-cta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5em 1em;
+    margin-top: 0.4em;
+}
+
+.mh-stores-cta-text {
+    font-size: 0.95em;
+    color: var(--maho-text-secondary);
 }
 
 
@@ -2022,6 +2207,7 @@ html.mh-anim .mh-reveal.mh-in {
         grid-template-columns: minmax(0, 1fr) 340px;
         gap: 2em;
     }
+
 }
 
 @media screen and (max-width: 768px) {
@@ -2050,6 +2236,7 @@ html.mh-anim .mh-reveal.mh-in {
     .mh-showcase { padding: 0 1.5em; }
     .mh-bulb-hint { display: none; } /* keep the pulsing bulb, drop the label */
     .mh-shot-nav { width: 42px; height: 42px; }
+    .mh-stores-arrow { width: 42px; height: 42px; }
 
     .mh-proof { padding: 2em 0 2.2em; }
     .mh-marquee-group { gap: 2.6em; padding-right: 2.6em; }
@@ -2148,6 +2335,14 @@ html.mh-anim .mh-reveal.mh-in {
     .logo {
         zoom: 70%;
     }
+
+    .mh-stores { padding: 3.2em 0 3.4em; }
+    .mh-stores-track .mh-store-card { flex-basis: 100%; }
+    .mh-stores-title,
+    .mh-proof-title { font-size: 1.6em; }
+
+    .mh-stores-cta { flex-wrap: wrap; }
+    .mh-stores-cta-go { margin-left: 0; padding-left: 0; width: 100%; }
 }
 
 .lp {
