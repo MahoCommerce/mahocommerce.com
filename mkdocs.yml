@@ -212,61 +212,73 @@ nav:
           - Date & time handling: developer/date-handling.md
           - Language packs: developer/language-packs.md
           - Array Import Adapter: developer/array-import-adapter.md
-    - API Reference:
-        - REST API:
-            - Introduction: api/rest/introduction.md
-            - Common HTTP status codes: api/rest/common_http_status_codes.md
-            - HTTP methods: api/rest/http_methods.md
-            - GET Filters: api/rest/get_filters.md
-            - Response formats: api/rest/response_formats.md
-            - Testing: api/rest/testing_rest_resources.md
-            - Authentication:
-              - OAuth authentication: api/rest/authentication/oauth_authentication.md
-              - OAuth configuration: api/rest/authentication/oauth_configuration.md
-            - Permission settings:
-              - Introduction: api/rest/permission_settings/introduction.md
-              - Roles configuration: api/rest/permission_settings/roles_configuration.md
-              - Attributes configuration: api/rest/permission_settings/attributes_configuration.md
-              - Attributes description: api/rest/permission_settings/attributes_description.md
-            - Extending REST API: api/rest/extending.md
-        - SOAP API:
-            - Introduction: api/soap.md
-            - Catalog Category: api/soap/catalog-category.md
-            - Catalog Category Attribute: api/soap/catalog-category-attribute.md
-            - Catalog Product:
-              - Product: api/soap/catalog-product.md
-              - Product Attribute: api/soap/catalog-product-attribute.md
-              - Product Attribute Media: api/soap/catalog-product-attribute-media.md
-              - Product Attribute Set: api/soap/catalog-product-attribute-set.md
-              - Product Custom Option: api/soap/catalog-product-custom-option.md
-              - Product Custom Option Value: api/soap/catalog-product-custom-option-value.md
-              - Product Downloadable Link: api/soap/catalog-product-downloadable-link.md
-              - Product Link: api/soap/catalog-product-link.md
-              - Product Tag: api/soap/catalog-product-tag.md
-              - Product Tier Price: api/soap/catalog-product-tier-price.md
-              - Product Types: api/soap/catalog-product-types.md
-            - Catalog Inventory: api/soap/catalog-inventory.md
-            - Checkout Cart:
-              - Checkout Cart: api/soap/checkout-cart.md
-              - Checkout Cart Coupon: api/soap/checkout-cart-coupon.md
-              - Checkout Cart Customer: api/soap/checkout-cart-customer.md
-              - Checkout Cart Payment: api/soap/checkout-cart-payment.md
-              - Checkout Cart Product: api/soap/checkout-cart-product.md
-              - Checkout Cart Shipping: api/soap/checkout-cart-shipping.md
-            - Customer:
-              - Customer: api/soap/customer.md
-              - Customer Group: api/soap/customer-group.md
-              - Customer Address: api/soap/customer-address.md
-            - Directory: api/soap/directory.md
-            - Store: api/soap/store.md
-            - Sales Order:
-              - Order: api/soap/sales-order.md
-              - Credit Memo: api/soap/sales-order-credit-memo.md
-              - Invoice: api/soap/sales-order-invoice.md
-              - Shipment: api/soap/sales-order-shipment.md
-        - JSON-RPC API: api/jsonrpc.md
-        - phpDoc code reference: api/code-reference.md
-        - DeepWiki AI docs: api/deepwiki.md
+    - REST & GraphQL API:
+      - Overview: api/v2/index.md
+      - Authentication: api/v2/authentication.md
+      - Conventions: api/v2/conventions.md
+      - GraphQL: api/v2/graphql.md
+      - Endpoints: api/v2/endpoints.md
+      - Errors: api/v2/errors.md
+      - CAPTCHA: api/v2/captcha.md
+      - Architecture: api/v2/architecture.md
+      - OpenAPI & Swagger UI: api/v2/openapi.md
+      - Web server config: api/v2/web-server.md
+      - Extending & deployment: api/v2/extending.md
+    - Legacy API:
+      - REST API:
+        - Introduction: api/rest/introduction.md
+        - Common HTTP status codes: api/rest/common_http_status_codes.md
+        - HTTP methods: api/rest/http_methods.md
+        - GET Filters: api/rest/get_filters.md
+        - Response formats: api/rest/response_formats.md
+        - Testing: api/rest/testing_rest_resources.md
+        - Authentication:
+          - OAuth authentication: api/rest/authentication/oauth_authentication.md
+          - OAuth configuration: api/rest/authentication/oauth_configuration.md
+        - Permission settings:
+          - Introduction: api/rest/permission_settings/introduction.md
+          - Roles configuration: api/rest/permission_settings/roles_configuration.md
+          - Attributes configuration: api/rest/permission_settings/attributes_configuration.md
+          - Attributes description: api/rest/permission_settings/attributes_description.md
+        - Extending REST API: api/rest/extending.md
+      - SOAP API:
+        - Introduction: api/soap.md
+        - Catalog Category: api/soap/catalog-category.md
+        - Catalog Category Attribute: api/soap/catalog-category-attribute.md
+        - Catalog Product:
+          - Product: api/soap/catalog-product.md
+          - Product Attribute: api/soap/catalog-product-attribute.md
+          - Product Attribute Media: api/soap/catalog-product-attribute-media.md
+          - Product Attribute Set: api/soap/catalog-product-attribute-set.md
+          - Product Custom Option: api/soap/catalog-product-custom-option.md
+          - Product Custom Option Value: api/soap/catalog-product-custom-option-value.md
+          - Product Downloadable Link: api/soap/catalog-product-downloadable-link.md
+          - Product Link: api/soap/catalog-product-link.md
+          - Product Tag: api/soap/catalog-product-tag.md
+          - Product Tier Price: api/soap/catalog-product-tier-price.md
+          - Product Types: api/soap/catalog-product-types.md
+        - Catalog Inventory: api/soap/catalog-inventory.md
+        - Checkout Cart:
+          - Checkout Cart: api/soap/checkout-cart.md
+          - Checkout Cart Coupon: api/soap/checkout-cart-coupon.md
+          - Checkout Cart Customer: api/soap/checkout-cart-customer.md
+          - Checkout Cart Payment: api/soap/checkout-cart-payment.md
+          - Checkout Cart Product: api/soap/checkout-cart-product.md
+          - Checkout Cart Shipping: api/soap/checkout-cart-shipping.md
+        - Customer:
+          - Customer: api/soap/customer.md
+          - Customer Group: api/soap/customer-group.md
+          - Customer Address: api/soap/customer-address.md
+        - Directory: api/soap/directory.md
+        - Store: api/soap/store.md
+        - Sales Order:
+          - Order: api/soap/sales-order.md
+          - Credit Memo: api/soap/sales-order-credit-memo.md
+          - Invoice: api/soap/sales-order-invoice.md
+          - Shipment: api/soap/sales-order-shipment.md
+    - Code Reference:
+      - phpDoc code reference: api/code-reference.md
+      - DeepWiki AI docs: api/deepwiki.md
   - Blog:
       - blog/index.md
   - Community:
