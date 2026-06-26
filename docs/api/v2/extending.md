@@ -24,7 +24,9 @@ use ApiPlatform\Metadata\GetCollection;
 final class WidgetType { /* ApiProperty fields */ }
 ```
 
-After adding or modifying the attribute, run `composer dump-autoload`. The compiler walks every class carrying `#[Maho\Config\ApiResource]` (anywhere in `app/code/` or installed packages) and emits `vendor/composer/maho_api_permissions.php`, which `Maho\ApiPlatform\Security\ApiPermissionRegistry` reads at runtime to drive `ApiUserVoter` (REST permission checks), `GraphQlPermissionListener` (GraphQL checks), and the admin role editor UI.
+After adding or modifying the attribute, run `composer dump-autoload`. The compiler walks every class carrying `#[Maho\Config\ApiResource]` (anywhere in `app/code/` or installed packages) and emits `vendor/composer/maho_api_permissions.php`, which `Maho\ApiPlatform\Security\ApiPermissionRegistry` reads to populate the **admin role editor UI** and the list of valid `resource/operation` permission ids.
+
+Authorization itself does **not** go through the registry. Each operation declares the permission it requires literally in its own `security:` expression (e.g. `security: "is_granted('orders/read')"`); API Platform's access checker evaluates that expression for both REST **and** GraphQL and routes the `resource/operation` attribute to `Maho\ApiPlatform\Security\ApiUserVoter`. So the permission you grant in the role editor is simply the `resource/operation` string an operation names in its `security:`.
 
 ### Auto-derivation
 
@@ -36,8 +38,6 @@ Most permission-registry fields are derived from the API Platform metadata on th
 | `mahoLabel`        | Title-cased `mahoId` (`cms-pages` → `CMS Pages`; ≤3-char segments are upper-cased as acronyms) |
 | `mahoSection`      | Module segment of the namespace (`Mage\Catalog\Api\Foo` → `'Catalog'`) |
 | `mahoOperations`   | One entry per operation type present in `operations: [...]`. Default labels: `read`/`create`/`write`/`delete` → `View`/`Create`/`Update`/`Delete` |
-| `mahoRestSegments` | The resource id itself. Augmented (not replaced) by your override, declare only the *additional* segments (e.g. Cart adds `'guest-carts'`) |
-| `mahoGraphQlFields`| Each camelCase `name:` from `graphQlOperations[]`. Snake_case names (`item_query`, `add_cart_item`) are skipped, those are API Platform's internal operation identifiers, not schema fields. Augmented by your override for handler-defined fields (e.g. mutations declared in `*MutationHandler` classes the compiler can't see) |
 | `mahoPublicRead`   | `true` when every read operation has `security: 'true'`. Override explicitly only if your read security expression doesn't use that literal form |
 | `mahoCustomerScoped` | No equivalent, must be explicit for resources bound to a logged-in customer (carts, wishlists, addresses, etc.) |
 
