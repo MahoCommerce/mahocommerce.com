@@ -14,13 +14,12 @@
 <section class="mh-hero" aria-label="Maho - open-source on-premises ecommerce platform">
   <div class="mh-hero-inner">
     <div class="mh-hero-copy">
-      <span class="mh-eyebrow"><span class="mh-dot"></span>Open source · Self-hosted · Forever free</span>
       <h1 id="homeh1" class="mh-headline"><span class="mh-sr">Maho - </span>Your store,<br><em>your rules.</em></h1>
       <p class="mh-lede">The ecommerce platform you actually own. Lean at the core, fully featured out of the box, and open to extend however you like. Self-hosted, with no fees skimming your margins and no vendor holding the keys.</p>
       <div class="mh-meta">
-        <span><span class="mh-bullet">●</span> OSL-3.0 licensed</span>
-        <span><span class="mh-bullet">●</span> PHP 8.3+</span>
-        <span><span class="mh-bullet">●</span> MySQL · MariaDB · PostgreSQL · SQLite</span>
+        <span><span class="mh-bullet">●</span> Open source</span>
+        <span><span class="mh-bullet">●</span> Self-hosted</span>
+        <span><span class="mh-bullet">●</span> Forever free</span>
       </div>
       <div class="mh-ctas">
         <a class="mh-btn mh-btn-solid" href="demo/">Try the live demo

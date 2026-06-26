@@ -793,6 +793,7 @@ article:has(#homeh1) {
 
 .mh-hero-copy {
     min-width: 0;
+    transform: translateY(-1.5em);
 }
 
 /* Eyebrow */
