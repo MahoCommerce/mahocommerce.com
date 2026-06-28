@@ -67,6 +67,17 @@ Country listings live under [Directory](#directory) (`/countries`).
 |--------|----------|------|-------------|
 | GET | `/layered-filters` | None | Get layered navigation filters |
 
+**Attribute metadata** (read-only, scoped to the `catalog_product` entity type):
+
+| Method | Endpoint | Auth | Description |
+|--------|----------|------|-------------|
+| GET | `/product-attributes` | Admin/API | List product attributes (code, label, input type, options, scope) |
+| GET | `/product-attributes/{id}` | Admin/API | Get one attribute's metadata |
+| GET | `/attribute-sets` | Admin/API | List product attribute sets |
+| GET | `/attribute-sets/{id}` | Admin/API | Get an attribute set and its attribute codes |
+
+GraphQL: `productAttributes` / `productAttribute(code:)` and `attributeSets` / `attributeSet`. The product write endpoints additionally accept `attributeSetId`, `taxClassId`, and a generic `customAttributesWrite` map (`{attribute_code: value}`) for any catalog_product EAV attribute without a dedicated field; system columns (`sku`, `type_id`, `status`, …) are rejected.
+
 ---
 
 ### Categories
@@ -90,6 +101,20 @@ Country listings live under [Directory](#directory) (`/countries`).
 | POST | `/carts/{id}/items` | Customer/Admin/API | Add item to cart |
 | PUT | `/carts/{id}/items/{itemId}` | Customer/Admin/API | Update cart item quantity |
 | DELETE | `/carts/{id}/items/{itemId}` | Customer/Admin/API | Remove cart item |
+| GET | `/carts/{id}/totals` | Customer/Admin/API | Get cart totals |
+| POST | `/carts/{id}/coupon` | Customer/Admin/API | Apply coupon code |
+| DELETE | `/carts/{id}/coupon` | Customer/Admin/API | Remove coupon |
+| POST | `/carts/{id}/giftcards` | Customer/Admin/API | Apply gift card |
+| DELETE | `/carts/{id}/giftcards/{code}` | Customer/Admin/API | Remove gift card |
+| POST | `/carts/{id}/shipping-methods` | Customer/Admin/API | Get available shipping methods |
+| GET | `/carts/{id}/payment-methods` | Customer/Admin/API | Get available payment methods |
+| POST | `/carts/{id}/place-order` | Customer/Admin/API | Place an order from the authenticated cart |
+| PUT | `/carts/{id}/gift-message` | Customer/Admin/API | Set the cart-level gift message |
+| DELETE | `/carts/{id}/gift-message` | Customer/Admin/API | Remove the cart-level gift message |
+| PUT | `/carts/{id}/items/{itemId}/gift-message` | Customer/Admin/API | Set a per-item gift message |
+| DELETE | `/carts/{id}/items/{itemId}/gift-message` | Customer/Admin/API | Remove a per-item gift message |
+
+The checkout sub-resources mirror the guest-cart flow so a logged-in customer can complete checkout entirely over REST. Gift messages require the `sales/gift_options/*` store config to be enabled; the body is `{sender, recipient, message}`.
 
 ---
 
@@ -158,6 +183,8 @@ Country listings live under [Directory](#directory) (`/countries`).
 | GET | `/orders/{id}` | Customer/Admin/API | Get order by ID (customers see only their own) |
 | GET | `/orders/{incrementId}/details` | Order token | Read a guest order via the per-order one-time `X-Order-Token` header |
 | POST | `/orders` | None | Place an order from a customer or guest cart |
+| POST | `/carts/{id}/place-order` | Customer/Admin/API | Place an order from the authenticated customer cart |
+| POST | `/guest-carts/{id}/place-order` | None | Place an order from a guest cart |
 
 **Guest order lookup** (`GET /orders/{incrementId}/details`): a public, unauthenticated endpoint for rendering order-confirmation views in headless/guest checkouts. The per-order token is passed in the `X-Order-Token` header (never the query string, which would leak into access logs). The token is **single-use**: it's cleared on the first successful read, so refreshing the page won't replay the lookup. The endpoint is IP rate-limited to prevent brute-forcing a token against a known increment ID. A missing/invalid token or unknown increment ID returns `404`. If no customer account exists for the order's email, the response includes an `accountToken` the frontend can use with `POST /customers/create-from-order`.
 
@@ -186,6 +213,17 @@ The GraphQL counterpart is the `guestOrder(incrementId, accessToken)` query (sam
 | GET | `/customers/me/orders/{orderId}/invoices` | Customer/API | List own invoices |
 | GET | `/customers/me/orders/{orderId}/invoices/{id}/pdf` | Customer/API | Download own invoice PDF |
 
+**Lifecycle actions:** each returns the updated order (the `statusHistory` field reflects the change).
+
+| Method | Endpoint | Auth | Description |
+|--------|----------|------|-------------|
+| POST | `/orders/{id}/hold` | Admin/API | Put an order on hold |
+| POST | `/orders/{id}/unhold` | Admin/API | Release an order from hold |
+| POST | `/orders/{id}/cancel` | Customer/Admin/API | Cancel an order (a customer may cancel their own) |
+| POST | `/orders/{id}/comments` | Admin/API | Add a status-history comment (`{comment, notifyCustomer?, visibleOnFront?}`) |
+
+GraphQL counterparts on the `Order` type: `hold`, `unhold`, `cancel`, `addComment` mutations (field names are suffixed with the type, e.g. `holdOrder`, `addCommentOrder`).
+
 ---
 
 ### Shipments
@@ -193,6 +231,10 @@ The GraphQL counterpart is the `guestOrder(incrementId, accessToken)` query (sam
 | Method | Endpoint | Auth | Description |
 |--------|----------|------|-------------|
 | GET | `/shipments/{id}` | Admin/API | Get shipment by ID |
+| POST | `/shipments/{id}/tracks` | Admin/API | Add a tracking number (`{carrierCode?, title?, trackNumber}`) |
+| DELETE | `/shipments/{id}/tracks/{trackId}` | Admin/API | Remove a tracking number by its track row ID |
+
+`{trackId}` is the internal track row ID (an integer), **not** the carrier tracking number. GraphQL counterparts on the `Shipment` type: `addTrack` / `removeTrack` mutations (fields `addTrackShipment` / `removeTrackShipment`).
 
 **Create shipment:**
 ```bash
@@ -635,6 +677,36 @@ The `honeypotField` value is **deterministic per install** (derived from the enc
 |--------|----------|------|-------------|
 | GET | `/countries` | None | List countries |
 | GET | `/countries/{id}` | None | Get country (with regions) |
+
+---
+
+### Tax
+
+Tax classes, rates, and rules are admin-only configuration data.
+
+| Method | Endpoint | Auth | Description |
+|--------|----------|------|-------------|
+| GET / POST | `/tax-classes` | Admin/API | List / create tax classes (`{className, classType: PRODUCT\|CUSTOMER}`) |
+| GET / PUT / DELETE | `/tax-classes/{id}` | Admin/API | Read / update / delete a tax class |
+| GET / POST | `/tax-rates` | Admin/API | List / create rates (`{code, taxCountryId, taxPostcode, rate, …}`) |
+| GET / PUT / DELETE | `/tax-rates/{id}` | Admin/API | Read / update / delete a rate |
+| GET / POST | `/tax-rules` | Admin/API | List / create rules (`{code, priority, customerTaxClassIds, productTaxClassIds, taxRateIds}`) |
+| GET / PUT / DELETE | `/tax-rules/{id}` | Admin/API | Read / update / delete a rule |
+
+A rule's `customerTaxClassIds`, `productTaxClassIds`, and `taxRateIds` round-trip on read. GraphQL: `taxClasses`/`taxClass`, `taxRates`/`taxRate`, `taxRules`/`taxRule`.
+
+---
+
+### Customer Groups
+
+Admin-only. Used for group-based pricing and tax-class assignment.
+
+| Method | Endpoint | Auth | Description |
+|--------|----------|------|-------------|
+| GET / POST | `/customer-groups` | Admin/API | List / create groups (`{code, taxClassId}`) |
+| GET / PUT / DELETE | `/customer-groups/{id}` | Admin/API | Read / update / delete a group |
+
+GraphQL: `customerGroups` / `customerGroup`.
 
 ---
 
