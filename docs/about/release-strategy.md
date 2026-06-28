@@ -12,7 +12,7 @@
 | m | Month number, without leading zero | 9 |
 | patch | Incremental number of patch releases | 0 |
 
-We aim to minimize patch releases, typically not exceeding one per YY.m version unless critical fixes are needed.
+Patch releases carry bugfixes and security fixes back onto an existing YY.m release without forcing you to adopt the breaking changes of the next one (see [Support Policy](#support-policy) below).
 
 ### Why Not Semantic Versioning?
 
@@ -35,9 +35,19 @@ While our versioning works with Composer, **every new YY.m release may contain b
 
 ## Support Policy
 
-**Each release is supported until the next release.** As a small team, we cannot provide long-term support for multiple versions simultaneously.
+**The current YY.m release is supported until the next one ships.** As a small team, we cannot provide long-term support for many versions simultaneously, so support always tracks the most recent release.
 
-If a bug is discovered in a release, the fix will be included in the next release. To deploy the fix, you'll need to upgrade to the latest version. This rolling support model keeps the codebase healthy and ensures resources are focused on moving forward rather than maintaining multiple branches.
+### Bugfix (patch) releases
+
+**Starting with 26.7, Maho has bugfix releases.** Most fixes simply land in the next YY.m release. But when a bug or security issue can't wait for the next calendar release, we can ship a **patch release** on the current series instead of forcing you onto a version that may contain breaking changes. Not every fix is backported — a fix is ported to a bugfix release only when we judge it necessary.
+
+Here's how it works:
+
+- On the day a YY.m release ships, we cut a **maintenance branch** named after the release series — for example `26.7` for the `26.7.0` release.
+- When a fix merged into the main line is suitable for the current release, a maintainer tags its pull request with a `backport <series>` label (e.g. `backport 26.7`). An automated workflow then opens a backport pull request against the matching maintenance branch.
+- Once that backport is merged, it's published as the next patch in the series — `26.7.1`, `26.7.2`, and so on.
+
+This lets you stay on a known-stable series and pick up `26.7.x` patch releases via Composer, without having to jump to the next YY.m release before you're ready to review its breaking changes. As always, **review the release notes for every release** — including patches — before upgrading.
 
 ## You Can Help Us Provide More
 
