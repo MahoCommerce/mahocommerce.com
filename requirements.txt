@@ -1,12 +1,12 @@
 babel==2.18.0
 backrefs==7.0
-bracex==2.6
+bracex==2.7
 cairocffi==1.7.1
 CairoSVG==2.9.0
 certifi==2026.6.17
 cffi==2.0.0
 charset-normalizer==3.4.7
-click==8.4.1
+click==8.4.2
 colorama==0.4.6
 csscompressor==0.9.5
 cssselect2==0.9.0
@@ -37,7 +37,7 @@ pillow==12.2.0
 platformdirs==4.10.0
 pycparser==3.0
 Pygments==2.20.0
-pymdown-extensions==10.21.3
+pymdown-extensions==11.0
 python-dateutil==2.9.0.post0
 PyYAML==6.0.3
 pyyaml_env_tag==1.1
