@@ -315,7 +315,7 @@ Clean, modern **admin interface** with professional features clients expect: **m
 
 ### Independent, Not Isolated
 
-Maho stands on a **[battle-tested open-source foundation](about/origins.md)**, hardened by real stores running in production. **Active development**, thorough documentation, and **direct access to the maintainers** mean you're never stuck. A clean, extensible architecture handles virtually any client requirement.
+Maho stands on a **[battle-tested open-source foundation](about/origins.md)**, hardened by real stores running in production. **Active development**, thorough documentation, and **direct access to the maintainers** mean you're never stuck.
 
 </div>
 
