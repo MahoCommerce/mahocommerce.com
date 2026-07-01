@@ -150,6 +150,7 @@ nav:
       - Origins: about/origins.md
       - Release strategy: about/release-strategy.md
       - Roadmap: about/roadmap.md
+      - GenAI transparency: about/genai-transparency.md
     - Catalog:
         - Product Types: user-guide/product-types.md
         - Product Relationship Rules: user-guide/product-relationship-rules.md
