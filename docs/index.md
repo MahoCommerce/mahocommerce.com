@@ -313,9 +313,9 @@ Clean, modern **admin interface** with professional features clients expect: **m
 
 :material-account-group:{ .feature-icon }
 
-### Proven Ecosystem
+### Independent, Not Isolated
 
-Tap into **decades of refinement** and **thousands of developers** worldwide. Extensive documentation, active community, and a mature **extension ecosystem** mean you're never stuck. Solutions exist for virtually any client requirement.
+Maho stands on a **[battle-tested open-source foundation](about/origins.md)**, hardened by real stores running in production. **Active development**, thorough documentation, and **direct access to the maintainers** mean you're never stuck. A clean, extensible architecture handles virtually any client requirement.
 
 </div>
 
