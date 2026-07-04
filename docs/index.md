@@ -121,9 +121,9 @@
       <div class="mh-stores-viewport">
         <div class="mh-stores-track">
           <a class="mh-store-card" href="https://www.parkerbrand.co.uk" target="_blank" rel="noopener">
-            <span class="mh-store-shot"><img src="assets/stores/parkerbrand.jpg" alt="Parker Brand storefront" loading="lazy" width="900" height="640"></span>
+            <span class="mh-store-shot"><img src="assets/stores/parkerbrand.jpg" alt="ParkerBrand storefront" loading="lazy" width="900" height="640"></span>
             <span class="mh-store-meta">
-              <span class="mh-store-name">Parker Brand</span>
+              <span class="mh-store-name">ParkerBrand</span>
               <span class="mh-store-loc">🇬🇧 United Kingdom · Garden &amp; workshop</span>
             </span>
           </a>
