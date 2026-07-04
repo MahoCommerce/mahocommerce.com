@@ -29,6 +29,13 @@
       </div>
     </div>
     <div class="mh-hero-side">
+      <div class="logo mh-logo" aria-hidden="true">
+        <div class="lp">
+          <div class="lp1"><img alt="" src="assets/maho-symbol.svg" width="90" height="89"></div>
+          <div class="lp2"><img alt="" src="assets/maho-logo-only-name-white.svg" width="326" height="91"></div>
+          <div class="lp3"><img alt="" src="assets/maho-logo-dot.svg" width="24" height="24"></div>
+        </div>
+      </div>
       <div class="mh-term-shell">
       <div class="mh-term" aria-hidden="true">
         <div class="mh-term-top">

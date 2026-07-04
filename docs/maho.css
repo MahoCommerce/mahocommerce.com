@@ -184,6 +184,36 @@ body {
     margin: -6px 0;
 }
 
+/* Material hides the header logo below its tablet breakpoint (the site
+   title is hidden too, leaving the mobile header unbranded) - keep it,
+   placed after the burger menu. */
+@media screen and (max-width: 76.1875em) {
+    .md-header .md-header__button.md-logo {
+        display: block;
+    }
+
+    .md-header__inner > .md-header__button[for="__drawer"] {
+        order: -1;
+    }
+}
+
+/* Once the search bar collapses to an icon there's room to center the
+   logo between the burger menu and the search icon. */
+@media screen and (max-width: 59.9375em) {
+    .md-header__inner {
+        position: relative;
+    }
+
+    .md-header .md-header__button.md-logo {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        margin: 0;
+        padding: 0;
+    }
+}
+
 .md-header__topic {
     visibility: hidden;
 }
@@ -983,6 +1013,20 @@ article:has(#homeh1) {
     display: flex;
     flex-direction: column;
     min-width: 0;
+}
+
+/* Animated logo sitting above the terminal. Hidden on mobile, where the
+   header logo takes over the branding. */
+.mh-hero-side > .mh-logo {
+    margin: 0 auto 1.4em;
+    max-width: 17em;
+    width: 100%;
+}
+
+@media screen and (max-width: 76.1875em) {
+    .mh-hero-side > .mh-logo {
+        display: none;
+    }
 }
 
 /* Static shell carries the glow so it doesn't sweep over the caption
@@ -2221,6 +2265,7 @@ html.mh-anim .mh-reveal.mh-in {
         animation: none !important;
     }
     #homeh1.mh-headline em { clip-path: none !important; animation: none !important; }
+    .lp > div { opacity: 1 !important; animation: none !important; }
     .mh-term-body .mh-cur,
     .mh-eyebrow .mh-dot,
     .mh-bulb,
