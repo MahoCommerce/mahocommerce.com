@@ -230,6 +230,7 @@ Discover and install powerful modules to enhance your Maho store. All modules ar
 
 <div class="category-filter">
     <button class="category-btn active" onclick="filterApps('all')">All Modules</button>
+    <button class="category-btn" onclick="filterApps('b2b')">B2B</button>
     <button class="category-btn" onclick="filterApps('developer-tools')">Developer Tools</button>
     <button class="category-btn" onclick="filterApps('localization')">Localization</button>
     <button class="category-btn" onclick="filterApps('marketing')">Marketing</button>
@@ -240,6 +241,23 @@ Discover and install powerful modules to enhance your Maho store. All modules ar
 </div>
 
 <div class="app-grid">
+    <!-- B2B Trade Registration -->
+    <div class="app-card" data-category="b2b">
+        <span class="app-category">B2B</span>
+        <h3 class="app-title">B2B Trade Registration</h3>
+        <p class="app-description">Trade account registration for Maho. Customers apply through a form, admins approve or decline from a queue, and approved applicants are moved into your wholesale customer group automatically, with notification emails at every step and form fields mapped onto the customer record.</p>
+        <div class="app-footer">
+            <div class="app-actions">
+                <button class="app-button app-button-primary" onclick="showInstallModal('mageaustralia/maho-module-b2b-registration')">
+                    ↓ Install
+                </button>
+                <a href="https://github.com/mageaustralia/maho-module-b2b-registration" class="app-button app-button-primary" target="_blank">
+                    View Details →
+                </a>
+            </div>
+        </div>
+    </div>
+
     <!-- Braintree Payment Gateway -->
     <div class="app-card" data-category="payment">
         <span class="app-category">Payment</span>
@@ -316,6 +334,23 @@ Discover and install powerful modules to enhance your Maho store. All modules ar
                     ↓ Install
                 </button>
                 <a href="https://github.com/fballiano/openmage-cssjs-versioning" class="app-button app-button-primary" target="_blank">
+                    View Details →
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Custom Forms -->
+    <div class="app-card" data-category="marketing">
+        <span class="app-category">Marketing</span>
+        <h3 class="app-title">Custom Forms</h3>
+        <p class="app-description">Build any form in the admin - contact, lead capture, trade applications, surveys - and publish it storefront-side with spam protection, email notifications, and a submissions review grid.</p>
+        <div class="app-footer">
+            <div class="app-actions">
+                <button class="app-button app-button-primary" onclick="showInstallModal('mageaustralia/maho-module-custom-forms')">
+                    ↓ Install
+                </button>
+                <a href="https://github.com/mageaustralia/maho-module-custom-forms" class="app-button app-button-primary" target="_blank">
                     View Details →
                 </a>
             </div>
