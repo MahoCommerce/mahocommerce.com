@@ -3,8 +3,13 @@
 Discover and install powerful modules to enhance your Maho store. All modules are open source and community-maintained.
 
 <style>
-.md-sidebar.md-sidebar--primary {display: none}
-.md-sidebar.md-sidebar--secondary {display: none}
+/* Hide sidebars on desktop only: below 76.25em the primary sidebar is the mobile drawer menu */
+@media screen and (min-width: 76.25em) {
+    .md-sidebar.md-sidebar--primary {display: none}
+}
+@media screen and (min-width: 60em) {
+    .md-sidebar.md-sidebar--secondary {display: none}
+}
 
 .app-grid {
     display: grid;
