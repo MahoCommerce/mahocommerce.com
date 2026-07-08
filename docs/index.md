@@ -115,6 +115,46 @@
   </div>
 </section>
 
+<section class="mh-funding" aria-label="Maho is backed by European public funding, partners and sponsors">
+  <div class="mh-funding-inner">
+    <h2 class="mh-sec-title">Funded by the <strong>European Commission</strong></h2>
+    <p class="mh-sec-lede">This project is funded through the <a href="https://nlnet.nl/taler" target="_blank" rel="noopener">NGI TALER Fund</a>, a fund established by <a href="https://nlnet.nl" target="_blank" rel="noopener">NLnet</a> with financial support from the European Commission's <a href="https://ngi.eu" target="_blank" rel="noopener">Next Generation Internet</a> program. Learn more at the <a href="https://nlnet.nl/project/Maho" target="_blank" rel="noopener">NLnet project page</a>.</p>
+    <div class="mh-funding-logos">
+      <a href="https://nlnet.nl" target="_blank" rel="noopener"><img src="assets/sponsors/nlnet.svg" alt="NLnet Foundation" loading="lazy" width="157" height="60"></a>
+      <a href="https://nlnet.nl/taler" target="_blank" rel="noopener"><img src="assets/sponsors/ngi-taler.svg" alt="NGI TALER" loading="lazy" width="215" height="60"></a>
+    </div>
+  </div>
+  <div class="mh-funding-marquee">
+    <p class="mh-funding-sublabel">Together with the sponsors and partners who keep Maho going</p>
+    <a class="mh-marquee-link" href="sponsors/" title="Meet the partners and sponsors behind Maho">
+      <div class="mh-marquee-viewport">
+        <div class="mh-marquee-track">
+          <div class="mh-marquee-group">
+            <img src="assets/sponsors/deinetuer.svg" alt="Deine Tür" loading="lazy">
+            <img src="assets/sponsors/egear.png" alt="e-Gear.dk" loading="lazy">
+            <img src="assets/sponsors/mageaustralia.png" alt="Mage Australia" loading="lazy">
+            <img src="assets/sponsors/magemega.png" alt="MageMega" loading="lazy">
+            <img src="assets/sponsors/blackfire.png" alt="Blackfire" loading="lazy">
+            <img src="assets/sponsors/cloudflare.jpg" alt="Cloudflare" loading="lazy">
+            <img src="assets/sponsors/jetbrains.svg" alt="JetBrains" loading="lazy">
+            <img src="assets/sponsors/magentiamo.png" alt="Magentiamo" loading="lazy">
+          </div>
+          <div class="mh-marquee-group" aria-hidden="true">
+            <img src="assets/sponsors/deinetuer.svg" alt="" loading="lazy">
+            <img src="assets/sponsors/egear.png" alt="" loading="lazy">
+            <img src="assets/sponsors/mageaustralia.png" alt="" loading="lazy">
+            <img src="assets/sponsors/magemega.png" alt="" loading="lazy">
+            <img src="assets/sponsors/blackfire.png" alt="" loading="lazy">
+            <img src="assets/sponsors/cloudflare.jpg" alt="" loading="lazy">
+            <img src="assets/sponsors/jetbrains.svg" alt="" loading="lazy">
+            <img src="assets/sponsors/magentiamo.png" alt="" loading="lazy">
+          </div>
+        </div>
+      </div>
+    </a>
+  </div>
+</section>
+
 <section class="mh-stores" aria-label="Real stores running Maho">
   <div class="mh-stores-inner">
     <div class="mh-stores-head">

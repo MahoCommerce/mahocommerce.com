@@ -45,6 +45,7 @@ plugins:
         - Development log
         - Events
         - Engineering
+        - News
   - minify:
       minify_html: true
   - redirects:

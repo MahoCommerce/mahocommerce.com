@@ -9,6 +9,15 @@ By sponsoring us, you're not just supporting our work - you're investing in the 
 
 [:fontawesome-regular-heart: Become a sponsor :fontawesome-regular-heart:](https://github.com/sponsors/fballiano){target=_blank .md-button .md-button--primary .affiliate-button}
 
+## Funding
+
+<div class="sponsorgallery funding">
+    <a href="https://nlnet.nl" title="NLnet Foundation" target="_blank"><img src="/assets/sponsors/nlnet.svg" alt="NLnet Foundation"></a>
+    <a href="https://nlnet.nl/taler" title="NGI TALER" target="_blank"><img src="/assets/sponsors/ngi-taler.svg" alt="NGI TALER"></a>
+</div>
+
+This project is funded through the [NGI TALER Fund](https://nlnet.nl/taler){target=_blank}, a fund established by [NLnet](https://nlnet.nl){target=_blank} with financial support from the European Commission's [Next Generation Internet](https://ngi.eu){target=_blank} program. Learn more at the [NLnet project page](https://nlnet.nl/project/Maho){target=_blank}.
+
 ## Sponsors
 
 ### Silver sponsors

@@ -778,6 +778,7 @@ article:has(#homeh1) {
 .mh-stores,
 .audience-section.agencies,
 .audience-section.developers,
+.mh-funding,
 .final-cta {
     width: 100vw;
     margin-left: calc(50% - 50vw);
@@ -2370,6 +2371,10 @@ html.mh-anim .mh-reveal.mh-in {
 
 
 /* === SPONSORS === */
+.md-typeset #funding {
+    margin-top: 1.25em;
+}
+
 .sponsorgallery {
     display: flex;
     flex-wrap: wrap;
@@ -2383,6 +2388,132 @@ html.mh-anim .mh-reveal.mh-in {
     height: 50px;
     width: auto;
     max-width: none;
+}
+
+.sponsorgallery.funding {
+    margin-bottom: 1.5em;
+}
+
+.sponsorgallery.funding img {
+    height: 60px;
+}
+
+
+/* === FUNDING (home) === */
+.mh-funding {
+    background: var(--maho-paper);
+    border-bottom: 1px solid var(--maho-border-light);
+    text-align: center;
+    padding: 4.2em 0 4.4em;
+}
+
+.mh-funding-inner {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 0 2em;
+}
+
+.mh-funding .mh-sec-title,
+.mh-funding .mh-sec-lede,
+.mh-funding-sublabel {
+    text-wrap: balance;
+}
+
+.mh-funding .mh-sec-lede {
+    margin: 0 auto 2.2em;
+}
+
+.mh-funding-logos {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 2em 3.5em;
+}
+
+.mh-funding-logos img {
+    height: 60px;
+    width: auto;
+}
+
+/* Sponsor logo marquee folded into the funding band */
+.mh-funding-marquee {
+    max-width: 1180px;
+    margin: 2em auto 0;
+    padding: 0 2em;
+}
+
+.mh-funding-sublabel {
+    margin: 0 0 1.8em;
+    text-align: center;
+    font-family: var(--maho-display);
+    font-size: 1.15em;
+    font-weight: 650;
+    letter-spacing: -0.01em;
+    color: var(--maho-text-primary);
+}
+
+/* Edge fade so logos slide in/out instead of popping */
+.mh-marquee-viewport {
+    overflow: hidden;
+    -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 9%, #000 91%, transparent 100%);
+            mask-image: linear-gradient(90deg, transparent 0, #000 9%, #000 91%, transparent 100%);
+}
+
+.mh-marquee-link {
+    display: block;
+    cursor: pointer;
+}
+
+.mh-marquee-track {
+    display: flex;
+    width: max-content;
+    animation: mhMarquee 42s linear infinite;
+}
+
+/* Two identical groups; track shifts by one group (-50%) for a seamless loop */
+.mh-marquee-group {
+    display: flex;
+    align-items: center;
+    gap: 4em;
+    padding-right: 4em;
+    flex-shrink: 0;
+}
+
+.mh-marquee-group img,
+.mh-marquee-group svg {
+    height: 32px;
+    width: auto;
+    max-width: none;
+    object-fit: contain;
+    filter: grayscale(1);
+    opacity: 0.55;
+}
+
+@keyframes mhMarquee {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+}
+
+@media screen and (max-width: 760px) {
+    .mh-marquee-group { gap: 2.6em; padding-right: 2.6em; }
+    .mh-marquee-group img,
+    .mh-marquee-group svg { height: 26px; }
+}
+
+/* Keep the two fund logos side by side on small screens */
+@media screen and (max-width: 520px) {
+    .mh-funding-logos { flex-wrap: nowrap; gap: 1.2em; }
+    .mh-funding-logos img { height: clamp(30px, 11vw, 44px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .mh-marquee-track { animation: none !important; width: 100%; flex-wrap: wrap; justify-content: center; }
+    .mh-marquee-group { flex-wrap: wrap; justify-content: center; padding-right: 0; }
+    .mh-marquee-group[aria-hidden="true"] { display: none; }
+    .mh-marquee-viewport { -webkit-mask-image: none; mask-image: none; }
+    .mh-marquee-group img,
+    .mh-marquee-group svg { filter: none; opacity: 1; }
 }
 
 
