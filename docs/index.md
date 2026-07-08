@@ -125,7 +125,7 @@
     </div>
   </div>
   <div class="mh-funding-marquee">
-    <p class="mh-funding-sublabel">Together with the sponsors and partners who keep Maho going</p>
+    <p class="mh-funding-sublabel">Together with our sponsors and partners</p>
     <a class="mh-marquee-link" href="sponsors/" title="Meet the partners and sponsors behind Maho">
       <div class="mh-marquee-viewport">
         <div class="mh-marquee-track">
