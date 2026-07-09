@@ -218,8 +218,8 @@ nav:
       - Overview: api/v2/index.md
       - Authentication: api/v2/authentication.md
       - Conventions: api/v2/conventions.md
+      - REST endpoints: api/v2/endpoints.md
       - GraphQL: api/v2/graphql.md
-      - Endpoints: api/v2/endpoints.md
       - Errors: api/v2/errors.md
       - CAPTCHA: api/v2/captcha.md
       - Architecture: api/v2/architecture.md
