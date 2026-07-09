@@ -36,6 +36,8 @@ Country listings live under [Directory](#directory) (`/countries`).
 | PUT | `/products/{id}` | Admin/API | Update product |
 | DELETE | `/products/{id}` | Admin/API | Delete product |
 
+**GraphQL (Product):** `product(id:)` (item) and `products` (collection). Attribute-value lookups are **filter arguments on the collection**, not separate `by<X>` queries — `products(sku: "ABC-123")` and `products(barcode: "…")` each return the 0-or-1 match, and `products(search: "…")` runs a catalog search. `productReviews(productId:)` returns a product's reviews.
+
 **Sub-resources** (parent path parameter is `{productId}` throughout):
 
 | Method | Endpoint | Auth | Description |
@@ -76,7 +78,7 @@ Country listings live under [Directory](#directory) (`/countries`).
 | GET | `/attribute-sets` | Admin/API | List product attribute sets |
 | GET | `/attribute-sets/{id}` | Admin/API | Get an attribute set and its attribute codes |
 
-GraphQL: `productAttributes` / `productAttribute(code:)` and `attributeSets` / `attributeSet`. The product write endpoints additionally accept `attributeSetId`, `taxClassId`, and a generic `customAttributesWrite` map (`{attribute_code: value}`) for any catalog_product EAV attribute without a dedicated field; system columns (`sku`, `type_id`, `status`, …) are rejected.
+GraphQL: `productAttribute(id:)` (item) and `productAttributes` (collection) — filter the collection by `code:` for an exact attribute-code lookup, e.g. `productAttributes(code: "color")`; plus `attributeSets` / `attributeSet`. The product write endpoints additionally accept `attributeSetId`, `taxClassId`, and a generic `customAttributesWrite` map (`{attribute_code: value}`) for any catalog_product EAV attribute without a dedicated field; system columns (`sku`, `type_id`, `status`, …) are rejected.
 
 ---
 
@@ -89,6 +91,8 @@ GraphQL: `productAttributes` / `productAttribute(code:)` and `attributeSets` / `
 | POST | `/categories` | Admin/API | Create category |
 | PUT | `/categories/{id}` | Admin/API | Update category |
 | DELETE | `/categories/{id}` | Admin/API | Delete category |
+
+**GraphQL (Category):** `category(id:)` / `categories`. A URL-key lookup is a collection filter: `categories(urlKey: "shoes")` (0-or-1 match). `categoryProducts(id:)` returns a category's products.
 
 ---
 
@@ -170,6 +174,8 @@ mutation {
 | POST | `/customers/forgot-password` | None | Request password reset email |
 | POST | `/customers/reset-password` | None | Reset password with token |
 | POST | `/customers/create-from-order` | None | Create a customer account from a placed guest order |
+
+**GraphQL (Customer):** the signed-in customer is `currentCustomer` (there is no `me`-style field — `customer(id:)` / `customers` are the admin by-ID item and collection). Mutations: `loginCustomer`, `logoutCustomer`, `quickCreateCustomer` (register), `updateCustomer`, `changePasswordCustomer`, `forgotPasswordCustomer`, `resetPasswordCustomer`. Addresses expose `myAddresses` plus `createAddress` / `updateAddress` / `deleteAddress`.
 
 **Addresses** (`Address` resource, same DTO is exposed under three URL families):
 
@@ -573,6 +579,8 @@ REST `GET /giftcards/{id}` is **admin-only and keyed by numeric ID**. A public *
 | DELETE | `/cms-blocks/{id}` | Admin/API | Delete CMS block |
 
 `POST /cms-pages` requires a non-empty `identifier` (the page's URL key) and rejects a create without one with a `400`. On `PUT`, `identifier` is optional (an omitted field is left unchanged).
+
+**GraphQL (CMS):** `cmsPage(id:)` / `cmsPages` and `cmsBlock(id:)` / `cmsBlocks`. An identifier lookup is a collection filter: `cmsPages(identifier: "about-us")` / `cmsBlocks(identifier: "footer-links")` (0-or-1 match).
 
 ---
 
