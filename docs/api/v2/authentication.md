@@ -29,13 +29,13 @@ curl -X POST /api/rest/v2/auth/token \
 ```json
 {
   "token": "eyJ...",
-  "tokenType": "Bearer",
-  "expiresIn": 3600,
+  "token_type": "Bearer",
+  "expires_in": 3600,
   "customer": {"id": 1, "email": "...", "firstName": "...", "lastName": "..."}
 }
 ```
 
-`customer` is populated for the `customer` grant; `apiUser` and `permissions` are populated for `client_credentials` / `api_user` grants. There is no separate `refresh_token` field, call `/auth/refresh` with the existing JWT in the `Authorization` header to get a new token.
+`token_type` and `expires_in` follow the OAuth 2.0 (RFC 6749) snake_case convention; the other fields use the API's usual camelCase. `customer` is populated for the `customer` grant; `apiUser` and `permissions` are populated for `client_credentials` / `api_user` grants. There is no separate `refresh_token` field, call `/auth/refresh` with the existing JWT in the `Authorization` header to get a new token.
 
 **Use the token:**
 ```bash

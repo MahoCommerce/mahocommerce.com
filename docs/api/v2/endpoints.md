@@ -114,7 +114,7 @@ GraphQL: `productAttributes` / `productAttribute(code:)` and `attributeSets` / `
 | PUT | `/carts/{id}/items/{itemId}/gift-message` | Customer/Admin/API | Set a per-item gift message |
 | DELETE | `/carts/{id}/items/{itemId}/gift-message` | Customer/Admin/API | Remove a per-item gift message |
 
-The checkout sub-resources mirror the guest-cart flow so a logged-in customer can complete checkout entirely over REST. Gift messages require the `sales/gift_options/*` store config to be enabled; the body is `{sender, recipient, message}`.
+The checkout sub-resources mirror the guest-cart flow so a logged-in customer can complete checkout entirely over REST. Gift messages require the `sales/gift_options/*` store config to be enabled; the body is `{sender, recipient, message}`. There is no separate gift-message resource — over GraphQL they are the `setGiftMessageOnCart` / `removeGiftMessageFromCart` mutations on the `Cart` type.
 
 ---
 
@@ -137,6 +137,21 @@ The checkout sub-resources mirror the guest-cart flow so a logged-in customer ca
 | POST | `/guest-carts/{id}/shipping-methods` | None | Get available shipping methods |
 | GET | `/guest-carts/{id}/payment-methods` | None | Get available payment methods |
 | POST | `/guest-carts/{id}/place-order` | None | Place order from guest cart |
+
+**GraphQL (Cart):** the same operations are available on the `Cart` type for both authenticated and guest carts.
+
+- **Queries:** `cart` (by node ID), `carts`, `customerCart` (the authenticated customer's cart), `guestCart(maskedId:)`.
+- **Mutations:** `createCart`, `addToCart`, `updateItemQtyInCart`, `removeItemFromCart`, `applyCouponToCart`, `removeCouponFromCart`, `setShippingAddressOnCart`, `setBillingAddressOnCart`, `setShippingMethodOnCart`, `setPaymentMethodOnCart`, `assignCustomerToCart`, `applyGiftcardToCart`, `removeGiftcardFromCart`, `setGiftMessageOnCart`, `removeGiftMessageFromCart`.
+
+Custom-operation field names are `lcfirst(operation + "Cart")` — e.g. the operation `setPaymentMethodOn` becomes the field `setPaymentMethodOnCart` — so they read naturally instead of stuttering (`setPaymentMethodCart`). A guest cart is addressed by its masked ID.
+
+```graphql
+mutation {
+  setPaymentMethodOnCart(input: { maskedId: "9f2c…", methodCode: "checkmo" }) {
+    cart { id grandTotal }
+  }
+}
+```
 
 ---
 
@@ -186,6 +201,8 @@ The checkout sub-resources mirror the guest-cart flow so a logged-in customer ca
 | POST | `/carts/{id}/place-order` | Customer/Admin/API | Place an order from the authenticated customer cart |
 | POST | `/guest-carts/{id}/place-order` | None | Place an order from a guest cart |
 
+**Checkout addresses:** the `shippingAddress` / `billingAddress` objects in the place-order body accept either a numeric `regionId` **or** a region `region` name — for countries with a fixed region list (US, CA, …) the API resolves the `region_id` from the name (or two-letter code) against `countryId` when `regionId` is omitted, so a client can send `"region": "California"` without looking the ID up first.
+
 **Guest order lookup** (`GET /orders/{incrementId}/details`): a public, unauthenticated endpoint for rendering order-confirmation views in headless/guest checkouts. The per-order token is passed in the `X-Order-Token` header (never the query string, which would leak into access logs). The token is **single-use**: it's cleared on the first successful read, so refreshing the page won't replay the lookup. The endpoint is IP rate-limited to prevent brute-forcing a token against a known increment ID. A missing/invalid token or unknown increment ID returns `404`. If no customer account exists for the order's email, the response includes an `accountToken` the frontend can use with `POST /customers/create-from-order`.
 
 ```bash
@@ -222,7 +239,7 @@ The GraphQL counterpart is the `guestOrder(incrementId, accessToken)` query (sam
 | POST | `/orders/{id}/cancel` | Customer/Admin/API | Cancel an order (a customer may cancel their own) |
 | POST | `/orders/{id}/comments` | Admin/API | Add a status-history comment (`{comment, notifyCustomer?, visibleOnFront?}`) |
 
-GraphQL counterparts on the `Order` type: `hold`, `unhold`, `cancel`, `addComment` mutations (field names are suffixed with the type, e.g. `holdOrder`, `addCommentOrder`).
+**GraphQL (Order):** queries `order`, `orders`, `guestOrder(incrementId, accessToken)`, `customerOrders`. Mutations `placeOrder`, `cancelOrder`, `holdOrder`, `unholdOrder`, `addCommentOrder`. Custom-operation field names are `lcfirst(operation + "Order")`, so the operation `hold` becomes the field `holdOrder`.
 
 ---
 
@@ -234,7 +251,7 @@ GraphQL counterparts on the `Order` type: `hold`, `unhold`, `cancel`, `addCommen
 | POST | `/shipments/{id}/tracks` | Admin/API | Add a tracking number (`{carrierCode?, title?, trackNumber}`) |
 | DELETE | `/shipments/{id}/tracks/{trackId}` | Admin/API | Remove a tracking number by its track row ID |
 
-`{trackId}` is the internal track row ID (an integer), **not** the carrier tracking number. GraphQL counterparts on the `Shipment` type: `addTrack` / `removeTrack` mutations (fields `addTrackShipment` / `removeTrackShipment`).
+`{trackId}` is the internal track row ID (an integer), **not** the carrier tracking number. **GraphQL (Shipment):** queries `shipment`, `shipments`, `orderShipments(orderId)`; mutations `createShipment`, `addTrackShipment`, `removeTrackShipment`.
 
 **Create shipment:**
 ```bash
@@ -416,7 +433,7 @@ mutation {
 }
 
 mutation {
-  updateStockBulk(input: {
+  bulkUpdateStock(input: {
     items: [
       {sku: "TENNIS-BALL-3PK", qty: 150},
       {sku: "RACQUET-PRO-V2", qty: 25}
@@ -533,10 +550,10 @@ mutation {
 
 | Method | Endpoint | Auth | Description |
 |--------|----------|------|-------------|
-| GET | `/giftcards/{id}` | Admin/API | Get a gift card by ID |
+| GET | `/giftcards/{id}` | Admin/API | Get a gift card by numeric ID |
 | POST | `/giftcards` | Admin/API | Create a new gift card |
 
-Balance lookups and adjustments are exposed via GraphQL only (`checkGiftcardBalance`, `adjustGiftcardBalance`).
+REST `GET /giftcards/{id}` is **admin-only and keyed by numeric ID**. A public **balance check by code** is exposed via GraphQL only: `checkBalanceGiftCard(code:)` (returns spendable balance and status with the code masked, no recipient/sender PII). Balance adjustments use the `adjustBalanceGiftCard` mutation (requires `giftcards/write`); `createGiftCard` requires `giftcards/create`. Admin item/collection queries are `giftCard` / `giftCards`.
 
 ---
 
@@ -554,6 +571,8 @@ Balance lookups and adjustments are exposed via GraphQL only (`checkGiftcardBala
 | POST | `/cms-blocks` | Admin/API | Create CMS block |
 | PUT | `/cms-blocks/{id}` | Admin/API | Update CMS block |
 | DELETE | `/cms-blocks/{id}` | Admin/API | Delete CMS block |
+
+`POST /cms-pages` requires a non-empty `identifier` (the page's URL key) and rejects a create without one with a `400`. On `PUT`, `identifier` is optional (an omitted field is left unchanged).
 
 ---
 
@@ -628,7 +647,7 @@ curl -X PUT /api/rest/v2/revocation-requests/1234 \
 ```
 - `processedStatus` must be one of `accepted`, `rejected`, `info_requested`; anything else returns `422`. Setting it stamps `processedAt`.
 
-**GraphQL:** `myRevocationRequests` (customer's own declarations), `submitRevocation(orderId / orderReference, reason)` mutation, plus the standard `revocationRequest` item / collection queries.
+**GraphQL:** `myRevocationRequests` (customer's own declarations), `submitRevocationRequest(orderId / orderReference, reason)` mutation, plus the standard `revocationRequest` / `revocationRequests` item and collection queries.
 
 ---
 
@@ -643,6 +662,8 @@ curl -X PUT /api/rest/v2/revocation-requests/1234 \
 **Guest subscription control:** Guest (unauthenticated) subscribe is controlled by the Maho config flag `newsletter/subscription/allow_guest_subscribe` (**System > Config > Newsletter > Subscription Options > Allow Guest Subscription**). When disabled, only authenticated customers can subscribe. Recommended: set to **No** for API use to prevent abuse.
 
 **Confirmation emails:** When `newsletter/subscription/confirm` is enabled, new subscriptions receive a confirmation email and remain inactive until confirmed (double opt-in).
+
+**GraphQL (Newsletter):** `subscribeNewsletter(email:)` and `unsubscribeNewsletter(email:)` mutations (public), and `statusNewsletter` for the authenticated customer's own subscription status. Admin item/collection queries are `newsletter` / `newsletters`.
 
 ---
 
@@ -719,6 +740,8 @@ GraphQL: `customerGroups` / `customerGroup`.
 | DELETE | `/customers/me/wishlist/{id}` | Customer/API | Remove from wishlist |
 | POST | `/customers/me/wishlist/{id}/move-to-cart` | Customer/API | Move item to cart |
 | POST | `/customers/me/wishlist/sync` | Customer/API | Sync a guest (localStorage) wishlist into the customer's wishlist |
+
+**GraphQL (WishlistItem):** query `myWishlistItems` (the authenticated customer's items; `wishlistItem` / `wishlistItems` are admin). Mutations `addWishlistItem`, `removeWishlistItem`, `moveToCartWishlistItem`, `syncWishlistItem`.
 
 ---
 
