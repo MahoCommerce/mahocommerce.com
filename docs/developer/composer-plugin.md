@@ -39,13 +39,15 @@ Since v26.5, the AutoloadPlugin also **compiles PHP attributes** during `compose
 - `maho_attributes.php`: observer and cron job declarations (plus route attribute data and reverse-lookup maps)
 - `maho_url_matcher.php` and `maho_url_generator.php`: the compiled Symfony route matcher and generator
 
-A separate compiler also writes `vendor/composer/maho_api_permissions.php` from the API Platform attributes when API Platform is installed.
+A separate compiler also writes `vendor/composer/maho_api_permissions.php` from the `#[Maho\Config\ApiResource]` attributes.
 
 See [Event observers](observers.md), [Cron jobs](../hosting/cron.md), and [Routing](routing.md) for the full reference.
 
 ### 2. FileCopyPlugin
 
 Handles the copying of necessary assets and files from vendor packages to the correct locations in your project structure, ensuring everything is in place without duplicating the entire codebase.
+
+It also publishes the API Platform bundle assets (the CSS, JS, and fonts used by the Swagger UI, ReDoc, and GraphiQL pages) to `public/bundles/apiplatform/` on every `composer install` / `update`, Maho's equivalent of Symfony's `assets:install` command.
 
 ### 3. ModmanPlugin
 

@@ -5,7 +5,7 @@ Maho exposes the same resources over GraphQL as over [REST](endpoints.md), via A
 **Endpoint:** `POST /api/graphql`
 **Admin GraphQL:** `POST /api/admin/graphql` (requires a fully-authenticated admin session)
 
-Both are opt-in: enable the `graphql` / `admin_graphql` protocols under **System → Configuration → Services → API Platform → API Protocols**. Authentication is the same JWT bearer token as REST (see [Authentication](authentication.md)); send it in the `Authorization` header.
+Both are opt-in: enable the `graphql` / `admin_graphql` protocols under **System → Configuration → Services → API → API Protocols**. Authentication is the same JWT bearer token as REST (see [Authentication](authentication.md)); send it in the `Authorization` header.
 
 ```graphql
 # Query: fetch a product by its node IRI

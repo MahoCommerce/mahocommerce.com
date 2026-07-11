@@ -32,8 +32,4 @@ rm -rf var/cache/api_platform/*
 
 #### Static assets
 
-The Swagger UI / ReDoc / GraphiQL pages load CSS, JS, and fonts from `public/bundles/apiplatform/`. Maho has no `assets:install` console command, so the `mahocommerce/maho-composer-plugin` publishes these files automatically on every `composer install`/`update` (copying them from `vendor/api-platform/core/.../Resources/public`). If the page renders unstyled with `404`s under `/bundles/apiplatform/*`, re-run `composer install`, or publish them manually:
-
-```bash
-ln -snf ../../vendor/api-platform/core/src/Symfony/Bundle/Resources/public public/bundles/apiplatform
-```
+The Swagger UI / ReDoc / GraphiQL pages load their CSS, JS, and fonts from `public/bundles/apiplatform/`. The `mahocommerce/maho-composer-plugin` publishes these files automatically on every `composer install` / `update` (Maho's equivalent of Symfony's `assets:install`), so no manual step is needed.

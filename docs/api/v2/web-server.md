@@ -18,7 +18,7 @@ The bundled `public/.htaccess` already implements this routing for Apache. The s
 
 `/api/rest`, `/api/soap`, `/api/v2_soap`, `/api/xmlrpc`, `/api/jsonrpc` are legacy Magento 1 API paths handled by the original `Mage_Api_*Controller` classes. The default `.htaccess` explicitly excludes them from the `rest.php` rewrite so they route to those controllers rather than the API Platform kernel. Two things gate whether they actually respond:
 
-- **They are disabled by default.** Every protocol (the modern `rest_v2`, `graphql`, `admin_graphql` and the legacy `legacy_rest`, `soap`, `v2_soap`, `xmlrpc`, `jsonrpc`) defaults to **off** (**System → Configuration → Services → API Platform → API Protocols**). A disabled path returns `404` at the entry point; enable only the protocols you use.
+- **They are disabled by default.** Every protocol (the modern `rest_v2`, `graphql`, `admin_graphql` and the legacy `legacy_rest`, `soap`, `v2_soap`, `xmlrpc`, `jsonrpc`) defaults to **off** (**System → Configuration → Services → API → API Protocols**). A disabled path returns `404` at the entry point; enable only the protocols you use.
 - **SOAP / XML-RPC / JSON-RPC need optional packages.** Those adapters build on Laminas components that are not installed by default - they are declared under `suggest` in `composer.json`. To use them, install the matching package(s):
 
     ```bash

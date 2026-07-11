@@ -34,7 +34,7 @@ This compiles all route attributes into three artifacts under `vendor/composer/`
 - `maho_url_generator.php`: compiled Symfony generator (route name → URL)
 - `maho_attributes.php`: raw attribute data plus reverse-lookup maps
 
-A fourth file, `maho_api_permissions.php`, is written by a separate compiler and only when API Platform is installed; see [Recompiling PHP attributes](#recompiling-php-attributes).
+A fourth file, `maho_api_permissions.php`, is written by a separate compiler from the API resource attributes; see [Recompiling PHP attributes](#recompiling-php-attributes).
 
 The runtime reads these files directly. Without the dump step, every URL 404s.
 
@@ -291,7 +291,7 @@ The button calls `Maho::recompilePhpAttributes()`, which invokes the compiler ru
 - `vendor/composer/maho_url_matcher.php`
 - `vendor/composer/maho_url_generator.php`
 
-When API Platform is installed, a separate compiler additionally rewrites `vendor/composer/maho_api_permissions.php`.
+A separate compiler additionally rewrites `vendor/composer/maho_api_permissions.php`.
 
 After writing, the action calls `opcache_reset()` so the next request picks up the new files.
 

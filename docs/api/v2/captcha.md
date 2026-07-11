@@ -1,6 +1,6 @@
 # CAPTCHA <span class="version-badge">v26.7+</span>
 
-The API Platform does not bundle any CAPTCHA provider. Instead, it exposes two events that any captcha module can observe, making the system completely provider-agnostic.
+CAPTCHA support in the API is provider-agnostic: it exposes two events that any captcha module can observe. The built-in `Maho_Captcha` module (Altcha) supports them out of the box, and third-party providers hook in the same way.
 
 ### How it works
 
