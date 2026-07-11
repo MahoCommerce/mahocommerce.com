@@ -20,7 +20,7 @@ Collection endpoints support pagination via query parameters (REST) or arguments
 
 | Parameter | Default | Max | Description |
 |-----------|---------|-----|-------------|
-| `page` | 1 | — | Page number |
+| `page` | 1 | - | Page number |
 | `itemsPerPage` (alias: `pageSize`) | 20 | 100 | Items per page |
 
 **Response format depends on the negotiated content type:**
@@ -97,3 +97,5 @@ curl -X POST /api/rest/v2/orders/123/credit-memos \
 ```
 
 **Key format:** 1-255 characters, alphanumeric + dashes + underscores (`[a-zA-Z0-9_-]`).
+
+**Concurrency:** while the first request with a given key is still executing, a duplicate request receives `409 Conflict` instead of running the operation twice. If a request dies without ever producing a response (worker crash, timeout), its reservation is released after 10 minutes and the key becomes retryable. Only successful (2xx) responses are stored for replay; after a 4xx/5xx the key is immediately retryable.

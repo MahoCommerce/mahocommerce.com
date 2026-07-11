@@ -41,36 +41,12 @@ The native `Maho_Captcha` module observes both events out of the box using [Altc
 
 ### Third-party providers
 
-A Turnstile or reCAPTCHA module just needs to observe the same two events. For example:
-
-```xml
-<config>
-    <api>
-        <events>
-            <api_captcha_config>
-                <observers>
-                    <my_turnstile>
-                        <class>my_turnstile/observer</class>
-                        <method>getCaptchaConfig</method>
-                    </my_turnstile>
-                </observers>
-            </api_captcha_config>
-            <api_verify_captcha>
-                <observers>
-                    <my_turnstile>
-                        <class>my_turnstile/observer</class>
-                        <method>verifyCaptcha</method>
-                    </my_turnstile>
-                </observers>
-            </api_verify_captcha>
-        </events>
-    </api>
-</config>
-```
+A Turnstile or reCAPTCHA module just needs to observe the same two events with `#[Maho\Config\Observer]` attributes (run `composer dump-autoload` after adding them). This is exactly how the built-in `Maho_Captcha` module registers itself:
 
 ```php
 class My_Turnstile_Model_Observer
 {
+    #[Maho\Config\Observer('api_captcha_config', area: 'api')]
     public function getCaptchaConfig(\Maho\Event\Observer $observer): void
     {
         $config = $observer->getEvent()->getConfig();
@@ -79,6 +55,7 @@ class My_Turnstile_Model_Observer
         $config->setSiteKey(Mage::getStoreConfig('my_turnstile/general/site_key'));
     }
 
+    #[Maho\Config\Observer('api_verify_captcha', area: 'api')]
     public function verifyCaptcha(\Maho\Event\Observer $observer): void
     {
         $data = $observer->getEvent()->getData('data');

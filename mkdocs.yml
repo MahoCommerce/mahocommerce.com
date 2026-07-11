@@ -214,7 +214,7 @@ nav:
           - Date & time handling: developer/date-handling.md
           - Language packs: developer/language-packs.md
           - Array Import Adapter: developer/array-import-adapter.md
-    - REST & GraphQL API:
+    - REST & GraphQL API (beta):
       - Overview: api/v2/index.md
       - Authentication: api/v2/authentication.md
       - Conventions: api/v2/conventions.md

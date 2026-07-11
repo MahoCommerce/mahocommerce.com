@@ -1,6 +1,6 @@
 # REST Endpoints <span class="version-badge">v26.7+</span>
 
-This page is the **REST v2** reference. The same resources are available over GraphQL — for the query and mutation field names, arguments, and examples, see the [GraphQL reference](graphql.md).
+This page is the **REST v2** reference. The same resources are available over GraphQL - for the query and mutation field names, arguments, and examples, see the [GraphQL reference](graphql.md).
 
 ### Auth
 
@@ -21,6 +21,7 @@ This page is the **REST v2** reference. The same resources are available over Gr
 | GET | `/store-config` | None | Get store configuration for the current store |
 | GET | `/{storeCode}/config` | None | Get store configuration for a specific store code |
 | GET | `/stores` | None | List all active stores and websites |
+| GET | `/stores/{id}` | None | Get a single store by ID |
 | GET | `/stores/currencies` | None | List allowed currencies |
 | POST | `/stores/switch/{storeCode}` | None | Switch store context |
 
@@ -116,7 +117,7 @@ The product write endpoints additionally accept `attributeSetId`, `taxClassId`, 
 | PUT | `/carts/{id}/items/{itemId}/gift-message` | Customer/Admin/API | Set a per-item gift message |
 | DELETE | `/carts/{id}/items/{itemId}/gift-message` | Customer/Admin/API | Remove a per-item gift message |
 
-The checkout sub-resources mirror the guest-cart flow so a logged-in customer can complete checkout entirely over REST. Gift messages require the `sales/gift_options/*` store config to be enabled; the body is `{sender, recipient, message}`. There is no separate gift-message resource — it is a sub-resource of the cart (`/carts/{id}/gift-message`).
+The checkout sub-resources mirror the guest-cart flow so a logged-in customer can complete checkout entirely over REST. Gift messages require the `sales/gift_options/*` store config to be enabled; the body is `{sender, recipient, message}`. There is no separate gift-message resource - it is a sub-resource of the cart (`/carts/{id}/gift-message`).
 
 ---
 
@@ -138,6 +139,8 @@ The checkout sub-resources mirror the guest-cart flow so a logged-in customer ca
 | DELETE | `/guest-carts/{id}/giftcards/{code}` | None | Remove gift card |
 | POST | `/guest-carts/{id}/shipping-methods` | None | Get available shipping methods |
 | GET | `/guest-carts/{id}/payment-methods` | None | Get available payment methods |
+| PUT / DELETE | `/guest-carts/{id}/gift-message` | None | Set / remove the cart-level gift message |
+| PUT / DELETE | `/guest-carts/{id}/items/{itemId}/gift-message` | None | Set / remove a per-item gift message |
 | POST | `/guest-carts/{id}/place-order` | None | Place order from guest cart |
 
 ---
@@ -188,7 +191,7 @@ The checkout sub-resources mirror the guest-cart flow so a logged-in customer ca
 | POST | `/carts/{id}/place-order` | Customer/Admin/API | Place an order from the authenticated customer cart |
 | POST | `/guest-carts/{id}/place-order` | None | Place an order from a guest cart |
 
-**Checkout addresses:** the `shippingAddress` / `billingAddress` objects in the place-order body accept either a numeric `regionId` **or** a region `region` name — for countries with a fixed region list (US, CA, …) the API resolves the `region_id` from the name (or two-letter code) against `countryId` when `regionId` is omitted, so a client can send `"region": "California"` without looking the ID up first.
+**Checkout addresses:** the `shippingAddress` / `billingAddress` objects in the place-order body accept either a numeric `regionId` **or** a region `region` name - for countries with a fixed region list (US, CA, ...) the API resolves the `region_id` from the code (or name) against `countryId` when `regionId` is omitted, so a client can send `"region": "California"` without looking the ID up first. On a match the returned address carries the canonical region name.
 
 **Guest order lookup** (`GET /orders/{incrementId}/details`): a public, unauthenticated endpoint for rendering order-confirmation views in headless/guest checkouts. The per-order token is passed in the `X-Order-Token` header (never the query string, which would leak into access logs). The token is **single-use**: it's cleared on the first successful read, so refreshing the page won't replay the lookup. The endpoint is IP rate-limited to prevent brute-forcing a token against a known increment ID. A missing/invalid token or unknown increment ID returns `404`. If no customer account exists for the order's email, the response includes an `accountToken` the frontend can use with `POST /customers/create-from-order`.
 
@@ -466,7 +469,7 @@ GET /api/rest/v2/coupons?page=2&itemsPerPage=50
 | GET | `/giftcards/{id}` | Admin/API | Get a gift card by numeric ID |
 | POST | `/giftcards` | Admin/API | Create a new gift card |
 
-REST `GET /giftcards/{id}` is **admin-only and keyed by numeric ID**. A public **balance check by code** (no recipient/sender PII) is exposed over GraphQL only — see the [GraphQL reference](graphql.md#inventory-promotions).
+REST `GET /giftcards/{id}` is **admin-only and keyed by numeric ID**. A public **balance check by code** (no recipient/sender PII) is exposed over GraphQL only - see the [GraphQL reference](graphql.md#inventory-promotions).
 
 ---
 

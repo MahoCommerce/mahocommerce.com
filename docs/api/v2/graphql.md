@@ -5,7 +5,7 @@ Maho exposes the same resources over GraphQL as over [REST](endpoints.md), via A
 **Endpoint:** `POST /api/graphql`
 **Admin GraphQL:** `POST /api/admin/graphql` (requires a fully-authenticated admin session)
 
-Both are opt-in — enable the `graphql` / `admin_graphql` protocols under **System → Configuration → Services → API Platform → API Protocols**. Authentication is the same JWT bearer token as REST (see [Authentication](authentication.md)); send it in the `Authorization` header.
+Both are opt-in: enable the `graphql` / `admin_graphql` protocols under **System → Configuration → Services → API Platform → API Protocols**. Authentication is the same JWT bearer token as REST (see [Authentication](authentication.md)); send it in the `Authorization` header.
 
 ```graphql
 # Query: fetch a product by its node IRI
@@ -31,12 +31,12 @@ mutation {
 
 ## Field naming
 
-API Platform derives every **custom** GraphQL field name as `lcfirst(operationName + ResourceShortName)` — the resource noun is always appended. Only the reserved item/collection queries escape this and yield the clean singular/plural (`product` / `products`, `order` / `orders`). So a custom operation named `setPaymentMethodOn` on the `Cart` resource becomes the field `setPaymentMethodOnCart`; operations are named with a natural qualifier (a verb, or `on` / `to` / `from` / `my` / `guest` / `current`) so the appended noun reads well rather than stuttering (`setPaymentMethodCart`).
+API Platform derives every **custom** GraphQL field name as `lcfirst(operationName + ResourceShortName)` - the resource noun is always appended. Only the reserved item/collection queries escape this and yield the clean singular/plural (`product` / `products`, `order` / `orders`). So a custom operation named `setPaymentMethodOn` on the `Cart` resource becomes the field `setPaymentMethodOnCart`; operations are named with a natural qualifier (a verb, or `on` / `to` / `from` / `my` / `guest` / `current`) so the appended noun reads well rather than stuttering (`setPaymentMethodCart`).
 
 Two consequences worth knowing:
 
 - **The signed-in customer is `currentCustomer`** (not `me`), a guest cart/order is `guestCart` / `guestOrder`, and a caller's own collections are `myAddresses` / `myReviews` / `myWishlistItems` / `myRevocationRequests`.
-- **Natural-key lookups are collection filter arguments, not separate `by<X>` queries.** Filter the collection to fetch by a key: `products(sku:)`, `products(barcode:)`, `categories(urlKey:)`, `productAttributes(code:)`, `cmsPages(identifier:)`, `cmsBlocks(identifier:)` — each returns the 0-or-1 match.
+- **Natural-key lookups are collection filter arguments, not separate `by<X>` queries.** Filter the collection to fetch by a key: `products(sku:)`, `products(barcode:)`, `categories(urlKey:)`, `productAttributes(code:)`, `cmsPages(identifier:)`, `cmsBlocks(identifier:)` - each returns the 0-or-1 match.
 
 ## Reference
 
@@ -46,11 +46,11 @@ Item queries take a node IRI (`id: "/api/rest/v2/products/123"`); collection que
 
 | Resource | Queries | Mutations |
 |---|---|---|
-| Product | `product(id:)`, `products` — filters `sku:`, `barcode:`, `search:` | — (writes are REST-only) |
-| Category | `category(id:)`, `categories` — filter `urlKey:`, `categoryProducts(id:)` | — |
-| Product attribute | `productAttribute(id:)`, `productAttributes` — filter `code:` | — |
-| Attribute set | `attributeSet(id:)`, `attributeSets` | — |
-| Layered filter | `layeredFilter(id:)`, `layeredFilters` | — |
+| Product | `product(id:)`, `products` - filters `sku:`, `barcode:`, `search:` | - (writes are REST-only) |
+| Category | `category(id:)`, `categories` - filter `urlKey:`, `categoryProducts(id:)` | - |
+| Product attribute | `productAttribute(id:)`, `productAttributes` - filter `code:` | - |
+| Attribute set | `attributeSet(id:)`, `attributeSets` | - |
+| Layered filter | `layeredFilter(id:)`, `layeredFilters` | - |
 | Review | `review(id:)`, `reviews`, `productReviews(productId:)`, `myReviews` | `submitReview` |
 
 ### Cart & checkout
@@ -59,7 +59,7 @@ Item queries take a node IRI (`id: "/api/rest/v2/products/123"`); collection que
 |---|---|---|
 | Cart | `cart(id:)`, `carts`, `customerCart`, `guestCart(maskedId:)` | `createCart`, `addToCart`, `updateItemQtyInCart`, `removeItemFromCart`, `applyCouponToCart`, `removeCouponFromCart`, `setShippingAddressOnCart`, `setBillingAddressOnCart`, `setShippingMethodOnCart`, `setPaymentMethodOnCart`, `assignCustomerToCart`, `applyGiftcardToCart`, `removeGiftcardFromCart`, `setGiftMessageOnCart`, `removeGiftMessageFromCart` |
 
-Gift messages have no separate resource — they are the `setGiftMessageOnCart` / `removeGiftMessageFromCart` mutations above.
+Gift messages have no separate resource - they are the `setGiftMessageOnCart` / `removeGiftMessageFromCart` mutations above.
 
 ### Customers
 
@@ -67,7 +67,7 @@ Gift messages have no separate resource — they are the `setGiftMessageOnCart` 
 |---|---|---|
 | Customer | `currentCustomer`, `customer(id:)` *(admin)*, `customers` *(admin)* | `loginCustomer`, `logoutCustomer`, `quickCreateCustomer` (register), `updateCustomer`, `changePasswordCustomer`, `forgotPasswordCustomer`, `resetPasswordCustomer` |
 | Address | `address(id:)`, `addresses`, `myAddresses` | `createAddress`, `updateAddress`, `deleteAddress` |
-| Customer group | `customerGroup(id:)`, `customerGroups` *(admin)* | — |
+| Customer group | `customerGroup(id:)`, `customerGroups` *(admin)* | - |
 
 ### Sales
 
@@ -92,10 +92,10 @@ Gift messages have no separate resource — they are the `setGiftMessageOnCart` 
 
 | Resource | Queries | Mutations |
 |---|---|---|
-| CMS page | `cmsPage(id:)`, `cmsPages` — filter `identifier:` | — (writes are REST-only) |
-| CMS block | `cmsBlock(id:)`, `cmsBlocks` — filter `identifier:` | — |
-| Blog post | `blogPost(id:)`, `blogPosts` | — |
-| Blog category | `blogCategory(id:)`, `blogCategories` | — |
+| CMS page | `cmsPage(id:)`, `cmsPages` - filter `identifier:` | - (writes are REST-only) |
+| CMS block | `cmsBlock(id:)`, `cmsBlocks` - filter `identifier:` | - |
+| Blog post | `blogPost(id:)`, `blogPosts` | - |
+| Blog category | `blogCategory(id:)`, `blogCategories` | - |
 
 ### Marketing
 
@@ -108,9 +108,9 @@ Gift messages have no separate resource — they are the `setGiftMessageOnCart` 
 
 | Resource | Queries | Mutations |
 |---|---|---|
-| Store config | `currentStoreConfig`, `storeConfig(id:)`, `storeConfigs` | — |
-| Country | `country(id:)`, `countries` | — |
-| Tax class / rate / rule *(admin)* | `taxClass` / `taxClasses`, `taxRate` / `taxRates`, `taxRule` / `taxRules` | — (writes are REST-only) |
-| URL resolver | `resolveUrlResolveResult(path:)` | — |
+| Store config | `currentStoreConfig`, `storeConfig(id:)`, `storeConfigs` | - |
+| Country | `country(id:)`, `countries` | - |
+| Tax class / rate / rule *(admin)* | `taxClass` / `taxClasses`, `taxRate` / `taxRates`, `taxRule` / `taxRules` | - (writes are REST-only) |
+| URL resolver | `resolveUrlResolveResult(path:)` | - |
 
-`resolveUrlResolveResult` resolves a storefront path to its target entity. The doubled noun is unavoidable under the naming rule — naming it `resolveUrl` would force a `Url` type and a nonsense `url` / `urls` list query — so it's kept as-is.
+`resolveUrlResolveResult` resolves a storefront path to its target entity. The doubled noun is unavoidable under the naming rule - naming it `resolveUrl` would force a `Url` type and a nonsense `url` / `urls` list query - so it's kept as-is.

@@ -7,23 +7,23 @@ The API is built on [API Platform](https://api-platform.com/) (Symfony) integrat
 - **Providers:** State providers (read operations), all extend `\Maho\ApiPlatform\Provider`
 - **Processors:** State processors (write operations), all extend `\Maho\ApiPlatform\Processor`
 - **Event listeners:** Symfony listeners for cross-cutting concerns (caching, idempotency)
-- **Authentication:** JWT (HS256) via Firebase JWT library
+- **Authentication:** JWT (HS256) via the `lcobucci/jwt` library, with strict signature, issuer, audience, and validity-window constraints
 
 **Module structure:**
 ```
 app/code/core/Maho/ApiPlatform/
-├── symfony/src/
+├── symfony/
 │   ├── Resource.php         # Base class for all DTOs ($extensions)
 │   ├── Provider.php         # Base class for all providers (auth + pagination)
 │   ├── Processor.php        # Base class for all processors (auth + persistence)
+│   ├── Kernel.php           # Symfony kernel (firewalls, services, routes)
 │   ├── Trait/               # Opt-in traits (ProductLoader, Cache, ActivityLog, StoreAccess)
-│   ├── Service/             # Shared services (StoreContext, mappers, etc.)
-│   ├── Security/            # Authentication (JWT, OAuth2, user providers)
-│   ├── EventListener/       # Cross-cutting concerns
+│   ├── Service/             # Shared services (StoreContext, JwtService, etc.)
+│   ├── Security/            # Authentication (JWT, OAuth2, user providers, permission voter)
+│   ├── EventListener/       # Cross-cutting concerns (caching, idempotency, store context)
 │   └── ...
-├── docs/                    # This documentation
 ├── etc/config.xml           # Module config
-└── sql/                     # DB migration scripts
+└── sql/schema.php           # Declarative DB schema
 
 app/code/core/Mage|Maho/*/Api/  # Per-module API resources
 ├── {Entity}.php             # DTO (extends \Maho\ApiPlatform\Resource)
@@ -102,7 +102,7 @@ Live under `app/code/core/Maho/ApiPlatform/symfony/Service/`:
 
 | Service | Purpose |
 |---|---|
-| `StoreContext` | Store scope management, `ensureStore()`, `getStoreId()`, `storeIdsToStoreCodes()`, `isAvailableForStore()` |
+| `StoreContext` | Store scope management, `ensureStore()`, `getStoreId()`, `getStore()`, `setStore()`, `isAvailableForStore()` |
 | `JwtService` | JWT issuance/validation for customer and API-user tokens |
 | `TokenBlacklist` | Tracks revoked JWT IDs (used by `/auth/logout` and on password change) |
 | `StoreDefaults` | Resolves default values per store (currency, locale, etc.) used during DTO building |

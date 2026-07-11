@@ -78,7 +78,7 @@ Every resource DTO (Product, Category, Cart, Order, etc.) dispatches a Maho even
 
 ### Event area: `api`
 
-The API Platform loads a dedicated `api` event area (`Mage_Core_Model_App_Area::AREA_API`), similar to `frontend` and `adminhtml`. Observers registered under `<api><events>` in `config.xml` only load when the API is running, they won't fire on regular frontend, admin, or cron requests.
+The API Platform loads a dedicated `api` event area (`Mage_Core_Model_App_Area::AREA_API`), similar to `frontend` and `adminhtml`. Observers declared with `#[Maho\Config\Observer('event_name', area: 'api')]` only load when the API is running, they won't fire on regular frontend, admin, or cron requests. Run `composer dump-autoload` after adding or changing observer attributes.
 
 ### Available Events
 
@@ -100,38 +100,12 @@ The API Platform loads a dedicated `api` event area (`Mage_Core_Model_App_Area::
 
 A module that adds bundle component data to products and cart items.
 
-**1. Register the observer** in your module's `config.xml`:
-
-```xml
-<config>
-    <api>
-        <events>
-            <api_product_dto_build>
-                <observers>
-                    <simple_bundles>
-                        <class>Vendor_SimpleBundles_Model_Api_Observer</class>
-                        <method>addBundleToProduct</method>
-                    </simple_bundles>
-                </observers>
-            </api_product_dto_build>
-            <api_cart_item_dto_build>
-                <observers>
-                    <simple_bundles>
-                        <class>Vendor_SimpleBundles_Model_Api_Observer</class>
-                        <method>addBundleToCartItem</method>
-                    </simple_bundles>
-                </observers>
-            </api_cart_item_dto_build>
-        </events>
-    </api>
-</config>
-```
-
-**2. Write the observer:**
+**1. Write the observer** with `#[Maho\Config\Observer]` attributes (then run `composer dump-autoload`):
 
 ```php
 class Vendor_SimpleBundles_Model_Api_Observer
 {
+    #[Maho\Config\Observer('api_product_dto_build', area: 'api')]
     public function addBundleToProduct(\Maho\Event\Observer $observer): void
     {
         $product = $observer->getEvent()->getProduct();
@@ -159,6 +133,7 @@ class Vendor_SimpleBundles_Model_Api_Observer
         ];
     }
 
+    #[Maho\Config\Observer('api_cart_item_dto_build', area: 'api')]
     public function addBundleToCartItem(\Maho\Event\Observer $observer): void
     {
         $quoteItem = $observer->getEvent()->getItem();
@@ -174,7 +149,7 @@ class Vendor_SimpleBundles_Model_Api_Observer
 }
 ```
 
-**3. API response** now includes the extension data:
+**2. API response** now includes the extension data:
 
 ```json
 {
