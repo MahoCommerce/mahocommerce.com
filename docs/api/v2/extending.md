@@ -2,6 +2,37 @@
 
 ## Adding a New API Resource
 
+### Scaffolding with the CLI
+
+The fastest way to add a resource is the built-in generator:
+
+```bash
+$ ./maho dev:api:resource:create
+```
+
+It prompts for (or accepts as options) the target module, the resource short name and the Mage model alias, then writes a ready-to-use DTO and provider into the module's `Api/` directory:
+
+```bash
+$ ./maho dev:api:resource:create --module=MyVendor_Widgets --resource=WidgetType --model=widgets/type
+```
+
+- For flat-table models it introspects the table and pre-fills typed public properties: the primary key is mapped to the `id` identifier, `created_at`/`updated_at` are marked read-only, and nullability follows the column definitions.
+- For EAV entities (whose attributes are not plain table columns) it emits a property stub to fill in manually, pointing at `Mage/Catalog/Api/ProductProvider.php` as the custom-provider reference.
+- Full CRUD + GraphQL operations are generated with admin-gated `security:` expressions. The permission ids in those expressions are derived by the same compiler code that builds the permission registry, so they can never drift from the registered ids.
+
+Options: `--route` (REST URI base, defaults to the kebab-cased plural of the resource), `--section` (admin permission section, defaults to the module name), `--with-processor` (generate a custom processor stub instead of reusing the shared `CrudProcessor`), `--force` (overwrite existing files), `--dry-run` (print the files instead of writing them).
+
+After generating, run `composer dump-autoload` (compiles the permission registry from the attribute) and `./maho cache:flush` (refreshes API resource discovery). The resource is then live over REST and GraphQL, with ACL entries in the admin role editor. Reads are gated behind `<resource>/read` by default; change the read operations' `security:` to `'true'` to make them public.
+
+To audit the resources discovered across your installation, with REST routes, HTTP methods, GraphQL availability, access level and permission ids:
+
+```bash
+$ ./maho dev:api:resource:list
+$ ./maho dev:api:resource:list --module=Maho_Blog --json
+```
+
+### Declaring resources manually
+
 Resources are declared with **one** attribute: `#[\Maho\Config\ApiResource]`, a drop-in subclass of `\ApiPlatform\Metadata\ApiResource` that adds Maho's permission-registry metadata alongside API Platform's HTTP/GraphQL configuration. Use it instead of `\ApiPlatform\Metadata\ApiResource` on every DTO.
 
 ```php
