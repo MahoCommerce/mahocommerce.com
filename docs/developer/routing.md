@@ -162,12 +162,12 @@ Existing installations carry the legacy declaration in `app/etc/local.xml`. To m
 ## Overriding controllers
 
 !!! info "v26.7+"
-    Since v26.7, the preferred way to replace a core controller is to **subclass it** — no XML, no attribute. The legacy `<routers><args><modules>` chain still works as a back-compatibility shim (see [Legacy XML chain](#legacy-xml-chain-back-compatibility)).
+    Since v26.7, the preferred way to replace a core controller is to **subclass it** - no XML, no attribute. The legacy `<routers><args><modules>` chain still works as a back-compatibility shim (see [Legacy XML chain](#legacy-xml-chain-back-compatibility)).
 
-At `composer dump-autoload` the compiler detects any controller that extends a route-owning controller and declares no `#[Route]` of its own, and points that route at your subclass. This works in **every area** — frontend, admin, and install:
+At `composer dump-autoload` the compiler detects any controller that extends a route-owning controller and declares no `#[Route]` of its own, and points that route at your subclass. This works in **every area** - frontend, admin, and install:
 
 ```php
-// Just works — no XML, no attribute. Run `composer dump-autoload` after adding it.
+// Just works - no XML, no attribute. Run `composer dump-autoload` after adding it.
 class Vendor_MyModule_Checkout_CartController extends Mage_Checkout_CartController
 {
     #[\Override]
@@ -180,13 +180,13 @@ class Vendor_MyModule_Checkout_CartController extends Mage_Checkout_CartControll
 
 - **Precedence is structural.** When several modules override the same controller they should form a single inheritance chain (`C extends B extends Core`); the most-derived class wins, deterministically and independent of module load order.
 - Two *sibling* subclasses extending the same base independently are a **conflict**: the compiler logs an error naming both and falls back to module load order (local/community over core). Resolve it by having one override extend the other.
-- A subclass that adds **new** actions still needs its own `#[Route]` for those actions — inheritance only carries over the base's existing routes.
+- A subclass that adds **new** actions still needs its own `#[Route]` for those actions - inheritance only carries over the base's existing routes.
 
 ### Legacy XML chain (back-compatibility)
 
 Magento 1's "module chain" override declared in `config.xml` still works, and **wins over the compiled inheritance override**, so existing modules behave identically until you choose to migrate.
 
-**Admin** — register your module under the admin chain and ship a subclass with the same controller name:
+**Admin** - register your module under the admin chain and ship a subclass with the same controller name:
 
 ```xml
 <config>
@@ -215,7 +215,7 @@ class Vendor_MyModule_Adminhtml_Catalog_ProductController extends Mage_Adminhtml
 }
 ```
 
-**Frontend** — same pattern via `<frontend>`, with the router code matching the front name you're overriding (here `customer`):
+**Frontend** - same pattern via `<frontend>`, with the router code matching the front name you're overriding (here `customer`):
 
 ```xml
 <config>
@@ -235,7 +235,7 @@ class Vendor_MyModule_Adminhtml_Catalog_ProductController extends Mage_Adminhtml
 
 A `Vendor_MyModule_AccountController extends Mage_Customer_AccountController` then takes precedence over the core controller.
 
-The runtime walks the chain at dispatch time, ordered by the `before`/`after` attributes, *before* falling back to the compiled lookup — so an XML override always wins over an inheritance-based one.
+The runtime walks the chain at dispatch time, ordered by the `before`/`after` attributes, *before* falling back to the compiled lookup - so an XML override always wins over an inheritance-based one.
 
 ### Migrating an override chain
 
@@ -250,7 +250,7 @@ A `<modules>` node is removed **only** when every declared override is a clean s
 
 - a controller that isn't a subclass of a routed controller;
 - one that adds un-routed actions (add a `#[Route]` for them first);
-- sibling modules overriding the same controller with no shared inheritance chain (detected even when the conflicting overrides live in *separate* module `config.xml` files) — make one extend the other.
+- sibling modules overriding the same controller with no shared inheritance chain (detected even when the conflicting overrides live in *separate* module `config.xml` files) - make one extend the other.
 
 ## Generating URLs
 
@@ -302,7 +302,7 @@ After writing, the action calls `opcache_reset()` so the next request picks up t
 
 - **Matching** uses Symfony's `CompiledUrlMatcher` reading the static array dumped to `vendor/composer/maho_url_matcher.php`. The compiled form is opcached, so route lookup is effectively a hash table read.
 - **Generation** uses Symfony's `CompiledUrlGenerator` reading `maho_url_generator.php`, also opcached.
-- **Controller overrides** are resolved by `Maho\Routing\ControllerDispatcher` in three tiers: the XML `<args><modules>` chain (M1 BC) is walked first, then the compiled `controllerLookup` — which already points at the most-derived inheritance-based override of a route-owning base — and finally the route's own controller. So an XML-declared override wins over an inheritance-based one, which wins over the base, preserving Magento 1's "first declared wins" semantics.
+- **Controller overrides** are resolved by `Maho\Routing\ControllerDispatcher` in three tiers: the XML `<args><modules>` chain (M1 BC) is walked first, then the compiled `controllerLookup` - which already points at the most-derived inheritance-based override of a route-owning base - and finally the route's own controller. So an XML-declared override wins over an inheritance-based one, which wins over the base, preserving Magento 1's "first declared wins" semantics.
 - **Legacy XML routes** (`<frontend><routers><MyMod><use>standard</use>...`) are matched by `ControllerDispatcher::dispatchLegacyPath()` *after* the Symfony matcher misses, so attribute-defined routes always take priority. A single `LOG_NOTICE` is emitted once per process listing legacy front names that are still in use.
 - **Performance**: 6.3 μs mean / 8 μs p99 per match in the new system, vs 46 μs / 93 μs in the legacy router chain (40k matches, opcache on).
 

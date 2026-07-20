@@ -271,8 +271,8 @@ $creditmemoList = $proxy->call($sessionId, 'order_creditmemo.list', [$filter]);
 <h4>Request Example SOAP V2</h4>
 
 ```php
-$proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); // TODO: change url
-$sessionId = $proxy->login('apiUser', 'apiKey'); // TODO: change login and pwd if necessary
+$proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); // replace with your store's WSDL URL
+$sessionId = $proxy->login('apiUser', 'apiKey'); // replace with your API user and key
 
 $result = $proxy->salesOrderCreditmemoList($sessionId, '200000001');
 var_dump($result);
@@ -560,8 +560,8 @@ var_dump($result);
 <h4>Request Example SOAP V2</h4>
 
 ```php
-$proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); // TODO: change url
-$sessionId = $proxy->login('apiUser', 'apiKey'); // TODO: change login and pwd if necessary
+$proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); // replace with your store's WSDL URL
+$sessionId = $proxy->login('apiUser', 'apiKey'); // replace with your API user and key
 
 $result = $proxy->salesOrderCreditmemoInfo($sessionId, '200000001');
 var_dump($result);
@@ -820,8 +820,8 @@ var_dump($result);
 <h4>Request Example SOAP V2</h4>
 
 ```php
-$proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); // TODO: change url
-$sessionId = $proxy->login('apiUser', 'apiKey'); // TODO: change login and pwd if necessary
+$proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); // replace with your store's WSDL URL
+$sessionId = $proxy->login('apiUser', 'apiKey'); // replace with your API user and key
 
 $result = $proxy->salesOrderCreditmemoCreate($sessionId, '200000010');
 var_dump($result);
@@ -899,8 +899,8 @@ $isCommentAdded = $proxy->call($sessionId, 'order_creditmemo.addComment', [$cred
 <h4>Request Example SOAP V2</h4>
 
 ```php
-$proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); // TODO: change url
-$sessionId = $proxy->login('apiUser', 'apiKey'); // TODO: change login and pwd if necessary
+$proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); // replace with your store's WSDL URL
+$sessionId = $proxy->login('apiUser', 'apiKey'); // replace with your API user and key
 
 $result = $proxy->salesOrderCreditmemoAddComment($sessionId, '200000001');
 var_dump($result);

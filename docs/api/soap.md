@@ -31,7 +31,7 @@ $result = $client->multiCall($session, [
     ['example.method'],
     ['example.method', 'arg1'],
     ['example.method', ['arg1', 'arg2']]
-)];
+]);
 
 $client->endSession($session);
 ```
@@ -52,7 +52,7 @@ $session = $client->call('login', ['apiUser', 'apiKey']);
 
 $client->call('call', [$session, 'example.method', ['arg1', 'arg2', 'arg3']]);
 $client->call('call', [$session, 'example.method', ['arg1']]);
-$client->call('call', [$session, 'example.method')];
+$client->call('call', [$session, 'example.method']);
 $client->call('multiCall', [$session,
     [
         ['example.method', 'arg1'],

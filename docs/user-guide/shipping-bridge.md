@@ -13,7 +13,7 @@ Traditional carrier integrations require a dedicated module for every shipping p
 - **Multi-store support**: Configuration is scoped per website
 
 <figure markdown="span">
-![Shipping Bridge methods displayed in the checkout](assets/shipping-bridge-frontend.png)
+![Shipping Bridge methods displayed in the checkout](/assets/shipping-bridge-frontend.png)
 <figcaption>Shipping methods from the Bridge API in the checkout</figcaption>
 </figure>
 
@@ -25,7 +25,7 @@ Connect to any shipping provider that offers a rate calculation API. Build a thi
 
 ### Custom Business Rules
 
-Deploy a serverless function (AWS Lambda, Cloudflare Workers, etc.) that implements your specific shipping logic -- zone-based pricing, weight tiers, customer group discounts, product category rules, or any combination.
+Deploy a serverless function (AWS Lambda, Cloudflare Workers, etc.) that implements your specific shipping logic - zone-based pricing, weight tiers, customer group discounts, product category rules, or any combination.
 
 ### ERP / WMS Integration
 
@@ -49,7 +49,7 @@ flowchart TD
 
 Navigate to **System > Configuration > Sales > Shipping Methods > Shipping Bridge**.
 
-![Shipping Bridge configuration in the admin panel](assets/shipping-bridge-backend.png)
+![Shipping Bridge configuration in the admin panel](/assets/shipping-bridge-backend.png)
 
 ### Settings Reference
 
@@ -71,9 +71,9 @@ Navigate to **System > Configuration > Sales > Shipping Methods > Shipping Bridg
 
 ### Authentication Types
 
-- **None** -- No authentication header is sent
-- **Bearer Token** -- Sends `Authorization: Bearer <token>` header
-- **Custom Header** -- Sends a custom header, e.g. `X-Api-Key: <token>`. The header name must contain only letters, numbers, and hyphens.
+- **None** - No authentication header is sent
+- **Bearer Token** - Sends `Authorization: Bearer <token>` header
+- **Custom Header** - Sends a custom header, e.g. `X-Api-Key: <token>`. The header name must contain only letters, numbers, and hyphens.
 
 ### Additional Product Attributes
 

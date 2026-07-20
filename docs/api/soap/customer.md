@@ -122,8 +122,8 @@ $client->endSession($session);
 <h4>Request Example SOAP V2 (List of All Customers)</h4>
 
 ```php
-$proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); // TODO: change url
-$sessionId = $proxy->login('apiUser', 'apiKey'); // TODO: change login and pwd if necessary
+$proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); // replace with your store's WSDL URL
+$sessionId = $proxy->login('apiUser', 'apiKey'); // replace with your API user and key
 
 $result = $proxy->customerCustomerList($sessionId);
 mp($result);
@@ -378,8 +378,8 @@ $client->endSession($session);
 <h4>Request Example SOAP V2</h4>
 
 ```php
-$proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); // TODO: change url
-$sessionId = $proxy->login('apiUser', 'apiKey'); // TODO: change login and pwd if necessary
+$proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); // replace with your store's WSDL URL
+$sessionId = $proxy->login('apiUser', 'apiKey'); // replace with your API user and key
 
 $result = $proxy->customerCustomerInfo($sessionId, '2');
 var_dump($result);
@@ -575,8 +575,8 @@ $client->endSession($session);
 <h4>Request Example SOAP V2</h4>
 
 ```php
-$proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); // TODO: change url
-$sessionId = $proxy->login('apiUser', 'apiKey'); // TODO: change login and pwd if necessary
+$proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); // replace with your store's WSDL URL
+$sessionId = $proxy->login('apiUser', 'apiKey'); // replace with your API user and key
 
 $result = $proxy->customerCustomerDelete($sessionId, '2');
 var_dump($result);

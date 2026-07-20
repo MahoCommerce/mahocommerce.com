@@ -18,20 +18,20 @@
 ??? info "Supported database versions (only actively maintained releases)"
     | Database   | Version | EOL        |
     |------------|---------|------------|
-    | MySQL      | 8.0     | Apr 2026   |
-    | MySQL      | 8.4 LTS | Apr 2032  |
-    | MySQL      | 9.x    | Innovation, rolling quarterly releases |
-    | MariaDB    | 10.6 LTS | Jul 2026 |
+    | MySQL      | 8.0     | **Apr 2026 (end of life - upgrade to 8.4 LTS)** |
+    | MySQL      | 8.4 LTS | Apr 2032   |
+    | MySQL      | 9.x     | Innovation, rolling quarterly releases |
+    | MariaDB    | 10.6 LTS | Jul 2026  |
     | MariaDB    | 10.11 LTS | Feb 2028 |
-    | MariaDB    | 11.4 LTS | May 2029 |
-    | MariaDB    | 11.8 LTS | Jun 2028 |
+    | MariaDB    | 11.4 LTS | May 2029  |
+    | MariaDB    | 11.8 LTS | Jun 2030  |
     | PostgreSQL | 14      | Nov 2026   |
     | PostgreSQL | 15      | Nov 2027   |
     | PostgreSQL | 16      | Nov 2028   |
     | PostgreSQL | 17      | Nov 2029   |
     | PostgreSQL | 18      | Nov 2030   |
 
-    We recommend using LTS versions for production. EOL dates sourced from [endoflife.date](https://endoflife.date).
+    We recommend using LTS versions for production: **MySQL 8.4 LTS** is the recommended MySQL series now that 8.0 has reached end of life. EOL dates sourced from [endoflife.date](https://endoflife.date).
 
 ## Create your project
 

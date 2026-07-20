@@ -11,6 +11,8 @@ All errors return JSON with an appropriate HTTP status code:
 }
 ```
 
+The `type` field is a machine-readable identifier, the human-readable explanation is in `detail`. For validation failures, `detail` contains the message of the first failed constraint (e.g. `"SKU is required"`).
+
 | Status | Meaning |
 |--------|---------|
 | 400 | Bad request / validation error |
@@ -19,4 +21,6 @@ All errors return JSON with an appropriate HTTP status code:
 | 404 | Resource not found |
 | 405 | Method not allowed |
 | 409 | Conflict (e.g. duplicate idempotency key race condition) |
+| 422 | Unprocessable entity - the request is well-formed but a business rule rejected it (e.g. a [revocation submission](endpoints.md#revocation-eu) past the cooling-off window, or an invalid `processedStatus` value) |
+| 429 | Too many requests - the client hit a rate limit (e.g. on guest order lookup, which is IP rate-limited) |
 | 500 | Internal server error |

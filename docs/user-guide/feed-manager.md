@@ -94,13 +94,13 @@ In the **Filters** tab, configure which products to include:
     | Product Type | Export Behaviour |
     |---|---|
     | **Simple** | Exported as a single feed entry. Children of configurables can pull values from the parent via the [Use Parent](#5-using-parent-product-data) feature in attribute mapping. |
-    | **Configurable** | Exported as a single feed entry. To export the simple variants underneath instead (or as well), select **Simple** in the Product Types filter -- the simples are then enriched with parent-product data automatically. See [Section 5](#5-using-parent-product-data). |
-    | **Grouped** | Exported as a single feed entry for the grouped product itself. Its associated simple products are *not* expanded automatically -- include them via the Simple type filter if you need them. |
+    | **Configurable** | Exported as a single feed entry. To export the simple variants underneath instead (or as well), select **Simple** in the Product Types filter - the simples are then enriched with parent-product data automatically. See [Section 5](#5-using-parent-product-data). |
+    | **Grouped** | Exported as a single feed entry for the grouped product itself. Its associated simple products are *not* expanded automatically - include them via the Simple type filter if you need them. |
     | **Bundle** | Exported as a single feed entry for the bundle product itself. Bundle selections are *not* expanded into separate feed entries. |
     | **Virtual** | Exported as a single feed entry, like simple products. |
     | **Downloadable** | Exported as a single feed entry, like simple products. |
 
-    **Tip:** the most common Google Shopping setup is to select **Simple** only -- this exports each variant as its own item with `item_group_id` linking it back to the configurable parent.
+    **Tip:** the most common Google Shopping setup is to select **Simple** only - this exports each variant as its own item with `item_group_id` linking it back to the configurable parent.
 
 ### Step 3: Attribute Mapping
 
@@ -185,7 +185,7 @@ Create nested JSON objects with arrays and proper data types.
 When exporting configurable product children, you often need data from the parent product. FeedManager's **"Use Parent"** feature handles this elegantly.
 
 !!! note "Configurable Products Only"
-    The **Use Parent** feature applies to configurable products only -- it works by looking up a simple product's configurable parent via `catalog_product_super_link`. Bundle and grouped products are exported as standalone entries (see the table in [Step 2](#step-2-product-selection)) -- their child/associated products are not automatically pulled in or merged, and the Use Parent dropdown has no effect on them.
+    The **Use Parent** feature applies to configurable products only - it works by looking up a simple product's configurable parent via `catalog_product_super_link`. Bundle and grouped products are exported as standalone entries (see the table in [Step 2](#step-2-product-selection)) - their child/associated products are not automatically pulled in or merged, and the Use Parent dropdown has no effect on them.
 
 ### Use Parent Modes
 
@@ -211,7 +211,7 @@ When exporting configurable product children, you often need data from the paren
     | item_group_id | Always | Resolves to the parent configurable's SKU |
 
 !!! tip "Item Group ID"
-    The Google, Facebook, Bing, and Pinterest mapping templates ship with an `item_group_id` field pre-configured as `sku` with **Use Parent: Always**. When you export simple children of configurables, this resolves to the parent's SKU, telling these platforms that the variants belong to the same item. The field is part of the default mapping -- you can edit or remove it like any other.
+    The Google, Facebook, Bing, and Pinterest mapping templates ship with an `item_group_id` field pre-configured as `sku` with **Use Parent: Always**. When you export simple children of configurables, this resolves to the parent's SKU, telling these platforms that the variants belong to the same item. The field is part of the default mapping - you can edit or remove it like any other.
 
 ---
 
@@ -231,7 +231,7 @@ Navigate to **Catalog > Feed Manager > Category Mapping**. Select a platform fro
 4. The search queries the bundled taxonomy file and shows matching results in a dropdown
 5. Click a result to apply the mapping
 
-Mappings are **global per platform** -- once you map a category for Google, all Google Shopping feeds will use that mapping automatically via the "Category Taxonomy" source type.
+Mappings are **global per platform** - once you map a category for Google, all Google Shopping feeds will use that mapping automatically via the "Category Taxonomy" source type.
 
 ### Taxonomy Search
 
@@ -240,17 +240,17 @@ The search field supports multi-word queries. For example, typing `tennis shoes`
 !!! example "Searching for 'tennis'"
     Results might include:
 
-    - `3854` -- Sporting Goods > Athletics > Tennis
-    - `3855` -- Sporting Goods > Athletics > Tennis > Tennis Racquets
-    - `3856` -- Sporting Goods > Athletics > Tennis > Tennis Balls
-    - `1648` -- Apparel > Shoes > Athletic Shoes > Tennis Shoes
+    - `3854` - Sporting Goods > Athletics > Tennis
+    - `3855` - Sporting Goods > Athletics > Tennis > Tennis Racquets
+    - `3856` - Sporting Goods > Athletics > Tennis > Tennis Balls
+    - `1648` - Apparel > Shoes > Athletic Shoes > Tennis Shoes
 
 ### Bulk Mapping
 
 To quickly apply the same platform category to multiple store categories:
 
 1. Map one category first, then click its **Copy** button
-2. The page enters **Bulk Mode** -- the source row highlights in blue
+2. The page enters **Bulk Mode** - the source row highlights in blue
 3. Click any other category row to apply the same mapping
 4. Use **Shift+Click** to apply to a range of categories
 5. Press **Escape** or click "Exit Bulk Mode" to finish
@@ -302,7 +302,7 @@ A Dynamic Rule consists of multiple **output rows**, evaluated top-to-bottom. Th
 
 ### Conditions
 
-Dynamic Rules use the standard Maho rule conditions widget -- the same interface used by Catalog Price Rules and Cart Price Rules. Each rule's **Conditions** tab lets you build conditions using a visual, point-and-click interface.
+Dynamic Rules use the standard Maho rule conditions widget - the same interface used by Catalog Price Rules and Cart Price Rules. Each rule's **Conditions** tab lets you build conditions using a visual, point-and-click interface.
 
 Available condition operators include:
 
@@ -357,8 +357,8 @@ Transformers are grouped by category in the UI.
 
 | Transformer | Description | Options |
 |---|---|---|
-| `uppercase` | Convert to UPPERCASE | -- |
-| `lowercase` | Convert to lowercase | -- |
+| `uppercase` | Convert to UPPERCASE | - |
+| `lowercase` | Convert to lowercase | - |
 | `capitalise` | Capitalise text | mode (title, first, sentence) |
 | `strip_tags` | Remove HTML tags | allowed_tags, decode_entities |
 | `truncate` | Limit text length | max_length, suffix, word_boundary |
@@ -478,7 +478,7 @@ Select a preset to quickly configure decimal and thousands separators, or choose
 | European | Comma decimal, period thousands | 1.234,56 |
 | Swiss | Period decimal, apostrophe thousands | 1'234.56 |
 | Indian | Period decimal, comma thousands | 1,23,456.78 |
-| Custom | Manually configure separators | -- |
+| Custom | Manually configure separators | - |
 
 ### Price Settings
 
@@ -614,9 +614,9 @@ FeedManager can alert you when feed generation or upload fails. Notifications ar
 
 ### What Triggers Notifications
 
-- **Generation failure** -- Feed generation encounters errors (validation, product processing, etc.)
-- **Upload failure** -- Feed file fails to upload to a configured destination
-- **Timeout** -- Feed generation is stuck for more than 30 minutes
+- **Generation failure** - Feed generation encounters errors (validation, product processing, etc.)
+- **Upload failure** - Feed file fails to upload to a configured destination
+- **Timeout** - Feed generation is stuck for more than 30 minutes
 
 !!! tip "'Once Until Success' for Scheduled Feeds"
     If a feed runs hourly and fails repeatedly due to a configuration issue, "Once Until Success" prevents your inbox from being flooded. You'll get one alert, fix the issue, and the next successful run resets the flag automatically.
@@ -692,7 +692,7 @@ FeedManager provides command-line tools for automation and debugging.
 ### Common Issues
 
 !!! warning "Feed shows 0 products"
-    - Check your filter conditions -- they may be too restrictive
+    - Check your filter conditions - they may be too restrictive
     - Verify "Exclude Disabled" and "Exclude Out of Stock" settings
     - Ensure products exist in the selected store view
     - Check the Product Types selection in the Filters tab

@@ -1,6 +1,7 @@
 # REST & GraphQL API (v2) <span class="version-badge">v26.7+ · beta</span>
 
-> **Base URL:** `https://your-domain.com/api`
+> **REST base URL:** `https://your-domain.com/api/rest/v2`
+> **GraphQL endpoint:** `https://your-domain.com/api/graphql`
 > **Entry Point:** `public/rest.php` (bootstraps Maho + Symfony API Platform)
 
 !!! info "Beta status"

@@ -49,8 +49,8 @@ var_dump($countries); // Countries list
 <h4>Request Example SOAP V2</h4>
 
 ```php
-$proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); // TODO: change url
-$sessionId = $proxy->login('apiUser', 'apiKey'); // TODO: change login and pwd if necessary
+$proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); // replace with your store's WSDL URL
+$sessionId = $proxy->login('apiUser', 'apiKey'); // replace with your API user and key
 
 $result = $proxy->directoryCountryList($sessionId);
 var_dump($result);

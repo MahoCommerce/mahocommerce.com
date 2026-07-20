@@ -39,15 +39,15 @@ While our versioning works with Composer, **every new YY.m release may contain b
 
 ### Bugfix (patch) releases
 
-**Starting with 26.7, Maho has bugfix releases.** Most fixes simply land in the next YY.m release. But when a bug or security issue can't wait for the next calendar release, we can ship a **patch release** on the current series instead of forcing you onto a version that may contain breaking changes. Not every fix is backported — a fix is ported to a bugfix release only when we judge it necessary.
+**Starting with 26.7, Maho has bugfix releases.** Most fixes simply land in the next YY.m release. But when a bug or security issue can't wait for the next calendar release, we can ship a **patch release** on the current series instead of forcing you onto a version that may contain breaking changes. Not every fix is backported - a fix is ported to a bugfix release only when we judge it necessary.
 
 Here's how it works:
 
-- On the day a YY.m release ships, we cut a **maintenance branch** named after the release series — for example `26.7` for the `26.7.0` release.
+- On the day a YY.m release ships, we cut a **maintenance branch** named after the release series - for example `26.7` for the `26.7.0` release.
 - When a fix merged into the main line is suitable for the current release, a maintainer tags its pull request with a `backport <series>` label (e.g. `backport 26.7`). An automated workflow then opens a backport pull request against the matching maintenance branch.
-- Once that backport is merged, it's published as the next patch in the series — `26.7.1`, `26.7.2`, and so on.
+- Once that backport is merged, it's published as the next patch in the series - `26.7.1`, `26.7.2`, and so on.
 
-This lets you stay on a known-stable series and pick up `26.7.x` patch releases via Composer, without having to jump to the next YY.m release before you're ready to review its breaking changes. As always, **review the release notes for every release** — including patches — before upgrading.
+This lets you stay on a known-stable series and pick up `26.7.x` patch releases via Composer, without having to jump to the next YY.m release before you're ready to review its breaking changes. As always, **review the release notes for every release** - including patches - before upgrading.
 
 ## You Can Help Us Provide More
 

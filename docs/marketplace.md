@@ -234,15 +234,15 @@ Discover and install powerful modules to enhance your Maho store. All modules ar
 ## Featured Modules
 
 <div class="category-filter">
-    <button class="category-btn active" onclick="filterApps('all')">All Modules</button>
-    <button class="category-btn" onclick="filterApps('b2b')">B2B</button>
-    <button class="category-btn" onclick="filterApps('developer-tools')">Developer Tools</button>
-    <button class="category-btn" onclick="filterApps('localization')">Localization</button>
-    <button class="category-btn" onclick="filterApps('marketing')">Marketing</button>
-    <button class="category-btn" onclick="filterApps('payment')">Payment</button>
-    <button class="category-btn" onclick="filterApps('performance')">Performance</button>
-    <button class="category-btn" onclick="filterApps('seo')">SEO</button>
-    <button class="category-btn" onclick="filterApps('security')">Security</button>
+    <button class="category-btn active" data-filter="all" onclick="filterApps('all')">All Modules</button>
+    <button class="category-btn" data-filter="b2b" onclick="filterApps('b2b')">B2B</button>
+    <button class="category-btn" data-filter="developer-tools" onclick="filterApps('developer-tools')">Developer Tools</button>
+    <button class="category-btn" data-filter="localization" onclick="filterApps('localization')">Localization</button>
+    <button class="category-btn" data-filter="marketing" onclick="filterApps('marketing')">Marketing</button>
+    <button class="category-btn" data-filter="payment" onclick="filterApps('payment')">Payment</button>
+    <button class="category-btn" data-filter="performance" onclick="filterApps('performance')">Performance</button>
+    <button class="category-btn" data-filter="seo" onclick="filterApps('seo')">SEO</button>
+    <button class="category-btn" data-filter="security" onclick="filterApps('security')">Security</button>
 </div>
 
 <div class="app-grid">
@@ -638,11 +638,7 @@ function filterApps(category) {
     
     // Update active button
     buttons.forEach(btn => {
-        btn.classList.remove('active');
-        if (btn.textContent.toLowerCase().includes(category) || 
-            (category === 'all' && btn.textContent === 'All Modules')) {
-            btn.classList.add('active');
-        }
+        btn.classList.toggle('active', btn.dataset.filter === category);
     });
     
     // Filter cards

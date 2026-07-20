@@ -2,6 +2,8 @@
 
 This page is the **REST v2** reference. The same resources are available over GraphQL - for the query and mutation field names, arguments, and examples, see the [GraphQL reference](graphql.md).
 
+All paths below are relative to the **`/api/rest/v2`** prefix: `GET /products` means `GET https://your-domain.com/api/rest/v2/products`.
+
 ### Auth
 
 | Method | Endpoint | Auth | Description |
