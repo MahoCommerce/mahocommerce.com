@@ -13,7 +13,7 @@ cssselect2==0.9.0
 defusedxml==0.7.1
 ghp-import==2.1.0
 gitdb==4.0.12
-GitPython==3.1.51
+GitPython==3.1.52
 htmlmin2==0.1.13
 idna==3.18
 Jinja2==3.1.6
@@ -34,7 +34,7 @@ packaging==26.2
 paginate==0.5.7
 pathspec==1.1.1
 pillow==12.3.0
-platformdirs==4.10.0
+platformdirs==4.10.1
 pycparser==3.0
 Pygments==2.20.0
 pymdown-extensions==11.0.1
