@@ -2,7 +2,17 @@
 
 The Model-View-Controller (MVC) architecture traces its origins back to the Smalltalk Programming language and Xerox Parc. Since then, there have been many systems that describe their architecture as MVC. Each system is slightly different, but all have the goal of separating data access, business logic, and user-interface code from one another.
 
-The architecture of most PHP MVC frameworks will looks something [like this](http://alanstorm.com/2009/img/magento-book/php-mvc.png).
+The architecture of most PHP MVC frameworks looks something like this:
+
+```mermaid
+flowchart LR
+    A[URL] --> B[Front Controller]
+    B --> C[Routing]
+    C --> D[Controller Action]
+    D --> E[Models]
+    D --> F[Data structure]
+    F --> G[View renders HTML]
+```
 
 1.  A URL is intercepted by a single PHP file (usually called a Front Controller).
 2.  This PHP file will examine the URL, and derive a Controller name and an Action name (a process that's often called routing).
@@ -20,7 +30,19 @@ While this pattern was a great leap forward from the "each php file is a page" p
     *   Controllers are often bound to specific views.
     *   Even when a system offers a way to override these defaults, the convention leads to applications where it's difficult/impossible to drop in a new model, view, or Controller implementation without massive re-factoring.
 
-As you've probably guessed, the Maho team shares this world view and has created a more abstract MVC pattern that looks something [like this:](http://alanstorm.com/2009/img/magento-book/magento-mvc.png).
+As you've probably guessed, the Maho team shares this world view and has created a more abstract MVC pattern that looks something like this:
+
+```mermaid
+flowchart LR
+    A[URL] --> B[Front Controller]
+    B --> C[Routers]
+    C --> D[Action Controller]
+    D --> E[Models]
+    D --> F[Layout]
+    F --> G[Blocks]
+    G --> E
+    G --> H[Templates render HTML]
+```
 
 1.  A URL is intercepted by a single PHP file.
 2.  This PHP file instantiates a Maho application.

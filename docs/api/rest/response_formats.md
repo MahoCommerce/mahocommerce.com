@@ -1,8 +1,11 @@
-If you make a Magento API call, you are guaranteed to receive some kind of a response. If you make a successful call, you will receive an HTTP response with a 200 OK status.
+!!! warning "Legacy API"
+    This is Maho's legacy REST API, inherited from Magento 1 and kept for backward compatibility. New integrations should use the modern [REST & GraphQL API (v2)](../v2/index.md) instead.
+
+If you make a Maho API call, you are guaranteed to receive some kind of a response. If you make a successful call, you will receive an HTTP response with a 200 OK status.
 
 ## REST API Response Formats
 
-You can view the response data from any Magento API call in one of the following two formats:
+You can view the response data from any Maho API call in one of the following two formats:
 
 -   XML
 -   JSON

@@ -145,13 +145,15 @@ Clear your Maho cache and reload your Hello World controller page. You should no
 
 So, that's a lot of voodoo and cryptic incantations. Let's take a look at what's going on.
 
-First, you'll want to install the [Layoutviewer](http://alanstorm.com/2005/projects/MahoLayoutViewer.tar.gz) module. This is a module similar to the [Configviewer](http://alanstorm.com/2005/projects/MahoConfigViewer.tar.gz) module you built in the Hello World article that will let us peek at some of Maho's internals.
+First, let's peek at some of Maho's internals with the built-in layout debugger. From your project root, run
 
-Once you've installed the module (similar to how you setup the [Configviewer](http://alanstorm.com/2005/projects/MahoConfigViewer.tar.gz) module), go to the following URL
+```bash
+./maho dev:frontend:layout:debug http://example.com/helloworld/index/index
+```
 
-`http://example.com/helloworld/index/index?showLayout=page`
+For any URL you give it, this command shows the layout handles that apply to the request, the layout XML files that were loaded, and the resulting block tree.
 
-This is the layout xml for your page/request. It's made up of `<block />`, `<reference />` and `<remove />` tags. When you call the loadLayout method of your Action Controller, Maho will
+The layout XML for your page/request is made up of `<block />`, `<reference />` and `<remove />` tags. When you call the loadLayout method of your Action Controller, Maho will
 
 1.  Generate this Layout XML
 2.  Instantiate a Block class for each `<block />` tag, looking up the class using the tag's type attribute as a global config path and store it in the internal _blocks array of the layout object, using the tag's name attribute as the array key.    
@@ -234,9 +236,11 @@ So, we have a slightly better understanding of what's going on with the Layout X
 
 ### Handles
 
-Each page request in Maho will generate several unique Handles. The Layoutview module can show you these Handles by using a URL something like
+Each page request in Maho will generate several unique Handles. The layout debugger shows you these Handles:
 
-`http://example.com/helloworld/index/index?showLayout=handles`
+```bash
+./maho dev:frontend:layout:debug http://example.com/helloworld/index/index
+```
 
 You should see a list similar to the following (depending on your configuration)
 
@@ -248,23 +252,17 @@ You should see a list similar to the following (depending on your configuration)
 
 Each of these is a Handle. Handles are set in a variety of places within the Maho system. The two we want to pay attention to are default and helloworld_index_index. The default Handle is present in **every** request into the Maho system. The helloworld_index_index Handle is created by combining the route name (helloworld), Action Controller name (index), and Action Controller Action Method (index) into a single string. This means each possible method on an Action Controller has a Handle associated with it.
 
-Remember that "index" is the Maho default for both Action Controllers and Action Methods, so the following request
+Remember that "index" is the Maho default for both Action Controllers and Action Methods, so debugging the following URL
 
-`http://example.com/helloworld/?showLayout=handles`
+`http://example.com/helloworld/`
 
-Will also produce a Handle named helloworld_index_index
+will also produce a Handle named helloworld_index_index
 
 ## Package Layout
 
-You can think of the Package Layout similar to the global config. It's a large XML file that contains **every possible layout configuration** for a particular Maho install. Let's take a look at it using the Layoutview module
+You can think of the Package Layout similar to the global config. It's a large XML tree that contains **every possible layout configuration** for a particular Maho install. The layout debugger's output lists the layout XML files that are combined to build it for the current request.
 
-`http://example.com/helloworld/index/index?showLayout=package`
-
-This may take a while to load. If your browser is choking on the XML rendering, try the text format
-
-`http://example.com/helloworld/index/index?showLayout=package&showLayoutFormat=text`
-
-You should see a very large XML file. This is the Package Layout. This XML file is created by combining the contents of all the XML layout files for the current theme (or package). For the default install, this is at
+The Package Layout is created by combining the contents of all the XML layout files for the current theme (or package). For the default install, this is at
 
 `app/design/frontend/base/default/layout/`
 

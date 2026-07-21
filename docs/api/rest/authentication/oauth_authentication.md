@@ -1,8 +1,11 @@
+!!! warning "Legacy API"
+    This is Maho's legacy REST API, inherited from Magento 1 and kept for backward compatibility. New integrations should use the modern [REST & GraphQL API (v2)](../../v2/index.md) instead.
+
 ##Introduction
 
-In most cases, the third-party application must be authenticated to use the Magento API. But users never reveal their credentials to the application to preserve their privacy. So, the question is as follows: how is your application going to authenticate users if it does not know user credentials. OAuth is the solution.
+In most cases, the third-party application must be authenticated to use the Maho API. But users never reveal their credentials to the application to preserve their privacy. So, the question is as follows: how is your application going to authenticate users if it does not know user credentials. OAuth is the solution.
 
-Magento authentication is based on OAuth, an open standard for secure API authentication. OAuth is a token-passing mechanism that allows users to control which applications have access to their data without revealing their passwords or other credentials.
+Maho authentication is based on OAuth, an open standard for secure API authentication. OAuth is a token-passing mechanism that allows users to control which applications have access to their data without revealing their passwords or other credentials.
 
 To learn more about OAuth, you can visit the official [OAuth](http://oauth.net/) site.
 
@@ -16,7 +19,7 @@ OAuth is completely invisible for the site visitors.
 
 ## Why Do You Need OAuth?
 
-Magento uses OAuth to allow access to its data. You need to use OAuth if you want to use any of the following Magento APIs:
+Maho uses OAuth to allow access to its data. You need to use OAuth if you want to use any of the following Maho APIs:
 
 -   Products
 -   Inventory
@@ -30,12 +33,12 @@ Magento uses OAuth to allow access to its data. You need to use OAuth if you wan
 
 There are some definitions you need to get familiar with before you start using OAuth. These are as follows:
 
--   **User** - A customer who has an account with Magento and can use the services via the Magento API.
--   **Consumer** - A third-party application that uses OAuth to access the Magento API. This application must be registered in the Magento system to receive the Consumer Key and Consumer Secret.
--   **Consumer Key** - A value used by the Consumer to identify itself with Magento.
+-   **User** - A customer who has an account with Maho and can use the services via the Maho API.
+-   **Consumer** - A third-party application that uses OAuth to access the Maho API. This application must be registered in the Maho system to receive the Consumer Key and Consumer Secret.
+-   **Consumer Key** - A value used by the Consumer to identify itself with Maho.
 -   **Consumer Secret** - A secret used by the Consumer to guarantee the ownership of the Consumer Key. This value is not passed in requests.
 -   **Request Token** - A value used by the Consumer to obtain authorization from the User (when needed). The Request Token is exchanged for an Access Token when permission is granted.
--   **Access Token** - A value used by the Consumer to call Magento APIs on behalf of the User.
+-   **Access Token** - A value used by the Consumer to call Maho APIs on behalf of the User.
 
 ## OAuth Process
 
@@ -45,11 +48,11 @@ The OAuth process consists of several steps:
 -   Requesting user authorization.
 -   Getting an Access Token by exchanging the Request Token for it.
 
-The application that requires access to data is known as the Consumer and Magento is the Service Provider.
+The application that requires access to data is known as the Consumer and Maho is the Service Provider.
 
 ## Registering an Application
 
-Before starting to make API requests, you need to register the application. After the registration, you will receive the Consumer Key that will identify you in Magento. Also, you will receive a Consumer Secret. This secret will be used when requesting for a Request Token.
+Before starting to make API requests, you need to register the application. After the registration, you will receive the Consumer Key that will identify you in Maho. Also, you will receive a Consumer Secret. This secret will be used when requesting for a Request Token.
 
 You can register your application by selecting **System** > **Web Services** > **REST - OAuth Consumers** and clicking **Add New** in the Admin Panel.
 
@@ -68,7 +71,7 @@ Also, the simple form can be used for authentication. To use a simple form, add 
 
 ### Getting an Unauthorized Request Token
 
-The first step to authenticate the user is to retrieve a Request Token from Magento. This is a temporary token that will be exchanged for the Access Token.
+The first step to authenticate the user is to retrieve a Request Token from Maho. This is a temporary token that will be exchanged for the Access Token.
 
 |     |     |
 | --- | --- |
@@ -90,7 +93,7 @@ The following request parameters should be present in the Authorization header:
 
 ### User Authorization
 
-The second step is to request user authorization. After receiving the Request Token from Magento, the application provides an authorization page to the user. The only required parameter for this step is the Request Token (oauth_token value) received from the previous step. The endpoint is followed by an oauth_token parameter with the value set to the oauth_token value.
+The second step is to request user authorization. After receiving the Request Token from Maho, the application provides an authorization page to the user. The only required parameter for this step is the Request Token (oauth_token value) received from the previous step. The endpoint is followed by an oauth_token parameter with the value set to the oauth_token value.
 
 After this, the user is asked to enter their credentials and authorize. When the user is granted the access, he/she is redirected to the URL specified in the oauth_callback parameter. This URL is followed by two parameters:
 
@@ -134,7 +137,7 @@ The response will contain the following response parameters:
 
 ## OAuth Error Codes
 
-When the third-party application performs invalid requests to Magento, the following errors related to OAuth can occur:
+When the third-party application performs invalid requests to Maho, the following errors related to OAuth can occur:
 
 | HTTP Code | Error Code | Text Representation | Description |
 | --- | --- | --- | --- |
@@ -190,11 +193,11 @@ try {
 ```php
 <?php
 /**
- * Example of retrieving the products list using Customer account via Magento REST API. OAuth authorization is used
+ * Example of retrieving the products list using Customer account via Maho REST API. OAuth authorization is used
  * Preconditions:
  * 1. Install php oauth extension
  * 2. If you were authorized as an Admin before this step, clear browser cookies for 'yourhost'
- * 3. Create at least one product in Magento and enable it for viewing in the frontend
+ * 3. Create at least one product in Maho and enable it for viewing in the frontend
  * 4. Configure resource permissions for Customer REST user for retrieving all product data for Customer
  * 5. Create a Consumer
  */

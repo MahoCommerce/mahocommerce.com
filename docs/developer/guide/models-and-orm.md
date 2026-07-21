@@ -34,11 +34,9 @@ To begin, we're going to create a basic Maho Model. PHP MVC tradition insists we
 2.  Create a database table for our Model
 3.  Add Model information to the config for a Model named Blogpost
 4.  Add Model Resource information to the config for the Blogpost Model
-5.  Add a Read Adapter to the config for the Blogpost Model
-6.  Add a Write Adapter to the config for the Blogpost Model
-7.  Add a PHP class file for the Blogpost Model
-8.  Add a PHP class file for the Blogpost Resource Model
-9.  Instantiate the Model
+5.  Add a PHP class file for the Blogpost Model
+6.  Add a PHP class file for the Blogpost Resource Model
+7.  Instantiate the Model
 
 ### Create a Weblog Module
 
@@ -60,6 +58,9 @@ In `Mahotutorial/Weblog/etc/config.xml`, setup the following route
 </frontend>
 ```
 
+!!! tip "Modern alternative"
+    XML route registration still works, but since v26.5 the recommended way is the `#[Maho\Config\Route]` PHP attribute placed directly on controller action methods. See [Routing](../routing.md).
+
 And then add the following Action Controller in
 
 ```php
@@ -79,7 +80,7 @@ You should see the word "Setup" on a white background.
 
 ### Creating the Database Table
 
-Maho has a system for automatically creating and changing your database schemas, but for the time being we'll just manually create a table for our Model.
+Maho has systems for creating and changing your database schemas - the modern [declarative schema](../declarative-database-schema.md) (v26.7+) and the classic [setup resources](setup-resources.md) covered later in this tutorial - but for the time being we'll just manually create a table so we can focus on the Model itself.
 
 Using the command-line or your favorite MySQL GUI application, create a table with the following schema
 
@@ -114,7 +115,7 @@ When you instantiate a Model in Maho, you make a call like this
 $model = Mage::getModel('weblog/blogpost');
 ```
 
-The first part of the URI you pass into get Model is the [Model Group Name](http://alanstorm.com/2009/img/maho-book/weblogGetModel.png). Because it is a good idea to follow conventions, this should be the (lowercase) name of your module, or to be safeguarded against conflicts use the packagename and modulename (also in lowercase). The second part of the URI is the lowercase version of your Model name.
+The first part of the URI you pass into `getModel()` is the Model Group Name. Because it is a good idea to follow conventions, this should be the (lowercase) name of your module, or to be safeguarded against conflicts use the packagename and modulename (also in lowercase). The second part of the URI is the lowercase version of your Model name.
 
 So, let's add the following XML to our module's `config.xml`.
 

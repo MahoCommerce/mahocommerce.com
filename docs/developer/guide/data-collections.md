@@ -15,7 +15,7 @@ $collection[] = 'bar';
 
 While this is still galling to a certain type of software developer, as you don't have access to low level implementation details, you do have the ability to create array-like Objects with methods that encapsulate specific functionality. You can also setup rules to offer a level of type safety by only allowing certain kinds of Objects into your Collection.
 
-It should come as no surprise that Maho offers you a number of these Collections. In fact, every Model object that follows the Maho interfaces gets a Collection type for free. Understanding how these Collections work is a key part to being an effective Maho programmer. We're going to take a look at Maho Collections, starting from the bottom and working our way up. Set up a [controller action](http://alanstorm.com/magento_controller_hello_world) where you can run arbitrary code, and let's get started.
+It should come as no surprise that Maho offers you a number of these Collections. In fact, every Model object that follows the Maho interfaces gets a Collection type for free. Understanding how these Collections work is a key part to being an effective Maho programmer. We're going to take a look at Maho Collections, starting from the bottom and working our way up. Set up a [controller action](controller-dispatch.md) where you can run arbitrary code, and let's get started.
 
 ## A Collection of Things
 

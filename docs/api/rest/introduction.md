@@ -1,4 +1,7 @@
-Magento REST API allows managing a number of features, namely:
+!!! warning "Legacy API"
+    This is Maho's legacy REST API, inherited from Magento 1 and kept for backward compatibility. New integrations should use the modern [REST & GraphQL API (v2)](../v2/index.md) instead.
+
+Maho REST API allows managing a number of features, namely:
 
 -   Managing customers.
 -   Managing customer addresses.
@@ -8,7 +11,7 @@ Magento REST API allows managing a number of features, namely:
 
 ### Authentication
 
-Magento REST API uses 3-legged [OAuth 1.0a](http://tools.ietf.org/html/rfc5849) protocol to authenticate the application to access the Magento service.
+Maho REST API uses 3-legged [OAuth 1.0a](http://tools.ietf.org/html/rfc5849) protocol to authenticate the application to access the Maho service.
 
 ### Output Formats
 
@@ -16,95 +19,95 @@ The REST API supports the response in two formats, which are XML and JSON.
 
 ### HTTP Verbs
 
-HTTP verbs are used to manage the state of resources. In Magento REST API, there are four verbs used to manage resources: GET, POST, PUT, and DELETE. You can get the contents of the data using HTTP GET, delete the data using HTTP DELETE, and create or update the data using POST/PUT.
+HTTP verbs are used to manage the state of resources. In Maho REST API, there are four verbs used to manage resources: GET, POST, PUT, and DELETE. You can get the contents of the data using HTTP GET, delete the data using HTTP DELETE, and create or update the data using POST/PUT.
 
 ### Request Structure
 
 All URLs in REST API have the following base URL. 
 
-http://magentohost/api/rest/
+https://mahohost/api/rest/
 
 **Example**
 
-Supposing, you want to retrieve the list of customers from Magento. To do this, you need to use the GET HTTP method. The GET request to retrieve the list of customers will look as follows:
+Supposing, you want to retrieve the list of customers from Maho. To do this, you need to use the GET HTTP method. The GET request to retrieve the list of customers will look as follows:
 
-http://magentohost/api/rest/customers
+https://mahohost/api/rest/customers
 
 where
 
--   http://magentohost/api/rest/ - endpoint
+-   https://mahohost/api/rest/ - endpoint
 -   /customers - action URL
 
 ### REST Resources
 
-The Magento REST API allows you to manage customers, customer addresses, sales orders, inventory, and products. REST API is organized into the following categories:
+The Maho REST API allows you to manage customers, customer addresses, sales orders, inventory, and products. REST API is organized into the following categories:
 
 ##### Products
 
 Retrieve the list of products, create, update, and delete a product.  
-**Resource Structure**: http://magentohost/api/rest/products
+**Resource Structure**: https://mahohost/api/rest/products
 
 ###### Product Categories
 
 Retrieve the list of categories assigned to a product, assign, and unassign the category to/from the specific product.  
-**Resource Structure**: http://magentohost/api/rest/products/:productId/categories
+**Resource Structure**: https://mahohost/api/rest/products/:productId/categories
 
 ###### Product Images
 
 Retrieve the list of images assigned to a product, add, update, and remove an image to/from the specific product.  
-**Resource Structure**: http://magentohost/api/rest/products/:productId/images
+**Resource Structure**: https://mahohost/api/rest/products/:productId/images
 
 ###### Product Websites
 
 Retrieve the list of websites assigned to a product, assign, and unassign a website to/from the specific product.  
-**Resource Structure**: http://magentohost/api/rest/products/:productId/websites
+**Resource Structure**: https://mahohost/api/rest/products/:productId/websites
 
 ##### Customers
 
 Retrieve the list of customers, create, delete a customer, and update the customer information.  
-**Resource Structure**: http://magentohost/api/rest/customers
+**Resource Structure**: https://mahohost/api/rest/customers
 
 ##### Customer Addresses
 
 Retrieve the list of customer addresses, create, update, and delete the customer address.  
-**Resource Structure**: http://magentohost/api/rest/customers/:customerId/addresses
+**Resource Structure**: https://mahohost/api/rest/customers/:customerId/addresses
 
 ##### Inventory
 
 Retrieve the list of stock items and update required stock items.  
-**Resource Structure**: http://magentohost/api/rest/stockitems
+**Resource Structure**: https://mahohost/api/rest/stockitems
 
 ##### Sales Orders
 
 Retrieve the list of sales orders as well as the specific order information.  
-**Resource Structure**: http://magentohost/api/rest/orders
+**Resource Structure**: https://mahohost/api/rest/orders
 
 ###### Order Items
 
 Retrieve order items for the specific order.  
-**Resource Structure**: http://magentohost/api/rest/orders/:orderId/items
+**Resource Structure**: https://mahohost/api/rest/orders/:orderId/items
 
 ###### Order Addresses
 
 Retrieve information on order billing and shipping addresses for the specific order.  
-**Resource Structure**: http://magentohost/api/rest/orders/:orderid/addresses
+**Resource Structure**: https://mahohost/api/rest/orders/:orderid/addresses
 
 ###### Order Comments
 
 Retrieve order comments for the specific order  
-**Resource Structure**: http://magentohost/api/rest/orders/:orderid/comments
+**Resource Structure**: https://mahohost/api/rest/orders/:orderid/comments
 
 ### Preparing for REST API
 
 These steps are required for utilizing REST API resources:
 
-1.  Set up permissions for REST resource operations from Magento Admin Panel.
-2.  Configure the attributes for different users types in Magento Admin Panel. There are 3 different types of users in accessing the data: Admin, Customer, and Guest. Admin is the backend logged in user, Customer is the fronted logged in user, and Guest is a non-logged in fronted user.
+1.  Set up permissions for REST resource operations from Maho Admin Panel.
+2.  Configure the attributes for different users types in Maho Admin Panel. There are 3 different types of users in accessing the data: Admin, Customer, and Guest. Admin is the backend logged in user, Customer is the fronted logged in user, and Guest is a non-logged in fronted user.
 
 ### Preparing REST API for the Third-Party Application
 
-1.  Register the third-party application (Consumer) in Magento Admin Panel.
-2.  The third-party application will utilize the provided consumer credentials to call Magento store for getting the access token to access the data.
+1.  Register the third-party application (Consumer) in Maho Admin Panel.
+2.  The third-party application will utilize the provided consumer credentials to call Maho store for getting the access token to access the data.
 
 ### PHP Examples
 
@@ -113,23 +116,23 @@ These steps are required for utilizing REST API resources:
 ```php
 <?php
 /**
- * Example of simple product POST using Admin account via Magento REST API. OAuth authorization is used.
+ * Example of simple product POST using Admin account via Maho REST API. OAuth authorization is used.
  * 
  * This file is a stand-alone OAuth client PHP file, which handles everything with the OAuth three-legged authentication. 
  * It uses PHP session to persist the current authentication state (step), the OAuth request token with its secret 
  * and the OAuth access token with its secret. 
  * 
- * Create this file oauth_admin.php in your Magento 1.x instance root folder to run this oauth authentication example.         
+ * Create this file oauth_admin.php in your Maho instance root folder to run this oauth authentication example.         
  * 
  * oauth_admin.php
  * 
  */
 
 $callbackUrl = "http://yourhost/oauth_admin.php";
-$temporaryCredentialsRequestUrl = "http://magentohost/oauth/initiate?oauth_callback=" . urlencode($callbackUrl);
-$adminAuthorizationUrl = 'http://magentohost/admin/oauth_authorize';
-$accessTokenRequestUrl = 'http://magentohost/oauth/token';
-$apiUrl = 'http://magentohost/api/rest';
+$temporaryCredentialsRequestUrl = "https://mahohost/oauth/initiate?oauth_callback=" . urlencode($callbackUrl);
+$adminAuthorizationUrl = 'https://mahohost/admin/oauth_authorize';
+$accessTokenRequestUrl = 'https://mahohost/oauth/token';
+$apiUrl = 'https://mahohost/api/rest';
 $consumerKey = 'yourconsumerkey';
 $consumerSecret = 'yourconsumersecret';
 
@@ -199,22 +202,22 @@ try {
 ```php
 <?php
 /**
- * Example of products list retrieve using Customer account via Magento REST API. OAuth authorization is used
+ * Example of products list retrieve using Customer account via Maho REST API. OAuth authorization is used
  * 
  * This file is a stand-alone Oauth client PHP file, which handles everything with the Oauth three-legged authentication. 
  * It uses PHP session to persist the current authentication state (step), the oauth request token with its secret 
  * and the oauth access token with its secret. 
  * 
- * Create this file oauth_customer in your Magento 1.x instance root folder to run this oauth authentication example.         
+ * Create this file oauth_customer in your Maho instance root folder to run this oauth authentication example.         
  * 
  * oauth_customer.php
  * 
  */ 
 $callbackUrl = "http://yourhost/oauth_customer.php";
-$temporaryCredentialsRequestUrl = "http://magentohost/oauth/initiate?oauth_callback=" . urlencode($callbackUrl);
-$adminAuthorizationUrl = 'http://magentohost/oauth/authorize';
-$accessTokenRequestUrl = 'http://magentohost/oauth/token';
-$apiUrl = 'http://magentohost/api/rest';
+$temporaryCredentialsRequestUrl = "https://mahohost/oauth/initiate?oauth_callback=" . urlencode($callbackUrl);
+$adminAuthorizationUrl = 'https://mahohost/oauth/authorize';
+$accessTokenRequestUrl = 'https://mahohost/oauth/token';
+$apiUrl = 'https://mahohost/api/rest';
 $consumerKey = 'yourconsumerkey';
 $consumerSecret = 'yourconsumersecret';
 
@@ -265,12 +268,12 @@ try {
 }
 ```
 
-### REST Client Example
+### API Client Example
 
 Retrieving the list of Products as a Guest
 
-1.  Use the [REST Client](https://addons.mozilla.org/en-US/firefox/addon/restclient/) that is a Firefox add-on. In the REST Client, in the **Method** drop-down list, select the **GET** option.
-2.  In the URL field, enter the following URL: http://magentohost/api/rest/products?limit=2.
+1.  Using an API client such as Postman, Insomnia, or Bruno, set the request **Method** to **GET**.
+2.  In the URL field, enter the following URL: https://mahohost/api/rest/products?limit=2.
 3.  Click **Send**. Information about the products will be displayed in the response body. Example in the XML format is as follows:
 
 **Example: XML**
@@ -294,7 +297,7 @@ Retrieving the list of Products as a Guest
         <final_price_with_tax>149.99</final_price_with_tax>
         <final_price_without_tax>149.99</final_price_without_tax>
         <is_saleable>1</is_saleable>
-        <image_url>http://magentohost/imageulr/nokia.jpg</image_url>
+        <image_url>https://mahohost/imageulr/nokia.jpg</image_url>
     </data_item>
     <data_item>
         <entity_id>17</entity_id>
@@ -312,7 +315,7 @@ Retrieving the list of Products as a Guest
         <final_price_with_tax>349.99</final_price_with_tax>
         <final_price_without_tax>349.99</final_price_without_tax>
         <is_saleable>1</is_saleable>
-        <image_url>http://magentohost/imageulr/blackberry.jpg</image_url>
+        <image_url>https://mahohost/imageulr/blackberry.jpg</image_url>
     </data_item>
 </magento_api>
 ```
@@ -321,7 +324,7 @@ Retrieving the list of Products as a Guest
 
 You can define the limit of items returned in the response by passing the limit parameter. By default, 10 items are returned and the maximum number is 100 items. You can also define the page number by passing the page parameter. Example:
 
-http://magentohost/api/rest/products?page=2&limit=20
+https://mahohost/api/rest/products?page=2&limit=20
 
 Authorization header will be required for Admin and Customer user types. The following parameters must be provided in the Authorization header for the call:
 

@@ -1,6 +1,9 @@
+!!! warning "Legacy API"
+    This is Maho's legacy REST API, inherited from Magento 1 and kept for backward compatibility. New integrations should use the modern [REST & GraphQL API (v2)](../v2/index.md) instead.
+
 HTTP status codes are an essential part of the REST concept. You can get familiar with all of them on [Wikipedia](http://en.wikipedia.org/wiki/List_of_http_status_codes).
 
-The Magento API attempts to return appropriate HTTP status codes for all requests. Any information is returned in the form of a standard HTTP response with an HTTP status code describing the error and the body message.
+The Maho API attempts to return appropriate HTTP status codes for all requests. Any information is returned in the form of a standard HTTP response with an HTTP status code describing the error and the body message.
 
 ## HTTP Status Codes
 
@@ -19,7 +22,7 @@ The following table contains possible common HTTP status codes:
 
 ## Error Messages
 
-When the Magento API returns an error message, it returns it in your requested format. For example, an error in the XML format might look like the following:
+When the Maho API returns an error message, it returns it in your requested format. For example, an error in the XML format might look like the following:
 
 ```xml
 <?xml version="1.0"?>

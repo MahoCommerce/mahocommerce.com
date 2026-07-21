@@ -1,25 +1,28 @@
 # Extending REST API to use coupon auto generation
 
+!!! warning "Legacy API"
+    This is Maho's legacy REST API, inherited from Magento 1 and kept for backward compatibility. New integrations should use the modern [REST & GraphQL API (v2)](../v2/index.md) instead.
+
 ## Overview
 
 Customers of traditional stores and online web stores love coupons. Typically, a merchant sends coupons to customers who input them when checking out. The coupon saves the customer money and hopefully entices the customer to visit the store more frequently. In addition, the merchant can track coupon codes to individual customers to target market those customers.
 
-### Coupon Auto Generation and the Magento REST API
+### Coupon Auto Generation and the Maho REST API
 
-Magento CE 1.7 introduced a new method of creating coupon codes - _auto generation_. Auto generating coupons means Magento programmatically creates several coupon codes at one time quickly and easily. However, if Magento generates the coupon codes, you'd have to manually distribute them to customers.
+Maho supports a method of creating coupon codes - _auto generation_. Auto generating coupons means Maho programmatically creates several coupon codes at one time quickly and easily. However, if Maho generates the coupon codes, you'd have to manually distribute them to customers.
 
-Magento's REST API is extensible and can easily be called by an outside program to auto generate coupon codes. You can use this feature, for example, to e-mail coupon codes to your top 100 customers.
+Maho's REST API is extensible and can easily be called by an outside program to auto generate coupon codes. You can use this feature, for example, to e-mail coupon codes to your top 100 customers.
 
-No programming is necessary to implement the extension module discussed in this guide; however, basic familiarity with Magento modules and PHP programming is desirable.
+No programming is necessary to implement the extension module discussed in this guide; however, basic familiarity with Maho modules and PHP programming is desirable.
 
-The Coupon AutoGen API enables any authorized external program to instruct Magento to:
+The Coupon AutoGen API enables any authorized external program to instruct Maho to:
 
 *   Auto-generate the specified number of coupon codes
 *   Return these codes to the calling program - simulated in this guide using a simple `.php` file
 
 ### Implementation Details
 
-This guide discusses how to use coupon auto generation and a web service to dynamically call the Magento REST API to generate a series of codes. The web service instantiates the underlying Magento sales rule (`salesrule/rule`) coupon code generator and creates a pool of new codes. These codes returned to the caller as a JSON string.
+This guide discusses how to use coupon auto generation and a web service to dynamically call the Maho REST API to generate a series of codes. The web service instantiates the underlying Maho sales rule (`salesrule/rule`) coupon code generator and creates a pool of new codes. These codes returned to the caller as a JSON string.
 
 To extend the REST API to add a web service for generating and retrieving coupon codes, this guide discusses the following:
 
@@ -33,12 +36,12 @@ To extend the REST API to add a web service for generating and retrieving coupon
 
 To implement and test the Coupon AutoGen API, you must have all of the following:
 
-*   Magento Community Edition (CE) 1.7 or later on Ubuntu.
+*   Maho on Ubuntu.
 *   [pecl OAuth 1.0a extension](http://pecl.php.net/package/oauth) which you install as discussed in [Installing OAuth](#prereq-software).  
-    Magento CE 1.7 and later support the [OAuth 1.0a specification](http://tools.ietf.org/html/rfc5849).
-*   _Optional._ [`phpmyadmin`](http://www.phpmyadmin.net/home_page/downloads.php), which makes it easier to view and manipulate the Magento database. You can use `phpmyadmin` for convenience to get the OAuth key and shared secret later in this guide.
+    Maho supports the [OAuth 1.0a specification](http://tools.ietf.org/html/rfc5849).
+*   _Optional._ [`phpmyadmin`](http://www.phpmyadmin.net/home_page/downloads.php), which makes it easier to view and manipulate the Maho database. You can use `phpmyadmin` for convenience to get the OAuth key and shared secret later in this guide.
 
-Although Magento supports other Linux operating systems, Ubuntu is the only one discussed in this guide. Consult an appropriate reference for equivalent commands on other Linux operating systems.
+Although Maho supports other Linux operating systems, Ubuntu is the only one discussed in this guide. Consult an appropriate reference for equivalent commands on other Linux operating systems.
 
 ### Installing OAuth
 
@@ -58,7 +61,7 @@ Before you begin, create a `phpinfo.php` file, if you have not already done so, 
 
 To create `phpinfo.php`:
 
-1.  Open a command prompt window and connect to your Magento server.
+1.  Open a command prompt window and connect to your Maho server.
 2.  Create a file named `phpinfo.php` anywhere on the web server's docroot:
 
     ```php
@@ -71,15 +74,13 @@ To create `phpinfo.php`:
     http://_host-or-ip_[:_port_]/_path-to-phpinfo_/phpinfo.php
 
 
-    For example, if your Magento instance hostname is `www.example.com` and you put `phpinfo.php` in the web server's docroot, enter:
+    For example, if your Maho instance hostname is `www.example.com` and you put `phpinfo.php` in the web server's docroot, enter:
     
     http://www.example.com/phpinfo.php
 
 4.  Search the resulting output for `OAuth`.  
-    The following figure shows an example of OAuth being properly set up.  
-    ![]({{ site.baseurl }}/guides/m1x/images/ht_magento-REST-API_phpinfo-oauth.png)  
-    If the preceding does _not_ display, OAuth is not set up so continue with the next section.  
-    If OAuth is already installed, continue with [Defining a Magento Coupon Code Generation Rule](#defining-a-magento-coupon-code-generation-rule).
+    If an OAuth section does _not_ display, OAuth is not set up so continue with the next section.  
+    If OAuth is already installed, continue with [Defining a Maho Coupon Code Generation Rule](#defining-a-maho-coupon-code-generation-rule).
 
 #### Installing the OAuth Packages
 
@@ -128,15 +129,14 @@ If your `phpinfo.php` page is still open in a web browser, press Control+R to fo
 
 **Note**: Do not continue until you know that OAuth installed successfully.
 
-## Defining a Magento Coupon Code Generation Rule
+## Defining a Maho Coupon Code Generation Rule
 
-To define a Magento coupon code generation rule:
+To define a Maho coupon code generation rule:
 
-1.  Log in to the Magento Admin Panel as an administrator.
+1.  Log in to the Maho Admin Panel as an administrator.
 2.  Click **Promotions** > **Shopping Cart Price Rules**.
 3.  On the Shopping Cart Price Rules page, click **Add New Rule** (in the upper-right corner of the page).  
-    The General Information page displays as follows.  
-    ![]({{ site.baseurl }}/guides/m1x/images/ht_magento-REST-API_rest_rule_info.png)
+    The General Information page displays.
 4.  Enter the following information.
 
     | Item | Description |
@@ -157,10 +157,9 @@ To define a Magento coupon code generation rule:
     | Public In RSS Feed | Click **No**. |
 
 5.  In the upper-right corner of the page, click **Save and Continue Edit**.  
-    The message `The rule has been saved` displays at the top of the page to indicate that Magento successfully saved the rule you just created.
+    The message `The rule has been saved` displays at the top of the page to indicate that Maho successfully saved the rule you just created.
 6.  In the left navigation bar, click **Actions**.  
-    The Actions page displays as follows.  
-    ![]({{ site.baseurl }}/guides/m1x/images/ht_magento-REST-API_rest_rule_actions.png)
+    The Actions page displays.
 7.  Enter the following information.
 
     | Item | Description |
@@ -175,7 +174,7 @@ To define a Magento coupon code generation rule:
     | _EE only_ Add Reward Points | Enter `0`. |
 
 8.  Click **Save** (in the upper-right corner of the page).  
-    The message `The rule has been saved` displays to indicate that Magento saved the rule action options you just entered. Notice that this page now has a row for the Generate Coupons rule you just defined.
+    The message `The rule has been saved` displays to indicate that Maho saved the rule action options you just entered. Notice that this page now has a row for the Generate Coupons rule you just defined.
 9.  Write down the rule ID (circled in red in the preceding figure). You will use this value later in this guide.
 
 ## Generating Coupon Codes
@@ -196,41 +195,41 @@ Now that you've created a rule, this section discusses how to use the rule to ma
     | Dash Every X Characters | Enter `0`. |
 
 4.  Click **Generate**.  
-    Magento displays the three coupon codes you created in the Coupon Code section.
+    Maho displays the three coupon codes you created in the Coupon Code section.
 5.  Click **Save**.
 
-## Extending Magento's REST API to Include Coupon Auto-Generation
+## Extending Maho's REST API to Include Coupon Auto-Generation
 
 In the preceding section, you created a Shopping Cart Price Rule named Generate Coupons that manually generates a set of coupon codes. To use those codes, you could export them to a file, and then import them into any external program you want; however, this is a time-consuming procedure!
 
-Fortunately, you can automate this process by adding a _coupon code auto-generate_ API to Magento's existing REST API. Using this API, an external program can automatically get the coupon codes it needs.
+Fortunately, you can automate this process by adding a _coupon code auto-generate_ API to Maho's existing REST API. Using this API, an external program can automatically get the coupon codes it needs.
 
-### Disabling the Magento Cache
+### Disabling the Maho Cache
 
-While you're implementing the Coupon AutoGen API, you must disable Magento's caching so Magento will find and use your new code immediately.
+While you're implementing the Coupon AutoGen API, you must disable Maho's caching so Maho will find and use your new code immediately.
 
 To disable the cache:
 
-1.  In the Magento Admin Panel, click **System** > **Cache Management**.
+1.  In the Maho Admin Panel, click **System** > **Cache Management**.
 2.  Click **Select All** (on the upper-left of the page).  
-    A check mark displays next to each Magento cache in the list.
+    A check mark displays next to each Maho cache in the list.
 3.  From the **Actions** list, click **Disable**.
 4.  Click **Submit**.  
-    Magento disables the selected caches, replacing the green ENABLED status indicators with red DISABLED indicators.
-5.  Click **Flush Magento Cache** and wait for the cache to be flushed.
-6.  Log out of the Magento Admin Panel.
+    Maho disables the selected caches, replacing the green ENABLED status indicators with red DISABLED indicators.
+5.  Click **Flush Maho Cache** and wait for the cache to be flushed.
+6.  Log out of the Maho Admin Panel.
 
 ### Creating Configuration Files
 
-This section discusses how to create a module (also referred to as an _extension_). The module consists of configuration files that create a web service that extends the Magento REST API to take input from an external program. This program uses [HTTP POST](http://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html#sec9.5) and OAuth calls to auto-generate coupon codes.
+This section discusses how to create a module (also referred to as an _extension_). The module consists of configuration files that create a web service that extends the Maho REST API to take input from an external program. This program uses [HTTP POST](http://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html#sec9.5) and OAuth calls to auto-generate coupon codes.
 
 In this guide, the external program is a PHP script; however, it could be any application that uses OAuth and REST calls.
 
-For more information about Magento module development, see [developer documentation on Magento Connect](http://www.magentocommerce.com/magento-connect/create_your_extension/).
+For more information about Maho module development, consult the Maho developer documentation.
 
 **Note**: It is up to you to determine ownership and permissions. This guide assumes you create files and directories as `root` and change the permissions appropriately later. Consult an IT administrator if you're not sure how to proceed.
 
-1.  Log in to your Magento server and create the following directories:
+1.  Log in to your Maho server and create the following directories:
 
      ```
     app/code/community/CouponDemo
@@ -247,7 +246,7 @@ For more information about Magento module development, see [developer documentat
     
     *   You must create the files and directories _exactly_ as shown; directory names are case-sensitive.
     *   Do not change any values in the configuration files discussed in this section.
-    *   When you create your configuration files, leave _no white space_ at the beginning of the files. Leading white space might cause errors when Magento reads the files and might prevent the coupon demonstration module from working.
+    *   When you create your configuration files, leave _no white space_ at the beginning of the files. Leading white space might cause errors when Maho reads the files and might prevent the coupon demonstration module from working.
 
 2.  Change to the `app/etc/modules` directory.
 3.  In that directory, use a text editor to create your module declaration file. This file must be named `CouponDemo_AutoGen.xml` and have the following contents.  
@@ -343,10 +342,10 @@ For more information about Magento module development, see [developer documentat
      class CouponDemo_AutoGen_Model_Api2_Coupon_Rest_Admin_V1 extends CouponDemo_AutoGen_Model_Api2_Coupon
      {     
         /**     
-         * Generate one or more coupon codes using the Generate Coupons rule defined in Magento.      
+         * Generate one or more coupon codes using the Generate Coupons rule defined in Maho.      
          * Expected parameters are:      
          * {      
-         *    'qty': int, - number of coupon codes to instruct Magento to generate      
+         *    'qty': int, - number of coupon codes to instruct Maho to generate      
          *    'length': int, - length of each generated coupon code      
          *    'format': string, - alphanum (for alphanumeric codes), alpha (for alphabetical codes), and num (for numeric codes)      
          * }      
@@ -418,18 +417,18 @@ For more information about Magento module development, see [developer documentat
 
 ### Setting Permissions on the Configuration Files
 
-File permissions and ownership are important for any Linux application. Magento provides general guidelines for permission and ownership although following them are not a requirement for this guide. The configuration files and directories can be owned by `root` or other users and it won't prevent the procedures discussed in this guide from completing successfully.
+File permissions and ownership are important for any Linux application. Maho provides general guidelines for permission and ownership although following them are not a requirement for this guide. The configuration files and directories can be owned by `root` or other users and it won't prevent the procedures discussed in this guide from completing successfully.
 
 Consult your network administrator if you are not sure how to set file permissions and ownership. The procedure that follows is a suggestion only.
 
-The Magento guidelines discussed in the following procedure are taken from this Magento Wiki article and set the following:
+The guidelines discussed in the following procedure set the following:
 
 *   File and directory ownership set to `_your-login-name_:_apache-user-group_`.  
     If you're not sure which group owns Apache processes, enter the command `ps -ef | grep apache2`. The following procedure assumes it is `www-data`.
 *   File permissions set to 644.
 *   Directory permissions set to 755.
 
-To optionally set permissions and ownership according to Magento guidelines:
+To optionally set permissions and ownership according to Maho guidelines:
 
 1.  As a user with `root` privileges, enter the following commands in the order shown to change ownership of the files and directories you created as discussed in this guide:
 
@@ -450,13 +449,13 @@ To optionally set permissions and ownership according to Magento guidelines:
 
 ## Securing the Coupon AutoGen API
 
-For security reasons, Magento allows only authorized external programs to call the Magento REST API.
+For security reasons, Maho allows only authorized external programs to call the Maho REST API.
 
 ### Creating a REST role for the Coupon AutoGen API
 
-To use the Magento Admin Panel to create a role for the Coupon AutoGen API:
+To use the Maho Admin Panel to create a role for the Coupon AutoGen API:
 
-1.  Log in to the Magento Admin Panel as an administrator.
+1.  Log in to the Maho Admin Panel as an administrator.
 2.  Click **System** > **Web Services** > **REST - Roles**.
 3.  On the REST - Roles page, click **Add Admin Role**.
 4.  In the **Role Name** field, enter `Coupon Auto Generate Demo`.
@@ -466,7 +465,7 @@ To use the Magento Admin Panel to create a role for the Coupon AutoGen API:
 7.  From the **Resource Access** list, click **Custom**.
 8.  Select the checkbox next to the node labeled **CouponDemo API**.
 9.  Click **Save Role**.  
-    Magento saves the resource API permissions you granted to the Coupon Auto Generate Demo REST role.  
+    Maho saves the resource API permissions you granted to the Coupon Auto Generate Demo REST role.  
     The Coupon Auto Generate Demo role now has permission to use the Coupon AutoGen API.
 
 ### Adding Users to the Coupon Auto Generate Demo Role
@@ -501,34 +500,34 @@ To set REST attributes for the REST Admin role:
 
 This section discusses how to create a consumer so you can test the Coupon AutoGen API before you deploy it in a production system. After successfully testing the API, you can remove this user.
 
-1.  In the Magento Admin Panel, click **System** > **Web Services** > **REST - OAuth Consumers**.
+1.  In the Maho Admin Panel, click **System** > **Web Services** > **REST - OAuth Consumers**.
 2.  Click **Add New** (in the upper-right corner of the page).  
     The **New Consumer** page displays.
 3.  In the **Name** field, enter `Coupon AutoGen Test Driver`.
 4.  Leave the other fields blank.
 5.  _Write down_ the values displayed in the **Key** and **Secret** text boxes.
 
-    **Note**: The key and secret values are stored in the Magento database in the table `oauth_consumer`. It might be more convenient for you to use `phpmyadmin` or database tools to retrieve them from the database after you save the role.
+    **Note**: The key and secret values are stored in the Maho database in the table `oauth_consumer`. It might be more convenient for you to use `phpmyadmin` or database tools to retrieve them from the database after you save the role.
 
-    You must include these values in the test script you will write in the next section. The script uses these values to identify itself to Magento.
+    You must include these values in the test script you will write in the next section. The script uses these values to identify itself to Maho.
 6.  Click **Save** (in the upper-right corner of the page).
-7.  Log out of the Magento Admin Panel.
+7.  Log out of the Maho Admin Panel.
 
 ## Testing the Coupon AutoGen API
 
 This section discusses how to create a simple PHP file that acts as an external program and, with permissions you granted the OAuth consumer, enables the program to use the [HTTP POST](http://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html#sec9.5) method to auto generate coupon codes.
 
-You can use _any_ type of OAuth/REST call, in fact, such as using the Firefox REST Client plug-in as discussed [here](http://www.magentocommerce.com/api/rest/testing_rest_resources.html).
+You can use _any_ type of OAuth/REST call, in fact, such as using an API client like Postman, Insomnia, or Bruno as discussed [here](testing_rest_resources.md).
 
 ### Creating the Test Script
 
-The test script you create calls the Coupon AutoGen API, thereby causing Magento to generate the specified coupon codes and return them to the caller (`rest_test.php`) in the form of a JSON-encoded string. Finally, the server responds to the browser's request with an HTML page containing the generated coupon codes.
+The test script you create calls the Coupon AutoGen API, thereby causing Maho to generate the specified coupon codes and return them to the caller (`rest_test.php`) in the form of a JSON-encoded string. Finally, the server responds to the browser's request with an HTML page containing the generated coupon codes.
 
 The PHP code that follows:
 
 *   Uses your OAuth `consumerKey` and `consumerSecret` to set up the OAuth client.
 *   Defines data to pass to the array `$couponGenerationData`. The data should include the following:
-    *   The rule ID (listed next to the rule in the rule list in the Magento Admin Panel)
+    *   The rule ID (listed next to the rule in the rule list in the Maho Admin Panel)
     *   The number of codes desired (in this case, two)
     *   The length of the codes
     *   The format to be used (in this case, alphanumeric)
@@ -538,7 +537,7 @@ Finally, the server responds to the browser's request with an HTML page containi
 
 To create the test script, named `rest_test.php`:
 
-1.  Create the file `_magento-install-dir_/rest_test.php` with the following contents.
+1.  Create the file `_maho-install-dir_/rest_test.php` with the following contents.
     ```php
     <?php
     // Replace <<...>> below with the key and secret values generated for the Coupon AutoGen Test Driver
@@ -549,7 +548,7 @@ To create the test script, named `rest_test.php`:
     // Set the OAuth callback URL to this script since it contains the logic
     // to execute *after* the user authorizes this script to use the Coupon AutoGen API
     $callbackUrl = "http://<<host-or-ip:port>>/<<path>>/rest_test.php"; 
-    // Set the URLs below to match your Magento installation
+    // Set the URLs below to match your Maho installation
     $temporaryCredentialsRequestUrl = "http://<<host-or-ip:port>>/<<path>>/oauth/initiate?oauth_callback=" . urlencode($callbackUrl);
     $adminAuthorizationUrl = 'http://<<host-or-ip:port>>/<<path>>/admin/oauth_authorize';
     $accessTokenRequestUrl = 'http://<<host-or-ip:port>>/<<path>>/oauth/token';
@@ -620,9 +619,9 @@ To create the test script, named `rest_test.php`:
 
     | String to change | How to change it |
     | --- | --- |
-    | <<YOUR CONSUMER KEY>> | Coupon AutoGen Test Driver OAuth consumer's key.<br><br>You can view this in the Admin Panel: **System** > **Web Services** > **REST - OAuth Consumers** or you can get the value from the `oauth_consumer` table in the Magento database. |
-    | <<YOUR CONSUMER SECRET>> | Coupon AutoGen Test Driver OAuth consumer's secret.<br><br>You can view this in the Admin Panel: **System** > **Web Services** > **REST - OAuth Consumers** or you can get the value from the `oauth_consumer` table in the Magento database. |
-    | <<host-or-ip:port>>/<<path>> | Your Magento instance's fully qualified hostname or IP address and port, if you are using a port other than 80, and the path to your Magento installation. If you are running Magento on localhost, enter `127.0.0.1`<br><br>``   For example, if your Magento server's hostname is `www.example.com`, running on port 80, and Magento is installed at `/var/www/magento`, enter `http://www.example.com/magento`   `` |
+    | <<YOUR CONSUMER KEY>> | Coupon AutoGen Test Driver OAuth consumer's key.<br><br>You can view this in the Admin Panel: **System** > **Web Services** > **REST - OAuth Consumers** or you can get the value from the `oauth_consumer` table in the Maho database. |
+    | <<YOUR CONSUMER SECRET>> | Coupon AutoGen Test Driver OAuth consumer's secret.<br><br>You can view this in the Admin Panel: **System** > **Web Services** > **REST - OAuth Consumers** or you can get the value from the `oauth_consumer` table in the Maho database. |
+    | <<host-or-ip:port>>/<<path>> | Your Maho instance's fully qualified hostname or IP address and port, if you are using a port other than 80, and the path to your Maho installation. If you are running Maho on localhost, enter `127.0.0.1`<br><br>``   For example, if your Maho server's hostname is `www.example.com`, running on port 80, and Maho is installed at `/var/www/maho`, enter `http://www.example.com/maho`   `` |
     | <<RULE_ID>> | Generate Coupons rule ID.<br><br>Get this value by clicking **Promotions** > **Shopping Cart Price Rules**<br><br>. |
 
 3.  Save the file and close the text editor.
@@ -650,24 +649,24 @@ To optionally see these codes in the Admin Panel:
 4.  In the left navigation bar, click **Manage Coupon Codes**.  
     The codes you generated manually earlier display with the new codes (highlighted in red).
 
-### Re-Enabling Magento's Cache
+### Re-Enabling Maho's Cache
 
-Only after successfully completing the test, you should re-enable Magento's caching system, so performance returns to normal.
+Only after successfully completing the test, you should re-enable Maho's caching system, so performance returns to normal.
 
-To re-enable the Magento cache:
+To re-enable the Maho cache:
 
-1.  In the Magento Admin Panel, click **System** > **Cache Management**.
+1.  In the Maho Admin Panel, click **System** > **Cache Management**.
 2.  On the Cache Storage Management page, click **Select All** (in the upper-left of the page).  
-    A check mark displays next to each Magento cache in the list.
+    A check mark displays next to each Maho cache in the list.
 3.  Click `Enable` from the **Actions** list.
 4.  Click **Submit**.  
-    Magento enables the selected caches. You can tell because the red DISABLED status indicator is replaced by a green ENABLED indicator.
+    Maho enables the selected caches. You can tell because the red DISABLED status indicator is replaced by a green ENABLED indicator.
 5.  Click **Select All** again.
 6.  Click `Refresh` from the **Actions** list.
 7.  Click **Submit**.  
-    Magento reloads the selected caches. Magento now performs much faster.
+    Maho reloads the selected caches. Maho now performs much faster.
 
-Congratulations! You have successfully added the Coupon AutoGen API to Magento's REST API.
+Congratulations! You have successfully added the Coupon AutoGen API to Maho's REST API.
 
 ## Troubleshooting Suggestions
 
@@ -716,14 +715,14 @@ ERROR: `make' failed
 
 **Problem:** After setting up the CouponDemo configuration files, the **CouponDemo API Calls** checkboxes do not display in the Admin Panel. A sample is shown [in a figure earlier in this guide](#figure_check-boxes).
 
-**Description:** The **CouponDemo API Calls** checkboxes display to indicate you set up the module correctly. If they don't display, either the Magento cache hasn't been entirely cleared or there's something wrong with the directory structure or configuration files.
+**Description:** The **CouponDemo API Calls** checkboxes display to indicate you set up the module correctly. If they don't display, either the Maho cache hasn't been entirely cleared or there's something wrong with the directory structure or configuration files.
 
 **Solution:** Use the following steps to isolate and correct the issue:
 
 1.  Make sure your directory structure is set up _exactly_ as shown in [this figure earlier in this guide](#figure_dir-structure).
 2.  Make sure you copied the _exact text_ from the sample configuration files discussed in [Creating Configuration Files](#extend-rest-api_create-files). _Do not change anything_, and remember that case is important.
-3.  Clear the Magento cache.
-4.  Log out of the Magento Admin Panel and log back in.
+3.  Clear the Maho cache.
+4.  Log out of the Maho Admin Panel and log back in.
 5.  Click **System** > **REST - Roles**.
 6.  Click **Coupon Auto Generate Demo**.
 7.  In the left navigation bar, click **Role API Resources**.
@@ -774,14 +773,14 @@ You can find this value in the Admin Panel: **Promotions** > **Shopping Cart Pri
 
 Change the value in `rest_test.php`, save it, and try again.
 
-#### Invalid auth/bad request: /magento/oauth/initiate was not found on this server
+#### Invalid auth/bad request: /maho/oauth/initiate was not found on this server
 
 The following error displays in the web browser:
 
 ```
 Invalid auth/bad request (got a 404, expected HTTP/1.1 20X or a redirect)
 Not Found
-The requested URL /magento/oauth/initiate was not found on this server.
+The requested URL /maho/oauth/initiate was not found on this server.
 ```
 
 **Description:** The HTTP redirect failed, most likely because web server rewrites are not properly enabled.

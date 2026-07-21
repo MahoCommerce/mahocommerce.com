@@ -1,3 +1,6 @@
+!!! warning "Legacy API"
+    This is Maho's legacy REST API, inherited from Magento 1 and kept for backward compatibility. New integrations should use the modern [REST & GraphQL API (v2)](../../v2/index.md) instead.
+
 ## Introduction
 
 After the authentication is complete successfully, the Access Token is received and will be used in every API call. This key allows identifying the client that accesses the API. With the help of this key, the following information about the user can be retrieved:
@@ -9,7 +12,7 @@ After the authentication is complete successfully, the Access Token is received 
 
 ### Access Levels
 
-There is a three-level authorization approach in Magento REST API. These three levels are as follows:
+There is a three-level authorization approach in Maho REST API. These three levels are as follows:
 
 -   Guest
 -   Customer
@@ -18,7 +21,7 @@ There is a three-level authorization approach in Magento REST API. These three l
 The following graphic describes the default rights for each access level with each level obtaining more rights up to Admin who has access to everything.
 
 Each user type will be described below.  
-Magento grants permissions for the following three types of users:
+Maho grants permissions for the following three types of users:
 
 **Guest**
 
@@ -38,9 +41,9 @@ Understanding of access levels is the basis of the ACL work.
 
 #### ACL Overview
 
-Every user has a specific role and purpose. To accomplish their goals, each user must be able to access certain resources and perform specific actions. Allowing users to access the resources without any limits can compromise Magento security.
+Every user has a specific role and purpose. To accomplish their goals, each user must be able to access certain resources and perform specific actions. Allowing users to access the resources without any limits can compromise Maho security.
 
-The Access Control List (ACL) is a set of permissions (access rights) that particular users have for certain resources. When a user wants to perform a specific action with a resource (for example, update the customer information), Magento checks the permission for this combination of user, resource, and action. If the action is allowed, the user can proceed. Otherwise, the action is denied.
+The Access Control List (ACL) is a set of permissions (access rights) that particular users have for certain resources. When a user wants to perform a specific action with a resource (for example, update the customer information), Maho checks the permission for this combination of user, resource, and action. If the action is allowed, the user can proceed. Otherwise, the action is denied.
 
 #### Understanding ACL
 

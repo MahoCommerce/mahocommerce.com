@@ -392,6 +392,9 @@ class Packagename_Mymodule_Model_Observer
 }
 ```
 
+!!! tip "Modern alternative"
+    XML observer registration still works, but since v26.5 the recommended way is the `#[Maho\Config\Observer]` PHP attribute placed directly on the observer method. See [Event observers](../observers.md).
+
 ## Class Overrides
 
 Finally, the Maho System offers you the ability to replace Model, Helper and Block classes from the core modules with your own. This is a feature that's similar to "Duck Typing" or "Monkey Patching" in a language like Ruby or Python.

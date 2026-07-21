@@ -1,11 +1,14 @@
 # Testing REST Resources
 
+!!! warning "Legacy API"
+    This is Maho's legacy REST API, inherited from Magento 1 and kept for backward compatibility. New integrations should use the modern [REST & GraphQL API (v2)](../v2/index.md) instead.
+
 ## Introduction
 
 Three steps are required for utilizing REST API resources:
 
--   [Authenticate the user](http://www.magentocommerce.com/api/rest/authentication/oauth_authentication.html "OAuth Authentication") (receive the access token for further steps);
--   Configure the [permissions for operations](http://www.magentocommerce.com/api/rest/permission_settings/roles_configuration.html "REST Roles Configuration") and [attributes](http://www.magentocommerce.com/api/rest/permission_settings/attributes_configuration.html "REST Attributes Configuration") for the type of the user;
+-   [Authenticate the user](authentication/oauth_authentication.md "OAuth Authentication") (receive the access token for further steps);
+-   Configure the [permissions for operations](permission_settings/roles_configuration.md "REST Roles Configuration") and [attributes](permission_settings/attributes_configuration.md "REST Attributes Configuration") for the type of the user;
 -   Make an API call.
 
 The following headers are required for the call:
@@ -25,13 +28,13 @@ The following parameters must be provided in the Authorization header for the ca
 -   oauth_token
 -   oauth_signature
 
-## Testing REST resources with the [REST Client](https://addons.mozilla.org/en-US/firefox/addon/restclient/) plugin for the Mozilla Firefox browser.
+## Testing REST resources with an API client (Postman, Insomnia, or Bruno)
 
-1.  Open the REST Client.
+1.  Open your API client.
 2.  From the Authentication drop-down, select **OAuth**.
 3.  In the OAuth window, on the Signature for the request tab, fill in the following fields:  
-    -   **Consumer key**: Enter the **Key** value provided when you created the consumer in Magento Admin Panel.
-    -   **Consumer secret**: Enter the **Secret** value provided when you created the consumer in Magento Admin Panel.
+    -   **Consumer key**: Enter the **Key** value provided when you created the consumer in Maho Admin Panel.
+    -   **Consumer secret**: Enter the **Secret** value provided when you created the consumer in Maho Admin Panel.
     -   **Access token**: Enter the oauth_token value received when you authenticated the application.
     -   **Access token secret**: Enter the oauth_token_secret value received when you authenticated the application.
 4.  On the OAuth setting tab, define the following options:
@@ -40,7 +43,7 @@ The following parameters must be provided in the Authorization header for the ca
     -   Leave the **Realm**, **oAuth Nonce**, and **oAuth Timestamp** values set by default.
 5.  Click **Save** and wait for the confirmation dialog to close.
 6.  Return to the Signature for the request tab and select **Insert > Insert as header**.  
-    An authorization header is created on the main page of REST Client.  
+    An authorization header is created on the main page of your API client.  
     **NOTE**: Click the header with authorization data and click **Auto refresh** in the opened pop-up in order to generate new values for oauth_nonce, oauth_timestamp, and oauth_signature at each request.
 7.  From the **Headers** drop-down, select **Custom Header**.  
 8.  In the **Request Header** window, enter "Content-Type" in the **Name** field and "text/xml" in the **Value** field (if you want to use the XML data format). To use the JSON request data format, enter application/json instead of the text/xml value.
@@ -49,10 +52,10 @@ The following parameters must be provided in the Authorization header for the ca
 ### Example: Retrieving the List of Products
 
 1.  From the **Method** drop-down list, select the **GET** option.
-2.  In the **URL** field, enter the following URL: http://magentohost/api/rest/products. You can limit the number of products returned in the response. To set the limit to 4, enter the following URL: http://magentohost/api/rest/products?limit=4
+2.  In the **URL** field, enter the following URL: https://mahohost/api/rest/products. You can limit the number of products returned in the response. To set the limit to 4, enter the following URL: https://mahohost/api/rest/products?limit=4
 3.  Click **Send**. Information about all products will be displayed in the response body.
 
-## Testing REST resources with the [Advanced REST Client](https://chrome.google.com/webstore/detail/hgmloofddffdnphfgcellkdfbfbjeloo) for Google Chrome browser.
+## Testing REST resources with the Advanced REST Client
 
 1.  Open the Advanced REST Client Application.  
 2.  In the **Headers** box, select the **Form** tab.
@@ -62,8 +65,8 @@ The following parameters must be provided in the Authorization header for the ca
 6.  In the **Type** group of options, select the **Signed Request** option.
 7.  In the **signature method** group of options, select which method will be used for signatures (HMAC-SHA1 or PLAINTEXT).
 8.  Fill in the following data:
-    -   **Consumer key**: Enter the **Key** value provided when you created the consumer in Magento Admin Panel.
-    -   **Consumer secret**: Enter the **Secret** value provided when you created the consumer in Magento Admin Panel.
+    -   **Consumer key**: Enter the **Key** value provided when you created the consumer in Maho Admin Panel.
+    -   **Consumer secret**: Enter the **Secret** value provided when you created the consumer in Maho Admin Panel.
     -   **Access Token**: Enter the oauth_token value received when you authenticated the application.
     -   **Access Token Secret**: Enter the oauth_token_secret value received when you authenticated the application.
 9.  Click **OK**.  
@@ -75,12 +78,12 @@ The following parameters must be provided in the Authorization header for the ca
 ### Example: Retrieving the list of customers
 
 1.  In the **Method** group of options, select the **GET** option.
-2.  In the URL field, enter the following URL: http://magentohost/api/rest/customers.
+2.  In the URL field, enter the following URL: https://mahohost/api/rest/customers.
 3.  Click **Send request**. Information about all customers will be displayed in the response body. Note that only Admin type of the user can retrieve the list of customers.
 
 ### Example: Creating a customer address
 
 1.  In the **Method** group of options, select the **POST** option.
-2.  In the URL field, enter the following URL: http://magentohost/api/rest/customers/:id/addresses where the ":id" value is the customer ID in the system.
+2.  In the URL field, enter the following URL: https://mahohost/api/rest/customers/:id/addresses where the ":id" value is the customer ID in the system.
 3.  In the **Body** table, on the **Raw input** tab, enter the data required for customer address creation.
 4.  Click **Send request**. If the address is created, the 200 OK HTTP status code will be returned.

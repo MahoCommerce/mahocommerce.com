@@ -101,6 +101,9 @@ First, we're going to add the following <global> section to our config.xml file.
 </config>
 ```
 
+!!! tip "Modern alternative"
+    XML observer registration still works and is what this tutorial uses, but since v26.5 the recommended way is the `#[Maho\Config\Observer]` PHP attribute placed directly on the observer method. See [Event observers](../observers.md).
+
 Then, create a file at
 
 `Mahotutorial/Configviewer/Model/Observer.php`

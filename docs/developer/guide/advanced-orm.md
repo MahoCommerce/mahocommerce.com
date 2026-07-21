@@ -39,8 +39,17 @@ In an EAV Model, each "entity" (product) being modeled has a **different** set o
 
 There aren't many open source or commercial databases that use EAV by default. There are none that are available on a wide variety of web hosting platforms. Because of that, the Maho engineers have built an EAV system out of PHP objects that use MySQL as a data-store. In other words, they've built an EAV database system **on top of** a traditional relational database.
 
-In practice this means any Model that uses an EAV resource has its attributes spread out over a number of MySQL tables.  
-[![](http://alanstorm.com/2009/img/magento-book/eav.png)](http://alanstorm.com/2009/img/magento-book/eav.png)
+In practice this means any Model that uses an EAV resource has its attributes spread out over a number of MySQL tables.
+
+```mermaid
+erDiagram
+    eav_entity_type ||--o{ catalog_product_entity : "entity_type_id"
+    eav_entity_type ||--o{ eav_attribute : "entity_type_id"
+    catalog_product_entity ||--o{ catalog_product_entity_varchar : "entity_id"
+    eav_attribute ||--o{ catalog_product_entity_varchar : "attribute_id"
+    catalog_product_entity ||--o{ catalog_product_entity_decimal : "entity_id"
+    eav_attribute ||--o{ catalog_product_entity_decimal : "attribute_id"
+```
 
 The above diagram is a rough layout of the database tables Maho consults when it looks up an EAV record for the catalog_product entity. Each individual product has a row in catalog_product_entity. All the available attributes in the **entire** system (not just for products) are stored in eav_attribute, and the actual attribute values are stored in tables with names like catalog_product_entity_varchar, catalog_product_entity_decimal, catalog_product_entity__etc._.
 
@@ -106,7 +115,7 @@ Again, so far this is setup similar to our regular Model Resource. We provide a 
 
 ## Where Does That File Go?
 
-One of the trickier (and more tedious) parts of working with the legacy `Mage_`/grouped-class naming is remembering how `<classname/>`s relate to file paths, and then creating the correctly named directory structure and class files. After configuring any `<classname/>`s or URIs, you may find it useful to attempt to instantiate the class in a controller **without** first creating the class files. This way PHP will throw an exception telling you it can't find the file, along with the file location. Give the following a try in your Index Controller.
+One of the trickier (and more tedious) parts of working with the legacy `Mage_`/grouped-class naming is remembering how `<classname/>`s relate to file paths, and then creating the correctly named directory structure and class files. After configuring any `<classname/>`s or URIs, you may find it useful to attempt to instantiate the class in a controller **without** first creating the class files. This way PHP will throw an error telling you the class name it was looking for, which maps directly to the file path you'll need to create. Give the following a try in your Index Controller.
 
 ```php
 public function indexAction()
@@ -117,15 +126,13 @@ public function indexAction()
 }
 ```
 
-As predicted, a warning should be thrown
+As predicted, an error should be thrown
 
-Warning: include(Mahotutorial/Complexworld/Model/Eavblogpost.php) [function.include]: 
-failed to open stream: No such file or directory  in /Users/username/Sites/maho.dev/lib/Varien/Autoload.php on line 93
+    Error: Class "Mahotutorial_Complexworld_Model_Eavblogpost" not found
 
-In addition to telling us the path where we'll need to define the new resource class this also serves as a configuration check. If we'd been warned with the following
+The class name tells us where we'll need to define the new resource class (`app/code/local/Mahotutorial/Complexworld/Model/Eavblogpost.php`), and it also serves as a configuration check. If we'd seen the following instead
 
-Warning: include(Mage/Complexworld/Model/Eavblogpost.php) [function.include]: 
-failed to open stream: No such file or directory  in /Users/username/Sites/maho.dev/lib/Varien/Autoload.php on line 93
+    Error: Class "Mage_Complexworld_Model_Eavblogpost" not found
 
 we'd know our Model was misconfigured, as Maho was looking for the Model in code/core/Mage instead of code/local/Mahotutorial.
 
@@ -261,7 +268,10 @@ class Mahotutorial_Complexworld_Model_Resource_Setup extends Mage_Eav_Model_Enti
 
 Take note that we're extending from Mage_Eav_Model_Entity_Setup rather than Mage_Core_Model_Resource_Setup.
 
-Finally, we'll set up our installer script. If you're not familiar with the naming conventions here, you'll want to review the setup resource tutorial on Setup Resources.
+Finally, we'll set up our installer script. If you're not familiar with the naming conventions here, you'll want to review the [Setup Resources](setup-resources.md) tutorial.
+
+!!! tip "Modern alternative"
+    For plain table structures, modern Maho modules should use [declarative database schema](../declarative-database-schema.md) (v26.7+) instead of writing DDL in installer scripts. EAV entity and attribute setup like the `addEntityType()` / `addAttribute()` calls in this tutorial still lives in setup scripts.
 
 File: app/code/local/Mahotutorial/Complexworld/sql/complexworld_setup/install-0.1.0.php:
 
@@ -513,7 +523,7 @@ public function populateEntriesAction()
         $weblog2 = Mage::getModel('complexworld/eavblogpost');
         $weblog2->setTitle('This is a test '.$i);
         $weblog2->setContent('This is test content '.$i);
-        $weblog2->setDate(Mage::getSingleton('core/date')->gmtDate());
+        $weblog2->setDate(Mage::app()->getLocale()->formatDateForDb('now'));
         $weblog2->save();
     }
 
@@ -589,8 +599,7 @@ Finally, let's pull our Models back out. Load the following URL in your browser
 
 This should give us a
 
-Warning: include(Mahotutorial/Complexworld/Model/Resource/Eavblogpost/Collection.php) [function.include]: 
-  failed to open stream: No such file or directory  in /Users/username/Sites/Maho.dev/lib/Varien/Autoload.php on line 93
+    Error: Class "Mahotutorial_Complexworld_Model_Resource_Eavblogpost_Collection" not found
 
 **So Close!** We didn't make a class for our collection object! Fortunately, doing so is just as easy as with a regular Model Resource. Add the following file with the following contents
 

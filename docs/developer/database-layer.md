@@ -201,8 +201,8 @@ $adapter->insert('catalog_product', [
     'sku' => 'NEW-SKU-001',
     'name' => 'New Product',
     'status' => 1,
-    // Always use utcDate() for database timestamps (stores in UTC)
-    'created_at' => Mage::app()->getLocale()->utcDate(null, null, true)->format(Mage_Core_Model_Locale::DATETIME_FORMAT)
+    // Always use formatDateForDb() for database timestamps (stores in UTC)
+    'created_at' => Mage::app()->getLocale()->formatDateForDb('now')
 ]);
 
 // Get last insert ID
@@ -223,7 +223,7 @@ $adapter->insertMultiple('catalog_product', $data);
 // Update with WHERE clause
 $adapter->update(
     'catalog_product',
-    ['status' => 0, 'updated_at' => Mage::app()->getLocale()->utcDate(null, null, true)->format(Mage_Core_Model_Locale::DATETIME_FORMAT)],
+    ['status' => 0, 'updated_at' => Mage::app()->getLocale()->formatDateForDb('now')],
     'sku = "OLD-SKU-001"'
 );
 

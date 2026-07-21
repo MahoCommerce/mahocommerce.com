@@ -1,12 +1,15 @@
-Accessing API is performed via HTTP. When you enter a URL into a web browser address bar, the browser performs an HTTP GET request to the URL. This usually returns a web page in the form of an HTTP response that the browser displays. But the GET method is one of several HTTP request methods. Magento REST API uses the four main HTTP methods: GET, POST, PUT, and DELETE. The most widespread methods are GET and POST. The other methods are less known but they became widely known due to the popularity of REST web services. An important concept of the REST architecture is that different HTTP request methods perform different actions when applied to the same URL.
+!!! warning "Legacy API"
+    This is Maho's legacy REST API, inherited from Magento 1 and kept for backward compatibility. New integrations should use the modern [REST & GraphQL API (v2)](../v2/index.md) instead.
+
+Accessing API is performed via HTTP. When you enter a URL into a web browser address bar, the browser performs an HTTP GET request to the URL. This usually returns a web page in the form of an HTTP response that the browser displays. But the GET method is one of several HTTP request methods. Maho REST API uses the four main HTTP methods: GET, POST, PUT, and DELETE. The most widespread methods are GET and POST. The other methods are less known but they became widely known due to the popularity of REST web services. An important concept of the REST architecture is that different HTTP request methods perform different actions when applied to the same URL.
 
 For example:
 
-GET https://magentohost/rest/customers/123
+GET https://mahohost/rest/customers/123
 
 will retrieve information about the specified customer;
 
-DELETE https://magentohost/rest/customers/123
+DELETE https://mahohost/rest/customers/123
 
 will delete the specified customer.
 
