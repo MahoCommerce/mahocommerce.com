@@ -602,7 +602,15 @@ A daily cron job (runs at 1 AM) automatically:
 
 1. Verify the order has been invoiced
 2. Check invoice payment status
-3. Verify cron is running: `./maho cron:run`
+3. Confirm the scheduled cron jobs are running (gift cards are generated when the invoice is paid)
+
+??? note "For developers / advanced"
+
+    Gift card generation is triggered by Maho's cron. To run the queue manually and confirm cron is working, use the Maho CLI:
+
+    ```bash
+    ./maho cron:run
+    ```
 
 ### Emails Not Sending
 

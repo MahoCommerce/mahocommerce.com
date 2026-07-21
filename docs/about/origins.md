@@ -45,5 +45,5 @@ By adopting a new identity, we're opening doors to new perspectives and possibil
 This name change signals to the community that while we build on a solid foundation, we're evolving into something
 distinctly powerful and forward-looking.
 
-**Maho is a new tree growing from time-tested roots – familiar in essence, yet branching out in exciting
+**Maho is a new tree growing from time-tested roots - familiar in essence, yet branching out in exciting
 new directions.**

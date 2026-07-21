@@ -103,3 +103,13 @@ curl -X POST /api/rest/v2/orders/123/credit-memos \
 **Key format:** 1-255 characters, alphanumeric + dashes + underscores (`[a-zA-Z0-9_-]`).
 
 **Concurrency:** while the first request with a given key is still executing, a duplicate request receives `409 Conflict` instead of running the operation twice. If a request dies without ever producing a response (worker crash, timeout), its reservation is released after 10 minutes and the key becomes retryable. Only successful (2xx) responses are stored for replay; after a 4xx/5xx the key is immediately retryable.
+
+---
+
+## Webhooks and change notifications
+
+The v2 API does not currently provide outbound webhooks or server-push notifications. There is no mechanism to register a callback URL and be notified when a resource changes.
+
+Integrations that need to react to changes (for example, syncing new or updated orders into an ERP) should **poll** the relevant collection endpoints on a schedule and compare against what they have already processed.
+
+To keep polling cheap, use the conditional-request support documented in [HTTP Caching](#http-caching). Store the `ETag` returned on a collection response and send it back as `If-None-Match` on the next poll: when nothing has changed the API replies with `304 Not Modified` and no body, so you only pay for a full response when there is actually new data. Combine this with [Pagination](#pagination) to walk through results in manageable pages.

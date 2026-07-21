@@ -50,5 +50,5 @@ cd dist
 !!! warning
     Something that you'll have to consider is that the `local.xml` file will be bundled in the binary,
     and you won't be able to change it later, same for other folders like `var` and `media`.
-    This is why this feature is still considered experimental,[get involved](../community/get-involved.md)
+    This is why this feature is still considered experimental,[get involved](../community/contributing.md)
     if you want to help.

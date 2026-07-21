@@ -2,11 +2,19 @@
 description: How to contribute to Maho - share ideas, report bugs, join discussions on Discord and GitHub, submit code pull requests and improve the documentation.
 ---
 
-# Contributing to Maho
+# Get Involved with Maho
+
+In an era dominated by SaaS solutions, the e-commerce world needs a robust, modern, and lean on-premises platform.
+That's where Maho comes in - and where you can make a real difference.
+
+We're building more than just another e-commerce platform: Maho aims to be the go-to solution for businesses
+that demand control, flexibility, performance and simplicity. By participating, you're not just contributing
+to a project - you are putting your dent in the future of e-commerce.
+
+[Join our community on Discord :fontawesome-brands-discord:](https://discord.gg/dWgcVUFTrS){:target="_blank" .md-button .md-button--primary .md-consent__controls}
 
 Thank you for your interest in contributing to Maho!  
-We welcome contributions from the community to help us improve and grow.  
-We look forward to your contributions!
+We welcome contributions from the community to help us improve and grow.
 
 ## Code of Conduct
 

@@ -160,10 +160,10 @@ You can customize this template in the admin panel under:
 
 ## Technical Details
 
-### Database Usage
+??? note "Technical details (for developers)"
 
-Magic Link reuses existing database infrastructure:
+    Magic Link does not add its own database tables - it reuses the existing customer authentication infrastructure:
 
-- `customer_entity.rp_token` - Stores the magic link token
-- `customer_entity.rp_token_created_at` - Token creation timestamp for expiration
-- `customer_flowpassword` - Tracks requests for rate limiting
+    - `customer_entity.rp_token` - stores the magic link token
+    - `customer_entity.rp_token_created_at` - token creation timestamp, used for expiration
+    - `customer_flowpassword` - tracks requests for rate limiting

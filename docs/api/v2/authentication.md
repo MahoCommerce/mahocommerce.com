@@ -12,22 +12,73 @@ All authenticated endpoints require a Bearer token in the `Authorization` header
 
 The endpoint dispatches by `grant_type`. Supported grants: `customer` (default), `client_credentials`, `api_user`.
 
-```bash
-# Customer login (grant_type defaults to "customer")
-curl -X POST /api/rest/v2/auth/token \
-  -H 'Content-Type: application/json' \
-  -d '{"email": "customer@example.com", "password": "password123"}'
+=== "curl"
 
-# OAuth2 client_credentials (recommended for integrations)
-curl -X POST /api/rest/v2/auth/token \
-  -H 'Content-Type: application/json' \
-  -d '{"grant_type": "client_credentials", "client_id": "...", "client_secret": "..."}'
+    ```bash
+    # Customer login (grant_type defaults to "customer")
+    curl -X POST /api/rest/v2/auth/token \
+      -H 'Content-Type: application/json' \
+      -d '{"email": "customer@example.com", "password": "password123"}'
 
-# Legacy API user (username + api_key)
-curl -X POST /api/rest/v2/auth/token \
-  -H 'Content-Type: application/json' \
-  -d '{"grant_type": "api_user", "username": "admin", "api_key": "..."}'
-```
+    # OAuth2 client_credentials (recommended for integrations)
+    curl -X POST /api/rest/v2/auth/token \
+      -H 'Content-Type: application/json' \
+      -d '{"grant_type": "client_credentials", "client_id": "...", "client_secret": "..."}'
+
+    # Legacy API user (username + api_key)
+    curl -X POST /api/rest/v2/auth/token \
+      -H 'Content-Type: application/json' \
+      -d '{"grant_type": "api_user", "username": "admin", "api_key": "..."}'
+    ```
+
+=== "JavaScript"
+
+    ```javascript
+    // Customer login (grant_type defaults to "customer")
+    let res = await fetch('/api/rest/v2/auth/token', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email: 'customer@example.com', password: 'password123' })
+    });
+    let data = await res.json();
+
+    // OAuth2 client_credentials (recommended for integrations)
+    res = await fetch('/api/rest/v2/auth/token', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ grant_type: 'client_credentials', client_id: '...', client_secret: '...' })
+    });
+    data = await res.json();
+
+    // Legacy API user (username + api_key)
+    res = await fetch('/api/rest/v2/auth/token', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ grant_type: 'api_user', username: 'admin', api_key: '...' })
+    });
+    data = await res.json();
+    ```
+
+=== "Python"
+
+    ```python
+    import requests
+
+    # Customer login (grant_type defaults to "customer")
+    res = requests.post('/api/rest/v2/auth/token',
+        json={'email': 'customer@example.com', 'password': 'password123'})
+    data = res.json()
+
+    # OAuth2 client_credentials (recommended for integrations)
+    res = requests.post('/api/rest/v2/auth/token',
+        json={'grant_type': 'client_credentials', 'client_id': '...', 'client_secret': '...'})
+    data = res.json()
+
+    # Legacy API user (username + api_key)
+    res = requests.post('/api/rest/v2/auth/token',
+        json={'grant_type': 'api_user', 'username': 'admin', 'api_key': '...'})
+    data = res.json()
+    ```
 
 **Response:**
 ```json
@@ -42,16 +93,61 @@ curl -X POST /api/rest/v2/auth/token \
 `token_type` and `expires_in` follow the OAuth 2.0 (RFC 6749) snake_case convention; the other fields use the API's usual camelCase. `customer` is populated for the `customer` grant; `apiUser` and `permissions` are populated for `client_credentials` / `api_user` grants. There is no separate `refresh_token` field, call `/auth/refresh` with the existing JWT in the `Authorization` header to get a new token.
 
 **Use the token:**
-```bash
-curl /api/rest/v2/products \
-  -H 'Authorization: Bearer eyJ...'
-```
+
+=== "curl"
+
+    ```bash
+    curl /api/rest/v2/products \
+      -H 'Authorization: Bearer eyJ...'
+    ```
+
+=== "JavaScript"
+
+    ```javascript
+    const res = await fetch('/api/rest/v2/products', {
+      headers: { 'Authorization': 'Bearer eyJ...' }
+    });
+    const data = await res.json();
+    ```
+
+=== "Python"
+
+    ```python
+    import requests
+
+    res = requests.get('/api/rest/v2/products',
+        headers={'Authorization': 'Bearer eyJ...'})
+    data = res.json()
+    ```
 
 **Refresh a token:** send the current (still-valid) JWT as a Bearer token; the body is ignored.
-```bash
-curl -X POST /api/rest/v2/auth/refresh \
-  -H 'Authorization: Bearer eyJ...'
-```
+
+=== "curl"
+
+    ```bash
+    curl -X POST /api/rest/v2/auth/refresh \
+      -H 'Authorization: Bearer eyJ...'
+    ```
+
+=== "JavaScript"
+
+    ```javascript
+    const res = await fetch('/api/rest/v2/auth/refresh', {
+      method: 'POST',
+      headers: { 'Authorization': 'Bearer eyJ...' }
+    });
+    const data = await res.json();
+    ```
+
+=== "Python"
+
+    ```python
+    import requests
+
+    res = requests.post('/api/rest/v2/auth/refresh',
+        headers={'Authorization': 'Bearer eyJ...'})
+    data = res.json()
+    ```
 
 **Other auth endpoints:**
 | Method | Endpoint | Description |

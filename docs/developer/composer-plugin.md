@@ -95,15 +95,22 @@ Or set it in your composer configuration:
 composer config optimize-autoloader true
 ```
 
+It should definitely speed things up in production, so you should enable it.
+
 ## Troubleshooting
 
 ### Class Conflicts
 
-When using the optimized autoloader in developer mode, a warning message will be displayed in the admin panel if class conflicts are detected. This message will show which classes conflict and which one will be used.
+When using the optimized autoloader in developer mode, a warning message will be displayed in the admin panel if class conflicts are detected. This message will show which classes conflict and which one will be used:
 
-### Case Sensitivity
+<img src="https://github.com/user-attachments/assets/02672a48-ec04-4f3d-8658-4c9b83f22166">
 
-Class names are now case-sensitive. For example, `mage_core_model_abstract` no longer works as a substitute for the properly cased class name.
+### Breaking Changes from Legacy Autoloading
+
+In a Maho project all autoloading is done by Composer: there are no `core` files in your project (Maho and all modules live only in the `vendor` folder) and there is no `Varien_Autoload` or any other custom autoloader. Two things changed as a result:
+
+1. Class names are case-sensitive, i.e. `mage_core_model_abstract` no longer works as a substitute for the properly cased class name.
+2. The `disable_local_modules` feature (in `local.xml`) was removed completely.
 
 ## License
 
@@ -111,6 +118,5 @@ The Maho Composer Plugin is licensed under the MIT License.
 
 ## Further Reading
 
-- [Autoloaders Documentation](autoloaders.md)
 - [Implementation PR in Maho's repo](https://github.com/MahoCommerce/maho/pull/63){target=_blank}
 - [Maho Composer Plugin GitHub Repository](https://github.com/MahoCommerce/maho-composer-plugin){target=_blank}

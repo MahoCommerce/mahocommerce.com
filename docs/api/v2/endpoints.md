@@ -271,20 +271,64 @@ Omit `items` to ship every remaining item on the order. Each track entry needs a
 | POST | `/orders/{orderId}/credit-memos` | Admin/API | Create credit memo |
 
 **Create a credit memo:**
-```bash
-curl -X POST /api/rest/v2/orders/123/credit-memos \
-  -H 'Authorization: Bearer eyJ...' \
-  -H 'Content-Type: application/json' \
-  -d '{
-    "items": [
-      {"orderItemId": 456, "qty": 1, "backToStock": true}
-    ],
-    "comment": "Customer returned item",
-    "adjustmentPositive": 5.00,
-    "adjustmentNegative": 0,
-    "offlineRefund": true
-  }'
-```
+
+=== "curl"
+
+    ```bash
+    curl -X POST /api/rest/v2/orders/123/credit-memos \
+      -H 'Authorization: Bearer eyJ...' \
+      -H 'Content-Type: application/json' \
+      -d '{
+        "items": [
+          {"orderItemId": 456, "qty": 1, "backToStock": true}
+        ],
+        "comment": "Customer returned item",
+        "adjustmentPositive": 5.00,
+        "adjustmentNegative": 0,
+        "offlineRefund": true
+      }'
+    ```
+
+=== "JavaScript"
+
+    ```javascript
+    const res = await fetch('/api/rest/v2/orders/123/credit-memos', {
+      method: 'POST',
+      headers: {
+        'Authorization': 'Bearer eyJ...',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        items: [
+          { orderItemId: 456, qty: 1, backToStock: true }
+        ],
+        comment: 'Customer returned item',
+        adjustmentPositive: 5.00,
+        adjustmentNegative: 0,
+        offlineRefund: true
+      })
+    });
+    const data = await res.json();
+    ```
+
+=== "Python"
+
+    ```python
+    import requests
+
+    res = requests.post('/api/rest/v2/orders/123/credit-memos',
+        headers={'Authorization': 'Bearer eyJ...'},
+        json={
+            'items': [
+                {'orderItemId': 456, 'qty': 1, 'backToStock': True}
+            ],
+            'comment': 'Customer returned item',
+            'adjustmentPositive': 5.00,
+            'adjustmentNegative': 0,
+            'offlineRefund': True
+        })
+    data = res.json()
+    ```
 
 **Response:**
 ```json
@@ -393,7 +437,7 @@ curl -X PUT /api/rest/v2/inventory/bulk \
 **Notes:**
 - `isInStock` auto-sets to `qty > 0` if not provided.
 - `manageStock` defaults to `true` if not provided.
-- Qty must be 0–99,999,999.
+- Qty must be 0-99,999,999.
 - Bulk limit: 100 items per request (validated upfront, executed in a DB transaction).
 
 ---

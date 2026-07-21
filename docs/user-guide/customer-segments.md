@@ -597,33 +597,6 @@ Large segments can take time to refresh:
 - Refresh during off-peak hours
 - Consider manual refresh for rarely-used segments
 
-### Database Indexing
-
-Critical indexes for segment performance:
-
-```sql
--- Customer table
-CREATE INDEX idx_created_at ON customer_entity(created_at);
-CREATE INDEX idx_email ON customer_entity(email);
-
--- Order table
-CREATE INDEX idx_customer_id ON sales_flat_order(customer_id);
-CREATE INDEX idx_created_at ON sales_flat_order(created_at);
-
--- Cart table
-CREATE INDEX idx_customer_id ON sales_flat_quote(customer_id);
-CREATE INDEX idx_updated_at ON sales_flat_quote(updated_at);
-CREATE INDEX idx_is_active ON sales_flat_quote(is_active);
-```
-
-### Caching
-
-Segment results are cached in `customer_segment_customer` table:
-
-- Membership persists between refreshes
-- Fast lookup for sales rules and email triggers
-- Invalidated only on segment refresh
-
 ## Monitoring & Analytics
 
 ### Segment Metrics
@@ -644,15 +617,7 @@ To see which customers are in a segment:
    - Customer grid → Filter by segment
    - Shows all customers in selected segment
 
-2. **Option B - Database Query**:
-```sql
-SELECT c.entity_id, c.email, c.firstname, c.lastname
-FROM customer_entity c
-JOIN customer_segment_customer sc ON c.entity_id = sc.customer_id
-WHERE sc.segment_id = 1;  -- Your segment ID
-```
-
-3. **Option C - Export**:
+2. **Option B - Export**:
    - Use Maho export functionality
    - Filter by segment before export
 
@@ -743,15 +708,6 @@ Conditions (ALL):
 4. ✅ Website scope is correct
 5. ✅ Test with a specific customer ID manually
 
-**Debug Query**:
-```sql
--- Check segment conditions
-SELECT conditions_serialized FROM customer_segment WHERE segment_id = 1;
-
--- Check matched customers
-SELECT COUNT(*) FROM customer_segment_customer WHERE segment_id = 1;
-```
-
 ### Segment Refresh Failing
 
 **Common Causes**:
@@ -774,54 +730,14 @@ tail -f var/log/exception.log
 - Cron jobs timing out
 
 **Solutions**:
-1. **Add database indexes** (see Performance section)
+1. **Add database indexes** (see the [Developer Guide](../developer/guide/customer-segments.md) for recommended indexes)
 2. **Simplify conditions** (reduce nesting)
 3. **Increase PHP memory** (`php.ini`: `memory_limit = 512M`)
 4. **Run refresh manually** during off-peak hours
 
-## Advanced Usage
+## For developers
 
-### Programmatic Segment Membership Check
-
-```php
-$customerId = 123;
-$segmentId = 1;
-$websiteId = 1;
-
-$isInSegment = Mage::getResourceModel('customersegmentation/segment')
-    ->isCustomerInSegment($segmentId, $customerId, $websiteId);
-
-if ($isInSegment) {
-    // Customer is in segment
-}
-```
-
-### Real-Time Segment Evaluation
-
-For real-time checking without refresh:
-
-```php
-$segment = Mage::getModel('customersegmentation/segment')->load($segmentId);
-$customer = Mage::getModel('customer/customer')->load($customerId);
-
-if ($segment->validateCustomer($customer, $websiteId)) {
-    // Customer matches segment conditions right now
-}
-```
-
-### Bulk Segment Export
-
-Export all segment members:
-
-```php
-$segment = Mage::getModel('customersegmentation/segment')->load($segmentId);
-$customerIds = $segment->getMatchingCustomerIds();
-
-foreach ($customerIds as $customerId) {
-    $customer = Mage::getModel('customer/customer')->load($customerId);
-    // Process customer
-}
-```
+Working with segments in code - programmatic membership checks, real-time evaluation, custom condition types, observers, or the underlying database schema - is covered in the [Customer Segments Developer Guide](../developer/guide/customer-segments.md).
 
 ## Migration from Other Platforms
 
@@ -848,24 +764,6 @@ Magento 2 has similar segmentation:
 - **Conditions**: Similar but syntax differs
 - **Rebuild required**: Manual recreation needed
 - **Test thoroughly**: Condition logic may differ
-
-## Integration Points
-
-### External CRM Sync
-
-Sync segment membership to external CRM:
-
-```php
-// Custom observer example
-public function syncSegmentToCrm(Varien_Event_Observer $observer)
-{
-    $segment = $observer->getSegment();
-    $customerIds = $observer->getMatchedCustomers();
-
-    // Push to your CRM
-    $this->crmClient->updateSegment($segment->getName(), $customerIds);
-}
-```
 
 ## Further Reading
 

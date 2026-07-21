@@ -49,9 +49,12 @@ plugins:
       minify_html: true
   - redirects:
       redirect_maps:
-        ai.md: user-guide/ai.md
+        ai.md: developer/ai.md
+        user-guide/ai.md: developer/ai.md
         array-import-adapter.md: developer/array-import-adapter.md
-        autoloaders.md: developer/autoloaders.md
+        autoloaders.md: developer/composer-plugin.md
+        developer/autoloaders.md: developer/composer-plugin.md
+        community/get-involved.md: community/contributing.md
         category-import-export.md: user-guide/category-import-export.md
         cli-tool.md: developer/cli-tool.md
         code-reference.md: api/code-reference.md
@@ -144,6 +147,7 @@ markdown_extensions:
 nav:
   - Home: index.md
   - User Guide:
+    - Start here: user-guide/index.md
     - About:
       - Live demo: about/demo.md
       - Differences: about/differences.md
@@ -163,7 +167,6 @@ nav:
         - Magic Link Authentication: user-guide/magic-link-authentication.md
     - Storefront & Growth:
         - SEO: user-guide/seo.md
-        - Artificial Intelligence: user-guide/ai.md
         - Captcha: user-guide/captcha.md
         - Shipping Bridge: user-guide/shipping-bridge.md
         - Feed Manager: user-guide/feed-manager.md
@@ -184,13 +187,14 @@ nav:
     - Developer Guide:
       - Tutorial:
           - Introduction: developer/guide/introduction.md
-          - The Maho config: developer/guide/config.md
           - Controller dispatch: developer/guide/controller-dispatch.md
+          - The Maho config: developer/guide/config.md
           - Layouts, blocks and templates: developer/guide/layout-blocks-templates.md
           - Models and ORM basics: developer/guide/models-and-orm.md
           - Setup resources: developer/guide/setup-resources.md
           - Advanced ORM: developer/guide/advanced-orm.md
           - Data collections: developer/guide/data-collections.md
+      - Feature guides:
           - JavaScript deferral: developer/guide/javascript-defer.md
           - Customer Segments: developer/guide/customer-segments.md
           - Email Automation: developer/guide/email-automation.md
@@ -198,7 +202,6 @@ nav:
       - Core & architecture:
           - Routing: developer/routing.md
           - Event observers: developer/observers.md
-          - Autoloaders: developer/autoloaders.md
           - Override configs: developer/override-configurations.md
           - Rate limiting & honeypot: developer/rate-limiting-honeypot.md
       - Database:
@@ -210,6 +213,7 @@ nav:
       - Utilities & tooling:
           - CLI tool: developer/cli-tool.md
           - Composer plugin: developer/composer-plugin.md
+          - Artificial Intelligence: developer/ai.md
           - Date & time handling: developer/date-handling.md
           - Language packs: developer/language-packs.md
           - Array Import Adapter: developer/array-import-adapter.md
@@ -283,8 +287,7 @@ nav:
   - Blog:
       - blog/index.md
   - Community:
-      - Get Involved: community/get-involved.md
-      - Contributing: community/contributing.md
+      - Get Involved: community/contributing.md
       - Community projects:
           - Docker Starter: community/projects/docker-starter.md
   - Marketplace: marketplace.md
