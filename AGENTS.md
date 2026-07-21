@@ -24,10 +24,19 @@ mkdocs serve
 
 The site will be available at http://localhost:8000
 
-### Build for Production
+### Checking your changes (AI agents included)
+
+If you need to build or preview the site to verify a change, do NOT run `mkdocs build` or
+`mkdocs serve` directly - it requires local Python dependencies and `mkdocs build` leaves a
+stray `site/` directory in the working tree. Instead, use Docker (via OrbStack on macOS) and
+run:
+
 ```bash
-mkdocs build
+./start.sh
 ```
+
+This builds the local Docker image and serves the site with livereload at http://localhost:8000,
+where you can check pages, navigation, and rendering. Production builds are handled by CI on push.
 
 ## Key Architecture
 

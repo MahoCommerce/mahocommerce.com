@@ -115,7 +115,7 @@ description: Maho is the open-source, self-hosted ecommerce platform you actuall
       <i data-light="assets/admin-screens/cache-management-light.png" data-dark="assets/admin-screens/cache-management-dark.png" data-title="Cache management"></i>
     </div>
 
-    <p class="mh-shots-caption">A completely redesigned admin, first-class dark mode included, shipping in Maho 26.7.<br>Use the arrows to browse screens, hit the lightbulb to flip the theme. <a href="demo/">Try it in the live demo →</a></p>
+    <p class="mh-shots-caption">A completely redesigned admin, first-class dark mode included, shipped in Maho 26.7.<br>Use the arrows to browse screens, hit the lightbulb to flip the theme. <a href="demo/">Try it in the live demo →</a></p>
   </div>
 </section>
 
@@ -310,7 +310,7 @@ Protect your business with **2-factor authentication**, **passkey support** for 
 
 ### Always Getting Better
 
-Regular updates with real improvements like **email automation** (25.11), **customer segmentation** (25.9), **dynamic categories** (25.7), **modern content editor** (25.7), and **enhanced security** (25.3). Maho evolves with your business needs.
+Regular updates with real improvements like a **redesigned admin with dark mode** (26.7), the **EU revocation button** (26.7), **gift cards** (26.1), **email automation** (25.11), and **customer segmentation** (25.9). Maho evolves with your business needs.
 
 </div>
 
@@ -356,7 +356,7 @@ Clean, modern **admin interface** with professional features clients expect: **m
 
 ### Enterprise Features, Zero Licensing
 
-**Multi-store capabilities**, advanced permissions, comprehensive **APIs** (REST, SOAP, JSON-RPC), and all the features enterprise clients demand. **No per-client licensing fees**, **no SaaS subscriptions** - pure profit margin.
+**Multi-store capabilities**, advanced permissions, comprehensive **APIs** (REST, GraphQL, SOAP), and all the features enterprise clients demand. **No per-client licensing fees**, **no SaaS subscriptions** - pure profit margin.
 
 </div>
 
@@ -376,7 +376,7 @@ Maho stands on a **[battle-tested open-source foundation](about/origins.md)**, h
 
 ### Complete Documentation
 
-Comprehensive **API documentation** (REST, SOAP, JSON-RPC), **developer guides** covering MVC, ORM, and architecture, plus **[AI-powered deep code documentation](https://deepwiki.com/MahoCommerce/maho){:target="_blank"}** via DeepWiki. Onboard new team members quickly and reduce training costs.
+Comprehensive **API documentation** (REST, GraphQL, SOAP), **developer guides** covering MVC, ORM, and architecture, plus **[AI-powered deep code documentation](https://deepwiki.com/MahoCommerce/maho){:target="_blank"}** via DeepWiki. Onboard new team members quickly and reduce training costs.
 
 </div>
 
@@ -432,7 +432,7 @@ Well-designed **MVC pattern**, powerful **ORM with collections**, **event-driven
 
 ### Comprehensive APIs
 
-Full **REST API** with **OAuth authentication**, **SOAP API** for legacy integrations, and **JSON-RPC** for modern applications. Detailed permission settings, role configuration, and extensive attribute control.
+Brand-new **REST & GraphQL API** built on API Platform, with **JWT authentication**, granular per-resource permissions, and **OpenAPI docs**, plus the legacy SOAP and XML-RPC APIs for older integrations.
 
 </div>
 
@@ -462,7 +462,7 @@ Choose the database that fits your infrastructure. **MySQL**, **MariaDB**, **Pos
 
 ### Actively Developed
 
-**Regular releases** with substantial improvements - not just patches. Recent additions: **Doctrine DBAL 4.4** database layer, **native HTML5 date inputs** with timezone support, **Symfony Cache** subsystem, **libsodium encryption**, **customer segmentation**, and **dynamic categories**. Continuous modernization with real features that matter.
+**Regular releases** with substantial improvements - not just patches. Recent additions: a **declarative database schema** system, the **API Platform-based REST & GraphQL API**, **Doctrine DBAL** database layer, **Symfony Cache** subsystem, **libsodium encryption**, and **customer segmentation**. Continuous modernization with real features that matter.
 
 </div>
 
