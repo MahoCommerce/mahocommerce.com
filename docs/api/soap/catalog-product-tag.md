@@ -4,15 +4,15 @@
 
 Allows you to operate with product tags.
 
-<h3>Resource</h3>
+### Resource
 
 - `catalog_product_tag`
 
-<h3>Alias</h3>
+### Alias
 
 - `product_tag`
 
-<h3>Methods</h3>
+### Methods
 
 - `product_tag.list` - Retrieve the list of tags by the product ID.
 - `product_tag.info` - Retrieve information about a product tag.
@@ -20,7 +20,7 @@ Allows you to operate with product tags.
 - `product_tag.update` - Update an existing product tag.
 - `product_tag.remove` - Remove a product tag.
 
-<h3>Faults</h3>
+### Faults
 
 | Fault Code | Fault Message                                       |
 |------------|-----------------------------------------------------|
@@ -32,7 +32,7 @@ Allows you to operate with product tags.
 | 106        | Error while saving tag. Details in error message.   |
 | 107        | Error while removing tag. Details in error message. |
 
-<h3>Example</h3>
+### Example
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/soap/?wsdl');
@@ -103,14 +103,14 @@ echo $removeResult ? 'Done!' : 'Fail!';
 
 ## List
 
-<h3>Method</h3>
+### Method
 
 - `catalog_product_tag.list` (SOAP V1)
 - `catalogProductTagList` (SOAP V2)
 
 Allows you to retrieve the list of tags for a specific product.
 
-<h3>Arguments</h3>
+### Arguments
 
 | Type   | Name      | Description           |
 |--------|-----------|-----------------------|
@@ -118,29 +118,29 @@ Allows you to retrieve the list of tags for a specific product.
 | string | productId | Product ID            |
 | string | store     | Store view code or ID |
 
-<h3>Return</h3>
+### Return
 
 | Type  | Name   | Description                          |
 |-------|--------|--------------------------------------|
 | array | result | Array of catalogProductTagListEntity |
 
-<h3>Content `catalogProductTagListEntity`</h3>
+### Content `catalogProductTagListEntity`
 
 | Type   | Name   | Description |
 |--------|--------|-------------|
 | string | tag_id | Tag ID      |
 | string | name   | Tag name    |
 
-<h3>Faults</h3>
+### Faults
 
 | Fault Code | Fault Message                     |
 |------------|-----------------------------------|
 | 101        | Requested store does not exist.   |
 | 102        | Requested product does not exist. |
 
-<h3>Examples</h3>
+### Examples
 
-<h4>Request Example SOAP V1</h4>
+#### Request Example SOAP V1
 
 ```php
 $client = new SoapClient('https://mahohost/api/soap/?wsdl');
@@ -150,7 +150,7 @@ $result = $client->call($session, 'catalog_product_tag.list', ['productId' => '4
 var_dump($result);
 ```
 
-<h4>Request Example SOAP V2</h4>
+#### Request Example SOAP V2
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); // replace with your store's WSDL URL
@@ -160,7 +160,7 @@ $result = $proxy->catalogProductTagList($sessionId, '4', '2');
 var_dump($result);
 ```
 
-<h4>Request Example SOAP V2 (WS-I Compliance Mode)</h4>
+#### Request Example SOAP V2 (WS-I Compliance Mode)
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl');
@@ -170,7 +170,7 @@ $result = $proxy->catalogProductTagList((object)['sessionId' => $sessionId->resu
 var_dump($result->result);
 ```
 
-<h4>Response Example SOAP V1</h4>
+#### Response Example SOAP V1
 
 ```php
 array
@@ -186,14 +186,14 @@ array
 
 ## Info
 
-<h3>Method</h3>
+### Method
 
 - `catalog_product_tag.info` (SOAP V1)
 - `catalogProductTagInfo` (SOAP V2)
 
 Allows you to retrieve information about the required product tag.
 
-<h3>Arguments</h3>
+### Arguments
 
 | Type   | Name      | Description           |
 |--------|-----------|-----------------------|
@@ -201,13 +201,13 @@ Allows you to retrieve information about the required product tag.
 | string | tagId     | Tag ID                |
 | string | store     | Store view code or ID |
 
-<h3>Return</h3>
+### Return
 
 | Type  | Name   | Description                          |
 |-------|--------|--------------------------------------|
 | array | result | Array of catalogProductTagInfoEntity |
 
-<h3>Content `catalogProductTagInfoEntity`</h3>
+### Content `catalogProductTagInfoEntity`
 
 | Type             | Name            | Description                                                                                     |
 |------------------|-----------------|-------------------------------------------------------------------------------------------------|
@@ -216,16 +216,16 @@ Allows you to retrieve information about the required product tag.
 | string           | base_popularity | Tag base popularity for a specific store                                                        |
 | associativeArray | products        | Associative array of tagged products with related product ID as a key and popularity as a value |
 
-<h3>Faults</h3>
+### Faults
 
 | Fault Code | Fault Message                   |
 |------------|---------------------------------|
 | 101        | Requested store does not exist. |
 | 104        | Requested tag does not exist.   |
 
-<h3>Examples</h3>
+### Examples
 
-<h4>Request Example SOAP V1</h4>
+#### Request Example SOAP V1
 
 ```php
 $client = new SoapClient('https://mahohost/api/soap/?wsdl');
@@ -235,7 +235,7 @@ $result = $client->call($session, 'catalog_product_tag.info', ['tagId' => '4', '
 var_dump($result);
 ```
 
-<h4>Request Example SOAP V2</h4>
+#### Request Example SOAP V2
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); // replace with your store's WSDL URL
@@ -245,7 +245,7 @@ $result = $proxy->catalogProductTagInfo($sessionId, '4', '2');
 var_dump($result);
 ```
 
-<h4>Request Example SOAP V2 (WS-I Compliance Mode)</h4>
+#### Request Example SOAP V2 (WS-I Compliance Mode)
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl');
@@ -255,7 +255,7 @@ $result = $proxy->catalogProductTagInfo((object)['sessionId' => $sessionId->resu
 var_dump($result->result);
 ```
 
-<h4>Response Example SOAP V1</h4>
+#### Response Example SOAP V1
 
 ```php
 array
@@ -271,27 +271,27 @@ array
 
 ## Add
 
-<h3>Method</h3>
+### Method
 
 - `catalog_product_tag.add` (SOAP V1)
 - `catalogProductTagAdd` (SOAP V2)
 
 Allows you to add one or more tags to a product.
 
-<h3>Arguments</h3>
+### Arguments
 
 | Type   | Name      | Description                         |
 |--------|-----------|-------------------------------------|
 | string | sessionId | Session ID                          |
 | array  | data      | Array of catalogProductTagAddEntity |
 
-<h3>Return</h3>
+### Return
 
 | Type  | Name   | Description                                                                          |
 |-------|--------|--------------------------------------------------------------------------------------|
 | array | result | Associative array of added tags with the tag name as a key and the tag ID as a value |
 
-<h3>Content `catalogProductTagAddEntity`</h3>
+### Content `catalogProductTagAddEntity`
 
 | Type   | Name        | Description                                                                                                                                    |
 |--------|-------------|------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -300,7 +300,7 @@ Allows you to add one or more tags to a product.
 | string | customer_id | Customer ID                                                                                                                                    |
 | string | store       | Store ID                                                                                                                                       |
 
-<h3>Faults</h3>
+### Faults
 
 | Fault Code | Fault Message                                     |
 |------------|---------------------------------------------------|
@@ -310,9 +310,9 @@ Allows you to add one or more tags to a product.
 | 105        | Provided data is invalid.                         |
 | 106        | Error while saving tag. Details in error message. |
 
-<h3>Examples</h3>
+### Examples
 
-<h4>Request Example SOAP V1</h4>
+#### Request Example SOAP V1
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/soap/?wsdl');
@@ -335,7 +335,7 @@ echo '<br>';
 print_r($addResult);
 ```
 
-<h4>Request Example SOAP V2</h4>
+#### Request Example SOAP V2
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl');
@@ -353,7 +353,7 @@ $result = $proxy->catalogProductTagAdd(
 var_dump($result);
 ```
 
-<h4>Request Example SOAP V2 (WS-I Compliance Mode)</h4>
+#### Request Example SOAP V2 (WS-I Compliance Mode)
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl');
@@ -375,14 +375,14 @@ var_dump($result->result);
 
 ## Update
 
-<h3>Method</h3>
+### Method
 
 - `catalog_product_tag.update` (SOAP V1)
 - `catalogProductTagUpdate` (SOAP V2)
 
 Allows you to update information about an existing product tag.
 
-<h3>Arguments</h3>
+### Arguments
 
 | Type   | Name      | Description                                                         |
 |--------|-----------|---------------------------------------------------------------------|
@@ -391,13 +391,13 @@ Allows you to update information about an existing product tag.
 | array  | data      | Array of catalogProductTagUpdateEntity                              |
 | string | store     | Store view code or ID (optional; required for WS-I compliance mode) |
 
-<h3>Return</h3>
+### Return
 
 | Type    | Description                        |
 |---------|------------------------------------|
 | boolean | True if the product tag is updated |
 
-<h3>Content `catalogProductTagUpdateEntity`</h3>
+### Content `catalogProductTagUpdateEntity`
 
 | Type   | Name            | Description                                                                        |
 |--------|-----------------|------------------------------------------------------------------------------------|
@@ -405,7 +405,7 @@ Allows you to update information about an existing product tag.
 | string | status          | Tag status. Can have the following values: -1 - Disabled, 0 - Pending, 1- Approved |
 | string | base_popularity | Tag base popularity                                                                |
 
-<h3>Faults</h3>
+### Faults
 
 | Fault Code | Fault Message                                     |
 |------------|---------------------------------------------------|
@@ -414,9 +414,9 @@ Allows you to update information about an existing product tag.
 | 105        | Provided data is invalid.                         |
 | 106        | Error while saving tag. Details in error message. |
 
-<h3>Examples</h3>
+### Examples
 
-<h4>Request Example SOAP V1</h4>
+#### Request Example SOAP V1
 
 ```php
 $client = new SoapClient('https://mahohost/api/soap/?wsdl');
@@ -435,7 +435,7 @@ $result = $client->call(
 var_dump($result);
 ```
 
-<h4>Request Example SOAP V2</h4>
+#### Request Example SOAP V2
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl');
@@ -452,7 +452,7 @@ $result = $proxy->catalogProductTagUpdate(
 var_dump($result);
 ```
 
-<h4>Request Example SOAP V2 (WS-I Compliance Mode)</h4>
+#### Request Example SOAP V2 (WS-I Compliance Mode)
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl');
@@ -475,36 +475,36 @@ var_dump($result->result);
 
 ## Remove
 
-<h3>Method</h3>
+### Method
 
 - `catalog_product_tag.remove` (SOAP V1)
 - `catalogProductTagRemove` (SOAP V2)
 
 Allows you to remove an existing product tag.
 
-<h3>Arguments</h3>
+### Arguments
 
 | Type   | Name      | Description |
 |--------|-----------|-------------|
 | string | sessionId | Session ID  |
 | string | tagId     | Tag ID      |
 
-<h3>Return</h3>
+### Return
 
 | Type        | Description                            |
 |-------------|----------------------------------------|
 | boolean/int | True (1) if the product tag is removed |
 
-<h3>Faults</h3>
+### Faults
 
 | Fault Code | Fault Message                                       |
 |------------|-----------------------------------------------------|
 | 104        | Requested tag does not exist.                       |
 | 107        | Error while removing tag. Details in error message. |
 
-<h3>Examples</h3>
+### Examples
 
-<h4>Request Example SOAP V1</h4>
+#### Request Example SOAP V1
 
 ```php
 $client = new SoapClient('https://mahohost/api/soap/?wsdl');
@@ -514,7 +514,7 @@ $result = $client->call($session, 'catalog_product_tag.remove', '3');
 var_dump($result);
 ```
 
-<h4>Request Example SOAP V2</h4>
+#### Request Example SOAP V2
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); // replace with your store's WSDL URL
@@ -524,7 +524,7 @@ $result = $proxy->catalogProductTagRemove($sessionId, '3');
 var_dump($result);
 ```
 
-<h4>Request Example SOAP V2 (WS-I Compliance Mode)</h4>
+#### Request Example SOAP V2 (WS-I Compliance Mode)
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl');

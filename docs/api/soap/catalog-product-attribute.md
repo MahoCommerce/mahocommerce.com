@@ -4,15 +4,15 @@
 
 Allows you to retrieve product attributes and options.
 
-<h3>Resource Name</h3>
+### Resource Name
 
 - `catalog_product_attribute`
 
-<h3>Aliases</h3>
+### Aliases
 
 - `product_attribute`
 
-<h3>Methods</h3>
+### Methods
 
 - `product_attribute.currentStore` - Set/Get the current store view.
 - `product_attribute.list` - Retrieve the attribute list.
@@ -25,7 +25,7 @@ Allows you to retrieve product attributes and options.
 - `product_attribute.types` - Get the list of possible attribute types.
 - `product_attribute.update` - Update the required attribute.
 
-<h3>Faults</h3>
+### Faults
 
 | Fault Code | Fault Message                                                                                                                                |
 |------------|----------------------------------------------------------------------------------------------------------------------------------------------|
@@ -40,7 +40,7 @@ Allows you to retrieve product attributes and options.
 | 108        | Unable to add option.                                                                                                                        |
 | 109        | Unable to remove option.                                                                                                                     |
 
-<h3>Example</h3>
+### Example
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/soap/?wsdl');
@@ -176,33 +176,33 @@ $result = $proxy->call(
 
 ## CurrentStore
 
-<h3>Method</h3>
+### Method
 
 - `catalog_product_attribute.currentStore` (SOAP V1)
 - `catalogProductAttributeCurrentStore` (SOAP V2)
 
 Allows you to set/get the current store view.
 
-<h3>Alias</h3>
+### Alias
 
 - `product_attribute.currentStore`
 
-<h3>Arguments</h3>
+### Arguments
 
 | Type   | Name      | Description                      |
 |--------|-----------|----------------------------------|
 | string | sessionId | Session ID                       |
 | string | storeView | Store view ID or code (optional) |
 
-<h3>Returns</h3>
+### Returns
 
 | Type | Name      | Description   |
 |------|-----------|---------------|
 | int  | storeView | Store view ID |
 
-<h3>Examples</h3>
+### Examples
 
-<h4>Request Example SOAP V1</h4>
+#### Request Example SOAP V1
 
 ```php
 $client = new SoapClient('https://mahohost/api/soap/?wsdl');
@@ -212,7 +212,7 @@ $result = $client->call($session, 'catalog_product_attribute.currentStore', 'eng
 var_dump($result);
 ```
 
-<h4>Request Example SOAP V2</h4>
+#### Request Example SOAP V2
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); // replace with your store's WSDL URL
@@ -224,31 +224,31 @@ var_dump($result);
 
 ## List
 
-<h3>Method</h3>
+### Method
 
 - `catalog_product_attribute.list` (SOAP V1)
 - `catalogProductAttributeList` (SOAP V2)
 
 Allows you to retrieve the list of product attributes.
 
-<h3>Alias</h3>
+### Alias
 
 - `product_attribute.list`
 
-<h3>Arguments</h3>
+### Arguments
 
 | Type   | Name      | Description             |
 |--------|-----------|-------------------------|
 | string | sessionId | Session ID              |
 | int    | setId     | ID of the attribute set |
 
-<h3>Returns</h3>
+### Returns
 
 | Type  | Name   | Description                     |
 |-------|--------|---------------------------------|
 | array | result | Array of catalogAttributeEntity |
 
-<h3>Content `catalogAttributeEntity`</h3>
+### Content `catalogAttributeEntity`
 
 | Type   | Name         | Description                                                       |
 |--------|--------------|-------------------------------------------------------------------|
@@ -258,13 +258,13 @@ Allows you to retrieve the list of product attributes.
 | string | required     | Defines whether the attribute is required                         |
 | string | scope        | Attribute scope. Possible values: 'store', 'website', or 'global' |
 
-<h3>Faults</h3>
+### Faults
 
 _No Faults._
 
-<h3>Examples</h3>
+### Examples
 
-<h4>Request Example SOAP V1</h4>
+#### Request Example SOAP V1
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/soap/?wsdl');
@@ -282,7 +282,7 @@ $result = $proxy->call(
 var_dump($result);
 ```
 
-<h4>Request Example SOAP V2</h4>
+#### Request Example SOAP V2
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); // replace with your store's WSDL URL
@@ -292,7 +292,7 @@ $result = $proxy->catalogProductAttributeList($sessionId, '4');
 var_dump($result);
 ```
 
-<h4>Request Example SOAP V2 (WS-I Compliance Mode)</h4>
+#### Request Example SOAP V2 (WS-I Compliance Mode)
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl');
@@ -302,7 +302,7 @@ $result = $proxy->catalogProductAttributeList((object)['sessionId' => $sessionId
 var_dump($result->result);
 ```
 
-<h4>Response Example SOAP V1</h4>
+#### Response Example SOAP V1
 
 ```php
 array
@@ -324,18 +324,18 @@ array
 
 ## Options
 
-<h3>Method</h3>
+### Method
 
 - `catalog_product_attribute.options` (SOAP V1)
 - `catalogProductAttributeOptions` (SOAP V2)
 
 Allows you to retrieve the product attribute options.
 
-<h3>Alias</h3>
+### Alias
 
 - `product_attribute.options`
 
-<h3>Arguments</h3>
+### Arguments
 
 | Type   | Name        | Description                      |
 |--------|-------------|----------------------------------|
@@ -343,28 +343,28 @@ Allows you to retrieve the product attribute options.
 | string | attributeId | Attribute ID or code             |
 | string | storeView   | Store view ID or code (optional) |
 
-<h3>Returns</h3>
+### Returns
 
 | Type  | Name   | Description                           |
 |-------|--------|---------------------------------------|
 | array | result | Array of catalogAttributeOptionEntity |
 
-<h3>Content `catalogAttributeOptionEntity`</h3>
+### Content `catalogAttributeOptionEntity`
 
 | Type   | Name  | Description  |
 |--------|-------|--------------|
 | string | label | Option label |
 | string | value | Option value |
 
-<h3>Faults</h3>
+### Faults
 
 | Fault Code | Fault Message                  |
 |------------|--------------------------------|
 | 101        | Requested attribute not found. |
 
-<h3>Examples</h3>
+### Examples
 
-<h4>Request Example SOAP V1</h4>
+#### Request Example SOAP V1
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/soap/?wsdl');
@@ -382,7 +382,7 @@ $result = $proxy->call(
 var_dump($result);
 ```
 
-<h4>Request Example SOAP V2</h4>
+#### Request Example SOAP V2
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); // replace with your store's WSDL URL
@@ -392,7 +392,7 @@ $result = $proxy->catalogProductAttributeOptions($sessionId, '11');
 var_dump($result);
 ```
 
-<h4>Request Example SOAP V2 (WS-I Compliance Mode)</h4>
+#### Request Example SOAP V2 (WS-I Compliance Mode)
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl');
@@ -402,7 +402,7 @@ $result = $proxy->catalogProductAttributeOptions((object)['sessionId' => $sessio
 var_dump($result->result);
 ```
 
-<h4>Response Example SOAP V1</h4>
+#### Response Example SOAP V1
 
 ```php
 array
@@ -422,14 +422,14 @@ array
 
 ## AddOption
 
-<h3>Method</h3>
+### Method
 
 - `product_attribute.addOption` (SOAP V1)
 - `catalogProductAttributeAddOption` (SOAP V2)
 
 Allows you to add a new option for attributes with selectable fields.
 
-<h3>Arguments</h3>
+### Arguments
 
 | Type   | Name      | Description                                       |
 |--------|-----------|---------------------------------------------------|
@@ -437,13 +437,13 @@ Allows you to add a new option for attributes with selectable fields.
 | string | attribute | Attribute code or ID                              |
 | array  | data      | Array of catalogProductAttributeOptionEntityToAdd |
 
-<h3>Return</h3>
+### Return
 
 | Type    | Name   | Description     |
 |---------|--------|-----------------|
 | boolean | result | True on success |
 
-<h3>Content `catalogProductAttributeOptionEntityToAdd`</h3>
+### Content `catalogProductAttributeOptionEntityToAdd`
 
 | Type   | Name       | Description                                 |
 |--------|------------|---------------------------------------------|
@@ -451,14 +451,14 @@ Allows you to add a new option for attributes with selectable fields.
 | int    | order      | Option order                                |
 | int    | is_default | Defines whether the option is a default one |
 
-<h3>Content `catalogProductAttributeOptionLabel`</h3>
+### Content `catalogProductAttributeOptionLabel`
 
 | Type          | Name     | Description             |
 |---------------|----------|-------------------------|
 | ArrayOfString | store_id | Array of store view IDs |
 | string        | value    | Text label              |
 
-<h3>Faults</h3>
+### Faults
 
 | Fault Code | Fault Message                  |
 |------------|--------------------------------|
@@ -466,9 +466,9 @@ Allows you to add a new option for attributes with selectable fields.
 | 104        | Incorrect attribute type.      |
 | 108        | Unable to add option.          |
 
-<h3>Examples</h3>
+### Examples
 
-<h4>Request Example SOAP V1</h4>
+#### Request Example SOAP V1
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/soap/?wsdl');
@@ -496,7 +496,7 @@ $result = $proxy->call(
 );
 ```
 
-<h4>Request Example SOAP V2</h4>
+#### Request Example SOAP V2
 
 ```php
 $client = new SoapClient('https://mahohost/api/v2_soap/?wsdl');
@@ -533,27 +533,27 @@ var_dump($orders);
 
 ## Create
 
-<h3>Method</h3>
+### Method
 
 - `product_attribute.create` (SOAP V1)
 - `catalogProductAttributeCreate` (SOAP V2)
 
 Allows you to create a new product attribute.
 
-<h3>Arguments</h3>
+### Arguments
 
 | Type   | Name      | Description                                    |
 |--------|-----------|------------------------------------------------|
 | string | sessionId | Session ID                                     |
 | array  | data      | Array of catalogProductAttributeEntityToCreate |
 
-<h3>Returns</h3>
+### Returns
 
 | Type | Name   | Description                 |
 |------|--------|-----------------------------|
 | int  | result | ID of the created attribute |
 
-<h3>Content `catalogProductAttributeEntityToCreate`</h3>
+### Content `catalogProductAttributeEntityToCreate`
 
 | Type             | Name                          | Description                                                                                                                                                        |
 |------------------|-------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -574,7 +574,7 @@ Allows you to create a new product attribute.
 | associativeArray | additional_fields             | Array of additional fields                                                                                                                                         |
 | array            | frontend_label                | Array of catalogProductAttributeFrontendLabel                                                                                                                      |
 
-<h3>Content `catalogProductAttributeFrontendLabelEntity`</h3>
+### Content `catalogProductAttributeFrontendLabelEntity`
 
 | Type   | Name     | Description   |
 |--------|----------|---------------|
@@ -584,7 +584,7 @@ Allows you to create a new product attribute.
 **Notes**: The `label` value for the `store_id` value set to `0` must be specified.
 An attribute cannot be created without specifying the label for `store_id = 0`.
 
-<h3>`AdditionaFieldsEntity` Additional Fields for Type `text`</h3>
+### `AdditionaFieldsEntity` Additional Fields for Type `text`
 
 | Type    | Name                     | Description                                                                                                                                                                                                                                                        |
 |---------|--------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -592,20 +592,20 @@ An attribute cannot be created without specifying the label for `store_id = 0`.
 | boolean | is_html_allowed_on_front | Defines whether the HTML tags are allowed on the frontend                                                                                                                                                                                                          |
 | boolean | used_for_sort_by         | Defines whether it is used for sorting in product listing                                                                                                                                                                                                          |
 
-<h3>`AdditionaFieldsEntity` Additional Fields for Type `textarea`</h3>
+### `AdditionaFieldsEntity` Additional Fields for Type `textarea`
 
 | Type    | Name                     | Description                                               |
 |---------|--------------------------|-----------------------------------------------------------|
 | boolean | is_wysiwyg_enabled       | Enable WYSIWYG flag                                       |
 | boolean | is_html_allowed_on_front | Defines whether the HTML tags are allowed on the frontend |
 
-<h3>`AdditionaFieldsEntity` Additional Fields for Type `date` and `boolean`</h3>
+### `AdditionaFieldsEntity` Additional Fields for Type `date` and `boolean`
 
 | Type    | Name             | Description                                               |
 |---------|------------------|-----------------------------------------------------------|
 | boolean | used_for_sort_by | Defines whether it is used for sorting in product listing |
 
-<h3>`AdditionaFieldsEntity` Additional Fields for Type `multiselect`</h3>
+### `AdditionaFieldsEntity` Additional Fields for Type `multiselect`
 
 | Type    | Name                    | Description                                                     |
 |---------|-------------------------|-----------------------------------------------------------------|
@@ -613,7 +613,7 @@ An attribute cannot be created without specifying the label for `store_id = 0`.
 | boolean | is_filterable_in_search | Defines whether it is used in search results layered navigation |
 | int     | position                | Position                                                        |
 
-<h3>`AdditionaFieldsEntity` Additional Fields for Type `select` and `price`</h3>
+### `AdditionaFieldsEntity` Additional Fields for Type `select` and `price`
 
 | Type    | Name                    | Description                                                     |
 |---------|-------------------------|-----------------------------------------------------------------|
@@ -622,7 +622,7 @@ An attribute cannot be created without specifying the label for `store_id = 0`.
 | int     | position                | Position                                                        |
 | boolean | used_for_sort_by        | Defines whether it is used for sorting in product listing       |
 
-<h3>Faults</h3>
+### Faults
 
 | Fault Code | Fault Message                                                                                                                                |
 |------------|----------------------------------------------------------------------------------------------------------------------------------------------|
@@ -631,9 +631,9 @@ An attribute cannot be created without specifying the label for `store_id = 0`.
 | 104        | Incorrect attribute type.                                                                                                                    |
 | 105        | Unable to save attribute.                                                                                                                    |
 
-<h3>Examples</h3>
+### Examples
 
-<h4>Request Example SOAP V1</h4>
+#### Request Example SOAP V1
 
 ```php
 $client = new SoapClient('https://mahohost/api/soap/?wsdl');
@@ -672,7 +672,7 @@ var_dump($result);
 $client->endSession($session);
 ```
 
-<h4>Request Example SOAP V2</h4>
+#### Request Example SOAP V2
 
 ```php
 $client = new SoapClient('https://mahohost/api/v2_soap/?wsdl');
@@ -722,27 +722,27 @@ var_dump($orders);
 
 ## Info
 
-<h3>Method</h3>
+### Method
 
 - `product_attribute.info` (SOAP V1)
 - `catalogProductAttributeInfo` (SOAP V2)
 
 Allows you to get full information about a required attribute with the list of options.
 
-<h3>Arguments</h3>
+### Arguments
 
 | Type   | Name      | Description          |
 |--------|-----------|----------------------|
 | string | sessionId | Session ID           |
 | string | attribute | Attribute code or ID |
 
-<h3>Return</h3>
+### Return
 
 | Type  | Name   | Description                            |
 |-------|--------|----------------------------------------|
 | array | result | Array of catalogProductAttributeEntity |
 
-<h3>Content `catalogProductAttributeEntity`</h3>
+### Content `catalogProductAttributeEntity`
 
 | Type             | Name                          | Description                                                                                                                                                        |
 |------------------|-------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -765,21 +765,21 @@ Allows you to get full information about a required attribute with the list of o
 | array            | options                       | Array of catalogAttributeOptionEntity                                                                                                                              |
 | array            | frontend_label                | Array of catalogProductAttributeFrontendLabel                                                                                                                      |
 
-<h3>Content `catalogAttributeOptionEntity`</h3>
+### Content `catalogAttributeOptionEntity`
 
 | Type   | Name  | Description |
 |--------|-------|-------------|
 | string | label | Text label  |
 | string | value | Option ID   |
 
-<h3>Content `catalogProductAttributeFrontendLabelEntity`</h3>
+### Content `catalogProductAttributeFrontendLabelEntity`
 
 | Type   | Name     | Description |
 |--------|----------|-------------|
 | string | store_id | Store ID    |
 | string | label    | Text label  |
 
-<h3>`AdditionaFieldsEntity` Additional Fields for Type `text`</h3>
+### `AdditionaFieldsEntity` Additional Fields for Type `text`
 
 | Type    | Name                     | Description                                                                                                                                                                                                                                         |
 |---------|--------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -787,20 +787,20 @@ Allows you to get full information about a required attribute with the list of o
 | boolean | is_html_allowed_on_front | Defines whether the HTML tags are allowed on the frontend                                                                                                                                                                                           |
 | boolean | used_for_sort_by         | Defines whether it is used for sorting in product listing                                                                                                                                                                                           |
 
-<h3>`AdditionaFieldsEntity` Additional Fields for Type `textarea`</h3>
+### `AdditionaFieldsEntity` Additional Fields for Type `textarea`
 
 | Type    | Name                     | Description                                               |
 |---------|--------------------------|-----------------------------------------------------------|
 | boolean | is_wysiwyg_enabled       | Enable WYSIWYG flag                                       |
 | boolean | is_html_allowed_on_front | Defines whether the HTML tags are allowed on the frontend |
 
-<h3>`AdditionaFieldsEntity` Additional Fields for Type `date` and `boolean`</h3>
+### `AdditionaFieldsEntity` Additional Fields for Type `date` and `boolean`
 
 | Type    | Name             | Description                                               |
 |---------|------------------|-----------------------------------------------------------|
 | boolean | used_for_sort_by | Defines whether it is used for sorting in product listing |
 
-<h3>`AdditionaFieldsEntity` Additional Fields for Type `multiselect`</h3>
+### `AdditionaFieldsEntity` Additional Fields for Type `multiselect`
 
 | Type    | Name                    | Description                                                     |
 |---------|-------------------------|-----------------------------------------------------------------|
@@ -808,7 +808,7 @@ Allows you to get full information about a required attribute with the list of o
 | boolean | is_filterable_in_search | Defines whether it is used in search results layered navigation |
 | int     | position                | Position                                                        |
 
-<h3>`AdditionaFieldsEntity` Additional Fields for Type `select` and `price`</h3>
+### `AdditionaFieldsEntity` Additional Fields for Type `select` and `price`
 
 | Type    | Name                    | Description                                                     |
 |---------|-------------------------|-----------------------------------------------------------------|
@@ -817,15 +817,15 @@ Allows you to get full information about a required attribute with the list of o
 | int     | position                | Position                                                        |
 | boolean | used_for_sort_by        | Defines whether it is used for sorting in product listing       |
 
-<h3>Faults</h3>
+### Faults
 
 | Fault Code | Fault Message                  |
 |------------|--------------------------------|
 | 101        | Requested attribute not found. |
 
-<h3>Examples</h3>
+### Examples
 
-<h4>Request Example SOAP V1</h4>
+#### Request Example SOAP V1
 
 ```php
 $client = new SoapClient('https://mahohost/api/soap/?wsdl');
@@ -838,7 +838,7 @@ var_dump($result);
 $client->endSession($session);
 ```
 
-<h4>Request Example SOAP V2</h4>
+#### Request Example SOAP V2
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); // replace with your store's WSDL URL
@@ -848,7 +848,7 @@ $result = $proxy->catalogProductAttributeInfo($sessionId, '11');
 var_dump($result);
 ```
 
-<h4>Response Example SOAP V1</h4>
+#### Response Example SOAP V1
 
 ```php
 array
@@ -888,36 +888,36 @@ array
 
 ## Remove
 
-<h3>Method</h3>
+### Method
 
 - `product_attribute.remove` (SOAP V1)
 - `catalogProductAttributeRemove` (SOAP V2)
 
 Allows you to remove the required attribute from a product.
 
-<h3>Arguments</h3>
+### Arguments
 
 | Type   | Name      | Description          |
 |--------|-----------|----------------------|
 | string | sessionId | Session ID           |
 | string | attribute | Attribute code or ID |
 
-<h3>Return</h3>
+### Return
 
 | Type    | Description                      |
 |---------|----------------------------------|
 | boolean | True if the attribute is removed |
 
-<h3>Faults</h3>
+### Faults
 
 | Fault Code | Fault Message                     |
 |------------|-----------------------------------|
 | 101        | Requested attribute not found.    |
 | 106        | This attribute cannot be deleted. |
 
-<h3>Examples</h3>
+### Examples
 
-<h4>Request Example SOAP V1</h4>
+#### Request Example SOAP V1
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/soap/?wsdl');
@@ -934,7 +934,7 @@ $result = $proxy->call(
 );
 ```
 
-<h4>Request Example SOAP V2</h4>
+#### Request Example SOAP V2
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); // replace with your store's WSDL URL
@@ -944,7 +944,7 @@ $result = $proxy->catalogProductAttributeRemove($sessionId, '11');
 var_dump($result);
 ```
 
-<h4>Request Example SOAP V2 (WS-I Compliance Mode)</h4>
+#### Request Example SOAP V2 (WS-I Compliance Mode)
 
 ```php
 $client = new SoapClient('https://mahohost/api/v2_soap/?wsdl');
@@ -956,14 +956,14 @@ var_dump($result);
 
 ## RemoveOption
 
-<h3>Method</h3>
+### Method
 
 - `product_attribute.removeOption` (SOAP V1)
 - `catalogProductAttributeRemoveOption` (SOAP V2)
 
 Allows you to remove the option for an attribute.
 
-<h3>Arguments</h3>
+### Arguments
 
 | Type   | Name      | Description          |
 |--------|-----------|----------------------|
@@ -971,13 +971,13 @@ Allows you to remove the option for an attribute.
 | string | attribute | Attribute code or ID |
 | string | optionId  | Option ID            |
 
-<h3>Return</h3>
+### Return
 
 | Type    | Description                   |
 |---------|-------------------------------|
 | boolean | True if the option is removed |
 
-<h3>Faults</h3>
+### Faults
 
 | Fault Code | Fault Message                  |
 |------------|--------------------------------|
@@ -985,9 +985,9 @@ Allows you to remove the option for an attribute.
 | 104        | Incorrect attribute type.      |
 | 109        | Unable to remove option.       |
 
-<h3>Examples</h3>
+### Examples
 
-<h4>Request Example SOAP V1</h4>
+#### Request Example SOAP V1
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/soap/?wsdl');
@@ -1006,7 +1006,7 @@ $result = $proxy->call(
 );
 ```
 
-<h4>Request Example SOAP V2</h4>
+#### Request Example SOAP V2
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); // replace with your store's WSDL URL
@@ -1018,39 +1018,39 @@ var_dump($result);
 
 ## Types
 
-<h3>Method</h3>
+### Method
 
 - `product_attribute.types` (SOAP V1)
 - `catalogProductAttributeTypes` (SOAP V2)
 
 Allows you to retrieve the list of possible attribute types.
 
-<h3>Arguments</h3>
+### Arguments
 
 | Type   | Name      | Description |
 |--------|-----------|-------------|
 | string | sessionId | Session ID  |
 
-<h3>Return</h3>
+### Return
 
 | Type  | Name   | Description                           |
 |-------|--------|---------------------------------------|
 | array | result | Array of catalogAttributeOptionEntity |
 
-<h3>Content `catalogAttributeOptionEntity`</h3>
+### Content `catalogAttributeOptionEntity`
 
 | Type   | Name  | Description   |
 |--------|-------|---------------|
 | string | label | Option label  |
 | string | value | Option value  |
 
-<h3>Faults</h3>
+### Faults
 
 _No Faults._
 
-<h3>Examples</h3>
+### Examples
 
-<h4>Request Example SOAP V1</h4>
+#### Request Example SOAP V1
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/soap/?wsdl');
@@ -1063,7 +1063,7 @@ $result = $proxy->call(
 var_dump($result);
 ```
 
-<h4>Request Example SOAP V2</h4>
+#### Request Example SOAP V2
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); // replace with your store's WSDL URL
@@ -1073,7 +1073,7 @@ $result = $proxy->catalogProductAttributeTypes($sessionId);
 var_dump($result);
 ```
 
-<h4>Response Example SOAP V1</h4>
+#### Response Example SOAP V1
 
 ```php
 array
@@ -1105,14 +1105,14 @@ array
 
 ## Update
 
-<h3>Method</h3>
+### Method
 
 - `product_attribute.update` (SOAP V1)
 - `catalogProductAttributeUpdate` (SOAP V2)
 
 Allows you to update the required attribute.
 
-<h3>Arguments</h3>
+### Arguments
 
 | Type   | Name      | Description                                    |
 |--------|-----------|------------------------------------------------|
@@ -1120,13 +1120,13 @@ Allows you to update the required attribute.
 | string | attribute | Attribute code or ID                           |
 | array  | data      | Array of catalogProductAttributeEntityToUpdate |
 
-<h3>Returns</h3>
+### Returns
 
 | Type    | Description                      |
 |---------|----------------------------------|
 | boolean | True if the attribute is updated |
 
-<h3>Content `catalogProductAttributeEntityToUpdate`</h3>
+### Content `catalogProductAttributeEntityToUpdate`
 
 | Type             | Name                          | Description                                                                                                                                                        |
 |------------------|-------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -1145,7 +1145,7 @@ Allows you to update the required attribute.
 | associativeArray | additional_fields             | Array of additional fields                                                                                                                                         |
 | array            | frontend_label                | Array of catalogProductAttributeFrontendLabel                                                                                                                      |
 
-<h3>`AdditionaFieldsEntity` Additional Fields for Type `text`</h3>
+### `AdditionaFieldsEntity` Additional Fields for Type `text`
 
 | Type    | Name                     | Description                                                                                                                                                                                                                                         |
 |---------|--------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -1153,20 +1153,20 @@ Allows you to update the required attribute.
 | boolean | is_html_allowed_on_front | Defines whether the HTML tags are allowed on the frontend                                                                                                                                                                                           |
 | boolean | used_for_sort_by         | Defines whether it is used for sorting in product listing                                                                                                                                                                                           |
 
-<h3>`AdditionaFieldsEntity` Additional Fields for Type `textarea`</h3>
+### `AdditionaFieldsEntity` Additional Fields for Type `textarea`
 
 | Type    | Name                     | Description                                               |
 |---------|--------------------------|-----------------------------------------------------------|
 | boolean | is_wysiwyg_enabled       | Enable WYSIWYG flag                                       |
 | boolean | is_html_allowed_on_front | Defines whether the HTML tags are allowed on the frontend |
 
-<h3>`AdditionaFieldsEntity` Additional Fields for Type `date` and `boolean`</h3>
+### `AdditionaFieldsEntity` Additional Fields for Type `date` and `boolean`
 
 | Type    | Name             | Description                                               |
 |---------|------------------|-----------------------------------------------------------|
 | boolean | used_for_sort_by | Defines whether it is used for sorting in product listing |
 
-<h3>`AdditionaFieldsEntity` Additional Fields for Type `multiselect`</h3>
+### `AdditionaFieldsEntity` Additional Fields for Type `multiselect`
 
 | Type    | Name                    | Description                                                     |
 |---------|-------------------------|-----------------------------------------------------------------|
@@ -1174,7 +1174,7 @@ Allows you to update the required attribute.
 | boolean | is_filterable_in_search | Defines whether it is used in search results layered navigation |
 | integer | position                | Position                                                        |
 
-<h3>`AdditionaFieldsEntity` Additional Fields for Type `select` and `price`</h3>
+### `AdditionaFieldsEntity` Additional Fields for Type `select` and `price`
 
 | Type    | Name                    | Description                                                     |
 |---------|-------------------------|-----------------------------------------------------------------|
@@ -1183,14 +1183,14 @@ Allows you to update the required attribute.
 | integer | position                | Position                                                        |
 | boolean | used_for_sort_by        | Defines whether it is used for sorting in product listing       |
 
-<h3>Content `catalogProductAttributeFrontendLabel`</h3>
+### Content `catalogProductAttributeFrontendLabel`
 
 | Type   | Name     | Description |
 |--------|----------|-------------|
 | string | store_id | Store ID    |
 | string | label    | Text label  |
 
-<h3>Faults</h3>
+### Faults
 
 | Fault Code | Fault Message                    |
 |------------|----------------------------------|
@@ -1198,9 +1198,9 @@ Allows you to update the required attribute.
 | 105        | Unable to save attribute.        |
 | 107        | This attribute cannot be edited. |
 
-<h3>Examples</h3>
+### Examples
 
-<h4>Request Example SOAP V1</h4>
+#### Request Example SOAP V1
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/soap/?wsdl');
@@ -1237,7 +1237,7 @@ $result = $proxy->call(
 );
 ```
 
-<h4>Request Example SOAP V2</h4>
+#### Request Example SOAP V2
 
 ```php
 $client = new SoapClient('https://mahohost/api/v2_soap/?wsdl');

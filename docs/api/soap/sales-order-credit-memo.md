@@ -4,15 +4,15 @@
 
 Allows you to operate with credit memos for orders.
 
-<h3>Resource</h3>
+### Resource
 
 - `sales_order_creditmemo`
 
-<h3>Alias</h3>
+### Alias
 
 - `order_creditmemo`
 
-<h3>Methods</h3>
+### Methods
 
 - `sales_order_creditmemo.list` - Retrieve the list of credit memos by filters.
 - `sales_order_creditmemo.info` - Retrieve the credit memo information.
@@ -20,7 +20,7 @@ Allows you to operate with credit memos for orders.
 - `sales_order_creditmemo.addComment` - Add a new comment to the credit memo.
 - `sales_order_creditmemo.cancel` - Cancel the credit memo.
 
-<h3>Faults</h3>
+### Faults
 
 | Fault Code | Fault Message                                                                        |
 |------------|--------------------------------------------------------------------------------------|
@@ -32,7 +32,7 @@ Allows you to operate with credit memos for orders.
 | 105        | Money can not be refunded to the store credit account as order was created by guest. |
 | 106        | Credit memo for requested order can not be created.                                  |
 
-<h3>Example</h3>
+### Example
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/soap/?wsdl');
@@ -80,27 +80,27 @@ print_r($creditmemoList);
 
 ## List
 
-<h3>Method</h3>
+### Method
 
 - `order_creditmemo.list` (SOAP V1)
 - `salesOrderCreditmemoList` (SOAP V2)
 
 Allows you to retrieve the list of credit memos by filters.
 
-<h3>Arguments</h3>
+### Arguments
 
 | Type              | Name      | Description        |
 |-------------------|-----------|--------------------|
 | string            | sessionId | Session ID         |
 | associative array | filters   | Filters (optional) |
 
-<h3>Return</h3>
+### Return
 
 | Type  | Name   | Description                         |
 |-------|--------|-------------------------------------|
 | array | result | Array of salesOrderCreditmemoEntity |
 
-<h3>Content `salesOrderCreditmemoEntity`</h3>
+### Content `salesOrderCreditmemoEntity`
 
 | Type   | Name                           | Description                                               |
 |--------|--------------------------------|-----------------------------------------------------------|
@@ -177,7 +177,7 @@ Allows you to retrieve the list of credit memos by filters.
 | array  | items                          | Array of salesOrderCreditmemoItemEntity                   |
 | array  | comments                       | Array of salesOrderCreditmemoCommentEntity                |
 
-<h3>Content `salesOrderCreditmemoItemEntity`</h3>
+### Content `salesOrderCreditmemoItemEntity`
 
 | Type   | Name                             | Description                                             |
 |--------|----------------------------------|---------------------------------------------------------|
@@ -215,7 +215,7 @@ Allows you to retrieve the list of credit memos by filters.
 | string | hidden_tax_amount                | Hidden tax amount                                       |
 | string | base_hidden_tax_amount           | Base hidden tax amount                                  |
 
-<h3>Content `salesOrderCreditmemoCommentEntity`</h3>
+### Content `salesOrderCreditmemoCommentEntity`
 
 | Type   | Name                 | Description                                            |
 |--------|----------------------|--------------------------------------------------------|
@@ -226,15 +226,15 @@ Allows you to retrieve the list of credit memos by filters.
 | string | comment_id           | Comment ID                                             |
 | string | is_visible_on_front  | Defines whether the comment is visible on the frontend |
 
-<h3>Faults</h3>
+### Faults
 
 | Fault Code | Fault Description                               |
 |------------|-------------------------------------------------|
 | 101        | Invalid filter given. Details in error message. |
 
-<h3>Examples</h3>
+### Examples
 
-<h4>Request Example SOAP V1</h4>
+#### Request Example SOAP V1
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/soap/?wsdl');
@@ -268,7 +268,7 @@ $filter = [
 $creditmemoList = $proxy->call($sessionId, 'order_creditmemo.list', [$filter]);
 ```
 
-<h4>Request Example SOAP V2</h4>
+#### Request Example SOAP V2
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); // replace with your store's WSDL URL
@@ -278,7 +278,7 @@ $result = $proxy->salesOrderCreditmemoList($sessionId, '200000001');
 var_dump($result);
 ```
 
-<h4>Request Example SOAP V2 (Complex Filter)</h4>
+#### Request Example SOAP V2 (Complex Filter)
 
 ```php
 $client = new SoapClient('https://mahohost/api/v2_soap/?wsdl');
@@ -296,7 +296,7 @@ $result = $client->salesOrderCreditmemoList($session, $complexFilter);
 var_dump($result);
 ```
 
-<h4>Request Example SOAP V2 (WS-I Compliance Mode)</h4>
+#### Request Example SOAP V2 (WS-I Compliance Mode)
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); 
@@ -306,7 +306,7 @@ $result = $proxy->salesOrderCreditmemoList((object)['sessionId' => $sessionId->r
 var_dump($result->result);
 ```
 
-<h4>Response Example SOAP V1</h4>
+#### Response Example SOAP V1
 
 ```php
 [
@@ -393,27 +393,27 @@ var_dump($result->result);
 
 ## Info
 
-<h3>Method</h3>
+### Method
 
 - `order_creditmemo.info` (SOAP V1)
 - `salesOrderCreditmemoInfo` (SOAP V2)
 
 Allows you to retrieve full information about the specified credit memo.
 
-<h3>Arguments</h3>
+### Arguments
 
 | Type   | Name                  | Description              |
 |--------|-----------------------|--------------------------|
 | string | sessionId             | Session ID               |
 | string | creditmemoIncrementId | Credit memo increment ID |
 
-<h3>Return</h3>
+### Return
 
 | Type  | Name   | Description                         |
 |-------|--------|-------------------------------------|
 | array | result | Array of salesOrderCreditmemoEntity |
 
-<h3>Content `salesOrderCreditmemoEntity`</h3>
+### Content `salesOrderCreditmemoEntity`
 
 | Type   | Name                           | Description                                               |
 |--------|--------------------------------|-----------------------------------------------------------|
@@ -490,7 +490,7 @@ Allows you to retrieve full information about the specified credit memo.
 | array  | items                          | Array of salesOrderCreditmemoItemEntity                   |
 | array  | comments                       | Array of salesOrderCreditmemoCommentEntity                |
 
-<h3>Content `salesOrderCreditmemoItemEntity`</h3>
+### Content `salesOrderCreditmemoItemEntity`
 
 | Type   | Name                             | Description                                             |
 |--------|----------------------------------|---------------------------------------------------------|
@@ -539,15 +539,15 @@ Allows you to retrieve full information about the specified credit memo.
 | string | comment_id           | Comment ID                                             |
 | string | is_visible_on_front  | Defines whether the comment is visible on the frontend |
 
-<h3>Faults</h3>
+### Faults
 
 | Fault Code | Fault Description                     |
 |------------|---------------------------------------|
 | 100        | Requested credit memo does not exist. |
 
-<h3>Examples</h3>
+### Examples
 
-<h4>Request Example SOAP V1</h4>
+#### Request Example SOAP V1
 
 ```php
 $client = new SoapClient('https://mahohost/api/soap/?wsdl');
@@ -557,7 +557,7 @@ $result = $client->call($session, 'order_creditmemo.info', '200000001');
 var_dump($result);
 ```
 
-<h4>Request Example SOAP V2</h4>
+#### Request Example SOAP V2
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); // replace with your store's WSDL URL
@@ -567,7 +567,7 @@ $result = $proxy->salesOrderCreditmemoInfo($sessionId, '200000001');
 var_dump($result);
 ```
 
-<h4>Request Example SOAP V2 (WS-I Compliance Mode)</h4>
+#### Request Example SOAP V2 (WS-I Compliance Mode)
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); 
@@ -577,7 +577,7 @@ $result = $proxy->salesOrderCreditmemoInfo((object)['sessionId' => $sessionId->r
 var_dump($result->result);
 ```
 
-<h4>Response Example SOAP V1</h4>
+#### Response Example SOAP V1
 
 ```php
 [
@@ -754,7 +754,7 @@ var_dump($result->result);
 
 ## Create
 
-<h3>Method</h3>
+### Method
 
 - `order_creditmemo.create` (SOAP V1)
 - `salesOrderCreditmemoCreate` (SOAP V2)
@@ -762,7 +762,7 @@ var_dump($result->result);
 Allows you to create a new credit memo for the invoiced order.
 Comments can be added and an email notification can be sent to the user email.
 
-<h3>Arguments</h3>
+### Arguments
 
 | Type   | Name                      | Description                                                           |
 |--------|---------------------------|-----------------------------------------------------------------------|
@@ -774,13 +774,13 @@ Comments can be added and an email notification can be sent to the user email.
 | int    | includeComment            | Include comment text into an email notification (optional)            |
 | string | refundToStoreCreditAmount | Payment amount to be refunded to the customer store credit (optional) |
 
-<h3>Return</h3>
+### Return
 
 | Type   | Name   | Description                      |
 |--------|--------|----------------------------------|
 | string | result | Created credit memo increment ID |
 
-<h3>Content `salesOrderCreditmemoData`</h3>
+### Content `salesOrderCreditmemoData`
 
 | Type   | Name                | Description                         |
 |--------|---------------------|-------------------------------------|
@@ -789,14 +789,14 @@ Comments can be added and an email notification can be sent to the user email.
 | double | adjustment_positive | Adjustment refund amount (optional) |
 | double | adjustment_negative | Adjustment fee amount (optional)    |
 
-<h3>Content `orderItemIdQty`</h3>
+### Content `orderItemIdQty`
 
 | Type   | Name          | Description                   |
 |--------|---------------|-------------------------------|
 | int    | order_item_id | Order item ID to be refunded  |
 | double | qty           | Items quantity to be refunded |
 
-<h3>Faults</h3>
+### Faults
 
 | Fault Code | Fault Message                                                                        |
 |------------|--------------------------------------------------------------------------------------|
@@ -805,9 +805,9 @@ Comments can be added and an email notification can be sent to the user email.
 | 105        | Money can not be refunded to the store credit account as order was created by guest. |
 | 106        | Credit memo for requested order can not be created.                                  |
 
-<h3>Examples</h3>
+### Examples
 
-<h4>Request Example SOAP V1</h4>
+#### Request Example SOAP V1
 
 ```php
 $client = new SoapClient('https://mahohost/api/soap/?wsdl');
@@ -817,7 +817,7 @@ $result = $client->call($session, 'order_creditmemo.create', '200000010');
 var_dump($result);
 ```
 
-<h4>Request Example SOAP V2</h4>
+#### Request Example SOAP V2
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); // replace with your store's WSDL URL
@@ -827,7 +827,7 @@ $result = $proxy->salesOrderCreditmemoCreate($sessionId, '200000010');
 var_dump($result);
 ```
 
-<h4>Request Example SOAP V2 (WS-I Compliance Mode)</h4>
+#### Request Example SOAP V2 (WS-I Compliance Mode)
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); 
@@ -851,7 +851,7 @@ var_dump($result->result);
 
 ## AddComment
 
-<h3>Method</h3>
+### Method
 
 - `order_creditmemo.addComment` (SOAP V1)
 - `salesOrderCreditmemoAddComment` (SOAP V2)
@@ -859,7 +859,7 @@ var_dump($result->result);
 Allows you to add a new comment to an existing credit memo.
 Email notification can be sent to the user email.
 
-<h3>Arguments</h3>
+### Arguments
 
 | Type   | Name                  | Description                                                 |
 |--------|-----------------------|-------------------------------------------------------------|
@@ -869,22 +869,22 @@ Email notification can be sent to the user email.
 | int    | notifyCustomer        | Notify customer by email flag (optional)                    |
 | int    | includeComment        | Include comment text into the email notification (optional) |
 
-<h3>Return</h3>
+### Return
 
 | Type       | Description                                         |
 |------------|-----------------------------------------------------|
 | booleanint | True (1) if the comment is added to the credit memo |
 
-<h3>Faults</h3>
+### Faults
 
 | Fault Code | Fault Message                                 |
 |------------|-----------------------------------------------|
 | 100        | Requested credit memo does not exist.         |
 | 102        | Invalid data given. Details in error message. |
 
-<h3>Examples</h3>
+### Examples
 
-<h4>Request Example SOAP V1</h4>
+#### Request Example SOAP V1
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/soap/?wsdl');
@@ -896,7 +896,7 @@ $commentText = "Credit memo comment successfully added";
 $isCommentAdded = $proxy->call($sessionId, 'order_creditmemo.addComment', [$creditmemoIncrementId, $commentText, true]);
 ```
 
-<h4>Request Example SOAP V2</h4>
+#### Request Example SOAP V2
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); // replace with your store's WSDL URL
@@ -906,7 +906,7 @@ $result = $proxy->salesOrderCreditmemoAddComment($sessionId, '200000001');
 var_dump($result);
 ```
 
-<h4>Request Example SOAP V2 (WS-I Compliance Mode)</h4>
+#### Request Example SOAP V2 (WS-I Compliance Mode)
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); 
@@ -918,36 +918,36 @@ var_dump($result->result);
 
 ## Cancel
 
-<h3>Method</h3>
+### Method
 
 - `order_creditmemo.cancel` (SOAP V1)
 - `salesOrderCreditmemoCancel` (SOAP V2)
 
 Allows you to cancel an existing credit memo.
 
-<h3>Arguments</h3>
+### Arguments
 
 | Type   | Name                  | Description              |
 |--------|-----------------------|--------------------------|
 | string | sessionId             | Session ID               |
 | string | creditmemoIncrementId | Credit memo increment ID |
 
-<h3>Return</h3>
+### Return
 
 | Type   | Name   | Description                         |
 |--------|--------|-------------------------------------|
 | string | result | Result of canceling the credit memo |
 
-<h3>Faults</h3>
+### Faults
 
 | Fault Code | Fault Message                         |
 |------------|---------------------------------------|
 | 100        | Requested credit memo does not exist. |
 | 104        | Credit memo status not changed.       |
 
-<h3>Examples</h3>
+### Examples
 
-<h4>Request Example SOAP V1</h4>
+#### Request Example SOAP V1
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/soap/?wsdl');

@@ -4,16 +4,16 @@
 
 Allows you to manage product images.
 
-<h3>Resource Name</h3>
+### Resource Name
 
 - `catalog_product_attribute_media`
 
-<h3>Aliases</h3>
+### Aliases
 
 - `product_attribute_media`
 - `product_media`
 
-<h3>Methods</h3>
+### Methods
 
 - `catalog_product_attribute_media.currentStore` - Set/Get the current store view.
 - `catalog_product_attribute_media.list` - Retrieve the product images.
@@ -23,7 +23,7 @@ Allows you to manage product images.
 - `catalog_product_attribute_media.update` - Update an image for a product.
 - `catalog_product_attribute_media.remove` - Remove an image for a product.
 
-<h3>Faults</h3>
+### Faults
 
 | Fault Code | Fault Message                                          |
 |------------|--------------------------------------------------------|
@@ -36,7 +36,7 @@ Allows you to manage product images.
 | 106        | Image not removed. Details in error message.           |
 | 107        | Requested product doesn’t support images               |
 
-<h3>Example - Working With Product Images</h3>
+### Example - Working With Product Images
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/soap/?wsdl');
@@ -85,34 +85,34 @@ var_dump($proxy->call($sessionId, 'product_media.list', 'sku'));
 
 ## CurrentStore
 
-<h3>Method</h3>
+### Method
 
 - `catalog_product_attribute_media.currentStore` (SOAP V1)
 - `catalogProductAttributeMediaCurrentStore` (SOAP V2)
 
 Allows you to set/get the current store view.
 
-<h3>Aliases</h3>
+### Aliases
 
 - `product_attribute_media.currentStore`
 - `product_media.currentStore`
 
-<h3>Arguments</h3>
+### Arguments
 
 | Type   | Name      | Description                      |
 |--------|-----------|----------------------------------|
 | string | sessionId | Session ID                       |
 | string | storeView | Store view ID or code (optional) |
 
-<h3>Returns</h3>
+### Returns
 
 | Type | Name      | Description   |
 |------|-----------|---------------|
 | int  | storeView | Store view ID |
 
-<h3>Examples</h3>
+### Examples
 
-<h4>Request Example SOAP V1</h4>
+#### Request Example SOAP V1
 
 ```php
 $client = new SoapClient('https://mahohost/api/soap/?wsdl');
@@ -122,7 +122,7 @@ $result = $client->call($session, 'catalog_product_attribute_media.currentStore'
 var_dump($result);
 ```
 
-<h4>Request Example SOAP V2</h4>
+#### Request Example SOAP V2
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); // replace with your store's WSDL URL
@@ -134,19 +134,19 @@ var_dump($result);
 
 ## List
 
-<h3>Method</h3>
+### Method
 
 - `catalog_product_attribute_media.list` (SOAP V1)
 - `catalogProductAttributeMediaList` (SOAP V2)
 
 Allows you to retrieve the list of product images.
 
-<h3>Aliases</h3>
+### Aliases
 
 - `product_attribute_media.list`
 - `product_media.list`
 
-<h3>Arguments</h3>
+### Arguments
 
 | Type   | Name           | Description                                                                |
 |--------|----------------|----------------------------------------------------------------------------|
@@ -155,13 +155,13 @@ Allows you to retrieve the list of product images.
 | string | storeView      | Store view ID or code (optional)                                           |
 | string | identifierType | Defines whether the product ID or sku is passed in the 'product' parameter |
 
-<h3>Returns</h3>
+### Returns
 
 | Type  | Name   | Description                        |
 |-------|--------|------------------------------------|
 | array | result | Array of catalogProductImageEntity |
 
-<h3>Content `catalogProductImageEntity`</h3>
+### Content `catalogProductImageEntity`
 
 | Type          | Name     | Description                                                               |
 |---------------|----------|---------------------------------------------------------------------------|
@@ -172,9 +172,9 @@ Allows you to retrieve the list of product images.
 | string        | url      | Image URL                                                                 |
 | ArrayOfString | types    | Array of types                                                            |
 
-<h3>Examples</h3>
+### Examples
 
-<h4>Request Example SOAP V1</h4>
+#### Request Example SOAP V1
 
 ```php
 $client = new SoapClient('https://mahohost/api/soap/?wsdl');
@@ -187,7 +187,7 @@ var_dump($result);
 $client->endSession($session);
 ```
 
-<h4>Request Example SOAP V2</h4>
+#### Request Example SOAP V2
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); // replace with your store's WSDL URL
@@ -197,7 +197,7 @@ $result = $proxy->catalogProductAttributeMediaList($sessionId, '2');
 var_dump($result);
 ```
 
-<h4>Request Example SOAP V2 (WS-I Compliance Mode)</h4>
+#### Request Example SOAP V2 (WS-I Compliance Mode)
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl');
@@ -212,7 +212,7 @@ $result = $proxy->catalogProductAttributeMediaList(
 var_dump($result->result);
 ```
 
-<h4>Response Example SOAP V1</h4>
+#### Response Example SOAP V1
 
 ```php
 array
@@ -232,19 +232,19 @@ array
 
 ## Info
 
-<h3>Method</h3>
+### Method
 
 - `catalog_product_attribute_media.info` (SOAP V1)
 - `catalogProductAttributeMediaInfo` (SOAP V2)
 
 Allows you to retrieve information about the specified product image.
 
-<h3>Aliases</h3>
+### Aliases
 
 - `product_attribute_media.info`
 - `product_media.info`
 
-<h3>Arguments</h3>
+### Arguments
 
 | Type   | Name           | Description                                                                |
 |--------|----------------|----------------------------------------------------------------------------|
@@ -254,13 +254,13 @@ Allows you to retrieve information about the specified product image.
 | string | storeView      | Store view ID or code (optional)                                           |
 | string | identifierType | Defines whether the product ID or SKU is passed in the 'product' parameter |
 
-<h3>Returns</h3>
+### Returns
 
 | Type  | Name   | Description                        |
 |-------|--------|------------------------------------|
 | array | result | Array of catalogProductImageEntity |
 
-<h3>Content `catalogProductImageEntity`</h3>
+### Content `catalogProductImageEntity`
 
 | Type          | Name     | Description                                                               |
 |---------------|----------|---------------------------------------------------------------------------|
@@ -271,9 +271,9 @@ Allows you to retrieve information about the specified product image.
 | string        | url      | Image URL                                                                 |
 | ArrayOfString | types    | Array of types                                                            |
 
-<h3>Examples</h3>
+### Examples
 
-<h4>Request Example SOAP V1</h4>
+#### Request Example SOAP V1
 
 ```php
 $client = new SoapClient('https://mahohost/api/soap/?wsdl');
@@ -293,7 +293,7 @@ var_dump($result);
 $client->endSession($session);
 ```
 
-<h4>Request Example SOAP V2</h4>
+#### Request Example SOAP V2
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); // replace with your store's WSDL URL
@@ -303,7 +303,7 @@ $result = $proxy->catalogProductAttributeMediaInfo($sessionId, '2', '/b/l/blackb
 var_dump($result);
 ```
 
-<h4>Request Example SOAP V2 (WS-I Compliance Mode)</h4>
+#### Request Example SOAP V2 (WS-I Compliance Mode)
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl');
@@ -319,7 +319,7 @@ $result = $proxy->catalogProductAttributeMediaInfo(
 var_dump($result->result);
 ```
 
-<h4>Response Example SOAP V1</h4>
+#### Response Example SOAP V1
 
 ```php
 array
@@ -337,7 +337,7 @@ array
 
 ## Types
 
-<h3>Method</h3>
+### Method
 
 - `catalog_product_attribute_media.types` (SOAP V1)
 - `catalogProductAttributeMediaTypes` (SOAP V2)
@@ -346,34 +346,34 @@ Allows you to retrieve product image types including standard `image`, `small_im
 Note that if the product attribute set contains attributes of the media image type
 (**Catalog Input Type for Store Owner > Media Image**), it will also be returned in the response.
 
-<h4>Aliases</h4>
+#### Aliases
 
 - `product_attribute_media.types`
 - `product_media.types`
 
-<h3>Arguments</h3>
+### Arguments
 
 | Type   | Name      | Description                     |
 |--------|-----------|---------------------------------|
 | string | sessionId | Session ID                      |
 | string | setId     | ID of the product attribute set |
 
-<h3>Returns</h3>
+### Returns
 
 | Type   | Name   | Description                                     |
 |--------|--------|-------------------------------------------------|
 | array  | result | Array of catalogProductAttributeMediaTypeEntity |
 
-<h3>Content `catalogProductAttributeMediaTypeEntity`</h3>
+### Content `catalogProductAttributeMediaTypeEntity`
 
 | Type   | Name  | Description                             |
 |--------|-------|-----------------------------------------|
 | string | code  | Image type code                         |
 | string | scope | Image scope (store, website, or global) |
 
-<h3>Examples</h3>
+### Examples
 
-<h4>Request Example SOAP V1</h4>
+#### Request Example SOAP V1
 
 ```php
 $client = new SoapClient('https://mahohost/api/soap/?wsdl');
@@ -386,7 +386,7 @@ var_dump($result);
 $client->endSession($session);
 ```
 
-<h4>Request Example SOAP V2</h4>
+#### Request Example SOAP V2
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); // replace with your store's WSDL URL
@@ -396,7 +396,7 @@ $result = $proxy->catalogProductAttributeMediaTypes($sessionId, '4');
 var_dump($result);
 ```
 
-<h4>Request Example SOAP V2 (WS-I Compliance Mode)</h4>
+#### Request Example SOAP V2 (WS-I Compliance Mode)
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl');
@@ -411,7 +411,7 @@ $result = $proxy->catalogProductAttributeMediaTypes(
 var_dump($result->result);
 ```
 
-<h4>Response Example SOAP V1</h4>
+#### Response Example SOAP V1
 
 ```php
 array
@@ -431,19 +431,19 @@ array
 
 ## Create
 
-<h3>Method</h3>
+### Method
 
 - `catalog_product_attribute_media.create` (SOAP V1)
 - `catalogProductAttributeMediaCreate` (SOAP V2)
 
 Allows you to upload a new product image.
 
-<h3>Aliases</h3>
+### Aliases
 
 - `product_attribute_media.create`
 - `product_media.create`
 
-<h3>Arguments</h3>
+### Arguments
 
 | Type   | Name           | Description                                                                |
 |--------|----------------|----------------------------------------------------------------------------|
@@ -453,13 +453,13 @@ Allows you to upload a new product image.
 | string | storeView      | Store view ID or code (optional)                                           |
 | string | identifierType | Defines whether the product ID or SKU is passed in the 'product' parameter |
 
-<h3>Returns</h3>
+### Returns
 
 | Type   | Name   | Description                                        |
 |--------|--------|----------------------------------------------------|
 | string | result | Image file name incl. path (e.g. '/i/m/image.png') |
 
-<h3>Content `catalogProductAttributeMediaCreateEntity`</h3>
+### Content `catalogProductAttributeMediaCreateEntity`
 
 | Type          | Name     | Description                                                               |
 |---------------|----------|---------------------------------------------------------------------------|
@@ -470,7 +470,7 @@ Allows you to upload a new product image.
 | string        | exclude  | Defines whether the image will associate only to one of three image types |
 | string        | remove   | Remove image flag                                                         |
 
-<h3>Content `catalogProductImageFileEntity`</h3>
+### Content `catalogProductImageFileEntity`
 
 | Type   | Name    | Description                        |
 |--------|---------|------------------------------------|
@@ -478,9 +478,9 @@ Allows you to upload a new product image.
 | string | mime    | Image mime type (e.g., image/jpeg) |
 | string | name    | Image name                         |
 
-<h3>Examples</h3>
+### Examples
 
-<h4>Request Example SOAP V1</h4>
+#### Request Example SOAP V1
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/soap/?wsdl');
@@ -508,7 +508,7 @@ $result = $proxy->call(
 );
 ```
 
-<h4>Request Example SOAP V2</h4>
+#### Request Example SOAP V2
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/soap/?wsdl');
@@ -533,7 +533,7 @@ $result = $proxy->catalogProductAttributeMediaCreate(
 );
 ```
 
-<h4>Request Example SOAP V2 (WS-I Compliance Mode)</h4>
+#### Request Example SOAP V2 (WS-I Compliance Mode)
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl');
@@ -561,19 +561,19 @@ var_dump($result->result);
 
 ## Update
 
-<h3>Method</h3>
+### Method
 
 - `catalog_product_attribute_media.update` (SOAP V1)
 - `catalogProductAttributeMediaUpdate` (SOAP V2)
 
 Allows you to update the product image.
 
-<h3>Aliases</h3>
+### Aliases
 
 - `product_attribute_media.update`
 - `product_media.update`
 
-<h3>Arguments</h3>
+### Arguments
 
 | Type   | Name           | Description                                                                |
 |--------|----------------|----------------------------------------------------------------------------|
@@ -587,13 +587,13 @@ Allows you to update the product image.
 **Notes:** You should specify only those parameters which you want to be updated.
 Parameters not specified in the request will preserve the previous values.
 
-<h3>Returns</h3>
+### Returns
 
 | Type    | Name   | Description                      |
 |---------|--------|----------------------------------|
 | boolean | result | Result of product image updating |
 
-<h3>Content `catalogProductAttributeMediaCreateEntity`</h3>
+### Content `catalogProductAttributeMediaCreateEntity`
 
 | Type          | Name     | Description                                                               |
 |---------------|----------|---------------------------------------------------------------------------|
@@ -604,7 +604,7 @@ Parameters not specified in the request will preserve the previous values.
 | string        | exclude  | Defines whether the image will associate only to one of three image types |
 | string        | remove   | Image remove flag                                                         |
 
-<h3>Content `catalogProductImageFileEntity`</h3>
+### Content `catalogProductImageFileEntity`
 
 | Type   | Name    | Description                             |
 |--------|---------|-----------------------------------------|
@@ -612,9 +612,9 @@ Parameters not specified in the request will preserve the previous values.
 | string | mime    | Image mime type (e.g., image/jpeg)      |
 | string | name    | Image name                              |
 
-<h3>Examples</h3>
+### Examples
 
-<h4>Request Example SOAP V1</h4>
+#### Request Example SOAP V1
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/soap/?wsdl');
@@ -645,7 +645,7 @@ $result = $client->call(
 );
 ```
 
-<h4>Request Example SOAP V2</h4>
+#### Request Example SOAP V2
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/soap/?wsdl');
@@ -673,7 +673,7 @@ $result = $client->catalogProductAttributeMediaUpdate(
 );
 ```
 
-<h4>Request Example SOAP V2 (WS-I Compliance Mode)</h4>
+#### Request Example SOAP V2 (WS-I Compliance Mode)
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl');
@@ -697,19 +697,19 @@ var_dump($result->result);
 
 ## Remove
 
-<h3>Method</h3>
+### Method
 
 - `catalog_product_attribute_media.remove` (SOAP V1)
 - `catalogProductAttributeMediaRemove` (SOAP V2)
 
 Allows you to remove the image from a product.
 
-<h3>Aliases</h3>
+### Aliases
 
 - `product_attribute_media.remove`
 - `product_media.remove`
 
-<h3>Arguments</h3>
+### Arguments
 
 | Type   | Name           | Description                                                                |
 |--------|----------------|----------------------------------------------------------------------------|
@@ -718,15 +718,15 @@ Allows you to remove the image from a product.
 | string | file           | Image file name (e.g. '/b/l/blackberry8100_2.jpg')                         |
 | string | identifierType | Defines whether the product ID or SKU is passed in the 'product' parameter |
 
-<h3>Returns</h3>
+### Returns
 
 | Type       | Description                                     |
 |------------|-------------------------------------------------|
 | booleanint | True (1) if the image is removed from a product |
 
-<h3>Examples</h3>
+### Examples
 
-<h4>Request Example SOAP V1</h4>
+#### Request Example SOAP V1
 
 ```php
 $client = new SoapClient('https://mahohost/api/soap/?wsdl');
@@ -746,7 +746,7 @@ var_dump($result);
 $client->endSession($session);
 ```
 
-<h4>Request Example SOAP V2</h4>
+#### Request Example SOAP V2
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); // replace with your store's WSDL URL
@@ -756,7 +756,7 @@ $result = $proxy->catalogProductAttributeMediaRemove($sessionId, '3', '/b/l/blac
 var_dump($result);
 ```
 
-<h4>Request Example SOAP V2 (WS-I Compliance Mode)</h4>
+#### Request Example SOAP V2 (WS-I Compliance Mode)
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl');

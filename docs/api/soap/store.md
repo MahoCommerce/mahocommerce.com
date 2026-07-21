@@ -2,27 +2,27 @@
 
 ## Store Info
 
-<h3>Method</h3>
+### Method
 
 - `store.info` (SOAP V1)
 - `storeInfo` (SOAP V2)
 
 Allows you to retrieve information about the required store view.
 
-<h3>Arguments</h3>
+### Arguments
 
 | Type   | Name      | Description                      |
 |--------|-----------|----------------------------------|
 | string | sessionId | Session ID                       |
 | string | storeId   | Store view ID or code (optional) |
 
-<h3>Return</h3>
+### Return
 
 | Type  | Name   | Description          |
 |-------|--------|----------------------|
 | array | result | Array of storeEntity |
 
-<h3>Content `storeEntity`</h3>
+### Content `storeEntity`
 
 | Type   | Name       | Description                         |
 |--------|------------|-------------------------------------|
@@ -34,15 +34,15 @@ Allows you to retrieve information about the required store view.
 | int    | sort_order | Store view sort order               |
 | int    | is_active  | Defines whether the store is active |
 
-<h3>Faults</h3>
+### Faults
 
 | Fault Code | Fault Message                   |
 |------------|---------------------------------|
 | 101        | Requested store view not found. |
 
-<h3>Examples</h3>
+### Examples
 
-<h4>Request Example SOAP V1</h4>
+#### Request Example SOAP V1
 
 ```php
 $client = new SoapClient('https://mahohost/api/soap/?wsdl');
@@ -52,7 +52,7 @@ $result = $client->call($session, 'store.info', '2');
 var_dump($result);
 ```
 
-<h4>Request Example SOAP V2</h4>
+#### Request Example SOAP V2
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); // replace with your store's WSDL URL
@@ -62,7 +62,7 @@ $result = $proxy->storeInfo($sessionId, '2');
 var_dump($result);
 ```
 
-<h4>Request Example SOAP V2 (WS-I Compliance Mode)</h4>
+#### Request Example SOAP V2 (WS-I Compliance Mode)
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); 
@@ -72,7 +72,7 @@ $result = $proxy->storeInfo((object)array('sessionId' => $sessionId->result, 'st
 var_dump($result->result);
 ```
 
-<h4>Response Example SOAP V1</h4>
+#### Response Example SOAP V1
 
 ```php
 array
@@ -87,26 +87,26 @@ array
 
 ## Store list
 
-<h3>Method</h3>
+### Method
 
 - `store.list` (SOAP V1)
 - `storeList` (SOAP V2)
 
 Allows you to retrieve the list of store views.
 
-<h3>Arguments</h3>
+### Arguments
 
 | Type   | Name      | Description |
 |--------|-----------|-------------|
 | string | sessionId | Session ID  |
 
-<h3>Return</h3>
+### Return
 
 | Type  | Name   | Description          |
 |-------|--------|----------------------|
 | array | result | Array of storeEntity |
 
-<h3>Content `storeEntity`</h3>
+### Content `storeEntity`
 
 | Type   | Name       | Description                         |
 |--------|------------|-------------------------------------|
@@ -118,13 +118,13 @@ Allows you to retrieve the list of store views.
 | int    | sort_order | Store view sort order               |
 | int    | is_active  | Defines whether the store is active |
 
-<h3>Faults</h3>
+### Faults
 
 _No Faults._
 
-<h3>Examples</h3>
+### Examples
 
-<h4>Request Example SOAP V1</h4>
+#### Request Example SOAP V1
 
 ```php
 $client = new SoapClient('https://mahohost/api/soap/?wsdl');
@@ -134,7 +134,7 @@ $result = $client->call($session, 'store.list');
 var_dump($result);
 ```
 
-<h4>Request Example SOAP V2</h4>
+#### Request Example SOAP V2
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); // replace with your store's WSDL URL
@@ -144,7 +144,7 @@ $result = $proxy->storeList($sessionId);
 var_dump($result);
 ```
 
-<h4>Request Example SOAP V2 (WS-I Compliance Mode)</h4>
+#### Request Example SOAP V2 (WS-I Compliance Mode)
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); 
@@ -154,7 +154,7 @@ $result = $proxy->storeList((object)['sessionId' => $sessionId->result]);
 var_dump($result->result);
 ```
 
-<h4>Response Example SOAP V1</h4>
+#### Response Example SOAP V1
 
 ```php
 array

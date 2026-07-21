@@ -4,19 +4,19 @@
 
 Allows you to retrieve product types.
 
-<h3>Resource Name</h3>
+### Resource Name
 
 - `catalog_product_type`
 
-<h3>Alias</h3>
+### Alias
 
 - `product_type`
 
-<h3>Method</h3>
+### Method
 
 - `catalog_product_type.list` - Retrieve the list of product types.
 
-<h3>Example - Retrieving the Product Type</h3>
+### Example - Retrieving the Product Type
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/soap/?wsdl');
@@ -28,39 +28,39 @@ var_dump($types);
 
 ## List
 
-<h3>Method</h3>
+### Method
 
 - `catalog_product_type.list` (SOAP V1)
 - `catalogProductTypeList` (SOAP V2)
 
 Allows you to retrieve the list of product types.
 
-<h3>Alias</h3>
+### Alias
 
 - `product_type.list`
 
-<h3>Arguments</h3>
+### Arguments
 
 | Type   | Name      | Description |
 |--------|-----------|-------------|
 | string | sessionId | Session ID  |
 
-<h3>Returns</h3>
+### Returns
 
 | Type  | Name   | Description                       |
 |-------|--------|-----------------------------------|
 | array | result | Array of catalogProductTypeEntity |
 
-<h3>Content `catalogProductTypeEntity`</h3>
+### Content `catalogProductTypeEntity`
 
 | Type   | Name  | Description                      |
 |--------|-------|----------------------------------|
 | string | type  | Product type                     |
 | string | label | Product label in the Admin Panel |
 
-<h3>Examples</h3>
+### Examples
 
-<h4>Request Example SOAP V1</h4>
+#### Request Example SOAP V1
 
 ```php
 $client = new SoapClient('https://mahohost/api/soap/?wsdl');
@@ -73,7 +73,7 @@ var_dump($result);
 $client->endSession($session);
 ```
 
-<h4>Request Example SOAP V2</h4>
+#### Request Example SOAP V2
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); // replace with your store's WSDL URL
@@ -83,7 +83,7 @@ $result = $proxy->catalogProductTypeList($sessionId);
 var_dump($result);
 ```
 
-<h4>Request Example SOAP V2 (WS-I Compliance Mode)</h4>
+#### Request Example SOAP V2 (WS-I Compliance Mode)
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl');
@@ -93,7 +93,7 @@ $result = $proxy->catalogProductTypeList((object)['sessionId' => $sessionId->res
 var_dump($result->result);
 ```
 
-<h4>Response Example SOAP V1</h4>
+#### Response Example SOAP V1
 
 ```php
 array

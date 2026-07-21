@@ -4,20 +4,20 @@
 
 Allows you to retrieve the list of category attributes and options.
 
-<h3>Methods</h3>
+### Methods
 
 - `catalog_category_attribute.currentStore` - Set/Get the current store view.
 - `catalog_category_attribute.list` - Retrieve the category attributes.
 - `catalog_category_attribute.options` - Retrieve the attribute options.
 
-<h3>Faults</h3>
+### Faults
 
 | Fault Code | Fault Message                      |
 |------------|------------------------------------|
 | 100        | Requested store view not found.    |
 | 101        | Requested attribute not found.     |
 
-<h3>Example - Retrieving Attributes and Options</h3>
+### Example - Retrieving Attributes and Options
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/soap/?wsdl');
@@ -35,33 +35,33 @@ var_dump($attributes);
 
 ## Current Store
 
-<h3>Method</h3>
+### Method
 
 - `catalog_category_attribute.currentStore` (SOAP V1)
 - `catalogCategoryAttributeCurrentStore` (SOAP V2)
 
 Allows you to set/get the current store view.
 
-<h3>Alias</h3>
+### Alias
 
 - `category_attribute.currentStore`
 
-<h3>Arguments</h3>
+### Arguments
 
 | Type   | Name      | Description           |
 |--------|-----------|-----------------------|
 | string | sessionId | Session ID            |
 | string | storeView | Store view ID or code |
 
-<h3>Returns</h3>
+### Returns
 
 | Type | Name      | Description   |
 |------|-----------|---------------|
 | int  | storeView | Store view ID |
 
-<h3>Examples</h3>
+### Examples
 
-<h4>Request Example SOAP V1</h4>
+#### Request Example SOAP V1
 
 ```php
 $client = new SoapClient('https://mahohost/api/soap/?wsdl');
@@ -71,7 +71,7 @@ $result = $client->call($session, 'catalog_category_attribute.currentStore', 'en
 var_dump($result);
 ```
 
-<h4>Request Example SOAP V2</h4>
+#### Request Example SOAP V2
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); // replace with your store's WSDL URL
@@ -83,30 +83,30 @@ var_dump($result);
 
 ## Attribute List
 
-<h3>Method</h3>
+### Method
 
 - `catalog_category_attribute.list` (SOAP V1)
 - `catalogCategoryAttributeList` (SOAP V2)
 
 Allows you to retrieve the list of category attributes.
 
-<h3>Alias</h3>
+### Alias
 
 - `category_attribute.list`
 
-<h3>Arguments</h3>
+### Arguments
 
 | Type   | Name      | Description |
 |--------|-----------|-------------|
 | string | sessionId | Session ID  |
 
-<h3>Returns</h3>
+### Returns
 
 | Type  | Name   | Description                     |
 |-------|--------|---------------------------------|
 | array | result | Array of catalogAttributeEntity |
 
-<h3>Content `catalogAttributeEntity`</h3>
+### Content `catalogAttributeEntity`
 
 | Type   | Name         | Description                                     |
 |--------|--------------|-------------------------------------------------|
@@ -116,9 +116,9 @@ Allows you to retrieve the list of category attributes.
 | string | required     | Defines whether the attribute is required       |
 | string | scope        | Attribute scope: `global`, `website` or `store` |
 
-<h3>Examples</h3>
+### Examples
 
-<h4>Request Example SOAP V1</h4>
+#### Request Example SOAP V1
 
 ```php
 $client = new SoapClient('https://mahohost/api/soap/?wsdl');
@@ -131,7 +131,7 @@ var_dump($result);
 $client->endSession($session);
 ```
 
-<h4>Request Example SOAP V2</h4>
+#### Request Example SOAP V2
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); // replace with your store's WSDL URL
@@ -141,7 +141,7 @@ $result = $proxy->catalogCategoryAttributeList($sessionId);
 var_dump($result);
 ```
 
-<h4>Request Example SOAP V2 (WS-I Compliance Mode)</h4>
+#### Request Example SOAP V2 (WS-I Compliance Mode)
 
 ```php
 $client = new SoapClient('https://mahohost/api/v2_soap/?wsdl');
@@ -151,7 +151,7 @@ $result = $client->catalogCategoryAttributeList((object)['sessionId' => $session
 var_dump($result);
 ```
 
-<h4>Response Example SOAP V1</h4>
+#### Response Example SOAP V1
 
 ```php
 array
@@ -177,18 +177,18 @@ array
 
 ## Attribute Options
 
-<h3>Method</h3>
+### Method
 
 - `catalog_category_attribute.options` (SOAP V1)
 - `catalogCategoryAttributeOptions` (SOAP V2)
 
 Allows you to retrieve the attribute options.
 
-<h3>Alias</h3>
+### Alias
 
 - `category_attribute.options`
 
-<h3>Arguments</h3>
+### Arguments
 
 | Type   | Name        | Description           |
 |--------|-------------|-----------------------|
@@ -196,22 +196,22 @@ Allows you to retrieve the attribute options.
 | string | attributeId | Attribute ID or code  |
 | string | storeView   | Store view ID or code |
 
-<h3>Returns</h3>
+### Returns
 
 | Type  | Name   | Description                           |
 |-------|--------|---------------------------------------|
 | array | result | Array of catalogAttributeOptionEntity |
 
-<h3>Content `catalogAttributeOptionEntity`</h3>
+### Content `catalogAttributeOptionEntity`
 
 | Type   | Name  | Description  |
 |--------|-------|--------------|
 | string | label | Option label |
 | string | value | Option value |
 
-<h3>Examples</h3>
+### Examples
 
-<h4>Request Example SOAP V1</h4>
+#### Request Example SOAP V1
 
 ```php
 $client = new SoapClient('https://mahohost/api/soap/?wsdl');
@@ -224,7 +224,7 @@ var_dump($result);
 $client->endSession($session);
 ```
 
-<h4>Request Example SOAP V2</h4>
+#### Request Example SOAP V2
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); // replace with your store's WSDL URL
@@ -234,7 +234,7 @@ $result = $proxy->catalogCategoryAttributeOptions($sessionId, '65');
 var_dump($result);
 ```
 
-<h4>Request Example SOAP V2 (WS-I Compliance Mode)</h4>
+#### Request Example SOAP V2 (WS-I Compliance Mode)
 
 ```php
 $client = new SoapClient('https://mahohost/api/v2_soap/?wsdl');
@@ -249,7 +249,7 @@ $result = $client->catalogCategoryAttributeOptions(
 var_dump($result);
 ```
 
-<h4>Response Example SOAP V1</h4>
+#### Response Example SOAP V1
 
 ```php
 array

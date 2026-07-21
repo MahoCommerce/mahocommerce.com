@@ -2,35 +2,35 @@
 
 ## Introduction
 
-<h3>Method</h3>
+### Method
 
 - `customer_group.list` (SOAP V1)
 - `customerGroupList` (SOAP V2)
 
 Retrieve the list of customer groups.
 
-<h3>Arguments</h3>
+### Arguments
 
 | Type   | Name      | Description  |
 |--------|-----------|--------------|
 | string | sessionId | Session ID   |
 
-<h3>Returns</h3>
+### Returns
 
 | Type  | Name   | Description                     |
 |-------|--------|---------------------------------|
 | array | result | An array of customerGroupEntity |
 
-<h3>Content `customerGroupEntity`</h3>
+### Content `customerGroupEntity`
 
 | Type   | Name                | Description              |
 |--------|---------------------|--------------------------|
 | int    | customer_group_id   | ID of the customer group |
 | string | customer_group_code | Customer group code      |
 
-<h3>Examples</h3>
+### Examples
 
-<h4>Request Example SOAP V1</h4>
+#### Request Example SOAP V1
 
 ```php
 $client = new SoapClient('https://mahohost/api/soap/?wsdl');
@@ -43,7 +43,7 @@ var_dump($result);
 $client->endSession($session);
 ```
 
-<h4>Request Example SOAP V2</h4>
+#### Request Example SOAP V2
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); // replace with your store's WSDL URL
@@ -53,7 +53,7 @@ $result = $proxy->customerGroupList($sessionId);
 var_dump($result);
 ```
 
-<h4>Request Example SOAP V2 (WS-I Compliance Mode)</h4>
+#### Request Example SOAP V2 (WS-I Compliance Mode)
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl');
@@ -63,7 +63,7 @@ $result = $proxy->customerGroupList((object)['sessionId' => $sessionId->result])
 var_dump($result->result);
 ```
 
-<h4>Response Example SOAP V1</h4>
+#### Response Example SOAP V1
 
 ```php
 array

@@ -157,6 +157,11 @@ Open **Sales → Revocation Requests** to manage incoming declarations. Two ACL 
 
 The grid lists every request with ID, received timestamp, store view, verified flag, customer name, email, order reference, matched order (linked when resolved), email-suppressed timestamp, processed status, and processed-at timestamp. It supports filtering, sorting, **CSV export**, and **mass actions** to mark selected requests Accepted or Rejected.
 
+<figure markdown="span">
+![The Revocation Requests grid in the admin panel](/assets/revocation-requests-grid.png)
+<figcaption>The revocation queue under Sales > Revocation Requests</figcaption>
+</figure>
+
 !!! note "Mass actions mark requests only"
     Bulk Accept/Reject updates the request rows but does **not** change the matched orders. Order-level actions (status note, refund) are applied one at a time from the detail view, where you can see the matched order.
 

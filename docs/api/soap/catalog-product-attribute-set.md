@@ -4,15 +4,15 @@
 
 Allows you to retrieve product attribute sets.
 
-<h3>Resource Name</h3>
+### Resource Name
 
 - `catalog_product_attribute_set`
 
-<h3>Alias</h3>
+### Alias
 
 - `product_attribute_set`
 
-<h3>Methods</h3>
+### Methods
 
 - `product_attribute_set.list` - Retrieve the list of product attribute sets.
 - `product_attribute_set.create` - Create a new attribute set.
@@ -23,7 +23,7 @@ Allows you to retrieve product attribute sets.
 - `product_attribute_set.groupRemove` - Remove a group of attributes from an attribute set.
 - `product_attribute_set.groupRename` - Rename a group of attributes in an attribute set.
 
-<h3>Faults</h3>
+### Faults
 
 | Fault Code | Fault Message                                                                                                                     |
 |------------|-----------------------------------------------------------------------------------------------------------------------------------|
@@ -46,7 +46,7 @@ Allows you to retrieve product attribute sets.
 | 116        | Group can not be removed as it contains system attributes.                                                                        |
 | 117        | Group can not be removed as it contains attributes, used in configurable products.                                                |
 
-<h3>Example</h3>
+### Example
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/soap/?wsdl');
@@ -137,43 +137,43 @@ $result = $proxy->call(
 
 ## List
 
-<h3>Method</h3>
+### Method
 
 - `catalog_product_attribute_set.list` (SOAP V1)
 - `catalogProductAttributeSetList` (SOAP V2)
 
 Allows you to retrieve the list of product attribute sets.
 
-<h3>Alias</h3>
+### Alias
 
 - `product_attribute_set.list`
 
-<h3>Arguments</h3>
+### Arguments
 
 | Type   | Name      | Description |
 |--------|-----------|-------------|
 | string | sessionId | Session ID  |
 
-<h3>Returns</h3>
+### Returns
 
 | Type  | Name   | Description                               |
 |-------|--------|-------------------------------------------|
 | array | result | Array of catalogProductAttributeSetEntity |
 
-<h3>Content `catalogProductAttributeSetEntity`</h3>
+### Content `catalogProductAttributeSetEntity`
 
 | Type   | Name   | Description             |
 |--------|--------|-------------------------|
 | int    | set_id | ID of the attribute set |
 | string | name   | Attribute set name      |
 
-<h3>Faults</h3>
+### Faults
 
 _No Faults._
 
-<h3>Examples</h3>
+### Examples
 
-<h4>Request Example SOAP V1</h4>
+#### Request Example SOAP V1
 
 ```php
 $client = new SoapClient('https://mahohost/api/soap/?wsdl');
@@ -186,7 +186,7 @@ var_dump($result);
 $client->endSession($session);
 ```
 
-<h4>Request Example SOAP V2</h4>
+#### Request Example SOAP V2
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); // replace with your store's WSDL URL
@@ -196,7 +196,7 @@ $result = $proxy->catalogProductAttributeSetList($sessionId);
 var_dump($result);
 ```
 
-<h4>Request Example SOAP V2 (WS-I Compliance Mode)</h4>
+#### Request Example SOAP V2 (WS-I Compliance Mode)
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl');
@@ -206,7 +206,7 @@ $result = $proxy->catalogProductAttributeSetList((object)['sessionId' => $sessio
 var_dump($result->result);
 ```
 
-<h4>Response Example SOAP V1</h4>
+#### Response Example SOAP V1
 
 ```php
 array
@@ -222,14 +222,14 @@ array
 
 ## Create
 
-<h3>Method</h3>
+### Method
 
 - `product_attribute_set.create` (SOAP V1)
 - `catalogProductAttributeSetCreate` (SOAP V2)
 
 Allows you to create a new attribute set based on another attribute set.
 
-<h3>Arguments</h3>
+### Arguments
 
 | Type   | Name             | Description                                                            |
 |--------|------------------|------------------------------------------------------------------------|
@@ -237,13 +237,13 @@ Allows you to create a new attribute set based on another attribute set.
 | string | attributeSetName | Attribute set name                                                     |
 | string | skeletonSetId    | Attribute set ID basing on which the new attribute set will be created |
 
-<h3>Return</h3>
+### Return
 
 | Type | Name  | Description                     |
 |------|-------|---------------------------------|
 | int  | setId | ID of the created attribute set |
 
-<h3>Faults</h3>
+### Faults
 
 | Fault Code | Fault Message                                                 |
 |------------|---------------------------------------------------------------|
@@ -251,9 +251,9 @@ Allows you to create a new attribute set based on another attribute set.
 | 101        | Invalid data given.                                           |
 | 102        | Error while creating attribute set. Details in error message. |
 
-<h3>Examples</h3>
+### Examples
 
-<h4>Request Example SOAP V1</h4>
+#### Request Example SOAP V1
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/soap/?wsdl');
@@ -272,7 +272,7 @@ $newSetId = $proxy->call(
 );
 ```
 
-<h4>Request Example SOAP V2</h4>
+#### Request Example SOAP V2
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl');
@@ -288,7 +288,7 @@ $result = $client->catalogProductAttributeSetCreate(
 );
 ```
 
-<h4>Request Example SOAP V2 (WS-I Compliance Mode)</h4>
+#### Request Example SOAP V2 (WS-I Compliance Mode)
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl');
@@ -306,14 +306,14 @@ var_dump($result->result);
 
 ## Remove
 
-<h3>Method</h3>
+### Method
 
 - `product_attribute_set.remove` (SOAP V1)
 - `catalogProductAttributeSetRemove` (SOAP V2)
 
 Allows you to remove an existing attribute set.
 
-<h3>Arguments</h3>
+### Arguments
 
 | Type   | Name                | Description                          |
 |--------|---------------------|--------------------------------------|
@@ -321,13 +321,13 @@ Allows you to remove an existing attribute set.
 | string | attributeSetId      | Attribute set ID                     |
 | string | forceProductsRemove | Force product remove flag (optional) |
 
-<h3>Return</h3>
+### Return
 
 | Type       | Name      | Description                              |
 |------------|-----------|------------------------------------------|
 | booleanint | isRemoved | True (1) if the attribute set is removed |
 
-<h3>Faults</h3>
+### Faults
 
 | Fault Code | Fault Message                                                                                                                     |
 |------------|-----------------------------------------------------------------------------------------------------------------------------------|
@@ -335,9 +335,9 @@ Allows you to remove an existing attribute set.
 | 104        | Attribute set with requested id does not exist.                                                                                   |
 | 105        | Unable to remove attribute set as it has related goods. Use forceProductsRemove parameter to remove attribute set with all goods. |
 
-<h3>Examples</h3>
+### Examples
 
-<h4>Request Example SOAP V1</h4>
+#### Request Example SOAP V1
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/soap/?wsdl');
@@ -354,7 +354,7 @@ $result = $proxy->call(
 );
 ```
 
-<h4>Request Example SOAP V2</h4>
+#### Request Example SOAP V2
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); // replace with your store's WSDL URL
@@ -364,7 +364,7 @@ $result = $proxy->catalogProductAttributeSetRemove($sessionId, '5');
 var_dump($result);
 ```
 
-<h4>Request Example SOAP V2 (WS-I Compliance Mode)</h4>
+#### Request Example SOAP V2 (WS-I Compliance Mode)
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl');
@@ -381,14 +381,14 @@ var_dump($result->result);
 
 ## AttributeAdd
 
-<h3>Method</h3>
+### Method
 
 - `product_attribute_set.attributeAdd` (SOAP V1)
 - `catalogProductAttributeSetAttributeAdd` (SOAP V2)
 
 Allows you to add an existing attribute to an attribute set.
 
-<h3>Arguments</h3>
+### Arguments
 
 | Type   | Name             | Description           |
 |--------|------------------|-----------------------|
@@ -400,13 +400,13 @@ Allows you to add an existing attribute to an attribute set.
 
 **Note:** If the `attributeGroupId` parameter is not passed, the attribute is added to the `General` group by default.
 
-<h3>Returns</h3>
+### Returns
 
 | Type    | Name    | Description                                        |
 |---------|---------|----------------------------------------------------|
 | boolean | isAdded | True if the attribute is added to an attribute set |
 
-<h3>Faults</h3>
+### Faults
 
 | Fault Code | Fault Message                                                            |
 |------------|--------------------------------------------------------------------------|
@@ -416,9 +416,9 @@ Allows you to add an existing attribute to an attribute set.
 | 108        | Attribute group with requested id does not exist.                        |
 | 109        | Requested attribute is already in requested attribute set.               |
 
-<h3>Examples</h3>
+### Examples
 
-<h4>Request Example SOAP V1</h4>
+#### Request Example SOAP V1
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/soap/?wsdl');
@@ -437,7 +437,7 @@ $result = $proxy->call(
 );
 ```
 
-<h4>Request Example SOAP V2</h4>
+#### Request Example SOAP V2
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl');
@@ -453,7 +453,7 @@ $result = $proxy->catalogProductAttributeSetAttributeAdd(
 );
 ```
 
-<h4>Request Example SOAP V2 (WS-I Compliance Mode)</h4>
+#### Request Example SOAP V2 (WS-I Compliance Mode)
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl');
@@ -471,14 +471,14 @@ var_dump($result->result);
 
 ## AttributeRemove
 
-<h3>Method</h3>
+### Method
 
 - `product_attribute_set.attributeRemove` (SOAP V1)
 - `catalogProductAttributeSetAttributeRemove` (SOAP V2)
 
 Allows you to remove an existing attribute from an attribute set.
 
-<h3>Arguments</h3>
+### Arguments
 
 | Type   | Name           | Description      |
 |--------|----------------|------------------|
@@ -486,13 +486,13 @@ Allows you to remove an existing attribute from an attribute set.
 | string | attributeId    | Attribute ID     |
 | string | attributeSetId | Attribute set ID |
 
-<h3>Returns</h3>
+### Returns
 
 | Type    | Name      | Description                                            |
 |---------|-----------|--------------------------------------------------------|
 | boolean | isRemoved | True if the attribute is removed from an attribute set |
 
-<h3>Faults</h3>
+### Faults
 
 | Fault Code | Fault Message                                                                |
 |------------|------------------------------------------------------------------------------|
@@ -501,9 +501,9 @@ Allows you to remove an existing attribute from an attribute set.
 | 110        | Error while removing attribute from attribute set. Details in error message. |
 | 111        | Requested attribute is not in requested attribute set.                       |
 
-<h3>Examples</h3>
+### Examples
 
-<h4>Request Example SOAP V1</h4>
+#### Request Example SOAP V1
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/soap/?wsdl');
@@ -522,7 +522,7 @@ $result = $proxy->call(
 );
 ```
 
-<h4>Request Example SOAP V2</h4>
+#### Request Example SOAP V2
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); // replace with your store's WSDL URL
@@ -532,7 +532,7 @@ $result = $proxy->catalogProductAttributeSetAttributeRemove($sessionId, '5', '83
 var_dump($result);
 ```
 
-<h4>Request Example SOAP V2 (WS-I Compliance Mode)</h4>
+#### Request Example SOAP V2 (WS-I Compliance Mode)
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl');
@@ -550,14 +550,14 @@ var_dump($result->result);
 
 ## GroupAdd
 
-<h3>Method</h3>
+### Method
 
 - `product_attribute_set.groupAdd` (SOAP V1)
 - `catalogProductAttributeSetGroupAdd` (SOAP V2)
 
 Allows you to add a new group for attributes to the attribute set.
 
-<h3>Arguments</h3>
+### Arguments
 
 | Type   | Name           | Description      |
 |--------|----------------|------------------|
@@ -565,22 +565,22 @@ Allows you to add a new group for attributes to the attribute set.
 | string | attributeSetId | Attribute set ID |
 | string | groupName      | Group name       |
 
-<h3>Return</h3>
+### Return
 
 | Type | Name   | Description             |
 |------|--------|-------------------------|
 | int  | result | ID of the created group |
 
-<h3>Faults</h3>
+### Faults
 
 | Fault Code | Fault Message                                                        |
 |------------|----------------------------------------------------------------------|
 | 112        | Requested group exist already in requested attribute set.            |
 | 113        | Error while adding group to attribute set. Details in error message. |
 
-<h3>Examples</h3>
+### Examples
 
-<h4>Request Example SOAP V1</h4>
+#### Request Example SOAP V1
 
 ```php
 $client = new SoapClient('https://mahohost/api/soap/?wsdl');
@@ -600,7 +600,7 @@ var_dump($result);
 $client->endSession($session);
 ```
 
-<h4>Request Example SOAP V2</h4>
+#### Request Example SOAP V2
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); // replace with your store's WSDL URL
@@ -610,7 +610,7 @@ $result = $proxy->catalogProductAttributeSetGroupAdd($sessionId, '9', 'new_group
 var_dump($result);
 ```
 
-<h4>Request Example SOAP V2 (WS-I Compliance Mode)</h4>
+#### Request Example SOAP V2 (WS-I Compliance Mode)
 
 ```php
 $proxy = new SoapClient('http://maentohost/api/v2_soap/?wsdl');
@@ -628,27 +628,27 @@ var_dump($result->result);
 
 ## GroupRemove
 
-<h3>Method</h3>
+### Method
 
 - `product_attribute_set.groupRemove` (SOAP V1)
 - `catalogProductAttributeSetGroupRemove` (SOAP V2)
 
 Allows you to remove a group from an attribute set.
 
-<h3>Arguments</h3>
+### Arguments
 
 | Type   | Name             | Description |
 |--------|------------------|-------------|
 | string | sessionId        | Session ID  |
 | string | attributeGroupId | Group ID    |
 
-<h3>Return</h3>
+### Return
 
 | Type       | Description                      |
 |------------|----------------------------------|
 | booleanint | True (1) if the group is removed |
 
-<h3>Faults</h3>
+### Faults
 
 | Fault Code | Fault Message                                                                      |
 |------------|------------------------------------------------------------------------------------|
@@ -657,9 +657,9 @@ Allows you to remove a group from an attribute set.
 | 116        | Group can not be removed as it contains system attributes.                         |
 | 117        | Group can not be removed as it contains attributes, used in configurable products. |
 
-<h3>Examples</h3>
+### Examples
 
-<h4>Request Example SOAP V1</h4>
+#### Request Example SOAP V1
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/soap/?wsdl');
@@ -676,7 +676,7 @@ $result = $proxy->call(
 );
 ```
 
-<h4>Request Example SOAP V2</h4>
+#### Request Example SOAP V2
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); // replace with your store's WSDL URL
@@ -686,7 +686,7 @@ $result = $proxy->catalogProductAttributeSetGroupRemove($sessionId, '70');
 var_dump($result);
 ```
 
-<h4>Request Example SOAP V2 (WS-I Compliance Mode)</h4>
+#### Request Example SOAP V2 (WS-I Compliance Mode)
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl');
@@ -703,14 +703,14 @@ var_dump($result->result);
 
 ## GroupRename
 
-<h3>Method</h3>
+### Method
 
 - `product_attribute_set.groupRename` (SOAP V1)
 - `catalogProductAttributeSetGroupRename` (SOAP V2)
 
 Allows you to rename a group in the attribute set.
 
-<h3>Arguments</h3>
+### Arguments
 
 | Type   | Name      | Description                          |
 |--------|-----------|--------------------------------------|
@@ -718,22 +718,22 @@ Allows you to rename a group in the attribute set.
 | string | groupId   | ID of the group that will be renamed |
 | string | groupName | New name for the group               |
 
-<h3>Return</h3>
+### Return
 
 | Type       | Description                      |
 |------------|----------------------------------|
 | booleanint | True (1) if the group is renamed |
 
-<h3>Faults</h3>
+### Faults
 
 | Fault Code | Fault Message                                         |
 |------------|-------------------------------------------------------|
 | 108        | Attribute group with requested id does not exist.     |
 | 114        | Error while renaming group. Details in error message. |
 
-<h3>Examples</h3>
+### Examples
 
-<h4>Request Example SOAP V1</h4>
+#### Request Example SOAP V1
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/soap/?wsdl');
@@ -753,7 +753,7 @@ $result = $proxy->call(
 );
 ```
 
-<h4>Request Example SOAP V2</h4>
+#### Request Example SOAP V2
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); // replace with your store's WSDL URL
@@ -763,7 +763,7 @@ $result = $proxy->catalogProductAttributeSetGroupRename($sessionId, '100', 'New 
 var_dump($result);
 ```
 
-<h4>Request Example SOAP V2 (WS-I Compliance Mode)</h4>
+#### Request Example SOAP V2 (WS-I Compliance Mode)
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl');

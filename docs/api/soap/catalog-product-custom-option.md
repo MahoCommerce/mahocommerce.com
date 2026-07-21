@@ -2,15 +2,15 @@
 
 ## Introduction
 
-<h3>Resource</h3>
+### Resource
 
 - `catalog_product_custom_option`
 
-<h3>Alias</h3>
+### Alias
 
 - `product_custom_option`
 
-<h3>Methods</h3>
+### Methods
 
 - `product_custom_option.add` - Add a new custom option to a product.
 - `product_custom_option.update` - Update the product custom option.
@@ -19,7 +19,7 @@
 - `product_custom_option.info` - Get full information about the custom option in a product.
 - `product_custom_option.remove` - Remove the custom option.
 
-<h3>Faults</h3>
+### Faults
 
 | Fault Code | Fault Message                                                                   |
 |------------|---------------------------------------------------------------------------------|
@@ -33,14 +33,14 @@
 
 ## Add
 
-<h3>Method</h3>
+### Method
 
 - `product_custom_option.add` (SOAP V1)
 - `catalogProductCustomOptionAdd` (SOAP V2)
 
 Allows you to add a new custom option for a product.
 
-<h3>Arguments</h3>
+### Arguments
 
 | Type   | Name      | Description                              |
 |--------|-----------|------------------------------------------|
@@ -49,13 +49,13 @@ Allows you to add a new custom option for a product.
 | array  | data      | Array of catalogProductCustomOptionToAdd |
 | string | store     | Store view ID or code (optional)         |
 
-<h3>Return</h3>
+### Return
 
 | Type    | Description                        |
 |---------|------------------------------------|
 | boolean | True if the custom option is added |
 
-<h3>Content `catalogProductCustomOptionToAdd`</h3>
+### Content `catalogProductCustomOptionToAdd`
 
 | Type   | Name              | Description                                         |
 |--------|-------------------|-----------------------------------------------------|
@@ -65,7 +65,7 @@ Allows you to add a new custom option for a product.
 | int    | is_require        | Defines whether the option is required              |
 | array  | additional_fields | Array of catalogProductCustomOptionAdditionalFields |
 
-<h3>Content `catalogProductCustomOptionAdditionalFieldsEntity`</h3>
+### Content `catalogProductCustomOptionAdditionalFieldsEntity`
 
 | Type   | Name           | Description                                                                      |
 |--------|----------------|----------------------------------------------------------------------------------|
@@ -80,7 +80,7 @@ Allows you to add a new custom option for a product.
 | string | image_size_y   | Height limit for uploaded images (optional)                                      |
 | string | value_id       | Value ID                                                                         |
 
-<h3>Faults</h3>
+### Faults
 
 | Fault Code | Fault Message                                                                   |
 |------------|---------------------------------------------------------------------------------|
@@ -90,9 +90,9 @@ Allows you to add a new custom option for a product.
 | 104        | Store with requested code/id does not exist.                                    |
 | 106        | Invalid option type provided. Call 'types' to get list of allowed option types. |
 
-<h3>Examples</h3>
+### Examples
 
-<h4>Request Example SOAP V1</h4>
+#### Request Example SOAP V1
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/soap/?wsdl');
@@ -183,7 +183,7 @@ $resultCustomDropdownOptionAdd = $proxy->call(
 );
 ```
 
-<h4>Request Example SOAP V2</h4>
+#### Request Example SOAP V2
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl');
@@ -210,7 +210,7 @@ $result = $proxy->catalogProductCustomOptionAdd(
 var_dump($result);
 ```
 
-<h4>Request Example SOAP V2 (WS-I Compliance Example)</h4>
+#### Request Example SOAP V2 (WS-I Compliance Example)
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl');
@@ -242,14 +242,14 @@ var_dump($result->result);
 
 ## Update
 
-<h3>Method</h3>
+### Method
 
 - `product_custom_option.update` (SOAP V1)
 - `catalogProductCustomOptionUpdate` (SOAP V2)
 
 Allows you to update the required product custom option.
 
-<h3>Arguments</h3>
+### Arguments
 
 | Type   | Name      | Description                                 |
 |--------|-----------|---------------------------------------------|
@@ -258,13 +258,13 @@ Allows you to update the required product custom option.
 | array  | data      | Array of catalogProductCustomOptionToUpdate |
 | string | store     | Store view ID or code (optional)            |
 
-<h3>Return</h3>
+### Return
 
 | Type       | Description                              |
 |------------|------------------------------------------|
 | booleanint | True (1) if the custom option is updated |
 
-<h3>Content `catalogProductCustomOptionToUpdate`</h3>
+### Content `catalogProductCustomOptionToUpdate`
 
 | Type   | Name              | Description                                         |
 |--------|-------------------|-----------------------------------------------------|
@@ -274,7 +274,7 @@ Allows you to update the required product custom option.
 | int    | is_require        | Defines whether the custom option is required       |
 | array  | additional_fields | Array of catalogProductCustomOptionAdditionalFields |
 
-<h3>Content `catalogProductCustomOptionAdditionalFields`</h3>
+### Content `catalogProductCustomOptionAdditionalFields`
 
 | Type   | Name           | Description                                                                                                   |
 |--------|----------------|---------------------------------------------------------------------------------------------------------------|
@@ -289,7 +289,7 @@ Allows you to update the required product custom option.
 | string | image_size_y   | Height limit for uploaded images (optional; for the **File** input type)                                      |
 | string | value_id       | Value ID                                                                                                      |
 
-<h3>Faults</h3>
+### Faults
 
 | Fault Code | Fault Message                                                                   |
 |------------|---------------------------------------------------------------------------------|
@@ -300,9 +300,9 @@ Allows you to update the required product custom option.
 | 105        | Option with requested id does not exist.                                        |
 | 106        | Invalid option type provided. Call 'types' to get list of allowed option types. |
 
-<h3>Examples</h3>
+### Examples
 
-<h4>Request Example SOAP V1</h4>
+#### Request Example SOAP V1
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/soap/?wsdl');
@@ -380,7 +380,7 @@ $resultCustomDropdownOptionUpdate = $proxy->call(
 );
 ```
 
-<h4>Request Example SOAP V2</h4>
+#### Request Example SOAP V2
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl');
@@ -394,7 +394,7 @@ $result = $proxy->catalogProductCustomOptionUpdate($sessionId, '1', [
 var_dump($result);
 ```
 
-<h4>Request Example SOAP V2 (WS-I Compliance Mode)</h4>
+#### Request Example SOAP V2 (WS-I Compliance Mode)
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl');
@@ -416,39 +416,39 @@ var_dump($result->result);
 
 ## Types
 
-<h3>Method</h3>
+### Method
 
 - `product_custom_option.types` (SOAP V1)
 - `catalogProductCustomOptionTypes` (SOAP V2)
 
 Allows you to retrieve the list of available custom option types.
 
-<h3>Arguments</h3>
+### Arguments
 
 | Type   | Name      | Description  |
 |--------|-----------|--------------|
 | string | sessionId | Session ID   |
 
-<h3>Return</h3>
+### Return
 
 | Type  | Name   | Description                              |
 |-------|--------|------------------------------------------|
 | array | result | Array of catalogProductCustomOptionTypes |
 
-<h3>Content `catalogProductCustomOptionTypesEntity`</h3>
+### Content `catalogProductCustomOptionTypesEntity`
 
 | Type   | Name  | Description         |
 |--------|-------|---------------------|
 | string | label | Custom option label |
 | string | value | Custom option value |
 
-<h3>Faults</h3>
+### Faults
 
 _No Faults._
 
-<h3>Examples</h3>
+### Examples
 
-<h4>Request Example SOAP V1</h4>
+#### Request Example SOAP V1
 
 ```php
 $client = new SoapClient('https://mahohost/api/soap/?wsdl');
@@ -461,7 +461,7 @@ var_dump($result);
 $client->endSession($session);
 ```
 
-<h4>Request Example SOAP V2</h4>
+#### Request Example SOAP V2
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); // replace with your store's WSDL URL
@@ -471,7 +471,7 @@ $result = $proxy->catalogProductCustomOptionTypes($sessionId);
 var_dump($result);
 ```
 
-<h4>Request Example SOAP V2 (WS-I Compliance Mode)</h4>
+#### Request Example SOAP V2 (WS-I Compliance Mode)
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl');
@@ -481,7 +481,7 @@ $result = $proxy->catalogProductCustomOptionTypes((object)['sessionId' => $sessi
 var_dump($result->result);
 ```
 
-<h4>Response Example SOAP V1</h4>
+#### Response Example SOAP V1
 
 ```php
 array
@@ -529,14 +529,14 @@ array
 
 ## List
 
-<h3>Method</h3>
+### Method
 
 - `product_custom_option.list` (SOAP V1)
 - `catalogProductCustomOptionList` (SOAP V2)
 
 Allows you to retrieve the list of custom options for a specific product.
 
-<h3>Arguments</h3>
+### Arguments
 
 | Type   | Name      | Description                                                 |
 |--------|-----------|-------------------------------------------------------------|
@@ -544,13 +544,13 @@ Allows you to retrieve the list of custom options for a specific product.
 | string | productId | Product ID                                                  |
 | string | store     | Store view ID or code (optional but required for WS-I mode) |
 
-<h3>Return</h3>
+### Return
 
 | Type  | Name   | Description                             |
 |-------|--------|-----------------------------------------|
 | array | result | Array of catalogProductCustomOptionList |
 
-<h3>Content `catalogProductCustomOptionList`</h3>
+### Content `catalogProductCustomOptionList`
 
 | Type   | Name       | Description                                   |
 |--------|------------|-----------------------------------------------|
@@ -560,16 +560,16 @@ Allows you to retrieve the list of custom options for a specific product.
 | string | sort_order | Custom option sort order                      |
 | int    | is_require | Defines whether the custom option is required |
 
-<h3>Faults</h3>
+### Faults
 
 | Fault Code | Fault Message                                |
 |------------|----------------------------------------------|
 | 101        | Product with requested id does not exist.    |
 | 104        | Store with requested code/id does not exist. |
 
-<h3>Examples</h3>
+### Examples
 
-<h4>Request Example SOAP V1</h4>
+#### Request Example SOAP V1
 
 ```php
 $client = new SoapClient('https://mahohost/api/soap/?wsdl');
@@ -582,7 +582,7 @@ var_dump($result);
 $client->endSession($session);
 ```
 
-<h4>Request Example SOAP V2</h4>
+#### Request Example SOAP V2
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); // replace with your store's WSDL URL
@@ -592,7 +592,7 @@ $result = $proxy->catalogProductCustomOptionList($sessionId, '1');
 var_dump($result);
 ```
 
-<h4>Request Example SOAP V2 (WS-I Compliance Mode)</h4>
+#### Request Example SOAP V2 (WS-I Compliance Mode)
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl');
@@ -602,7 +602,7 @@ $result = $proxy->catalogProductCustomOptionList((object)['sessionId' => $sessio
 var_dump($result->result);
 ```
 
-<h4>Response Example SOAP V1</h4>
+#### Response Example SOAP V1
 
 ```php
 array
@@ -617,14 +617,14 @@ array
 
 ## Info
 
-<h3>Method</h3>
+### Method
 
 - `product_custom_option.info` (SOAP V1)
 - `catalogProductCustomOptionInfo` (SOAP V2)
 
 Allows you to retrieve full information about the custom option in a product.
 
-<h3>Arguments</h3>
+### Arguments
 
 | Type   | Name      | Description                      |
 |--------|-----------|----------------------------------|
@@ -632,13 +632,13 @@ Allows you to retrieve full information about the custom option in a product.
 | string | optionId  | Option ID                        |
 | string | store     | Store view ID or code (optional) |
 
-<h3>Return</h3>
+### Return
 
 | Type  | Name   | Description                                   |
 |-------|--------|-----------------------------------------------|
 | array | result | Array of catalogProductCustomOptionInfoEntity |
 
-<h3>Content `catalogProductCustomOptionInfoEntity`</h3>
+### Content `catalogProductCustomOptionInfoEntity`
 
 | Type   | Name              | Description                                                                    |
 |--------|-------------------|--------------------------------------------------------------------------------|
@@ -648,7 +648,7 @@ Allows you to retrieve full information about the custom option in a product.
 | int    | is_require        | Defines whether the custom option is required                                  |
 | array  | additional_fields | Array of catalogProductCustomOptionAdditionalFields                            |
 
-<h3>Content `catalogProductCustomOptionAdditionalFields`</h3>
+### Content `catalogProductCustomOptionAdditionalFields`
 
 | Type   | Name           | Description                                                                                                   |
 |--------|----------------|---------------------------------------------------------------------------------------------------------------|
@@ -663,7 +663,7 @@ Allows you to retrieve full information about the custom option in a product.
 | string | image_size_y   | Height limit for uploaded images (optional; for the **File** input type)                                      |
 | string | value_id       | Value ID                                                                                                      |
 
-<h3>Faults</h3>
+### Faults
 
 | Fault Code | Fault Message                                |
 |------------|----------------------------------------------|
@@ -671,9 +671,9 @@ Allows you to retrieve full information about the custom option in a product.
 | 104        | Store with requested code/id does not exist. |
 | 105        | Option with requested id does not exist.     |
 
-<h3>Examples</h3>
+### Examples
 
-<h4>Request Example SOAP V1</h4>
+#### Request Example SOAP V1
 
 ```php
 $client = new SoapClient('https://mahohost/api/soap/?wsdl');
@@ -686,7 +686,7 @@ var_dump($result);
 $client->endSession($session);
 ```
 
-<h4>Request Example SOAP V2</h4>
+#### Request Example SOAP V2
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); // replace with your store's WSDL URL
@@ -696,7 +696,7 @@ $result = $proxy->catalogProductCustomOptionInfo($sessionId, '1');
 var_dump($result);
 ```
 
-<h4>Request Example SOAP V2 (WS-I Compliance Mode)</h4>
+#### Request Example SOAP V2 (WS-I Compliance Mode)
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl');
@@ -706,7 +706,7 @@ $result = $proxy->catalogProductCustomOptionInfo((object)['sessionId' => $sessio
 var_dump($result->result);
 ```
 
-<h4>Response Example SOAP V1</h4>
+#### Response Example SOAP V1
 
 ```php
 array
@@ -736,36 +736,36 @@ array
 
 ## Remove
 
-<h3>Method</h3>
+### Method
 
 - `product_custom_option.remove` (SOAP V1)
 - `catalogProductCustomOptionRemove` (SOAP V2)
 
 Allows you to remove a custom option from the product.
 
-<h3>Arguments</h3>
+### Arguments
 
 | Type   | Name      | Description      |
 |--------|-----------|------------------|
 | string | sessionId | Session ID       |
 | string | optionId  | Custom option ID |
 
-<h3>Return</h3>
+### Return
 
 | Type    | Description                          |
 |---------|--------------------------------------|
 | boolean | True if the custom option is removed |
 
-<h3>Faults</h3>
+### Faults
 
 | Fault Code | Fault Message                                                     |
 |------------|-------------------------------------------------------------------|
 | 105        | Option with requested id does not exist.                          |
 | 107        | Error while deleting an option. Details are in the error message. |
 
-<h3>Examples</h3>
+### Examples
 
-<h4>Request Example SOAP V1</h4>
+#### Request Example SOAP V1
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/soap/?wsdl');
@@ -781,7 +781,7 @@ $result = $proxy->call(
 );
 ```
 
-<h4>Request Example SOAP V2</h4>
+#### Request Example SOAP V2
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); // replace with your store's WSDL URL
@@ -791,7 +791,7 @@ $result = $proxy->catalogProductCustomOptionRemove($sessionId, '1');
 var_dump($result);
 ```
 
-<h4>Request Example SOAP V2 (WS-I Compliance Mode)</h4>
+#### Request Example SOAP V2 (WS-I Compliance Mode)
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl');

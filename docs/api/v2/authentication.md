@@ -12,6 +12,9 @@ All authenticated endpoints require a Bearer token in the `Authorization` header
 
 The endpoint dispatches by `grant_type`. Supported grants: `customer` (default), `client_credentials`, `api_user`.
 
+!!! note "Which grant should I use?"
+    The `api_user` grant is fully supported, not a deprecated path: it authenticates the API user accounts defined in the admin under **System > Web Services** (the same accounts used by the SOAP-era APIs) and issues a JWT carrying that user's ACL role permissions. Use it to reuse existing API accounts and roles; use `client_credentials` for new integrations.
+
 === "curl"
 
     ```bash

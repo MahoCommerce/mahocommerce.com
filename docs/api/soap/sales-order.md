@@ -4,15 +4,15 @@
 
 Allows you to manage orders.
 
-<h3>Resource Name</h3>
+### Resource Name
 
 - `sales_order`
 
-<h3>Alias</h3>
+### Alias
 
 - `order`
 
-<h3>Methods</h3>
+### Methods
 
 - `sales_order.list` - Retrieve the list of orders using filters.
 - `sales_order.info` - Retrieve the order information.
@@ -21,7 +21,7 @@ Allows you to manage orders.
 - `sales_order.unhold` - Unhold an order.
 - `sales_order.cancel` - Cancel an order.
 
-<h3>Faults</h3>
+### Faults
 
 | Fault Code | Fault Message                                       |
 |------------|-----------------------------------------------------|
@@ -30,7 +30,7 @@ Allows you to manage orders.
 | 102        | Invalid data given. Details in error message.       |
 | 103        | Order status not changed. Details in error message. |
 
-<h3>Example - Working With Orders</h3>
+### Example - Working With Orders
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/soap/?wsdl');
@@ -60,32 +60,32 @@ var_dump($proxy->call($sessionId, 'sales_order.info', '100000003'));
 
 ## List
 
-<h3>Method</h3>
+### Method
 
 - `sales_order.list` (SOAP V1)
 - `salesOrderList` (SOAP V2)
 
 Allows you to retrieve the list of orders. Additional filters can be applied.
 
-<h3>Aliases</h3>
+### Aliases
 
 - `order.list`
 - `salesOrderList` (SOAP V2 method name)
 
-<h3>Arguments</h3>
+### Arguments
 
 | Type   | Name      | Description                                              |
 |--------|-----------|----------------------------------------------------------|
 | string | sessionId | Session ID                                               |
 | array  | filters   | Array of filters for the list of sales orders (optional) |
 
-<h3>Returns</h3>
+### Returns
 
 | Type  | name   | Description               |
 |-------|--------|---------------------------|
 | array | result | Array of salesOrderEntity |
 
-<h3>Content `salesOrderEntity`</h3>
+### Content `salesOrderEntity`
 
 | Type   | Name                        | Description                                    |
 |--------|-----------------------------|------------------------------------------------|
@@ -157,9 +157,9 @@ Allows you to retrieve the list of orders. Additional filters can be applied.
 | string | gift_message_id             | Gift message ID                                |
 | string | gift_message                | Gift message                                   |
 
-<h3>Examples</h3>
+### Examples
 
-<h4>Request Example SOAP V1</h4>
+#### Request Example SOAP V1
 
 ```php
 $client = new SoapClient('https://mahohost/api/soap/?wsdl');
@@ -169,7 +169,7 @@ $result = $client->call($session, 'order.list');
 var_dump($result);
 ```
 
-<h4>Request Example SOAP V2</h4>
+#### Request Example SOAP V2
 
 ```php
 $params = [[
@@ -204,7 +204,7 @@ $params = [[
 $result = $client->__call('salesOrderList', $params);
 ```
 
-<h4>Request Example SOAP V2 (Simple Filter)</h4>
+#### Request Example SOAP V2 (Simple Filter)
 
 ```php
 $client = new SoapClient('https://mahohost/api/v2_soap/?wsdl');
@@ -215,7 +215,7 @@ $result = $client->salesOrderList($session, $filter);
 var_dump($result);
 ```
 
-<h4>Request Example SOAP V2 (WS-I Compliance Mode)</h4>
+#### Request Example SOAP V2 (WS-I Compliance Mode)
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); 
@@ -225,7 +225,7 @@ $result = $proxy->salesOrderList((object)['sessionId' => $sessionId->result, 'fi
 var_dump($result->result);
 ```
 
-<h4>SOAP "v2" XML Request</h4>
+#### SOAP "v2" XML Request
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -271,31 +271,31 @@ var_dump($result->result);
 
 ## Info
 
-<h4>Method</h4>
+#### Method
 
 - `sales_order.info` (SOAP V1)
 - `salesOrderInfo` (SOAP V2)
 
 Allows you to retrieve the required order information.
 
-<h3>Alias</h3>
+### Alias
 
 - `order.info`
 
-<h3>Arguments</h3>
+### Arguments
 
 | Type   | Name             | Description        |
 |--------|------------------|--------------------|
 | string | sessionId        | Session ID         |
 | string | orderIncrementId | Order increment ID |
 
-<h3>Returns</h3>
+### Returns
 
 | Type  | Name   | Description               |
 |-------|--------|---------------------------|
 | array | result | Array of salesOrderEntity |
 
-<h3>Content `salesOrderEntity`</h3>
+### Content `salesOrderEntity`
 
 | Type   | Name                        | Description                                    |
 |--------|-----------------------------|------------------------------------------------|
@@ -372,7 +372,7 @@ Allows you to retrieve the required order information.
 | array  | payment                     | Array of salesOrderPaymentEntity               |
 | array  | status_history              | Array of salesOrderStatusHistoryEntity         |
 
-<h3>Content `salesOrderAddressEntity`</h3>
+### Content `salesOrderAddressEntity`
 
 | Type   | Name         | Description                           |
 |--------|--------------|---------------------------------------|
@@ -395,7 +395,7 @@ Allows you to retrieve the required order information.
 | string | region_id    | Region ID                             |
 | string | address_id   | Address ID                            |
 
-<h3>Content `salesOrderItemEntity`</h3>
+### Content `salesOrderItemEntity`
 
 | Type   | Name                             | Description                                             |
 |--------|----------------------------------|---------------------------------------------------------|
@@ -457,7 +457,7 @@ Allows you to retrieve the required order information.
 | string | base_weee_tax_disposition        | Fixed product tax disposition (in base currency)        |
 | string | base_weee_tax_row_disposition    | Fixed product tax row disposition (in base currency)    |
 
-<h3>Content `salesOrderPaymentEntity`</h3>
+### Content `salesOrderPaymentEntity`
 
 | Type   | Name                 | Description                           |
 |--------|----------------------|---------------------------------------|
@@ -482,7 +482,7 @@ Allows you to retrieve the required order information.
 | string | cc_ss_start_year     | Credit card start year (Switch/Solo)  |
 | string | payment_id           | Payment ID                            |
 
-<h3>Content `salesOrderStatusHistoryEntity`</h3>
+### Content `salesOrderStatusHistoryEntity`
 
 | Type   | Name                 | Description                              |
 |--------|----------------------|------------------------------------------|
@@ -495,9 +495,9 @@ Allows you to retrieve the required order information.
 | string | status               | Order status                             |
 | string | comment              | Order comment                            |
 
-<h3>Examples</h3>
+### Examples
 
-<h4>Request Example SOAP V1</h4>
+#### Request Example SOAP V1
 
 ```php
 $client = new SoapClient('https://mahohost/api/soap/?wsdl');
@@ -510,7 +510,7 @@ var_dump($result);
 $client->endSession($session);
 ```
 
-<h4>Request Example SOAP V2</h4>
+#### Request Example SOAP V2
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); // replace with your store's WSDL URL
@@ -520,7 +520,7 @@ $result = $proxy->salesOrderInfo($sessionId, '200000006');
 var_dump($result);
 ```
 
-<h4>Request Example SOAP V2 (WS-I Compliance Mode)</h4>
+#### Request Example SOAP V2 (WS-I Compliance Mode)
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); 
@@ -530,7 +530,7 @@ $result = $proxy->salesOrderInfo((object)['sessionId' => $sessionId->result, 'or
 var_dump($result->result);
 ```
 
-<h4>Response Example SOAP V1</h4>
+#### Response Example SOAP V1
 
 ```php
 array
@@ -669,18 +669,18 @@ English' (length=29)
 
 ## AddComment
 
-<h3>Method</h3>
+### Method
 
 - `sales_order.addComment` (SOAP V1)
 - `salesOrderAddComment` (SOAP V2)
 
 Allows you to add a new comment to the order.
 
-<h3>Alias</h3>
+### Alias
 
 - `order.addComment`
 
-<h3>Arguments</h3>
+### Arguments
 
 | Type   | Name             | Description                              |
 |--------|------------------|------------------------------------------|
@@ -690,15 +690,15 @@ Allows you to add a new comment to the order.
 | string | comment          | Order comment (optional)                 |
 | string | notify           | Notification flag (optional)             |
 
-<h3>Returns</h3>
+### Returns
 
 | Type       | Description                                   |
 |------------|-----------------------------------------------|
 | booleanint | True (1) if the comment is added to the order |
 
-<h3>Examples</h3>
+### Examples
 
-<h4>Request Example SOAP V1</h4>
+#### Request Example SOAP V1
 
 ```php
 $client = new SoapClient('https://mahohost/api/soap/?wsdl');
@@ -711,7 +711,7 @@ var_dump($result);
 $client->endSession($session);
 ```
 
-<h4>Request Example SOAP V2</h4>
+#### Request Example SOAP V2
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); // replace with your store's WSDL URL
@@ -721,7 +721,7 @@ $result = $proxy->salesOrderAddComment($sessionId, '200000004', 'processing');
 var_dump($result);
 ```
 
-<h4>Request Example SOAP V2 (WS-I Compliance Mode)</h4>
+#### Request Example SOAP V2 (WS-I Compliance Mode)
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); 
@@ -733,33 +733,33 @@ var_dump($result->result);
 
 ## Hold
 
-<h3>Method</h3>
+### Method
 
 - `sales_order.hold` (SOAP V1)
 - `salesOrderHold` (SOAP V2)
 
 Allows you to place the required order on hold.
 
-<h3>Alias</h3>
+### Alias
 
 - `order.hold`
 
-<h3>Arguments</h3>
+### Arguments
 
 | Type   | Name             | Description        |
 |--------|------------------|--------------------|
 | string | sessionId        | Session ID         |
 | string | orderIncrementId | Order increment ID |
 
-<h3>Returns</h3>
+### Returns
 
 | Type       | Description                             |
 |------------|-----------------------------------------|
 | booleanint | True (1) if the order is placed on hold |
 
-<h3>Examples</h3>
+### Examples
 
-<h4>Request Example SOAP V1</h4>
+#### Request Example SOAP V1
 
 ```php
 $client = new SoapClient('https://mahohost/api/soap/?wsdl');
@@ -772,7 +772,7 @@ var_dump($result);
 $client->endSession($session);
 ```
 
-<h4>Request Example SOAP V2</h4>
+#### Request Example SOAP V2
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); // replace with your store's WSDL URL
@@ -782,7 +782,7 @@ $result = $proxy->salesOrderHold($sessionId, '200000006');
 var_dump($result);
 ```
 
-<h4>Request Example SOAP V2 (WS-I Compliance Mode)</h4>
+#### Request Example SOAP V2 (WS-I Compliance Mode)
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); 
@@ -794,33 +794,33 @@ var_dump($result->result);
 
 ## Unhold
 
-<h3>Method</h3>
+### Method
 
 - `sales_order.unhold` (SOAP V1)
 - `salesOrderUnhold` (SOAP V2)
 
 Allows you to unhold the required order.
 
-<h3>Alias</h3>
+### Alias
 
 - `order.unhold`
 
-<h3>Arguments</h3>
+### Arguments
 
 | Type   | Name             | Description        |
 |--------|------------------|--------------------|
 | string | sessionId        | Session ID         |
 | string | orderIncrementId | Order increment ID |
 
-<h3>Returns</h3>
+### Returns
 
 | Type       | Description                     |
 |------------|---------------------------------|
 | booleanint | True (1) if the order is unheld |
 
-<h3>Examples</h3>
+### Examples
 
-<h4>Request Example SOAP V1</h4>
+#### Request Example SOAP V1
 
 ```php
 $client = new SoapClient('https://mahohost/api/soap/?wsdl');
@@ -830,7 +830,7 @@ $result = $client->call($session, 'sales_order.unhold', '200000006');
 var_dump($result);
 ```
 
-<h4>Request Example SOAP V2</h4>
+#### Request Example SOAP V2
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); 
@@ -840,7 +840,7 @@ $result = $proxy->salesOrderUnhold($sessionId, '200000006');
 var_dump($result);
 ```
 
-<h4>Request Example SOAP V2 (WS-I Compliance Mode)</h4>
+#### Request Example SOAP V2 (WS-I Compliance Mode)
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); 
@@ -852,33 +852,33 @@ var_dump($result->result);
 
 ## Cancel
 
-<h3>Method</h3>
+### Method
 
 - `sales_order.cancel` (SOAP V1)
 - `salesOrderCancel` (SOAP V2)
 
 Allows you to cancel the required order.
 
-<h3>Alias</h3>
+### Alias
 
 - `order.cancel`
 
-<h4>Arguments</h4>
+#### Arguments
 
 | Type   | Name             | Description        |
 |--------|------------------|--------------------|
 | string | sessionId        | Session ID         |
 | string | orderIncrementId | Order increment ID |
 
-<h3>Returns</h3>
+### Returns
 
 | Type    | Description                   |
 |---------|-------------------------------|
 | boolean | True if the order is canceled |
 
-<h3>Examples</h3>
+### Examples
 
-<h4>Request Example SOAP V1</h4>
+#### Request Example SOAP V1
 
 ```php
 $client = new SoapClient('https://mahohost/api/soap/?wsdl');
@@ -891,7 +891,7 @@ var_dump($result);
 $client->endSession($session);
 ```
 
-<h4>Request Example SOAP V2</h4>
+#### Request Example SOAP V2
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); // replace with your store's WSDL URL
@@ -901,7 +901,7 @@ $result = $proxy->salesOrderCancel($sessionId, '200000004');
 var_dump($result);
 ```
 
-<h4>Request Example SOAP V2 (WS-I Compliance Mode)</h4>
+#### Request Example SOAP V2 (WS-I Compliance Mode)
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); 

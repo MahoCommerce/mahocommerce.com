@@ -4,21 +4,21 @@
 
 Allows you to retrieve and update product tier prices.
 
-<h3>Resource Name</h3>
+### Resource Name
 
 - `catalog_product_attribute_tier_price`
 
-<h3>Aliases</h3>
+### Aliases
 
 - `product_attribute_tier_price`
 - `product_tier_price`
 
-<h3>Methods</h3>
+### Methods
 
 - `catalog_product_attribute_tier_price.info` - Retrieve information about product tier prices.
 - `catalog_product_attribute_tier_price.update` - Update the product tier prices.
 
-<h3>Faults</h3>
+### Faults
 
 | Fault Code | Fault Message                                      |
 |------------|----------------------------------------------------|
@@ -26,7 +26,7 @@ Allows you to retrieve and update product tier prices.
 | 101        | Invalid data given. Details in error message.      |
 | 102        | Tier prices not updated. Details in error message. |
 
-<h3>Examples</h3>
+### Examples
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/soap/?wsdl');
@@ -55,19 +55,19 @@ var_dump($tierPrices);
 
 ## Info
 
-<h3>Method</h3>
+### Method
 
 - `catalog_product_attribute_tier_price.info` (SOAP V1)
 - `catalogProductAttributeTierPriceInfo` (SOAP V2)
 
 Allows you to retrieve information about product tier prices.
 
-<h3>Aliases</h3>
+### Aliases
 
 - `product_attribute_tier_price.info`
 - `product_tier_price.info`
 
-<h3>Arguments</h3>
+### Arguments
 
 | Type   | Name             | Description                                                                |
 |--------|------------------|----------------------------------------------------------------------------|
@@ -75,13 +75,13 @@ Allows you to retrieve information about product tier prices.
 | string | productproductId | Product ID or SKU                                                          |
 | string | identifierType   | Defines whether the product ID or SKU is passed in the 'product' parameter |
 
-<h3>Returns</h3>
+### Returns
 
 | Type  | Name   | Description                            |
 |-------|--------|----------------------------------------|
 | array | result | Array of catalogProductTierPriceEntity |
 
-<h3>Content `catalogProductTierPriceEntity`</h3>
+### Content `catalogProductTierPriceEntity`
 
 | Type   | Name              | Description                                          |
 |--------|-------------------|------------------------------------------------------|
@@ -90,9 +90,9 @@ Allows you to retrieve information about product tier prices.
 | int    | qty               | Quantity of items to which the price will be applied |
 | double | price             | Price that each item will cost                       |
 
-<h3>Examples</h3>
+### Examples
 
-<h4>Request Example SOAP V1</h4>
+#### Request Example SOAP V1
 
 ```php
 $client = new SoapClient('https://mahohost/api/soap/?wsdl');
@@ -102,7 +102,7 @@ $result = $client->call($session, 'catalog_product_attribute_tier_price.info', '
 var_dump($result);
 ```
 
-<h4>Request Example SOAP V2</h4>
+#### Request Example SOAP V2
 
 ```php
 $client = new SoapClient('https://mahohost/api/v2_soap/?wsdl');
@@ -116,7 +116,7 @@ $result = $client->catalogProductAttributeTierPriceInfo(
 );
 ```
 
-<h4>Request Example SOAP V2 (WS-I Compliance Mode)</h4>
+#### Request Example SOAP V2 (WS-I Compliance Mode)
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl');
@@ -128,7 +128,7 @@ $result = $proxy->catalogProductAttributeTierPriceInfo(
 var_dump($result->result);
 ```
 
-<h4>Response Example SOAP V1</h4>
+#### Response Example SOAP V1
 
 ```php
 array
@@ -140,7 +140,7 @@ array
       'price' => string '129.9900' (length=8)
 ```
 
-<h4>Response Example SOAP V2</h4>
+#### Response Example SOAP V2
 
 ```php
 array
@@ -160,19 +160,19 @@ array
 
 ## Update
 
-<h3>Method</h3>
+### Method
 
 - `catalog_product_attribute_tier_price.update` (SOAP V1)
 - `catalogProductAttributeTierPriceUpdate` (SOAP V2)
 
 Allows you to update the product tier prices.
 
-<h3>Aliases</h3>
+### Aliases
 
 - `product_attribute_tier_price.update`
 - `product_tier_price.update`
 
-<h3>Arguments</h3>
+### Arguments
 
 | Type   | Name             | Description                                                                |
 |--------|------------------|----------------------------------------------------------------------------|
@@ -181,13 +181,13 @@ Allows you to update the product tier prices.
 | array  | tierPrices       | Array of catalogProductTierPriceEntity                                     |
 | string | identifierType   | Defines whether the product ID or SKU is passed in the 'product' parameter |
 
-<h3>Returns</h3>
+### Returns
 
 | Type       | Name   | Description                                   |
 |------------|--------|-----------------------------------------------|
 | booleanint | result | True (1) if the product tier price is updated |
 
-<h3>Content `catalogProductTierPriceEntity`</h3>
+### Content `catalogProductTierPriceEntity`
 
 | Type   | Name              | Description                                          |
 |--------|-------------------|------------------------------------------------------|
@@ -196,9 +196,9 @@ Allows you to update the product tier prices.
 | int    | qty               | Quantity of items to which the price will be applied |
 | double | price             | Price that each item will cost                       |
 
-<h3>Examples</h3>
+### Examples
 
-<h4>Request Example SOAP V1</h4>
+#### Request Example SOAP V1
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/soap/?wsdl');
@@ -225,7 +225,7 @@ $result = $proxy->call(
 var_dump($result);
 ```
 
-<h4>Request Example SOAP V2</h4>
+#### Request Example SOAP V2
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl');
@@ -245,7 +245,7 @@ $result = $proxy->catalogProductAttributeTierPriceUpdate($sessionId, $productId,
 var_dump($result);
 ```
 
-<h4>Request Example SOAP V2 (WS-I Compliance Mode)</h4>
+#### Request Example SOAP V2 (WS-I Compliance Mode)
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl');

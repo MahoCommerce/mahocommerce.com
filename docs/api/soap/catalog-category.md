@@ -4,7 +4,7 @@
 
 Allows you to manage categories and how products are assigned to categories.
 
-<h3>Methods</h3>
+### Methods
 
 - `catalog_category.currentStore` - Set/Get the current store view.
 - `catalog_category.tree` - Retrieve the hierarchical category tree.
@@ -19,7 +19,7 @@ Allows you to manage categories and how products are assigned to categories.
 - `catalog_category.updateProduct` - Update an assigned product.
 - `catalog_category.removeProduct` - Remove a product assignment.
 
-<h3>Faults</h3>
+### Faults
 
 | Fault Code | Fault Message                                   |
 |------------|-------------------------------------------------|
@@ -31,9 +31,9 @@ Allows you to manage categories and how products are assigned to categories.
 | 105        | Category not deleted. Details in error message. |
 | 106        | Requested product is not assigned to category.  |
 
-<h3>Examples</h3>
+### Examples
 
-<h4>Working With Categories</h4>
+#### Working With Categories
 
 ```php
 function getSomeRandomCategory(&$categories, $targetLevel, $currentLevel = 0) {
@@ -101,7 +101,7 @@ var_dump($firstLevel);
 // $proxy->call($sessionId, 'category.delete', $newCategoryId);
 ```
 
-<h4>Working With Assigned Products</h4>
+#### Working With Assigned Products
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/soap/?wsdl');
@@ -125,31 +125,31 @@ $proxy->call($sessionId, 'category.removeProduct', [$categoryId, 'someProductSku
 
 ## Assigned Products
 
-<h3>Method</h3>
+### Method
 
 - `catalog_category.assignedProducts` (SOAP V1)
 - `catalogCategoryAssignedProducts` (SOAP V2)
 
 Retrieve the list of products assigned to a required category.
 
-<h3>Alias</h3>
+### Alias
 
 - `category.assignedProducts`
 
-<h3>Arguments</h3>
+### Arguments
 
 | Type   | Name       | Description                 |
 |--------|------------|-----------------------------|
 | string | sessionId  | Session ID                  |
 | int    | categoryId | ID of the required category |
 
-<h3>Returns</h3>
+### Returns
 
 | Type  | Name   | Description                     |
 |-------|--------|---------------------------------|
 | array | result | Array of catalogAssignedProduct |
 
-<h3>Content `catalogAssignedProduct`</h3>
+### Content `catalogAssignedProduct`
 
 | Type   | Name       | Description                      |
 |--------|------------|----------------------------------|
@@ -159,9 +159,9 @@ Retrieve the list of products assigned to a required category.
 | string | sku        | Product SKU                      |
 | int    | position   | Position of the assigned product |
 
-<h3>Examples</h3>
+### Examples
  
-<h4>Request Example SOAP V1</h4>
+#### Request Example SOAP V1
 
 ```php
 $client = new SoapClient('https://mahohost/api/soap/?wsdl');
@@ -174,7 +174,7 @@ var_dump($result);
 $client->endSession($session);
 ```
 
-<h4>Request Example SOAP V2</h4>
+#### Request Example SOAP V2
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); // replace with your store's WSDL URL
@@ -184,7 +184,7 @@ $result = $proxy->catalogCategoryAssignedProducts($sessionId, '4');
 var_dump($result);
 ```
 
-<h4>Request Example SOAP V2 (WS-I Compliance Mode)</h4>
+#### Request Example SOAP V2 (WS-I Compliance Mode)
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl');
@@ -199,7 +199,7 @@ $result = $proxy->catalogCategoryAssignedProducts(
 var_dump($result->result);
 ```
 
-<h4>Response Example SOAP V1</h4>
+#### Response Example SOAP V1
 
 ```php
 array
@@ -221,18 +221,18 @@ array
 
 ## Assign Product
 
-<h3>Method</h3>
+### Method
 
 - `catalog_category.assignProduct` (SOAP V1)
 - `catalogCategoryAssignProduct` (SOAP V2)
 
 Assign a product to the required category.
 
-<h3>Alias</h3>
+### Alias
 
 - `category.assignProduct`
 
-<h3>Arguments</h3>
+### Arguments
 
 | Type   | Name              | Description                                                               |
 |--------|-------------------|---------------------------------------------------------------------------|
@@ -242,15 +242,15 @@ Assign a product to the required category.
 | string | position          | Position of the assigned product in the category (optional)               |
 | string | identifierType    | Defines whether the product ID or SKU is passed in the 'product' argument |
 
-<h3>Returns</h3>
+### Returns
 
 | Type    | Description                                               |
 |---------|-----------------------------------------------------------|
 | boolean | True if the product is assigned to the specified category |
 
-<h4>Examples</h4>
+#### Examples
 
-<h4>Request Example SOAP V1</h4>
+#### Request Example SOAP V1
 
 ```php
 $client = new SoapClient('https://mahohost/api/soap/?wsdl');
@@ -263,7 +263,7 @@ var_dump($result);
 $client->endSession($session);
 ```
 
-<h4>Request Example SOAP V2</h4>
+#### Request Example SOAP V2
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); // replace with your store's WSDL URL
@@ -273,7 +273,7 @@ $result = $proxy->catalogCategoryAssignProduct($sessionId, '4', '3');
 var_dump($result);
 ```
 
-<h4>Request Example SOAP V2 (WS-I Compliance Mode)</h4>
+#### Request Example SOAP V2 (WS-I Compliance Mode)
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl');
@@ -292,18 +292,18 @@ var_dump($result->result);
 
 ## Create Category
 
-<h3>Method</h3>
+### Method
 
 - `catalog_category.create` (SOAP V1)
 - `catalogCategoryCreate` (SOAP V2)
 
 Create a new category and return its ID.
 
-<h3>Alias</h3>
+### Alias
 
 - `category.create`
 
-<h3>Arguments</h3>
+### Arguments
 
 | Type   | Name         | Description                          |
 |--------|--------------|--------------------------------------|
@@ -312,13 +312,13 @@ Create a new category and return its ID.
 | array  | categoryData | Array of catalogCategoryEntityCreate |
 | string | storeView    | Store view ID or code (optional)     |
 
-<h3>Returns</h3>
+### Returns
 
 | Type | Name         | Description                |
 |------|--------------|----------------------------|
 | int  | attribute_id | ID of the created category |
 
-<h3>Content `categoryData`</h3>
+### Content `categoryData`
 
 | Type          | Name                       | Description                                                                                                                          |
 |---------------|----------------------------|--------------------------------------------------------------------------------------------------------------------------------------|
@@ -350,9 +350,9 @@ The category will be positioned anyway at the end of the list, and you can't set
 You should use the `catalog_category.move` method instead.
 You cannot also assign a root category to the specified store.
 
-<h3>Examples</h3>
+### Examples
 
-<h4>Request Example SOAP V1</h4>
+#### Request Example SOAP V1
 
 ```php
 $client = new SoapClient('https://mahohost/api/soap/?wsdl');
@@ -386,7 +386,7 @@ $result = $client->call($session, 'catalog_category.create', [2, [
 var_dump($result);
 ```
 
-<h4>Request Example SOAP V2</h4>
+#### Request Example SOAP V2
 
 ```php
 $client = new SoapClient('https://mahohost/api/v2_soap/?wsdl');
@@ -420,7 +420,7 @@ $result = $client->catalogCategoryCreate($session, 2, [
 var_dump($result);
 ```
 
-<h4>Request Example SOAP V2 (WS-I Compliance Mode)</h4>
+#### Request Example SOAP V2 (WS-I Compliance Mode)
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl');
@@ -447,33 +447,33 @@ var_dump($result->result);
 
 ## Current Store
 
-<h3>Method</h3>
+### Method
 
 - `catalog_category.currentStore` (SOAP V1)
 - `catalogCategoryCurrentStore` (SOAP V2)
 
 Allows you to set/get the current store view.
 
-<h3>Alias</h3>
+### Alias
 
 - `category.currentStore`
 
-<h3>Arguments</h3>
+### Arguments
 
 | Type   | Name      | Description           |
 |--------|-----------|-----------------------|
 | string | sessionId | Session ID            |
 | string | storeView | Store view ID or code |
 
-<h3>Returns</h3>
+### Returns
 
 | Type | Name      | Description   |
 |------|-----------|---------------|
 | int  | storeView | Store view ID |
 
-<h3>Examples</h3>
+### Examples
 
-<h4>Request Example SOAP V1</h4>
+#### Request Example SOAP V1
 
 ```php
 $client = new SoapClient('https://mahohost/api/soap/?wsdl');
@@ -483,7 +483,7 @@ $result = $client->call($session, 'category.currentStore', '1');
 var_dump($result);
 ```
 
-<h4>Request Example SOAP V2</h4>
+#### Request Example SOAP V2
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); // replace with your store's WSDL URL
@@ -495,33 +495,33 @@ var_dump($result);
 
 ## Category Delete
 
-<h3>Method</h3>
+### Method
 
 - `catalog_category.delete` (SOAP V1)
 - `catalogCategoryDelete` (SOAP V2)
 
 Allows you to delete the required category.
 
-<h3>Alias</h3>
+### Alias
 
 - `category.delete`
 
-<h3>Arguments</h3>
+### Arguments
 
 | Type   | Name       | Description                      |
 |--------|------------|----------------------------------|
 | string | sessionId  | Session ID                       |
 | int    | categoryId | ID of the category to be deleted |
 
-<h3>Returns</h3>
+### Returns
 
 | Type    | Description                     |
 |---------|---------------------------------|
 | boolean | True if the category is deleted |
 
-<h3>Examples</h3>
+### Examples
 
-<h4>Request Example SOAP V1</h4>
+#### Request Example SOAP V1
 
 ```php
 $client = new SoapClient('https://mahohost/api/soap/?wsdl');
@@ -534,7 +534,7 @@ var_dump($result);
 $client->endSession($session);
 ```
 
-<h4>Request Example SOAP V2</h4>
+#### Request Example SOAP V2
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); // replace with your store's WSDL URL
@@ -544,7 +544,7 @@ $result = $proxy->catalogCategoryDelete($sessionId, '7');
 var_dump($result);
 ```
 
-<h4>Request Example SOAP V2 (WS-I Compliance Mode)</h4>
+#### Request Example SOAP V2 (WS-I Compliance Mode)
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl');
@@ -556,18 +556,18 @@ var_dump($result->result);
 
 ## Category Info
 
-<h3>Method</h3>
+### Method
 
 - `catalog_category.info` (SOAP V1)
 - `catalogCategoryInfo` (SOAP V2)
 
 Allows you to retrieve information about the required category.
 
-<h3>Aliases</h3>
+### Aliases
 
 - `category.info`
 
-<h3>Arguments</h3>
+### Arguments
 
 | Type          | Name       | Description                      |
 |---------------|------------|----------------------------------|
@@ -576,13 +576,13 @@ Allows you to retrieve information about the required category.
 | string        | storeView  | Store view ID or code (optional) |
 | ArrayOfString | attributes | Array of attributes (optional)   |
 
-<h3>Returns</h3>
+### Returns
 
 | Type  | Name | Description                  |
 |-------|------|------------------------------|
 | array | info | Array of catalogCategoryInfo |
 
-<h3>Content `catalogCategoryInfo`</h3>
+### Content `catalogCategoryInfo`
 
 | Type          | Name                       | Description                                                                                                               |
 |---------------|----------------------------|---------------------------------------------------------------------------------------------------------------------------|
@@ -619,9 +619,9 @@ Allows you to retrieve information about the required category.
 | string        | filter_price_range         | Price range of each price level displayed in the layered navigation block                                                 |
 | int           | custom_use_parent_settings | Defines whether the category will inherit custom design settings of the category to which it is assigned. 1 - Yes, 0 - No |
 
-<h3>Examples</h3>
+### Examples
 
-<h4>Request Example SOAP V1</h4>
+#### Request Example SOAP V1
 
 ```php
 $client = new SoapClient('https://mahohost/api/soap/?wsdl');
@@ -634,7 +634,7 @@ var_dump($result);
 $client->endSession($session);
 ```
 
-<h4>Request Example SOAP V2</h4>
+#### Request Example SOAP V2
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); // replace with your store's WSDL URL
@@ -644,7 +644,7 @@ $result = $proxy->catalogCategoryInfo($sessionId, '5');
 var_dump($result);
 ```
 
-<h4>Request Example SOAP V2 (WS-I Compliance Mode)</h4>
+#### Request Example SOAP V2 (WS-I Compliance Mode)
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl');
@@ -654,7 +654,7 @@ $result = $proxy->catalogCategoryInfo((object)['sessionId' => $sessionId->result
 var_dump($result->result);
 ```
 
-<h4>Response Example SOAP V1</h4>
+#### Response Example SOAP V1
 
 ```php
 array
@@ -698,18 +698,18 @@ array
 
 ## Category Level
 
-<h3>Method</h3>
+### Method
 
 - `catalog_category.level` (SOAP V1)
 - `catalogCategoryLevel` (SOAP V2)
 
 Allows you to retrieve one level of categories by a website, a store view or a parent category.
 
-<h3>Alias</h3>
+### Alias
 
 - `category.level`
 
-<h3>Arguments</h3>
+### Arguments
 
 | Type   | Name           | Description                      |
 |--------|----------------|----------------------------------|
@@ -718,13 +718,13 @@ Allows you to retrieve one level of categories by a website, a store view or a p
 | string | storeView      | Store view ID or code (optional) |
 | string | parentCategory | Parent category ID (optional)    |
 
-<h3>Returns</h3>
+### Returns
 
 | Type  | Name | Description                                |
 |-------|------|--------------------------------------------|
 | array | tree | Array of CatalogCategoryEntitiesNoChildren |
 
-<h3>Content `CatalogCategoryEntitityNoChildren`</h3>
+### Content `CatalogCategoryEntitityNoChildren`
 
 | Type   | Name        | Description                            |
 |--------|-------------|----------------------------------------|
@@ -735,9 +735,9 @@ Allows you to retrieve one level of categories by a website, a store view or a p
 | int    | position    | Category position                      |
 | int    | level       | Category level                         |
 
-<h3>Examples</h3>
+### Examples
 
-<h4>Request Example SOAP V1</h4>
+#### Request Example SOAP V1
 
 ```php
 $client = new SoapClient('https://mahohost/api/soap/?wsdl');
@@ -750,7 +750,7 @@ var_dump($result);
 $client->endSession($session);
 ```
 
-<h4>Request Example SOAP V2</h4>
+#### Request Example SOAP V2
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); // replace with your store's WSDL URL
@@ -760,7 +760,7 @@ $result = $proxy->catalogCategoryLevel($sessionId);
 var_dump($result);
 ```
 
-<h4>Response Example SOAP V1</h4>
+#### Response Example SOAP V1
 
 ```php
 array
@@ -784,18 +784,18 @@ array
 
 ## Category Move
 
-<h3>Method</h3>
+### Method
 
 - `catalog_category.move` (SOAP V1)
 - `catalogCategoryMove` (SOAP V2)
 
 Allows you to move the required category in the category tree.
 
-<h3>Alias</h3>
+### Alias
 
 - `category.move`
 
-<h3>Arguments</h3>
+### Arguments
 
 | Type   | Name       | Description                                                                                 |
 |--------|------------|---------------------------------------------------------------------------------------------|
@@ -804,15 +804,15 @@ Allows you to move the required category in the category tree.
 | int    | parentId   | ID of the new parent category                                                               |
 | string | afterId    | ID of the category after which the required category will be moved (optional for V1 and V2) |
 
-<h3>Returns</h3>
+### Returns
 
 | Type    | Name | Description                   |
 |---------|------|-------------------------------|
 | boolean | id   | True if the category is moved |
 
-<h3>Examples</h3>
+### Examples
 
-<h4>Request Example SOAP V1</h4>
+#### Request Example SOAP V1
 
 ```php
 $client = new SoapClient('https://mahohost/api/soap/?wsdl');
@@ -825,7 +825,7 @@ var_dump($result);
 $client->endSession($session);
 ```
 
-<h4>Request Example SOAP V2</h4>
+#### Request Example SOAP V2
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); // replace with your store's WSDL URL
@@ -835,7 +835,7 @@ $result = $proxy->catalogCategoryMove($sessionId, '4', '3');
 var_dump($result);
 ```
 
-<h4>Request Example SOAP V2 (WS-I Compliance Mode)</h4>
+#### Request Example SOAP V2 (WS-I Compliance Mode)
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl');
@@ -851,18 +851,18 @@ and you won’t be able to fix this from the admin interface later.
 
 ## Remove Product
 
-<h3>Method</h3>
+### Method
 
 - `catalog_category.removeProduct` (SOAP V1)
 - `catalogCategoryRemoveProduct` (SOAP V2)
 
 Allows you to remove the product assignment from the category.
 
-<h3>Alias</h3>
+### Alias
 
 - `category.removeProduct`
 
-<h3>Arguments</h3>
+### Arguments
 
 | Type   | Name           | Description                                                                |
 |--------|----------------|----------------------------------------------------------------------------|
@@ -871,15 +871,15 @@ Allows you to remove the product assignment from the category.
 | string | productId      | ID or SKU of the product to be removed from the category                   |
 | string | identifierType | Defines whether the product ID or SKU is passed in the `product` parameter |
 
-<h3>Returns</h3>
+### Returns
 
 | Type    | Description                                      |
 |---------|--------------------------------------------------|
 | boolean | True if the product is removed from the category |
 
-<h3>Examples</h3>
+### Examples
 
-<h4>Request Example SOAP V1</h4>
+#### Request Example SOAP V1
 
 ```php
 $client = new SoapClient('https://mahohost/api/soap/?wsdl');
@@ -899,7 +899,7 @@ var_dump($result);
 $client->endSession($session);
 ```
 
-<h4>Request Example SOAP V2</h4>
+#### Request Example SOAP V2
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); // replace with your store's WSDL URL
@@ -909,7 +909,7 @@ $result = $proxy->catalogCategoryRemoveProduct($sessionId, '4', '3');
 var_dump($result);
 ```
 
-<h4>Request Example SOAP V2 (WS-I Compliance Mode)</h4>
+#### Request Example SOAP V2 (WS-I Compliance Mode)
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl');
@@ -927,18 +927,18 @@ var_dump($result->result);
 
 ## Category Tree
 
-<h3>Method</h3>
+### Method
 
 - `catalog_category.tree` (SOAP V1)
 - `catalogCategoryTree` (SOAP V2)
 
 Allows you to retrieve the hierarchical tree of categories.
 
-<h3>Alias</h3>
+### Alias
 
 - `category.tree`
 
-<h3>Arguments</h3>
+### Arguments
 
 | Type   | Name      | Description                          |
 |--------|-----------|--------------------------------------|
@@ -946,13 +946,13 @@ Allows you to retrieve the hierarchical tree of categories.
 | string | parentId  | ID of the parent category (optional) |
 | string | storeView | Store view (optional)                |
 
-<h3>Returns</h3>
+### Returns
 
 | Type  | Name | Description                  |
 |-------|------|------------------------------|
 | array | tree | Array of catalogCategoryTree |
 
-<h3>Content `catalogCategoryTree`</h3>
+### Content `catalogCategoryTree`
 
 | Type   | Name        | Description                      |
 |--------|-------------|----------------------------------|
@@ -963,7 +963,7 @@ Allows you to retrieve the hierarchical tree of categories.
 | int    | level       | Category level                   |
 | array  | children    | Array of CatalogCategoryEntities |
 
-<h3>Content `catalogCategoryEntity`</h3>
+### Content `catalogCategoryEntity`
 
 | Type   | Name        | Description                            |
 |--------|-------------|----------------------------------------|
@@ -975,9 +975,9 @@ Allows you to retrieve the hierarchical tree of categories.
 | int    | level       | Category level                         |
 | array  | children    | Array of CatalogCategoryEntities       |
 
-<h3>Examples</h3>
+### Examples
 
-<h4>Request Example SOAP V1</h4>
+#### Request Example SOAP V1
 
 ```php
 $client = new SoapClient('https://mahohost/api/soap/?wsdl');
@@ -990,7 +990,7 @@ var_dump($result);
 $client->endSession($session);
 ```
 
-<h4>Request Example SOAP V2</h4>
+#### Request Example SOAP V2
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); // replace with your store's WSDL URL
@@ -1000,7 +1000,7 @@ $result = $proxy->catalogCategoryTree($sessionId);
 var_dump($result);
 ```
 
-<h4>Request Example SOAP V2 (WS-I Compliance Mode)</h4>
+#### Request Example SOAP V2 (WS-I Compliance Mode)
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl');
@@ -1010,7 +1010,7 @@ $result = $proxy->catalogCategoryTree((object)['sessionId' => $sessionId->result
 var_dump($result->result);
 ```
 
-<h4>Response Example SOAP V1</h4>
+#### Response Example SOAP V1
 
 ```php
 array
@@ -1048,18 +1048,18 @@ array
 
 ## Category Update
 
-<h3>Method</h3>
+### Method
 
 - `catalog_category.update` (SOAP V1)
 - `catalogCategoryUpdate` (SOAP V2)
 
 Update the required category. Note that you should specify only those parameters which you want to be updated.
 
-<h3>Alias</h3>
+### Alias
 
 - `category.update`
 
-<h3>Arguments</h3>
+### Arguments
 
 | Type   | Name         | Description                             |
 |--------|--------------|-----------------------------------------|
@@ -1068,13 +1068,13 @@ Update the required category. Note that you should specify only those parameters
 | array  | categoryData | An array of catalogCategoryEntityCreate |
 | string | storeView    | Store view ID or code (optional)        |
 
-<h3>Returns</h3>
+### Returns
 
 | Type    | Description                     |
 |---------|---------------------------------|
 | boolean | True if the category is updated |
 
-<h3>Content `catalogCategoryEntityCreate`</h3>
+### Content `catalogCategoryEntityCreate`
 
 | Type          | Name                       | Description                                                                                                               |
 |---------------|----------------------------|---------------------------------------------------------------------------------------------------------------------------|
@@ -1101,13 +1101,13 @@ Update the required category. Note that you should specify only those parameters
 | string        | filter_price_range         | Price range of each price level displayed in the layered navigation block                                                 |
 | int           | custom_use_parent_settings | Defines whether the category will inherit custom design settings of the category to which it is assigned. 1 - Yes, 0 - No |
 
-<h3>Faults</h3>
+### Faults
 
 _No Faults._
 
-<h3>Examples</h3>
+### Examples
 
-<h4>Request Example SOAP V1</h4>
+#### Request Example SOAP V1
 
 ```php
 $client = new SoapClient('https://mahohost/api/soap/?wsdl');
@@ -1148,7 +1148,7 @@ $result = $client->call(
 var_dump($result);
 ```
 
-<h4>Request Example SOAP V2</h4>
+#### Request Example SOAP V2
 
 ```php
 $client = new SoapClient('https://mahohost/api/v2_soap/?wsdl');
@@ -1186,7 +1186,7 @@ $result = $client->catalogCategoryUpdate(
 var_dump($result);
 ```
 
-<h4>Request Example SOAP V2 (WS-I Compliance Mode)</h4>
+#### Request Example SOAP V2 (WS-I Compliance Mode)
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl');
@@ -1213,18 +1213,18 @@ var_dump($result->result);
 
 ## Category Product Update
 
-<h3>Method</h3>
+### Method
 
 - `catalog_category.updateProduct` (SOAP V1)
 - `catalogCategoryUpdateProduct` (SOAP V2)
 
 Allows you to update the product assigned to a category. The product position is updated.
 
-<h3>Aliases</h3>
+### Aliases
 
 - `category.updateProduct`
 
-<h3>Arguments</h3>
+### Arguments
 
 | Type   | Name           | Description                                                                |
 |--------|----------------|----------------------------------------------------------------------------|
@@ -1234,15 +1234,15 @@ Allows you to update the product assigned to a category. The product position is
 | string | position       | Position of the product in the category (optional)                         |
 | string | identifierType | Defines whether the product ID or SKU is passed in the 'product' parameter |
 
-<h3>Returns</h3>
+### Returns
 
 | Type    | Description                                    |
 |---------|------------------------------------------------|
 | boolean | True if the product is updated in the category |
 
-<h3>Examples</h3>
+### Examples
 
-<h4>Request Example SOAP V1</h4>
+#### Request Example SOAP V1
 
 ```php
 $client = new SoapClient('https://mahohost/api/soap/?wsdl');
@@ -1263,7 +1263,7 @@ var_dump($result);
 $client->endSession($session);
 ```
 
-<h4>Request Example SOAP V2</h4>
+#### Request Example SOAP V2
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); // replace with your store's WSDL URL
@@ -1273,7 +1273,7 @@ $result = $proxy->catalogCategoryUpdateProduct($sessionId, '4', '1', '3');
 var_dump($result);
 ```
 
-<h4>Request Example SOAP V2 (WS-I Compliance Mode)</h4>
+#### Request Example SOAP V2 (WS-I Compliance Mode)
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl');

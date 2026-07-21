@@ -4,15 +4,15 @@
 
 Allows you to manage products.
 
-<h3>Resource Name</h3>
+### Resource Name
 
 - `catalog_product`
 
-<h3>Alias</h3>
+### Alias
 
 - `product`
 
-<h3>Methods</h3>
+### Methods
 
 - `catalog_product.currentStore` - Set/Get the current store view.
 - `catalog_product.list` - Retrieve the list of products using filters.
@@ -24,7 +24,7 @@ Allows you to manage products.
 - `catalog_product.delete` - Delete a required product.
 - `catalog_product.listOfAdditionalAttributes` - Get the list of additional attributes.
 
-<h3>Faults</h3>
+### Faults
 
 | Fault Code | Fault Message                                  |
 |------------|------------------------------------------------|
@@ -33,9 +33,9 @@ Allows you to manage products.
 | 102        | Invalid data given. Details in error message.  |
 | 103        | Product not deleted. Details in error message. |
 
-<h3>Examples</h3>
+### Examples
 
-<h4>Retrieving the Product List</h4>
+#### Retrieving the Product List
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/soap/?wsdl');
@@ -49,7 +49,7 @@ $products = $proxy->call($sessionId, 'product.list', [$filters]);
 var_dump($products);
 ```
 
-<h4>Creating, Viewing, Updating and Deleting a Product</h4>
+#### Creating, Viewing, Updating and Deleting a Product
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/soap/?wsdl');
@@ -128,33 +128,33 @@ try {
 
 ## CurrentStore
 
-<h3>Method</h3>
+### Method
 
 - `catalog_product.currentStore` (SOAP V1)
 - `catalogProductCurrentStore` (SOAP V2)
 
 Allows you to set/get the current store view.
 
-<h3>Alias</h3>
+### Alias
 
 - `product.currentStore`
 
-<h3>Arguments</h3>
+### Arguments
 
 | Type   | Name      | Description                      |
 |--------|-----------|----------------------------------|
 | string | sessionId | Session ID                       |
 | string | storeView | Store view ID or code (optional) |
 
-<h3>Returns</h3>
+### Returns
 
 | Type       | Name      | Description   |
 |------------|-----------|---------------|
 | int/string | storeView | Store view ID |
 
-<h3>Examples</h3>
+### Examples
 
-<h4>Request Example SOAP V1</h4>
+#### Request Example SOAP V1
 
 ```php
 $client = new SoapClient('https://mahohost/api/soap/?wsdl');
@@ -164,7 +164,7 @@ $result = $client->call($session, 'catalog_product.currentStore', 'english');
 var_dump($result);
 ```
 
-<h4>Request Example SOAP V2</h4>
+#### Request Example SOAP V2
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); // replace with your store's WSDL URL
@@ -176,18 +176,18 @@ var_dump($result);
 
 ## List
 
-<h3>Method</h3>
+### Method
 
 - `catalog_product.list` (SOAP V1)
 - `catalogProductList` (SOAP V2)
 
 Allows you to retrieve the list of products.
 
-<h3>Alias</h3>
+### Alias
 
 - `product.list`
 
-<h3>Arguments</h3>
+### Arguments
 
 | Type   | Name      | Description                               |
 |--------|-----------|-------------------------------------------|
@@ -195,13 +195,13 @@ Allows you to retrieve the list of products.
 | array  | filters   | Array of filters by attributes (optional) |
 | string | storeView | Store view ID or code (optional)          |
 
-<h3>Returns</h3>
+### Returns
 
 | Type  | Name      | Description                   |
 |-------|-----------|-------------------------------|
 | array | storeView | Array of catalogProductEntity |
 
-<h3>Content `catalogProductEntity`</h3>
+### Content `catalogProductEntity`
 
 | Type          | Name         | Description           |
 |---------------|--------------|-----------------------|
@@ -213,9 +213,9 @@ Allows you to retrieve the list of products.
 | ArrayOfString | category_ids | Array of category IDs |
 | ArrayOfString | website_ids  | Array of website IDs  |
 
-<h3>Examples</h3>
+### Examples
 
-<h4>Request Example SOAP V1</h4>
+#### Request Example SOAP V1
 
 ```php
 $client = new SoapClient('https://mahohost/api/soap/?wsdl');
@@ -228,7 +228,7 @@ var_dump($result);
 $client->endSession($session);
 ```
 
-<h4>Request Example SOAP V2 (List of All Products)</h4>
+#### Request Example SOAP V2 (List of All Products)
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); // replace with your store's WSDL URL
@@ -238,7 +238,7 @@ $result = $proxy->catalogProductList($sessionId);
 var_dump($result);
 ```
 
-<h4>Request Example SOAP V2 (Complex Filter)</h4>
+#### Request Example SOAP V2 (Complex Filter)
 
 ```php
 $client = new SoapClient('https://mahohost/api/v2_soap/?wsdl');
@@ -256,7 +256,7 @@ $result = $client->catalogProductList($session, $complexFilter);
 var_dump($result);
 ```
 
-<h4>Request Example SOAP V2 (WS-I Compliance Mode)</h4>
+#### Request Example SOAP V2 (WS-I Compliance Mode)
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl');
@@ -266,7 +266,7 @@ $result = $proxy->catalogProductList((object)['sessionId' => $sessionId->result,
 var_dump($result->result);
 ```
 
-<h4>Response Example SOAP V1</h4>
+#### Response Example SOAP V1
 
 ```php
 array
@@ -294,18 +294,18 @@ array
 
 ## Info
 
-<h3>Method</h3>
+### Method
 
 - `catalog_product.info` (SOAP V1)
 - `catalogProductInfo` (SOAP V2)
 
 Allows you to retrieve information about the required product.
 
-<h3>Alias</h3>
+### Alias
 
 - `product.info`
 
-<h3>Arguments</h3>
+### Arguments
 
 | Type   | Name           | Description                                                                                    |
 |--------|----------------|------------------------------------------------------------------------------------------------|
@@ -315,20 +315,20 @@ Allows you to retrieve information about the required product.
 | array  | attributes     | Array of catalogProductRequestAttributes (optional)                                            |
 | string | identifierType | Defines whether the product ID or SKU value is passed in the `productId` parameter. (optional) |
 
-<h3>Returns</h3>
+### Returns
 
 | Type  | Name | Description                         |
 |-------|------|-------------------------------------|
 | array | info | Array of catalogProductReturnEntity |
 
-<h3>Content `catalogProductRequestAttributes`</h3>
+### Content `catalogProductRequestAttributes`
 
 | Type          | Name                  | Description                    |
 |---------------|-----------------------|--------------------------------|
 | ArrayOfString | attributes            | Array of attributes            |
 | ArrayOfString | additional_attributes | Array of additional attributes |
 
-<h3>Content `catalogProductReturnEntity`</h3>
+### Content `catalogProductReturnEntity`
 
 | Type             | Name                   | Description                                                          |
 |------------------|------------------------|----------------------------------------------------------------------|
@@ -368,7 +368,7 @@ Allows you to retrieve information about the required product.
 | associativeArray | additional_attributes  | Array of additional attributes                                       |
 | string           | enable_googlecheckout  | Defines whether Google Checkout is applied to the product            |
 
-<h3>Content `catalogProductTierPriceEntity`</h3>
+### Content `catalogProductTierPriceEntity`
 
 | Type   | Name              | Description                                 |
 |--------|-------------------|---------------------------------------------|
@@ -377,9 +377,9 @@ Allows you to retrieve information about the required product.
 | int    | qty               | Quantity to which the price will be applied |
 | double | price             | Price that each item will cost              |
 
-<h3>Examples</h3>
+### Examples
 
-<h4>Request Example SOAP V1</h4>
+#### Request Example SOAP V1
 
 ```php
 $client = new SoapClient('https://mahohost/api/soap/?wsdl');
@@ -392,7 +392,7 @@ var_dump($result);
 $client->endSession($session);
 ```
 
-<h4>Request Example SOAP V2</h4>
+#### Request Example SOAP V2
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); // replace with your store's WSDL URL
@@ -402,7 +402,7 @@ $result = $proxy->catalogProductInfo($sessionId, '4');
 var_dump($result);
 ```
 
-<h4>Request Example SOAP V2 (WS-I Compliance Mode)</h4>
+#### Request Example SOAP V2 (WS-I Compliance Mode)
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl');
@@ -412,7 +412,7 @@ $result = $proxy->catalogProductInfo((object)['sessionId' => $sessionId->result,
 var_dump($result->result);
 ```
 
-<h4>Response Example SOAP V1</h4>
+#### Response Example SOAP V1
 
 ```php
 array
@@ -485,14 +485,14 @@ The PowerShot A630 packs a vast array of advanced features into a remarkably com
 
 ## Create
 
-<h3>Method</h3>
+### Method
 
 - `catalog_product.create` (SOAP V1)
 - `catalogProductCreate` (SOAP V2)
 
 Allows you to create a new product and return ID of the created product.
 
-<h3>Alias</h3>
+### Alias
 
 - `product.create`
 
@@ -500,7 +500,7 @@ Allows you to create a new product and return ID of the created product.
 Maho strongly recommends you pass in two digits to reduce inaccuracy in the tax calculation process.
 (That is, use a price like `12.35` and not `12.3487`).
 
-<h3>Arguments</h3>
+### Arguments
 
 | Type   | Name        | Description                         |
 |--------|-------------|-------------------------------------|
@@ -511,13 +511,13 @@ Maho strongly recommends you pass in two digits to reduce inaccuracy in the tax 
 | array  | productData | Array of catalogProductCreateEntity |
 | string | storeView   | Store view ID or code               |
 
-<h3>Returns</h3>
+### Returns
 
 | Type | Name   | Description               |
 |------|--------|---------------------------|
 | int  | result | ID of the created product |
 
-<h3>Content `catalogProductCreateEntity`</h3>
+### Content `catalogProductCreateEntity`
 
 | Type          | Name                   | Description                                                               |
 |---------------|------------------------|---------------------------------------------------------------------------|
@@ -554,7 +554,7 @@ Maho strongly recommends you pass in two digits to reduce inaccuracy in the tax 
 You can specify an array of website IDs (int)
 and then you don't need to specify the array of website codes (string) and vice versa.
 
-<h3>Content `catalogProductTierPriceEntity`</h3>
+### Content `catalogProductTierPriceEntity`
 
 | Type   | Name              | Description       |
 |--------|-------------------|-------------------|
@@ -563,7 +563,7 @@ and then you don't need to specify the array of website codes (string) and vice 
 | int    | qty               | Quantity          |
 | double | price             | Tier price        |
 
-<h3>Content `catalogInventoryStockItemUpdateEntity`</h3>
+### Content `catalogInventoryStockItemUpdateEntity`
 
 | Type   | Name                        | Description                                                                    |
 |--------|-----------------------------|--------------------------------------------------------------------------------|
@@ -583,14 +583,14 @@ and then you don't need to specify the array of website codes (string) and vice 
 | int    | notify_stock_qty            | Stock quantity below which a notification will appear                          |
 | int    | use_config_notify_stock_qty | Use config settings flag (for stock quantity)                                  |
 
-<h3>Content `catalogProductAdditionalAttributesEntity`</h3>
+### Content `catalogProductAdditionalAttributesEntity`
 
 | Type                  | Name                                                                |
 |-----------------------|---------------------------------------------------------------------|
 | associativeMultiArray | multi_data (array of attributes which could contain several values) |
 | associativeArray      | single_data (array of attributes with only single value)            |
 
-<h3>Faults</h3>
+### Faults
 
 | Fault Code | Fault Message                                                   |
 |------------|-----------------------------------------------------------------|
@@ -600,9 +600,9 @@ and then you don't need to specify the array of website codes (string) and vice 
 | 105        | Product attribute set is not existed                            |
 | 106        | Product attribute set is not belong catalog product entity type |
 
-<h3>Examples</h3>
+### Examples
 
-<h4>Request Example SOAP V1</h4>
+#### Request Example SOAP V1
 
 ```php
 $client = new SoapClient('https://mahohost/api/soap/?wsdl');
@@ -641,7 +641,7 @@ $result = $client->call(
 var_dump($result);
 ```
 
-<h4>Request Example SOAP V2</h4>
+#### Request Example SOAP V2
 
 ```php
 $client = new SoapClient('https://mahohost/api/v2_soap/?wsdl');
@@ -677,7 +677,7 @@ $result = $client->catalogProductCreate(
 var_dump($result);
 ```
 
-<h4>Request Example SOAP V2 (WS-I Compliance Mode)</h4>
+#### Request Example SOAP V2 (WS-I Compliance Mode)
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl');
@@ -699,14 +699,14 @@ var_dump($result->result);
 
 ## Update
 
-<h3>Method</h3>
+### Method
 
 - `catalog_product.update` (SOAP V1)
 - `catalogProductUpdate` (SOAP V2)
 
 Allows you to update the required product. Note that you should specify only those parameters which you want to be updated.
 
-<h3>Alias</h3>
+### Alias
 
 - `product.update`
 
@@ -714,7 +714,7 @@ Allows you to update the required product. Note that you should specify only tho
 Maho strongly recommends you pass in two digits to reduce inaccuracy in the tax calculation process.
 (That is, use a price like `12.35` and not `12.3487`).
 
-<h3>Arguments</h3>
+### Arguments
 
 | Type   | Name           | Description                                                                |
 |--------|----------------|----------------------------------------------------------------------------|
@@ -724,13 +724,13 @@ Maho strongly recommends you pass in two digits to reduce inaccuracy in the tax 
 | string | storeView      | Store view ID or code (optional)                                           |
 | string | identifierType | Defines whether the product ID or SKU is passed in the 'product' parameter |
 
-<h3>Returns</h3>
+### Returns
 
 | Type    | Description                    |
 |---------|--------------------------------|
 | boolean | True if the product is updated |
 
-<h3>Content `catalogProductCreateEntity`</h3>
+### Content `catalogProductCreateEntity`
 
 | Type             | Name                   | Description                                                               |
 |------------------|------------------------|---------------------------------------------------------------------------|
@@ -767,7 +767,7 @@ Maho strongly recommends you pass in two digits to reduce inaccuracy in the tax 
 You can specify an array of website IDs (int)
 and then you don't need to specify the array of website codes (string) and vice versa.
 
-<h3>Content `catalogProductTierPriceEntity`</h3>
+### Content `catalogProductTierPriceEntity`
 
 | Type   | Name              | Description                                          |
 |--------|-------------------|------------------------------------------------------|
@@ -776,7 +776,7 @@ and then you don't need to specify the array of website codes (string) and vice 
 | int    | qty               | Quantity of items to which the price will be applied |
 | double | price             | Price that each item will cost                       |
 
-<h3>Content `catalogInventoryStockItemUpdateEntity`</h3>
+### Content `catalogInventoryStockItemUpdateEntity`
 
 | Type   | Name                        | Description                                                                    |
 |--------|-----------------------------|--------------------------------------------------------------------------------|
@@ -796,14 +796,14 @@ and then you don't need to specify the array of website codes (string) and vice 
 | int    | notify_stock_qty            | Stock quantity below which a notification will appear                          |
 | int    | use_config_notify_stock_qty | Use config settings flag (for stock quantity)                                  |
 
-<h3>Content `catalogProductAdditionalAttributesEntity`</h3>
+### Content `catalogProductAdditionalAttributesEntity`
 
 | Type                  | Name                                                                |
 |-----------------------|---------------------------------------------------------------------|
 | associativeMultiArray | multi_data (array of attributes which could contain several values) |
 | associativeArray      | single_data (array of attributes with only single value)            |
 
-<h3>Faults</h3>
+### Faults
 
 | Fault Code | Fault Message                                 |
 |------------|-----------------------------------------------|
@@ -811,9 +811,9 @@ and then you don't need to specify the array of website codes (string) and vice 
 | 101        | Product not exists.                           |
 | 102        | Invalid data given. Details in error message. |
 
-<h3>Examples</h3>
+### Examples
 
-<h4>Request Example SOAP V1</h4>
+#### Request Example SOAP V1
 
 ```php
 $client = new SoapClient('https://mahohost/api/soap/?wsdl');
@@ -846,7 +846,7 @@ $result = $client->call(
 var_dump($result);
 ```
 
-<h4>Request Example SOAP V2</h4>
+#### Request Example SOAP V2
 
 ```php
 $client = new SoapClient('https://mahohost/api/v2_soap/?wsdl');
@@ -876,7 +876,7 @@ $result = $client->catalogProductUpdate(
 var_dump($result);
 ```
 
-<h4>Request Example SOAP V2 (WS-I Compliance Mode)</h4>
+#### Request Example SOAP V2 (WS-I Compliance Mode)
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl');
@@ -892,14 +892,14 @@ var_dump($result->result);
 
 ## SetSpecialPrice
 
-<h3>Method</h3>
+### Method
 
 - `catalog_product.setSpecialPrice` (SOAP V1)
 - `catalogProductSetSpecialPrice` (SOAP V2)
 
 Allows you to set the product's special price.
 
-<h3>Aliases</h3>
+### Aliases
 
 - `product.setSpecialPrice`
 
@@ -907,7 +907,7 @@ Allows you to set the product's special price.
 Maho strongly recommends you pass in two digits to reduce inaccuracy in the tax calculation process.
 (That is, use a price like `12.35` and not `12.3487`).
 
-<h3>Arguments</h3>
+### Arguments
 
 | Type   | Name                  | Description                                                                             |
 |--------|-----------------------|-----------------------------------------------------------------------------------------|
@@ -919,15 +919,15 @@ Maho strongly recommends you pass in two digits to reduce inaccuracy in the tax 
 | string | storeView             | Store view ID or code (optional)                                                        |
 | string | productIdentifierType | Defines whether the product ID or SKU is passed in the 'productId' parameter (optional) |
 
-<h3>Returns</h3>
+### Returns
 
 | Type        | Name   | Description                                          |
 |-------------|--------|------------------------------------------------------|
 | boolean/int | result | True (1) if the special price is set for the product |
 
-<h3>Examples</h3>
+### Examples
 
-<h4>Request Example SOAP V1</h4>
+#### Request Example SOAP V1
 
 ```php
 $client = new SoapClient('https://mahohost/api/soap/?wsdl');
@@ -940,7 +940,7 @@ var_dump($result);
 $client->endSession($session);
 ```
 
-<h4>Request Example SOAP V2</h4>
+#### Request Example SOAP V2
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); // replace with your store's WSDL URL
@@ -956,7 +956,7 @@ $result = $proxy->catalogProductSetSpecialPrice(
 var_dump($result);
 ```
 
-<h4>Request Example SOAP V2 (WS-I Compliance Mode)</h4>
+#### Request Example SOAP V2 (WS-I Compliance Mode)
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl');
@@ -976,18 +976,18 @@ var_dump($result->result);
 
 ## GetSpecialPrice
 
-<h3>Method</h3>
+### Method
 
 - `catalog_product.getSpecialPrice` (SOAP V1)
 - `catalogProductGetSpecialPrice` (SOAP V2)
 
 Allows you to get the product special price data.
 
-<h3>Alias</h3>
+### Alias
 
 - `product.getSpecialPrice`
 
-<h3>Arguments</h3>
+### Arguments
 
 | Type   | Name           | Description                                                                |
 |--------|----------------|----------------------------------------------------------------------------|
@@ -996,13 +996,13 @@ Allows you to get the product special price data.
 | string | storeView      | Store view ID or code                                                      |
 | string | identifierType | Defines whether the product ID or SKU is passed in the 'product' parameter |
 
-<h3>Returns</h3>
+### Returns
 
 | Type  | Name   | Description                         |
 |-------|--------|-------------------------------------|
 | array | result | Array of catalogProductReturnEntity |
 
-<h3>Content `catalogProductReturnEntity`</h3>
+### Content `catalogProductReturnEntity`
 
 | Type   | Name              | Description                                                          |
 |--------|-------------------|----------------------------------------------------------------------|
@@ -1010,9 +1010,9 @@ Allows you to get the product special price data.
 | string | special_from_date | Date starting from which the special price is applied to the product |
 | string | special_to_date   | Date till which the special price is applied to the product          |
 
-<h3>Examples</h3>
+### Examples
 
-<h4>Request Example SOAP V1</h4>
+#### Request Example SOAP V1
 
 ```php
 $client = new SoapClient('https://mahohost/api/soap/?wsdl');
@@ -1025,7 +1025,7 @@ var_dump($result);
 $client->endSession($session);
 ```
 
-<h4>Request Example SOAP V2</h4>
+#### Request Example SOAP V2
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); // replace with your store's WSDL URL
@@ -1035,7 +1035,7 @@ $result = $proxy->catalogProductGetSpecialPrice($sessionId, '1');
 var_dump($result);
 ```
 
-<h4>Request Example SOAP V2 (WS-I Compliance Mode)</h4>
+#### Request Example SOAP V2 (WS-I Compliance Mode)
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl');
@@ -1050,7 +1050,7 @@ $result = $proxy->catalogProductGetSpecialPrice(
 var_dump($result->result);
 ```
 
-<h4>Response Example SOAP V1</h4>
+#### Response Example SOAP V1
 
 ```php
 array
@@ -1061,18 +1061,18 @@ array
 
 ## Delete
 
-<h3>Method</h3>
+### Method
 
 - `catalog_product.delete` (SOAP V1)
 - `catalogProductDelete` (SOAP V2)
 
 Allows you to delete the required product.
 
-<h3>Aliases</h3>
+### Aliases
 
 - `product.delete`
 
-<h3>Arguments</h3>
+### Arguments
 
 | Type   | Name           | Description                                                                |
 |--------|----------------|----------------------------------------------------------------------------|
@@ -1080,15 +1080,15 @@ Allows you to delete the required product.
 | string | productId      | Product ID or SKU                                                          |
 | string | identifierType | Defines whether the product ID or SKU is passed in the 'product' parameter |
 
-<h3>Returns</h3>
+### Returns
 
 | Type        | Name   | Description                        |
 |-------------|--------|------------------------------------|
 | boolean/int | result | True (1) if the product is deleted |
 
-<h3>Examples</h3>
+### Examples
 
-<h4>Request Example SOAP V1</h4>
+#### Request Example SOAP V1
 
 ```php
 $client = new SoapClient('https://mahohost/api/soap/?wsdl');
@@ -1101,7 +1101,7 @@ var_dump($result);
 $client->endSession($session);
 ```
 
-<h4>Request Example SOAP V2</h4>
+#### Request Example SOAP V2
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); // replace with your store's WSDL URL
@@ -1111,7 +1111,7 @@ $result = $proxy->catalogProductDelete($sessionId, '6');
 var_dump($result);
 ```
 
-<h4>Request Example SOAP V2 (WS-I Compliance Mode)</h4>
+#### Request Example SOAP V2 (WS-I Compliance Mode)
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl');
@@ -1128,7 +1128,7 @@ var_dump($result->result);
 
 ## ListOfAdditionalAttributes
 
-<h3>Method</h3>
+### Method
 
 - `product.listOfAdditionalAttributes` (SOAP V1)
 - `catalogProductListOfAdditionalAttributes` (SOAP V2)
@@ -1136,7 +1136,7 @@ var_dump($result->result);
 Get the list of additional attributes.
 Additional attributes are attributes that are not in the default set of attributes.
 
-<h3>Arguments</h3>
+### Arguments
 
 | Type   | Name           | Description                  |
 |--------|----------------|------------------------------|
@@ -1144,7 +1144,7 @@ Additional attributes are attributes that are not in the default set of attribut
 | string | productType    | Product type (e.g. `simple`) |
 | string | attributeSetId | Attribute set ID             |
 
-<h3>Returns</h3>
+### Returns
 
 | Type   | Name         | Description                                          |
 |--------|--------------|------------------------------------------------------|
@@ -1154,7 +1154,7 @@ Additional attributes are attributes that are not in the default set of attribut
 | string | required     | Defines whether the attribute is required            |
 | string | scope        | Attribute scope (global, website, or store)          |
 
-<h3>Faults</h3>
+### Faults
 
 | Fault Code | Fault Message                                                   |
 |------------|-----------------------------------------------------------------|
@@ -1162,9 +1162,9 @@ Additional attributes are attributes that are not in the default set of attribut
 | 105        | Product attribute set is not existed                            |
 | 106        | Product attribute set is not belong catalog product entity type |
 
-<h3>Examples</h3>
+### Examples
 
-<h4>Request Example SOAP V1</h4>
+#### Request Example SOAP V1
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/soap/?wsdl');
@@ -1180,7 +1180,7 @@ $listAttributes = $proxy->call(
 );
 ```
 
-<h4>Request Example SOAP V2</h4>
+#### Request Example SOAP V2
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); // replace with your store's WSDL URL
@@ -1190,7 +1190,7 @@ $result = $proxy->catalogProductListOfAdditionalAttributes($sessionId, 'simple',
 var_dump($result);
 ```
 
-<h4>Response Example SOAP V1</h4>
+#### Response Example SOAP V1
 
 ```php
 array

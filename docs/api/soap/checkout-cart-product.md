@@ -4,11 +4,11 @@
 
 Allows you to manage products in a shopping cart.
 
-<h3>Resource Name</h3>
+### Resource Name
 
 - `cart_product`
 
-<h3>Methods</h3>
+### Methods
 
 - `cart_product.add` - Add one or more products to a shopping cart.
 - `cart_product.update` - Update one or more products in a shopping cart.
@@ -16,7 +16,7 @@ Allows you to manage products in a shopping cart.
 - `cart_product.list` - Get a list of products in a shopping cart.
 - `cart_product.moveToCustomerQuote` - Move one or more products from the quote to the customer shopping cart.
 
-<h3>Faults</h3>
+### Faults
 
 | Fault Code | Fault Message                                                       |
 |------------|---------------------------------------------------------------------|
@@ -37,14 +37,14 @@ Allows you to manage products in a shopping cart.
 
 ## Add
 
-<h3>Method</h3>
+### Method
 
 - `cart_product.add` (SOAP V1)
 - `shoppingCartProductAdd` (SOAP V2)
 
 Allows you to add one or more products to the shopping cart (quote).
 
-<h3>Arguments</h3>
+### Arguments
 
 | Type   | Name                 | Description                                         |
 |--------|----------------------|-----------------------------------------------------|
@@ -53,13 +53,13 @@ Allows you to add one or more products to the shopping cart (quote).
 | array  | productsproductsData | An array with the list of shoppingCartProductEntity |
 | string | storeId              | Store view ID or code (optional)                    |
 
-<h3>Returns</h3>
+### Returns
 
 | Type    | Description                                                    |
 |---------|----------------------------------------------------------------|
 | boolean | True on success (if the product is added to the shopping cart) |
 
-<h3>Content `shoppingCartProductEntity`</h3>
+### Content `shoppingCartProductEntity`
 
 | Type             | Name              | Description                                                            |
 |------------------|-------------------|------------------------------------------------------------------------|
@@ -71,13 +71,13 @@ Allows you to add one or more products to the shopping cart (quote).
 | associativeArray | bundle_option_qty | An array of bundle items quantity (optional)                           |
 | ArrayOfString    | links             | An array of links (optional)                                           |
 
-<h3>Faults  </h3>
+### Faults  
 
 _No Faults._
 
-<h3>Examples</h3>
+### Examples
 
-<h4>Request Example SOAP V1</h4>
+#### Request Example SOAP V1
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/soap/?wsdl');
@@ -109,7 +109,7 @@ $resultCartProductAdd = $proxy->call(
 );
 ```
 
-<h4>Request Example SOAP V2</h4>
+#### Request Example SOAP V2
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); 
@@ -133,7 +133,7 @@ $result = $proxy->shoppingCartProductAdd(
 var_dump($result);
 ```
 
-<h4>Request Example SOAP V2 (WS-I Compliance Mode)</h4>
+#### Request Example SOAP V2 (WS-I Compliance Mode)
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl');
@@ -161,14 +161,14 @@ var_dump($result->result);
 
 ## Update
 
-<h3>Method</h3>
+### Method
 
 - `cart_product.update` (SOAP V1)
 - `shoppingCartProductUpdate` (SOAP V2)
 
 Allows you to update one or several products in the shopping cart (quote).
 
-<h3>Arguments</h3>
+### Arguments
 
 | Type   | Name         | Description                        |
 |--------|--------------|------------------------------------|
@@ -177,13 +177,13 @@ Allows you to update one or several products in the shopping cart (quote).
 | array  | productsData | Array of shoppingCartProductEntity |
 | string | store        | Store view ID or code (optional)   |
 
-<h3>Return</h3>
+### Return
 
 | Type    | Description                    |
 |---------|--------------------------------|
 | boolean | True if the product is updated |
 
-<h3>Content `shoppingCartProductEntity`</h3>
+### Content `shoppingCartProductEntity`
 
 | Type             | Name              | Description                                  |
 |------------------|-------------------|----------------------------------------------|
@@ -195,13 +195,13 @@ Allows you to update one or several products in the shopping cart (quote).
 | associativeArray | bundle_option_qty | An array of bundle items quantity (optional) |
 | ArrayOfString    | links             | An array of links (optional)                 |
 
-<h3>Faults</h3>
+### Faults
 
 _No Faults._
 
-<h3>Examples</h3>
+### Examples
 
-<h4>Request Example SOAP V1</h4>
+#### Request Example SOAP V1
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/soap/?wsdl');
@@ -242,7 +242,7 @@ $resultCartProductUpdate = $proxy->call(
 );
 ```
 
-<h4>Request Example SOAP V2</h4>
+#### Request Example SOAP V2
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); 
@@ -266,7 +266,7 @@ $result = $proxy->shoppingCartProductUpdate(
 var_dump($result);
 ```
 
-<h4>Request Example SOAP V2 (WS-I Compliance Mode)</h4>
+#### Request Example SOAP V2 (WS-I Compliance Mode)
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); 
@@ -294,14 +294,14 @@ var_dump($result->result);
 
 ## Remove
 
-<h3>Method</h3>
+### Method
 
 - `cart_product.remove` (SOAP V1)
 - `shoppingCartProductRemove` (SOAP V2)
 
 Allows you to remove one or several products from a shopping cart (quote).
 
-<h3>Arguments</h3>
+### Arguments
 
 | Type   | Name         | Description                        |
 |--------|--------------|------------------------------------|
@@ -310,13 +310,13 @@ Allows you to remove one or several products from a shopping cart (quote).
 | array  | productsData | Array of shoppingCartProductEntity |
 | string | store        | Store view ID or code (optional)   |
 
-<h3>Return</h3>
+### Return
 
 | Type    | Description                    |
 |---------|--------------------------------|
 | boolean | True if the product is removed |
 
-<h3>Content `shoppingCartProductEntity`</h3>
+### Content `shoppingCartProductEntity`
 
 | Type             | Name              | Description                                  |
 |------------------|-------------------|----------------------------------------------|
@@ -328,13 +328,13 @@ Allows you to remove one or several products from a shopping cart (quote).
 | associativeArray | bundle_option_qty | An array of bundle items quantity (optional) |
 | ArrayOfString    | links             | An array of links (optional)                 |
 
-<h3>Faults</h3>
+### Faults
 
 _No Faults._
 
-<h3>Examples</h3>
+### Examples
 
-<h4>Request Example SOAP V1</h4>
+#### Request Example SOAP V1
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/soap/?wsdl');
@@ -374,7 +374,7 @@ $resultCartProductUpdate = $proxy->call(
 );
 ```
 
-<h4>Request Example SOAP V2</h4>
+#### Request Example SOAP V2
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); 
@@ -398,7 +398,7 @@ $result = $proxy->shoppingCartProductRemove(
 var_dump($result);
 ```
 
-<h4>Request Example SOAP V2 (WS-I Compliance Mode)</h4>
+#### Request Example SOAP V2 (WS-I Compliance Mode)
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); 
@@ -426,14 +426,14 @@ var_dump($result->result);
 
 ## List
 
-<h3>Method</h3>
+### Method
 
 - `cart_product.list` (SOAP V1)
 - `shoppingCartProductList` (SOAP V2)
 
 Allows you to retrieve the list of products in the shopping cart (quote).
 
-<h3>Arguments</h3>
+### Arguments
 
 | Type   | Name      | Description                      |
 |--------|-----------|----------------------------------|
@@ -441,13 +441,13 @@ Allows you to retrieve the list of products in the shopping cart (quote).
 | int    | quoteId   | Shopping cart ID                 |
 | string | store     | Store view ID or code (optional) |
 
-<h3>Return</h3>
+### Return
 
 | Type  | Name   | Description                                |
 |-------|--------|--------------------------------------------|
 | array | result | Array of shoppingCartProductResponseEntity |
 
-<h3>Content `shoppingCartProductResponseEntity` (`catalogProductEntity`)</h3>
+### Content `shoppingCartProductResponseEntity` (`catalogProductEntity`)
 
 | Type          | Name         | Description           |
 |---------------|--------------|-----------------------|
@@ -459,13 +459,13 @@ Allows you to retrieve the list of products in the shopping cart (quote).
 | ArrayOfString | category_ids | Array of category IDs |
 | ArrayOfString | website_ids  | Array of website IDs  |
 
-<h3>Faults</h3>
+### Faults
 
 _No Faults._
 
-<h3>Examples</h3>
+### Examples
 
-<h4>Request Example SOAP V1</h4>
+#### Request Example SOAP V1
 
 ```php
 $client = new SoapClient('https://mahohost/api/soap/?wsdl');
@@ -475,7 +475,7 @@ $result = $client->call($session, 'cart_product.list', '15');
 var_dump($result);
 ```
 
-<h4>Request Example SOAP V2</h4>
+#### Request Example SOAP V2
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); // replace with your store's WSDL URL
@@ -485,7 +485,7 @@ $result = $proxy->shoppingCartProductList($sessionId, '15');
 var_dump($result);
 ```
 
-<h4>Request Example SOAP V2 (WS-I Compliance Mode)</h4>
+#### Request Example SOAP V2 (WS-I Compliance Mode)
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); 
@@ -495,7 +495,7 @@ $result = $proxy->shoppingCartProductList((object)['sessionId' => $sessionId->re
 var_dump($result->result);
 ```
 
-<h4>Response Example SOAP V1</h4>
+#### Response Example SOAP V1
 
 ```php
 array
@@ -516,14 +516,14 @@ array
 
 ## MoveToCustomerQuote
 
-<h3>Method</h3>
+### Method
 
 - `cart_product.moveToCustomerQuote` (SOAP V1)
 - `shoppingCartProductMoveToCustomerQuote` (SOAP V2)
 
 Allows you to move products from the current quote to a customer quote.
 
-<h3>Arguments</h3>
+### Arguments
 
 | Type   | Name         | Description                        |
 |--------|--------------|------------------------------------|
@@ -532,13 +532,13 @@ Allows you to move products from the current quote to a customer quote.
 | array  | productsData | Array of shoppingCartProductEntity |
 | string | store        | Store view ID or code (optional)   |
 
-<h3>Return</h3>
+### Return
 
 | Type    | Name   | Description                                    |
 |---------|--------|------------------------------------------------|
 | boolean | result | True if the product is moved to customer quote |
 
-<h3>Content `shoppingCartProductEntity`</h3>
+### Content `shoppingCartProductEntity`
 
 | Type             | Name              | Description                                  |
 |------------------|-------------------|----------------------------------------------|
@@ -550,13 +550,13 @@ Allows you to move products from the current quote to a customer quote.
 | associativeArray | bundle_option_qty | An array of bundle items quantity (optional) |
 | ArrayOfString    | links             | An array of links (optional)                 |
 
-<h3>Faults</h3>
+### Faults
 
 _No Faults._
 
-<h3>Examples</h3>
+### Examples
 
-<h4>Request Example SOAP V1</h4>
+#### Request Example SOAP V1
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/soap/?wsdl');

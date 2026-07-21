@@ -4,15 +4,15 @@
 
 Allows you to manage links for products (including related), cross-sells, upsells and grouped.
 
-<h3>Resource Name</h3>
+### Resource Name
 
 - `catalog_product_link`
 
-<h3>Alias</h3>
+### Alias
 
 - `product_link`
 
-<h3>Methods</h3>
+### Methods
 
 - `catalog_product_link.list` - Retrieve products linked to the specified product.
 - `catalog_product_link.assign` - Link a product to another product.
@@ -21,7 +21,7 @@ Allows you to manage links for products (including related), cross-sells, upsell
 - `catalog_product_link.types` - Retrieve product link types.
 - `catalog_product_link.attributes` - Retrieve product link type attributes.
 
-<h3>Faults</h3>
+### Faults
 
 | Fault Code | Fault Message                                 |
 |------------|-----------------------------------------------|
@@ -30,7 +30,7 @@ Allows you to manage links for products (including related), cross-sells, upsell
 | 102        | Invalid data given. Details in error message. |
 | 104        | Product link not removed.                     |
 
-<h3>Example - Working With Product Links</h3>
+### Example - Working With Product Links
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/soap/?wsdl');
@@ -57,18 +57,18 @@ var_dump($proxy->call($sessionId, 'product_link.list', ['related', 'sku']));
 
 ## List
 
-<h3>Method</h3>
+### Method
 
 - `catalog_product_link.list` (SOAP V1)
 - `catalogProductLinkList` (SOAP V2)
 
 Allows you to retrieve the list of linked products for a specific product.
 
-<h3>Alias</h3>
+### Alias
 
 - `product_link.list`
 
-<h3>Arguments</h3>
+### Arguments
 
 | Type   | Name           | Description                                                                |
 |--------|----------------|----------------------------------------------------------------------------|
@@ -77,13 +77,13 @@ Allows you to retrieve the list of linked products for a specific product.
 | string | productId      | Product ID or SKU                                                          |
 | string | identifierType | Defines whether the product ID or SKU is passed in the 'product' parameter |
 
-<h3>Returns</h3>
+### Returns
 
 | Type  | Name   | Description                       |
 |-------|--------|-----------------------------------|
 | array | result | Array of catalogProductLinkEntity |
 
-<h3>Content `catalogProductLinkEntity`</h3>
+### Content `catalogProductLinkEntity`
 
 | Type   | Name       | Description           |
 |--------|------------|-----------------------|
@@ -94,9 +94,9 @@ Allows you to retrieve the list of linked products for a specific product.
 | string | position   | Position              |
 | string | qty        | Quantity              |
 
-<h3>Examples</h3>
+### Examples
 
-<h4>Request Example SOAP V1</h4>
+#### Request Example SOAP V1
 
 ```php
 $client = new SoapClient('https://mahohost/api/soap/?wsdl');
@@ -109,7 +109,7 @@ var_dump($result);
 $client->endSession($session);
 ```
 
-<h4>Request Example SOAP V2</h4>
+#### Request Example SOAP V2
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); // replace with your store's WSDL URL
@@ -119,7 +119,7 @@ $result = $proxy->catalogProductLinkList($sessionId, 'related', '1');
 var_dump($result);
 ```
 
-<h4>Request Example SOAP V2 (WS-I Compliance Mode)</h4>
+#### Request Example SOAP V2 (WS-I Compliance Mode)
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl');
@@ -135,7 +135,7 @@ $result = $proxy->catalogProductLinkList(
 var_dump($result->result);
 ```
 
-<h4>Response Example SOAP V1</h4>
+#### Response Example SOAP V1
 
 ```php
 array
@@ -157,18 +157,18 @@ array
 
 ## Assign
 
-<h3>Method</h3>
+### Method
 
 - `catalog_product_link.assign` (SOAP V1)
 - `catalogProductLinkAssign` (SOAP V2)
 
 Allows you to assign a product link (cross_sell, grouped, related, or up_sell) to another product.
 
-<h3>Alias</h3>
+### Alias
 
 - `product_link.assign`
 
-<h3>Arguments</h3>
+### Arguments
 
 | Type   | Name            | Description                                                                |
 |--------|-----------------|----------------------------------------------------------------------------|
@@ -179,13 +179,13 @@ Allows you to assign a product link (cross_sell, grouped, related, or up_sell) t
 | array  | data            | Array of catalogProductLinkEntity                                          |
 | string | identifierType  | Defines whether the product ID or SKU is passed in the 'product' parameter |
 
-<h3>Returns</h3>
+### Returns
 
 | Type    | Description                                 |
 |---------|---------------------------------------------|
 | boolean | True if the link is assigned to the product |
 
-<h3>Content `catalogProductLinkEntity`</h3>
+### Content `catalogProductLinkEntity`
 
 | Type   | Name       | Description                                                 |
 |--------|------------|-------------------------------------------------------------|
@@ -196,9 +196,9 @@ Allows you to assign a product link (cross_sell, grouped, related, or up_sell) t
 | string | position   | Position of the product                                     |
 | string | qty        | Quantity of products                                        |
 
-<h3>Examples</h3>
+### Examples
 
-<h4>Request Example SOAP V1</h4>
+#### Request Example SOAP V1
 
 ```php
 $client = new SoapClient('https://mahohost/api/soap/?wsdl');
@@ -219,7 +219,7 @@ var_dump($result);
 $client->endSession($session);
 ```
 
-<h4>Request Example SOAP V2</h4>
+#### Request Example SOAP V2
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); // replace with your store's WSDL URL
@@ -229,7 +229,7 @@ $result = $proxy->catalogProductLinkAssign($sessionId, 'related', '1', '4');
 var_dump($result);
 ```
 
-<h4>Request Example SOAP V2 (WS-I Compliance Mode)</h4>
+#### Request Example SOAP V2 (WS-I Compliance Mode)
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl');
@@ -248,18 +248,18 @@ var_dump($result->result);
 
 ## Update
 
-<h3>Method</h3>
+### Method
 
 - `catalog_product_link.update` (SOAP V1)
 - `catalogProductLinkUpdate` (SOAP V2)
 
 Allows you to update the product link.
 
-<h3>Alias</h3>
+### Alias
 
 - `product_link.update`
 
-<h3>Arguments</h3>
+### Arguments
 
 | Type   | Name            | Description                                                                |
 |--------|-----------------|----------------------------------------------------------------------------|
@@ -270,13 +270,13 @@ Allows you to update the product link.
 | array  | data            | Array of catalogProductLinkEntity                                          |
 | string | identifierType  | Defines whether the product ID or SKU is passed in the 'product' parameter |
 
-<h3>Returns</h3>
+### Returns
 
 | Type       | Name   | Description                     |
 |------------|--------|---------------------------------|
 | booleanint | result | True (1) if the link is updated |
 
-<h3>Content `catalogProductLinkEntity`</h3>
+### Content `catalogProductLinkEntity`
 
 | Type   | Name       | Description           |
 |--------|------------|-----------------------|
@@ -287,9 +287,9 @@ Allows you to update the product link.
 | string | position   | Position              |
 | string | qty        | Quantity              |
 
-<h3>Examples</h3>
+### Examples
 
-<h4>Request Example SOAP V1</h4>
+#### Request Example SOAP V1
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/soap/?wsdl');
@@ -313,7 +313,7 @@ $result = $proxy->call(
 );
 ```
 
-<h4>Request Example SOAP V2</h4>
+#### Request Example SOAP V2
 
 ```php
 $client = new SoapClient('https://mahohost/api/v2_soap/?wsdl');
@@ -341,7 +341,7 @@ echo 'Number of results: ' . count($orders) . '<br>';
 var_dump($orders);
 ```
 
-<h4>Request Example SOAP V2 (WS-I Compliance Mode)</h4>
+#### Request Example SOAP V2 (WS-I Compliance Mode)
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl');
@@ -363,18 +363,18 @@ var_dump($result->result);
 
 ## Remove
 
-<h3>Method</h3>
+### Method
 
 - `catalog_product_link.remove` (SOAP V1)
 - `catalogProductLinkRemove` (SOAP V2)
 
 Allows you to remove the product link from a specific product.
 
-<h3>Alias</h3>
+### Alias
 
 - `product_link.remove`
 
-<h3>Arguments</h3>
+### Arguments
 
 | Type   | Name            | Description                                                                |
 |--------|-----------------|----------------------------------------------------------------------------|
@@ -384,15 +384,15 @@ Allows you to remove the product link from a specific product.
 | string | linkedProductId | Product ID or SKU for the link                                             |
 | string | identifierType  | Defines whether the product ID or SKU is passed in the 'product' parameter |
 
-<h3>Returns</h3>
+### Returns
 
 | Type       | Description                                    |
 |------------|------------------------------------------------|
 | booleanint | True (1) if the link is removed from a product |
 
-<h3>Examples</h3>
+### Examples
 
-<h4>Request Example SOAP V1</h4>
+#### Request Example SOAP V1
 
 ```php
 $client = new SoapClient('https://mahohost/api/soap/?wsdl');
@@ -413,7 +413,7 @@ var_dump($result);
 $client->endSession($session);
 ```
 
-<h4>Request Example SOAP V2</h4>
+#### Request Example SOAP V2
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); // replace with your store's WSDL URL
@@ -423,7 +423,7 @@ $result = $proxy->catalogProductLinkRemove($sessionId, 'related', '1', '4');
 var_dump($result);
 ```
 
-<h4>Request Example SOAP V2 (WS-I Compliance Mode)</h4>
+#### Request Example SOAP V2 (WS-I Compliance Mode)
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl');
@@ -442,32 +442,32 @@ var_dump($result->result);
 
 ## Types
 
-<h3>Method</h3>
+### Method
 
 - `catalog_product_link.types` (SOAP V1)
 - `catalogProductLinkTypes` (SOAP V2)
 
 Allows you to retrieve the list of product link types.
 
-<h3>Alias</h3>
+### Alias
 
 - `product_link.types`
 
-<h3>Arguments</h3>
+### Arguments
 
 | Type   | Name      | Description |
 |--------|-----------|-------------|
 | string | sessionId | Session ID  |
 
-<h3>Returns</h3>
+### Returns
 
 | Type          | Name   | Description         |
 |---------------|--------|---------------------|
 | ArrayOfString | result | Array of link types |
 
-<h3>Examples</h3>
+### Examples
 
-<h4>Request Example SOAP V1</h4>
+#### Request Example SOAP V1
 
 ```php
 $client = new SoapClient('https://mahohost/api/soap/?wsdl');
@@ -480,7 +480,7 @@ var_dump($result);
 $client->endSession($session);
 ```
 
-<h4>Request Example SOAP V2</h4>
+#### Request Example SOAP V2
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); // replace with your store's WSDL URL
@@ -490,7 +490,7 @@ $result = $proxy->catalogProductLinkTypes($sessionId);
 var_dump($result);
 ```
 
-<h4>Request Example SOAP V2 (WS-I Compliance Mode)</h4>
+#### Request Example SOAP V2 (WS-I Compliance Mode)
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl');
@@ -500,7 +500,7 @@ $result = $proxy->catalogProductLinkTypes((object)['sessionId' => $sessionId->re
 var_dump($result->result);
 ```
 
-<h4>Response Example SOAP V1</h4>
+#### Response Example SOAP V1
 
 ```php
 array
@@ -512,40 +512,40 @@ array
 
 ## Attributes
 
-<h3>Method</h3>
+### Method
 
 - `catalog_product_link.attributes` (SOAP V1)
 - `catalogProductLinkAttributes` (SOAP V2)
 
 Allows you to retrieve the product link type attributes.
 
-<h3>Alias</h3>
+### Alias
 
 - `product_link.attributes`
 
-<h3>Arguments</h3>
+### Arguments
 
 | Type   | Name      | Description                                                 |
 |--------|-----------|-------------------------------------------------------------|
 | string | sessionId | Session ID                                                  |
 | string | type      | Type of the link (cross_sell, up_sell, related, or grouped) |
 
-<h3>Returns</h3>
+### Returns
 
 | Type  | Name   | Description                                |
 |-------|--------|--------------------------------------------|
 | array | result | Array of catalogProductLinkAttributeEntity |
 
-<h3>Content `catalogProductLinkAttributeEntity`</h3>
+### Content `catalogProductLinkAttributeEntity`
 
 | Type   | Name | Description    |
 |--------|------|----------------|
 | string | code | Attribute code |
 | string | type | Attribute type |
 
-<h3>Examples</h3>
+### Examples
 
-<h4>Request Example SOAP V1</h4>
+#### Request Example SOAP V1
 
 ```php
 $client = new SoapClient('https://mahohost/api/soap/?wsdl');
@@ -558,7 +558,7 @@ var_dump($result);
 $client->endSession($session);
 ```
 
-<h4>Request Example SOAP V2</h4>
+#### Request Example SOAP V2
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl'); // replace with your store's WSDL URL
@@ -568,7 +568,7 @@ $result = $proxy->catalogProductLinkAttributes($sessionId, 'related');
 var_dump($result);
 ```
 
-<h4>Request Example SOAP V2 (WS-I Compliance Mode)</h4>
+#### Request Example SOAP V2 (WS-I Compliance Mode)
 
 ```php
 $proxy = new SoapClient('https://mahohost/api/v2_soap/?wsdl');
@@ -578,7 +578,7 @@ $result = $proxy->catalogProductLinkAttributes((object)['sessionId' => $sessionI
 var_dump($result->result);
 ```
 
-<h4>Response Example SOAP V1</h4>
+#### Response Example SOAP V1
 
 ```php
 array
