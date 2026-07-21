@@ -1,3 +1,7 @@
+---
+description: Maho publishes a public CycloneDX SBOM and daily vulnerability scans for every project, so you can audit its third-party components and known CVEs yourself.
+---
+
 # Security & SBOMs
 
 Maho publishes a **Software Bill of Materials (SBOM)** for every project in the [`mahocommerce`](https://github.com/mahocommerce) organization, plus daily vulnerability scans against those SBOMs. Both are public and version-controlled in the [`MahoCommerce/sboms`](https://github.com/MahoCommerce/sboms) repository.

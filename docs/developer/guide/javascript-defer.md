@@ -1,3 +1,7 @@
+---
+description: Improve Maho frontend performance with JavaScript deferral, moving scripts to the end of the body or activating them only on first user interaction via defer modes.
+---
+
 # JavaScript Deferral <span class="version-badge">v25.1+</span>
 
 Maho includes a JavaScript deferral system that improves page load performance by controlling how `<script>` tags are loaded on frontend pages. Instead of blocking the initial render, scripts can be deferred or loaded only when a user interacts with the page.

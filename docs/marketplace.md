@@ -1,3 +1,7 @@
+---
+description: "Browse the Maho Marketplace: open-source, community-maintained modules for payments, SEO, security, localization, marketing and developer tools."
+---
+
 # Maho Marketplace
 
 Discover and install powerful modules to enhance your Maho store. All modules are open source and community-maintained.
@@ -124,30 +128,6 @@ Discover and install powerful modules to enhance your Maho store. All modules ar
     background: #ADB41A;
     color: white;
     border-color: #ADB41A;
-}
-
-.app-stats {
-    display: flex;
-    gap: 24px;
-    margin-bottom: 32px;
-    padding: 20px;
-    background: var(--md-code-bg-color);
-    border-radius: 8px;
-}
-
-.stat-item {
-    text-align: center;
-}
-
-.stat-number {
-    font-size: 2em;
-    font-weight: 700;
-    color: #ADB41A;
-}
-
-.stat-label {
-    font-size: 0.9em;
-    color: var(--md-default-fg-color--light);
 }
 
 .install-dialog {

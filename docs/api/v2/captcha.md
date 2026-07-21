@@ -1,3 +1,7 @@
+---
+description: Provider-agnostic CAPTCHA in the Maho v2 API - advertise settings and verify tokens through events, with built-in Altcha support and third-party hooks.
+---
+
 # CAPTCHA <span class="version-badge">v26.7+</span>
 
 CAPTCHA support in the API is provider-agnostic: it exposes two events that any captcha module can observe. The built-in `Maho_Captcha` module (Altcha) supports them out of the box, and third-party providers hook in the same way.

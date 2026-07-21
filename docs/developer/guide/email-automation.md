@@ -1,3 +1,7 @@
+---
+description: Developer guide to Maho customer segment email automation, covering segment triggers, sequence scheduling, the newsletter queue, database schema and extension points.
+---
+
 # Customer Segment Email Automation - Developer Guide <span class="version-badge">v25.11+</span>
 
 This guide covers the technical implementation details of Maho's Customer Segment Email Automation system, including database schema, architecture, code examples, and extension points.

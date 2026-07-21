@@ -1,3 +1,9 @@
+---
+description: Understand Maho's layout, block and template system, how blocks are PHP objects tied to phtml templates and reference models directly to render the view.
+---
+
+# Layouts, Blocks and Templates
+
 ## Introduction
 
 Developers new to Maho are often confused by the Layout and View system. This article will take a look at Maho's Layout/Block approach, and show you how it fits into Maho MVC worldview.
@@ -17,7 +23,7 @@ You'll see the following PHP template code.
 ```php
 <?php $_productCollection=$this->getLoadedProductCollection() ?>
 <?php if(!$_productCollection->count()): ?> <div class="note-msg">
-    <?php echo $this->__("There are no products matching the selection.") ?>
+    <?= $this->__("There are no products matching the selection.") ?>
 </div> <?php else: ?>
 ```
 
@@ -392,7 +398,7 @@ We're adding a new Block nested within our root. This is a Block that's distribu
 
 ```php
 <body>
-    <?php echo $this->getChildHtml('customer_form_register'); ?>
+    <?= $this->getChildHtml('customer_form_register') ?>
 </body>
 ```
 
@@ -401,7 +407,7 @@ Clear your Maho cache and reload the page and you should see the customer regist
 ```php
 <body>
     <h1>Links</h1>
-    <?php echo $this->getChildHtml('top.links'); ?>
+    <?= $this->getChildHtml('top.links') ?>
 </body>
 ```
 

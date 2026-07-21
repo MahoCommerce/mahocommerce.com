@@ -1,3 +1,7 @@
+---
+description: Developer guide to Maho customer segments, covering the rule-based condition architecture, database schema, condition types and SQL query generation.
+---
+
 # Customer Segments - Developer Guide <span class="version-badge">v25.9+</span>
 
 This guide covers the technical implementation of Maho's Customer Segmentation system, including architecture, database schema, condition types, code examples, and extension points.

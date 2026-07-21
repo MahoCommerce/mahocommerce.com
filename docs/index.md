@@ -1,3 +1,7 @@
+---
+description: Maho is the open-source, self-hosted ecommerce platform you actually own - fully featured out of the box, no fees, no vendor lock-in, forever free.
+---
+
 <div style="position:absolute;width:0;height:0;overflow:hidden" aria-hidden="true">
 <svg width="0" height="0" focusable="false">
   <filter id="maho-duo-ink" color-interpolation-filters="sRGB">

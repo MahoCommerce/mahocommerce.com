@@ -1,3 +1,7 @@
+---
+description: Send targeted, multi-step email campaigns in Maho when customers enter or exit segments, with configurable delays and dynamic coupon generation.
+---
+
 # Customer Segment Email Automation <span class="version-badge">v25.11+</span>
 
 Maho's Customer Segment Email Automation enables you to send targeted, multi-step email campaigns automatically when customers enter or exit specific segments. Transform your customer engagement with personalized email sequences, dynamic coupon generation, and intelligent timing.
@@ -257,7 +261,7 @@ Or rely on the main cron job:
 | `{{var coupon_discount_text}}` | "15% off" | Human-readable discount |
 | `{{var coupon_discount_amount}}` | 15.00 | Discount amount |
 | `{{var coupon_description}}` | "Cart recovery" | Sales rule description |
-| `{{var coupon_expires_date}}` | "2025-11-20" | Expiration date (Y-m-d) |
+| `{{var coupon_expires_date}}` | "2026-11-20" | Expiration date (Y-m-d) |
 | `{{var coupon_expires_formatted}}` | "Nov 20, 2025" | Formatted expiration |
 
 ### Example Templates
@@ -382,9 +386,9 @@ The automation system includes several cron jobs:
 All automation activity is logged to `var/log/customer_segmentation.log`:
 
 ```
-2025-10-21 05:35:00 INFO: Started email sequences for 1 customers entering segment 1
-2025-10-21 05:35:00 INFO: Sent automation email to customer 3, template 1, queue 2
-2025-10-21 05:35:00 INFO: Generated coupon CART3ABC123 for customer 3 using rule 1
+2026-07-10 05:35:00 INFO: Started email sequences for 1 customers entering segment 1
+2026-07-10 05:35:00 INFO: Sent automation email to customer 3, template 1, queue 2
+2026-07-10 05:35:00 INFO: Generated coupon CART3ABC123 for customer 3 using rule 1
 ```
 
 ## Best Practices

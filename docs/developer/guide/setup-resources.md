@@ -1,3 +1,9 @@
+---
+description: Use Maho setup-resource scripts for versioned data work like seed rows, config values and EAV attributes, while table structure stays in declarative sql/schema.php.
+---
+
+# Setup Resources
+
 ## Introduction
 
 A module usually needs to do two kinds of database work: define its **table structure** (columns, indexes, foreign keys) and load **data** (seed rows, configuration values, EAV attributes). In current Maho these are two separate mechanisms:

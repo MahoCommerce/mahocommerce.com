@@ -1,3 +1,7 @@
+---
+description: Maho lets edge and full-page-cache modules skip session start for anonymous GETs, making CMS, category and product HTML safe to cache on Cloudflare or Varnish.
+---
+
 # Edge caching integration <span class="version-badge">v26.5+</span>
 
 Maho dispatches a core event that lets full-page-cache (FPC) or edge-cache modules opt out of session start for cacheable anonymous GETs, without forking core controllers.

@@ -1,5 +1,6 @@
 ---
-title: Artificial Intelligence User Guide
+title: Artificial Intelligence
+description: Maho's AI module routes a single helper to OpenAI, Anthropic, Google, Mistral, Ollama and more for product descriptions, reporting and image generation.
 ---
 
 # Artificial Intelligence <span class="version-badge">v26.5+</span>

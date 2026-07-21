@@ -1,3 +1,7 @@
+---
+description: Develop Maho themes the upgrade-safe way, layering CSS variables, extra CSS and local.xml over core files and overriding templates only when truly necessary.
+---
+
 # Theme Development Guide
 
 This guide explains the best way to develop a theme following Maho's philosophy: keep things simple and maintain upgradability. Rather than copying and modifying entire stylesheets or templates, you'll learn how to achieve your desired look with minimal overrides, ensuring your store can receive Maho updates without conflicts.

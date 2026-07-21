@@ -1,3 +1,7 @@
+---
+description: "Map URLs to controller actions in Maho with the #[Maho\\Config\\Route] PHP attribute, compiled to a fast Symfony matcher at composer dump-autoload time."
+---
+
 # Routing <span class="version-badge">v26.5+</span>
 
 Maho's routing layer maps incoming URLs to controller action methods. Under the hood it uses [Symfony Routing](https://symfony.com/doc/current/routing.html) with a compiled matcher, so URL resolution is opcached and fast. The matching layer benchmarks at **7.4× faster** than the previous router chain.

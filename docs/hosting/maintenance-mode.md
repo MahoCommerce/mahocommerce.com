@@ -1,3 +1,7 @@
+---
+description: Take your Maho store offline for updates with built-in maintenance mode, controlled from the command line with enable, disable and status commands.
+---
+
 # Maintenance Mode <span class="version-badge">v26.1+</span>
 
 Maho includes built-in maintenance mode functionality that allows you to temporarily take your store offline while performing updates, migrations, or other administrative tasks.

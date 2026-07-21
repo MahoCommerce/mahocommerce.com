@@ -1,3 +1,7 @@
+---
+description: Request conventions for the Maho v2 API - headers, pagination, store context, idempotency keys, ETag caching, and JSON versus JSON-LD content types.
+---
+
 # Conventions <span class="version-badge">v26.7+</span>
 
 ## Request Headers

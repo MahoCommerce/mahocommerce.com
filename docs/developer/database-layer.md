@@ -1,3 +1,7 @@
+---
+description: Maho's database layer runs on Doctrine DBAL 4 with full Zend_Db compatibility and multi-engine support for MySQL, MariaDB, PostgreSQL and SQLite.
+---
+
 # Database Layer in Maho <span class="version-badge">v25.11+</span>
 
 Maho uses [Doctrine DBAL 4](https://www.doctrine-project.org/projects/dbal.html){target=_blank} for all database operations, providing a modern, actively maintained foundation while maintaining 100% backward compatibility with existing code.

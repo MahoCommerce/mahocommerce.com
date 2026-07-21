@@ -6,6 +6,9 @@ categories:
 
 # 15-Year-Long quest for perfect language packs
 
+!!! info "Update (June 2026)"
+    The language pack system described in this post has since been rebuilt from scratch - see [Language packs, rebuilt](2026-06-01-language-packs-rebuilt.md) for how it works today.
+
 In the world of e-commerce platforms, localization is key to reaching a global audience.
 At Maho Commerce, we know that a great software solution needs excellent localization.
 

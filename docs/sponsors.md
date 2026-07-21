@@ -1,3 +1,7 @@
+---
+description: Meet the sponsors, funders and technology partners keeping Maho free and open source, from the NGI TALER Fund to affiliate partners you can support.
+---
+
 <h1 id="sponsorsh1" style="margin-bottom: 0.75em">Sponsors</h1>
 
 Maho is free and open source, but making it takes a lot of time and resources.

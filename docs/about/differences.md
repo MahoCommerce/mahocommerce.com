@@ -1,3 +1,7 @@
+---
+description: How Maho differs from Magento 1 and OpenMage - a lean project structure, complete Zend Framework removal, modern frontend libraries and its own toolchain.
+---
+
 # Differences with previous platforms
 
 Maho is built on the M1 platform, specifically:

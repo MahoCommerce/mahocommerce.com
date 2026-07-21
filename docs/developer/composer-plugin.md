@@ -1,3 +1,7 @@
+---
+description: The Maho Composer Plugin powers autoloading, a lean project structure, asset copying and PHP attribute compilation, replacing the legacy M1 core-copy approach.
+---
+
 # Maho Composer Plugin
 
 ## Overview

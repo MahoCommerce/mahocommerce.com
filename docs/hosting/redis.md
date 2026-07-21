@@ -1,3 +1,7 @@
+---
+description: Use Redis for both cache and session storage in Maho out of the box via symfony/cache, configured in local.xml with no third-party plugin needed.
+---
+
 # Redis (cache & sessions)
 
 Since [Maho 25.5](../blog/posts/2025-05-15-maho-25.5-announcement.md) adds a completely new cache subsystem

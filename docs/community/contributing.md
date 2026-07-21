@@ -1,3 +1,7 @@
+---
+description: How to contribute to Maho - share ideas, report bugs, join discussions on Discord and GitHub, submit code pull requests and improve the documentation.
+---
+
 # Contributing to Maho
 
 Thank you for your interest in contributing to Maho!  

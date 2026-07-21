@@ -1,3 +1,7 @@
+---
+description: Overview of Maho's v2 REST and GraphQL API built on API Platform, covering authentication, conventions, endpoints, errors, and extending the API.
+---
+
 # REST & GraphQL API (v2) <span class="version-badge">v26.7+ · beta</span>
 
 > **REST base URL:** `https://your-domain.com/api/rest/v2`

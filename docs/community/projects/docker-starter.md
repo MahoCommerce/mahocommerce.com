@@ -1,3 +1,7 @@
+---
+description: "Docker Starter for Maho by Simone Fantini: a modern Docker stack with green SSL certs, browser log viewing, a database GUI and VSCode integration."
+---
+
 The goal of this project by
 [Simone Fantini](https://www.linkedin.com/in/simonedanielefantini){target=_blank}
 is to create a complete and modern docker stack for Maho, either to speed up development

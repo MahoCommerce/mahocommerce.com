@@ -1,3 +1,7 @@
+---
+description: How the Maho team uses generative AI alongside human work - guardrails, tests and maintainer review of every PR - and why AI-only changes are never merged.
+---
+
 # GenAI transparency
 
 Maho is built by a small team competing in a heavyweight championship, something that

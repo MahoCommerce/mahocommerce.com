@@ -1,3 +1,7 @@
+---
+description: Automatically generate related products, up-sells and cross-sells in Maho with condition-based rules instead of linking every product by hand.
+---
+
 # Product Relationship Rules <span class="version-badge">v26.1+</span>
 
 Product Relationship Rules in Maho enable you to automatically manage Related Products, Up-sells, and Cross-sells based on powerful, condition-based rules. Instead of manually assigning product relationships one by one, define rule-based criteria to dynamically generate these links across your entire catalog.
@@ -81,7 +85,7 @@ This powerful feature enables context-aware product relationships that adapt to 
 | **Priority** | Lower number = higher priority (0-999+) | 10 |
 | **Sort Order** | How to order the linked products | Price: Low to High |
 | **Maximum Links** | Limit number of linked products (optional) | 4 |
-| **From Date** | Optional start date for rule activation | 2025-01-01 |
+| **From Date** | Optional start date for rule activation | 2026-01-01 |
 | **To Date** | Optional end date for rule deactivation | 2025-12-31 |
 
 ### Link Types
@@ -287,8 +291,8 @@ IF ALL of these conditions are TRUE:
 - **Priority**: 5
 - **Sort Order**: Newest First
 - **Max Links**: 5
-- **From Date**: 2025-11-01
-- **To Date**: 2026-03-31
+- **From Date**: 2026-11-01
+- **To Date**: 2027-03-31
 
 **Source Conditions**:
 ```

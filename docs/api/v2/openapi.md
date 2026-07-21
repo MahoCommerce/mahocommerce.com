@@ -1,3 +1,7 @@
+---
+description: Explore the Maho v2 API documentation - runtime-generated OpenAPI 3.1 and JSON-LD specs plus an opt-in Swagger UI served from /api/docs.
+---
+
 # API Documentation (Swagger UI / OpenAPI) <span class="version-badge">v26.7+</span>
 
 The API publishes its own documentation, generated at runtime from the `#[ApiResource]` attributes on each resource. Make sure `/api/docs` is routed to `rest.php` first (see [Web Server Configuration](web-server.md)), otherwise the request falls through to the legacy `Mage_Api` controllers.

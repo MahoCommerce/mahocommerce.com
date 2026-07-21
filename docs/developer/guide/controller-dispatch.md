@@ -1,3 +1,9 @@
+---
+description: Understand how Maho's MVC controller dispatch works, from URL routing through the front controller to action methods that load models and prepare views.
+---
+
+# Controller Dispatch
+
 ## Introduction
 
 The Model-View-Controller (MVC) architecture traces its origins back to the Smalltalk Programming language and Xerox Parc. Since then, there have been many systems that describe their architecture as MVC. Each system is slightly different, but all have the goal of separating data access, business logic, and user-interface code from one another.
@@ -89,7 +95,7 @@ Then create a configuration file for the module (at path app/code/local/Mahotuto
         </Mahotutorial_Helloworld>
     </modules>
 </config>
-````
+```
 
 Then create a file to activate the module (at path app/etc/modules/Mahotutorial_Helloworld.xml):
 
@@ -102,7 +108,7 @@ Then create a file to activate the module (at path app/etc/modules/Mahotutorial_
         </Mahotutorial_Helloworld>
     </modules>
 </config>
-````
+```
 
 Finally, we ensure the module is active:
 

@@ -1,3 +1,7 @@
+---
+description: Upload SVG images in Maho for favicons and other contexts, with automatic sanitization that strips malicious code to keep every upload secure.
+---
+
 # SVG Image Uploads <span class="version-badge">v25.11+</span>
 
 Maho includes comprehensive support for uploading SVG (Scalable Vector Graphics) files in specific contexts, with automatic sanitization to ensure security.

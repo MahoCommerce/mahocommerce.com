@@ -1,3 +1,7 @@
+---
+description: Developer guide to Maho's Gift Card module, covering the database schema, balances and codes, plus how to extend, customize and integrate gift card functionality.
+---
+
 # Gift Cards <span class="version-badge">v26.1+</span>
 
 This guide covers the technical aspects of Maho's Gift Card module for developers who need to extend, customize, or integrate with the gift card functionality.

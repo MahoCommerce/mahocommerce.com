@@ -1,3 +1,7 @@
+---
+description: Full REST endpoint catalogue for the Maho v2 API - auth, store config, products, customers, orders, and more, all under the /api/rest/v2 prefix.
+---
+
 # REST Endpoints <span class="version-badge">v26.7+</span>
 
 This page is the **REST v2** reference. The same resources are available over GraphQL - for the query and mutation field names, arguments, and examples, see the [GraphQL reference](graphql.md).

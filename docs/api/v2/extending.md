@@ -1,3 +1,7 @@
+---
+description: Extend and deploy the Maho v2 API - scaffold new API Platform resources with the CLI, add DTOs and providers from custom modules, plus deployment notes.
+---
+
 # Extending & Deployment <span class="version-badge">v26.7+</span>
 
 ## Adding a New API Resource

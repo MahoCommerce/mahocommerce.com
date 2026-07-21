@@ -1,3 +1,7 @@
+---
+description: "The origins of Maho: its technical roots in Magento and OpenMage, and the meaning behind the name drawn from Canary Islands, Spanish and Japanese culture."
+---
+
 # Origins of Maho
 
 ## Technical origins

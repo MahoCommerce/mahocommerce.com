@@ -1,3 +1,7 @@
+---
+description: "React to events in Maho with the observer pattern, registering methods with the #[Maho\\Config\\Observer] PHP attribute and compiling them via composer dump-autoload."
+---
+
 # Event observers
 
 Maho uses an **observer pattern** to let modules react to events dispatched throughout the system. When something significant happens (a product is saved, a customer logs in, an order is placed), the system fires a named event, and any registered observer method is called.

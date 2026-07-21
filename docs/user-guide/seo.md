@@ -1,5 +1,6 @@
 ---
-title: SEO User Guide
+title: SEO
+description: Configure Maho's built-in SEO tools - page metadata, canonical tags, clean URLs, layered-navigation crawl controls, XML sitemaps and multi-store hreflang.
 ---
 
 # Search Engine Optimization

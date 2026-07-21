@@ -1,3 +1,7 @@
+---
+description: Delegate Maho shipping rate calculation to any external API through a single configurable endpoint - no custom carrier module or code required.
+---
+
 # Shipping Bridge <span class="version-badge">v26.3+</span>
 
 Maho's Shipping Bridge module lets you delegate shipping rate calculation to any external API. Instead of writing a custom carrier module, you configure a single API endpoint URL and Maho sends the full cart and address data as a JSON POST request, then renders whatever shipping methods the API returns.

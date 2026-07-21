@@ -1,3 +1,7 @@
+---
+description: "How autoloading works in Maho: everything runs through Composer and the Maho composer plugin, with no core files in your project and no Varien_Autoload."
+---
+
 # Autoloaders
 
 Maho is tightly built around composer, meaning that, in a Maho project, all the autoloading is done

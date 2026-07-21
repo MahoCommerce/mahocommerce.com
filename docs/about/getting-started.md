@@ -1,3 +1,7 @@
+---
+description: Install and run Maho step by step - system requirements, Composer setup, web server config, Docker, the CLI and web installers, Redis and cron.
+---
+
 # Getting Started
 
 !!! tip "Just want to look around?"

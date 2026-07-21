@@ -1,3 +1,7 @@
+---
+description: Migrate a Magento 1 or OpenMage store to Maho step by step, covering project structure, Zend Framework removal, breaking changes and the health check.
+---
+
 # Migrate Magento1/OpenMage to Maho
 
 ## Step by Step
@@ -32,7 +36,7 @@ While this may seem more complex initially, it will pay off in the long run.
 9. Convert any custom scripts in the `shell` folder to maho-cli-commands
 
 ## PHP Compatibility
-Maho (as of 25.7) requires PHP 8.3+.
+Maho supports the three most recent stable PHP releases, currently 8.3 / 8.4 / 8.5 (see [system requirements](getting-started.md#system-requirements)).
 Custom code and third-party modules will likely need adaptation to the new PHP version.
 
 !!! note

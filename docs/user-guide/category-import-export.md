@@ -1,3 +1,7 @@
+---
+description: Bulk manage Maho categories with CSV import and export - create, update and delete categories and handle multi-store data across your entire catalog.
+---
+
 # Category Import/Export
 
 The Category Import/Export feature allows you to bulk manage categories in Maho using CSV files. This system supports creating new categories, updating existing ones, deleting categories, and managing multi-store data.

@@ -1,3 +1,9 @@
+---
+description: Work with Maho data collections, array-like objects that hold model instances with iteration, counting and filtering, one provided free with every Maho model.
+---
+
+# Data Collections
+
 ## Introduction
 
 Originally, as a PHP programmer, if you wanted to collect together a group of related variables you had one choice, the venerable [Array](http://us.php.net/manual/en/language.types.array.php). While it shares a name with C's array of memory addresses, a PHP array is a general purpose dictionary like object combined with the behaviors of a numerically indexed mutable array.

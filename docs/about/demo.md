@@ -1,6 +1,7 @@
 ---
 hide:
   - toc
+description: Try Maho free in a live demo loaded with sample data - explore the full storefront and admin panel, no installation required. Resets every 3 hours.
 ---
 
 # Live Demo

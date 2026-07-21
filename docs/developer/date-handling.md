@@ -1,3 +1,7 @@
+---
+description: Maho's date and time API stores UTC in the database and converts to the store timezone at the edges, with locale helpers for safe input and display formatting.
+---
+
 # Date & Time Handling <span class="version-badge">v26.5+</span>
 
 Maho provides a small, opinionated API for working with dates and times, built around one invariant: **the database always stores UTC**, and conversion to the store's timezone happens at the edges (when you receive input from a user, or when you display a value).

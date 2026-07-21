@@ -1,3 +1,7 @@
+---
+description: Add the EU-mandated online revocation button to your Maho store, with a customer withdrawal form, admin triage workflow and tamper-proof receipts.
+---
+
 # Revocation Button <span class="version-badge">v26.7+</span>
 
 The `Maho_Revocation` module provides the mandatory online revocation (withdrawal) button that EU consumer law requires B2C shops to offer. It gives customers a permanently reachable form to declare withdrawal from their contract, gives merchants a clean admin workflow to triage and process those declarations, and keeps a tamper-proof legal receipt of every submission.

@@ -1,3 +1,7 @@
+---
+description: Sell, manage and redeem gift cards in Maho with email delivery, QR codes, partial redemption at checkout and full multi-store, multi-currency support.
+---
+
 # Gift Cards <span class="version-badge">v26.1+</span>
 
 Maho's built-in Gift Card module provides a complete solution for selling, managing, and redeeming gift cards in your e-commerce store. Gift cards can be purchased as products, sent to recipients via email, and used as payment during checkout.

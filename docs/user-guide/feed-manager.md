@@ -1,5 +1,6 @@
 ---
-title: FeedManager User Guide
+title: Feed Manager
+description: Export your Maho product catalog to Google Shopping, Facebook, Pinterest, Idealo and more with visual mapping builders and automated feed scheduling.
 ---
 
 # Feed Manager <span class="version-badge">v26.3+</span>

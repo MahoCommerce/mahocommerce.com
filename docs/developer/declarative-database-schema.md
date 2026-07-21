@@ -1,3 +1,7 @@
+---
+description: Define a Maho module's tables in one declarative sql/schema.php file and let Doctrine DBAL reconcile the database, replacing chains of install and upgrade scripts.
+---
+
 # Declarative Database Schema <span class="version-badge">v26.7+</span>
 
 Maho can build and maintain a module's database tables from a single declarative file, `sql/schema.php`, instead of a growing chain of imperative install and upgrade scripts. The file describes the *target* shape of your tables, and Maho reconciles the live database with that target automatically, using [Doctrine DBAL](database-layer.md)'s own schema `Comparator`.

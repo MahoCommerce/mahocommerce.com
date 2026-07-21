@@ -1,3 +1,7 @@
+---
+description: Understand Maho v2 API error responses - JSON error bodies with type, title, and detail fields, plus the HTTP status codes from 400 to 500 explained.
+---
+
 # Error Responses <span class="version-badge">v26.7+</span>
 
 All errors return JSON with an appropriate HTTP status code:

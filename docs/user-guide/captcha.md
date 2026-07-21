@@ -1,3 +1,7 @@
+---
+description: Maho's built-in, self-hosted Altcha captcha protects storefront and admin forms from bots without third-party scripts, cookies or GDPR headaches.
+---
+
 # Captcha <span class="version-badge">v25.3+</span>
 
 Maho ships a built-in, self-hosted captcha that protects your storefront and admin forms from automated abuse without sending any of your visitors' data to a third party. It is powered by the open-source [Altcha](https://altcha.org) project and runs entirely on your own server.

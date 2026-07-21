@@ -1,3 +1,7 @@
+---
+description: Get involved with Maho, the modern open-source on-premises ecommerce platform. Join the community on Discord and help shape the future of e-commerce.
+---
+
 In an era dominated by SaaS solutions, the e-commerce world needs a robust, modern, and lean on-premises platform.
 That's where Maho comes in – and where you can make a real difference.
 

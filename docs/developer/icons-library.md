@@ -1,3 +1,7 @@
+---
+description: Use over 6,000 optimized Tabler SVG icons built into Maho directly in your templates with getIconSvg(), no separate icon files to upload or manage.
+---
+
 # Maho Icons Library <span class="version-badge">v25.3+</span>
 
 Maho includes a built-in library of **over 6,000 optimized SVG icons** from [Tabler Icons](https://tabler.io/icons) that you can use in your templates without needing to upload or manage separate icon files.

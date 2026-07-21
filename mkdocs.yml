@@ -26,7 +26,7 @@ extra_css:
   - maho.css
 extra_javascript:
   - maho.js
-  - https://cdn.jsdelivr.net/npm/party-js@latest/bundle/party.min.js
+  - party.min.js
 
 plugins:
   - search
@@ -34,7 +34,6 @@ plugins:
       cards_layout_options:
         logo: docs/assets/maho-logo.svg
         background_color: "#d7df22"
-  - awesome-pages
   - blog:
       blog_dir: blog
       post_date_format: full

@@ -1,3 +1,7 @@
+---
+description: Let Maho customers log in without a password using secure, time-limited magic links sent by email, in either hybrid or fully passwordless mode.
+---
+
 # Magic Link Authentication <span class="version-badge">v26.1+</span>
 
 Magic Link (passwordless) authentication allows customers to log in using a secure, time-limited link sent to their email instead of entering a password. This feature provides enhanced security and convenience for your customers.

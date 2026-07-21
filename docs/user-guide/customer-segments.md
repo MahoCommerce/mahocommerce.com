@@ -1,3 +1,7 @@
+---
+description: Build dynamic customer groups in Maho using real-time conditions on behavior, orders and demographics to power targeted promotions and email automation.
+---
+
 # Customer Segments <span class="version-badge">v25.9+</span>
 
 Customer Segments in Maho enable you to create dynamic groups of customers based on powerful, real-time conditions. Target specific customer behaviors, demographics, purchase patterns, and engagement metrics to deliver personalized experiences, targeted promotions, and automated marketing campaigns.
@@ -441,7 +445,7 @@ Active: Yes
 Name: UK Customers - New Region
 Conditions (ALL):
 - Shipping Address: Country equals "United Kingdom"
-- Customer: Created At after 2025-01-01
+- Customer: Created At after 2026-01-01
 Website: UK Website
 Auto Email: Enabled (Enter Segment)
 Active: Yes
@@ -659,8 +663,8 @@ Monitor segment refresh performance in logs:
 **Location**: `var/log/customer_segmentation.log`
 
 ```
-2025-10-21 05:00:00 INFO: Refreshing segment: VIP Platinum (ID: 1)
-2025-10-21 05:00:02 INFO: Segment 1 refreshed successfully. Time: 1.82s, Memory: 12.5MB, Customers: 342
+2026-07-10 05:00:00 INFO: Refreshing segment: VIP Platinum (ID: 1)
+2026-07-10 05:00:02 INFO: Segment 1 refreshed successfully. Time: 1.82s, Memory: 12.5MB, Customers: 342
 ```
 
 ## Best Practices
@@ -846,20 +850,6 @@ Magento 2 has similar segmentation:
 - **Test thoroughly**: Condition logic may differ
 
 ## Integration Points
-
-### REST API (Future)
-
-Programmatic segment management (planned):
-
-```php
-// Future API endpoint
-GET    /api/rest/segments
-POST   /api/rest/segments
-PUT    /api/rest/segments/:id
-DELETE /api/rest/segments/:id
-POST   /api/rest/segments/:id/refresh
-GET    /api/rest/segments/:id/customers
-```
 
 ### External CRM Sync
 

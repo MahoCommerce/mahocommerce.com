@@ -1,3 +1,7 @@
+---
+description: The ./maho command-line tool ships with every Maho project to run installs, migrations, cache and admin tasks, plus an interactive PHP shell and dev server.
+---
+
 # CLI tool
 
 Every Maho based project comes with a tool to run various tasks from the command line, find it in the root of your

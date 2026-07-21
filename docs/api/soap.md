@@ -1,3 +1,7 @@
+---
+description: Manage your Maho store over the SOAP and XML-RPC API - work with customers, categories, products, orders, carts, and inventory from any SOAP client.
+---
+
 # SOAP API
 
 ## Introduction

@@ -1,3 +1,9 @@
+---
+description: Understand Entity Attribute Value models in Maho, how EAV resources differ from simple models and store flexible attributes across a sparse-matrix table schema.
+---
+
+# Advanced ORM: Entity Attribute Value
+
 ## Introduction
 
 In the first ORM article we told you there were two kinds of Models in Maho. Regular, or "simple" Models, and Entity Attribute Value (or EAV) Models. We also told you this was a bit of a fib. Here's where we come clean.

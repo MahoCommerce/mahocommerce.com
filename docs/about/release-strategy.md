@@ -1,3 +1,7 @@
+---
+description: How Maho releases work - calendar-based YY.m versioning, why not semver, the support policy and the new bugfix patch releases starting with 26.7.
+---
+
 ## Introduction
 
 **Maho is built to move fast**: delivering innovation, new features, performance improvements, and removing outdated technologies. Our release strategy reflects this commitment to continuous improvement while being transparent about what it means for users.

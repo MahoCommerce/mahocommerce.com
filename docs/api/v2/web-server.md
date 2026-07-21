@@ -1,3 +1,7 @@
+---
+description: Configure Apache, nginx, or Caddy to route Maho v2 API URLs to rest.php while legacy SOAP and XML-RPC paths fall through to the Magento 1 controllers.
+---
+
 # Web Server Configuration <span class="version-badge">v26.7+</span>
 
 All web servers must route the new API URLs (`/api/rest/v2/*`, `/api/graphql`, `/api/admin/graphql`, `/api/docs`) to `rest.php` (the Symfony API Platform entry point), while letting legacy paths (`/api/rest`, `/api/soap`, `/api/v2_soap`, `/api/xmlrpc`, `/api/jsonrpc`) fall through to the original Magento 1 controllers. Below are example configurations for the three most common setups.

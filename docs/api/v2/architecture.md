@@ -1,3 +1,7 @@
+---
+description: How the Maho v2 API is built on API Platform and Symfony - ApiResource DTOs, state providers and processors, event listeners, and JWT HS256 authentication.
+---
+
 # Architecture <span class="version-badge">v26.7+</span>
 
 The API is built on [API Platform](https://api-platform.com/) (Symfony) integrated with Maho Commerce (PHP 8.3+, fork of OpenMage/Magento 1).

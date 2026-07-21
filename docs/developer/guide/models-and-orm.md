@@ -1,3 +1,9 @@
+---
+description: Learn Maho models and ORM basics, from ActiveRecord-style simple models to EAV, with model resources handling database reads and writes and free collections.
+---
+
+# Models and ORM Basics
+
 ## Introduction
 
 The implementation of a "Models Tier" is a huge part of any MVC framework. It represents the data of your application, and most applications are useless without data. Maho Models play an even bigger role, as they typically contain the "Business Logic" that's often relegated to the Controller or Helper methods in other PHP MVC frameworks.

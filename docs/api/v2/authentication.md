@@ -1,3 +1,7 @@
+---
+description: "Authenticate to the Maho v2 API with JWT bearer tokens: customer login, OAuth2 client_credentials, and legacy api_user grant types, plus token refresh."
+---
+
 # Authentication <span class="version-badge">v26.7+</span>
 
 ### JWT Token Authentication

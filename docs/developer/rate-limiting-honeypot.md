@@ -1,3 +1,7 @@
+---
+description: Throttle public endpoints and trap spam bots in Maho with the shared rate limiter and honeypot toolkit on the core helper, using cache-backed sliding windows.
+---
+
 # Rate Limiting & Honeypot <span class="version-badge">v26.7+</span>
 
 Maho ships a single, shared toolkit for throttling public endpoints and trapping spam bots. Both live on the core helper (`Mage_Core_Helper_Data`), so you should never roll a per-feature limiter or hand-build a honeypot field. Use these factories and you get consistent behaviour, install-specific trap fields, and cache-backed counters for free.

@@ -1,3 +1,7 @@
+---
+description: Override Maho configuration with ENV variables that take precedence over XML and database values, scoped per default, website or store view using MAHO_CONFIG names.
+---
+
 # Override configurations with ENV variables
 
 ## Introduction

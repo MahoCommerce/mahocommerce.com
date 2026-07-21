@@ -1,3 +1,9 @@
+---
+description: Learn how Maho's module system and config.xml work by building a module, from the directory structure under app/code/local to wiring configuration into the platform.
+---
+
+# The Maho Config
+
 ## Setting up a Module Directory Structure
 
 We're going to be creating a Maho module. A module is a group of php and xml files meant to extend the system with new functionality, or override core system behavior. This may meaning adding additional data models to track sales information, changing the behavior of existing classes, or adding entirely new features.

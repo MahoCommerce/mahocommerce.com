@@ -1,3 +1,7 @@
+---
+description: Query the Maho v2 API over GraphQL - the same resources as REST via API Platform, with JWT auth, an introspectable schema, and admin GraphQL support.
+---
+
 # GraphQL <span class="version-badge">v26.7+</span>
 
 Maho exposes the same resources over GraphQL as over [REST](endpoints.md), via API Platform's built-in GraphQL support. Every resource's fields, arguments, and types are introspectable from the schema.

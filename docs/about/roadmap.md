@@ -1,3 +1,7 @@
+---
+description: Follow Maho's public roadmap on GitHub and share your ideas for new features and improvements to help shape the future of the open-source platform.
+---
+
 We think that it's extremely important, both for the team and the users, to have a clear and public roadmap.
 That's why we manage it through GitHub projects.
 

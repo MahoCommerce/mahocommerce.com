@@ -1,3 +1,9 @@
+---
+description: Start developing for Maho with this adapted Alana Storm guide series, learning how code is organized into modules under app/code and how you extend the platform.
+---
+
+# Introduction to Maho Development
+
 !!! tip "Deep dive"
     For AI-generated documentation with architecture diagrams and source-level explanations, see the [DeepWiki documentation](https://deepwiki.com/MahoCommerce/maho){:target="_blank"}.
 
@@ -121,7 +127,7 @@ As previously mentioned, if you want your Module to use Controllers, you'll need
         </catalog>
     </routers>
 </frontend>
-````
+```
 
 Don't worry too much about the specifics right now, but notice the
 

@@ -1,3 +1,7 @@
+---
+description: Compare Maho's seven product types - simple, configurable, grouped, virtual, bundle, downloadable and gift card - to model your catalog correctly.
+---
+
 # Product Types
 
 Understanding product types is essential for setting up your catalog effectively. Maho offers seven product types, each designed for different selling scenarios. Choosing the right type ensures your customers have the best shopping experience and you can manage inventory efficiently.

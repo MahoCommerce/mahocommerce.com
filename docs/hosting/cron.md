@@ -1,3 +1,7 @@
+---
+description: Define and run Maho cron jobs for scheduled background tasks like queued emails, sitemap generation and catalog price rules using PHP attributes.
+---
+
 # Cron jobs
 
 Maho uses a cron system to run scheduled background tasks - things like sending queued emails, cleaning up old logs, generating sitemaps, and applying catalog price rules.

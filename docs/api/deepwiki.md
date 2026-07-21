@@ -1,3 +1,7 @@
+---
+description: Explore DeepWiki's AI-generated documentation for Maho, indexing source code to explain architecture, core services, catalog, CLI tools, and the API.
+---
+
 # DeepWiki - AI Code Documentation
 
 [DeepWiki](https://deepwiki.com){:target="_blank"} provides AI-generated documentation
