@@ -35,7 +35,7 @@ For object properties (`order.increment_id`), Maho first looks for a real getter
 {{/depend}}
 ```
 
-### Expressions
+### Expressions <span class="version-badge">v26.9+</span>
 
 Conditions are evaluated with [Symfony ExpressionLanguage](https://symfony.com/doc/current/reference/formats/expression_language.html), so they are not limited to a single variable - comparisons, boolean logic, and method calls all work:
 
