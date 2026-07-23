@@ -209,6 +209,7 @@ nav:
           - Declarative DB schema: developer/declarative-database-schema.md
       - Frontend & theming:
           - Theme development: developer/theme-development.md
+          - Template directives: developer/template-directives.md
           - Icons library: developer/icons-library.md
       - Utilities & tooling:
           - CLI tool: developer/cli-tool.md
