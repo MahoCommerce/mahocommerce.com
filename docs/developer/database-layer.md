@@ -609,6 +609,82 @@ $expr = new Varien_Db_Expr('COUNT(*)');  // Backward compatible
 $expr = new Maho\Db\Expr('COUNT(*)');    // Modern approach
 ```
 
+## GROUP BY Strictness & SQL Modes <span class="version-badge">v26.9+</span>
+
+Every GROUP BY query in the Maho core is compliant with strict SQL grouping rules - the standard that PostgreSQL always enforces and that MySQL enforces under `ONLY_FULL_GROUP_BY`. Production connections are unchanged: MySQL and MariaDB still run with `SQL_MODE=''`, exactly as before.
+
+### Developer mode enforces strict grouping
+
+With [developer mode](guide/models-and-orm.md#enable-developer-mode) active, Maho sets `SQL_MODE='ONLY_FULL_GROUP_BY'` on MySQL connections. Any non-compliant GROUP BY query in your custom modules fails loudly during development instead of silently returning an arbitrary row per group:
+
+```
+SQLSTATE[42000]: Expression #1 of SELECT list is not in GROUP BY clause
+and contains nonaggregated column ... which is not functionally dependent
+on columns in GROUP BY clause
+```
+
+This is a detection tool: fix the query (see the patterns below), don't disable developer mode to make the error go away. A query that trips this check returns non-deterministic results in production and will not run on PostgreSQL at all.
+
+!!! warning "MariaDB is exempt"
+    Strict mode is **not** applied on MariaDB, even in developer mode. MariaDB's `ONLY_FULL_GROUP_BY` lacks the functional-dependency detection that MySQL 5.7+ and PostgreSQL have ([MDEV-11588](https://jira.mariadb.org/browse/MDEV-11588){target=_blank}, unresolved since 2016), so it would reject SQL-standard queries like `SELECT t.* ... GROUP BY t.pk`. If you develop on MariaDB, run your test suite against MySQL (locally or in CI) to catch grouping violations.
+
+### Writing strict-compliant GROUP BY queries
+
+Every selected column must either appear in the GROUP BY clause, be wrapped in an aggregate function, or be functionally dependent on the grouped columns. In practice, a handful of patterns cover almost every query:
+
+**Group by the primary key.** Other columns of the same table are functionally dependent on it, so they can be selected freely:
+
+```php
+// ✅ Compliant on MySQL strict mode and PostgreSQL
+$select->from(['e' => 'customer_entity'], ['entity_id', 'email', 'created_at'])
+    ->joinLeft(['o' => 'sales_flat_order'], 'o.customer_id = e.entity_id', ['orders' => 'COUNT(o.entity_id)'])
+    ->group('e.entity_id');
+```
+
+**Wrap constant-per-group joined columns in `MAX()` or `MIN()`.** When a joined column has one value per group but the database can't prove it, aggregate it explicitly:
+
+```php
+// ❌ store_name is not functionally dependent on the grouped column
+$select->columns(['store_name' => 's.name'])->group('o.customer_id');
+
+// ✅ same value, provably one row per group
+$select->columns(['store_name' => new Maho\Db\Expr('MAX(s.name)')])->group('o.customer_id');
+```
+
+**Use `DISTINCT` instead of dedup-only GROUP BY.** If the query groups only to remove duplicate rows and selects no aggregates, `DISTINCT` says the same thing without triggering grouping rules:
+
+```php
+// ❌ GROUP BY used purely for deduplication
+$select->from(['p' => 'catalog_product'], ['entity_id', 'sku'])->group('p.entity_id');
+
+// ✅
+$select->distinct()->from(['p' => 'catalog_product'], ['entity_id', 'sku']);
+```
+
+**Group by the expression, not its alias.** PostgreSQL rejects grouping by a SELECT alias in some positions; repeat the expression instead:
+
+```php
+// ❌ fails on PostgreSQL
+$select->columns(['period' => "DATE_FORMAT(created_at, '%Y-%m')"])->group('period');
+
+// ✅
+$select->columns(['period' => new Maho\Db\Expr("DATE_FORMAT(created_at, '%Y-%m')")])
+    ->group(new Maho\Db\Expr("DATE_FORMAT(created_at, '%Y-%m')"));
+```
+
+**Move grouping into a derived table** when the outer select must stay ungrouped, or **use a correlated subquery** for per-row counts.
+
+!!! info "PostgreSQL is stricter than MySQL"
+    MySQL 5.7+ infers functional dependencies broadly (primary keys, unique keys, WHERE equalities). PostgreSQL only recognizes grouping by a table's primary key. If your module targets PostgreSQL, stick to PK grouping and explicit aggregates; passing MySQL's strict mode is a good tripwire but not a formal guarantee.
+
+### Managed databases and clusters
+
+Managed database offerings tend to enforce strict SQL modes globally and don't hand out the `SUPER` privilege to change them. [DigitalOcean Managed MySQL](https://docs.digitalocean.com/products/databases/mysql/how-to/set-sql-mode/){target=_blank}, for example, defaults to a mode set that includes `ONLY_FULL_GROUP_BY` (alongside `ANSI`, `STRICT_ALL_TABLES`, `NO_ZERO_DATE` and others), and changing it requires their API or control panel. MySQL 8 itself ships with `ONLY_FULL_GROUP_BY` in its default mode, so self-hosted clusters increasingly enforce it too.
+
+Maho currently sidesteps this by resetting `SQL_MODE` per connection, and strict GROUP BY compliance means the queries no longer depend on that override. This is the groundwork for a future release that drops the override entirely and lets Maho run under a provider's enforced defaults as-is (the remaining gap is the non-grouping strictness flags, such as zero-date and truncation handling).
+
+Clusters gain a correctness benefit as well: results that were previously "an arbitrary row per group" become deterministic, so a load-balanced replica answers a query the same way as its primary.
+
 ## Best Practices
 
 ### 1. Use Read/Write Adapters Appropriately
