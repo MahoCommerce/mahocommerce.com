@@ -123,18 +123,23 @@ Omitting the argument does not fall back to a smaller subset. It masks nothing a
 A **preview** that is never persisted has no save step to hook into. Resolve the directives first, then run the plain filter over the resolved markup. This is what the newsletter and email template preview blocks do.
 
 !!! warning "The masking pattern is a security boundary"
-    Whatever the masking pattern in `Mage_Core_Model_Input_Filter_MaliciousCode` matches is restored **without sanitization**. That makes it much stricter than the renderer's own `CONSTRUCTION_PATTERN`. It enforces two rules:
+    Whatever the masking pattern in `Mage_Core_Model_Input_Filter_MaliciousCode` matches is restored **without sanitization**. That makes it much stricter than the renderer's own `CONSTRUCTION_PATTERN`. It enforces three rules:
 
     1. The keyword must be one the supplied processor actually resolves.
     2. The body must consist of well-formed `name="value"` parameters.
+    3. No parameter may be named like an event handler (`on` followed by letters).
 
     **Rule 1** matters because a renderer leaves a directive it has no handler for untouched in the output. Masking such a directive would hand the payload straight to the browser.
 
     **Rule 2** matters because excluding `<` and `>` is not enough on its own. An HTML attribute is terminated by a quote, so a body like `" onerror="alert(1)` grafts a live event handler onto the enclosing tag without using an angle bracket at all.
 
-    **Both are needed.** `onerror="alert(1)"` is itself a well-formed parameter, so it passes rule 2. Only rule 1 catches it, by declining to mask a keyword the renderer cannot resolve.
+    **Rule 3 is why the first two are not enough.** A well-formed parameter is also a well-formed HTML attribute, so `{{media url="a" onerror="alert(1)"}}` satisfies both: `media` is a keyword the processor resolves, and the body parses. Emitted verbatim inside `alt="…"`, the HTML parser ends the attribute at the directive's first quote and reads `onerror` as the next attribute of the tag. Resolving the directive discards the extra parameter, so this only bites on a render path that emits rather than resolves — excluding the name keeps the preserved text inert either way. Only `on` plus letters is rejected, so a widget parameter such as `on_sale` still masks.
+
+    The exclusion deliberately stops at event handlers rather than growing to cover `href`, `src` and friends, which the same trick can also graft onto the tag. Rejecting `on` plus letters costs nothing, since no directive parameter is ever named `onclick`, whereas `href` and `src` are plausible widget parameter names, so excluding them would stop masking a legitimate directive and mangle it on save. What keeps those inert is the invariant at the end of this box: every handler reads its own named parameters and drops the rest, or `stripDirectives()` removes the construction. Preserve that invariant on new render paths instead of extending this list.
 
     **Whether the renderer runs at all counts too.** Catalog descriptions reach the template processor only when **Allow Dynamic Media URLs in Products and Categories** (`catalog/frontend/parse_url_directives`) is enabled, and that setting is per store view. Deciding it at save time would be wrong twice over: the flag can be switched off long after the save, and it is per store while the stored value is shared. So the save keeps the directive intact, and `Mage_Catalog_Helper_Output` calls `stripDirectives()` when the rendering store will not resolve it. Nothing is lost, since a directive that is never parsed would not have worked anyway.
+
+    That fallback is keyed off `is_wysiwyg_enabled` alone, deliberately, because that is the flag the save side masks on. An attribute with WYSIWYG enabled but **Allow HTML Tags on Frontend** disabled would otherwise match none of the three branches — neither escaped, nor resolved, nor stripped — and its directives would reach the page exactly as authored.
 
     **No processor means no preservation.** If you cannot name the processor that will resolve a directive, there isn't one. Masking on the assumption that something downstream will resolve it is how content ends up shipping a live event handler. Product alert emails are the worked example: their markup is echoed into an already-rendered `{{var alertGrid}}`, which the template filter does not rescan, so they strip directives and filter as plain HTML.
 
