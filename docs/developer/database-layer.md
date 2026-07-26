@@ -611,11 +611,22 @@ $expr = new Maho\Db\Expr('COUNT(*)');    // Modern approach
 
 ## GROUP BY Strictness & SQL Modes <span class="version-badge">v26.9+</span>
 
-Every GROUP BY query in the Maho core is compliant with strict SQL grouping rules - the standard that PostgreSQL always enforces and that MySQL enforces under `ONLY_FULL_GROUP_BY`. Production connections are unchanged: MySQL and MariaDB still run with `SQL_MODE=''`, exactly as before.
+Every GROUP BY query in the Maho core is compliant with strict SQL grouping rules - the standard that PostgreSQL always enforces and that MySQL enforces under `ONLY_FULL_GROUP_BY`. And Maho no longer runs MySQL connections in the legacy relaxed `SQL_MODE=''`: it pins an explicit modern strict baseline on every connection.
 
-### Developer mode enforces strict grouping
+### The strict SQL_MODE baseline
 
-With [developer mode](guide/models-and-orm.md#enable-developer-mode) active, Maho sets `SQL_MODE='ONLY_FULL_GROUP_BY'` on MySQL connections. Any non-compliant GROUP BY query in your custom modules fails loudly during development instead of silently returning an arbitrary row per group:
+On connection init, Maho sets the MySQL 8+ default mode set:
+
+```
+ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,
+ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION
+```
+
+Pinning the mode per connection (rather than inheriting the server's global mode) keeps behavior deterministic on every host: a self-managed MySQL, a managed cluster, or a provider with exotic global flags all behave identically. What each flag buys you:
+
+- `STRICT_TRANS_TABLES`: an overlong or out-of-range value is a hard error instead of being silently truncated or clamped into corrupted data
+- `NO_ZERO_DATE` / `NO_ZERO_IN_DATE`: `'0000-00-00'` can no longer be written
+- `ONLY_FULL_GROUP_BY`: a non-compliant GROUP BY query fails loudly instead of returning an arbitrary row per group:
 
 ```
 SQLSTATE[42000]: Expression #1 of SELECT list is not in GROUP BY clause
@@ -623,10 +634,37 @@ and contains nonaggregated column ... which is not functionally dependent
 on columns in GROUP BY clause
 ```
 
-This is a detection tool: fix the query (see the patterns below), don't disable developer mode to make the error go away. A query that trips this check returns non-deterministic results in production and will not run on PostgreSQL at all.
+If one of these errors appears in your custom module, fix the query or the write path (see the patterns below): the same code now behaves identically in development, CI, and production, and compliant queries are also the ones that run on PostgreSQL.
 
-!!! warning "MariaDB is exempt"
-    Strict mode is **not** applied on MariaDB, even in developer mode. MariaDB's `ONLY_FULL_GROUP_BY` lacks the functional-dependency detection that MySQL 5.7+ and PostgreSQL have ([MDEV-11588](https://jira.mariadb.org/browse/MDEV-11588){target=_blank}, unresolved since 2016), so it would reject SQL-standard queries like `SELECT t.* ... GROUP BY t.pk`. If you develop on MariaDB, run your test suite against MySQL (locally or in CI) to catch grouping violations.
+!!! info "Why exactly this set"
+    It is the MySQL 8+ factory default, the most battle-tested flag combination there is, so a Maho connection behaves exactly like stock modern MySQL. Stricter or different flags were considered and excluded deliberately: `STRICT_ALL_TABLES` can leave partial multi-row writes on non-transactional tables with no rollback (the same reason MySQL excludes it), the `ANSI` group changes how SQL is parsed and would break MySQL-idiom queries, and `NO_BACKSLASH_ESCAPES` would desynchronize the server from PDO's quoting. Providers that add such flags globally (see below) don't affect Maho, since the mode is pinned per connection.
+
+!!! warning "MariaDB is exempt from ONLY_FULL_GROUP_BY only"
+    MariaDB gets the same strict baseline **minus** `ONLY_FULL_GROUP_BY`: its implementation lacks the functional-dependency detection that MySQL 5.7+ and PostgreSQL have ([MDEV-11588](https://jira.mariadb.org/browse/MDEV-11588){target=_blank}, unresolved since 2016), so it would reject SQL-standard queries like `SELECT t.* ... GROUP BY t.pk`. If you develop on MariaDB, run your test suite against MySQL (locally or in CI) to catch grouping violations.
+
+### Upgrading legacy stores: zero dates and the escape hatch
+
+Stores migrated from Magento/OpenMage may carry `'0000-00-00'` values (and zero-date column defaults) written over the years under the relaxed mode. Under `NO_ZERO_DATE`, an UPDATE touching such a row, or an INSERT relying on such a default, fails. Run the health check to find them before they bite, then fix them:
+
+```bash
+./maho health-check            # detects zero dates (among many other checks)
+./maho legacy:fix-zero-dates   # dry run: reports what would change
+./maho legacy:fix-zero-dates --force   # applies the fixes
+```
+
+The fixer sets zero-date rows to NULL and changes zero-date defaults to `DEFAULT NULL` on nullable columns. NOT NULL columns are listed for manual attention instead: decide per column whether to make it nullable or backfill a meaningful real date.
+
+If a store is blocked while cleaning up, a `<sql_mode>` node on the connection in `app/etc/local.xml` overrides the baseline verbatim - an empty value restores the old fully-relaxed behavior:
+
+```xml
+<connection>
+    <host><![CDATA[localhost]]></host>
+    <!-- ... -->
+    <sql_mode><![CDATA[]]></sql_mode>
+</connection>
+```
+
+Treat it as a temporary exit, not a configuration choice: every release is developed and tested against the strict baseline.
 
 ### Writing strict-compliant GROUP BY queries
 
@@ -681,7 +719,7 @@ $select->columns(['period' => new Maho\Db\Expr("DATE_FORMAT(created_at, '%Y-%m')
 
 Managed database offerings tend to enforce strict SQL modes globally and don't hand out the `SUPER` privilege to change them. [DigitalOcean Managed MySQL](https://docs.digitalocean.com/products/databases/mysql/how-to/set-sql-mode/){target=_blank}, for example, defaults to a mode set that includes `ONLY_FULL_GROUP_BY` (alongside `ANSI`, `STRICT_ALL_TABLES`, `NO_ZERO_DATE` and others), and changing it requires their API or control panel. MySQL 8 itself ships with `ONLY_FULL_GROUP_BY` in its default mode, so self-hosted clusters increasingly enforce it too.
 
-Maho currently sidesteps this by resetting `SQL_MODE` per connection, and strict GROUP BY compliance means the queries no longer depend on that override. This is the groundwork for a future release that drops the override entirely and lets Maho run under a provider's enforced defaults as-is (the remaining gap is the non-grouping strictness flags, such as zero-date and truncation handling).
+None of this affects Maho: it pins its own strict baseline per connection, so the provider's global mode is irrelevant - the same queries run the same way on a laptop, a managed cluster, or a self-hosted replica set.
 
 Clusters gain a correctness benefit as well: results that were previously "an arbitrary row per group" become deterministic, so a load-balanced replica answers a query the same way as its primary.
 
