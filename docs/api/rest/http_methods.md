@@ -1,3 +1,9 @@
+---
+description: How Maho's legacy REST API maps the GET, POST, PUT, and DELETE methods to resource operations, with request examples.
+---
+
+# HTTP Methods
+
 !!! warning "Legacy API"
     This is Maho's legacy REST API, inherited from Magento 1 and kept for backward compatibility. New integrations should use the modern [REST & GraphQL API (v2)](../v2/index.md) instead.
 

@@ -1,3 +1,9 @@
+---
+description: HTTP status codes returned by Maho's legacy REST API and the error messages that accompany them.
+---
+
+# Common HTTP Status Codes
+
 !!! warning "Legacy API"
     This is Maho's legacy REST API, inherited from Magento 1 and kept for backward compatibility. New integrations should use the modern [REST & GraphQL API (v2)](../v2/index.md) instead.
 

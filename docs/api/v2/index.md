@@ -17,8 +17,8 @@ Maho's v2 API is built on [API Platform](https://api-platform.com/) and exposes 
 
 - [Authentication](authentication.md)
 - [Conventions](conventions.md) - request headers, pagination, HTTP caching, idempotency keys
+- [REST Endpoints](endpoints.md)
 - [GraphQL](graphql.md)
-- [Endpoints](endpoints.md)
 - [Error Responses](errors.md)
 - [CAPTCHA](captcha.md)
 - [Architecture](architecture.md) - base classes, opt-in traits, shared services

@@ -1,3 +1,9 @@
+---
+description: GET parameters supported by Maho's legacy REST API - filter, page, order, dir, and limit - with syntax and examples.
+---
+
+# GET Filters
+
 !!! warning "Legacy API"
     This is Maho's legacy REST API, inherited from Magento 1 and kept for backward compatibility. New integrations should use the modern [REST & GraphQL API (v2)](../v2/index.md) instead.
 

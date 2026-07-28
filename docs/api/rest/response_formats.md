@@ -1,3 +1,9 @@
+---
+description: The XML and JSON response formats returned by Maho's legacy REST API, with an example of each.
+---
+
+# Response Formats
+
 !!! warning "Legacy API"
     This is Maho's legacy REST API, inherited from Magento 1 and kept for backward compatibility. New integrations should use the modern [REST & GraphQL API (v2)](../v2/index.md) instead.
 

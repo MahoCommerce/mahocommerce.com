@@ -1,7 +1,13 @@
+---
+description: Authenticate applications against Maho's legacy REST API with 3-legged OAuth 1.0a - endpoints, request and access tokens, error codes, and PHP examples.
+---
+
+# OAuth Authentication
+
 !!! warning "Legacy API"
     This is Maho's legacy REST API, inherited from Magento 1 and kept for backward compatibility. New integrations should use the modern [REST & GraphQL API (v2)](../../v2/index.md) instead.
 
-##Introduction
+## Introduction
 
 In most cases, the third-party application must be authenticated to use the Maho API. But users never reveal their credentials to the application to preserve their privacy. So, the question is as follows: how is your application going to authenticate users if it does not know user credentials. OAuth is the solution.
 
@@ -107,7 +113,7 @@ After this, the user is asked to enter their credentials and authorize. When the
 | **Method**: | GET |
 | **Sample Response**: | /callback?oauth_token=tz2kmxyf3lagl3o95xnox9ia15k6mpt3&oauth_verifier=cbwwh03alr5huiz5c76wi4l21zf05eb0 |
 
-#### Getting an Access Token
+### Getting an Access Token
 
 The final third authentication step. After the application access is authorized, the application needs to exchange the Request Token for an Access Token. For this step, you will need the Request Token (the oauth_token and oauth_token_secret values) and the oauth_verifier value from the previous step.
 

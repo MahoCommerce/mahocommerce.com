@@ -1,3 +1,7 @@
+---
+description: Extend Maho's legacy REST API with a custom coupon auto-generation resource - configuration files, REST roles and attributes, OAuth setup, and a test script.
+---
+
 # Extending REST API to use coupon auto generation
 
 !!! warning "Legacy API"
@@ -37,7 +41,7 @@ To extend the REST API to add a web service for generating and retrieving coupon
 To implement and test the Coupon AutoGen API, you must have all of the following:
 
 *   Maho on Ubuntu.
-*   [pecl OAuth 1.0a extension](http://pecl.php.net/package/oauth) which you install as discussed in [Installing OAuth](#prereq-software).  
+*   [pecl OAuth 1.0a extension](http://pecl.php.net/package/oauth) which you install as discussed in [Installing OAuth](#installing-oauth).  
     Maho supports the [OAuth 1.0a specification](http://tools.ietf.org/html/rfc5849).
 *   _Optional._ [`phpmyadmin`](http://www.phpmyadmin.net/home_page/downloads.php), which makes it easier to view and manipulate the Maho database. You can use `phpmyadmin` for convenience to get the OAuth key and shared secret later in this guide.
 
@@ -713,14 +717,14 @@ ERROR: `make' failed
 
 ### CouponDemo API Calls Options Don't Display in the Admin Panel
 
-**Problem:** After setting up the CouponDemo configuration files, the **CouponDemo API Calls** checkboxes do not display in the Admin Panel. A sample is shown [in a figure earlier in this guide](#figure_check-boxes).
+**Problem:** After setting up the CouponDemo configuration files, the **CouponDemo API Calls** checkboxes do not display in the Admin Panel. They are described in [Creating a REST role for the Coupon AutoGen API](#creating-a-rest-role-for-the-coupon-autogen-api).
 
 **Description:** The **CouponDemo API Calls** checkboxes display to indicate you set up the module correctly. If they don't display, either the Maho cache hasn't been entirely cleared or there's something wrong with the directory structure or configuration files.
 
 **Solution:** Use the following steps to isolate and correct the issue:
 
-1.  Make sure your directory structure is set up _exactly_ as shown in [this figure earlier in this guide](#figure_dir-structure).
-2.  Make sure you copied the _exact text_ from the sample configuration files discussed in [Creating Configuration Files](#extend-rest-api_create-files). _Do not change anything_, and remember that case is important.
+1.  Make sure your directory structure is set up _exactly_ as shown in [Creating Configuration Files](#creating-configuration-files).
+2.  Make sure you copied the _exact text_ from the sample configuration files discussed in [Creating Configuration Files](#creating-configuration-files). _Do not change anything_, and remember that case is important.
 3.  Clear the Maho cache.
 4.  Log out of the Maho Admin Panel and log back in.
 5.  Click **System** > **REST - Roles**.

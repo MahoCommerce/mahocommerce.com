@@ -1,3 +1,9 @@
+---
+description: Configure REST attributes in the Maho admin panel to limit which resource fields guest, customer, and admin users can read and write.
+---
+
+# REST Attributes Configuration
+
 !!! warning "Legacy API"
     This is Maho's legacy REST API, inherited from Magento 1 and kept for backward compatibility. New integrations should use the modern [REST & GraphQL API (v2)](../../v2/index.md) instead.
 

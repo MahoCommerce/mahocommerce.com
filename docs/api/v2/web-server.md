@@ -18,20 +18,13 @@ The new API URLs are served **only** through `rest.php`; there is no `index.php`
 
 The bundled `public/.htaccess` already implements this routing for Apache. The snippets below are for installations using nginx/Caddy, or for operators who need to replicate the behaviour in a different web server.
 
-### Legacy SOAP / XMLRPC / JSONRPC
+### Enable the protocols you route
 
-`/api/rest`, `/api/soap`, `/api/v2_soap`, `/api/xmlrpc`, `/api/jsonrpc` are legacy Magento 1 API paths handled by the original `Mage_Api_*Controller` classes. The default `.htaccess` explicitly excludes them from the `rest.php` rewrite so they route to those controllers rather than the API Platform kernel. Two things gate whether they actually respond:
+Routing alone is not enough: every API protocol (`rest_v2`, `graphql`, `admin_graphql`) defaults to **off** in **System → Configuration → Services → API → API Protocols**. A disabled protocol returns `404` at the entry point even with the rewrite rules in place.
 
-- **They are disabled by default.** Every protocol (the modern `rest_v2`, `graphql`, `admin_graphql` and the legacy `legacy_rest`, `soap`, `v2_soap`, `xmlrpc`, `jsonrpc`) defaults to **off** (**System → Configuration → Services → API → API Protocols**). A disabled path returns `404` at the entry point; enable only the protocols you use.
-- **SOAP / XML-RPC / JSON-RPC need optional packages.** Those adapters build on Laminas components that are not installed by default - they are declared under `suggest` in `composer.json`. To use them, install the matching package(s):
+### Legacy paths
 
-    ```bash
-    composer require laminas/laminas-soap          # SOAP (soap, v2_soap)
-    composer require laminas/laminas-xmlrpc         # XML-RPC (xmlrpc)
-    composer require laminas/laminas-json-server    # JSON-RPC (jsonrpc)
-    ```
-
-    Without them, an enabled legacy protocol errors when it tries to instantiate the adapter. The modern REST v2 / GraphQL API has no such dependency. (The legacy Magento 1 REST at `/api/rest`, gated by `legacy_rest`, does not need any of these packages.)
+`/api/rest`, `/api/soap`, `/api/v2_soap`, `/api/xmlrpc`, `/api/jsonrpc` are legacy Magento 1 API paths handled by the original `Mage_Api_*Controller` classes. The rules below explicitly exclude them from the `rest.php` rewrite so they keep routing to those controllers rather than the API Platform kernel. They have their own enablement and dependency requirements, covered in [Legacy API Protocols](../legacy-protocols.md).
 
 ### Nginx
 

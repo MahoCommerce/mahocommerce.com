@@ -1,4 +1,11 @@
+---
+description: Manage categories over the Maho SOAP API - retrieve the category tree, create, update, move, and delete categories, and assign products to them.
+---
+
 # Catalog Category
+
+!!! warning "Legacy API"
+    This is Maho's legacy SOAP/XML-RPC API, inherited from Magento 1 and kept for backward compatibility. New integrations should use the modern [REST & GraphQL API (v2)](../v2/index.md) instead.
 
 ## Introduction
 

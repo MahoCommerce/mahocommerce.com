@@ -1,3 +1,7 @@
+---
+description: Test Maho's legacy REST API resources with an API client such as Postman, Insomnia, or Bruno, including OAuth-authenticated example calls.
+---
+
 # Testing REST Resources
 
 !!! warning "Legacy API"

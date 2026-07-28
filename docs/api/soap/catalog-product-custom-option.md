@@ -1,4 +1,11 @@
+---
+description: Manage product custom options over the Maho SOAP API - add, update, list, retrieve, and remove options, and get the available option types.
+---
+
 # Catalog Product Custom Option
+
+!!! warning "Legacy API"
+    This is Maho's legacy SOAP/XML-RPC API, inherited from Magento 1 and kept for backward compatibility. New integrations should use the modern [REST & GraphQL API (v2)](../v2/index.md) instead.
 
 ## Introduction
 

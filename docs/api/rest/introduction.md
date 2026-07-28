@@ -1,3 +1,9 @@
+---
+description: Overview of Maho's legacy REST API - available resources, OAuth authentication, output formats, request structure, and PHP examples.
+---
+
+# REST API
+
 !!! warning "Legacy API"
     This is Maho's legacy REST API, inherited from Magento 1 and kept for backward compatibility. New integrations should use the modern [REST & GraphQL API (v2)](../v2/index.md) instead.
 
@@ -9,19 +15,19 @@ Maho REST API allows managing a number of features, namely:
 -   Retrieving sales orders.
 -   Managing inventory.
 
-### Authentication
+## Authentication
 
 Maho REST API uses 3-legged [OAuth 1.0a](http://tools.ietf.org/html/rfc5849) protocol to authenticate the application to access the Maho service.
 
-### Output Formats
+## Output Formats
 
 The REST API supports the response in two formats, which are XML and JSON.
 
-### HTTP Verbs
+## HTTP Verbs
 
 HTTP verbs are used to manage the state of resources. In Maho REST API, there are four verbs used to manage resources: GET, POST, PUT, and DELETE. You can get the contents of the data using HTTP GET, delete the data using HTTP DELETE, and create or update the data using POST/PUT.
 
-### Request Structure
+## Request Structure
 
 All URLs in REST API have the following base URL. 
 
@@ -38,80 +44,81 @@ where
 -   https://mahohost/api/rest/ - endpoint
 -   /customers - action URL
 
-### REST Resources
+## REST Resources
 
 The Maho REST API allows you to manage customers, customer addresses, sales orders, inventory, and products. REST API is organized into the following categories:
 
-##### Products
+### Products
 
 Retrieve the list of products, create, update, and delete a product.  
 **Resource Structure**: https://mahohost/api/rest/products
 
-###### Product Categories
+#### Product Categories
 
 Retrieve the list of categories assigned to a product, assign, and unassign the category to/from the specific product.  
 **Resource Structure**: https://mahohost/api/rest/products/:productId/categories
 
-###### Product Images
+#### Product Images
 
 Retrieve the list of images assigned to a product, add, update, and remove an image to/from the specific product.  
 **Resource Structure**: https://mahohost/api/rest/products/:productId/images
 
-###### Product Websites
+#### Product Websites
 
 Retrieve the list of websites assigned to a product, assign, and unassign a website to/from the specific product.  
 **Resource Structure**: https://mahohost/api/rest/products/:productId/websites
 
-##### Customers
+### Customers
 
 Retrieve the list of customers, create, delete a customer, and update the customer information.  
 **Resource Structure**: https://mahohost/api/rest/customers
 
-##### Customer Addresses
+### Customer Addresses
 
 Retrieve the list of customer addresses, create, update, and delete the customer address.  
 **Resource Structure**: https://mahohost/api/rest/customers/:customerId/addresses
 
-##### Inventory
+### Inventory
 
 Retrieve the list of stock items and update required stock items.  
 **Resource Structure**: https://mahohost/api/rest/stockitems
 
-##### Sales Orders
+### Sales Orders
 
 Retrieve the list of sales orders as well as the specific order information.  
 **Resource Structure**: https://mahohost/api/rest/orders
 
-###### Order Items
+#### Order Items
 
 Retrieve order items for the specific order.  
 **Resource Structure**: https://mahohost/api/rest/orders/:orderId/items
 
-###### Order Addresses
+#### Order Addresses
 
 Retrieve information on order billing and shipping addresses for the specific order.  
 **Resource Structure**: https://mahohost/api/rest/orders/:orderid/addresses
 
-###### Order Comments
+#### Order Comments
 
 Retrieve order comments for the specific order  
 **Resource Structure**: https://mahohost/api/rest/orders/:orderid/comments
 
-### Preparing for REST API
+## Preparing for REST API
 
 These steps are required for utilizing REST API resources:
 
-1.  Set up permissions for REST resource operations from Maho Admin Panel.
-2.  Configure the attributes for different users types in Maho Admin Panel. There are 3 different types of users in accessing the data: Admin, Customer, and Guest. Admin is the backend logged in user, Customer is the fronted logged in user, and Guest is a non-logged in fronted user.
+1.  Enable the `legacy_rest` protocol, which is off by default (see [Legacy API Protocols](../legacy-protocols.md)).
+2.  Set up permissions for REST resource operations from Maho Admin Panel.
+3.  Configure the attributes for different users types in Maho Admin Panel. There are 3 different types of users in accessing the data: Admin, Customer, and Guest. Admin is the backend logged in user, Customer is the fronted logged in user, and Guest is a non-logged in fronted user.
 
-### Preparing REST API for the Third-Party Application
+## Preparing REST API for the Third-Party Application
 
 1.  Register the third-party application (Consumer) in Maho Admin Panel.
 2.  The third-party application will utilize the provided consumer credentials to call Maho store for getting the access token to access the data.
 
-### PHP Examples
+## PHP Examples
 
-#### Create a simple product as an Admin user with OAuth authentication
+### Create a simple product as an Admin user with OAuth authentication
 
 ```php
 <?php
@@ -197,7 +204,7 @@ try {
 }
 ```
 
-#### Retrieve the list of products as a Customer user with OAuth authentication
+### Retrieve the list of products as a Customer user with OAuth authentication
 
 ```php
 <?php
@@ -268,7 +275,7 @@ try {
 }
 ```
 
-### API Client Example
+## API Client Example
 
 Retrieving the list of Products as a Guest
 
@@ -320,7 +327,7 @@ Retrieving the list of Products as a Guest
 </magento_api>
 ```
 
-### Additional Information
+## Additional Information
 
 You can define the limit of items returned in the response by passing the limit parameter. By default, 10 items are returned and the maximum number is 100 items. You can also define the page number by passing the page parameter. Example:
 

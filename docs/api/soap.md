@@ -4,6 +4,9 @@ description: Manage your Maho store over the SOAP and XML-RPC API - work with cu
 
 # SOAP API
 
+!!! warning "Legacy API"
+    This is Maho's legacy SOAP/XML-RPC API, inherited from Magento 1 and kept for backward compatibility. New integrations should use the modern [REST & GraphQL API (v2)](v2/index.md) instead.
+
 ## Introduction
 
 The Maho SOAP API provides you with the ability to manage your eCommerce stores by providing calls
@@ -13,6 +16,8 @@ It also allows you to manage shopping carts and inventory.
 ## Supported Types
 
 The Maho API supports SOAP and XML-RPC, where SOAP is the default protocol.
+
+Every protocol is disabled by default and the SOAP/XML-RPC adapters need optional Composer packages: see [Legacy API Protocols](legacy-protocols.md) before making your first call.
 
 ### SOAP
 
@@ -175,7 +180,7 @@ basic customer information.
 
 To learn more about the Core API, to read Maho Core API calls.
 
-For general information about the Maho API, go to the [Introduction](#Introduction).
+For general information about the Maho API, go to the [Introduction](#introduction).
 
 ### 1. Creating an XML File that Will Define the API Resource
 
