@@ -138,13 +138,13 @@ Call `tools/list` against your own install for the authoritative list; it reflec
 Each tool advertises a right-sized input schema rather than the whole resource:
 
 - **item read or delete** takes just the identifier
-- **list** takes `page` and `itemsPerPage`
+- **list** takes `page` and `itemsPerPage`, plus whatever filters the resource declares
 - **create or update** takes the resource body, with identifiers merged in
 
 ```json
 {
   "name": "catalog_products_get",
-  "title": "Product",
+  "title": "Get Product",
   "description": "Get a product by ID",
   "inputSchema": {
     "type": "object",
@@ -185,7 +185,11 @@ Results come back as JSON text plus `structuredContent`, in the same JSON-LD sha
 
 `tools/list` is cursor-paginated. Follow `nextCursor` until it is absent; a client that reads only the first page will see a fraction of the catalogue.
 
-List *tools* paginate too. Pass `page` and `itemsPerPage` as arguments; they reach the resource exactly as the equivalent REST query parameters would, so any filter a resource supports over REST also works as a tool argument even when it is not in the advertised schema.
+List *tools* paginate too. Pass `page` and `itemsPerPage` as arguments; they reach the resource exactly as the equivalent REST query parameters would.
+
+Filters work the same way, and a list tool advertises the ones its resource declares. `catalog_products_list`, for example, accepts `search`, `sku`, `barcode`, `categoryId`, `priceMin`, `priceMax`, `sortBy`, `sortDir` and `attributeFilters` alongside pagination.
+
+Not every list tool advertises filters, because the advertised set is derived from the resource's canonical GraphQL collection query, which is the only machine-readable declaration of what a collection filters on. A resource that filters in its provider without declaring the arguments there still accepts them as tool arguments, it just can't tell an agent they exist. If you maintain a resource and want its filters discoverable over MCP, declare them as `args:` (or `extraArgs:`) on its `collection_query`; the same declaration serves GraphQL clients.
 
 ## Tool visibility
 
