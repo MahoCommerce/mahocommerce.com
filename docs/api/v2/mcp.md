@@ -10,7 +10,7 @@ Maho speaks the [Model Context Protocol](https://modelcontextprotocol.io/), so A
 **Transport:** streamable HTTP
 **Authentication:** the same JWT bearer token as [REST](authentication.md)
 
-There is nothing to configure per tool. The tool catalogue is derived from the [same resource metadata](extending.md) that drives REST and GraphQL, so every resource, including those added by third-party modules, becomes a set of tools the moment it is installed. A default install exposes around 160 of them across catalog, inventory, sales, customers, content, tax and system.
+There is nothing to configure per tool. The tool catalogue is derived from the [same resource metadata](extending.md) that drives REST and GraphQL, so every resource, including those added by third-party modules, becomes a set of tools the moment it is installed. A default install exposes around 200 of them across catalog, inventory, sales, customers, content, tax and system.
 
 !!! info "Same gates as REST"
     A tool call runs through the identical provider/processor pipeline as the matching REST request, which means it inherits the operation's `security:` expression, the caller's role permissions, admin ACL, write logging and rate limiting. A call is refused exactly when the same REST request would be. There is no separate permission surface to audit.
@@ -112,7 +112,7 @@ catalog_products_create
 catalog_products_update
 catalog_products_delete
 sales_orders_list
-checkout_carts_items_gift_message_update
+customers_carts_items_gift_message_update
 ```
 
 The verbs are `list`, `get`, `create`, `update` and `delete`. Path variables are dropped, so a collection and its item differ only by `list` versus `get`.
@@ -124,14 +124,16 @@ A representative slice of the catalogue:
 | Section | Examples |
 |---|---|
 | Catalog | `catalog_products_*`, `catalog_categories_*`, `catalog_product_attributes_*`, `catalog_attribute_sets_*` |
-| Inventory | `catalog_inventory_update`, `catalog_inventory_bulk_update`, `catalog_stocks_get` |
+| Inventory | `catalog_inventory_update`, `catalog_inventory_bulk_update` |
 | Sales | `sales_orders_*`, `sales_orders_invoices_list`, `sales_orders_credit_memos_*`, `sales_orders_shipments_*`, `sales_coupons_*` |
 | Customers | `customers_customers_*`, `customers_addresses_*`, `customers_customer_groups_*`, `customers_carts_*` |
 | Content | `content_cms_pages_*`, `content_cms_blocks_*`, `content_blog_posts_*` |
 | Tax | `tax_tax_rates_*`, `tax_tax_rules_*`, `tax_tax_classes_*` |
-| System | `system_stores_*`, `system_countries_*` |
+| System | `system_stores_*`, `system_countries_*`, `core_store_config_get` |
 
 Call `tools/list` against your own install for the authoritative list; it reflects the modules you actually have.
+
+Sub-resources get tools too, so an agent can work at the same granularity REST offers rather than round-tripping the whole entity: `catalog_products_tier_prices_*`, `catalog_products_media_*`, `catalog_products_custom_options_*`, `catalog_products_links_related_*` (plus `cross_sell` and `up_sell`), `sales_orders_comments_create`.
 
 ## What a tool looks like
 
@@ -209,12 +211,14 @@ A refused call comes back as a JSON-RPC error with the reason in the message:
 {"jsonrpc": "2.0", "id": 3, "error": {"code": -32603, "message": "Authentication required: send a Maho API bearer token with the MCP request."}}
 ```
 
-## Keeping a resource out of the catalogue
+## Keeping something out of the catalogue
 
-Module authors can opt a resource out of tool derivation without touching its REST surface. Useful for upload endpoints, auth handshakes, and anything an agent has no business calling:
+Derivation is opt-out, on the principle that a resource worth exposing over REST is usually worth exposing to an agent. Useful exceptions are upload endpoints, auth handshakes, operations that return a raw file, and anything whose only sensible caller is a human in a browser. There are three levels.
+
+**A whole resource, using Maho's attribute.** `mahoMcp: false` leaves the REST surface untouched:
 
 ```php
-#[ApiResource(
+#[Maho\Config\ApiResource(
     mahoMcp: false,
     shortName: 'MediaUpload',
     operations: [ /* … */ ],
@@ -222,7 +226,27 @@ Module authors can opt a resource out of tool derivation without touching its RE
 class MediaUpload { }
 ```
 
-Declaring `mcp:` explicitly on the attribute also disables derivation for that resource, leaving you in full control of its tools. See [Extending & Deployment](extending.md).
+**A whole resource, using API Platform's attribute.** There is no `mahoMcp` to set, so declare `mcp:` explicitly. An empty array means no tools; a populated one means you are declaring them yourself and derivation stays out of the way:
+
+```php
+#[ApiResource(
+    mcp: [],
+    shortName: 'ContactForm',
+    operations: [ /* … */ ],
+)]
+class ContactForm { }
+```
+
+**A single operation.** Set the `maho_mcp` extra property to `false`:
+
+```php
+new Get(
+    uriTemplate: '/products/{productId}/custom-options/{id}/file',
+    extraProperties: ['maho_mcp' => false],
+)
+```
+
+Core uses all three: the token handshake and the contact form declare `mcp: []`, and the custom-option file download opts out per-operation. See [Extending & Deployment](extending.md).
 
 ## Not the same as the Intelligence MCP server
 
