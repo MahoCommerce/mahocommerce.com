@@ -224,6 +224,7 @@ nav:
       - Conventions: api/v2/conventions.md
       - REST endpoints: api/v2/endpoints.md
       - GraphQL: api/v2/graphql.md
+      - MCP (AI agents): api/v2/mcp.md
       - Errors: api/v2/errors.md
       - CAPTCHA: api/v2/captcha.md
       - Architecture: api/v2/architecture.md

@@ -20,7 +20,7 @@ The bundled `public/.htaccess` already implements this routing for Apache. The s
 
 ### Enable the protocols you route
 
-Routing alone is not enough: every API protocol (`rest_v2`, `graphql`, `admin_graphql`) defaults to **off** in **System → Configuration → Services → API → API Protocols**. A disabled protocol returns `404` at the entry point even with the rewrite rules in place.
+Routing alone is not enough: every API protocol (`rest_v2`, `graphql`, `admin_graphql`, `mcp`) defaults to **off** in **System → Configuration → Services → API → API Protocols**. A disabled protocol returns `404` at the entry point even with the rewrite rules in place.
 
 ### Legacy paths
 
@@ -31,12 +31,12 @@ Routing alone is not enough: every API protocol (`rest_v2`, `graphql`, `admin_gr
 Add these blocks **before** the main `location /` block in your nginx config.
 
 ```nginx
-# API Platform endpoints (new REST + GraphQL + docs), no basic auth required.
-# Matches /api/rest/v2/*, /api/graphql, /api/admin/graphql, /api/docs.
+# API Platform endpoints (new REST + GraphQL + MCP + docs), no basic auth required.
+# Matches /api/rest/v2/*, /api/graphql, /api/admin/graphql, /api/mcp, /api/docs.
 # Explicitly EXCLUDES legacy paths (/api/rest, /api/soap, /api/v2_soap,
 # /api/xmlrpc, /api/jsonrpc) so the original Magento 1 controllers keep
 # handling them.
-location ~ ^/api/(rest/v2(/|$)|graphql$|admin/graphql$|docs(/|\.|$)) {
+location ~ ^/api/(rest/v2(/|$)|graphql$|admin/graphql$|mcp$|docs(/|\.|$)) {
     # Bypass any site-wide basic auth / IP restrictions
     satisfy any;
     allow all;
@@ -46,7 +46,7 @@ location ~ ^/api/(rest/v2(/|$)|graphql$|admin/graphql$|docs(/|\.|$)) {
     add_header 'Access-Control-Allow-Origin' '*' always;
     add_header 'Access-Control-Allow-Methods' 'GET, POST, PUT, PATCH, DELETE, OPTIONS' always;
     add_header 'Access-Control-Allow-Headers' 'Content-Type, Authorization, Accept, X-Requested-With, X-Store-Code, X-Idempotency-Key, X-Order-Token, If-None-Match' always;
-    add_header 'Access-Control-Expose-Headers' 'ETag, X-Idempotency-Replayed, Link' always;
+    add_header 'Access-Control-Expose-Headers' 'ETag, X-Idempotency-Replayed, Link, Mcp-Session-Id' always;
 
     # Handle preflight requests
     if ($request_method = 'OPTIONS') {
@@ -108,7 +108,7 @@ Add these rules to your `public/.htaccess` **before** the main `RewriteRule .* i
 
     # Handle CORS preflight requests for new API endpoints
     RewriteCond %{REQUEST_METHOD} OPTIONS
-    RewriteCond %{REQUEST_URI} ^/api/(rest/v2/|graphql|admin/graphql|docs)
+    RewriteCond %{REQUEST_URI} ^/api/(rest/v2/|graphql|admin/graphql|mcp|docs)
     RewriteRule ^(.*)$ $1 [R=204,L]
 
     # Route new REST API to rest.php
@@ -128,11 +128,11 @@ Add these rules to your `public/.htaccess` **before** the main `RewriteRule .* i
 
 # CORS headers for API endpoints
 <IfModule mod_headers.c>
-    <LocationMatch "^/api/(rest/v2/|graphql|admin/graphql|docs)">
+    <LocationMatch "^/api/(rest/v2/|graphql|admin/graphql|mcp|docs)">
         Header always set Access-Control-Allow-Origin "*"
         Header always set Access-Control-Allow-Methods "GET, POST, PUT, PATCH, DELETE, OPTIONS"
         Header always set Access-Control-Allow-Headers "Content-Type, Authorization, Accept, X-Requested-With, X-Store-Code, X-Idempotency-Key, X-Order-Token, If-None-Match"
-        Header always set Access-Control-Expose-Headers "ETag, X-Idempotency-Replayed, Link"
+        Header always set Access-Control-Expose-Headers "ETag, X-Idempotency-Replayed, Link, Mcp-Session-Id"
     </LocationMatch>
 </IfModule>
 
@@ -154,27 +154,27 @@ maho.example.com {
 
     # ---- API Platform routing ----
 
-    # Match new API endpoints (REST + GraphQL + docs). Legacy paths
+    # Match new API endpoints (REST + GraphQL + MCP + docs). Legacy paths
     # (/api/rest, /api/soap, /api/v2_soap, /api/xmlrpc, /api/jsonrpc)
     # are NOT included so they fall through to the Magento 1 controllers.
     @api {
-        path /api/rest/v2/* /api/graphql /api/admin/graphql /api/docs*
+        path /api/rest/v2/* /api/graphql /api/admin/graphql /api/mcp /api/docs*
     }
     header @api Access-Control-Allow-Origin "*"
     header @api Access-Control-Allow-Methods "GET, POST, PUT, PATCH, DELETE, OPTIONS"
     header @api Access-Control-Allow-Headers "Content-Type, Authorization, Accept, X-Requested-With, X-Store-Code, X-Idempotency-Key, X-Order-Token, If-None-Match"
-    header @api Access-Control-Expose-Headers "ETag, X-Idempotency-Replayed, Link"
+    header @api Access-Control-Expose-Headers "ETag, X-Idempotency-Replayed, Link, Mcp-Session-Id"
 
     # Handle CORS preflight
     @preflight {
         method OPTIONS
-        path /api/rest/v2/* /api/graphql /api/admin/graphql /api/docs*
+        path /api/rest/v2/* /api/graphql /api/admin/graphql /api/mcp /api/docs*
     }
     respond @preflight 204
 
     # Route new API URLs to rest.php
     @apiRoute {
-        path /api/rest/v2/* /api/graphql /api/admin/graphql /api/docs*
+        path /api/rest/v2/* /api/graphql /api/admin/graphql /api/mcp /api/docs*
         not file
     }
     rewrite @apiRoute /rest.php
