@@ -193,13 +193,24 @@ Filters work the same way, and a list tool advertises the ones its resource decl
 
 | Tool | Filters |
 |---|---|
-| `catalog_products_list` | `search`, `sku`, `barcode`, `categoryId`, `priceMin`, `priceMax`, `sortBy`, `sortDir`, `attributeFilters` |
-| `sales_orders_list` | `status`, `since`, `email`, `emailLike`, `incrementId` |
+| `catalog_products_list` | `search`, `sku`, `barcode`, `categoryId`, `priceMin`, `priceMax`, `sortBy`, `sortDir`, `attributeFilters`, `createdFrom`, `createdTo`, `updatedSince` |
+| `sales_orders_list` | `status`, `state`, `storeId`, `customerId`, `email`, `emailLike`, `incrementId`, `createdFrom`, `createdTo`, `updatedSince` |
 | `customers_customers_list` | `search`, `email`, `telephone` |
-| `content_cms_pages_list`, `content_cms_blocks_list` | `identifier`, `search` |
+| `content_cms_pages_list`, `content_cms_blocks_list` | `identifier`, `search`, `createdFrom`, `createdTo`, `updatedSince` |
+| `content_blog_posts_list` | `urlKey`, `search`, `categoryId`, `createdFrom`, `createdTo`, `updatedSince` |
 | `catalog_categories_list` | `search`, `urlKey`, `parentId`, `includeInMenu` |
 | `tax_tax_rates_list` | `search`, `taxCountryId` |
 | `sales_coupons_list` | `code`, `is_active` |
+
+### Date ranges
+
+`createdFrom`, `createdTo` and `updatedSince` take a UTC date (`2026-07-29`) or datetime (`2026-07-29 14:30:00`). A bare date on `createdTo` covers the **whole** day, so a single day is `createdFrom` and `createdTo` set to the same value:
+
+```json
+{"name": "sales_orders_list", "arguments": {"createdFrom": "2026-07-29", "createdTo": "2026-07-29"}}
+```
+
+`updatedSince` is the one to poll on for synchronisation, since it catches edits to older records that a `created` range would miss. On orders it is also accepted under its original REST name `since`, which still works but is no longer advertised: one filter with two names is a trap for an agent reading the schema as the contract.
 
 The advertised set is derived from the resource's canonical GraphQL collection query, which is the only machine-readable declaration of what a collection filters on. Two consequences are worth knowing.
 
@@ -209,8 +220,8 @@ The advertised set is derived from the resource's canonical GraphQL collection q
 
 Where a resource exposes both a top-level collection and a scoped variant, `/orders` and `/customers/me/orders`, only the top-level one carries the declared filters; the scoped variant reads a different set in its provider.
 
-!!! warning "Date filtering is limited"
-    `sales_orders_list` has one date filter, `since`, which means `updated_at >=` and has no upper bound. There is no `created_at` filter, so "orders placed today" is not expressible: an older order edited today matches `since`, and the range cannot be closed.
+!!! note "What is deliberately not filterable"
+    Storefront-facing collections hard-code their own visibility rules, so there is no filter to see past them: `catalog_products_list` is limited to enabled, catalog-visible products, and `content_cms_pages_list`, `catalog_categories_list` and `content_blog_posts_list` to active records. A disabled product is not reachable through the product list on any token, by design. Sub-resource lists (`catalog_products_media_list`, `sales_orders_invoices_list`, customer addresses) take the parent id and return a handful of rows, so they carry no filters beyond it. Customer date and group filtering is not available yet: that provider searches through hand-built SQL that needs porting to the collection API first.
 
 ## Tool visibility
 
