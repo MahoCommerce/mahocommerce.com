@@ -189,9 +189,28 @@ Results come back as JSON text plus `structuredContent`, in the same JSON-LD sha
 
 List *tools* paginate too. Pass `page` and `itemsPerPage` as arguments; they reach the resource exactly as the equivalent REST query parameters would.
 
-Filters work the same way, and a list tool advertises the ones its resource declares. `catalog_products_list`, for example, accepts `search`, `sku`, `barcode`, `categoryId`, `priceMin`, `priceMax`, `sortBy`, `sortDir` and `attributeFilters` alongside pagination.
+Filters work the same way, and a list tool advertises the ones its resource declares:
 
-Not every list tool advertises filters, because the advertised set is derived from the resource's canonical GraphQL collection query, which is the only machine-readable declaration of what a collection filters on. A resource that filters in its provider without declaring the arguments there still accepts them as tool arguments, it just can't tell an agent they exist. If you maintain a resource and want its filters discoverable over MCP, declare them as `args:` (or `extraArgs:`) on its `collection_query`; the same declaration serves GraphQL clients.
+| Tool | Filters |
+|---|---|
+| `catalog_products_list` | `search`, `sku`, `barcode`, `categoryId`, `priceMin`, `priceMax`, `sortBy`, `sortDir`, `attributeFilters` |
+| `sales_orders_list` | `status`, `since`, `email`, `emailLike`, `incrementId` |
+| `customers_customers_list` | `search`, `email`, `telephone` |
+| `content_cms_pages_list`, `content_cms_blocks_list` | `identifier`, `search` |
+| `catalog_categories_list` | `search`, `urlKey`, `parentId`, `includeInMenu` |
+| `tax_tax_rates_list` | `search`, `taxCountryId` |
+| `sales_coupons_list` | `code`, `is_active` |
+
+The advertised set is derived from the resource's canonical GraphQL collection query, which is the only machine-readable declaration of what a collection filters on. Two consequences are worth knowing.
+
+**A tool that advertises no filter may still accept one.** Providers read filters from an ad-hoc array, so a resource that filters without declaring the arguments still honours them, it just cannot tell an agent they exist. If you maintain a resource and want its filters discoverable, declare them as `args:` (or `extraArgs:`) on its `collection_query`; the same declaration serves GraphQL clients.
+
+**An unrecognised argument is ignored, not rejected.** A filter name an agent invents is silently dropped and the call returns the unfiltered set, which reads as a filtered answer. Treat the advertised schema as the whole contract rather than guessing names.
+
+Where a resource exposes both a top-level collection and a scoped variant, `/orders` and `/customers/me/orders`, only the top-level one carries the declared filters; the scoped variant reads a different set in its provider.
+
+!!! warning "Date filtering is limited"
+    `sales_orders_list` has one date filter, `since`, which means `updated_at >=` and has no upper bound. There is no `created_at` filter, so "orders placed today" is not expressible: an older order edited today matches `since`, and the range cannot be closed.
 
 ## Tool visibility
 
