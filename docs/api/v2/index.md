@@ -6,6 +6,7 @@ description: Overview of Maho's v2 REST and GraphQL API built on API Platform, c
 
 > **REST base URL:** `https://your-domain.com/api/rest/v2`
 > **GraphQL endpoint:** `https://your-domain.com/api/graphql`
+> **MCP endpoint:** `https://your-domain.com/api/mcp` <span class="version-badge">v26.9+</span>
 > **Entry Point:** `public/rest.php` (bootstraps Maho + Symfony API Platform)
 
 !!! info "Beta status"
@@ -19,6 +20,7 @@ Maho's v2 API is built on [API Platform](https://api-platform.com/) and exposes 
 - [Conventions](conventions.md) - request headers, pagination, HTTP caching, idempotency keys
 - [REST Endpoints](endpoints.md)
 - [GraphQL](graphql.md)
+- [MCP](mcp.md) - the same resources as tools for AI agents
 - [Error Responses](errors.md)
 - [CAPTCHA](captcha.md)
 - [Architecture](architecture.md) - base classes, opt-in traits, shared services

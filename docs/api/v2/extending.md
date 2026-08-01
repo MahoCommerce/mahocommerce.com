@@ -235,4 +235,6 @@ Run this whenever module API resources change (new/modified `#[ApiResource]` cla
 
 ### Cache invalidation
 
-The container cache is keyed by class file mtimes; a normal deploy that overwrites files invalidates it automatically. If you ever need to force a rebuild manually, delete `var/cache/api_platform/{env}/`, the next request will recompile.
+In production the compiled container is never invalidated automatically: `public/rest.php` boots the kernel with debug off, and in that mode Symfony reuses an existing compiled container without any freshness check, it does not compare file mtimes. Deleting `var/cache/api_platform/{env}/` is therefore part of every deploy that changes API resources, not a fallback; the next request (or the pre-warm above) recompiles.
+
+A few values are baked into the compiled container from store configuration rather than read per request: the CORS allowlist (`apiplatform/general/cors_origins`, falling back to the store's own origin) and the [MCP host allowlist](mcp.md), both derived from your base URLs. Changing a base URL, adding a store, or editing the CORS origins therefore needs the same `var/cache/api_platform/` delete, even though no code changed.
