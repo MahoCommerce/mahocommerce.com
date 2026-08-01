@@ -45,14 +45,14 @@ location ~ ^/api/(rest/v2(/|$)|graphql$|admin/graphql$|mcp$|docs(/|\.|$)) {
     # CORS headers for API access
     add_header 'Access-Control-Allow-Origin' '*' always;
     add_header 'Access-Control-Allow-Methods' 'GET, POST, PUT, PATCH, DELETE, OPTIONS' always;
-    add_header 'Access-Control-Allow-Headers' 'Content-Type, Authorization, Accept, X-Requested-With, X-Store-Code, X-Idempotency-Key, X-Order-Token, If-None-Match' always;
+    add_header 'Access-Control-Allow-Headers' 'Content-Type, Authorization, Accept, X-Requested-With, X-Store-Code, X-Idempotency-Key, X-Order-Token, If-None-Match, Mcp-Session-Id, MCP-Protocol-Version' always;
     add_header 'Access-Control-Expose-Headers' 'ETag, X-Idempotency-Replayed, Link, Mcp-Session-Id' always;
 
     # Handle preflight requests
     if ($request_method = 'OPTIONS') {
         add_header 'Access-Control-Allow-Origin' '*';
         add_header 'Access-Control-Allow-Methods' 'GET, POST, PUT, PATCH, DELETE, OPTIONS';
-        add_header 'Access-Control-Allow-Headers' 'Content-Type, Authorization, Accept, X-Requested-With, X-Store-Code, X-Idempotency-Key, X-Order-Token, If-None-Match';
+        add_header 'Access-Control-Allow-Headers' 'Content-Type, Authorization, Accept, X-Requested-With, X-Store-Code, X-Idempotency-Key, X-Order-Token, If-None-Match, Mcp-Session-Id, MCP-Protocol-Version';
         add_header 'Access-Control-Max-Age' 1728000;
         add_header 'Content-Type' 'text/plain; charset=utf-8';
         add_header 'Content-Length' 0;
@@ -131,7 +131,7 @@ Add these rules to your `public/.htaccess` **before** the main `RewriteRule .* i
     <LocationMatch "^/api/(rest/v2/|graphql|admin/graphql|mcp|docs)">
         Header always set Access-Control-Allow-Origin "*"
         Header always set Access-Control-Allow-Methods "GET, POST, PUT, PATCH, DELETE, OPTIONS"
-        Header always set Access-Control-Allow-Headers "Content-Type, Authorization, Accept, X-Requested-With, X-Store-Code, X-Idempotency-Key, X-Order-Token, If-None-Match"
+        Header always set Access-Control-Allow-Headers "Content-Type, Authorization, Accept, X-Requested-With, X-Store-Code, X-Idempotency-Key, X-Order-Token, If-None-Match, Mcp-Session-Id, MCP-Protocol-Version"
         Header always set Access-Control-Expose-Headers "ETag, X-Idempotency-Replayed, Link, Mcp-Session-Id"
     </LocationMatch>
 </IfModule>
@@ -162,7 +162,7 @@ maho.example.com {
     }
     header @api Access-Control-Allow-Origin "*"
     header @api Access-Control-Allow-Methods "GET, POST, PUT, PATCH, DELETE, OPTIONS"
-    header @api Access-Control-Allow-Headers "Content-Type, Authorization, Accept, X-Requested-With, X-Store-Code, X-Idempotency-Key, X-Order-Token, If-None-Match"
+    header @api Access-Control-Allow-Headers "Content-Type, Authorization, Accept, X-Requested-With, X-Store-Code, X-Idempotency-Key, X-Order-Token, If-None-Match, Mcp-Session-Id, MCP-Protocol-Version"
     header @api Access-Control-Expose-Headers "ETag, X-Idempotency-Replayed, Link, Mcp-Session-Id"
 
     # Handle CORS preflight

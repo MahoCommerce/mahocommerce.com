@@ -17,11 +17,19 @@ There is nothing to configure per tool. The tool catalogue is derived from the [
 
 ## Enabling it
 
-MCP is off by default, like every other protocol.
+MCP is off by default, like every other protocol, and its two supporting packages are not part of a standard install.
 
-1. Go to **System → Configuration → Services → API → API Protocols**.
-2. Set **MCP (Model Context Protocol)** to *Yes*.
-3. Create a token for the agent, see [Authentication](authentication.md). A `client_credentials` service account scoped to just the resources the agent needs is the right choice here, not an admin token.
+1. Install the packages:
+
+    ```bash
+    composer require symfony/mcp-bundle nyholm/psr7
+    ```
+
+    They ship in Maho's `suggest` list rather than as hard dependencies, so nothing pulls them in for you. Without both, the admin toggle below stays inert (the config field warns you when they are missing).
+
+2. Go to **System → Configuration → Services → API → API Protocols**.
+3. Set **MCP (Model Context Protocol)** to *Yes*.
+4. Create a token for the agent, see [Authentication](authentication.md). A `client_credentials` service account scoped to just the resources the agent needs is the right choice here, not an admin token.
 
 If you serve Maho with nginx, Caddy, or anything other than the bundled Apache config, add `/api/mcp` to your API location block, see [Web Server Configuration](web-server.md). The bundled `public/.htaccess` already routes it.
 
@@ -30,7 +38,7 @@ If you serve Maho with nginx, Caddy, or anything other than the bundled Apache c
 
 ## Connecting a client
 
-The handshake is a normal JSON-RPC `initialize` call. The response carries a `Mcp-Session-Id` header that every subsequent message must echo back.
+The handshake is a normal JSON-RPC `initialize` call. The response carries a `Mcp-Session-Id` header that every subsequent message must echo back. The server accepts every protocol version from `2024-11-05` onwards and advertises the newest one it knows in the `initialize` response, so the version it replies with may be later than the one you sent; that is normal version negotiation, not an error.
 
 === "curl"
 
@@ -96,6 +104,8 @@ The handshake is a normal JSON-RPC `initialize` call. The response carries a `Mc
 
 !!! note "Static tokens only"
     Maho's MCP endpoint authenticates with the same static bearer token as the rest of the v2 API. It does **not** implement MCP's OAuth 2.1 / protected-resource-metadata discovery flow, so it works with clients that let you set a custom header, and not with clients that insist on driving an OAuth dance. `GET /api/mcp` returns `405`; the endpoint is POST (plus `DELETE` to end a session and `OPTIONS` for preflight).
+
+    "Static" does not mean eternal: the token is a JWT with a lifetime (one hour by default), so one pasted into a client config stops working when it expires. For a long-lived agent, raise the token lifetime or have the agent re-issue via `client_credentials`, see [Authentication](authentication.md).
 
 ## Server instructions
 
@@ -185,7 +195,7 @@ Results come back as JSON text plus `structuredContent`, in the same JSON-LD sha
 
 ## Pagination and filtering
 
-`tools/list` is cursor-paginated. Follow `nextCursor` until it is absent; a client that reads only the first page will see a fraction of the catalogue.
+`tools/list` is cursor-paginated. Follow `nextCursor` until it is absent; a client that reads only the first page will see a fraction of the catalogue. Pages can also come back shorter than nominal, because permission filtering runs after paging, so treat only a missing `nextCursor` as the end, never a short page.
 
 List *tools* paginate too. Pass `page` and `itemsPerPage` as arguments; they reach the resource exactly as the equivalent REST query parameters would.
 
@@ -221,11 +231,11 @@ The advertised set is derived from the resource's canonical GraphQL collection q
 Where a resource exposes both a top-level collection and a scoped variant, `/orders` and `/customers/me/orders`, only the top-level one carries the declared filters; the scoped variant reads a different set in its provider.
 
 !!! note "What is deliberately not filterable"
-    Storefront-facing collections hard-code their own visibility rules, so there is no filter to see past them: `catalog_products_list` is limited to enabled, catalog-visible products, and `content_cms_pages_list`, `catalog_categories_list` and `content_blog_posts_list` to active records. A disabled product is not reachable through the product list on any token, by design. Sub-resource lists (`catalog_products_media_list`, `sales_orders_invoices_list`, customer addresses) take the parent id and return a handful of rows, so they carry no filters beyond it. Customer date and group filtering is not available yet: that provider searches through hand-built SQL that needs porting to the collection API first.
+    Storefront-facing collections hard-code their own visibility rules, so there is no filter to see past them: `catalog_products_list` is limited to enabled, catalog-visible products (a text `search` goes through the search index, so it matches search-visible products, a slightly different set), and `content_cms_pages_list`, `catalog_categories_list` and `content_blog_posts_list` to active records, with blog posts scheduled in the future hidden too. A disabled product is not reachable through the product list on any token, by design. Sub-resource lists (`catalog_products_media_list`, `sales_orders_invoices_list`, customer addresses) take the parent id and return a handful of rows, so they carry no filters beyond it. Customer date and group filtering is not available yet: that provider searches through hand-built SQL that needs porting to the collection API first.
 
 ## Tool visibility
 
-`tools/list` is filtered to what the calling token can actually use, so an agent is not shown a catalogue it will be refused from. An unauthenticated caller sees only the public read tools; a service account sees the resources its role grants.
+`tools/list` is filtered to what the calling token can actually use, so an agent is not shown a catalogue it will be refused from. An unauthenticated caller sees only the public tools, which are not all reads: operations open to guests over REST, like guest-cart writes, are public here too. A service account sees the resources its role grants.
 
 This is a usability measure, not the security boundary. Enforcement happens on the call itself, and a tool that is hidden is also refused. Filtering is deliberately optimistic: where the verdict cannot be reached without loading the entity, for instance a customer-scoped resource that compares the loaded record against the token, the tool stays listed.
 
@@ -245,15 +255,15 @@ A refused call comes back as a JSON-RPC error with the reason in the message:
 
 Derivation is opt-out, on the principle that a resource worth exposing over REST is usually worth exposing to an agent. Useful exceptions are upload endpoints, auth handshakes, operations that return a raw file, and anything whose only sensible caller is a human in a browser. There are three levels.
 
-**A whole resource, using Maho's attribute.** `mahoMcp: false` leaves the REST surface untouched:
+**A whole resource, using Maho's attribute.** `mahoMcp: false` leaves the REST surface untouched. A hypothetical third-party resource:
 
 ```php
 #[Maho\Config\ApiResource(
     mahoMcp: false,
-    shortName: 'MediaUpload',
+    shortName: 'SupplierFeed',
     operations: [ /* … */ ],
 )]
-class MediaUpload { }
+class SupplierFeed { }
 ```
 
 **A whole resource, using API Platform's attribute.** There is no `mahoMcp` to set, so declare `mcp:` explicitly. An empty array means no tools; a populated one means you are declaring them yourself and derivation stays out of the way:
@@ -276,7 +286,7 @@ new Get(
 )
 ```
 
-Core uses all three: the token handshake and the contact form declare `mcp: []`, and the custom-option file download opts out per-operation. See [Extending & Deployment](extending.md).
+Core currently uses the last two: the token handshake and the contact form declare `mcp: []`, and the custom-option file download opts out per-operation. `mahoMcp: false` is there for module authors; no core resource needs it yet. See [Extending & Deployment](extending.md).
 
 ## Not the same as the Intelligence MCP server
 
