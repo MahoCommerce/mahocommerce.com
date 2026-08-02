@@ -1589,6 +1589,11 @@ html.mh-anim .mh-term-scene.is-active {
     color: var(--maho-text-secondary);
 }
 
+/* forces the "and the list keeps growing" button onto its own line */
+.mh-stores-cta-break {
+    flex-basis: 100%;
+    height: 0;
+}
 /* Audience routing folded into the stores section: "whoever you are" + pills,
    a calm closer that hands off to the audience deep-dives below */
 .mh-stores-audience {
@@ -2110,12 +2115,14 @@ html.mh-anim .mh-term-scene.is-active {
 }
 
 /* Line and ghost buttons adjusted for the light surface */
-.final-cta .mh-btn-line {
+.final-cta .mh-btn-line,
+.mh-stores-cta .mh-btn-line {
     border-color: rgba(25, 26, 16, 0.3);
     color: var(--maho-text-primary) !important;
 }
 
-.final-cta .mh-btn-line:hover {
+.final-cta .mh-btn-line:hover,
+.mh-stores-cta .mh-btn-line:hover {
     border-color: var(--maho-text-primary);
     color: var(--maho-text-primary) !important;
 }

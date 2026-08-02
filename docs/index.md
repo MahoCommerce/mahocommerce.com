@@ -163,7 +163,7 @@ description: Maho is the open-source, self-hosted ecommerce platform you actuall
   <div class="mh-stores-inner">
     <div class="mh-stores-head">
       <h2 class="mh-sec-title">Selling on Maho <strong>right now</strong></h2>
-      <p class="mh-sec-lede">Worldwide merchants run their storefronts on Maho. Click through and see for yourself.</p>
+      <p class="mh-sec-lede">Worldwide merchants run their storefronts on Maho.</p>
     </div>
     <div class="mh-stores-carousel">
       <button class="mh-stores-arrow mh-stores-prev" type="button" aria-label="Previous stores">
@@ -206,6 +206,8 @@ description: Maho is the open-source, self-hosted ecommerce platform you actuall
       </button>
     </div>
     <div class="mh-stores-cta">
+      <a class="mh-btn mh-btn-line" href="https://trends.builtwith.com/shop/MahoCommerce" target="_blank" rel="noopener">And the list keeps growing</a>
+      <span class="mh-stores-cta-break" aria-hidden="true"></span>
       <span class="mh-stores-cta-text">Is your store running on Maho?</span>
       <a class="mh-btn mh-btn-solid" href="mailto:info@mahocommerce.com?subject=Add%20my%20store%20to%20mahocommerce.com&amp;body=Store%20name%3A%0AStore%20URL%3A%0ACountry%3A%0AWhat%20you%20sell%3A%0A%0AHappy%20for%20Maho%20to%20feature%20my%20store%3A%20yes">Showcase it here
         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
