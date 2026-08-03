@@ -1,5 +1,5 @@
 ---
-description: Migrate a Magento 1 or OpenMage store to Maho step by step, covering project structure, Zend Framework removal, breaking changes and the health check.
+description: Migrate a Magento 1 or OpenMage store to Maho step by step, covering project structure, Zend Framework removal, the encryption key, breaking changes and the health check.
 ---
 
 # Migrate Magento1/OpenMage to Maho
@@ -34,6 +34,9 @@ While this may seem more complex initially, it will pay off in the long run.
    Also review any custom modifications to .htaccess if using Apache
 
 9. Convert any custom scripts in the `shell` folder to maho-cli-commands
+
+10. Import your database, then migrate the encrypted data to the new key
+    (see [Encryption key](#encryption-key)), otherwise every encrypted value in it reads as blank
 
 ## PHP Compatibility
 Maho supports the three most recent stable PHP releases, currently 8.3 / 8.4 / 8.5 (see [system requirements](getting-started.md#system-requirements)).
@@ -118,6 +121,47 @@ Zend_Json::decode($json);
 Mage::helper('core')->jsonEncode($data);
 Mage::helper('core')->jsonDecode($json);
 ```
+
+### Encryption key
+
+Maho encrypts with [libsodium](https://doc.libsodium.org/){target=_blank} instead of mcrypt, and its key is a
+different shape: 64 hexadecimal characters (a 32 byte key), where Magento/OpenMage used 32 arbitrary characters.
+A migration can go wrong in two ways:
+
+- **Copying the old key into `app/etc/local.xml`.** The old key isn't valid hexadecimal, so every encrypt/decrypt
+  call fails with an error.
+- **Keeping the freshly generated key while importing the old database.** Values encrypted under the old key can't
+  be decrypted, and decryption returns an empty string rather than failing: payment gateway credentials, SMTP
+  passwords and API keys silently read as blank.
+
+To carry the encrypted data over:
+
+1. `composer require mahocommerce/module-mcrypt-compat`
+2. Put your **old** Magento/OpenMage key (the one the imported database was encrypted with) in `app/etc/local.xml`,
+   under `<crypt><key>`
+3. `./maho sys:encryptionkey:regenerate`
+4. `composer remove mahocommerce/module-mcrypt-compat`
+
+The command recognizes an M1 key, checks that everything can still be decrypted before touching anything, then
+re-encrypts it under a newly generated libsodium key and writes that key to `local.xml` (backing up the old file
+first). It covers encrypted `core_config_data` values, admin two-factor secrets, stored credit card data,
+PayPal vault tokens and feed destinations. Third-party modules holding encrypted data of their own must listen to
+the `encryption_key_regenerated` event
+([sample implementation](https://github.com/MahoCommerce/maho/blob/43b8cd5b1b4a73f6f8c58dd1cbd4db46f2f6d4b8/app/code/core/Mage/Payment/Model/Observer.php#L162){target=_blank}),
+otherwise their values have to be re-entered by hand.
+
+If you'd rather not migrate the old ciphertext, skip the steps above and simply re-enter every encrypted value
+(payment credentials, SMTP password, API keys) in the admin after the migration.
+
+!!! note
+    `./maho health-check` validates the format of the encryption key and verifies that all encrypted data can
+    still be decrypted with it, so both problems above show up as errors instead of blank credentials.
+
+### Passwords
+
+Nothing to do. Customer, admin and API credentials hashed by Magento/OpenMage (MD5, SHA256 or SHA512, salted or
+not) keep working, and each one is transparently upgraded to bcrypt the first time that account logs in. No
+password reset is needed.
 
 ### POST-only routes for state-changing actions <span class="version-badge">v26.5+</span>
 
