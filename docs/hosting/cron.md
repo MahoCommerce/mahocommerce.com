@@ -132,8 +132,6 @@ these two commands:
 | catalog_product_alert                        | productalert/observer::process                            |              |
 | catalog_product_index_price_reindex_all      | catalog/observer::reindexProductPrices                    | 0 2 * * *    |
 | core_clean_cache                             | core/observer::cleanCache                                 | 30 2 * * *   |
-| core_email_queue_clean_up                    | core/email_queue::cleanQueue                              | 0 0 * * *    |
-| core_email_queue_send_all                    | core/email_queue::send                                    | */1 * * * *  |
 | currency_rates_update                        | directory/observer::scheduledUpdateCurrencyRates          |              |
 | customer_flowpassword                        | customer/observer::deleteCustomerFlowPassword             | 0 0 1 * *    |
 | index_clean_events                           | index/observer::cleanOutdatedEvents                       | 30 */4 * * * |
@@ -141,18 +139,29 @@ these two commands:
 | newsletter_send_all                          | newsletter/observer::scheduledSend                        | */5 * * * *  |
 | paypal_fetch_settlement_reports              | paypal/observer::fetchReports                             |              |
 | persistent_clear_expired                     | persistent/observer::clearExpiredCronJob                  | 0 0 * * *    |
+| queue_clean_up                               | queue/cron::cleanup                                       | 0 2 * * *    |
+| queue_process                                | queue/cron::process                                       | * * * * *    |
 | sales_clean_quotes                           | sales/observer::cleanExpiredQuotes                        | 0 0 * * *    |
 | sitemap_generate                             | sitemap/observer::scheduledGenerateSitemaps               |              |
 +----------------------------------------------+-----------------------------------------------------------+--------------+
 ```
+
+!!! note "Email delivery jobs"
+    <span class="version-badge">v26.9+</span> Emails ride the generic
+    [message queue](../developer/message-queue.md): `queue_process` keeps the background worker alive
+    (respawning it within a minute if it dies) and `queue_clean_up` prunes old messages nightly.
+
+    <span class="version-badge">&lt;v26.9</span> Queued emails were flushed by `core_email_queue_send_all`
+    and pruned by `core_email_queue_clean_up`. Both jobs are gone, and any unsent messages are migrated
+    onto the message queue on upgrade.
 
 ```
 ./maho cron:history
 +-------------+---------------------------+---------+----------+---------------------+---------------------+-------------+-------------+
 | schedule_id | job_code                  | status  | messages | messages            | scheduled_at        | executed_at | finished_at |
 +-------------+---------------------------+---------+----------+---------------------+---------------------+-------------+-------------+
-| 167         | core_email_queue_send_all | pending |          | 2024-08-10 23:09:41 | 2024-08-10 23:09:00 |             |             |
-| 168         | core_email_queue_send_all | pending |          | 2024-08-10 23:09:41 | 2024-08-10 23:10:00 |             |             |
+| 167         | newsletter_send_all       | pending |          | 2024-08-10 23:09:41 | 2024-08-10 23:09:00 |             |             |
+| 168         | newsletter_send_all       | pending |          | 2024-08-10 23:09:41 | 2024-08-10 23:10:00 |             |             |
 | ...         | ...                       | ...     | ...      | ...                 | ...                 | ...         | ...         |
 +-------------+---------------------------+---------+----------+---------------------+---------------------+-------------+-------------+
 ```
@@ -165,8 +174,8 @@ want to run a specific cron job.
 This can be done passing the `job_code` you want to execute to `./maho cron:run`, like:
 
 ```
-./maho cron:run core_email_queue_send_all
-core_email_queue_send_all executed successfully
+./maho cron:run newsletter_send_all
+newsletter_send_all executed successfully
 ```
 
 !!! note

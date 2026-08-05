@@ -110,8 +110,11 @@ Maho ships several CLI commands to test and manage email. See the [CLI tool](../
 ### Emails are not sending
 
 1. **Verify the configuration** with `./maho email:config:show`, then try a direct send with `./maho email:test:send`. If the direct send works but real store emails never arrive, the problem is the queue or cron, not your SMTP settings.
-2. **Check cron.** Most store emails are queued and flushed by the `core_email_queue_send_all` cron job. If cron is not running, the queue simply fills up and nothing is delivered. Confirm your cron setup is in place, described on the [cron jobs](cron.md) page.
+2. **Check cron.** Store emails are queued, not sent inline, so if cron is not running the queue simply fills up and nothing is delivered. Confirm your cron setup is in place, described on the [cron jobs](cron.md) page.
+    - <span class="version-badge">v26.9+</span> emails go through the [message queue](../developer/message-queue.md), consumed by a background worker that the `queue_process` cron job keeps alive.
+    - <span class="version-badge">&lt;v26.9</span> emails were flushed directly by the `core_email_queue_send_all` cron job.
 3. **Process the queue manually** with `./maho email:queue:process` to confirm queued messages can be delivered. If this sends the backlog, your SMTP is fine and cron is the missing piece.
+4. **Look for failures.** <span class="version-badge">v26.9+</span> Run `./maho queue:list`, or open **System > Tools > Message Queue** in the admin, to see whether messages are piling up as failed and what error they carry. Failed messages can be retried from there.
 
 ### Emails land in spam
 

@@ -98,6 +98,9 @@ Available commands:
   maintenance:disable           Disable maintenance mode
   maintenance:enable            Enable maintenance mode
   maintenance:status            Show maintenance mode status
+ queue
+  queue:list                    Show per-queue message counts and the active transport
+  queue:work                    Consume messages from the queue (long-running worker; cron keeps one running automatically)
  sys
   sys:currencies                Get all available currencies
   sys:directory:regions:import  Import states/provinces for a country from ISO 3166-2 standard with localization
@@ -105,6 +108,11 @@ Available commands:
   sys:locales                   Get all available locales
   sys:timezones                 Get all available timezones
 ```
+
+!!! note
+    <span class="version-badge">v26.9+</span> The `queue:*` commands drive the
+    [message queue](message-queue.md). On earlier versions only the `email:queue:*` commands existed,
+    because the queue was email-specific.
 
 This tool is inspired by [Laravel Artisan](https://laravel.com/docs/11.x/artisan){:target="_blank"},
 [n98-magerun](https://github.com/netz98/n98-magerun){:target="_blank"}, and it was created using the awesome

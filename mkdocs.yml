@@ -204,6 +204,7 @@ nav:
           - Event observers: developer/observers.md
           - Override configs: developer/override-configurations.md
           - Rate limiting & honeypot: developer/rate-limiting-honeypot.md
+          - Message queue: developer/message-queue.md
       - Database:
           - Database layer: developer/database-layer.md
           - Declarative DB schema: developer/declarative-database-schema.md
