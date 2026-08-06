@@ -438,6 +438,23 @@ Discover and install powerful modules to enhance your Maho store. All modules ar
         </div>
     </div>
 
+    <!-- Nexi XPay Build -->
+    <div class="app-card" data-category="payment">
+        <span class="app-category">Payment</span>
+        <h3 class="app-title">Nexi XPay Build</h3>
+        <p class="app-description">Accept credit cards through Nexi's XPay Build gateway with an embedded checkout form, no redirect. Card data is entered in SDK-managed iframes so it never touches your server, with one-click saved cards, immediate or deferred capture, and online refunds from the admin.</p>
+        <div class="app-footer">
+            <div class="app-actions">
+                <button class="app-button app-button-primary" onclick="showInstallModal('empiricompany/maho-nexi-xpaybuild')">
+                    ↓ Install
+                </button>
+                <a href="https://github.com/empiricompany/maho_nexi_xpaybuild" class="app-button app-button-primary" target="_blank">
+                    View Details →
+                </a>
+            </div>
+        </div>
+    </div>
+
     <!-- No Cache Header -->
     <div class="app-card" data-category="performance">
         <span class="app-category">Performance</span>
