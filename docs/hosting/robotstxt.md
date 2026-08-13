@@ -58,10 +58,8 @@ Disallow: */catalogsearch/
 #Allow: */catalogsearch/seo_sitemap
 #Allow: */catalogsearch/term/popular
 Disallow: */checkout/
-Disallow: */control/
 Disallow: */contacts/
 Disallow: */customer/
-Disallow: */customize/
 Disallow: */newsletter/
 Disallow: */review/
 Disallow: */sales/
