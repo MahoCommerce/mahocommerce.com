@@ -222,6 +222,27 @@ Customers can check their gift card balance without applying it:
 !!! warning "Rate Limiting"
     Balance checks are rate-limited to 10 attempts per minute to prevent code enumeration attacks.
 
+### Check Balance From My Account <span class="version-badge">v26.9+</span>
+
+Logged-in customers also get a **Check Gift Card Balance** page under My
+Account. They enter a code and see the remaining balance and the expiration
+date, without adding the card to a cart.
+
+The page is deliberately cautious about what it reveals:
+
+- A code that is unknown, expired, disabled, or not valid on the current store
+  all produce the same message. This stops the page being used to discover which
+  codes exist.
+- The result is shown once. Going back in the browser does not redisplay it, so
+  a check made on a shared device does not linger.
+- The code is never placed in the address bar, so it does not reach browser
+  history or server referer logs.
+- Failed lookups are limited to 10 per hour, per customer. Successful lookups do
+  not count, so a customer holding several cards is not penalised.
+
+This page is separate from the checkout balance check described above, and has
+its own limit.
+
 ### Partial Redemption
 
 Gift cards support partial redemption:
@@ -261,7 +282,7 @@ Navigate to **Sales > Gift Cards > Manage Gift Cards** to access the gift card g
 |--------|-------------|
 | **Code** | Unique gift card code (partially masked for security) |
 | **Status** | Active, Used, Expired, or Disabled |
-| **Website** | Assigned website |
+| **Websites** | Websites the card is valid on, comma separated <span class="version-badge">v26.9+</span> |
 | **Balance** | Current available balance |
 | **Initial Balance** | Original amount when created |
 | **Expiration Date** | When the gift card expires |
@@ -284,7 +305,7 @@ Administrators can create gift cards without a purchase:
 2. Fill in the details:
    - **Code**: Leave blank for auto-generation or enter custom code
    - **Status**: Set to Active for immediate use
-   - **Website**: Select the website (cannot be changed later)
+   - **Websites**: Select one or more websites the card is valid on. They must share one base currency <span class="version-badge">v26.9+</span>
    - **Balance**: Enter the gift card value
    - **Recipient/Sender Info**: Optional delivery details
    - **Expiration Date**: Optional expiration
@@ -300,9 +321,9 @@ Open any gift card from the grid to access the edit form.
 |-------|-------------|-------|
 | **Code** | Unique gift card code | Auto-generated if left blank on creation; cannot be changed after save |
 | **Status** | Gift card state | Active, Used, Disabled, or Expired |
-| **Website** | Assigned website | Selected on creation; cannot be changed later (shows base currency) |
+| **Websites** | Websites the card is valid on | <span class="version-badge">v26.9+</span> Multiselect, editable after creation. All selected websites must share one base currency, which is shown next to the field |
 | **Initial Balance** | Original amount | Display only for existing gift cards (shows historical reference) |
-| **Amount / Current Balance** | Gift card value | For new cards: sets initial amount; For existing cards: edit to manually adjust balance |
+| **Amount / Current Balance** | Gift card value | For new cards: sets initial amount; For existing cards: edit to manually adjust balance. <span class="version-badge">v26.9+</span> Shown to up to 4 decimals, so a balance left over from a partial redemption or a currency conversion is displayed exactly rather than rounded |
 | **Expires At** | Expiration date | Optional; leave empty for no expiration |
 | **Recipient Name** | Gift recipient name | Optional; used in emails |
 | **Recipient Email** | Recipient email address | Optional; required for sending notification emails |
@@ -355,6 +376,17 @@ The history grid shows all gift card transactions across your store. Click any r
 | **Refunded** | Balance restored from a credit memo or order cancellation |
 | **Adjusted** | Admin manually changed the balance |
 | **Expired** | Gift card expired (via cron job) |
+
+#### Transaction History Tab <span class="version-badge">v26.9+</span>
+
+The edit page of a saved gift card has a **Transaction History** tab next to the
+General form. It lists the same entries as the grid above, already narrowed to
+that card, so you no longer have to leave the card and filter the global
+history page to trace where a balance went.
+
+The tab is read-only, pages without reloading the form, and keeps its own
+sorting and filtering, so it does not disturb the global history grid. It does
+not appear when you are creating a card.
 
 ### Printing Gift Cards
 
@@ -491,11 +523,23 @@ When creating orders in the admin panel:
 
 ## Multi-Store and Multi-Currency
 
-### Website Binding
+### Website Binding <span class="version-badge">v26.9+</span>
 
-- Each gift card is permanently assigned to one website at creation
-- Gift cards can only be redeemed on their assigned website
-- This prevents cross-website balance exploitation
+- A gift card is associated with one or more websites, chosen on creation and
+  editable afterwards
+- A gift card can only be redeemed on a website it is associated with, which
+  prevents cross-website balance exploitation
+- All associated websites must share one base currency, because the balance is
+  denominated in it. This also means re-scoping a card never changes what its
+  balance is worth
+- Deleting a website removes it from every card that referenced it. A card left
+  with no websites cannot be redeemed anywhere, but it still opens in the admin
+  so you can associate it with another website
+
+!!! info "Upgrading from an earlier version"
+    Before v26.9 a card was assigned to exactly one website, permanently. The
+    upgrade moves that assignment into the new structure unchanged, so no card
+    gains or loses reach. Widening a card to more websites is a deliberate edit.
 
 ### Currency Handling
 
@@ -503,7 +547,7 @@ Gift cards support multi-currency environments:
 
 | Scenario | Behavior |
 |----------|----------|
-| **Storage** | Balances stored in website's base currency |
+| **Storage** | Balances stored in the base currency shared by the card's websites |
 | **Display** | Converted to store view currency for display |
 | **Redemption** | Converted using current exchange rates |
 | **Refunds** | Returned in base currency |
@@ -585,13 +629,13 @@ A daily cron job (runs at 1 AM) automatically:
 **Possible causes:**
 
 - Code is incorrect or has typos
-- Gift card is assigned to a different website
+- Gift card is not associated with the current website
 - Gift card status is not "Active"
 - Gift card has expired
 - Gift card balance is zero
 - Cart contains only gift card products (circular purchase prevention)
 
-**Solution:** Check the gift card in admin to verify status, website, balance, and expiration.
+**Solution:** Check the gift card in admin to verify status, websites, balance, and expiration.
 
 ### Gift Cards Not Created After Purchase
 
@@ -658,7 +702,7 @@ A daily cron job (runs at 1 AM) automatically:
 
 - Gift card code not applied correctly
 - Gift card module disabled
-- Gift card assigned to different website
+- Gift card not associated with the current website
 
 **Solution:**
 

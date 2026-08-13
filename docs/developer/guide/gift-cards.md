@@ -21,7 +21,6 @@ Stores gift card records.
 | `giftcard_id` | INT | Primary key, auto-increment |
 | `code` | VARCHAR(64) | Unique gift card code |
 | `status` | VARCHAR(32) | Status: active, used, expired, disabled |
-| `website_id` | SMALLINT | Website assignment (FK) |
 | `balance` | DECIMAL(12,4) | Current available balance |
 | `initial_balance` | DECIMAL(12,4) | Original amount when created |
 | `recipient_name` | VARCHAR(255) | Gift recipient name |
@@ -36,6 +35,30 @@ Stores gift card records.
 | `updated_at` | DATETIME | Last modified |
 | `email_scheduled_at` | DATETIME | When to send email |
 | `email_sent_at` | DATETIME | When actually sent |
+
+!!! info "v26.9+"
+    The `website_id` column was removed. A card is associated with any number of
+    websites through the `giftcard_website` junction below. The 1.0.0 to 1.1.0
+    upgrade moves each existing association into the junction, one row per card,
+    so scoping is unchanged by the upgrade itself.
+
+#### `giftcard_website` <span class="version-badge">v26.9+</span>
+
+Associates a gift card with the websites it is valid on.
+
+| Column | Type | Description |
+|--------|------|-------------|
+| `giftcard_id` | INT | Gift card reference (FK, `ON DELETE CASCADE`) |
+| `website_id` | SMALLINT | Website reference (FK, `ON DELETE CASCADE`) |
+
+The primary key is `(giftcard_id, website_id)`, with a secondary index on
+`website_id`. Deleting a website removes its rows here and leaves the card in
+place with no associations. Such a card cannot be redeemed anywhere, but it
+still loads in the admin so it can be re-associated.
+
+All websites a card is associated with must share one base currency, because the
+balance is denominated in it. Re-scoping an existing card cannot re-denominate
+its balance.
 
 #### `giftcard_history`
 
@@ -89,9 +112,24 @@ if ($giftcard->isValid()) {
 
 // Website-specific check
 if ($giftcard->isValidForWebsite($websiteId)) {
-    // Gift card is valid and belongs to this website
+    // Gift card is valid and associated with this website
 }
 ```
+
+!!! info "v26.9+"
+    `isValidForWebsite()` is a membership check against the card's associated
+    websites. A card with no associations fails it, so the check is closed by
+    default.
+
+### Reading and Setting Websites <span class="version-badge">v26.9+</span>
+
+```php
+$websiteIds = $giftcard->getWebsiteIds();      // int[]
+$giftcard->setWebsiteIds([1, 2]);              // replaces the whole set
+```
+
+The junction is synced inside the save transaction. Passing an empty set throws
+`Mage_Core_Exception`: delete the card instead of orphaning it.
 
 ### Getting Balance
 
@@ -149,7 +187,6 @@ $giftcard = Mage::getModel('giftcard/giftcard');
 $giftcard->setData([
     'code' => $helper->generateCode(),
     'status' => 'active',
-    'website_id' => $websiteId,
     'balance' => 100.00,
     'initial_balance' => 100.00,
     'recipient_name' => 'John Doe',
@@ -158,6 +195,7 @@ $giftcard->setData([
     'message' => 'Happy Birthday!',
     'expires_at' => $helper->calculateExpirationDate(),
 ]);
+$giftcard->setWebsiteIds([$websiteId]);
 $giftcard->save();
 
 // Record creation in history
@@ -177,7 +215,11 @@ Mage::getModel('giftcard/history')->setData([
 // Get all active gift cards for a website
 $collection = Mage::getResourceModel('giftcard/giftcard_collection')
     ->addFieldToFilter('status', 'active')
-    ->addFieldToFilter('website_id', $websiteId);
+    ->addWebsiteFilter($websiteId);
+
+// Or match any of several websites
+$collection = Mage::getResourceModel('giftcard/giftcard_collection')
+    ->addWebsiteIdsFilter([1, 2]);
 
 // Get gift cards expiring soon
 $collection = Mage::getResourceModel('giftcard/giftcard_collection')
@@ -189,6 +231,12 @@ $history = Mage::getResourceModel('giftcard/history_collection')
     ->addFieldToFilter('giftcard_id', $giftcardId)
     ->setOrder('created_at', 'DESC');
 ```
+
+!!! info "v26.9+"
+    Filter by website with `addWebsiteFilter()` or `addWebsiteIdsFilter()`.
+    Filtering on a `website_id` field no longer works, because the column was
+    replaced by the `giftcard_website` junction. Both methods use a membership
+    subquery, so they behave the same on MySQL, PostgreSQL and SQLite.
 
 ## Helper Methods
 

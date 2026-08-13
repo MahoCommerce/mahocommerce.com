@@ -92,6 +92,13 @@ Gift messages have no separate resource - they are the `setGiftMessageOnCart` / 
 
 `checkBalanceGiftCard(code:)` is the public balance check (returns balance + status with the code masked, no recipient/sender PII).
 
+!!! warning "v26.9+ breaking change"
+    `createGiftCard` takes `websiteIds: [Int!]` in place of the removed scalar
+    `websiteId` argument, and gift card types expose `websiteIds` rather than
+    `websiteId`. A client still sending `websiteId` fails input validation.
+    Unlike REST create, the mutation accepts no legacy alias. Omitting
+    `websiteIds` defaults to the current website.
+
 ### Content
 
 | Resource | Queries | Mutations |

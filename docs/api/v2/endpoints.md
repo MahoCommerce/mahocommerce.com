@@ -521,6 +521,19 @@ GET /api/rest/v2/coupons?page=2&itemsPerPage=50
 
 REST `GET /giftcards/{id}` is **admin-only and keyed by numeric ID**. A public **balance check by code** (no recipient/sender PII) is exposed over GraphQL only - see the [GraphQL reference](graphql.md#inventory-promotions).
 
+!!! warning "v26.9+ breaking change"
+    A gift card is now associated with a set of websites instead of one. Responses
+    carry `websiteIds` (a list of integers) and no longer include the scalar
+    `websiteId`. On create, `POST /giftcards` still accepts `websiteId` as a
+    legacy alias, honored only when `websiteIds` is omitted, so an older client is
+    not silently scoped to the current website. Omitting both defaults to the
+    current website.
+
+    A token restricted to specific stores can read a card when any of its websites
+    is in scope, but can only write one when **every** website is in scope. The
+    same rule applies to the websites being written, so a restricted token cannot
+    claim a card by re-scoping it.
+
 ---
 
 ### CMS Content
