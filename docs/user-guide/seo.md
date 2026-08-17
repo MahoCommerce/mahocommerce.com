@@ -165,6 +165,18 @@ Two additional options in the Catalog > Search Engine Optimizations group:
   served under `/catalog/seo_sitemap/category` and `/catalog/seo_sitemap/product`.
 - **Popular Search Terms** - exposes popular on-site search terms as crawlable links.
 
+## Structured data, AI crawlers and llms.txt
+
+Two related features have their own guides:
+
+- **[Structured Data](structured-data.md)** - the schema.org JSON-LD Maho emits on product,
+  category, blog, and CMS pages, which powers rich results and Google Merchant listings. As of
+  v26.9 it covers Google's full core product set (shipping details, return policy, item
+  condition, variant markup).
+- **[AI Crawlers & llms.txt](ai-and-crawlers.md)** - the generated `llms.txt` /
+  `llms-full.txt` files and the robots.txt content signals that state your store's policy on
+  AI search and AI training (v26.9+).
+
 ## Pages Maho keeps out of the index
 
 Some pages should never be indexed, and Maho marks them `noindex, nofollow` out of the box:

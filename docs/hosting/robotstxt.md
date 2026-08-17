@@ -8,6 +8,13 @@ how to crawl pages on their website. The file uses the
 which is a protocol with a small set of commands that can be used to indicate access to your site by section and by 
 specific kinds of web crawlers (such as mobile crawlers vs. desktop crawlers).
 
+!!! note "Maho v26.9+ generates robots.txt for you"
+    Since v26.9, Maho serves a generated `/robots.txt` out of the box, configurable per store
+    view under **System > Configuration > Catalog > Crawlers & robots.txt**, including AI
+    crawler blocking and [content signals](../user-guide/ai-and-crawlers.md). A `robots.txt`
+    file you place in `public/` (as described below) is served by the web server directly and
+    overrides the generated one.
+
 ## Why is robots.txt important for e-commerce websites?
 
 For an e-commerce platform, `robots.txt` can be crucial for several reasons:

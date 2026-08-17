@@ -167,6 +167,8 @@ nav:
         - Magic Link Authentication: user-guide/magic-link-authentication.md
     - Storefront & Growth:
         - SEO: user-guide/seo.md
+        - Structured Data: user-guide/structured-data.md
+        - AI Crawlers & llms.txt: user-guide/ai-and-crawlers.md
         - Captcha: user-guide/captcha.md
         - Shipping Bridge: user-guide/shipping-bridge.md
         - Feed Manager: user-guide/feed-manager.md
@@ -181,6 +183,7 @@ nav:
       - Cron jobs: hosting/cron.md
       - Maintenance mode: hosting/maintenance-mode.md
       - Logging: hosting/logging.md
+      - OpenTelemetry: hosting/opentelemetry.md
       - Email sending (SMTP): hosting/email-sending-configuration.md
       - Robots.txt: hosting/robotstxt.md
       - SVG uploads: hosting/svg-support.md
