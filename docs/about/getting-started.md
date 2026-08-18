@@ -11,7 +11,7 @@ description: Install and run Maho step by step - system requirements, Composer s
 ## System requirements
 
 - PHP 8.3 / 8.4 / 8.5
-- Apache/Nginx/Caddy/FrankenPHP[^1]
+- Apache/Nginx/Caddy/FrankenPHP[^1] ([configuration](../hosting/web-server.md))
 - MySQL 8.0+ / MariaDB 10.6+ / PostgreSQL 14+ (beta) / SQLite (beta)
 
 ??? info "PHP version support policy"

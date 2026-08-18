@@ -18,6 +18,8 @@ The new API URLs are served **only** through `rest.php`; there is no `index.php`
 
 The bundled `public/.htaccess` already implements this routing for Apache. The snippets below are for installations using nginx/Caddy, or for operators who need to replicate the behaviour in a different web server.
 
+These rules cover the API paths only. For the document root, the front-controller rewrite and the file access rules of the storefront itself, see [Web Server Configuration](../../hosting/web-server.md).
+
 ### Enable the protocols you route
 
 Routing alone is not enough: every API protocol (`rest_v2`, `graphql`, `admin_graphql`, `mcp`) defaults to **off** in **System → Configuration → Services → API → API Protocols**. A disabled protocol returns `404` at the entry point even with the rewrite rules in place.

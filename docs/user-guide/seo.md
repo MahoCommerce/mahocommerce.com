@@ -131,6 +131,11 @@ how catalog URLs are built:
 URL rewrites are stored in the `core_url_rewrite` table, and you can add custom rewrites and
 redirects there as well.
 
+Maho also normalizes the request URL itself. A request for `/index.php`, or for a page served
+through `/index.php/...`, answers with a **301 redirect** to the same page without that segment.
+The storefront therefore keeps one canonical entry point on every web server, and you need no
+rewrite rule of your own. See [Web Server Configuration](../hosting/web-server.md).
+
 ## Multi-store hreflang
 
 When a website has more than one active store view, Maho automatically emits

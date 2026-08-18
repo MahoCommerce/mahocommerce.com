@@ -178,6 +178,7 @@ nav:
     - Migrate to Maho: about/migrate-to-maho.md
     - Security & SBOMs: about/sboms.md
     - Hosting & Operations:
+      - Web server configuration: hosting/web-server.md
       - Redis (cache & sessions): hosting/redis.md
       - Edge caching integration: hosting/edge-caching.md
       - FrankenPHP: hosting/frankenphp.md
