@@ -165,6 +165,7 @@ nav:
         - Gift Cards: user-guide/gift-cards.md
         - Revocation Button: user-guide/revocation-button.md
         - Magic Link Authentication: user-guide/magic-link-authentication.md
+        - Social Login: user-guide/social-login.md
     - Storefront & Growth:
         - SEO: user-guide/seo.md
         - Structured Data: user-guide/structured-data.md
