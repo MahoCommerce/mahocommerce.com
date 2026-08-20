@@ -138,7 +138,10 @@ maho.example.com {
     root * /var/www/maho/public
     encode zstd br gzip
 
-    @hidden path_regexp hidden /\.(?!well-known/)
+    @hidden {
+        path_regexp hidden /\.
+        not path /.well-known/*
+    }
     respond @hidden 404
 
     @private path *.bak *.conf *.dist *.flag *.lock *.log *.md *.neon *.sample *.sh *.sql *.yaml *.yml
@@ -148,7 +151,12 @@ maho.example.com {
 }
 ```
 
-The official Maho Docker images run this configuration already. See
+Caddy uses the Go regular expression engine, which has no negative lookahead. The `@hidden`
+matcher therefore uses two conditions: a regular expression for the dot, and a `not path` exception
+for `/.well-known/`.
+
+The official Maho Docker images use the default FrankenPHP site block, and do not include these two
+matchers. Add them to your own `Caddyfile` if you build on top of those images. See
 [FrankenPHP](frankenphp.md).
 
 ## A second store view on a second domain
