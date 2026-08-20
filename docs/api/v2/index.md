@@ -25,5 +25,5 @@ Maho's v2 API is built on [API Platform](https://api-platform.com/) and exposes 
 - [CAPTCHA](captcha.md)
 - [Architecture](architecture.md) - base classes, opt-in traits, shared services
 - [API Documentation (Swagger UI / OpenAPI)](openapi.md)
-- [Web Server Configuration](web-server.md)
+- [Web Server Configuration](../../hosting/web-server.md)
 - [Extending & Deployment](extending.md) - adding resources, third-party modules, deployment notes

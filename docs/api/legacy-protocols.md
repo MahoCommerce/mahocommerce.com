@@ -37,4 +37,4 @@ Without them, an enabled legacy protocol errors when it tries to instantiate the
 
 ## Web server routing
 
-The legacy paths must reach Maho's normal front controller (`index.php`), not the v2 API entry point (`rest.php`). The bundled `public/.htaccess` already excludes them from the `rest.php` rewrite; if you use nginx, Caddy, or a custom Apache configuration, replicate that exclusion as shown in [Web Server Configuration](v2/web-server.md).
+`/api/rest` goes to `api.php`, and the four SOAP and RPC paths go to Maho's normal front controller (`index.php`). None of them go to the v2 API entry point (`rest.php`). The bundled `public/.htaccess` already routes them this way; if you use nginx, Caddy, or a custom Apache configuration, replicate the routing as shown in the [API routing map](../hosting/web-server.md#api-routing-map).

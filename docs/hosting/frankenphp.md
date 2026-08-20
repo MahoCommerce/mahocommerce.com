@@ -19,6 +19,19 @@ Maho provides **official Docker images based on FrankenPHP**, making it easy to 
 These images are automatically built via Docker Cloud Build and are available on
 [hub.docker.com/r/mahocommerce/maho](https://hub.docker.com/r/mahocommerce/maho){target=_blank}.
 
+The tags for Maho 26.7 and later, `latest` and `nightly` included, ship a Maho Caddyfile at
+`/etc/caddy/Caddyfile`. It routes the `/api/*` paths, denies access to hidden and private files, and
+sets the security headers. Older tags keep the default site block of the base image, because Maho
+before 26.7 has no `rest.php` entry point.
+
+The plain `dunglas/frankenphp` base image has none of these rules. An image that you build on that
+base yourself therefore needs its own Caddyfile. Copy the site block from
+[Web Server Configuration](web-server.md#caddy-and-frankenphp).
+
+To change the configuration of an official image, mount your own file over
+`/etc/frankenphp/Caddyfile`, which is the path the container runs, or set the
+`CADDY_SERVER_EXTRA_DIRECTIVES` environment variable to add directives to the site block.
+
 
 ## Static binary building
 
@@ -42,6 +55,12 @@ cd dist
 # And run the Maho CLI tool with
 ./frankenphp-mac-arm64 php-cli maho
 ```
+
+!!! warning "php-server does not apply the Maho rules"
+    The `php-server` command runs a default configuration. It serves the storefront, but it does
+    not route `/api/*` and it does not deny hidden files. Write a Caddyfile with the site block from
+    [Web Server Configuration](web-server.md#caddy-and-frankenphp), then start the binary with
+    `./frankenphp-mac-arm64 run --config /path/to/Caddyfile` instead.
 
 !!! info
     For more info on options and configurations, check

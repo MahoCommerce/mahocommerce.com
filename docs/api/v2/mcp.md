@@ -31,7 +31,7 @@ MCP is off by default, like every other protocol, and its two supporting package
 3. Set **MCP (Model Context Protocol)** to *Yes*.
 4. Create a token for the agent, see [Authentication](authentication.md). A `client_credentials` service account scoped to just the resources the agent needs is the right choice here, not an admin token.
 
-If you serve Maho with nginx, Caddy, or anything other than the bundled Apache config, add `/api/mcp` to your API location block, see [Web Server Configuration](web-server.md). The bundled `public/.htaccess` already routes it.
+If you serve Maho with nginx, Caddy, or anything other than the bundled Apache config, make sure `/api/mcp` reaches `rest.php`, see [Web Server Configuration](../../hosting/web-server.md#api-routing-map). The bundled `public/.htaccess` already routes it.
 
 !!! warning "Remote clients need the host allowlist"
     The MCP SDK ships DNS-rebinding protection that, left at its default, only answers requests whose `Host` is localhost. Maho populates the allowlist from your store's base URLs automatically, but it does so when the API container is compiled. **After changing a base URL or adding a store, clear `var/cache/api_platform`** or remote calls will fail with an opaque transport error. The same already applies to the CORS allowlist, see [Cache invalidation](extending.md#cache-invalidation).
