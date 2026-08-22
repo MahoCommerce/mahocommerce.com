@@ -30,7 +30,7 @@ Maho's **Artificial Intelligence** module is the first-party AI platform. It pro
 - **Async task queue** - cron sweep processes pending tasks with retry, timeout recovery, and callback dispatch
 - **Safety guardrails** - prompt-injection patterns, configurable regex blocklist, output sanitisation, PII detection
 - **Token telemetry** - per-task usage, aggregated daily
-- **Vector storage** - `maho_ai_vector` table for embedding-backed lookup / RAG
+- **Vector storage** - `ai_vector` table for embedding-backed lookup / RAG
 - **Admin UI** - Task History grid, Usage grid, Queue All Embeddings page, System Configuration with auto model-fetch
 - **Extensible** - community providers plug in by extending `Maho_Ai_Model_Platform_Symfony` or registering a factory
 - **Store-scoped configuration** - different stores can use different platforms / models / credentials
@@ -40,6 +40,9 @@ Maho's **Artificial Intelligence** module is the first-party AI platform. It pro
 ## 2. Getting Started
 
 ### Module Configuration
+
+!!! note "Renamed in 26.9"
+    The store-config section, the ACL resources, the cron ids and the three database tables lost the `maho_` vendor prefix in Maho 26.9: `maho_ai/general/enabled` became `ai/general/enabled`, `maho_ai_task` became `ai_task`, and so on. `./maho migrate` renames the tables, moves the `core_config_data` paths and moves the `admin_rule` resources for you. Update any custom code that reads a `maho_ai/...` config path or queries a `maho_ai_*` table.
 
 Navigate to **System > Configuration > AI**. Configuration is grouped into the sections below; each provider has its own sub-fieldset for API key (encrypted via `ai/system_config_backend_apiKey`) and per-platform default model.
 
@@ -139,7 +142,7 @@ $response = Mage::helper('ai')->invoke(
 When `$model` isn't passed explicitly:
 
 1. If `$model` parameter is set → use it
-2. Else use `maho_ai/general/{platform}_model` for the selected platform (or `maho_ai/embed/{platform}_model` / `maho_ai/image/{platform}_model` for those capabilities)
+2. Else use `ai/general/{platform}_model` for the selected platform (or `ai/embed/{platform}_model` / `ai/image/{platform}_model` for those capabilities)
 
 A platform that has no configured default for the requested capability throws `Mage_Core_Exception("No {capability} model configured for {platform}")`.
 
@@ -169,7 +172,7 @@ $taskId = Mage::helper('ai')->submitTask([
 
 Two specialised helpers exist for non-chat task types:
 
-- `submitEmbedTask([...])` - submits an embedding task and (when `entity_type` + `entity_id` are passed in `data`) auto-persists the resulting vector to `maho_ai_vector` on completion.
+- `submitEmbedTask([...])` - submits an embedding task and (when `entity_type` + `entity_id` are passed in `data`) auto-persists the resulting vector to `ai_vector` on completion.
 - `submitImageTask([...])` - submits an image-generation task. The prompt is run through the InputValidator (mirroring sync `generateImage()`).
 
 User-role messages on `submitTask()` and the prompt on `submitImageTask()` go through the InputValidator just like their sync counterparts - the async path is **not** a bypass.
@@ -188,9 +191,9 @@ User-role messages on `submitTask()` and the prompt on `submitImageTask()` go th
 
 ### Cron Behaviour
 
-- Sweep runs on the schedule defined in `maho_ai/queue/cron_schedule` (default `*/2 * * * *`)
-- Processes up to `maho_ai/queue/max_tasks_per_run` per run (default 10)
-- **Stuck-task recovery**: anything in `processing` longer than `maho_ai/queue/task_timeout` seconds (default 120) is re-queued; tasks past `max_retries` are marked `failed`
+- Sweep runs on the schedule defined in `ai/queue/cron_schedule` (default `*/2 * * * *`)
+- Processes up to `ai/queue/max_tasks_per_run` per run (default 10)
+- **Stuck-task recovery**: anything in `processing` longer than `ai/queue/task_timeout` seconds (default 120) is re-queued; tasks past `max_retries` are marked `failed`
 - **Weekly cleanup**: `complete` / `failed` / `cancelled` rows older than 90 days are dropped every Sunday at 03:00; abandoned `pending` rows older than 90 days are also cleared
 
 ### Callbacks
@@ -223,7 +226,7 @@ Both guardrails are **on by default** and apply to both sync and async entry poi
 Runs before each `invoke()`, `submitTask()`, sync `generateImage()`, and `submitImageTask()`. Checks user-role content against:
 
 - **15 known prompt-injection patterns** (e.g. "ignore previous instructions", "DAN mode", role-rewrite attempts)
-- **Configurable regex blocklist** - admin-set patterns in `maho_ai/safety/blocked_patterns` (one per line)
+- **Configurable regex blocklist** - admin-set patterns in `ai/safety/blocked_patterns` (one per line)
 - **Base64-payload heuristic** - flags long base64-like strings that may hide encoded instructions
 
 When a request matches a pattern, the validator throws `Mage_Core_Exception` with `'AI request rejected: ...'`. Catch this in your consumer to surface a friendly error.
@@ -236,7 +239,7 @@ Runs against model responses. With `options['is_html'] === true` it:
 
 - Strips dangerous tags (`<script>`, `<style>`, `<iframe>`, `<object>`, `<embed>`)
 - Strips `on*=` event-handler attributes and `javascript:` / unsafe `data:` URLs from `href` / `src`
-- **PII detection** (when `maho_ai/safety/pii_detection` is enabled) - emails, credit-card-like numbers, AU phone numbers are flagged in the AI log but not blocked (the model may have produced them legitimately).
+- **PII detection** (when `ai/safety/pii_detection` is enabled) - emails, credit-card-like numbers, AU phone numbers are flagged in the AI log but not blocked (the model may have produced them legitimately).
 
 ---
 
@@ -260,9 +263,9 @@ $vectors = Mage::helper('ai')->embed(
 );
 ```
 
-If `maho_ai/embed/target_dimensions` is set, it is passed through as the `dimensions` option (for providers that support reduced-dimension embeddings like OpenAI's `text-embedding-3-*`).
+If `ai/embed/target_dimensions` is set, it is passed through as the `dimensions` option (for providers that support reduced-dimension embeddings like OpenAI's `text-embedding-3-*`).
 
-### Storing in `maho_ai_vector`
+### Storing in `ai_vector`
 
 ```php
 /** @var Maho_Ai_Model_Resource_Vector $resource */
@@ -303,13 +306,13 @@ $imageUrl = Mage::helper('ai')->generateImage(
 );
 ```
 
-Returns a data URI by default (portable across providers regardless of upload behaviour). When the image capability is disabled and `maho_ai/image/fallback_placeholder` is on, returns a placeholder URL from `maho_ai/image/placeholder_url`.
+Returns a data URI by default (portable across providers regardless of upload behaviour). When the image capability is disabled and `ai/image/fallback_placeholder` is on, returns a placeholder URL from `ai/image/placeholder_url`.
 
 ---
 
 ## 8. Usage Telemetry
 
-Every sync `invoke()` / `embed()` / `generateImage()` call records a row to `maho_ai_usage` (when `maho_ai/general/log_requests` is enabled). Async tasks record their own per-task usage on the task row; a nightly cron (05 minutes past midnight) aggregates the previous day's completed task rows into `maho_ai_usage` grouped by consumer / platform / model / store.
+Every sync `invoke()` / `embed()` / `generateImage()` call records a row to `ai_usage` (when `ai/general/log_requests` is enabled). Async tasks record their own per-task usage on the task row; a nightly cron (05 minutes past midnight) aggregates the previous day's completed task rows into `ai_usage` grouped by consumer / platform / model / store.
 
 | Field | Description |
 |---|---|
@@ -344,7 +347,7 @@ Tools for vector store maintenance: queue embedding tasks for an entity type, cl
 
 Per-provider API keys (encrypted), default models, safety toggles, queue settings. Saving an API key (or the Ollama base URL) auto-fetches the provider's `/models` endpoint and caches the result, so dropdowns stay current as providers ship new models. Re-save the key to force a refresh.
 
-ACL is granular: `system/maho_ai/tasks`, `system/maho_ai/usage`, `system/maho_ai/reindex` are separate resources, so an admin role with general config access doesn't automatically get permission to queue paid embedding tasks.
+ACL is granular: `system/ai/tasks`, `system/ai/usage`, `system/ai/reindex` are separate resources, so an admin role with general config access doesn't automatically get permission to queue paid embedding tasks.
 
 ---
 
@@ -357,7 +360,7 @@ The recommended pattern for adding a new provider: **extend `Maho_Ai_Model_Platf
 Symfony AI Platform's bridges already do the HTTP work for OpenAI, Anthropic, Gemini, Mistral, OpenRouter, Ollama, and any OpenAI-compatible endpoint (NanoGPT, LiteLLM, vLLM, Azure OpenAI, etc.). The Maho shim sits on top of that and adds:
 
 - Encrypted API key retrieval from store config
-- Model resolution order (`maho_ai/{capability}/{platform}_model` → constructor defaults)
+- Model resolution order (`ai/{capability}/{platform}_model` → constructor defaults)
 - Token-usage normalisation to Maho's `{input, output}` shape
 - Custom `ModelCatalog` so admin-set model IDs not in Symfony's built-in catalog still resolve (e.g. dated variants like `gpt-4o-mini-2024-07-18`)
 - Maho's `Mage_Core_Exception` from provider errors instead of Symfony's exception hierarchy
@@ -442,7 +445,7 @@ class My_Module_Model_Platform_Foo_Factory
     public function create(?int $storeId = null): Maho_Ai_Model_Platform_ProviderInterface
     {
         $apiKey = (string) Mage::helper('core')->decrypt(
-            (string) Mage::getStoreConfig('maho_ai/general/foo_api_key', $storeId),
+            (string) Mage::getStoreConfig('ai/general/foo_api_key', $storeId),
         );
         if ($apiKey === '') {
             throw new Mage_Core_Exception('Foo API key is not configured.');
@@ -450,7 +453,7 @@ class My_Module_Model_Platform_Foo_Factory
 
         return new My_Module_Model_Platform_Foo(
             apiKey:           $apiKey,
-            defaultChatModel: (string) Mage::getStoreConfig('maho_ai/general/foo_model', $storeId) ?: 'foo-default',
+            defaultChatModel: (string) Mage::getStoreConfig('ai/general/foo_model', $storeId) ?: 'foo-default',
         );
     }
 }
@@ -487,7 +490,7 @@ The InputValidator matched a known injection pattern or admin-configured blockli
 
 ### Tasks stuck in `processing`
 
-The stuck-task recovery cron resets anything older than `maho_ai/queue/task_timeout` seconds (default 120). It runs on the same schedule as the queue sweep (`maho_ai/queue/cron_schedule`), so adjusting the sweep frequency also affects how quickly stuck tasks are recovered.
+The stuck-task recovery cron resets anything older than `ai/queue/task_timeout` seconds (default 120). It runs on the same schedule as the queue sweep (`ai/queue/cron_schedule`), so adjusting the sweep frequency also affects how quickly stuck tasks are recovered.
 
 ### Model dropdown is empty / outdated
 

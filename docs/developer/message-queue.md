@@ -290,7 +290,7 @@ keep the table small.
 
 ## Storage and lifecycle
 
-The default transport stores messages in `maho_queue_message`, through Maho's DBAL adapter, so it works
+The default transport stores messages in `queue_message`, through Maho's DBAL adapter, so it works
 identically on MySQL, PostgreSQL and SQLite.
 
 ```mermaid
@@ -356,6 +356,6 @@ retried.
 `QueueManager::reset()` drops every memoised service (bus, transport, serializer, handler registry).
 Call it between tests, or after changing configuration that the queue reads, to force a clean rebuild.
 
-To assert on what a piece of code queued, dispatch it and read `maho_queue_message` through
+To assert on what a piece of code queued, dispatch it and read `queue_message` through
 `Mage::getModel('queue/message')->getCollection()`; to run the work inline, build a bounded worker with
 `\Maho\Queue\WorkerFactory::create(['stopWhenIdle' => true])`.

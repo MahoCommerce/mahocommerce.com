@@ -66,6 +66,7 @@ The file lives in `sql/`, alongside any existing imperative `sql/<resource>_setu
 Follow these conventions so your schema matches the core modules and migrates cleanly:
 
 - **Unprefixed table names.** Author tables with their bare names (`cron_schedule`, not `prefix_cron_schedule`). Maho applies the configured `table_prefix` from `app/etc/local.xml` centrally.
+- **No vendor prefix in an identifier.** A table takes the name of its module or of its domain, never the vendor name: `blog_post_entity`, `feedmanager_feed`, `paypal_webhook_event`. The same rule applies to store-config sections, cron ids and observer ids. Core modules are checked by `tests/Backend/Unit/Maho/NamingConventionTest.php`; third-party modules are exempt, so your own install never fails `composer test`. A former name recorded with `Renamer` is the one exception, because it must stay verbatim.
 - **`notnull` defaults to `true`.** DBAL columns are `NOT NULL` by default, so you only spell out `'notnull' => false` for nullable columns. This makes the nullable columns stand out.
 - **No zero-date defaults.** Never use `'0000-00-00 00:00:00'`. It is not strict-mode safe and cannot be stored on PostgreSQL. Use a nullable date/datetime column (`'notnull' => false`) and let real `NULL` represent "no date".
 - **Use `CurrentTimestamp` for `CURRENT_TIMESTAMP` defaults**, not the literal string:
@@ -116,6 +117,46 @@ return function (Schema $schema): void {
 
 !!! warning "Declare your dependencies"
     `$schema->getTable('catalog_product_entity')` throws if `Mage_Catalog` has not been processed yet. Whenever you reference or extend another module's table, declare a `<depends>` on that module in `app/etc/modules/<Your_Module>.xml`. The dependency is what guarantees the other module's `schema.php` runs first.
+
+## Renaming a table or a column <span class="version-badge">v26.9+</span>
+
+A schema comparison is structural, so it cannot tell a rename from a drop plus an add. Without help, a rename leaves the old object holding every row and creates the new one empty.
+
+Declare the identity history on the table that the rename produced, and give the former names newest-first:
+
+```php
+use Maho\Db\Schema\Renamer;
+
+$order = $schema->createTable('sales_flat_order');
+Renamer::renamed($order, from: 'sales_order', columns: ['customer_email' => 'customer_mail']);
+```
+
+Both `from:` and each value of `columns:` take a single name or a list of names, newest-first. A column that was renamed `a` to `b` to `c` therefore declares `['b', 'a']`:
+
+```php
+Renamer::renamed($order, columns: ['c' => ['b', 'a']]);
+```
+
+`./maho migrate` renames the live objects **before** it compares anything, so the comparator, the PostgreSQL fixups and the SQLite rebuild all see the end state. The statement order becomes: conversions, renames, creates, alters. `--dry-run` lists renames as non-destructive.
+
+### How an entry is resolved
+
+Each entry carries its own precondition instead of a position in an ordered list, so it is self-idempotent and needs no version counter and no state table:
+
+| Old name in the database | New name in the database | Result |
+|---|---|---|
+| present | absent | The rename runs. |
+| absent | present | Skipped, the rename already ran. |
+| absent | absent | Skipped. |
+| present | present | Refused with guidance. Only a human can decide which one holds the real rows. |
+
+A fresh install ignores the history completely, because no old name exists.
+
+### Rules and lifetime
+
+- **A former name must be unique.** If another table or another column also declares it, the schema is rejected at collect time. This also rules out a rename cycle.
+- **Repeated calls append.** A module can extend a history that another module declared.
+- **Drop the entries** once upgrades from the release that carried the old name are no longer supported.
 
 ## How and when it runs
 
