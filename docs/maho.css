@@ -3,8 +3,11 @@
    Electric chartreuse (#d7df22, straight from the logo) on deep
    olive ink, over a warm paper reading surface.
    Display type: Bricolage Grotesque · Body: Geist · Code: Geist Mono
-   Fonts are loaded from the document head (see overrides/main.html) so the
-   browser discovers them early and avoids a flash of fallback text.
+   All three are self-hosted variable fonts. The @font-face rules and the
+   preloads live in the document head (see overrides/main.html) so the browser
+   discovers them early and avoids a flash of fallback text.
+   The weights 650 and 750 below need the variable axis. Do not replace these
+   faces with static instances.
    ============================================================ */
 
 /* --- Design tokens --- */

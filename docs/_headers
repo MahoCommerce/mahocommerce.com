@@ -1,2 +1,7 @@
 /*
   Link: </llms.txt>; rel="alternate"; type="text/plain"
+
+# Self-hosted brand fonts. The content never changes, so cache it for a year.
+# If a face is ever replaced, ship it under a new file name so caches pick it up.
+/assets/fonts/*
+  Cache-Control: public, max-age=31536000
