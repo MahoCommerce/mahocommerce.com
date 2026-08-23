@@ -12,7 +12,7 @@ description: Install and run Maho step by step - system requirements, Composer s
 
 - PHP 8.3 / 8.4 / 8.5
 - Apache/Nginx/Caddy/FrankenPHP[^1] ([configuration](../hosting/web-server.md))
-- MySQL 8.0+ / MariaDB 10.6+ / PostgreSQL 14+ (beta) / SQLite (beta)
+- MySQL 8.0+ / MariaDB 10.6+ / PostgreSQL 15+ (beta) / SQLite (beta)
 
 ??? info "PHP version support policy"
     Maho supports the **three most recent stable PHP releases**. Today that means **8.3, 8.4, and 8.5**.
@@ -29,7 +29,6 @@ description: Install and run Maho step by step - system requirements, Composer s
     | MariaDB    | 10.11 LTS | Feb 2028 |
     | MariaDB    | 11.4 LTS | May 2029  |
     | MariaDB    | 11.8 LTS | Jun 2030  |
-    | PostgreSQL | 14      | Nov 2026   |
     | PostgreSQL | 15      | Nov 2027   |
     | PostgreSQL | 16      | Nov 2028   |
     | PostgreSQL | 17      | Nov 2029   |
