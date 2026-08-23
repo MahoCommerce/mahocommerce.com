@@ -118,7 +118,7 @@ Use the **Preview** tab to test your feed with a sample of products. When satisf
 FeedManager provides visual builders for each output format. All builders share the same powerful options for data sources.
 
 <figure markdown="span">
-![The XML Builder on a Google Shopping feed's Feed Content tab](/assets/feed-manager-xml-builder.png)
+![The XML Builder on a Google Shopping feed's Feed Content tab](/assets/feed-manager-xml-builder.webp)
 <figcaption>The XML Builder with the Google Shopping template structure</figcaption>
 </figure>
 

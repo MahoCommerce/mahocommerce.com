@@ -77,7 +77,7 @@ Gift cards are a special product type that generates redeemable codes when purch
 In the **Gift Card** tab, configure these settings:
 
 <figure markdown="span">
-![The Gift Card tab on a gift card product](/assets/gift-card-product-tab.png)
+![The Gift Card tab on a gift card product](/assets/gift-card-product-tab.webp)
 <figcaption>The Gift Card tab of a gift card product in the admin panel</figcaption>
 </figure>
 

@@ -158,7 +158,7 @@ Open **Sales → Revocation Requests** to manage incoming declarations. Two ACL 
 The grid lists every request with ID, received timestamp, store view, verified flag, customer name, email, order reference, matched order (linked when resolved), email-suppressed timestamp, processed status, and processed-at timestamp. It supports filtering, sorting, **CSV export**, and **mass actions** to mark selected requests Accepted or Rejected.
 
 <figure markdown="span">
-![The Revocation Requests grid in the admin panel](/assets/revocation-requests-grid.png)
+![The Revocation Requests grid in the admin panel](/assets/revocation-requests-grid.webp)
 <figcaption>The revocation queue under Sales > Revocation Requests</figcaption>
 </figure>
 

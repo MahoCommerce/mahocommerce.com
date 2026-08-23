@@ -17,7 +17,7 @@ Traditional carrier integrations require a dedicated module for every shipping p
 - **Multi-store support**: Configuration is scoped per website
 
 <figure markdown="span">
-![Shipping Bridge methods displayed in the checkout](/assets/shipping-bridge-frontend.png)
+![Shipping Bridge methods displayed in the checkout](/assets/shipping-bridge-frontend.webp)
 <figcaption>Shipping methods from the Bridge API in the checkout</figcaption>
 </figure>
 
@@ -53,7 +53,7 @@ flowchart TD
 
 Navigate to **System > Configuration > Sales > Shipping Methods > Shipping Bridge**.
 
-![Shipping Bridge configuration in the admin panel](/assets/shipping-bridge-backend.png)
+![Shipping Bridge configuration in the admin panel](/assets/shipping-bridge-backend.webp)
 
 ### Settings Reference
 

@@ -11,7 +11,7 @@ security update!
 
 <!-- more -->
 
-<img src="/assets/blog/announcement-on-linkedin.png" alt="" loading="lazy" style="max-width: 300px" align="left">
+<img src="/assets/blog/announcement-on-linkedin.webp" alt="" loading="lazy" style="max-width: 300px" align="left">
 
 ## We're public!
 
@@ -42,7 +42,7 @@ This is a great start, and I hope more people will join this new journey!
   that really needed some love.
 
 <figure markdown="span" style="border:1px solid var(--md-typeset-a-color);padding:20px 20px 0 20px">
-  ![SVG placeholders](/assets/blog/svg-placeholders.png){ loading=lazy width=500 }
+  ![SVG placeholders](/assets/blog/svg-placeholders.webp){ loading=lazy width=500 }
   <figcaption>SVG placeholder images in action</figcaption>
 </figure>
 

@@ -94,8 +94,8 @@ description: Maho is the open-source, self-hosted ecommerce platform you actuall
       <div class="mh-shot-stage" id="mh-shot-stage">
         <img class="mh-shot-hold" id="mh-shot-hold" alt="" aria-hidden="true" decoding="async">
         <div class="mh-shot-frame" id="mh-shot-frame">
-          <img class="mh-shot-light" id="mh-shot-light" src="assets/admin-screens/dashboard-light.png" alt="Dashboard in the redesigned admin, light mode" decoding="async">
-          <img class="mh-shot-dark" id="mh-shot-dark" src="assets/admin-screens/dashboard-dark.png" alt="" aria-hidden="true" decoding="async">
+          <img class="mh-shot-light" id="mh-shot-light" src="assets/admin-screens/dashboard-light.webp" alt="Dashboard in the redesigned admin, light mode" decoding="async">
+          <img class="mh-shot-dark" id="mh-shot-dark" src="assets/admin-screens/dashboard-dark.webp" alt="" aria-hidden="true" decoding="async">
         </div>
         <button class="mh-shot-nav mh-shot-prev" id="mh-shot-prev" type="button" aria-label="Previous screen">
           <svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg>
@@ -108,15 +108,15 @@ description: Maho is the open-source, self-hosted ecommerce platform you actuall
     </div>
 
     <div class="mh-shot-screens" id="mh-shot-screens" hidden>
-      <i data-light="assets/admin-screens/dashboard-light.png" data-dark="assets/admin-screens/dashboard-dark.png" data-title="Dashboard"></i>
-      <i data-light="assets/admin-screens/products-grid-light.png" data-dark="assets/admin-screens/products-grid-dark.png" data-title="Products grid"></i>
-      <i data-light="assets/admin-screens/product-edit-light.png" data-dark="assets/admin-screens/product-edit-dark.png" data-title="Product edit"></i>
-      <i data-light="assets/admin-screens/system-config-light.png" data-dark="assets/admin-screens/system-config-dark.png" data-title="System config"></i>
-      <i data-light="assets/admin-screens/cms-editor-light.png" data-dark="assets/admin-screens/cms-editor-dark.png" data-title="CMS editor"></i>
-      <i data-light="assets/admin-screens/category-tree-light.png" data-dark="assets/admin-screens/category-tree-dark.png" data-title="Category tree"></i>
-      <i data-light="assets/admin-screens/navigation-light.png" data-dark="assets/admin-screens/navigation-dark.png" data-title="Navigation"></i>
-      <i data-light="assets/admin-screens/health-check-light.png" data-dark="assets/admin-screens/health-check-dark.png" data-title="Health check"></i>
-      <i data-light="assets/admin-screens/cache-management-light.png" data-dark="assets/admin-screens/cache-management-dark.png" data-title="Cache management"></i>
+      <i data-light="assets/admin-screens/dashboard-light.webp" data-dark="assets/admin-screens/dashboard-dark.webp" data-title="Dashboard"></i>
+      <i data-light="assets/admin-screens/products-grid-light.webp" data-dark="assets/admin-screens/products-grid-dark.webp" data-title="Products grid"></i>
+      <i data-light="assets/admin-screens/product-edit-light.webp" data-dark="assets/admin-screens/product-edit-dark.webp" data-title="Product edit"></i>
+      <i data-light="assets/admin-screens/system-config-light.webp" data-dark="assets/admin-screens/system-config-dark.webp" data-title="System config"></i>
+      <i data-light="assets/admin-screens/cms-editor-light.webp" data-dark="assets/admin-screens/cms-editor-dark.webp" data-title="CMS editor"></i>
+      <i data-light="assets/admin-screens/category-tree-light.webp" data-dark="assets/admin-screens/category-tree-dark.webp" data-title="Category tree"></i>
+      <i data-light="assets/admin-screens/navigation-light.webp" data-dark="assets/admin-screens/navigation-dark.webp" data-title="Navigation"></i>
+      <i data-light="assets/admin-screens/health-check-light.webp" data-dark="assets/admin-screens/health-check-dark.webp" data-title="Health check"></i>
+      <i data-light="assets/admin-screens/cache-management-light.webp" data-dark="assets/admin-screens/cache-management-dark.webp" data-title="Cache management"></i>
     </div>
 
     <p class="mh-shots-caption">A completely redesigned admin, first-class dark mode included, shipped in Maho 26.7.<br>Use the arrows to browse screens, hit the lightbulb to flip the theme. <a href="demo/">Try it in the live demo →</a></p>
@@ -145,23 +145,23 @@ description: Maho is the open-source, self-hosted ecommerce platform you actuall
         <div class="mh-marquee-track">
           <div class="mh-marquee-group">
             <img src="assets/sponsors/deinetuer.svg" alt="Deine Tür" loading="lazy">
-            <img src="assets/sponsors/egear.png" alt="e-Gear.dk" loading="lazy">
-            <img src="assets/sponsors/mageaustralia.png" alt="Mage Australia" loading="lazy">
+            <img src="assets/sponsors/egear.webp" alt="e-Gear.dk" loading="lazy">
+            <img src="assets/sponsors/mageaustralia.webp" alt="Mage Australia" loading="lazy">
             <img src="assets/sponsors/magemega.png" alt="MageMega" loading="lazy">
-            <img src="assets/sponsors/blackfire.png" alt="Blackfire" loading="lazy">
-            <img src="assets/sponsors/cloudflare.jpg" alt="Cloudflare" loading="lazy">
+            <img src="assets/sponsors/blackfire.webp" alt="Blackfire" loading="lazy">
+            <img src="assets/sponsors/cloudflare.webp" alt="Cloudflare" loading="lazy">
             <img src="assets/sponsors/jetbrains.svg" alt="JetBrains" loading="lazy">
-            <img src="assets/sponsors/magentiamo.png" alt="Magentiamo" loading="lazy">
+            <img src="assets/sponsors/magentiamo.webp" alt="Magentiamo" loading="lazy">
           </div>
           <div class="mh-marquee-group" aria-hidden="true">
             <img src="assets/sponsors/deinetuer.svg" alt="" loading="lazy">
-            <img src="assets/sponsors/egear.png" alt="" loading="lazy">
-            <img src="assets/sponsors/mageaustralia.png" alt="" loading="lazy">
+            <img src="assets/sponsors/egear.webp" alt="" loading="lazy">
+            <img src="assets/sponsors/mageaustralia.webp" alt="" loading="lazy">
             <img src="assets/sponsors/magemega.png" alt="" loading="lazy">
-            <img src="assets/sponsors/blackfire.png" alt="" loading="lazy">
-            <img src="assets/sponsors/cloudflare.jpg" alt="" loading="lazy">
+            <img src="assets/sponsors/blackfire.webp" alt="" loading="lazy">
+            <img src="assets/sponsors/cloudflare.webp" alt="" loading="lazy">
             <img src="assets/sponsors/jetbrains.svg" alt="" loading="lazy">
-            <img src="assets/sponsors/magentiamo.png" alt="" loading="lazy">
+            <img src="assets/sponsors/magentiamo.webp" alt="" loading="lazy">
           </div>
         </div>
       </div>
@@ -182,28 +182,28 @@ description: Maho is the open-source, self-hosted ecommerce platform you actuall
       <div class="mh-stores-viewport">
         <div class="mh-stores-track">
           <a class="mh-store-card" href="https://www.parkerbrand.co.uk" target="_blank" rel="noopener">
-            <span class="mh-store-shot"><img src="assets/stores/parkerbrand.jpg" alt="ParkerBrand storefront" loading="lazy" width="900" height="640"></span>
+            <span class="mh-store-shot"><img src="assets/stores/parkerbrand.webp" alt="ParkerBrand storefront" loading="lazy" width="900" height="640"></span>
             <span class="mh-store-meta">
               <span class="mh-store-name">ParkerBrand</span>
               <span class="mh-store-loc">🇬🇧 United Kingdom · Garden &amp; workshop</span>
             </span>
           </a>
           <a class="mh-store-card" href="https://www.deinetuer.de" target="_blank" rel="noopener">
-            <span class="mh-store-shot"><img src="assets/stores/deinetuer.jpg" alt="Deine Tür storefront" loading="lazy" width="900" height="640"></span>
+            <span class="mh-store-shot"><img src="assets/stores/deinetuer.webp" alt="Deine Tür storefront" loading="lazy" width="900" height="640"></span>
             <span class="mh-store-meta">
               <span class="mh-store-name">Deine Tür</span>
               <span class="mh-store-loc">🇪🇺 Europe-wide · Doors &amp; interiors</span>
             </span>
           </a>
           <a class="mh-store-card" href="https://www.mooremilitaria.com" target="_blank" rel="noopener">
-            <span class="mh-store-shot"><img src="assets/stores/mooremilitaria.jpg" alt="Moore Militaria storefront" loading="lazy" width="900" height="640"></span>
+            <span class="mh-store-shot"><img src="assets/stores/mooremilitaria.webp" alt="Moore Militaria storefront" loading="lazy" width="900" height="640"></span>
             <span class="mh-store-meta">
               <span class="mh-store-name">Moore Militaria</span>
               <span class="mh-store-loc">🇺🇸 United States · Militaria &amp; collectibles</span>
             </span>
           </a>
           <a class="mh-store-card" href="https://www.eylinda.de" target="_blank" rel="noopener">
-            <span class="mh-store-shot"><img src="assets/stores/eylinda.jpg" alt="ey Linda storefront" loading="lazy" width="900" height="640"></span>
+            <span class="mh-store-shot"><img src="assets/stores/eylinda.webp" alt="ey Linda storefront" loading="lazy" width="900" height="640"></span>
             <span class="mh-store-meta">
               <span class="mh-store-name">ey Linda</span>
               <span class="mh-store-loc">🇩🇪 Germany · Fashion &amp; apparel</span>

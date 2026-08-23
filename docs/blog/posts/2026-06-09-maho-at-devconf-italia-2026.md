@@ -6,7 +6,7 @@ categories:
 
 # Maho at DevConf 2026!
 
-![DevConf 2026](/assets/blog/devconf-italia-2026-hero.png){ loading=lazy }
+![DevConf 2026](/assets/blog/devconf-italia-2026-hero.webp){ loading=lazy }
 
 We're excited to share that **Fabrizio Balliano** will be speaking at **DevConf 2026**, the Italian conference dedicated to developers and the open source community.
 

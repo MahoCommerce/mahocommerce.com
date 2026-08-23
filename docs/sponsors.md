@@ -33,18 +33,18 @@ This project is funded through the [NGI TALER Fund](https://nlnet.nl/taler){targ
 ### Bronze sponsors
 
 <div class="sponsorgallery">
-    <a href="https://e-gear.dk" title="e-Gear.dk" target="_blank"><img src="/assets/sponsors/egear.png" alt="e-Gear.dk"></a>
-    <a href="https://mageaustralia.com.au" title="Mage Australia" target="_blank"><img src="/assets/sponsors/mageaustralia.png" alt="Mage Australia"></a>
+    <a href="https://e-gear.dk" title="e-Gear.dk" target="_blank"><img src="/assets/sponsors/egear.webp" alt="e-Gear.dk"></a>
+    <a href="https://mageaustralia.com.au" title="Mage Australia" target="_blank"><img src="/assets/sponsors/mageaustralia.webp" alt="Mage Australia"></a>
     <a href="https://magemega.com" title="MageMega" target="_blank"><img src="/assets/sponsors/magemega.png" alt="MageMega"></a>
 </div>
 
 ### Technology partners
 
 <div class="sponsorgallery">
-<a href="https://blackfire.io" title="Blackfire" target="_blank"><img src="/assets/sponsors/blackfire.png" alt="Blackfire"></a>
-    <a href="https://cloudflare.com" title="Cloudflare" target="_blank"><img src="/assets/sponsors/cloudflare.jpg" alt="Cloudflare"></a>
+<a href="https://blackfire.io" title="Blackfire" target="_blank"><img src="/assets/sponsors/blackfire.webp" alt="Blackfire"></a>
+    <a href="https://cloudflare.com" title="Cloudflare" target="_blank"><img src="/assets/sponsors/cloudflare.webp" alt="Cloudflare"></a>
     <a href="https://www.jetbrains.com" title="JetBrains" target="_blank"><img src="/assets/sponsors/jetbrains.svg" alt="JetBrains"></a>
-    <a href="https://www.magentiamo.it" title="Magentiamo" target="_blank"><img src="/assets/sponsors/magentiamo.png" alt="Magentiamo"></a>
+    <a href="https://www.magentiamo.it" title="Magentiamo" target="_blank"><img src="/assets/sponsors/magentiamo.webp" alt="Magentiamo"></a>
     <a href="https://sevalla.com" title="Sevalla" target="_blank">
         <svg fill="none" viewBox="0 0 1739 559" id="sevalla-logo-new" class="w-28 md:w-32">
             <g clip-path="url(#clip0_1117_94)">

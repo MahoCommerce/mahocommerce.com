@@ -106,7 +106,7 @@ PII:
 All settings live under **System > Configuration > Advanced > Developer > OpenTelemetry** and
 depend on **Enable Tracing** being set to Yes.
 
-![The OpenTelemetry configuration group in the Maho admin](/assets/opentelemetry-config.png)
+![The OpenTelemetry configuration group in the Maho admin](/assets/opentelemetry-config.webp)
 
 ### Connection
 

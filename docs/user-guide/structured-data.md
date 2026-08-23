@@ -25,7 +25,7 @@ configurable products.
 The module settings sit in **System > Configuration > Catalog > Catalog > Structured Data
 (schema.org)**:
 
-![The Structured Data configuration group in the Maho admin](/assets/structured-data-config.png)
+![The Structured Data configuration group in the Maho admin](/assets/structured-data-config.webp)
 
 | Field | Default | What it does |
 |---|---|---|

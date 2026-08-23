@@ -6,7 +6,7 @@ description: Let customers sign in to your Maho store with their Google, Apple, 
 
 Social Login lets customers sign in with an account they already have: Google, Apple, or Facebook. The buttons appear on the login and registration pages, under the standard form.
 
-![The social sign-in buttons on the customer login page](/assets/social-login-buttons.png)
+![The social sign-in buttons on the customer login page](/assets/social-login-buttons.webp)
 
 ## Key Features
 
@@ -22,7 +22,7 @@ Social Login lets customers sign in with an account they already have: Google, A
 
 Go to **System → Configuration → Customers → Customer Configuration → Social Login**.
 
-![The Social Login configuration group in the Maho admin](/assets/social-login-config.png)
+![The Social Login configuration group in the Maho admin](/assets/social-login-config.webp)
 
 | Setting | Description | Default |
 |---------|-------------|---------|

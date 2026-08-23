@@ -42,7 +42,7 @@ Customer segmentation is a fundamental feature for data-driven marketing and per
 Maho provides 13 powerful condition types to create sophisticated customer segments:
 
 <figure markdown="span">
-![The visual condition builder on a segment's Conditions tab](/assets/customer-segments-condition-builder.png)
+![The visual condition builder on a segment's Conditions tab](/assets/customer-segments-condition-builder.webp)
 <figcaption>Building segment conditions with the visual rule editor</figcaption>
 </figure>
 

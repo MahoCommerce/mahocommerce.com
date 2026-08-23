@@ -50,7 +50,7 @@ Two settings outside this section also feed llms.txt:
 | Store Name | General > General > Store Information | The heading of llms.txt (falls back to the store group name, then the store view name). |
 | Default Description | General > Design > HTML Head | The store summary, when the Store Description field above is empty. |
 
-![The robots.txt configuration group in the Maho admin](/assets/crawlers-robots-config.png)
+![The robots.txt configuration group in the Maho admin](/assets/crawlers-robots-config.webp)
 
 ## Content signals in robots.txt
 
@@ -102,7 +102,7 @@ can state a different policy for a specific crawler.
 `/llms.txt` is a proposed convention: a markdown file at the site root that gives AI agents a
 compact, reliable index of the site instead of forcing them to crawl HTML.
 
-![The llms.txt configuration group in the Maho admin](/assets/crawlers-llms-config.png)
+![The llms.txt configuration group in the Maho admin](/assets/crawlers-llms-config.webp)
 
 Maho generates the file automatically with:
 
