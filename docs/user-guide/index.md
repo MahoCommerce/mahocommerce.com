@@ -37,6 +37,7 @@ A few operational essentials keep your store fast, indexable, and maintainable o
 - **Enable Redis caching.** [Redis](../hosting/redis.md) gives you a fast, production-grade cache and session backend, and it is well worth setting up before you take real traffic.
 - **Review your robots.txt.** Control what search engines crawl with a proper [robots.txt](../hosting/robotstxt.md) file.
 - **Cover the SEO basics.** Maho has broad built-in [SEO tools](seo.md): page metadata, canonical tags, clean URLs, XML sitemaps, and more. Set these up so you launch already indexable.
+- **Protect your admin accounts.** Turn on [two-factor authentication](two-factor-authentication.md) for every backend user, or register a passkey. From v26.9 you can make 2FA mandatory with a cutover date.
 - **Know how to use maintenance mode.** When you need to do planned work, [maintenance mode](../hosting/maintenance-mode.md) takes the storefront offline cleanly.
 
 ## Grow your store
