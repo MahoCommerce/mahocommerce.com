@@ -41,6 +41,10 @@ description: Maho is the open-source, self-hosted ecommerce platform you actuall
         </div>
       </div>
       <div class="mh-term-shell">
+      <button class="mh-motion-btn mh-motion-btn-dark mh-term-pause" id="mh-term-pause" type="button" aria-label="Pause the terminal animation" title="Pause the terminal animation">
+        <svg class="mh-ico-pause" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M9 5v14M15 5v14"/></svg>
+        <svg class="mh-ico-play" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 4.8l11 7.2-11 7.2z"/></svg>
+      </button>
       <div class="mh-term" aria-hidden="true">
         <div class="mh-term-top">
           <span class="mh-d"></span><span class="mh-d"></span><span class="mh-d"></span>
@@ -129,7 +133,13 @@ description: Maho is the open-source, self-hosted ecommerce platform you actuall
     </div>
   </div>
   <div class="mh-funding-marquee">
-    <p class="mh-funding-sublabel">Together with our sponsors and partners</p>
+    <div class="mh-marquee-head">
+      <p class="mh-funding-sublabel">Together with our sponsors and partners</p>
+      <button class="mh-motion-btn mh-marquee-pause" id="mh-marquee-pause" type="button" aria-label="Pause the scrolling sponsor logos" title="Pause the scrolling sponsor logos">
+        <svg class="mh-ico-pause" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M9 5v14M15 5v14"/></svg>
+        <svg class="mh-ico-play" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 4.8l11 7.2-11 7.2z"/></svg>
+      </button>
+    </div>
     <a class="mh-marquee-link" href="sponsors/" title="Meet the partners and sponsors behind Maho">
       <div class="mh-marquee-viewport">
         <div class="mh-marquee-track">

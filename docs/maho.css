@@ -1042,6 +1042,100 @@ article:has(#homeh1) {
     perspective: 1600px;
 }
 
+/* ---- Motion pause controls (WCAG 2.2.2 Pause, Stop, Hide) ----
+   The terminal types on a loop and the sponsor strip scrolls on a loop. Both
+   start on their own and never end, so both need a control that any visitor can
+   reach, not only one who has set prefers-reduced-motion at the OS level.
+   Same 26px disc as the screenshot lightbulb, in a light and a dark variant. */
+.mh-motion-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 26px;
+    height: 26px;
+    padding: 0;
+    border-radius: 50%;
+    border: 1px solid var(--maho-border);
+    background: var(--maho-surface);
+    color: var(--maho-text-secondary);
+    cursor: pointer;
+    flex: none;
+    transition:
+        color var(--maho-duration) var(--maho-ease),
+        border-color var(--maho-duration) var(--maho-ease),
+        background var(--maho-duration) var(--maho-ease);
+}
+
+.mh-motion-btn:hover,
+.mh-motion-btn:focus-visible {
+    color: var(--maho-text-primary);
+    border-color: var(--maho-brand);
+    background: var(--maho-brand-subtle);
+}
+
+/* The default ring is browser blue, which belongs to no palette and reads
+   badly on the ink terminal. Keep a real ring, in the brand. */
+.mh-motion-btn:focus-visible {
+    outline: 2px solid var(--maho-brand-dark);
+    outline-offset: 2px;
+}
+
+.mh-motion-btn-dark:focus-visible {
+    outline-color: var(--maho-chartreuse);
+}
+
+.mh-motion-btn-dark {
+    border-color: var(--maho-ink-border);
+    background: rgba(244, 245, 232, 0.04);
+    color: var(--maho-on-ink-soft);
+}
+
+.mh-motion-btn-dark:hover,
+.mh-motion-btn-dark:focus-visible {
+    color: var(--maho-ink);
+    border-color: var(--maho-chartreuse);
+    background: var(--maho-chartreuse);
+}
+
+/* One icon at a time: pause while it runs, play once it is stopped. */
+.mh-motion-btn .mh-ico-play { display: none; }
+.mh-motion-btn.is-paused .mh-ico-pause { display: none; }
+.mh-motion-btn.is-paused .mh-ico-play { display: block; }
+
+/* Sits over the terminal chrome, outside the aria-hidden window itself. */
+.mh-term-pause {
+    position: absolute;
+    top: 0.55em;
+    right: 0.7em;
+    z-index: 3;
+}
+
+.mh-marquee-head {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.7em;
+    margin-bottom: 1.8em;
+}
+
+.mh-marquee-head .mh-funding-sublabel {
+    margin: 0;
+}
+
+/* Narrow: the label wraps to two lines, and a button beside it pushes the
+   whole block off centre. Stack instead. */
+@media screen and (max-width: 768px) {
+    .mh-marquee-head {
+        flex-direction: column;
+        gap: 0.9em;
+    }
+}
+
+/* Nothing animates under reduced motion, so there is nothing to pause. */
+@media (prefers-reduced-motion: reduce) {
+    .mh-motion-btn { display: none; }
+}
+
 .mh-term {
     background: #0a0b05;
     border: 1px solid var(--maho-ink-border-brand);
@@ -1860,7 +1954,20 @@ html.mh-anim .mh-term-scene.is-active {
 }
 
 
-/* ---- Feature carousel (CSS scroll-snap + native scroll markers) ---- */
+/* ---- Feature cards: swipe carousel on a phone, plain grid everywhere else ----
+
+   These sections carry the whole "fully featured out of the box" argument, so
+   the cards are the evidence. A carousel used to run at every width, which hid
+   four of the seven cards behind a scroll with no scrollbar, no arrows and no
+   peek: three cards fitted the row exactly, so the section read as a finished
+   grid and nobody looked for the rest.
+
+   Narrow viewports keep the carousel. Swipe is the native gesture there, the
+   next card always peeks past the right edge so the gesture is discoverable,
+   and the page stays short on a phone.
+
+   From tablet up the cards simply wrap. Every card is visible, the section
+   makes its argument in one glance, and there is nothing to operate. */
 .features-grid {
     display: flex;
     gap: 1.1em;
@@ -1885,17 +1992,53 @@ html.mh-anim .mh-term-scene.is-active {
     scroll-padding-left: 2em;
 }
 
+/* Never a full-width card: the remainder is the peek that says "keep swiping".
+   The peek carries the affordance on its own now, so it has to read as a card
+   edge and not as a hairline: the 1px border alone is barely 1.2:1 against the
+   paper. A resting shadow gives the sliver a body. */
 .features-grid > .feature-card {
-    flex: 0 0 calc((100% - 2.2em) / 3);
-    min-width: 250px;
+    flex: 0 0 min(78%, 320px);
+    min-width: 0;
     scroll-snap-align: start;
+    box-shadow: var(--maho-shadow-md);
 }
 
 .features-grid::-webkit-scrollbar { display: none; }
 
+/* Tablet: two columns, wrapped. */
+@media screen and (min-width: 48.0625em) {
+    .features-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        overflow: visible;
+        scroll-snap-type: none;
+        /* room for the hover lift and its shadow, which the scroller clipped */
+        padding-bottom: 1.4em;
+    }
+
+    .features-grid > .feature-card {
+        flex: none;
+        box-shadow: none;
+    }
+}
+
+/* Desktop: three columns. A short last row is the honest shape of seven
+   cards; stretching the orphan across the row would blow the reading
+   measure past 70 characters for no gain. */
+@media screen and (min-width: 64.0625em) {
+    .features-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+}
+
 /* Native CSS carousel dots (Chrome 135+); degrades to plain scroll-snap */
 @supports (scroll-marker-group: after) {
     .features-grid { scroll-marker-group: after; }
+
+    /* Wrapped grid: nothing scrolls, so the dots would be decoration. */
+    @media screen and (min-width: 48.0625em) {
+        .features-grid { scroll-marker-group: none; }
+    }
 
     .features-grid::scroll-marker-group {
         display: flex;
@@ -1928,12 +2071,6 @@ html.mh-anim .mh-term-scene.is-active {
     }
     .developers .features-grid > .feature-card::scroll-marker:target-current {
         background: var(--maho-chartreuse);
-    }
-}
-
-@media screen and (min-width: 48.0625em) and (max-width: 64em) {
-    .features-grid > .feature-card {
-        flex-basis: calc((100% - 1.1em) / 2);
     }
 }
 
@@ -2515,6 +2652,10 @@ html.mh-anim .mh-reveal.mh-in {
 @media screen and (max-width: 520px) {
     .mh-funding-logos { flex-wrap: nowrap; gap: 1.2em; }
     .mh-funding-logos img { height: clamp(30px, 11vw, 44px); }
+}
+
+.mh-funding-marquee.is-paused .mh-marquee-track {
+    animation-play-state: paused;
 }
 
 @media (prefers-reduced-motion: reduce) {

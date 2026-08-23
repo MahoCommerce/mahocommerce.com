@@ -109,36 +109,77 @@ function mahoFlipTerminal(term, swap, done) {
     }, HALF);
 }
 
+/* Show every line of a scene at once, with no typing. Used when the visitor
+   pauses: the terminal must stay readable, not freeze half-typed. */
+function mahoRevealScene(scene) {
+    Array.prototype.slice.call(scene.querySelectorAll('.mh-ln')).forEach(function (ln) {
+        ln.style.transition = 'none';
+        ln.style.opacity = '1';
+        ln.style.clipPath = 'inset(0 0 0 0)';
+    });
+    var cursor = scene.querySelector('.mh-cur');
+    if (cursor) cursor.style.opacity = '';
+}
+
+/* Which terminal is running, which scene it is on, and whether the visitor
+   stopped it. Module-level so the pause button can act on it. */
+var mahoTerm = { el: null, scenes: [], i: 0, paused: false };
+
 /* Drive the terminal: type the active scene, hold, flip to the next scene,
    type it, and repeat. A single scene just types once. */
-function mahoCycleTerminal(term) {
-    if (!term) return;
-    var scenes = Array.prototype.slice.call(term.querySelectorAll('.mh-term-scene'));
-    if (!scenes.length) return;
+function mahoRunTerminal() {
+    var t = mahoTerm;
+    if (!t.el || t.paused || !t.scenes.length) return;
 
     var HOLD = 3400; // dwell on a finished scene before flipping away
-    var i = 0;
 
     function activate(idx) {
-        scenes.forEach(function (s, k) { s.classList.toggle('is-active', k === idx); });
+        t.scenes.forEach(function (s, k) { s.classList.toggle('is-active', k === idx); });
     }
 
     function typeCurrent() {
-        mahoTypeScene(scenes[i], function () {
-            if (scenes.length < 2) return; // single scene: type once and stop
+        if (t.paused) return;
+        mahoTypeScene(t.scenes[t.i], function () {
+            if (t.paused || t.scenes.length < 2) return; // single scene: type once and stop
             mahoTermDelay(function () {
-                mahoFlipTerminal(term, function () {
-                    i = (i + 1) % scenes.length;
-                    activate(i);
-                    mahoBlankScene(scenes[i]); // blank before it flips into view
+                if (t.paused) return;
+                mahoFlipTerminal(t.el, function () {
+                    t.i = (t.i + 1) % t.scenes.length;
+                    activate(t.i);
+                    mahoBlankScene(t.scenes[t.i]); // blank before it flips into view
                 }, typeCurrent);
             }, HOLD);
         });
     }
 
-    activate(0);
-    mahoBlankScene(scenes[0]);
+    activate(t.i);
+    mahoBlankScene(t.scenes[t.i]);
     mahoTermDelay(typeCurrent, 360); // let the panel slide in first
+}
+
+function mahoCycleTerminal(term) {
+    if (!term) return;
+    var scenes = Array.prototype.slice.call(term.querySelectorAll('.mh-term-scene'));
+    if (!scenes.length) return;
+    mahoTerm = { el: term, scenes: scenes, i: 0, paused: false };
+    mahoRunTerminal();
+}
+
+/* Stop the loop and leave the current scene complete, or start it again.
+   A flip can be in flight when the visitor hits pause, so the panel's inline
+   rotation is cleared too; otherwise it would stay stuck edge-on. */
+function mahoTermSetPaused(paused) {
+    var t = mahoTerm;
+    t.paused = paused;
+    if (!t.el) return;
+    if (paused) {
+        mahoClearTerm();
+        t.el.style.transition = 'none';
+        t.el.style.transform = 'none';
+        mahoRevealScene(t.scenes[t.i]);
+    } else {
+        mahoRunTerminal();
+    }
 }
 
 /* Fade/slide content blocks in as they enter the viewport. */
@@ -175,58 +216,11 @@ function mahoSetupReveal() {
     targets.forEach(function (el) { io.observe(el); });
 }
 
-/* Gently auto-advance each feature carousel as a "scrollable" hint.
-   Only runs while the carousel is on screen, and backs off completely
-   as soon as the visitor interacts with it. */
-var mahoCarouselTimers = [];
-
-function mahoClearCarousels() {
-    mahoCarouselTimers.forEach(function (id) { clearInterval(id); });
-    mahoCarouselTimers = [];
-}
-
-function mahoSetupCarousels() {
-    var grids = Array.prototype.slice.call(document.querySelectorAll('.features-grid'));
-    grids.forEach(function (grid) {
-        var cards = grid.querySelectorAll('.feature-card');
-        if (cards.length < 2) return;
-
-        var state = { visible: false, paused: false, idle: null };
-
-        if ('IntersectionObserver' in window) {
-            new IntersectionObserver(function (entries) {
-                entries.forEach(function (e) { state.visible = e.isIntersecting; });
-            }, { threshold: 0.35 }).observe(grid);
-        } else {
-            state.visible = true;
-        }
-
-        // Any genuine user interaction pauses auto-advance for a while.
-        function pause() {
-            state.paused = true;
-            clearTimeout(state.idle);
-            state.idle = setTimeout(function () { state.paused = false; }, 7000);
-        }
-        ['pointerenter', 'pointerdown', 'touchstart', 'wheel', 'keydown', 'focusin']
-            .forEach(function (ev) { grid.addEventListener(ev, pause, { passive: true }); });
-
-        var id = setInterval(function () {
-            if (!state.visible || state.paused || document.hidden) return;
-            var cardList = grid.querySelectorAll('.feature-card');
-            var step = cardList.length > 1
-                ? (cardList[1].offsetLeft - cardList[0].offsetLeft)
-                : cardList[0].offsetWidth;
-            var atEnd = grid.scrollLeft + grid.clientWidth >= grid.scrollWidth - 4;
-            if (atEnd) {
-                grid.scrollTo({ left: 0, behavior: 'smooth' });   // loop back
-            } else {
-                grid.scrollBy({ left: step, behavior: 'smooth' }); // next card
-            }
-        }, 4500);
-
-        mahoCarouselTimers.push(id);
-    });
-}
+/* The feature sections used to auto-advance as a "there is more" hint. That
+   was moving content that started on its own and never stopped, which fails
+   WCAG 2.2.2 (Pause, Stop, Hide) at Level A. The hint is static now: the next
+   card always peeks past the right edge, and Chrome draws scroll markers. From
+   tablet up the cards wrap and there is nothing to hint at. */
 
 /* ---- Hero admin showcase: lightbulb toggle + prev/next arrows ----
    One screenshot at a time; a lightbulb in the window chrome crossfades
@@ -381,19 +375,50 @@ function mahoSetupStores() {
     if (next) next.addEventListener('click', function () { page(1); });
 }
 
+/* Wire the two pause controls. Everything that moves on its own must have a
+   control any visitor can reach, not only one who set prefers-reduced-motion
+   at the OS level (WCAG 2.2.2, Level A). */
+function mahoSetupMotionControls() {
+    var termBtn = document.getElementById('mh-term-pause');
+    if (termBtn && termBtn.dataset.mhWired !== 'on') {
+        termBtn.dataset.mhWired = 'on';
+        termBtn.addEventListener('click', function () {
+            var paused = !termBtn.classList.contains('is-paused');
+            mahoTermSetPaused(paused);
+            termBtn.classList.toggle('is-paused', paused);
+            var label = paused ? 'Play the terminal animation' : 'Pause the terminal animation';
+            termBtn.setAttribute('aria-label', label);
+            termBtn.setAttribute('title', label);
+        });
+    }
+
+    var mqBtn = document.getElementById('mh-marquee-pause');
+    var marquee = document.querySelector('.mh-funding-marquee');
+    if (mqBtn && marquee && mqBtn.dataset.mhWired !== 'on') {
+        mqBtn.dataset.mhWired = 'on';
+        mqBtn.addEventListener('click', function () {
+            var paused = !mqBtn.classList.contains('is-paused');
+            marquee.classList.toggle('is-paused', paused);
+            mqBtn.classList.toggle('is-paused', paused);
+            var label = paused ? 'Resume the scrolling sponsor logos' : 'Pause the scrolling sponsor logos';
+            mqBtn.setAttribute('aria-label', label);
+            mqBtn.setAttribute('title', label);
+        });
+    }
+}
+
 function mahoInitHome() {
     var hero = document.querySelector('.mh-hero');
     if (!hero) return;            // only on the home page
     mahoSetupShots();             // works with or without motion
     mahoSetupStores();            // carousel arrows, motion-independent
+    mahoSetupMotionControls();    // the buttons hide themselves under reduced motion
     if (mahoReducedMotion()) return; // CSS keeps everything visible
 
-    mahoClearCarousels(); // avoid duplicate timers across instant navigations
-    mahoClearTerm();
+    mahoClearTerm(); // avoid duplicate cycles across instant navigations
     document.documentElement.classList.add('mh-anim');
     mahoCycleTerminal(document.querySelector('.mh-term'));
     mahoSetupReveal();
-    mahoSetupCarousels();
 }
 
 /* ---- Blog & Community sidebars: keep their groups expanded ----
