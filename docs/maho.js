@@ -1,33 +1,53 @@
-// https://github.com/kasnder/youtube-embedding-consent
-function unblockVideos() {
-    document.querySelectorAll('.video_wrapper .video_trigger').forEach(function(_trigger) {
-        _trigger.style.display = 'none';
-
-        // seek video_layer element
-        for (var i = 0; i < _trigger.parentNode.childNodes.length; i++) {
-            var video_layer = _trigger.parentNode.childNodes[i];
-            if (video_layer.className == "video_layer") {
-                video_layer.style.display = 'block';
-
-                // seek iframe element
-                for (var j = 0; j < video_layer.childNodes.length; j++) {
-                    var iframe = video_layer.childNodes[j];
-                    if (iframe.tagName.toLowerCase() == 'iframe') {
-                        var videoId = _trigger.getAttribute('data-source');
-                        iframe.src = 'https://www.youtube-nocookie.com/embed/' + videoId + '?controls=1&showinfo=0&autoplay=1&mute=0';
-                    }
-                }
-            }
-        }
-    });
+/* Run a feature so that its failure cannot take the others down with it.
+   Everything on the home page is independent, and the accessibility controls
+   must survive a broken decoration. */
+function mahoSafe(name, fn) {
+    try {
+        fn();
+    } catch (err) {
+        if (window.console && console.warn) console.warn('[maho] ' + name + ' failed:', err);
+    }
 }
-document.addEventListener("DOMContentLoaded", function(event) {
-    document.querySelectorAll('.video_wrapper .video_trigger .video-btn').forEach(function(node) {
-        node.addEventListener("click", function(event) {
-            unblockVideos();
+
+/* YouTube consent: https://github.com/kasnder/youtube-embedding-consent
+   Consent is per video. The visitor agreed to this embed, not to every embed
+   on the page, and each one loaded is another request to YouTube carrying
+   their address. */
+function mahoUnblockVideo(wrapper) {
+    if (!wrapper) return;
+    var trigger = wrapper.querySelector('.video_trigger');
+    var layer = wrapper.querySelector('.video_layer');
+    var iframe = layer && layer.querySelector('iframe');
+    if (!trigger || !layer || !iframe) return;
+
+    /* A bare YouTube id and nothing else. The value comes from authored
+       markup, and anything containing ? & or / would rewrite the embed URL
+       through its query string. */
+    var videoId = trigger.getAttribute('data-source');
+    if (!videoId || !/^[A-Za-z0-9_-]{6,20}$/.test(videoId)) {
+        if (window.console && console.warn) {
+            console.warn('[maho] video wrapper has no usable data-source id:', videoId);
+        }
+        return;
+    }
+
+    trigger.style.display = 'none';
+    layer.style.display = 'block';
+    iframe.src = 'https://www.youtube-nocookie.com/embed/' + encodeURIComponent(videoId) +
+        '?controls=1&showinfo=0&autoplay=1&mute=0';
+}
+
+/* Bound per button, and re-bindable: DOMContentLoaded alone would leave these
+   dead on any page reached without a full load. */
+function mahoSetupVideos() {
+    document.querySelectorAll('.video_wrapper .video_trigger .video-btn').forEach(function (btn) {
+        if (btn.dataset.mhWired === 'on') return;
+        btn.dataset.mhWired = 'on';
+        btn.addEventListener('click', function () {
+            mahoUnblockVideo(btn.closest('.video_wrapper'));
         });
     });
-});
+}
 
 
 /* ============================================================
@@ -176,7 +196,7 @@ function mahoTermSetPaused(paused) {
         mahoClearTerm();
         t.el.style.transition = 'none';
         t.el.style.transform = 'none';
-        mahoRevealScene(t.scenes[t.i]);
+        if (t.scenes[t.i]) mahoRevealScene(t.scenes[t.i]);
     } else {
         mahoRunTerminal();
     }
@@ -190,7 +210,9 @@ function mahoSetupReveal() {
 
     targets.forEach(function (el) {
         // small stagger between siblings sharing a parent
-        var sibs = Array.prototype.slice.call(el.parentNode.children).filter(function (c) {
+        var parent = el.parentNode;
+        if (!parent) return;
+        var sibs = Array.prototype.slice.call(parent.children).filter(function (c) {
             return c.matches && c.matches(selector);
         });
         var idx = sibs.indexOf(el);
@@ -230,7 +252,8 @@ function mahoSetupReveal() {
    direction. Progressive enhancement: without JS the first shot shows. */
 function mahoSetupShots() {
     var stage = document.getElementById('mh-shot-stage');
-    if (!stage) return;
+    if (!stage || stage.dataset.mhShots === 'on') return;
+
     var bulb = document.getElementById('mh-bulb');
     var title = document.getElementById('mh-shot-title');
     var frame = document.getElementById('mh-shot-frame');
@@ -239,6 +262,19 @@ function mahoSetupShots() {
     var light = document.getElementById('mh-shot-light');
     var dark = document.getElementById('mh-shot-dark');
     var win = document.getElementById('mh-shot-window');
+    var prevBtn = document.getElementById('mh-shot-prev');
+    var nextBtn = document.getElementById('mh-shot-next');
+
+    /* Without any one of these the showcase cannot work. Leave the first
+       screenshot on display and stop, rather than throwing part way through
+       and leaving the controls half wired. */
+    if (!bulb || !frame || !spinner || !hold || !light || !dark || !prevBtn || !nextBtn) {
+        if (window.console && console.warn) {
+            console.warn('[maho] admin showcase is missing required elements; navigation disabled');
+        }
+        return;
+    }
+    stage.dataset.mhShots = 'on';
 
     var screens = Array.prototype.map.call(
         document.querySelectorAll('#mh-shot-screens > [data-title]'),
@@ -266,18 +302,38 @@ function mahoSetupShots() {
         light.setAttribute('alt', s.title + ' in the redesigned admin, ' + (isDark ? 'dark' : 'light') + ' mode');
     }
 
+    /* Rejects on failure rather than swallowing it, so go() can tell a
+       capture that arrived from one that never will. */
     function decode(img) {
         if (!img.decode) {
-            return new Promise(function (res) {
-                if (img.complete) { res(); return; }
-                img.onload = img.onerror = res;
+            return new Promise(function (res, rej) {
+                if (img.complete) { img.naturalWidth ? res() : rej(new Error('load failed')); return; }
+                img.onload = res;
+                img.onerror = function () { rej(new Error('load failed')); };
             });
         }
-        return img.decode().catch(function () {});
+        return img.decode();
+    }
+
+    /* A capture that never resolves would leave the spinner turning for the
+       rest of the session. Bound the wait and report what happened. */
+    var LOAD_TIMEOUT = 6000;
+    function settleWithin(promise, ms) {
+        return new Promise(function (resolve) {
+            var settled = false;
+            var timer = setTimeout(function () {
+                if (!settled) { settled = true; resolve('timeout'); }
+            }, ms);
+            promise.then(
+                function () { if (!settled) { settled = true; clearTimeout(timer); resolve('ok'); } },
+                function () { if (!settled) { settled = true; clearTimeout(timer); resolve('error'); } }
+            );
+        });
     }
 
     function go(step) {
         var token = ++navToken;
+        var from = i;
         i = (i + step + screens.length) % screens.length;
         var s = screens[i];
 
@@ -289,9 +345,20 @@ function mahoSetupShots() {
         preL.src = s.light;
         preD.src = s.dark;
 
-        Promise.all([decode(preL), decode(preD)]).then(function () {
+        settleWithin(Promise.all([decode(preL), decode(preD)]), LOAD_TIMEOUT).then(function (outcome) {
             if (token !== navToken) return;     // a newer navigation superseded this one
             spinner.hidden = true;
+
+            if (outcome !== 'ok') {
+                /* Slow or missing capture. Keep the screenshot already on
+                   display instead of swapping in a broken frame, and put the
+                   index back so the arrows stay predictable. */
+                i = from;
+                if (window.console && console.warn) {
+                    console.warn('[maho] screenshot "' + s.title + '" did not load (' + outcome + ')');
+                }
+                return;
+            }
 
             // Park the currently-visible capture on the hold layer so the
             // crossfade reveals it (not the dark stage) behind the new one.
@@ -322,8 +389,8 @@ function mahoSetupShots() {
     var hint = document.getElementById('mh-bulb-hint');
     if (hint) hint.addEventListener('click', toggleMode); // the hint label toggles too
 
-    document.getElementById('mh-shot-prev').addEventListener('click', function () { go(-1); });
-    document.getElementById('mh-shot-next').addEventListener('click', function () { go(1); });
+    prevBtn.addEventListener('click', function () { go(-1); });
+    nextBtn.addEventListener('click', function () { go(1); });
 
     // Touch: swipe left/right to browse screens (mainly for mobile).
     // Track the first touch, and on release fire a navigation only when the
@@ -407,18 +474,59 @@ function mahoSetupMotionControls() {
     }
 }
 
+/* The OS setting can change while the page is open. CSS reacts on its own,
+   but the scripted motion has to be told, or a visitor who switches reduce
+   motion on mid-session keeps the typing loop until they reload. */
+var mahoMotionWatched = false;
+function mahoWatchReducedMotion() {
+    if (mahoMotionWatched || !window.matchMedia) return;
+    mahoMotionWatched = true;
+    var mq = window.matchMedia('(prefers-reduced-motion: reduce)');
+    var onChange = function () {
+        if (mq.matches) {
+            mahoClearTerm();
+            if (mahoTerm.el && mahoTerm.scenes.length) mahoRevealScene(mahoTerm.scenes[mahoTerm.i]);
+            document.documentElement.classList.remove('mh-anim');
+        } else if (document.querySelector('.mh-hero')) {
+            mahoInitHome();
+        }
+    };
+    if (mq.addEventListener) mq.addEventListener('change', onChange);
+    else if (mq.addListener) mq.addListener(onChange);
+}
+
 function mahoInitHome() {
+    mahoSafe('videos', mahoSetupVideos);   // every page, not only the home page
+    mahoWatchReducedMotion();
+
     var hero = document.querySelector('.mh-hero');
-    if (!hero) return;            // only on the home page
-    mahoSetupShots();             // works with or without motion
-    mahoSetupStores();            // carousel arrows, motion-independent
-    mahoSetupMotionControls();    // the buttons hide themselves under reduced motion
+    if (!hero) {
+        /* Left the home page. Without this the terminal timers keep firing
+           against detached nodes for the rest of the session. */
+        mahoClearTerm();
+        mahoTerm = { el: null, scenes: [], i: 0, paused: false };
+        return;
+    }
+
+    /* Each feature is independent, so each one fails alone. The pause controls
+       carry a WCAG obligation and must not depend on a decorative showcase. */
+    mahoSafe('motion controls', mahoSetupMotionControls);
+    mahoSafe('admin showcase', mahoSetupShots);
+    mahoSafe('stores carousel', mahoSetupStores);
+
     if (mahoReducedMotion()) return; // CSS keeps everything visible
 
-    mahoClearTerm(); // avoid duplicate cycles across instant navigations
-    document.documentElement.classList.add('mh-anim');
-    mahoCycleTerminal(document.querySelector('.mh-term'));
-    mahoSetupReveal();
+    mahoSafe('terminal', function () {
+        mahoClearTerm(); // avoid duplicate cycles across instant navigations
+        document.documentElement.classList.add('mh-anim');
+        mahoCycleTerminal(document.querySelector('.mh-term'));
+
+        /* The control keeps its own state, so a re-init must not silently
+           restart motion the visitor already stopped. */
+        var pauseBtn = document.getElementById('mh-term-pause');
+        if (pauseBtn && pauseBtn.classList.contains('is-paused')) mahoTermSetPaused(true);
+    });
+    mahoSafe('scroll reveal', mahoSetupReveal);
 }
 
 /* ---- Blog & Community sidebars: keep their groups expanded ----
@@ -435,11 +543,18 @@ function mahoExpandSectionNav() {
     });
 }
 
-// Run on first load, and again after Material "instant" navigations.
+/* Run on first load, and again after Material "instant" navigations. Both
+   entry points are wrapped: a throw inside a document$ subscriber would
+   otherwise break the observable for every later navigation. */
+function mahoBoot() {
+    mahoSafe('home init', mahoInitHome);
+    mahoSafe('section nav', mahoExpandSectionNav);
+}
+
 if (typeof window !== 'undefined' && window.document$ && typeof window.document$.subscribe === 'function') {
-    window.document$.subscribe(mahoInitHome);
-    window.document$.subscribe(mahoExpandSectionNav);
+    window.document$.subscribe(mahoBoot);
+} else if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', mahoBoot);
 } else {
-    document.addEventListener('DOMContentLoaded', mahoInitHome);
-    document.addEventListener('DOMContentLoaded', mahoExpandSectionNav);
+    mahoBoot(); // the script loaded late; the document is already parsed
 }
