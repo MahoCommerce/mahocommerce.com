@@ -32,6 +32,10 @@ extra_javascript:
   - party.min.js
 
 plugins:
+  # Downloads external assets at build time and serves them from this origin,
+  # so a visitor's address never reaches a third party. It carries a special
+  # case for mermaid.min.js, which the theme fetches from unpkg at runtime.
+  - privacy
   - search
   - social:
       cards_layout_options:
