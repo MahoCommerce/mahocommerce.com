@@ -85,16 +85,3 @@ Reliable email delivery is critical for e-commerce success. Maileroo offers a po
         <span style="text-align: left;">Get started with Maileroo<br><small style="font-size: 0.85em; opacity: 0.8;">and support Maho</small></span>
     </a>
 </p>
-
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    document.querySelectorAll('.affiliate-button').forEach(button => {
-        button.addEventListener('mouseenter', function() {
-            party.confetti(this, {
-                count: party.variation.range(30, 40),
-                speed: party.variation.range(400, 600)
-            });
-        });
-    });
-});
-</script>

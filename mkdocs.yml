@@ -15,7 +15,10 @@ theme:
       primary: black
       accent: '#ADB41A'
   features:
-    - instant
+    # `instant` was the Material 7 name and has been silently ignored ever
+    # since: the token appears nowhere in the theme's templates or its bundle.
+    - navigation.instant
+    - navigation.instant.progress
     - content.code.copy
     - navigation.tabs
     - navigation.top

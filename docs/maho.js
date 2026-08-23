@@ -529,6 +529,26 @@ function mahoInitHome() {
     mahoSafe('scroll reveal', mahoSetupReveal);
 }
 
+/* ---- Sponsors: confetti on the affiliate buttons ----
+   This lived in an inline <script> on sponsors.md. Content swapped in by an
+   instant navigation never re-runs its inline scripts, so it belonged here,
+   behind the same document$ subscription as everything else. party.js is
+   loaded once from extra_javascript and survives navigation, but guard for it
+   anyway: a missing library must not throw. */
+function mahoSetupConfetti() {
+    if (typeof party === 'undefined' || !party.confetti) return;
+    document.querySelectorAll('.affiliate-button').forEach(function (button) {
+        if (button.dataset.mhWired === 'on') return;
+        button.dataset.mhWired = 'on';
+        button.addEventListener('mouseenter', function () {
+            party.confetti(this, {
+                count: party.variation.range(30, 40),
+                speed: party.variation.range(400, 600)
+            });
+        });
+    });
+}
+
 /* ---- Blog & Community sidebars: keep their groups expanded ----
    The collapsible sidebar (navigation.sections is off, which keeps the large
    docs sidebar short) collapses nested groups by default. On the small blog and
@@ -549,6 +569,7 @@ function mahoExpandSectionNav() {
 function mahoBoot() {
     mahoSafe('home init', mahoInitHome);
     mahoSafe('section nav', mahoExpandSectionNav);
+    mahoSafe('confetti', mahoSetupConfetti);
 }
 
 if (typeof window !== 'undefined' && window.document$ && typeof window.document$.subscribe === 'function') {
