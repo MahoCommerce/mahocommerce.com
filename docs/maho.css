@@ -8,6 +8,12 @@
    discovers them early and avoids a flash of fallback text.
    The weights 650 and 750 below need the variable axis. Do not replace these
    faces with static instances.
+
+   Type units: display sizes stay in `em` so the breakpoint rules can rescale a
+   whole heading with one value. Body, label and caption roles are `em` of a
+   known 16px context. Never let two rules in one selector list set a font-size
+   on both a parent and its child: `em` compounds, and that is how the code
+   blocks ended up at 12.4px.
    ============================================================ */
 
 /* --- Design tokens --- */
@@ -77,7 +83,9 @@
 
 /* === GLOBAL TYPOGRAPHY === */
 html {
-    font-size: 20px;
+    /* 125% of the browser default, not a hard 20px. Identical at the default
+       setting, but a reader who raises their browser font size now gets it. */
+    font-size: 125%;
     scroll-behavior: smooth;
 }
 
@@ -460,6 +468,10 @@ body {
     box-shadow: var(--maho-shadow-md);
 }
 
+/* The size is set once, on the block, and the inner <code> inherits it.
+   These selectors match both a parent and its child, so declaring font-size
+   for all of them compounded 0.88em twice: code blocks came out at 12.4px,
+   smaller than inline code, on a site whose main content is code. */
 .md-typeset pre > code,
 .md-typeset .highlight pre,
 .md-typeset .highlighttable .code {
@@ -468,8 +480,20 @@ body {
     border: none;
     border-radius: 0;
     padding: 1em 1.2em;
-    font-size: 0.88em;
     line-height: 1.7;
+}
+
+/* Sized on the block only. Every one of these selectors lands on the same
+   <pre>, so they cannot compound with each other, and the <code> inside
+   inherits the result instead of stepping down a second time. */
+.md-typeset pre,
+.md-typeset .highlight pre,
+.md-typeset .highlighttable .code {
+    font-size: 0.88em;
+}
+
+.md-typeset pre > code {
+    font-size: inherit;
 }
 
 .md-typeset pre::before {
@@ -908,8 +932,14 @@ article:has(#homeh1) {
 }
 
 .mh-lede {
-    font-size: 0.95em;
-    line-height: 1.65;
+    /* Primary prose, so it sits at the 16px reading floor rather than under it.
+       Light on ink also needs compensating on all three axes: a touch more
+       leading, a touch more tracking, and one step more weight, because a pale
+       face on a dark ground reads thinner than the same face on paper. */
+    font-size: 1.02em;
+    line-height: 1.72;
+    letter-spacing: 0.005em;
+    font-weight: 420;
     color: var(--maho-on-ink-soft);
     max-width: 46ch;
     margin: 0 0 1.7em;
@@ -1511,11 +1541,14 @@ html.mh-anim .mh-term-scene.is-active {
     outline: none;
 }
 
+/* Caption role, shared with .mh-store-loc. Light on ink, so compensated. */
 .mh-shots-caption {
     max-width: 1000px;
     margin: 1.2em auto 0;
     text-align: center;
-    font-size: 0.86em;
+    font-size: 0.85em;
+    line-height: 1.72;
+    letter-spacing: 0.004em;
     color: var(--maho-on-ink-soft);
 }
 
@@ -1667,7 +1700,8 @@ html.mh-anim .mh-term-scene.is-active {
 }
 
 .mh-store-loc {
-    font-size: 0.82em;
+    /* Caption role, same size as .mh-shots-caption. */
+    font-size: 0.85em;
     color: var(--maho-text-secondary);
 }
 
@@ -1874,8 +1908,8 @@ html.mh-anim .mh-term-scene.is-active {
 }
 
 .mh-sec-lede {
-    font-size: 0.92em;
-    line-height: 1.65;
+    font-size: 1.02em;
+    line-height: 1.68;
     color: var(--maho-text-secondary);
     margin: 0;
     max-width: 56ch;
@@ -2160,7 +2194,9 @@ html.mh-anim .mh-term-scene.is-active {
     color: var(--maho-text-secondary);
     line-height: 1.62;
     margin: 0;
-    font-size: 0.82em;
+    /* Secondary, scannable copy: 14.4px, the floor for text that is not prose.
+       It was 13.1px, under even that. */
+    font-size: 0.9em;
 }
 
 .feature-card p strong {
@@ -2183,10 +2219,17 @@ html.mh-anim .mh-term-scene.is-active {
 
 .developers .feature-card h3 {
     color: var(--maho-on-ink);
+    letter-spacing: -0.014em;
 }
 
+/* Same card, inverted ground. Colour alone is not the whole adaptation: pale
+   text on ink needs more leading, more tracking and one more weight step to
+   match the density it had on paper. */
 .developers .feature-card p {
     color: var(--maho-on-ink-soft);
+    line-height: 1.72;
+    letter-spacing: 0.006em;
+    font-weight: 420;
 }
 
 .developers .feature-card p strong {
@@ -2324,7 +2367,8 @@ html.mh-anim .mh-reveal.mh-in {
 @media screen and (max-width: 768px) {
     #homeh1.mh-headline { font-size: 2.4em; }
 
-    .mh-lede { font-size: 0.92em; }
+    /* Stays at the reading floor on a phone, where it matters most. */
+    .mh-lede { font-size: 1em; }
 
     /* Hero CTAs: first two share a 50/50 row, the ghost link centered below */
     .mh-ctas {
