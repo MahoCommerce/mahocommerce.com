@@ -45,7 +45,7 @@
     --maho-border-light: #ecece0;
     --maho-text-primary: #191a10;
     --maho-text-secondary: #54564a;
-    --maho-text-tertiary: #8b8d7d;
+    --maho-text-tertiary: #6f7162;        /* AA on paper, surface and warm */
 
     /* Type */
     --maho-display: "Bricolage Grotesque", "Geist", ui-sans-serif, system-ui, sans-serif;
@@ -265,6 +265,78 @@ body {
 
 .md-search__output {
     border-radius: 0 0 var(--maho-radius-md) var(--maho-radius-md);
+}
+
+/* --- Search results ---
+   On a phone the overlay is the whole screen, so it has to belong to the same
+   world as the page behind it. Material's defaults land here as neutral greys
+   and 0.87-black text, which reads as a different product bolted on. */
+
+/* Full-width bar on a phone: square it off and seat it on a real border. */
+@media screen and (max-width: 76.1875em) {
+    [data-md-toggle=search]:checked ~ .md-header .md-search__form {
+        border-radius: 0;
+        background: var(--maho-surface);
+        border-bottom: 1px solid var(--maho-border);
+    }
+}
+
+/* "20 matching documents" */
+.md-search-result__meta {
+    background: var(--maho-surface-warm);
+    color: var(--maho-text-secondary);
+    border-bottom: 1px solid var(--maho-border-light);
+    font-family: var(--maho-sans);
+    font-weight: 500;
+    letter-spacing: 0.01em;
+}
+
+.md-search-result__item {
+    border-bottom: 1px solid var(--maho-border-light);
+}
+
+.md-search-result__item:last-child {
+    border-bottom: 0;
+}
+
+/* Teaser copy is supporting text; the headings carry the scan.
+   Matched to `.md-search-result .md-typeset`, which is the specificity the
+   theme uses here: a single-class selector loses to it. */
+.md-search-result .md-typeset {
+    color: var(--maho-text-secondary);
+}
+
+.md-search-result .md-typeset h1,
+.md-search-result .md-typeset h2 {
+    color: var(--maho-text-primary);
+}
+
+.md-search-result .md-typeset h1 {
+    font-family: var(--maho-display);
+    font-weight: 650;
+    letter-spacing: -0.015em;
+}
+
+.md-search-result__link:hover,
+.md-search-result__link:focus,
+.md-search-result__link[data-md-state="active"] {
+    background: var(--maho-brand-subtle);
+}
+
+.md-search-result__more > summary,
+.md-search-result__more > a {
+    color: var(--maho-brand-text);
+    font-weight: 500;
+}
+
+/* Matches read as highlights, not as links. Tint and colour carry it; adding
+   weight as a third marker turns a dense result into noise. */
+.md-search-result mark {
+    background: var(--maho-brand-muted);
+    color: var(--maho-brand-text);
+    border-radius: 3px;
+    padding: 0 0.14em;
+    text-decoration: none;
 }
 
 /* Source (GitHub) chip */
