@@ -1,32 +1,35 @@
 ---
 title: AI Crawlers & llms.txt
-description: Configure Maho's llms.txt, llms-full.txt and robots.txt content signals to tell AI assistants and crawlers what your store is and what they may do with it.
+description: Configure Maho's llms.txt, llms-full.txt, robots.txt content signals and markdown pages to tell AI assistants and crawlers what your store is, what they may do with it, and how to read it cheaply.
 ---
 
 # AI Crawlers & llms.txt <span class="version-badge">v26.9+</span>
 
 AI assistants and AI-powered search engines are becoming a real discovery channel for stores.
-Maho gives you two tools to manage them, both served automatically and both configurable per
+Maho gives you three tools to manage them, all served automatically and all configurable per
 store view:
 
 - **llms.txt** and **llms-full.txt** - a markdown index of your store, written for AI agents.
 - **Content signals** in the generated robots.txt - a machine-readable statement of what
   crawlers may do with your content (search indexing, AI answers, AI training).
+- **Markdown pages** - a markdown version of every product, category, CMS page and blog post,
+  served on the same URL when an agent asks for it.
 
-Both features are **enabled by default**, and a fresh or upgraded v26.9 store serves them with
-no action on your part. This page explains what they contain, where every setting lives, and
-how to change or disable each one.
+All three features are **enabled by default**, and a fresh or upgraded v26.9 store serves them
+with no action on your part. This page explains what they contain, where every setting lives,
+and how to change or disable each one.
 
 !!! warning "Defaults changed on upgrade"
     After upgrading to v26.9, your generated robots.txt gains a `Content-Signal` line
     (`search=yes, ai-input=yes, ai-train=no, use=reference`) plus an explanatory notice, and
-    your store starts answering at `/llms.txt` and `/llms-full.txt`. If that is not the policy
-    you want, adjust the settings below. Flush the configuration cache after deploying so the
-    new defaults apply.
+    your store starts answering at `/llms.txt` and `/llms-full.txt`, and your catalog, CMS and
+    blog pages answer with markdown when a request asks for it. If that is not the policy you
+    want, adjust the settings below. Flush the configuration cache after deploying so the new
+    defaults apply.
 
 ## Where everything lives
 
-All settings sit in **System > Configuration > Catalog > Crawlers & robots.txt**, in two
+All settings sit in **System > Configuration > Catalog > Crawlers & robots.txt**, in three
 groups. Every field is configurable per store view.
 
 | Group | Field | Default | What it does |
@@ -42,6 +45,9 @@ groups. Every field is configurable per store view.
 | llms.txt | Store Description | (empty) | The store summary shown to AI agents. Empty falls back to the default meta description. |
 | llms.txt | Generate llms-full.txt | Yes | Serves `/llms-full.txt` with the full text of your CMS pages. When off, it answers 404. |
 | llms.txt | Extra Content | (empty) | Markdown appended verbatim to the end of llms.txt. |
+| Markdown for AI agents | Enabled | Yes | Serves the markdown version of a page on request. When off, every request gets HTML. |
+| Markdown for AI agents | Routes | Catalog, CMS and blog pages | One route prefix per line, as `module/controller/action`. Only these pages get a markdown version. |
+| Markdown for AI agents | Cache Lifetime | 3600 | Seconds a generated markdown page stays in the **Blocks HTML output** cache. |
 
 Two settings outside this section also feed llms.txt:
 
@@ -147,6 +153,66 @@ No AI vendor promises to read llms.txt today, and Google has stated that it does
 ships it because the cost is near zero and the convention is emerging: treat it as a low-cost
 bet, not as a traffic channel.
 
+## Markdown for AI agents
+
+An AI agent that reads a product page as HTML pays for the navigation, the scripts, the styles
+and the tracking code before it reaches the product. Maho answers with markdown instead when the
+agent asks for it. The URL stays the same, so browsers and search engines keep the HTML page.
+
+An agent can ask in two ways:
+
+- Send the header `Accept: text/markdown`. Agent clients such as Claude Code send it by default.
+  Maho answers with markdown only when `text/markdown` outranks `text/html` in the header, so a
+  browser never gets markdown by accident.
+- Append `.md` to the URL. `/women/` becomes `/women.md`, and `/lafayette-dress.html` becomes
+  `/lafayette-dress.html.md`. The home page has no `.md` form: use the header.
+
+Every HTML page that has a markdown version announces it with a `Link` header
+(`rel="alternate"; type="text/markdown"`) and sends `Vary: Accept`. The markdown response carries
+`X-Robots-Tag: noindex`, so search engines never index it as a duplicate. llms.txt mentions the
+feature too, so an agent that starts there knows how to read the rest of the store.
+
+### What the markdown contains
+
+- **Product** - the name, the meta description, then SKU, price (with the regular price when a
+  special price applies), availability, brand, GTIN, MPN, URL and image URLs. The description
+  follows, then the same attributes as the "Additional Information" tab, then the options: one
+  row per child of a configurable product with its price and availability, the items of a
+  grouped product, or the price range of a bundle.
+- **Category** - the name, the description, the subcategories, and the product list as a table
+  with a link, SKU, price and availability for each product. The table follows the page, the
+  sort order and the layered navigation filters of the request, and it ends with a link to the
+  next page.
+- **CMS page** and **blog post** - the title, the meta description and the content converted
+  to markdown, with template directives such as `{{media}}` and `{{widget}}` resolved.
+- **Blog index** and **blog category** - one line per post with its date and an excerpt.
+
+Prices follow the display currency and the tax display setting of the store view.
+
+### Search engines and duplicate content
+
+A search engine never sees the markdown as a duplicate of the HTML page. Its crawler asks for
+HTML, so the normal URL answers with HTML, and the `.md` URL answers with `X-Robots-Tag: noindex`,
+which Google honors for any content type. A `noindex` page never enters the index. Do not add a
+`Disallow: /*.md$` rule to robots.txt: a blocked URL can still be indexed from external links,
+and the crawler cannot read the `noindex` header of a URL it may not fetch.
+
+### Which pages answer
+
+The **Routes** field lists the pages that get a markdown version, one route prefix per line.
+The default covers the product page, the category page, CMS pages, the home page, blog posts and
+the blog lists. Every other page, such as the cart, the checkout and the customer account, always
+answers with HTML, whatever the request asks for. Add a line to include a page of a third-party
+module, or remove one to exclude a page.
+
+### Web server
+
+The Apache configuration that ships with Maho 26.9 lets `.md` URLs through. An nginx or Caddy
+configuration written for an earlier version denies `.md` files, so every `.md` URL answers `404`
+before the request reaches PHP. Remove `md` from the list of denied extensions, as the
+[Web Server Configuration](../hosting/web-server.md) page shows. The `Accept` header works
+without any web server change.
+
 ## Recommended setup
 
 1. Open **System > Configuration > Catalog > Crawlers & robots.txt**.
@@ -170,3 +236,9 @@ header (robots.txt sends the same header). After changing settings, flush the
 **Configuration** cache and the **Blocks HTML output** cache in System > Cache Management to
 see the change immediately; otherwise it appears within the hour. Saving a CMS page or a
 category also invalidates the cached files.
+
+Markdown pages use the same **Blocks HTML output** cache, one copy per store view, currency,
+customer group and URL, for the number of seconds in **Cache Lifetime**. Saving the product, the
+category, the CMS page or the blog post clears its copy at once. A stock change or a catalog
+price rule does not: the page updates when the lifetime ends. Set a shorter lifetime when stock
+changes often, or flush the **Blocks HTML output** cache after a bulk import.
