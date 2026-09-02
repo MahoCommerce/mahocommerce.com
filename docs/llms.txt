@@ -45,6 +45,7 @@ Maho is an advanced open-source, on-premises e-commerce platform that evolved fr
 - **Retina-ready frontend** with srcset 2x
 - **Redis support built-in** (no 3rd party modules needed)
 - **Docker images based on FrankenPHP**
+- **Native DDEV support** (`maho` project type since DDEV 1.25.4)
 - **Full Composer autoload** for the entire platform
 
 ### Developer Experience

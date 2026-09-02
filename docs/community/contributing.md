@@ -67,6 +67,13 @@ Join our [Discord server](https://discord.gg/dWgcVUFTrS){:target="_blank"} for r
 3. Ensure your changes don't break existing functionality.
 4. Submit a pull request with a clear description of your changes.
 
+!!! tip "Local environment with DDEV"
+    [DDEV](https://ddev.com){:target="_blank"} (1.25.4+) has a native `maho` project type, and its
+    [Maho quickstart](https://docs.ddev.com/en/stable/users/quickstart/#maho){:target="_blank"}
+    includes a "Git Clone (for contributors)" setup: it clones the core repository, starts
+    the containers and installs Maho with sample data in a few commands.
+    See also the [DDEV section of our Getting Started guide](../about/getting-started.md#ddev).
+
 Please note that smaller pull requests have a higher chance of being accepted,
 and pull requests with tests will be prioritized.
 

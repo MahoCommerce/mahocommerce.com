@@ -1,5 +1,5 @@
 ---
-description: Install and run Maho step by step - system requirements, Composer setup, web server config, Docker, the CLI and web installers, Redis and cron.
+description: Install and run Maho step by step - system requirements, Composer setup, web server config, DDEV, Docker, the CLI and web installers, Redis and cron.
 ---
 
 # Getting Started
@@ -71,6 +71,45 @@ Arguments:
 ./maho serve
 Serving Maho on http://127.0.0.1:8000, press CTRL+C to exit...
 ```
+
+### DDEV
+
+[DDEV](https://ddev.com){target=_blank} is a Docker-based local development environment
+with native Maho support since version 1.25.4. It comes with a dedicated `maho` project type,
+which brings you:
+
+- a preconfigured web server, PHP and database, no manual setup needed
+- automatic creation of `app/etc/local.xml` with the database connection details,
+  so importing an existing store is just `ddev import-db` and `ddev import-files` away
+- the `ddev maho` command, which runs the [Maho CLI tool](../developer/cli-tool.md) inside the container
+
+To create a new store with DDEV:
+
+```bash
+mkdir -p my-maho-site && cd my-maho-site
+ddev config --project-type=maho --docroot=public
+ddev start
+ddev composer create-project mahocommerce/maho-starter
+```
+
+Then run the installer (`--force` is needed because DDEV already created `local.xml` for you):
+
+```bash
+ddev maho install --force \
+  --license_agreement_accepted yes \
+  --locale en_US --timezone UTC --default_currency USD \
+  --db_host db --db_name db --db_user db --db_pass db \
+  --url "https://my-maho-site.ddev.site/" \
+  --use_secure 1 --secure_base_url "https://my-maho-site.ddev.site/" --use_secure_admin 1 \
+  --admin_firstname Store --admin_lastname Admin --admin_email admin@example.com \
+  --admin_username admin --admin_password veryl0ngpassw0rd \
+  --sample_data 1
+ddev maho index:reindex:all && ddev maho cache:flush
+ddev launch /admin
+```
+
+The full walkthrough, including a setup for contributors working on Maho's core repository,
+is in the [DDEV Maho quickstart](https://docs.ddev.com/en/stable/users/quickstart/#maho){target=_blank}.
 
 ### Do you like Docker?
 
