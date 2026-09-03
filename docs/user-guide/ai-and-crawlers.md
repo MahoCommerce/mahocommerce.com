@@ -47,7 +47,7 @@ groups. Every field is configurable per store view.
 | llms.txt | Extra Content | (empty) | Markdown appended verbatim to the end of llms.txt. |
 | Markdown for AI agents | Enabled | Yes | Serves the markdown version of a page on request. When off, every request gets HTML. |
 | Markdown for AI agents | Routes | Catalog, CMS and blog pages | One route prefix per line, as `module/controller/action`. Only these pages get a markdown version. |
-| Markdown for AI agents | Cache Lifetime | 3600 | Seconds a generated markdown page stays in the **Blocks HTML output** cache. |
+| Markdown for AI agents | Cache Lifetime | 3600 | Seconds a generated markdown page stays in the **Blocks HTML output** cache. `0` turns the cache off. |
 
 Two settings outside this section also feed llms.txt:
 
@@ -163,31 +163,44 @@ An agent can ask in two ways:
 
 - Send the header `Accept: text/markdown`. Agent clients such as Claude Code send it by default.
   Maho answers with markdown only when `text/markdown` outranks `text/html` in the header, so a
-  browser never gets markdown by accident.
+  browser never gets markdown by accident. A wildcard such as `*/*` never selects markdown.
 - Append `.md` to the URL. `/women/` becomes `/women.md`, and `/lafayette-dress.html` becomes
-  `/lafayette-dress.html.md`. The home page has no `.md` form: use the header.
+  `/lafayette-dress.html.md`. The home page is `/index.md`.
+
+Both forms answer the same document. A `.md` URL that redirects, for example to the canonical
+URL of a product, keeps the suffix on the redirect target. A `.md` URL of a page without a
+markdown version, such as the cart, answers `404` with a short markdown body.
 
 Every HTML page that has a markdown version announces it with a `Link` header
 (`rel="alternate"; type="text/markdown"`) and sends `Vary: Accept`. The markdown response carries
-`X-Robots-Tag: noindex`, so search engines never index it as a duplicate. llms.txt mentions the
-feature too, so an agent that starts there knows how to read the rest of the store.
+`X-Robots-Tag: noindex`, so search engines never index it as a duplicate. A CDN or a Varnish
+cache in front of the store then keeps one copy of the page per `Accept` value. llms.txt mentions
+the feature too, and its page and category links point straight to the markdown version.
 
 ### What the markdown contains
 
-- **Product** - the name, the meta description, then SKU, price (with the regular price when a
-  special price applies), availability, brand, GTIN, MPN, URL and image URLs. The description
-  follows, then the same attributes as the "Additional Information" tab, then the options: one
-  row per child of a configurable product with its price and availability, the items of a
-  grouped product, or the price range of a bundle.
-- **Category** - the name, the description, the subcategories, and the product list as a table
-  with a link, SKU, price and availability for each product. The table follows the page, the
-  sort order and the layered navigation filters of the request, and it ends with a link to the
-  next page.
-- **CMS page** and **blog post** - the title, the meta description and the content converted
-  to markdown, with template directives such as `{{media}}` and `{{widget}}` resolved.
-- **Blog index** and **blog category** - one line per post with its date and an excerpt.
+Each page is one document. Query parameters such as the page number, the sort order and the
+layered navigation filters are ignored, so one URL names one document.
 
-Prices follow the display currency and the tax display setting of the store view.
+- **Product** - the name, the meta description, then SKU, price (with the regular price when a
+  special price applies, or a price range for a bundle), availability, brand, GTIN, MPN, URL and
+  up to ten image URLs. The description follows, then the same attributes as the "Additional
+  Information" tab, then the options: one row per enabled child of a configurable product with
+  the price the buyer pays and its availability, or one row per item of a grouped product.
+- **Category** - the name, the meta description, the description, the CMS block of the landing
+  page when the display mode shows one, the subcategories, and the first 100 products in
+  position order as a table with a link, SKU, price and availability for each product. When the
+  category holds more products, the table ends with a count of the remaining ones and points
+  the agent to the XML sitemap.
+- **CMS page** - the title, the meta description and the content converted to markdown, with
+  template directives such as `{{media}}` and `{{widget}}` resolved.
+- **Blog post** - the title, the meta description, the publish date, the image URL, the URL and
+  the content converted to markdown.
+- **Blog index** and **blog category** - one line per post with its date and an excerpt, for the
+  first 100 posts.
+
+Prices follow the display currency and the tax display setting of the store view, the same
+rules as the structured data on the page.
 
 ### Search engines and duplicate content
 
@@ -202,8 +215,11 @@ and the crawler cannot read the `noindex` header of a URL it may not fetch.
 The **Routes** field lists the pages that get a markdown version, one route prefix per line.
 The default covers the product page, the category page, CMS pages, the home page, blog posts and
 the blog lists. Every other page, such as the cart, the checkout and the customer account, always
-answers with HTML, whatever the request asks for. Add a line to include a page of a third-party
-module, or remove one to exclude a page.
+answers with HTML, whatever the request asks for. Remove a line to exclude a page.
+
+A line alone does not add a page: the page also needs a renderer that builds its markdown. A
+third-party module that ships one documents the route to add. Developers find the renderer
+contract in the [Markdown renderers](../developer/markdown-renderers.md) guide.
 
 ### Web server
 
@@ -238,7 +254,8 @@ see the change immediately; otherwise it appears within the hour. Saving a CMS p
 category also invalidates the cached files.
 
 Markdown pages use the same **Blocks HTML output** cache, one copy per store view, currency,
-customer group and URL, for the number of seconds in **Cache Lifetime**. Saving the product, the
-category, the CMS page or the blog post clears its copy at once. A stock change or a catalog
-price rule does not: the page updates when the lifetime ends. Set a shorter lifetime when stock
-changes often, or flush the **Blocks HTML output** cache after a bulk import.
+customer group and URL, for the number of seconds in **Cache Lifetime**. A lifetime of `0`
+turns the cache off, and every request builds the page again. Saving the product, the category,
+the CMS page or the blog post clears its copy at once. A stock change or a catalog price rule
+does not: the page updates when the lifetime ends. Set a shorter lifetime when stock changes
+often, or flush the **Blocks HTML output** cache after a bulk import.

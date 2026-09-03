@@ -214,6 +214,7 @@ nav:
           - Customer Segments: developer/guide/customer-segments.md
           - Email Automation: developer/guide/email-automation.md
           - Gift Cards: developer/guide/gift-cards.md
+          - Markdown renderers: developer/markdown-renderers.md
       - Core & architecture:
           - Routing: developer/routing.md
           - Event observers: developer/observers.md
