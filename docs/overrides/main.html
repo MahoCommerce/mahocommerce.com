@@ -8,10 +8,9 @@
   must not do that. The woff2 files now live in docs/assets/fonts/ and are
   served from this origin.
 
-  All of them are variable fonts. Keep them variable: maho.css asks for weight 650
-  and weight 750 on the largest headings, and static instances cannot render
-  those. Bricolage Grotesque also carries an optical-size axis, which the browser
-  applies on its own through font-optical-sizing.
+  All of them are variable fonts. Keep them variable: maho.css asks for
+  weights between the standard instances (650, 750), and static instances
+  cannot render those.
 
   The files are preloaded so the browser starts them during the initial head
   scan, in parallel with the stylesheets, instead of waiting for layout. This
@@ -34,32 +33,11 @@
 {% block extrahead %}
   {{ super() }}
   <link rel="preload" href="{{ 'assets/fonts/geist-latin.woff2' | url }}" as="font" type="font/woff2" crossorigin>
-  <link rel="preload" href="{{ 'assets/fonts/bricolage-grotesque-latin.woff2' | url }}" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="{{ 'assets/fonts/geist-mono-latin.woff2' | url }}" as="font" type="font/woff2" crossorigin>
   {% if page.is_homepage %}
   <link rel="preload" href="{{ 'assets/fonts/big-shoulders-display-latin.woff2' | url }}" as="font" type="font/woff2" crossorigin>
   {% endif %}
   <style>
-    /* Bricolage Grotesque - display. Axes: opsz 12..96, wght 200..800 */
-    @font-face {
-      font-family: 'Bricolage Grotesque';
-      font-style: normal;
-      font-weight: 200 800;
-      font-stretch: 100%;
-      font-display: swap;
-      src: url({{ 'assets/fonts/bricolage-grotesque-latin.woff2' | url }}) format('woff2');
-      unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-    }
-    @font-face {
-      font-family: 'Bricolage Grotesque';
-      font-style: normal;
-      font-weight: 200 800;
-      font-stretch: 100%;
-      font-display: swap;
-      src: url({{ 'assets/fonts/bricolage-grotesque-latin-ext.woff2' | url }}) format('woff2');
-      unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
-    }
-
     /* Big Shoulders Display - homepage headline. Axis: wght 100..900 */
     @font-face {
       font-family: 'Big Shoulders Display';

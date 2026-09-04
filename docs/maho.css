@@ -2,10 +2,10 @@
    MAHO COMMERCE - "Ink & Chartreuse" design system
    Electric chartreuse (#d7df22, straight from the logo) on deep
    olive ink, over a warm paper reading surface.
-   Display type: Bricolage Grotesque · Body: Geist · Code: Geist Mono
+   Display and body type: Geist · Code: Geist Mono
    Homepage hero headline: Big Shoulders Display (condensed poster face,
-   uppercase, one line). Homepage section titles: Geist at weight 600.
-   All four are self-hosted variable fonts. The @font-face rules and the
+   uppercase, one line).
+   All three are self-hosted variable fonts. The @font-face rules and the
    preloads live in the document head (see overrides/main.html) so the browser
    discovers them early and avoids a flash of fallback text.
    The weights 650 and 750 below need the variable axis. Do not replace these
@@ -50,7 +50,7 @@
     --maho-text-tertiary: #6f7162;        /* AA on paper, surface and warm */
 
     /* Type */
-    --maho-display: "Bricolage Grotesque", "Geist", ui-sans-serif, system-ui, sans-serif;
+    --maho-display: "Geist", ui-sans-serif, system-ui, sans-serif;
     --maho-sans: "Geist", ui-sans-serif, system-ui, sans-serif;
     --maho-mono: "Geist Mono", ui-monospace, "SF Mono", Menlo, monospace;
     --maho-poster: "Big Shoulders Display", "Arial Narrow", Impact, sans-serif;
