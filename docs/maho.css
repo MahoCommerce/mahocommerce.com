@@ -3,7 +3,9 @@
    Electric chartreuse (#d7df22, straight from the logo) on deep
    olive ink, over a warm paper reading surface.
    Display type: Bricolage Grotesque · Body: Geist · Code: Geist Mono
-   All three are self-hosted variable fonts. The @font-face rules and the
+   Homepage hero headline: Big Shoulders Display (condensed poster face,
+   uppercase, one line). Homepage section titles: Geist at weight 600.
+   All four are self-hosted variable fonts. The @font-face rules and the
    preloads live in the document head (see overrides/main.html) so the browser
    discovers them early and avoids a flash of fallback text.
    The weights 650 and 750 below need the variable axis. Do not replace these
@@ -51,6 +53,8 @@
     --maho-display: "Bricolage Grotesque", "Geist", ui-sans-serif, system-ui, sans-serif;
     --maho-sans: "Geist", ui-sans-serif, system-ui, sans-serif;
     --maho-mono: "Geist Mono", ui-monospace, "SF Mono", Menlo, monospace;
+    --maho-poster: "Big Shoulders Display", "Arial Narrow", Impact, sans-serif;
+    --maho-home-display: var(--maho-sans);
 
     /* Shadows */
     --maho-shadow-sm: 0 1px 3px rgba(20, 21, 10, 0.05), 0 1px 2px rgba(20, 21, 10, 0.06);
@@ -958,16 +962,21 @@ article:has(#homeh1) {
     100% { box-shadow: 0 0 0 0 rgba(215, 223, 34, 0); }
 }
 
-/* Headline */
+/* Headline: condensed poster face, uppercase, on ONE line. 3.6em of the
+   20px context is 72px; the whole line then measures about 520px, inside
+   the 552px copy column. white-space: nowrap keeps it from breaking, and the
+   breakpoint rules step the size down before a column gets too narrow. */
 #homeh1.mh-headline {
-    font-family: var(--maho-display);
+    font-family: var(--maho-poster);
     text-align: left;
-    font-size: 4.1em;
-    font-weight: 750;
-    line-height: 0.98;
-    letter-spacing: -0.035em;
+    font-size: 3.6em;
+    font-weight: 800;
+    line-height: 0.9;
+    letter-spacing: 0.006em;
+    text-transform: uppercase;
+    white-space: nowrap;
     color: var(--maho-on-ink);
-    margin: 0.4em 0 0.32em;
+    margin: 0.4em 0 0.4em;
 }
 
 #homeh1.mh-headline .mh-sr {
@@ -985,22 +994,7 @@ article:has(#homeh1) {
 #homeh1.mh-headline em {
     font-style: normal;
     color: var(--maho-chartreuse);
-    position: relative;
     display: inline-block;
-}
-
-/* Hand-drawn underline stroke beneath the accent words */
-#homeh1.mh-headline em::after {
-    content: '';
-    position: absolute;
-    left: 0.02em;
-    right: 0.14em;
-    bottom: -0.06em;
-    height: 0.085em;
-    background: var(--maho-chartreuse);
-    opacity: 0.35;
-    border-radius: 99px;
-    transform: skewX(-12deg);
 }
 
 .mh-lede {
@@ -1962,18 +1956,20 @@ html.mh-anim .mh-term-scene.is-active {
 }
 
 .md-typeset .mh-sec-title {
-    font-family: var(--maho-display);
+    font-family: var(--maho-home-display);
     font-size: 2.7em;
-    font-weight: 700;
+    font-weight: 600;
     letter-spacing: -0.03em;
     line-height: 1.08;
     margin: 0 0 0.4em;
 }
 
-.md-typeset .mh-sec-title strong {
-    font-weight: 750;
+/* The chartreuse band runs under the whole title, never under a fragment.
+   It sits on an inline span so it follows every wrapped line (clone). */
+.md-typeset .mh-sec-title .mh-mark,
+.final-cta h2 .mh-mark {
     color: inherit;
-    background: linear-gradient(transparent 68%, rgba(215, 223, 34, 0.5) 68%);
+    background: linear-gradient(transparent 78%, rgba(215, 223, 34, 0.5) 78%);
     padding: 0 0.06em;
     box-decoration-break: clone;
     -webkit-box-decoration-break: clone;
@@ -2036,10 +2032,9 @@ html.mh-anim .mh-term-scene.is-active {
     color: var(--maho-on-ink);
 }
 
-.developers .md-typeset .mh-sec-title strong,
-.md-typeset .developers .mh-sec-title strong {
-    background: none;
-    color: var(--maho-chartreuse);
+.md-typeset .developers .mh-sec-title .mh-mark {
+    /* on ink the band is dimmer, so the light text stays legible */
+    background: linear-gradient(transparent 68%, rgba(215, 223, 34, 0.28) 68%);
 }
 
 .developers .mh-sec-lede {
@@ -2340,22 +2335,13 @@ html.mh-anim .mh-term-scene.is-active {
 }
 
 .md-typeset .final-cta h2 {
-    font-family: var(--maho-display);
+    font-family: var(--maho-home-display);
     font-size: 2.6em;
     margin: 0 0 0.4em;
-    font-weight: 750;
+    font-weight: 600;
     letter-spacing: -0.03em;
     line-height: 1.05;
     color: var(--maho-text-primary);
-}
-
-.final-cta h2 em {
-    font-style: normal;
-    color: inherit;
-    background: linear-gradient(transparent 68%, rgba(215, 223, 34, 0.5) 68%);
-    padding: 0 0.06em;
-    box-decoration-break: clone;
-    -webkit-box-decoration-break: clone;
 }
 
 .final-cta p {
@@ -2424,7 +2410,7 @@ html.mh-anim .mh-reveal.mh-in {
         padding: 2.6em 1.5em 3em;
     }
 
-    #homeh1.mh-headline { font-size: 3.1em; }
+    #homeh1.mh-headline { font-size: 3.6em; }
 
     .mh-hero-side { max-width: 600px; }
 
@@ -2437,7 +2423,7 @@ html.mh-anim .mh-reveal.mh-in {
 }
 
 @media screen and (max-width: 768px) {
-    #homeh1.mh-headline { font-size: 2.4em; }
+    #homeh1.mh-headline { font-size: 2.3em; }
 
     /* Stays at the reading floor on a phone, where it matters most. */
     .mh-lede { font-size: 1em; }

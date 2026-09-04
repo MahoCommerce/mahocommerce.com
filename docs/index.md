@@ -18,7 +18,7 @@ description: Maho is the open-source, self-hosted ecommerce platform you actuall
 <section class="mh-hero" aria-label="Maho - open-source on-premises ecommerce platform">
   <div class="mh-hero-inner">
     <div class="mh-hero-copy">
-      <h1 id="homeh1" class="mh-headline"><span class="mh-sr">Maho - </span>Your store,<br><em>your rules.</em></h1>
+      <h1 id="homeh1" class="mh-headline"><span class="mh-sr">Maho - </span>Your store, <em>your rules.</em></h1>
       <p class="mh-lede">The ecommerce platform you actually own. Lean at the core, fully featured out of the box, and open to extend however you like. Self-hosted, with no fees skimming your margins and no vendor holding the keys.</p>
       <div class="mh-meta">
         <span><span class="mh-bullet">●</span> Open source</span>
@@ -125,7 +125,7 @@ description: Maho is the open-source, self-hosted ecommerce platform you actuall
 
 <section class="mh-funding" aria-label="Maho is backed by European public funding, partners and sponsors">
   <div class="mh-funding-inner">
-    <h2 class="mh-sec-title">Funded by the <strong>European Commission</strong></h2>
+    <h2 class="mh-sec-title"><span class="mh-mark">Funded by the European Commission</span></h2>
     <p class="mh-sec-lede">This project is funded through the <a href="https://nlnet.nl/taler" target="_blank" rel="noopener">NGI TALER Fund</a>, a fund established by <a href="https://nlnet.nl" target="_blank" rel="noopener">NLnet</a> with financial support from the European Commission's <a href="https://ngi.eu" target="_blank" rel="noopener">Next Generation Internet</a> program. Learn more at the <a href="https://nlnet.nl/project/Maho" target="_blank" rel="noopener">NLnet project page</a>.</p>
     <div class="mh-funding-logos">
       <a href="https://nlnet.nl" target="_blank" rel="noopener"><img src="assets/sponsors/nlnet.svg" alt="NLnet Foundation" loading="lazy" width="157" height="60"></a>
@@ -172,7 +172,7 @@ description: Maho is the open-source, self-hosted ecommerce platform you actuall
 <section class="mh-stores" aria-label="Real stores running Maho">
   <div class="mh-stores-inner">
     <div class="mh-stores-head">
-      <h2 class="mh-sec-title">Selling on Maho <strong>right now</strong></h2>
+      <h2 class="mh-sec-title"><span class="mh-mark">Selling on Maho right now</span></h2>
       <p class="mh-sec-lede">Worldwide merchants run their storefronts on Maho.</p>
     </div>
     <div class="mh-stores-carousel">
@@ -248,7 +248,7 @@ description: Maho is the open-source, self-hosted ecommerce platform you actuall
 
 <div class="mh-sec-head" markdown>
 <div class="mh-sec-copy" markdown>
-<h2 class="mh-sec-title" markdown>For **store owners**</h2>
+<h2 class="mh-sec-title"><span class="mh-mark">For store owners</span></h2>
 <p class="mh-sec-lede">Run your store with enterprise features that actually help you sell more, without the enterprise price tag or complexity.</p>
 </div>
 <div class="mh-sec-media" aria-hidden="true"><img src="assets/owner.webp" alt="" width="1024" height="1024" loading="lazy"></div>
@@ -334,7 +334,7 @@ Regular updates with real improvements like a **redesigned admin with dark mode*
 
 <div class="mh-sec-head" markdown>
 <div class="mh-sec-copy" markdown>
-<h2 class="mh-sec-title" markdown>For **agencies**</h2>
+<h2 class="mh-sec-title"><span class="mh-mark">For agencies</span></h2>
 <p class="mh-sec-lede">Deliver professional ecommerce solutions to clients with a platform that's proven, powerful, and cost-effective.</p>
 </div>
 <div class="mh-sec-media" aria-hidden="true"><img src="assets/agencies.webp" alt="" width="1024" height="1024" loading="lazy"></div>
@@ -410,7 +410,7 @@ Comprehensive **API documentation** (REST, GraphQL, SOAP), **developer guides** 
 
 <div class="mh-sec-head" markdown>
 <div class="mh-sec-copy" markdown>
-<h2 class="mh-sec-title" markdown>For **developers**</h2>
+<h2 class="mh-sec-title"><span class="mh-mark">For developers</span></h2>
 <p class="mh-sec-lede">Build with a modern tech stack and clean architecture, no legacy baggage, just great developer experience.</p>
 </div>
 <div class="mh-sec-media" aria-hidden="true"><img src="assets/developer.webp" alt="" width="1024" height="1024" loading="lazy"></div>
@@ -494,7 +494,7 @@ Choose the database that fits your infrastructure. **MySQL**, **MariaDB**, **Pos
 
 <section class="final-cta" aria-label="Get started with Maho">
   <div class="final-cta-inner">
-    <h2>Ready to build the future of <em>your</em> ecommerce?</h2>
+    <h2><span class="mh-mark">Ready to build the future of your ecommerce?</span></h2>
     <p>Whether you're launching your first store, delivering client projects, or building custom solutions, Maho gives you the foundation to succeed.</p>
     <div class="mh-ctas">
       <a class="mh-btn mh-btn-solid" href="getting-started/">Get started with Maho
