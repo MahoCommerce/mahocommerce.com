@@ -1,5 +1,5 @@
 ---
-description: Install and run Maho step by step - system requirements, Composer setup, web server config, DDEV, Docker, the CLI and web installers, Redis and cron.
+description: Install and run Maho step by step - system requirements, Composer setup, web server config, DDEV, Harbor, Docker, the CLI and web installers, Redis and cron.
 ---
 
 # Getting Started
@@ -110,6 +110,46 @@ ddev launch /admin
 
 The full walkthrough, including a setup for contributors working on Maho's core repository,
 is in the [DDEV Maho quickstart](https://docs.ddev.com/en/stable/users/quickstart/#maho){target=_blank}.
+
+### Harbor
+
+[Harbor](../community/projects/harbor.md) is a community project by
+[Empirico](https://github.com/empiricompany){target=_blank}: a Docker-based local development
+environment that installs as a Composer dev dependency and gives you a small Bash CLI around
+Docker Compose, which brings you:
+
+- a preconfigured PHP application container, database, cron runner and Mailpit, no manual setup needed
+- wrapper commands like `harbor php`, `harbor composer` and `harbor maho`, which runs the
+  [Maho CLI tool](../developer/cli-tool.md) inside the container
+- Xdebug included out of the box, optional Redis, Adminer and phpMyAdmin, and VS Code Dev Containers support
+
+To set up Harbor in a Maho project:
+
+```bash
+composer create-project mahocommerce/maho-starter my-maho-site && cd my-maho-site
+composer require --dev empiricompany/harbor
+./vendor/bin/harbor init
+./vendor/bin/harbor up -d
+./vendor/bin/harbor doctor
+```
+
+Then run the installer, using `db` as the database host and the credentials from `.harbor/.env`:
+
+```bash
+./vendor/bin/harbor maho install \
+  --license_agreement_accepted yes \
+  --locale en_US --timezone UTC --default_currency USD \
+  --db_host db --db_name maho --db_user maho --db_pass maho \
+  --url "https://localhost:8443/" \
+  --use_secure 1 --secure_base_url "https://localhost:8443/" --use_secure_admin 1 \
+  --admin_firstname Store --admin_lastname Admin --admin_email admin@example.com \
+  --admin_username admin --admin_password veryl0ngpassw0rd \
+  --sample_data 1
+./vendor/bin/harbor maho index:reindex:all && ./vendor/bin/harbor maho cache:flush
+./vendor/bin/harbor open admin
+```
+
+The full command reference is in the [Harbor README](https://github.com/empiricompany/harbor){target=_blank}.
 
 ### Do you like Docker?
 
