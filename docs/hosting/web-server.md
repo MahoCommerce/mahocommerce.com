@@ -206,6 +206,15 @@ server {
     }
     # ---- End API routing ----
 
+    # Feeds and sitemaps are regenerated in place, so a proxy must not keep
+    # an old copy.
+    location ~ ^/media/.*\.(xml|csv|json|jsonl|gz)$ {
+        try_files $uri =404;
+        expires -1;
+        add_header Cache-Control "no-cache, must-revalidate";
+        access_log off;
+    }
+
     # These three directories hold static files only. A missing file must give a
     # 404, and must not start a full Maho bootstrap.
     location ~ ^/(media|skin|js)/ {
