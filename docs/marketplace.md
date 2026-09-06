@@ -370,17 +370,17 @@ Discover and install powerful modules to enhance your Maho store. All modules ar
         </div>
     </div>
 
-    <!-- Ignition Debug Bar -->
+    <!-- Ignition -->
     <div class="app-card" data-category="developer-tools">
         <span class="app-category">Developer Tools</span>
-        <h3 class="app-title">Ignition Debug Bar</h3>
-        <p class="app-description">Beautiful error pages and debugging tools powered by Spatie Ignition. Makes debugging easier with detailed stack traces and context.</p>
+        <h3 class="app-title">Ignition</h3>
+        <p class="app-description">Beautiful error pages powered by Spatie Ignition, with detailed stack traces, request context, optional AI-generated solutions and Flare error reporting.</p>
         <div class="app-footer">
             <div class="app-actions">
-                <button class="app-button app-button-primary" onclick="showInstallModal('empiricompany/openmage_ignition')">
+                <button class="app-button app-button-primary" onclick="showInstallModal('empiricompany/maho-ignition')">
                     ↓ Install
                 </button>
-                <a href="https://github.com/empiricompany/openmage_ignition" class="app-button app-button-primary" target="_blank">
+                <a href="https://github.com/empiricompany/maho-ignition" class="app-button app-button-primary" target="_blank">
                     View Details →
                 </a>
             </div>
