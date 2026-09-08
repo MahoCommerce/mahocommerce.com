@@ -505,7 +505,7 @@ body {
 
 
 /* === LINKS === */
-.md-content a:not(.md-button):not(.mh-btn):not(.mh-store-card) {
+.md-content a:not(.md-button):not(.mh-btn):not(.mh-store-card):not(.mh-tab) {
     color: var(--maho-brand-text);
     text-decoration: underline;
     text-decoration-color: rgba(173, 180, 26, 0.4);
@@ -515,7 +515,7 @@ body {
                 text-decoration-color var(--maho-duration) var(--maho-ease);
 }
 
-.md-content a:not(.md-button):not(.mh-btn):not(.mh-store-card):hover {
+.md-content a:not(.md-button):not(.mh-btn):not(.mh-store-card):not(.mh-tab):hover {
     color: var(--maho-brand-dark);
     text-decoration-color: var(--maho-brand);
 }
@@ -3114,6 +3114,8 @@ body:has(h1[id=blog]) .md-post__meta {
     align-self: stretch;
 }
 
+/* .md-typeset a would otherwise paint the tabs in the olive link colour */
+.md-typeset .mh-tab,
 .mh-tab {
     position: relative;
     display: inline-flex;
@@ -3134,6 +3136,7 @@ body:has(h1[id=blog]) .md-post__meta {
 
 .mh-tab svg { flex-shrink: 0; width: 16px; height: 16px; opacity: 0.85; }
 
+.md-typeset .mh-tab:hover,
 .mh-tab:hover {
     color: var(--maho-on-ink);
     background: rgba(244, 245, 232, 0.1);
@@ -3143,6 +3146,7 @@ body:has(h1[id=blog]) .md-post__meta {
    edge, the way a browser joins the active tab to the page below */
 /* The active tab is a solid chartreuse block, the way the solid button is,
    so it reads at a glance whatever sits behind the window */
+.md-typeset .mh-tab.is-active,
 .mh-tab.is-active {
     color: var(--maho-ink);
     background: var(--maho-chartreuse);
