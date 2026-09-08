@@ -103,6 +103,30 @@ description: Maho is the open-source, self-hosted ecommerce platform you actuall
           </button>
         </div>
       </div>
+      <div class="mh-subbar" data-mh-picks="store" data-mh-mode="store" aria-label="Storefront themes">
+        <a class="mh-tstage-pick" href="about/themes/#theme-default" data-theme="default" data-name="Default">Default</a>
+        <a class="mh-tstage-pick" href="about/themes/#theme-fashion" data-theme="fashion" data-name="Fashion">Fashion</a>
+        <a class="mh-tstage-pick" href="about/themes/#theme-electronics" data-theme="electronics" data-name="Electronics">Electronics</a>
+        <a class="mh-tstage-pick" href="about/themes/#theme-food" data-theme="food" data-name="Food" data-dark="no">Food</a>
+        <a class="mh-tstage-pick" href="about/themes/#theme-books" data-theme="books" data-name="Books">Books</a>
+        <a class="mh-tstage-pick" href="about/themes/#theme-jewelry" data-theme="jewelry" data-name="Jewelry">Jewelry</a>
+        <a class="mh-tstage-pick" href="about/themes/#theme-beauty" data-theme="beauty" data-name="Beauty">Beauty</a>
+        <a class="mh-tstage-pick" href="about/themes/#theme-home" data-theme="home" data-name="Home">Home</a>
+        <a class="mh-tstage-pick" href="about/themes/#theme-sports" data-theme="sports" data-name="Sports">Sports</a>
+        <a class="mh-tstage-pick" href="about/themes/#theme-kids" data-theme="kids" data-name="Kids" data-dark="no">Kids</a>
+        <a class="mh-tstage-pick" href="about/themes/#theme-garden" data-theme="garden" data-name="Garden">Garden</a>
+      </div>
+      <div class="mh-subbar" data-mh-picks="admin" data-mh-mode="admin" aria-label="Admin screens" hidden>
+        <button class="mh-tstage-pick" type="button" data-light="assets/admin-screens/dashboard-light.webp" data-dark="assets/admin-screens/dashboard-dark.webp" data-title="Dashboard">Dashboard</button>
+        <button class="mh-tstage-pick" type="button" data-light="assets/admin-screens/products-grid-light.webp" data-dark="assets/admin-screens/products-grid-dark.webp" data-title="Products grid">Products grid</button>
+        <button class="mh-tstage-pick" type="button" data-light="assets/admin-screens/product-edit-light.webp" data-dark="assets/admin-screens/product-edit-dark.webp" data-title="Product edit">Product edit</button>
+        <button class="mh-tstage-pick" type="button" data-light="assets/admin-screens/system-config-light.webp" data-dark="assets/admin-screens/system-config-dark.webp" data-title="System config">System config</button>
+        <button class="mh-tstage-pick" type="button" data-light="assets/admin-screens/cms-editor-light.webp" data-dark="assets/admin-screens/cms-editor-dark.webp" data-title="CMS editor">CMS editor</button>
+        <button class="mh-tstage-pick" type="button" data-light="assets/admin-screens/category-tree-light.webp" data-dark="assets/admin-screens/category-tree-dark.webp" data-title="Category tree">Category tree</button>
+        <button class="mh-tstage-pick" type="button" data-light="assets/admin-screens/navigation-light.webp" data-dark="assets/admin-screens/navigation-dark.webp" data-title="Navigation">Navigation</button>
+        <button class="mh-tstage-pick" type="button" data-light="assets/admin-screens/health-check-light.webp" data-dark="assets/admin-screens/health-check-dark.webp" data-title="Health check">Health check</button>
+        <button class="mh-tstage-pick" type="button" data-light="assets/admin-screens/cache-management-light.webp" data-dark="assets/admin-screens/cache-management-dark.webp" data-title="Cache management">Cache management</button>
+      </div>
       <div class="mh-shot-stage">
         <div class="mh-tstage-scroll" role="region" tabindex="0" aria-label="Scroll the capture">
           <img class="mh-tstage-img" src="assets/themes/fashion-home-light.webp" alt="Fashion theme, home page, light mode" width="2880" height="4800" decoding="async">
@@ -117,30 +141,6 @@ description: Maho is the open-source, self-hosted ecommerce platform you actuall
       </div>
     </div>
 
-    <div data-mh-picks="store" hidden>
-      <i class="mh-tstage-pick" data-theme="default" data-name="Default"></i>
-      <i class="mh-tstage-pick" data-theme="fashion" data-name="Fashion"></i>
-      <i class="mh-tstage-pick" data-theme="electronics" data-name="Electronics"></i>
-      <i class="mh-tstage-pick" data-theme="food" data-name="Food" data-dark="no"></i>
-      <i class="mh-tstage-pick" data-theme="books" data-name="Books"></i>
-      <i class="mh-tstage-pick" data-theme="jewelry" data-name="Jewelry"></i>
-      <i class="mh-tstage-pick" data-theme="beauty" data-name="Beauty"></i>
-      <i class="mh-tstage-pick" data-theme="home" data-name="Home"></i>
-      <i class="mh-tstage-pick" data-theme="sports" data-name="Sports"></i>
-      <i class="mh-tstage-pick" data-theme="kids" data-name="Kids" data-dark="no"></i>
-      <i class="mh-tstage-pick" data-theme="garden" data-name="Garden"></i>
-    </div>
-    <div data-mh-picks="admin" hidden>
-      <i class="mh-tstage-pick" data-light="assets/admin-screens/dashboard-light.webp" data-dark="assets/admin-screens/dashboard-dark.webp" data-title="Dashboard"></i>
-      <i class="mh-tstage-pick" data-light="assets/admin-screens/products-grid-light.webp" data-dark="assets/admin-screens/products-grid-dark.webp" data-title="Products grid"></i>
-      <i class="mh-tstage-pick" data-light="assets/admin-screens/product-edit-light.webp" data-dark="assets/admin-screens/product-edit-dark.webp" data-title="Product edit"></i>
-      <i class="mh-tstage-pick" data-light="assets/admin-screens/system-config-light.webp" data-dark="assets/admin-screens/system-config-dark.webp" data-title="System config"></i>
-      <i class="mh-tstage-pick" data-light="assets/admin-screens/cms-editor-light.webp" data-dark="assets/admin-screens/cms-editor-dark.webp" data-title="CMS editor"></i>
-      <i class="mh-tstage-pick" data-light="assets/admin-screens/category-tree-light.webp" data-dark="assets/admin-screens/category-tree-dark.webp" data-title="Category tree"></i>
-      <i class="mh-tstage-pick" data-light="assets/admin-screens/navigation-light.webp" data-dark="assets/admin-screens/navigation-dark.webp" data-title="Navigation"></i>
-      <i class="mh-tstage-pick" data-light="assets/admin-screens/health-check-light.webp" data-dark="assets/admin-screens/health-check-dark.webp" data-title="Health check"></i>
-      <i class="mh-tstage-pick" data-light="assets/admin-screens/cache-management-light.webp" data-dark="assets/admin-screens/cache-management-dark.webp" data-title="Cache management"></i>
-    </div>
 
 
     <p class="mh-shots-caption" data-mh-mode="store">Eleven storefront themes ship with Maho 26.9, light and dark included. Use the arrows to walk through the pages and the themes, scroll the page inside the window, hit the lightbulb for dark mode. <a href="about/themes/">Compare all eleven themes →</a></p>

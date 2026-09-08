@@ -3579,3 +3579,54 @@ html.mh-full-lock { overflow: hidden; }
     transform: none;
     will-change: auto;
 }
+
+
+/* ---- Second bar: the theme (or admin screen) picker, like a bookmarks bar ---- */
+.mh-subbar {
+    display: flex;
+    align-items: center;
+    gap: 0.15em;
+    padding: 0.3em 0.6em;
+    background: #0e100a;
+    border-bottom: 1px solid var(--maho-ink-border);
+    overflow-x: auto;
+    scrollbar-width: none;
+}
+
+.mh-subbar::-webkit-scrollbar { display: none; }
+
+.md-typeset .mh-subbar .mh-tstage-pick,
+.mh-subbar .mh-tstage-pick {
+    flex: 0 0 auto;
+    padding: 0.5em 0.8em;
+    border: 0;
+    border-radius: 6px;
+    background: none;
+    font-family: var(--maho-mono);
+    font-size: 0.55em;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--maho-on-ink-soft);
+    text-decoration: none !important;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: color var(--maho-duration) var(--maho-ease),
+                background var(--maho-duration) var(--maho-ease);
+}
+
+.mh-subbar .mh-tstage-pick:hover {
+    color: var(--maho-on-ink);
+    background: rgba(244, 245, 232, 0.07);
+}
+
+.md-typeset .mh-subbar .mh-tstage-pick[aria-current="true"],
+.mh-subbar .mh-tstage-pick[aria-current="true"] {
+    color: var(--maho-chartreuse);
+    background: rgba(215, 223, 34, 0.12);
+}
+
+.mh-subbar .mh-tstage-pick:focus-visible {
+    outline: 2px solid var(--maho-chartreuse);
+    outline-offset: -2px;
+}
