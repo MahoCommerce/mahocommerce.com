@@ -685,6 +685,36 @@ function mahoSetupThemeStage(root) {
             show({ mode: 'store', i: c.mode === 'store' ? c.i : modes.store.i, page: el.getAttribute('data-page'), dark: c.dark });
         });
     });
+    /* Full screen: the window fills the screen, the capture fills the window.
+       Escape and the same button leave it. */
+    var full = root.querySelector('.mh-full');
+    if (full) {
+        var canFull = win && (document.fullscreenEnabled || document.webkitFullscreenEnabled);
+        if (!canFull) {
+            full.hidden = true;
+        } else {
+            var isFull = function () {
+                var el = document.fullscreenElement || document.webkitFullscreenElement;
+                return !!el && el === win;
+            };
+            var renderFull = function () {
+                var on = isFull();
+                win.classList.toggle('is-full', on);
+                full.setAttribute('aria-label', on ? 'Leave full screen' : 'View full screen');
+                full.setAttribute('title', on ? 'Leave full screen' : 'Full screen');
+            };
+            full.addEventListener('click', function () {
+                if (isFull()) {
+                    (document.exitFullscreen || document.webkitExitFullscreen).call(document);
+                } else {
+                    (win.requestFullscreen || win.webkitRequestFullscreen).call(win);
+                }
+            });
+            document.addEventListener('fullscreenchange', renderFull);
+            document.addEventListener('webkitfullscreenchange', renderFull);
+        }
+    }
+
     if (bulb) bulb.addEventListener('click', toggleMode);
     if (hint) hint.addEventListener('click', toggleMode);
     if (prevBtn) prevBtn.addEventListener('click', function () { step(-1); });

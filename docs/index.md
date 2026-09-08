@@ -97,6 +97,10 @@ description: Maho is the open-source, self-hosted ecommerce platform you actuall
               <path d="M12 3a6 6 0 0 0-4 10.5c.7.7 1 1.2 1 2.5h6c0-1.3.3-1.8 1-2.5A6 6 0 0 0 12 3z"/>
             </svg>
           </button>
+          <button class="mh-full" type="button" aria-label="View full screen" title="Full screen" data-mh-js hidden>
+            <svg class="mh-full-open" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 3H5a2 2 0 0 0-2 2v3M21 8V5a2 2 0 0 0-2-2h-3M3 16v3a2 2 0 0 0 2 2h3M16 21h3a2 2 0 0 0 2-2v-3"/></svg>
+            <svg class="mh-full-close" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 3v3a2 2 0 0 1-2 2H3M21 8h-3a2 2 0 0 1-2-2V3M3 16h3a2 2 0 0 1 2 2v3M16 21v-3a2 2 0 0 1 2-2h3"/></svg>
+          </button>
         </div>
       </div>
       <div class="mh-shot-stage">
@@ -139,7 +143,7 @@ description: Maho is the open-source, self-hosted ecommerce platform you actuall
     </div>
 
 
-    <p class="mh-shots-caption" data-mh-mode="store">Eleven storefront themes ship with Maho 26.9, light and dark included. Pick a swatch, scroll the page inside the window, hit the lightbulb. <a href="about/themes/">Compare all eleven themes →</a></p>
+    <p class="mh-shots-caption" data-mh-mode="store">Eleven storefront themes ship with Maho 26.9, light and dark included. Use the arrows to walk through the pages and the themes, scroll the page inside the window, hit the lightbulb for dark mode. <a href="about/themes/">Compare all eleven themes →</a></p>
     <p class="mh-shots-caption" data-mh-mode="admin" hidden>A completely redesigned admin, first-class dark mode included, shipped in Maho 26.7. Pick a screen, hit the lightbulb to flip the theme. <a href="demo/">Try it in the live demo →</a></p>
   </div>
 </section>
