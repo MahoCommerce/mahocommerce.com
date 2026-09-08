@@ -11,7 +11,7 @@ Maho 26 ships eleven storefront themes in the box. Each one is a complete storef
 <div class="mh-themes-page">
 
 <div class="mh-tstage" id="mh-themes-compare" data-src-base="../../assets/themes/" data-theme="default">
-  <div class="mh-tstage-picks" data-mh-mode="store" aria-label="Choose a theme">
+  <div class="mh-tstage-picks" data-mh-picks="store" aria-label="Choose a theme">
     <a class="mh-tstage-pick" href="#theme-default" data-theme="default" data-name="Default"><span>Default</span></a>
     <a class="mh-tstage-pick" href="#theme-fashion" data-theme="fashion" data-name="Fashion"><span>Fashion</span></a>
     <a class="mh-tstage-pick" href="#theme-electronics" data-theme="electronics" data-name="Electronics"><span>Electronics</span></a>

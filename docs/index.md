@@ -113,35 +113,36 @@ description: Maho is the open-source, self-hosted ecommerce platform you actuall
       </div>
     </div>
 
+    <div data-mh-picks="store" hidden>
+      <i class="mh-tstage-pick" data-theme="default" data-name="Default"></i>
+      <i class="mh-tstage-pick" data-theme="fashion" data-name="Fashion"></i>
+      <i class="mh-tstage-pick" data-theme="electronics" data-name="Electronics"></i>
+      <i class="mh-tstage-pick" data-theme="food" data-name="Food" data-dark="no"></i>
+      <i class="mh-tstage-pick" data-theme="books" data-name="Books"></i>
+      <i class="mh-tstage-pick" data-theme="jewelry" data-name="Jewelry"></i>
+      <i class="mh-tstage-pick" data-theme="beauty" data-name="Beauty"></i>
+      <i class="mh-tstage-pick" data-theme="home" data-name="Home"></i>
+      <i class="mh-tstage-pick" data-theme="sports" data-name="Sports"></i>
+      <i class="mh-tstage-pick" data-theme="kids" data-name="Kids" data-dark="no"></i>
+      <i class="mh-tstage-pick" data-theme="garden" data-name="Garden"></i>
+    </div>
+    <div data-mh-picks="admin" hidden>
+      <i class="mh-tstage-pick" data-light="assets/admin-screens/dashboard-light.webp" data-dark="assets/admin-screens/dashboard-dark.webp" data-title="Dashboard"></i>
+      <i class="mh-tstage-pick" data-light="assets/admin-screens/products-grid-light.webp" data-dark="assets/admin-screens/products-grid-dark.webp" data-title="Products grid"></i>
+      <i class="mh-tstage-pick" data-light="assets/admin-screens/product-edit-light.webp" data-dark="assets/admin-screens/product-edit-dark.webp" data-title="Product edit"></i>
+      <i class="mh-tstage-pick" data-light="assets/admin-screens/system-config-light.webp" data-dark="assets/admin-screens/system-config-dark.webp" data-title="System config"></i>
+      <i class="mh-tstage-pick" data-light="assets/admin-screens/cms-editor-light.webp" data-dark="assets/admin-screens/cms-editor-dark.webp" data-title="CMS editor"></i>
+      <i class="mh-tstage-pick" data-light="assets/admin-screens/category-tree-light.webp" data-dark="assets/admin-screens/category-tree-dark.webp" data-title="Category tree"></i>
+      <i class="mh-tstage-pick" data-light="assets/admin-screens/navigation-light.webp" data-dark="assets/admin-screens/navigation-dark.webp" data-title="Navigation"></i>
+      <i class="mh-tstage-pick" data-light="assets/admin-screens/health-check-light.webp" data-dark="assets/admin-screens/health-check-dark.webp" data-title="Health check"></i>
+      <i class="mh-tstage-pick" data-light="assets/admin-screens/cache-management-light.webp" data-dark="assets/admin-screens/cache-management-dark.webp" data-title="Cache management"></i>
+    </div>
+
     <div class="mh-showcase-strip">
-      <div class="mh-tstage-picks mh-swatches" data-mh-mode="store" aria-label="Storefront themes">
-        <a class="mh-tstage-pick mh-swatch" href="about/themes/#theme-default" data-theme="default" data-name="Default" style="--c1:#0b6d9f;--c2:#1f9e9e;--c3:#f5f5ea"><span class="mh-swatch-ink" aria-hidden="true"><i></i><i></i><i></i></span><span class="mh-swatch-name">Default</span></a>
-        <a class="mh-tstage-pick mh-swatch" href="about/themes/#theme-fashion" data-theme="fashion" data-name="Fashion" style="--c1:#111111;--c2:#ffffff;--c3:#8a8a8a"><span class="mh-swatch-ink" aria-hidden="true"><i></i><i></i><i></i></span><span class="mh-swatch-name">Fashion</span></a>
-        <a class="mh-tstage-pick mh-swatch" href="about/themes/#theme-electronics" data-theme="electronics" data-name="Electronics" style="--c1:#1d6cf2;--c2:#16181d;--c3:#ffffff"><span class="mh-swatch-ink" aria-hidden="true"><i></i><i></i><i></i></span><span class="mh-swatch-name">Electronics</span></a>
-        <a class="mh-tstage-pick mh-swatch" href="about/themes/#theme-food" data-theme="food" data-name="Food" data-dark="no" style="--c1:#e8563f;--c2:#2f6b3a;--c3:#f2b632"><span class="mh-swatch-ink" aria-hidden="true"><i></i><i></i><i></i></span><span class="mh-swatch-name">Food</span></a>
-        <a class="mh-tstage-pick mh-swatch" href="about/themes/#theme-books" data-theme="books" data-name="Books" style="--c1:#0f6b6b;--c2:#f0a93b;--c3:#f7efe3"><span class="mh-swatch-ink" aria-hidden="true"><i></i><i></i><i></i></span><span class="mh-swatch-name">Books</span></a>
-        <a class="mh-tstage-pick mh-swatch" href="about/themes/#theme-jewelry" data-theme="jewelry" data-name="Jewelry" style="--c1:#fbf8f2;--c2:#1a1917;--c3:#c9a227"><span class="mh-swatch-ink" aria-hidden="true"><i></i><i></i><i></i></span><span class="mh-swatch-name">Jewelry</span></a>
-        <a class="mh-tstage-pick mh-swatch" href="about/themes/#theme-beauty" data-theme="beauty" data-name="Beauty" style="--c1:#9b4d76;--c2:#9fb59a;--c3:#fbeef0"><span class="mh-swatch-ink" aria-hidden="true"><i></i><i></i><i></i></span><span class="mh-swatch-name">Beauty</span></a>
-        <a class="mh-tstage-pick mh-swatch" href="about/themes/#theme-home" data-theme="home" data-name="Home" style="--c1:#b8563a;--c2:#7b7f4a;--c3:#d9d3c7"><span class="mh-swatch-ink" aria-hidden="true"><i></i><i></i><i></i></span><span class="mh-swatch-name">Home</span></a>
-        <a class="mh-tstage-pick mh-swatch" href="about/themes/#theme-sports" data-theme="sports" data-name="Sports" style="--c1:#111111;--c2:#d7ff2a;--c3:#ffffff"><span class="mh-swatch-ink" aria-hidden="true"><i></i><i></i><i></i></span><span class="mh-swatch-name">Sports</span></a>
-        <a class="mh-tstage-pick mh-swatch" href="about/themes/#theme-kids" data-theme="kids" data-name="Kids" data-dark="no" style="--c1:#e03a2f;--c2:#ffd6e0;--c3:#cfe8ff"><span class="mh-swatch-ink" aria-hidden="true"><i></i><i></i><i></i></span><span class="mh-swatch-name">Kids</span></a>
-        <a class="mh-tstage-pick mh-swatch" href="about/themes/#theme-garden" data-theme="garden" data-name="Garden" style="--c1:#2f6b3a;--c2:#8bb174;--c3:#c96a3c"><span class="mh-swatch-ink" aria-hidden="true"><i></i><i></i><i></i></span><span class="mh-swatch-name">Garden</span></a>
-      </div>
       <div class="mh-tstage-pages" data-mh-mode="store" role="group" aria-label="Page type" data-mh-js hidden>
         <button class="mh-tstage-page" type="button" data-page="home" aria-pressed="true">Home</button>
         <button class="mh-tstage-page" type="button" data-page="category" aria-pressed="false">Category</button>
         <button class="mh-tstage-page" type="button" data-page="product" aria-pressed="false">Product</button>
-      </div>
-      <div class="mh-tstage-picks mh-screens" data-mh-mode="admin" aria-label="Admin screens" hidden>
-        <button class="mh-tstage-pick mh-chip" type="button" data-light="assets/admin-screens/dashboard-light.webp" data-dark="assets/admin-screens/dashboard-dark.webp" data-title="Dashboard">Dashboard</button>
-        <button class="mh-tstage-pick mh-chip" type="button" data-light="assets/admin-screens/products-grid-light.webp" data-dark="assets/admin-screens/products-grid-dark.webp" data-title="Products grid">Products grid</button>
-        <button class="mh-tstage-pick mh-chip" type="button" data-light="assets/admin-screens/product-edit-light.webp" data-dark="assets/admin-screens/product-edit-dark.webp" data-title="Product edit">Product edit</button>
-        <button class="mh-tstage-pick mh-chip" type="button" data-light="assets/admin-screens/system-config-light.webp" data-dark="assets/admin-screens/system-config-dark.webp" data-title="System config">System config</button>
-        <button class="mh-tstage-pick mh-chip" type="button" data-light="assets/admin-screens/cms-editor-light.webp" data-dark="assets/admin-screens/cms-editor-dark.webp" data-title="CMS editor">CMS editor</button>
-        <button class="mh-tstage-pick mh-chip" type="button" data-light="assets/admin-screens/category-tree-light.webp" data-dark="assets/admin-screens/category-tree-dark.webp" data-title="Category tree">Category tree</button>
-        <button class="mh-tstage-pick mh-chip" type="button" data-light="assets/admin-screens/navigation-light.webp" data-dark="assets/admin-screens/navigation-dark.webp" data-title="Navigation">Navigation</button>
-        <button class="mh-tstage-pick mh-chip" type="button" data-light="assets/admin-screens/health-check-light.webp" data-dark="assets/admin-screens/health-check-dark.webp" data-title="Health check">Health check</button>
-        <button class="mh-tstage-pick mh-chip" type="button" data-light="assets/admin-screens/cache-management-light.webp" data-dark="assets/admin-screens/cache-management-dark.webp" data-title="Cache management">Cache management</button>
       </div>
     </div>
 

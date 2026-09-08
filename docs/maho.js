@@ -417,6 +417,8 @@ if (typeof window !== 'undefined' && window.document$ && typeof window.document$
    picks the screen. The arrows walk the storefront page by page and then on
    to the next theme; in the admin they step through the screens. They wrap
    at both ends, and the lightbulb flips light and dark in both tabs.
+   The item lists come from [data-mh-picks="store"] and [data-mh-picks="admin"]:
+   visible pills on about/themes, hidden data lists on the home page.
    Progressive enhancement: without JS the first capture shows, the tabs and
    the swatches are plain links, and the script-only controls stay hidden.
    Two themes carry no dark palette; the bulb is disabled on those instead
@@ -480,7 +482,7 @@ function mahoSetupThemeStage(root) {
     var base = root.getAttribute('data-src-base') || '';
     var modes = {};
 
-    var storeBox = root.querySelector('.mh-tstage-picks[data-mh-mode="store"]');
+    var storeBox = root.querySelector('[data-mh-picks="store"]');
     var storePicks = storeBox ? all('.mh-tstage-pick', storeBox) : all('.mh-tstage-pick');
     if (storePicks.length) {
         modes.store = {
@@ -499,7 +501,7 @@ function mahoSetupThemeStage(root) {
         });
     }
 
-    var adminBox = root.querySelector('.mh-tstage-picks[data-mh-mode="admin"]');
+    var adminBox = root.querySelector('[data-mh-picks="admin"]');
     if (adminBox) {
         var adminPicks = all('.mh-tstage-pick', adminBox);
         if (adminPicks.length) {

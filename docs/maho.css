@@ -3118,13 +3118,13 @@ body:has(h1[id=blog]) .md-post__meta {
     position: relative;
     display: inline-flex;
     align-items: center;
-    gap: 0.45em;
-    padding: 0 0.95em;
+    gap: 0.5em;
+    padding: 0 1.1em;
     font-family: var(--maho-sans);
-    font-size: 0.62em;
-    font-weight: 600;
+    font-size: 0.74em;
+    font-weight: 650;
     letter-spacing: -0.005em;
-    color: var(--maho-on-ink-faint);
+    color: var(--maho-on-ink-soft);
     text-decoration: none !important;
     white-space: nowrap;
     border-radius: 8px 8px 0 0;
@@ -3132,7 +3132,7 @@ body:has(h1[id=blog]) .md-post__meta {
                 background var(--maho-duration) var(--maho-ease);
 }
 
-.mh-tab svg { flex-shrink: 0; opacity: 0.85; }
+.mh-tab svg { flex-shrink: 0; width: 16px; height: 16px; opacity: 0.85; }
 
 .mh-tab:hover {
     color: var(--maho-on-ink);
@@ -3142,9 +3142,11 @@ body:has(h1[id=blog]) .md-post__meta {
 /* The active tab is lit and carries the chartreuse indicator on its lower
    edge, the way a browser joins the active tab to the page below */
 .mh-tab.is-active {
-    color: var(--maho-on-ink);
-    background: rgba(244, 245, 232, 0.07);
+    color: var(--maho-chartreuse);
+    background: rgba(215, 223, 34, 0.1);
 }
+
+.mh-tab.is-active svg { opacity: 1; }
 
 .mh-tab.is-active::after {
     content: "";
@@ -3233,7 +3235,7 @@ body:has(h1[id=blog]) .md-post__meta {
 
 .mh-shot-window:has(.mh-bulb[aria-disabled="true"]) .mh-bulb-arrow { display: none; }
 
-/* ---- The strip under the window: swatches or chips, plus the page toggle ---- */
+/* ---- Under the window: the page toggle (storefront only) ---- */
 .mh-showcase-strip {
     display: flex;
     flex-direction: column;
@@ -3253,76 +3255,6 @@ body:has(h1[id=blog]) .md-post__meta {
 }
 
 .mh-tstage-picks::-webkit-scrollbar { display: none; }
-
-/* Swatch: the theme's own three colors fanned like a paint chip, then the
-   name in the mono label voice */
-.mh-swatch,
-.mh-chip {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.6em;
-    flex: 0 0 auto;
-    padding: 0.42em 0.85em 0.42em 0.55em;
-    border: 1px solid var(--maho-ink-border);
-    border-radius: 99px;
-    background: rgba(244, 245, 232, 0.03);
-    font-family: var(--maho-mono);
-    font-size: 0.55em;
-    font-weight: 500;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--maho-on-ink-soft);
-    text-decoration: none !important;
-    cursor: pointer;
-    white-space: nowrap;
-    transition: color var(--maho-duration) var(--maho-ease),
-                border-color var(--maho-duration) var(--maho-ease),
-                background var(--maho-duration) var(--maho-ease),
-                transform var(--maho-duration) var(--maho-ease);
-}
-
-.mh-chip { padding: 0.5em 0.95em; }
-
-.mh-swatch:hover,
-.mh-chip:hover {
-    color: var(--maho-on-ink);
-    border-color: rgba(244, 245, 232, 0.28);
-    transform: translateY(-1px);
-}
-
-.mh-swatch[aria-current="true"],
-.mh-chip[aria-current="true"] {
-    color: var(--maho-chartreuse);
-    border-color: var(--maho-chartreuse);
-    background: rgba(215, 223, 34, 0.08);
-}
-
-.mh-swatch:focus-visible,
-.mh-chip:focus-visible,
-.mh-tstage-page:focus-visible {
-    outline: 2px solid var(--maho-chartreuse);
-    outline-offset: 2px;
-}
-
-.mh-swatch-ink {
-    display: inline-flex;
-    flex-shrink: 0;
-}
-
-.mh-swatch-ink i {
-    display: block;
-    width: 14px;
-    height: 14px;
-    border-radius: 50%;
-    border: 1.5px solid #11130a;
-    box-shadow: 0 0 0 1px rgba(244, 245, 232, 0.08);
-}
-
-.mh-swatch-ink i:nth-child(1) { background: var(--c1); z-index: 3; }
-.mh-swatch-ink i:nth-child(2) { background: var(--c2); margin-left: -6px; z-index: 2; }
-.mh-swatch-ink i:nth-child(3) { background: var(--c3); margin-left: -6px; z-index: 1; }
-
-.mh-swatch[aria-current="true"] .mh-swatch-ink i { border-color: #1c1f10; }
 
 /* Page toggle: home · category · product */
 .mh-tstage-pages {
@@ -3574,7 +3506,7 @@ body:has(h1[id=blog]) .md-post__meta {
 
 @media (prefers-reduced-motion: reduce) {
     .mh-tstage-scroll.mh-shot-fade { animation: none; }
-    .mh-theme-card, .mh-theme-shot img, .mh-swatch, .mh-chip { transition: none; }
-    .mh-theme-card:hover, .mh-swatch:hover, .mh-chip:hover { transform: none; }
+    .mh-theme-card, .mh-theme-shot img { transition: none; }
+    .mh-theme-card:hover { transform: none; }
     .mh-theme-card:hover .mh-theme-shot img { transform: none; }
 }
