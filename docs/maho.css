@@ -3124,7 +3124,7 @@ body:has(h1[id=blog]) .md-post__meta {
     font-size: 0.74em;
     font-weight: 650;
     letter-spacing: -0.005em;
-    color: var(--maho-on-ink-soft);
+    color: var(--maho-on-ink);
     text-decoration: none !important;
     white-space: nowrap;
     border-radius: 8px 8px 0 0;
@@ -3136,17 +3136,21 @@ body:has(h1[id=blog]) .md-post__meta {
 
 .mh-tab:hover {
     color: var(--maho-on-ink);
-    background: rgba(244, 245, 232, 0.05);
+    background: rgba(244, 245, 232, 0.1);
 }
 
 /* The active tab is lit and carries the chartreuse indicator on its lower
    edge, the way a browser joins the active tab to the page below */
+/* The active tab is a solid chartreuse block, the way the solid button is,
+   so it reads at a glance whatever sits behind the window */
 .mh-tab.is-active {
-    color: var(--maho-chartreuse);
-    background: rgba(215, 223, 34, 0.1);
+    color: var(--maho-ink);
+    background: var(--maho-chartreuse);
 }
 
 .mh-tab.is-active svg { opacity: 1; }
+
+.mh-tab.is-active::after { display: none; }
 
 .mh-tab.is-active::after {
     content: "";
@@ -3160,7 +3164,7 @@ body:has(h1[id=blog]) .md-post__meta {
 }
 
 .mh-tab:focus-visible {
-    outline: 2px solid var(--maho-chartreuse);
+    outline: 2px solid var(--maho-on-ink);
     outline-offset: -3px;
 }
 
