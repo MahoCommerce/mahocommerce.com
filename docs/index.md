@@ -139,7 +139,7 @@ description: Maho is the open-source, self-hosted ecommerce platform you actuall
     </div>
 
 
-    <p class="mh-shots-caption" data-mh-mode="store">Eleven storefront themes ship with Maho 26, light and dark included. Pick a swatch, scroll the page inside the window, hit the lightbulb. <a href="about/themes/">Compare all eleven themes →</a></p>
+    <p class="mh-shots-caption" data-mh-mode="store">Eleven storefront themes ship with Maho 26.9, light and dark included. Pick a swatch, scroll the page inside the window, hit the lightbulb. <a href="about/themes/">Compare all eleven themes →</a></p>
     <p class="mh-shots-caption" data-mh-mode="admin" hidden>A completely redesigned admin, first-class dark mode included, shipped in Maho 26.7. Pick a screen, hit the lightbulb to flip the theme. <a href="demo/">Try it in the live demo →</a></p>
   </div>
 </section>

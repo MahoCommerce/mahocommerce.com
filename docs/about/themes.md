@@ -4,9 +4,9 @@ hide:
 description: Compare the eleven storefront themes that ship with Maho, on the home, category and product pages, in light and dark, and open each one in the live demo.
 ---
 
-# Eleven storefront themes
+# Eleven storefront themes <span class="version-badge">v26.9+</span>
 
-Maho 26 ships eleven storefront themes in the box. Each one is a complete storefront with its own type, palette and rhythm, on the same catalog, checkout and admin. Pick a theme below, step through the home, category and product pages, and flip the lightbulb to see it in dark mode. Every theme is live in the [demo store](https://demo.mahocommerce.com/).
+Maho 26.9 ships eleven storefront themes in the box. Each one is a complete storefront with its own type, palette and rhythm, on the same catalog, checkout and admin. Pick a theme below, step through the home, category and product pages, and flip the lightbulb to see it in dark mode. Every theme is live in the [demo store](https://demo.mahocommerce.com/).
 
 <div class="mh-themes-page">
 
