@@ -675,7 +675,8 @@ function mahoSetupThemeStage(root) {
             x.el.addEventListener('click', function (e) {
                 e.preventDefault();
                 e.stopPropagation(); // keep the click from Material's instant navigation
-                show({ mode: m, i: k, page: cur().page, dark: cur().dark });
+                // a theme pick always opens that theme's home page
+                show({ mode: m, i: k, page: 'home', dark: cur().dark });
             });
         });
     });
