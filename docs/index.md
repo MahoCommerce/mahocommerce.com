@@ -88,7 +88,7 @@ description: Maho is the open-source, self-hosted ecommerce platform you actuall
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
             <span>Admin</span></a>
         </div>
-        <span class="mh-term-title mh-tstage-title" aria-hidden="true">demo.mahocommerce.com/fashion/ · home · light</span>
+        <span class="mh-term-title mh-tstage-title" aria-hidden="true">Fashion · Home</span>
         <div class="mh-bulb-wrap">
           <span class="mh-bulb-hint" id="mh-bulb-hint" aria-hidden="true" data-mh-js hidden><span class="mh-bulb-text">Try dark mode</span> <span class="mh-bulb-arrow">→</span></span>
           <button class="mh-bulb" type="button" aria-pressed="false" aria-label="Switch the screenshot to dark mode" title="Toggle light / dark" data-mh-js hidden>

@@ -567,8 +567,8 @@ function mahoSetupThemeStage(root) {
 
         if (title) {
             title.textContent = isStore
-                ? 'demo.mahocommerce.com/' + (it.key === 'default' ? '' : it.key + '/') + ' · ' + state.page + ' · ' + (it.dark ? schemeOf(state) : 'light only')
-                : 'maho-admin · ' + it.name.toLowerCase() + ' · ' + schemeOf(state);
+                ? it.name + ' · ' + state.page.charAt(0).toUpperCase() + state.page.slice(1)
+                : it.name;
         }
         if (bulb) {
             bulb.setAttribute('aria-pressed', state.dark ? 'true' : 'false');

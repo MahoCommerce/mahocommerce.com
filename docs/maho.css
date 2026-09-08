@@ -3163,12 +3163,14 @@ body:has(h1[id=blog]) .md-post__meta {
 }
 
 .mh-term-top .mh-tstage-title {
-    /* the demo URL plus page and scheme is long; let it truncate */
+    /* what the window shows right now: the theme and page, or the admin screen */
     min-width: 0;
     flex: 1 1 auto;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+    font-size: 0.62em;
+    color: var(--maho-on-ink);
 }
 
 /* ---- The frame: the capture scrolls inside, like a browser tab ---- */

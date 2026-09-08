@@ -28,7 +28,7 @@ Maho 26 ships eleven storefront themes in the box. Each one is a complete storef
     <div class="mh-shot-window mh-tstage-window" aria-label="Storefront theme comparison">
       <div class="mh-term-top">
         <span class="mh-d" aria-hidden="true"></span><span class="mh-d" aria-hidden="true"></span><span class="mh-d" aria-hidden="true"></span>
-        <span class="mh-term-title mh-tstage-title" aria-hidden="true">demo.mahocommerce.com/default/ · home · light</span>
+        <span class="mh-term-title mh-tstage-title" aria-hidden="true">Default · Home</span>
         <div class="mh-bulb-wrap">
           <span class="mh-bulb-hint" aria-hidden="true" data-mh-js hidden><span class="mh-bulb-text">Try dark mode</span> <span class="mh-bulb-arrow">→</span></span>
           <button class="mh-bulb" type="button" aria-pressed="false" aria-label="Switch the screenshot to dark mode" title="Toggle light / dark" data-mh-js hidden>
