@@ -1,12 +1,16 @@
 ---
 hide:
   - toc
-description: Compare the eleven storefront themes that ship with Maho, on the home, category and product pages, in light and dark, and open each one in the live demo.
+description: Maho ships a complete set of industry themes for fashion, food, electronics, books and more. Every theme is fully customizable from the admin, with no code and no build, and every theme comes in light and dark. Compare them here and open each one in the live demo.
 ---
 
 # Eleven storefront themes <span class="version-badge">v26.9+</span>
 
-Maho 26.9 ships eleven storefront themes in the box. Each one is a complete storefront with its own type, palette and rhythm, on the same catalog, checkout and admin. Pick a theme below, step through the home, category and product pages, and flip the lightbulb to see it in dark mode. Every theme is live in the [demo store](https://demo.mahocommerce.com/).
+Maho comes with a complete set of storefront themes, one for each kind of shop: fashion, electronics, food, books, jewelry, beauty, home, sports, kids, garden, and a neutral default. Every theme is a finished storefront, optimized for its industry, with its own type, palette, rhythm and dark mode. All of them run on the same catalog, checkout and admin, and all of them ship in the box with Maho 26.9.
+
+Every theme is a starting point, not a cage. A merchant restyles it from the admin, with no code and no build. A developer extends it with a child theme that stays upgrade-safe. The details are [below](#make-it-yours).
+
+Pick a theme, step through the home, category and product pages with the arrows, and flip the lightbulb to see it in dark mode. Every theme is live in the [demo store](https://demo.mahocommerce.com/).
 
 <div class="mh-themes-page">
 
@@ -189,5 +193,14 @@ Maho 26.9 ships eleven storefront themes in the box. Each one is a complete stor
 
 </div>
 
-!!! tip "Switching a store to a theme"
-    All eleven themes live in the `base` design package. Set the theme under **System > Configuration > Design** in the admin, at the website or store view level, or use one per store view to serve several looks from one installation.
+## Make it yours { #make-it-yours }
+
+Each theme is a thin layer of CSS variables, about a hundred lines, on top of one shared, compiled stylesheet. That is why changing a theme is cheap, and why the themes stay in step with every Maho release.
+
+**From the admin, with no code.** Open **System > Configuration > Design > Theme Settings**. The page has a live preview and exposes the controls that define an identity: primary, secondary and accent colors, page background and text color, star rating color, footer colors, body and heading fonts with a web font stylesheet, heading weight and letter spacing, button case and letter spacing, three corner radii, control size, border width, raised surfaces, product image background, and a dark mode block for values that differ in dark mode. A **Custom CSS** field takes anything else. You can also import a daisyUI theme in one paste. Every field is optional: an empty field keeps the theme's own value, so a theme switch never leaves stale settings behind.
+
+**Per store view.** Theme settings, like every design setting, apply at the website or store view level. One installation serves several looks: the demo store runs all eleven themes from one Maho, one store view each.
+
+**With a child theme, for developers.** Run `./maho dev:frontend:theme:create` to scaffold a theme that inherits from any of the eleven. Set variables in its `theme.css`, add rules, adjust layout with `local.xml`, and override templates only when you must. The [theme development guide](../../developer/theme-development.md) explains each tier and its cost at upgrade time.
+
+**Switching a store to a theme.** Set the theme under **System > Configuration > Design**, at the website or store view level. All eleven live in the `base` design package.
