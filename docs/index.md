@@ -76,7 +76,7 @@ description: Maho is the open-source, self-hosted ecommerce platform you actuall
     </div>
   </div>
 
-  <div class="mh-showcase mh-tstage" id="mh-showcase" data-src-base="assets/themes/" data-theme="fashion" data-mode="store" aria-label="The Maho storefront themes and the admin, in light and dark">
+  <div class="mh-showcase mh-tstage" id="mh-showcase" data-src-base="assets/themes/" data-theme="default" data-mode="store" aria-label="The Maho storefront themes and the admin, in light and dark">
     <div class="mh-shot-window" id="mh-shot-window">
       <div class="mh-term-top">
         <span class="mh-d" aria-hidden="true"></span><span class="mh-d" aria-hidden="true"></span><span class="mh-d" aria-hidden="true"></span>
@@ -88,7 +88,7 @@ description: Maho is the open-source, self-hosted ecommerce platform you actuall
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
             <span>Admin</span></a>
         </div>
-        <span class="mh-term-title mh-tstage-title" aria-hidden="true">Fashion · Home</span>
+        <span class="mh-term-title mh-tstage-title" aria-hidden="true">Default · Home</span>
         <div class="mh-bulb-wrap">
           <span class="mh-bulb-hint" id="mh-bulb-hint" aria-hidden="true" data-mh-js hidden><span class="mh-bulb-text">Try dark mode</span> <span class="mh-bulb-arrow">→</span></span>
           <button class="mh-bulb" type="button" aria-pressed="false" aria-label="Switch the screenshot to dark mode" title="Toggle light / dark" data-mh-js hidden>
@@ -129,7 +129,7 @@ description: Maho is the open-source, self-hosted ecommerce platform you actuall
       </div>
       <div class="mh-shot-stage">
         <div class="mh-tstage-scroll" role="region" tabindex="0" aria-label="Scroll the capture">
-          <img class="mh-tstage-img" src="assets/themes/fashion-home-light.webp" alt="Fashion theme, home page, light mode" width="2880" height="4800" decoding="async">
+          <img class="mh-tstage-img" src="assets/themes/default-home-light.webp" alt="Default theme, home page, light mode" width="2880" height="4800" decoding="async">
         </div>
         <button class="mh-shot-nav mh-shot-prev" type="button" aria-label="Previous" data-mh-js hidden>
           <svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg>

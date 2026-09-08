@@ -602,7 +602,7 @@ function mahoSetupThemeStage(root) {
     /* Keep the current capture on screen, preload the next one, and swap
        only once it has decoded. A capture that fails or stalls leaves the
        stage as it was, so the controls never show a broken frame. */
-    function show(next) {
+    function show(next, gate) {
         if (!itemOf(next).dark) next.dark = false;
         var token = ++navToken;
         pending = next;
@@ -610,15 +610,18 @@ function mahoSetupThemeStage(root) {
         if (spinner) spinner.hidden = false;
         var pre = new Image();
         pre.src = target;
-        mahoSettleWithin(mahoDecodeImage(pre), LOAD_TIMEOUT).then(function (outcome) {
-            if (token !== navToken) return;
+        var loaded = mahoSettleWithin(mahoDecodeImage(pre), LOAD_TIMEOUT);
+        // an optional gate holds the swap until the window is edge-on (the flip)
+        return Promise.all([loaded, gate || Promise.resolve()]).then(function (results) {
+            var outcome = results[0];
+            if (token !== navToken) return false;
             pending = null;
             if (spinner) spinner.hidden = true;
             if (outcome !== 'ok') {
                 if (window.console && console.warn) {
                     console.warn('[maho] capture "' + target + '" did not load (' + outcome + ')');
                 }
-                return;
+                return false;
             }
             state = next;
             modes[state.mode].i = state.i;
@@ -630,6 +633,33 @@ function mahoSetupThemeStage(root) {
                 void scroller.offsetWidth;
                 scroller.classList.add('mh-shot-fade');
             }
+            return true;
+        });
+    }
+
+    /* Switching tabs turns the window over, like looking at the back of the
+       shop: it rotates edge-on, the capture swaps while nothing is visible,
+       and it rotates back in from the other side. The admin is the back, so
+       the two directions are opposite. */
+    var FLIP = 380;
+    var FLIP_EASE = 'cubic-bezier(0.45, 0.05, 0.55, 0.95)';
+    function flipTo(next) {
+        var dir = next.mode === 'admin' ? -1 : 1;
+        win.classList.add('is-flipping');
+        win.style.transition = 'transform ' + FLIP + 'ms ' + FLIP_EASE;
+        win.style.transform = 'rotateY(' + (90 * dir) + 'deg)';
+        var edge = new Promise(function (res) { setTimeout(res, FLIP); });
+        show(next, edge).then(function (swapped) {
+            win.style.transition = 'none';
+            win.style.transform = swapped ? 'rotateY(' + (-90 * dir) + 'deg)' : win.style.transform;
+            void win.offsetWidth;
+            win.style.transition = 'transform ' + FLIP + 'ms ' + FLIP_EASE;
+            win.style.transform = 'rotateY(0deg)';
+            setTimeout(function () {
+                win.style.transition = '';
+                win.style.transform = '';
+                win.classList.remove('is-flipping');
+            }, FLIP);
         });
     }
 
@@ -667,7 +697,9 @@ function mahoSetupThemeStage(root) {
             e.stopPropagation(); // keep the click from Material's instant navigation
             var c = cur();
             if (m === c.mode) return;
-            show({ mode: m, i: modes[m].i, page: c.page, dark: c.dark });
+            var next = { mode: m, i: modes[m].i, page: c.page, dark: c.dark };
+            if (fade && win && !win.classList.contains('is-flipping')) flipTo(next);
+            else show(next);
         });
     });
     Object.keys(modes).forEach(function (m) {

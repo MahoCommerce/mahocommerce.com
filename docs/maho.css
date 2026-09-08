@@ -3572,10 +3572,11 @@ html.mh-full-lock { overflow: hidden; }
 
 /* The hero showcase animates in with a transform, and a transformed ancestor
    would pin the fixed window to itself. Drop it while the window is full. */
-.mh-showcase:has(.mh-shot-window.is-full) {
+.mh-tstage:has(.mh-shot-window.is-full) {
     animation: none;
     transform: none;
     will-change: auto;
+    perspective: none;   /* a perspective would pin the fixed window too */
 }
 
 
@@ -3628,3 +3629,14 @@ html.mh-full-lock { overflow: hidden; }
     outline: 2px solid var(--maho-chartreuse);
     outline-offset: -2px;
 }
+
+
+/* ---- Tab flip: the window turns over between storefront and admin ---- */
+.mh-tstage { perspective: 1600px; }
+
+.mh-shot-window {
+    transform-style: preserve-3d;
+    backface-visibility: hidden;
+}
+
+.mh-shot-window.is-flipping .mh-shot-nav { opacity: 0; }
