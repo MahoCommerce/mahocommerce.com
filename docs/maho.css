@@ -3178,7 +3178,6 @@ body:has(h1[id=blog]) .md-post__meta {
     aspect-ratio: 45 / 32;              /* the admin captures' ratio */
     overflow-x: hidden;
     overflow-y: auto;
-    overscroll-behavior: contain;
     scrollbar-width: thin;
     scrollbar-color: rgba(14, 15, 8, 0.35) transparent;
     background: var(--maho-surface);
