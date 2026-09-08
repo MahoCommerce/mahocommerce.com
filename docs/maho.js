@@ -414,8 +414,9 @@ if (typeof window !== 'undefined' && window.document$ && typeof window.document$
    under the window picks the theme, the page toggle steps through home,
    category and product, and the capture scrolls inside the frame like a
    real browser tab. The admin tab shows the admin screens; the chip strip
-   picks the screen. The arrows step through the current strip and wrap, and
-   the lightbulb flips light and dark in both tabs.
+   picks the screen. The arrows walk the storefront page by page and then on
+   to the next theme; in the admin they step through the screens. They wrap
+   at both ends, and the lightbulb flips light and dark in both tabs.
    Progressive enhancement: without JS the first capture shows, the tabs and
    the swatches are plain links, and the script-only controls stay hidden.
    Two themes carry no dark palette; the bulb is disabled on those instead
@@ -630,9 +631,22 @@ function mahoSetupThemeStage(root) {
         });
     }
 
+    /* The arrows walk the storefront page by page: home, category, product,
+       then the next theme's home. In the admin they step through the screens. */
+    var PAGES = pageBtns.length
+        ? pageBtns.map(function (el) { return el.getAttribute('data-page'); })
+        : ['home', 'category', 'product'];
     function step(dir) {
         var c = cur();
         var n = modes[c.mode].items.length;
+        if (c.mode === 'store') {
+            var p = PAGES.indexOf(c.page) + dir;
+            var i = c.i;
+            if (p >= PAGES.length) { p = 0; i = (i + 1) % n; }
+            else if (p < 0) { p = PAGES.length - 1; i = (i - 1 + n) % n; }
+            show({ mode: 'store', i: i, page: PAGES[p], dark: c.dark });
+            return;
+        }
         show({ mode: c.mode, i: (c.i + dir + n) % n, page: c.page, dark: c.dark });
     }
 

@@ -3162,15 +3162,26 @@ body:has(h1[id=blog]) .md-post__meta {
     outline-offset: -3px;
 }
 
+.mh-term-top {
+    position: relative;   /* the stage title centres on the whole bar */
+}
+
 .mh-term-top .mh-tstage-title {
-    /* what the window shows right now: the theme and page, or the admin screen */
-    min-width: 0;
-    flex: 1 1 auto;
+    /* what the window shows right now: the theme and page, or the admin
+       screen. Centred on the bar itself, not on the space the tabs leave. */
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 34%;
+    margin: 0;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+    text-align: center;
     font-size: 0.62em;
     color: var(--maho-on-ink);
+    pointer-events: none;
 }
 
 /* ---- The frame: the capture scrolls inside, like a browser tab ---- */
