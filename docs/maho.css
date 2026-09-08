@@ -3110,7 +3110,11 @@ body:has(h1[id=blog]) .md-post__meta {
     display: flex;
     align-items: stretch;
     gap: 2px;
-    margin: -0.7em 0 -0.7em 0.5em;   /* sit on the chrome's full height */
+    /* sit on the chrome's full height, and cover its bottom border so the
+       active tab joins the page below without a dark seam */
+    margin: -0.7em 0 calc(-0.7em - 1px) 0.5em;
+    position: relative;
+    z-index: 1;
     align-self: stretch;
 }
 
