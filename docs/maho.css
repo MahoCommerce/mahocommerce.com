@@ -505,7 +505,7 @@ body {
 
 
 /* === LINKS === */
-.md-content a:not(.md-button):not(.mh-btn):not(.mh-store-card):not(.mh-tab) {
+.md-content a:not(.md-button):not(.mh-btn):not(.mh-store-card):not(.mh-tab):not(.mh-tstage-pick) {
     color: var(--maho-brand-text);
     text-decoration: underline;
     text-decoration-color: rgba(173, 180, 26, 0.4);
@@ -515,7 +515,7 @@ body {
                 text-decoration-color var(--maho-duration) var(--maho-ease);
 }
 
-.md-content a:not(.md-button):not(.mh-btn):not(.mh-store-card):not(.mh-tab):hover {
+.md-content a:not(.md-button):not(.mh-btn):not(.mh-store-card):not(.mh-tab):not(.mh-tstage-pick):hover {
     color: var(--maho-brand-dark);
     text-decoration-color: var(--maho-brand);
 }
