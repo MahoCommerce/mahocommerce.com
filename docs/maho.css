@@ -1403,9 +1403,7 @@ html.mh-anim .mh-term-scene.is-active {
     border-top-right-radius: calc(var(--maho-radius-lg) - 1px);
 }
 
-.mh-shot-window .mh-shot-light,
-.mh-shot-window .mh-shot-dark,
-.mh-shot-window .mh-shot-hold {
+.mh-shot-window .mh-tstage-scroll {
     border-bottom-left-radius: calc(var(--maho-radius-lg) - 1px);
     border-bottom-right-radius: calc(var(--maho-radius-lg) - 1px);
 }
@@ -1491,35 +1489,11 @@ html.mh-anim .mh-term-scene.is-active {
     box-shadow: 0 0 12px -2px rgba(215, 223, 34, 0.5);
 }
 
-/* The screenshot stage: light base with a dark layer crossfaded on top */
+/* The screenshot stage: the capture scrolls inside a fixed-ratio frame */
 .mh-shot-stage {
     position: relative;
     background: var(--maho-ink-soft);
 }
-
-/* Frame wraps the two image layers so navigation can animate them
-   without moving the arrows / chrome. */
-.mh-shot-frame {
-    position: relative;
-    z-index: 1;
-}
-
-/* Outgoing screenshot held behind the frame so the crossfade never
-   exposes the dark stage background (no black flash). */
-.mh-shot-hold {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: top left;
-    z-index: 0;
-    opacity: 0;
-    pointer-events: none;
-}
-
-/* New screenshot crossfades up over the held one */
-.mh-shot-frame.mh-shot-fade { animation: mhShotFade 0.45s var(--maho-ease); }
 
 @keyframes mhShotFade {
     from { opacity: 0; }
@@ -1545,26 +1519,6 @@ html.mh-anim .mh-term-scene.is-active {
 .mh-shot-spinner[hidden] { display: none; }
 
 @keyframes mhSpin { to { transform: rotate(360deg); } }
-
-.mh-shot-light {
-    display: block;
-    width: 100%;
-    height: auto;
-}
-
-.mh-shot-dark {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    opacity: 0;
-    transition: opacity 0.35s var(--maho-ease);
-}
-
-.mh-shot-stage.is-dark .mh-shot-dark {
-    opacity: 1;
-}
 
 /* Prev / next arrows straddling the stage edges, vertically centred */
 .mh-shot-nav {
@@ -2520,7 +2474,7 @@ html.mh-anim .mh-reveal.mh-in {
     .mh-eyebrow .mh-dot,
     .mh-bulb,
     .mh-bulb-arrow,
-    .mh-shot-frame { animation: none !important; } /* hint label stays visible, just static */
+    .mh-tstage-scroll { animation: none !important; } /* hint label stays visible, just static */
 }
 
 
@@ -3133,4 +3087,482 @@ body:has(h1[id=blog]) .md-post__meta {
     gap: 0.8em;
     justify-content: center;
     flex-wrap: wrap;
+}
+
+
+/* ============================================================
+   SHOWCASE STAGE
+   One browser window, two tabs. The Storefront tab shows one of the eleven
+   themes as a full-page capture that scrolls inside the frame; the swatch
+   strip under the window picks the theme and the page toggle steps through
+   home, category and product. The Admin tab shows the admin screens; the
+   chip strip picks the screen. The lightbulb flips light and dark in both.
+   The engine is mahoSetupThemeStage() in maho.js; the same markup shape
+   drives the comparison window on about/themes (.mh-themes-page).
+   ============================================================ */
+
+/* The stage's script-only controls carry the hidden attribute in the
+   markup. Their component rules set display, which would override it. */
+.mh-tstage [hidden] { display: none !important; }
+
+/* ---- Tabs in the window chrome, drawn like browser tabs ---- */
+.mh-tabs {
+    display: flex;
+    align-items: stretch;
+    gap: 2px;
+    margin: -0.7em 0 -0.7em 0.5em;   /* sit on the chrome's full height */
+    align-self: stretch;
+}
+
+.mh-tab {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45em;
+    padding: 0 0.95em;
+    font-family: var(--maho-sans);
+    font-size: 0.62em;
+    font-weight: 600;
+    letter-spacing: -0.005em;
+    color: var(--maho-on-ink-faint);
+    text-decoration: none !important;
+    white-space: nowrap;
+    border-radius: 8px 8px 0 0;
+    transition: color var(--maho-duration) var(--maho-ease),
+                background var(--maho-duration) var(--maho-ease);
+}
+
+.mh-tab svg { flex-shrink: 0; opacity: 0.85; }
+
+.mh-tab:hover {
+    color: var(--maho-on-ink);
+    background: rgba(244, 245, 232, 0.05);
+}
+
+/* The active tab is lit and carries the chartreuse indicator on its lower
+   edge, the way a browser joins the active tab to the page below */
+.mh-tab.is-active {
+    color: var(--maho-on-ink);
+    background: rgba(244, 245, 232, 0.07);
+}
+
+.mh-tab.is-active::after {
+    content: "";
+    position: absolute;
+    left: 0.6em;
+    right: 0.6em;
+    bottom: 0;
+    height: 2px;
+    border-radius: 2px 2px 0 0;
+    background: var(--maho-chartreuse);
+}
+
+.mh-tab:focus-visible {
+    outline: 2px solid var(--maho-chartreuse);
+    outline-offset: -3px;
+}
+
+.mh-term-top .mh-tstage-title {
+    /* the demo URL plus page and scheme is long; let it truncate */
+    min-width: 0;
+    flex: 1 1 auto;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* ---- The frame: the capture scrolls inside, like a browser tab ---- */
+.mh-tstage-scroll {
+    position: relative;
+    z-index: 1;
+    aspect-ratio: 45 / 32;              /* the admin captures' ratio */
+    overflow-x: hidden;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(14, 15, 8, 0.35) transparent;
+    background: var(--maho-surface);
+}
+
+.mh-tstage-img {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+/* New capture crossfades in */
+.mh-tstage-scroll.mh-shot-fade { animation: mhShotFade 0.45s var(--maho-ease); }
+
+.mh-tstage-scroll:focus-visible {
+    outline: 2px solid var(--maho-chartreuse);
+    outline-offset: -2px;
+}
+
+.mh-tstage .mh-bulb:focus-visible,
+.mh-tstage .mh-shot-nav:focus-visible {
+    outline: 2px solid var(--maho-chartreuse);
+    outline-offset: 2px;
+}
+
+/* A theme with no dark palette: the bulb stays put, unlit */
+.mh-bulb[aria-disabled="true"] {
+    color: var(--maho-on-ink-faint);
+    border-color: var(--maho-ink-border);
+    background: rgba(244, 245, 232, 0.04);
+    box-shadow: none;
+    cursor: not-allowed;
+    animation: none !important;
+}
+
+.mh-shot-window:has(.mh-bulb[aria-disabled="true"]) .mh-bulb-hint {
+    color: var(--maho-on-ink-faint);
+    cursor: default;
+}
+
+.mh-shot-window:has(.mh-bulb[aria-disabled="true"]) .mh-bulb-arrow { display: none; }
+
+/* ---- The strip under the window: swatches or chips, plus the page toggle ---- */
+.mh-showcase-strip {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.8em;
+    margin: 1.1em 0 0;
+}
+
+.mh-tstage-picks {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0.35em;
+    max-width: 100%;
+    padding: 4px;                  /* room for the focus ring and the lift */
+}
+
+.mh-tstage-picks::-webkit-scrollbar { display: none; }
+
+/* Swatch: the theme's own three colors fanned like a paint chip, then the
+   name in the mono label voice */
+.mh-swatch,
+.mh-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6em;
+    flex: 0 0 auto;
+    padding: 0.42em 0.85em 0.42em 0.55em;
+    border: 1px solid var(--maho-ink-border);
+    border-radius: 99px;
+    background: rgba(244, 245, 232, 0.03);
+    font-family: var(--maho-mono);
+    font-size: 0.55em;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--maho-on-ink-soft);
+    text-decoration: none !important;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: color var(--maho-duration) var(--maho-ease),
+                border-color var(--maho-duration) var(--maho-ease),
+                background var(--maho-duration) var(--maho-ease),
+                transform var(--maho-duration) var(--maho-ease);
+}
+
+.mh-chip { padding: 0.5em 0.95em; }
+
+.mh-swatch:hover,
+.mh-chip:hover {
+    color: var(--maho-on-ink);
+    border-color: rgba(244, 245, 232, 0.28);
+    transform: translateY(-1px);
+}
+
+.mh-swatch[aria-current="true"],
+.mh-chip[aria-current="true"] {
+    color: var(--maho-chartreuse);
+    border-color: var(--maho-chartreuse);
+    background: rgba(215, 223, 34, 0.08);
+}
+
+.mh-swatch:focus-visible,
+.mh-chip:focus-visible,
+.mh-tstage-page:focus-visible {
+    outline: 2px solid var(--maho-chartreuse);
+    outline-offset: 2px;
+}
+
+.mh-swatch-ink {
+    display: inline-flex;
+    flex-shrink: 0;
+}
+
+.mh-swatch-ink i {
+    display: block;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    border: 1.5px solid #11130a;
+    box-shadow: 0 0 0 1px rgba(244, 245, 232, 0.08);
+}
+
+.mh-swatch-ink i:nth-child(1) { background: var(--c1); z-index: 3; }
+.mh-swatch-ink i:nth-child(2) { background: var(--c2); margin-left: -6px; z-index: 2; }
+.mh-swatch-ink i:nth-child(3) { background: var(--c3); margin-left: -6px; z-index: 1; }
+
+.mh-swatch[aria-current="true"] .mh-swatch-ink i { border-color: #1c1f10; }
+
+/* Page toggle: home · category · product */
+.mh-tstage-pages {
+    display: flex;
+    align-items: center;
+    gap: 0.2em;
+    flex: 0 0 auto;
+    padding: 3px;
+    border: 1px solid var(--maho-ink-border);
+    border-radius: 99px;
+    background: rgba(244, 245, 232, 0.03);
+}
+
+.mh-tstage-page {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.45em 0.9em;
+    border: 0;
+    border-radius: 99px;
+    background: none;
+    font-family: var(--maho-mono);
+    font-size: 0.55em;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--maho-on-ink-faint);
+    cursor: pointer;
+    transition: color var(--maho-duration) var(--maho-ease),
+                background var(--maho-duration) var(--maho-ease);
+}
+
+.mh-tstage-page:hover { color: var(--maho-on-ink); }
+
+.mh-tstage-page[aria-pressed="true"] {
+    color: var(--maho-ink);
+    background: var(--maho-chartreuse);
+}
+
+/* ---- Themes page (about/themes): the same stage on paper ---- */
+.mh-themes-page .mh-tstage {
+    margin: 1.6em 0 3.2em;
+}
+
+.mh-themes-page .mh-tstage-scroll { aspect-ratio: 16 / 10; }
+
+.mh-themes-page .mh-tstage-picks {
+    flex-wrap: wrap;
+    overflow: visible;
+    gap: 0.45em;
+    margin: 0 0 1.2em;
+    padding: 0;
+}
+
+.md-typeset .mh-themes-page .mh-tstage-pick,
+.mh-themes-page .mh-tstage-pick {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.5em 1em;
+    border: 1px solid var(--maho-border);
+    border-radius: 99px;
+    background: var(--maho-surface);
+    font-size: 0.85em;
+    font-weight: 600;
+    color: var(--maho-text-primary);
+    text-decoration: none !important;
+    cursor: pointer;
+    transition: background var(--maho-duration) var(--maho-ease),
+                border-color var(--maho-duration) var(--maho-ease),
+                color var(--maho-duration) var(--maho-ease);
+}
+
+.mh-themes-page .mh-tstage-pick:hover {
+    border-color: var(--maho-brand);
+    background: var(--maho-brand-subtle);
+}
+
+.md-typeset .mh-themes-page .mh-tstage-pick[aria-current="true"],
+.mh-themes-page .mh-tstage-pick[aria-current="true"] {
+    border-color: var(--maho-ink);
+    background: var(--maho-ink);
+    color: var(--maho-chartreuse);
+}
+
+.mh-themes-page .mh-tstage-pick:focus-visible,
+.mh-theme-shot:focus-visible,
+.mh-theme-card .mh-btn:focus-visible {
+    outline: 2px solid var(--maho-brand-dark);
+    outline-offset: 2px;
+}
+
+.mh-themes-page .mh-tstage-pages {
+    margin: 1em auto 0;
+    width: max-content;
+    max-width: 100%;
+    border-color: var(--maho-border);
+    background: var(--maho-surface);
+}
+
+.mh-themes-page .mh-tstage-page { color: var(--maho-text-tertiary); }
+.mh-themes-page .mh-tstage-page:hover { color: var(--maho-text-primary); }
+.mh-themes-page .mh-tstage-page[aria-pressed="true"] { color: var(--maho-ink); }
+
+.mh-tstage-caption {
+    margin: 0.9em 0 0;
+    text-align: center;
+    font-size: 0.85em;
+    color: var(--maho-text-tertiary);
+}
+
+/* Card grid: every theme, its identity and a thumbnail. This is the content
+   that stays reachable without a script. */
+.mh-theme-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.4em;
+    margin: 1.6em 0 2em;
+}
+
+.mh-theme-card {
+    display: flex;
+    flex-direction: column;
+    background: var(--maho-surface);
+    border: 1px solid var(--maho-border-light);
+    border-radius: 14px;
+    overflow: hidden;
+    scroll-margin-top: 5em;
+    transition: transform 0.28s ease, box-shadow 0.28s ease, border-color 0.28s ease;
+}
+
+.mh-theme-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--maho-border);
+    box-shadow: 0 20px 44px -24px rgba(0, 0, 0, 0.45);
+}
+
+.md-typeset .mh-theme-shot,
+.mh-theme-shot {
+    display: block;
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    background: var(--maho-paper);
+    border-bottom: 1px solid var(--maho-border-light);
+}
+
+.mh-theme-shot img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top center;
+    transition: transform 0.5s var(--maho-ease-out);
+}
+
+.mh-theme-card:hover .mh-theme-shot img { transform: translateY(-3%); }
+
+.mh-theme-body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4em;
+    padding: 1em 1.15em 1.2em;
+    flex: 1 1 auto;
+}
+
+.md-typeset .mh-theme-body h3 {
+    margin: 0;
+    font-size: 1.25em;
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.6em;
+}
+
+.mh-theme-scheme {
+    font-family: var(--maho-mono);
+    font-size: 0.5em;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--maho-text-tertiary);
+    white-space: nowrap;
+}
+
+.md-typeset .mh-theme-body p {
+    margin: 0;
+    font-size: 0.85em;
+    line-height: 1.55;
+    color: var(--maho-text-secondary);
+}
+
+.mh-theme-pages {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.3em 0.9em;
+    margin: 0.2em 0 0;
+    font-family: var(--maho-mono);
+    font-size: 0.6em;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+}
+
+.md-typeset .mh-theme-pages a {
+    color: var(--maho-text-tertiary);
+    text-decoration: none;
+}
+
+.md-typeset .mh-theme-pages a:hover {
+    color: var(--maho-brand-text);
+    text-decoration: underline;
+}
+
+.mh-theme-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5em;
+    margin-top: auto;
+    padding-top: 0.8em;
+}
+
+.md-typeset .mh-theme-actions .mh-btn {
+    font-size: 0.72em;
+    padding: 0.62em 1.1em;
+}
+
+/* ---- Responsive ---- */
+@media screen and (max-width: 64em) {
+    .mh-theme-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media screen and (max-width: 768px) {
+    .mh-term-top .mh-tstage-title { display: none; }
+    .mh-tab { padding: 0 0.75em; }
+    /* one scrolling row on a phone, the first swatch flush left */
+    .mh-tstage-picks {
+        flex-wrap: nowrap;
+        justify-content: flex-start;
+        width: 100%;
+        overflow-x: auto;
+        scrollbar-width: none;
+    }
+    .mh-tstage-picks::-webkit-scrollbar { display: none; }
+}
+
+@media screen and (max-width: 600px) {
+    .mh-theme-grid { grid-template-columns: 1fr; }
+    .mh-tstage-scroll { aspect-ratio: 4 / 3; }
+    .mh-tab span { display: none; }   /* icons only; the accessible name is the text */
+    .mh-tab svg { opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .mh-tstage-scroll.mh-shot-fade { animation: none; }
+    .mh-theme-card, .mh-theme-shot img, .mh-swatch, .mh-chip { transition: none; }
+    .mh-theme-card:hover, .mh-swatch:hover, .mh-chip:hover { transform: none; }
+    .mh-theme-card:hover .mh-theme-shot img { transform: none; }
 }

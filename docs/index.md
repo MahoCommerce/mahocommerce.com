@@ -76,14 +76,22 @@ description: Maho is the open-source, self-hosted ecommerce platform you actuall
     </div>
   </div>
 
-  <div class="mh-showcase" aria-label="The redesigned Maho admin in light and dark">
+  <div class="mh-showcase mh-tstage" id="mh-showcase" data-src-base="assets/themes/" data-theme="fashion" data-mode="store" aria-label="The Maho storefront themes and the admin, in light and dark">
     <div class="mh-shot-window" id="mh-shot-window">
       <div class="mh-term-top">
         <span class="mh-d" aria-hidden="true"></span><span class="mh-d" aria-hidden="true"></span><span class="mh-d" aria-hidden="true"></span>
-        <span class="mh-term-title" id="mh-shot-title" aria-hidden="true">maho-admin · light</span>
+        <div class="mh-tabs" role="tablist" aria-label="Show the storefront or the admin">
+          <a class="mh-tab is-active" role="tab" aria-selected="true" data-mode="store" href="about/themes/">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 9 4.5 4h15L21 9M4 9v10a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1V9M4 9h16M9 13a3 3 0 0 0 6 0"/></svg>
+            <span>Storefront</span></a>
+          <a class="mh-tab" role="tab" aria-selected="false" data-mode="admin" href="demo/">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+            <span>Admin</span></a>
+        </div>
+        <span class="mh-term-title mh-tstage-title" aria-hidden="true">demo.mahocommerce.com/fashion/ · home · light</span>
         <div class="mh-bulb-wrap">
-          <span class="mh-bulb-hint" id="mh-bulb-hint" aria-hidden="true"><span class="mh-bulb-text" id="mh-bulb-text">Try dark mode</span> <span class="mh-bulb-arrow">→</span></span>
-          <button class="mh-bulb" id="mh-bulb" type="button" aria-pressed="false" aria-label="Switch the screenshot to dark mode" title="Toggle light / dark">
+          <span class="mh-bulb-hint" id="mh-bulb-hint" aria-hidden="true" data-mh-js hidden><span class="mh-bulb-text">Try dark mode</span> <span class="mh-bulb-arrow">→</span></span>
+          <button class="mh-bulb" type="button" aria-pressed="false" aria-label="Switch the screenshot to dark mode" title="Toggle light / dark" data-mh-js hidden>
             <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
               <path d="M9 18h6"/><path d="M10 21h4"/>
               <path d="M12 3a6 6 0 0 0-4 10.5c.7.7 1 1.2 1 2.5h6c0-1.3.3-1.8 1-2.5A6 6 0 0 0 12 3z"/>
@@ -91,35 +99,54 @@ description: Maho is the open-source, self-hosted ecommerce platform you actuall
           </button>
         </div>
       </div>
-      <div class="mh-shot-stage" id="mh-shot-stage">
-        <img class="mh-shot-hold" id="mh-shot-hold" alt="" aria-hidden="true" decoding="async">
-        <div class="mh-shot-frame" id="mh-shot-frame">
-          <img class="mh-shot-light" id="mh-shot-light" src="assets/admin-screens/dashboard-light.webp" alt="Dashboard in the redesigned admin, light mode" decoding="async">
-          <img class="mh-shot-dark" id="mh-shot-dark" src="assets/admin-screens/dashboard-dark.webp" alt="" aria-hidden="true" decoding="async">
+      <div class="mh-shot-stage">
+        <div class="mh-tstage-scroll" role="region" tabindex="0" aria-label="Scroll the capture">
+          <img class="mh-tstage-img" src="assets/themes/fashion-home-light.webp" alt="Fashion theme, home page, light mode" width="2880" height="4800" decoding="async">
         </div>
-        <button class="mh-shot-nav mh-shot-prev" id="mh-shot-prev" type="button" aria-label="Previous screen">
+        <button class="mh-shot-nav mh-shot-prev" type="button" aria-label="Previous" data-mh-js hidden>
           <svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg>
         </button>
-        <button class="mh-shot-nav mh-shot-next" id="mh-shot-next" type="button" aria-label="Next screen">
+        <button class="mh-shot-nav mh-shot-next" type="button" aria-label="Next" data-mh-js hidden>
           <svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>
         </button>
-        <div class="mh-shot-spinner" id="mh-shot-spinner" aria-hidden="true" hidden></div>
+        <div class="mh-shot-spinner" aria-hidden="true" hidden></div>
       </div>
     </div>
 
-    <div class="mh-shot-screens" id="mh-shot-screens" hidden>
-      <i data-light="assets/admin-screens/dashboard-light.webp" data-dark="assets/admin-screens/dashboard-dark.webp" data-title="Dashboard"></i>
-      <i data-light="assets/admin-screens/products-grid-light.webp" data-dark="assets/admin-screens/products-grid-dark.webp" data-title="Products grid"></i>
-      <i data-light="assets/admin-screens/product-edit-light.webp" data-dark="assets/admin-screens/product-edit-dark.webp" data-title="Product edit"></i>
-      <i data-light="assets/admin-screens/system-config-light.webp" data-dark="assets/admin-screens/system-config-dark.webp" data-title="System config"></i>
-      <i data-light="assets/admin-screens/cms-editor-light.webp" data-dark="assets/admin-screens/cms-editor-dark.webp" data-title="CMS editor"></i>
-      <i data-light="assets/admin-screens/category-tree-light.webp" data-dark="assets/admin-screens/category-tree-dark.webp" data-title="Category tree"></i>
-      <i data-light="assets/admin-screens/navigation-light.webp" data-dark="assets/admin-screens/navigation-dark.webp" data-title="Navigation"></i>
-      <i data-light="assets/admin-screens/health-check-light.webp" data-dark="assets/admin-screens/health-check-dark.webp" data-title="Health check"></i>
-      <i data-light="assets/admin-screens/cache-management-light.webp" data-dark="assets/admin-screens/cache-management-dark.webp" data-title="Cache management"></i>
+    <div class="mh-showcase-strip">
+      <div class="mh-tstage-picks mh-swatches" data-mh-mode="store" aria-label="Storefront themes">
+        <a class="mh-tstage-pick mh-swatch" href="about/themes/#theme-default" data-theme="default" data-name="Default" style="--c1:#0b6d9f;--c2:#1f9e9e;--c3:#f5f5ea"><span class="mh-swatch-ink" aria-hidden="true"><i></i><i></i><i></i></span><span class="mh-swatch-name">Default</span></a>
+        <a class="mh-tstage-pick mh-swatch" href="about/themes/#theme-fashion" data-theme="fashion" data-name="Fashion" style="--c1:#111111;--c2:#ffffff;--c3:#8a8a8a"><span class="mh-swatch-ink" aria-hidden="true"><i></i><i></i><i></i></span><span class="mh-swatch-name">Fashion</span></a>
+        <a class="mh-tstage-pick mh-swatch" href="about/themes/#theme-electronics" data-theme="electronics" data-name="Electronics" style="--c1:#1d6cf2;--c2:#16181d;--c3:#ffffff"><span class="mh-swatch-ink" aria-hidden="true"><i></i><i></i><i></i></span><span class="mh-swatch-name">Electronics</span></a>
+        <a class="mh-tstage-pick mh-swatch" href="about/themes/#theme-food" data-theme="food" data-name="Food" data-dark="no" style="--c1:#e8563f;--c2:#2f6b3a;--c3:#f2b632"><span class="mh-swatch-ink" aria-hidden="true"><i></i><i></i><i></i></span><span class="mh-swatch-name">Food</span></a>
+        <a class="mh-tstage-pick mh-swatch" href="about/themes/#theme-books" data-theme="books" data-name="Books" style="--c1:#0f6b6b;--c2:#f0a93b;--c3:#f7efe3"><span class="mh-swatch-ink" aria-hidden="true"><i></i><i></i><i></i></span><span class="mh-swatch-name">Books</span></a>
+        <a class="mh-tstage-pick mh-swatch" href="about/themes/#theme-jewelry" data-theme="jewelry" data-name="Jewelry" style="--c1:#fbf8f2;--c2:#1a1917;--c3:#c9a227"><span class="mh-swatch-ink" aria-hidden="true"><i></i><i></i><i></i></span><span class="mh-swatch-name">Jewelry</span></a>
+        <a class="mh-tstage-pick mh-swatch" href="about/themes/#theme-beauty" data-theme="beauty" data-name="Beauty" style="--c1:#9b4d76;--c2:#9fb59a;--c3:#fbeef0"><span class="mh-swatch-ink" aria-hidden="true"><i></i><i></i><i></i></span><span class="mh-swatch-name">Beauty</span></a>
+        <a class="mh-tstage-pick mh-swatch" href="about/themes/#theme-home" data-theme="home" data-name="Home" style="--c1:#b8563a;--c2:#7b7f4a;--c3:#d9d3c7"><span class="mh-swatch-ink" aria-hidden="true"><i></i><i></i><i></i></span><span class="mh-swatch-name">Home</span></a>
+        <a class="mh-tstage-pick mh-swatch" href="about/themes/#theme-sports" data-theme="sports" data-name="Sports" style="--c1:#111111;--c2:#d7ff2a;--c3:#ffffff"><span class="mh-swatch-ink" aria-hidden="true"><i></i><i></i><i></i></span><span class="mh-swatch-name">Sports</span></a>
+        <a class="mh-tstage-pick mh-swatch" href="about/themes/#theme-kids" data-theme="kids" data-name="Kids" data-dark="no" style="--c1:#e03a2f;--c2:#ffd6e0;--c3:#cfe8ff"><span class="mh-swatch-ink" aria-hidden="true"><i></i><i></i><i></i></span><span class="mh-swatch-name">Kids</span></a>
+        <a class="mh-tstage-pick mh-swatch" href="about/themes/#theme-garden" data-theme="garden" data-name="Garden" style="--c1:#2f6b3a;--c2:#8bb174;--c3:#c96a3c"><span class="mh-swatch-ink" aria-hidden="true"><i></i><i></i><i></i></span><span class="mh-swatch-name">Garden</span></a>
+      </div>
+      <div class="mh-tstage-pages" data-mh-mode="store" role="group" aria-label="Page type" data-mh-js hidden>
+        <button class="mh-tstage-page" type="button" data-page="home" aria-pressed="true">Home</button>
+        <button class="mh-tstage-page" type="button" data-page="category" aria-pressed="false">Category</button>
+        <button class="mh-tstage-page" type="button" data-page="product" aria-pressed="false">Product</button>
+      </div>
+      <div class="mh-tstage-picks mh-screens" data-mh-mode="admin" aria-label="Admin screens" hidden>
+        <button class="mh-tstage-pick mh-chip" type="button" data-light="assets/admin-screens/dashboard-light.webp" data-dark="assets/admin-screens/dashboard-dark.webp" data-title="Dashboard">Dashboard</button>
+        <button class="mh-tstage-pick mh-chip" type="button" data-light="assets/admin-screens/products-grid-light.webp" data-dark="assets/admin-screens/products-grid-dark.webp" data-title="Products grid">Products grid</button>
+        <button class="mh-tstage-pick mh-chip" type="button" data-light="assets/admin-screens/product-edit-light.webp" data-dark="assets/admin-screens/product-edit-dark.webp" data-title="Product edit">Product edit</button>
+        <button class="mh-tstage-pick mh-chip" type="button" data-light="assets/admin-screens/system-config-light.webp" data-dark="assets/admin-screens/system-config-dark.webp" data-title="System config">System config</button>
+        <button class="mh-tstage-pick mh-chip" type="button" data-light="assets/admin-screens/cms-editor-light.webp" data-dark="assets/admin-screens/cms-editor-dark.webp" data-title="CMS editor">CMS editor</button>
+        <button class="mh-tstage-pick mh-chip" type="button" data-light="assets/admin-screens/category-tree-light.webp" data-dark="assets/admin-screens/category-tree-dark.webp" data-title="Category tree">Category tree</button>
+        <button class="mh-tstage-pick mh-chip" type="button" data-light="assets/admin-screens/navigation-light.webp" data-dark="assets/admin-screens/navigation-dark.webp" data-title="Navigation">Navigation</button>
+        <button class="mh-tstage-pick mh-chip" type="button" data-light="assets/admin-screens/health-check-light.webp" data-dark="assets/admin-screens/health-check-dark.webp" data-title="Health check">Health check</button>
+        <button class="mh-tstage-pick mh-chip" type="button" data-light="assets/admin-screens/cache-management-light.webp" data-dark="assets/admin-screens/cache-management-dark.webp" data-title="Cache management">Cache management</button>
+      </div>
     </div>
 
-    <p class="mh-shots-caption">A completely redesigned admin, first-class dark mode included, shipped in Maho 26.7.<br>Use the arrows to browse screens, hit the lightbulb to flip the theme. <a href="demo/">Try it in the live demo →</a></p>
+    <p class="mh-shots-caption" data-mh-mode="store">Eleven storefront themes ship with Maho 26, light and dark included. Pick a swatch, scroll the page inside the window, hit the lightbulb. <a href="about/themes/">Compare all eleven themes →</a></p>
+    <p class="mh-shots-caption" data-mh-mode="admin" hidden>A completely redesigned admin, first-class dark mode included, shipped in Maho 26.7. Pick a screen, hit the lightbulb to flip the theme. <a href="demo/">Try it in the live demo →</a></p>
   </div>
 </section>
 

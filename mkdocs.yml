@@ -158,6 +158,7 @@ nav:
     - Start here: user-guide/index.md
     - About:
       - Live demo: about/demo.md
+      - Themes: about/themes.md
       - Differences: about/differences.md
       - Origins: about/origins.md
       - Release strategy: about/release-strategy.md

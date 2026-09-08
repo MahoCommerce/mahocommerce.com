@@ -204,7 +204,7 @@ function mahoTermSetPaused(paused) {
 
 /* Fade/slide content blocks in as they enter the viewport. */
 function mahoSetupReveal() {
-    var selector = '.mh-proof, .mh-sec-head, .feature-card, .final-cta-inner';
+    var selector = '.mh-proof, .mh-sec-head, .mh-themes-inner, .feature-card, .final-cta-inner';
     var targets = Array.prototype.slice.call(document.querySelectorAll(selector));
     if (!targets.length) return;
 
@@ -243,178 +243,6 @@ function mahoSetupReveal() {
    WCAG 2.2.2 (Pause, Stop, Hide) at Level A. The hint is static now: the next
    card always peeks past the right edge, and Chrome draws scroll markers. From
    tablet up the cards wrap and there is nothing to hint at. */
-
-/* ---- Hero admin showcase: lightbulb toggle + prev/next arrows ----
-   One screenshot at a time; a lightbulb in the window chrome crossfades
-   between the light and dark capture. Big arrows step through the screens
-   (wrapping), keeping the current mode: the frame is hidden behind a
-   spinner until the next capture decodes, then slides in from the chosen
-   direction. Progressive enhancement: without JS the first shot shows. */
-function mahoSetupShots() {
-    var stage = document.getElementById('mh-shot-stage');
-    if (!stage || stage.dataset.mhShots === 'on') return;
-
-    var bulb = document.getElementById('mh-bulb');
-    var title = document.getElementById('mh-shot-title');
-    var frame = document.getElementById('mh-shot-frame');
-    var spinner = document.getElementById('mh-shot-spinner');
-    var hold = document.getElementById('mh-shot-hold');
-    var light = document.getElementById('mh-shot-light');
-    var dark = document.getElementById('mh-shot-dark');
-    var win = document.getElementById('mh-shot-window');
-    var prevBtn = document.getElementById('mh-shot-prev');
-    var nextBtn = document.getElementById('mh-shot-next');
-
-    /* Without any one of these the showcase cannot work. Leave the first
-       screenshot on display and stop, rather than throwing part way through
-       and leaving the controls half wired. */
-    if (!bulb || !frame || !spinner || !hold || !light || !dark || !prevBtn || !nextBtn) {
-        if (window.console && console.warn) {
-            console.warn('[maho] admin showcase is missing required elements; navigation disabled');
-        }
-        return;
-    }
-    stage.dataset.mhShots = 'on';
-
-    var screens = Array.prototype.map.call(
-        document.querySelectorAll('#mh-shot-screens > [data-title]'),
-        function (el) {
-            return {
-                light: el.getAttribute('data-light'),
-                dark: el.getAttribute('data-dark'),
-                title: el.getAttribute('data-title')
-            };
-        }
-    );
-    if (!screens.length) return;
-    var i = 0;
-    var navToken = 0;
-
-    var hintText = document.getElementById('mh-bulb-text');
-
-    function render() {
-        var s = screens[i];
-        var isDark = stage.classList.contains('is-dark');
-        bulb.setAttribute('aria-pressed', isDark ? 'true' : 'false');
-        bulb.setAttribute('aria-label', isDark ? 'Switch the screenshot to light mode' : 'Switch the screenshot to dark mode');
-        if (title) title.textContent = 'maho-admin · ' + (isDark ? 'dark' : 'light');
-        if (hintText) hintText.textContent = isDark ? 'Turn on the lights' : 'Try dark mode';
-        light.setAttribute('alt', s.title + ' in the redesigned admin, ' + (isDark ? 'dark' : 'light') + ' mode');
-    }
-
-    /* Rejects on failure rather than swallowing it, so go() can tell a
-       capture that arrived from one that never will. */
-    function decode(img) {
-        if (!img.decode) {
-            return new Promise(function (res, rej) {
-                if (img.complete) { img.naturalWidth ? res() : rej(new Error('load failed')); return; }
-                img.onload = res;
-                img.onerror = function () { rej(new Error('load failed')); };
-            });
-        }
-        return img.decode();
-    }
-
-    /* A capture that never resolves would leave the spinner turning for the
-       rest of the session. Bound the wait and report what happened. */
-    var LOAD_TIMEOUT = 6000;
-    function settleWithin(promise, ms) {
-        return new Promise(function (resolve) {
-            var settled = false;
-            var timer = setTimeout(function () {
-                if (!settled) { settled = true; resolve('timeout'); }
-            }, ms);
-            promise.then(
-                function () { if (!settled) { settled = true; clearTimeout(timer); resolve('ok'); } },
-                function () { if (!settled) { settled = true; clearTimeout(timer); resolve('error'); } }
-            );
-        });
-    }
-
-    function go(step) {
-        var token = ++navToken;
-        var from = i;
-        i = (i + step + screens.length) % screens.length;
-        var s = screens[i];
-
-        // Keep the current screenshot on screen; preload the next one
-        // off-screen and only swap once it's decoded.
-        spinner.hidden = false;
-        var preL = new Image();
-        var preD = new Image();
-        preL.src = s.light;
-        preD.src = s.dark;
-
-        settleWithin(Promise.all([decode(preL), decode(preD)]), LOAD_TIMEOUT).then(function (outcome) {
-            if (token !== navToken) return;     // a newer navigation superseded this one
-            spinner.hidden = true;
-
-            if (outcome !== 'ok') {
-                /* Slow or missing capture. Keep the screenshot already on
-                   display instead of swapping in a broken frame, and put the
-                   index back so the arrows stay predictable. */
-                i = from;
-                if (window.console && console.warn) {
-                    console.warn('[maho] screenshot "' + s.title + '" did not load (' + outcome + ')');
-                }
-                return;
-            }
-
-            // Park the currently-visible capture on the hold layer so the
-            // crossfade reveals it (not the dark stage) behind the new one.
-            hold.src = stage.classList.contains('is-dark') ? dark.src : light.src;
-            hold.style.opacity = '1';
-
-            light.src = s.light;                // instant: already in cache
-            dark.src = s.dark;
-            render();                           // update the chrome name to match
-
-            frame.classList.remove('mh-shot-fade');
-            void frame.offsetWidth;             // restart the crossfade
-            frame.classList.add('mh-shot-fade');
-        });
-    }
-
-    // Once the new frame has fully faded in, drop the held outgoing image.
-    frame.addEventListener('animationend', function () {
-        hold.style.opacity = '0';
-    });
-
-    function toggleMode() {
-        stage.classList.toggle('is-dark');
-        if (win) win.classList.add('is-hint-done'); // stop the attention hint
-        render();
-    }
-    bulb.addEventListener('click', toggleMode);
-    var hint = document.getElementById('mh-bulb-hint');
-    if (hint) hint.addEventListener('click', toggleMode); // the hint label toggles too
-
-    prevBtn.addEventListener('click', function () { go(-1); });
-    nextBtn.addEventListener('click', function () { go(1); });
-
-    // Touch: swipe left/right to browse screens (mainly for mobile).
-    // Track the first touch, and on release fire a navigation only when the
-    // gesture is clearly horizontal so vertical page scrolling stays intact.
-    var swipeX = 0, swipeY = 0, swiping = false;
-    stage.addEventListener('touchstart', function (e) {
-        if (e.touches.length !== 1) { swiping = false; return; }
-        swipeX = e.touches[0].clientX;
-        swipeY = e.touches[0].clientY;
-        swiping = true;
-    }, { passive: true });
-    stage.addEventListener('touchend', function (e) {
-        if (!swiping) return;
-        swiping = false;
-        var t = e.changedTouches[0];
-        var dx = t.clientX - swipeX;
-        var dy = t.clientY - swipeY;
-        if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy) * 1.5) {
-            go(dx < 0 ? 1 : -1);   // swipe left = next, swipe right = previous
-        }
-    }, { passive: true });
-
-    render();
-}
 
 /* Stores carousel: arrows page the scroll-snap viewport a screen at a time,
    wrapping around at the ends like the admin showcase. */
@@ -511,7 +339,6 @@ function mahoInitHome() {
     /* Each feature is independent, so each one fails alone. The pause controls
        carry a WCAG obligation and must not depend on a decorative showcase. */
     mahoSafe('motion controls', mahoSetupMotionControls);
-    mahoSafe('admin showcase', mahoSetupShots);
     mahoSafe('stores carousel', mahoSetupStores);
 
     if (mahoReducedMotion()) return; // CSS keeps everything visible
@@ -570,6 +397,7 @@ function mahoBoot() {
     mahoSafe('home init', mahoInitHome);
     mahoSafe('section nav', mahoExpandSectionNav);
     mahoSafe('confetti', mahoSetupConfetti);
+    mahoSafe('theme stages', mahoSetupThemeStages); // home teaser and about/themes
 }
 
 if (typeof window !== 'undefined' && window.document$ && typeof window.document$.subscribe === 'function') {
@@ -578,4 +406,317 @@ if (typeof window !== 'undefined' && window.document$ && typeof window.document$
     document.addEventListener('DOMContentLoaded', mahoBoot);
 } else {
     mahoBoot(); // the script loaded late; the document is already parsed
+}
+
+/* ---- Showcase stage: storefront themes and the admin in one window ----
+   One browser window with two tabs, Storefront and Admin. The storefront tab
+   shows a full-page capture of one of the eleven themes; the swatch strip
+   under the window picks the theme, the page toggle steps through home,
+   category and product, and the capture scrolls inside the frame like a
+   real browser tab. The admin tab shows the admin screens; the chip strip
+   picks the screen. The arrows step through the current strip and wrap, and
+   the lightbulb flips light and dark in both tabs.
+   Progressive enhancement: without JS the first capture shows, the tabs and
+   the swatches are plain links, and the script-only controls stay hidden.
+   Two themes carry no dark palette; the bulb is disabled on those instead
+   of showing a broken frame.
+   The same engine drives the comparison window on about/themes, which has
+   no tabs and only storefront picks. */
+function mahoDecodeImage(img) {
+    /* Resolve on load, then give decode() a moment so the swap paints in one
+       frame. decode() alone is not enough: Chrome can leave it pending for
+       a detached image, and a pending decode would look like a lost capture. */
+    var loaded = new Promise(function (res, rej) {
+        if (img.complete) { img.naturalWidth ? res() : rej(new Error('load failed')); return; }
+        img.onload = res;
+        img.onerror = function () { rej(new Error('load failed')); };
+    });
+    return loaded.then(function () {
+        if (!img.decode) return;
+        return Promise.race([
+            img.decode().catch(function () {}),
+            new Promise(function (res) { setTimeout(res, 800); })
+        ]);
+    });
+}
+
+/* A capture that never resolves would leave the spinner turning for the
+   rest of the session. Bound the wait and report what happened. */
+function mahoSettleWithin(promise, ms) {
+    return new Promise(function (resolve) {
+        var settled = false;
+        var timer = setTimeout(function () {
+            if (!settled) { settled = true; resolve('timeout'); }
+        }, ms);
+        promise.then(
+            function () { if (!settled) { settled = true; clearTimeout(timer); resolve('ok'); } },
+            function () { if (!settled) { settled = true; clearTimeout(timer); resolve('error'); } }
+        );
+    });
+}
+
+function mahoSetupThemeStage(root) {
+    if (root.dataset.mhWired === 'on') return;
+    var all = function (sel, el) { return Array.prototype.slice.call((el || root).querySelectorAll(sel)); };
+
+    var img = root.querySelector('.mh-tstage-img');
+    var scroller = root.querySelector('.mh-tstage-scroll');
+    var win = root.querySelector('.mh-shot-window');
+    var title = root.querySelector('.mh-tstage-title');
+    var bulb = root.querySelector('.mh-bulb');
+    var hint = root.querySelector('.mh-bulb-hint');
+    var hintText = root.querySelector('.mh-bulb-text');
+    var spinner = root.querySelector('.mh-shot-spinner');
+    var prevBtn = root.querySelector('.mh-shot-prev');
+    var nextBtn = root.querySelector('.mh-shot-next');
+    var tabs = all('.mh-tab[data-mode]');
+    var modeEls = all('[data-mh-mode]');
+    var pageBtns = all('.mh-tstage-page');
+    var demoLinks = all('.mh-tstage-demo');
+
+    if (!img || !scroller) return;
+
+    var base = root.getAttribute('data-src-base') || '';
+    var modes = {};
+
+    var storeBox = root.querySelector('.mh-tstage-picks[data-mh-mode="store"]');
+    var storePicks = storeBox ? all('.mh-tstage-pick', storeBox) : all('.mh-tstage-pick');
+    if (storePicks.length) {
+        modes.store = {
+            i: 0,
+            items: storePicks.map(function (el) {
+                return {
+                    key: el.getAttribute('data-theme'),
+                    name: el.getAttribute('data-name') || el.textContent.trim(),
+                    dark: el.getAttribute('data-dark') !== 'no',
+                    el: el
+                };
+            })
+        };
+        modes.store.items.forEach(function (it, k) {
+            if (it.key === root.getAttribute('data-theme')) modes.store.i = k;
+        });
+    }
+
+    var adminBox = root.querySelector('.mh-tstage-picks[data-mh-mode="admin"]');
+    if (adminBox) {
+        var adminPicks = all('.mh-tstage-pick', adminBox);
+        if (adminPicks.length) {
+            modes.admin = {
+                i: 0,
+                items: adminPicks.map(function (el) {
+                    return {
+                        light: el.getAttribute('data-light'),
+                        darkSrc: el.getAttribute('data-dark'),
+                        name: el.getAttribute('data-title') || el.textContent.trim(),
+                        dark: true,
+                        el: el
+                    };
+                })
+            };
+        }
+    }
+
+    var first = root.getAttribute('data-mode');
+    if (!modes[first]) first = modes.store ? 'store' : 'admin';
+    if (!modes[first]) return;
+    root.dataset.mhWired = 'on';
+
+    var state = { mode: first, i: modes[first].i, page: 'home', dark: false };
+    var pending = null;   // the state a capture is loading for, so fast clicks chain
+    var navToken = 0;
+    var LOAD_TIMEOUT = 6000;
+    var fade = !mahoReducedMotion();
+
+    // Controls that only work with a script are hidden in the markup.
+    all('[data-mh-js]').forEach(function (el) { el.hidden = false; });
+
+    function itemOf(s) { return modes[s.mode].items[s.i]; }
+    function cur() { return pending || state; }
+    function schemeOf(s) { return s.dark ? 'dark' : 'light'; }
+    function srcOf(s) {
+        var it = itemOf(s);
+        if (s.mode === 'admin') return s.dark ? it.darkSrc : it.light;
+        return base + it.key + '-' + s.page + '-' + schemeOf(s) + '.webp';
+    }
+    function demoUrl(it) {
+        return 'https://demo.mahocommerce.com/' + (it.key === 'default' ? '' : it.key + '/');
+    }
+
+    function render() {
+        var it = itemOf(state);
+        var isStore = state.mode === 'store';
+
+        tabs.forEach(function (el) {
+            var on = el.getAttribute('data-mode') === state.mode;
+            el.setAttribute('aria-selected', on ? 'true' : 'false');
+            el.classList.toggle('is-active', on);
+        });
+        modeEls.forEach(function (el) {
+            el.hidden = el.getAttribute('data-mh-mode') !== state.mode;
+        });
+        Object.keys(modes).forEach(function (m) {
+            modes[m].items.forEach(function (x, k) {
+                if (m === state.mode && k === state.i) x.el.setAttribute('aria-current', 'true');
+                else x.el.removeAttribute('aria-current');
+            });
+        });
+        pageBtns.forEach(function (el) {
+            el.setAttribute('aria-pressed', el.getAttribute('data-page') === state.page ? 'true' : 'false');
+        });
+
+        if (title) {
+            title.textContent = isStore
+                ? 'demo.mahocommerce.com/' + (it.key === 'default' ? '' : it.key + '/') + ' · ' + state.page + ' · ' + (it.dark ? schemeOf(state) : 'light only')
+                : 'maho-admin · ' + it.name.toLowerCase() + ' · ' + schemeOf(state);
+        }
+        if (bulb) {
+            bulb.setAttribute('aria-pressed', state.dark ? 'true' : 'false');
+            if (it.dark) {
+                bulb.removeAttribute('aria-disabled');
+                bulb.setAttribute('aria-label', state.dark ? 'Switch the screenshot to light mode' : 'Switch the screenshot to dark mode');
+                bulb.setAttribute('title', 'Toggle light / dark');
+                if (hintText) hintText.textContent = state.dark ? 'Turn on the lights' : 'Try dark mode';
+            } else {
+                bulb.setAttribute('aria-disabled', 'true');
+                bulb.setAttribute('aria-label', it.name + ' has no dark mode, it is pinned to light');
+                bulb.setAttribute('title', it.name + ' is light only');
+                if (hintText) hintText.textContent = 'Light only';
+            }
+        }
+        img.setAttribute('alt', isStore
+            ? it.name + ' theme, ' + state.page + ' page, ' + schemeOf(state) + ' mode'
+            : it.name + ' in the redesigned admin, ' + schemeOf(state) + ' mode');
+        if (isStore) {
+            demoLinks.forEach(function (a) {
+                a.setAttribute('href', demoUrl(it));
+                var label = a.querySelector('.mh-tstage-demo-name');
+                if (label) label.textContent = it.name;
+            });
+        }
+    }
+
+    /* Keep the current capture on screen, preload the next one, and swap
+       only once it has decoded. A capture that fails or stalls leaves the
+       stage as it was, so the controls never show a broken frame. */
+    function show(next) {
+        if (!itemOf(next).dark) next.dark = false;
+        var token = ++navToken;
+        pending = next;
+        var target = srcOf(next);
+        if (spinner) spinner.hidden = false;
+        var pre = new Image();
+        pre.src = target;
+        mahoSettleWithin(mahoDecodeImage(pre), LOAD_TIMEOUT).then(function (outcome) {
+            if (token !== navToken) return;
+            pending = null;
+            if (spinner) spinner.hidden = true;
+            if (outcome !== 'ok') {
+                if (window.console && console.warn) {
+                    console.warn('[maho] capture "' + target + '" did not load (' + outcome + ')');
+                }
+                return;
+            }
+            state = next;
+            modes[state.mode].i = state.i;
+            img.src = target;
+            scroller.scrollTop = 0;
+            render();
+            if (fade) {
+                scroller.classList.remove('mh-shot-fade');
+                void scroller.offsetWidth;
+                scroller.classList.add('mh-shot-fade');
+            }
+        });
+    }
+
+    function step(dir) {
+        var c = cur();
+        var n = modes[c.mode].items.length;
+        show({ mode: c.mode, i: (c.i + dir + n) % n, page: c.page, dark: c.dark });
+    }
+
+    function toggleMode() {
+        var c = cur();
+        if (!itemOf(c).dark) return;
+        if (win) win.classList.add('is-hint-done');
+        show({ mode: c.mode, i: c.i, page: c.page, dark: !c.dark });
+    }
+
+    tabs.forEach(function (el) {
+        el.addEventListener('click', function (e) {
+            var m = el.getAttribute('data-mode');
+            if (!modes[m]) return;
+            e.preventDefault();
+            e.stopPropagation(); // keep the click from Material's instant navigation
+            var c = cur();
+            if (m === c.mode) return;
+            show({ mode: m, i: modes[m].i, page: c.page, dark: c.dark });
+        });
+    });
+    Object.keys(modes).forEach(function (m) {
+        modes[m].items.forEach(function (x, k) {
+            x.el.addEventListener('click', function (e) {
+                e.preventDefault();
+                e.stopPropagation(); // keep the click from Material's instant navigation
+                show({ mode: m, i: k, page: cur().page, dark: cur().dark });
+            });
+        });
+    });
+    pageBtns.forEach(function (el) {
+        el.addEventListener('click', function () {
+            var c = cur();
+            show({ mode: 'store', i: c.mode === 'store' ? c.i : modes.store.i, page: el.getAttribute('data-page'), dark: c.dark });
+        });
+    });
+    if (bulb) bulb.addEventListener('click', toggleMode);
+    if (hint) hint.addEventListener('click', toggleMode);
+    if (prevBtn) prevBtn.addEventListener('click', function () { step(-1); });
+    if (nextBtn) nextBtn.addEventListener('click', function () { step(1); });
+
+    // Swipe on the window steps through the strip (mobile); vertical
+    // gestures keep scrolling the capture.
+    var swipeX = 0, swipeY = 0, swiping = false;
+    scroller.addEventListener('touchstart', function (e) {
+        if (e.touches.length !== 1) { swiping = false; return; }
+        swipeX = e.touches[0].clientX;
+        swipeY = e.touches[0].clientY;
+        swiping = true;
+    }, { passive: true });
+    scroller.addEventListener('touchend', function (e) {
+        if (!swiping) return;
+        swiping = false;
+        var t = e.changedTouches[0];
+        var dx = t.clientX - swipeX;
+        var dy = t.clientY - swipeY;
+        if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy) * 1.5) step(dx < 0 ? 1 : -1);
+    }, { passive: true });
+
+    /* Openers elsewhere on the page (the theme cards on about/themes) select
+       a theme in this stage and bring it into view. Without JS they link to
+       the full-size capture. */
+    if (root.id && modes.store) {
+        all('.mh-tstage-open[data-target="' + root.id + '"]', document).forEach(function (el) {
+            if (el.dataset.mhWired === 'on') return;
+            el.dataset.mhWired = 'on';
+            el.addEventListener('click', function (e) {
+                var key = el.getAttribute('data-theme');
+                var k = -1;
+                modes.store.items.forEach(function (it, n) { if (it.key === key) k = n; });
+                if (k < 0) return;
+                e.preventDefault();
+                e.stopPropagation(); // keep the click from Material's instant navigation
+                show({ mode: 'store', i: k, page: el.getAttribute('data-page') || cur().page, dark: cur().dark });
+                root.scrollIntoView({ behavior: fade ? 'smooth' : 'auto', block: 'start' });
+            });
+        });
+    }
+
+    render();
+}
+
+function mahoSetupThemeStages() {
+    document.querySelectorAll('.mh-tstage').forEach(function (root) {
+        mahoSafe('showcase stage', function () { mahoSetupThemeStage(root); });
+    });
 }
