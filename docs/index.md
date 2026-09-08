@@ -138,13 +138,6 @@ description: Maho is the open-source, self-hosted ecommerce platform you actuall
       <i class="mh-tstage-pick" data-light="assets/admin-screens/cache-management-light.webp" data-dark="assets/admin-screens/cache-management-dark.webp" data-title="Cache management"></i>
     </div>
 
-    <div class="mh-showcase-strip">
-      <div class="mh-tstage-pages" data-mh-mode="store" role="group" aria-label="Page type" data-mh-js hidden>
-        <button class="mh-tstage-page" type="button" data-page="home" aria-pressed="true">Home</button>
-        <button class="mh-tstage-page" type="button" data-page="category" aria-pressed="false">Category</button>
-        <button class="mh-tstage-page" type="button" data-page="product" aria-pressed="false">Product</button>
-      </div>
-    </div>
 
     <p class="mh-shots-caption" data-mh-mode="store">Eleven storefront themes ship with Maho 26, light and dark included. Pick a swatch, scroll the page inside the window, hit the lightbulb. <a href="about/themes/">Compare all eleven themes →</a></p>
     <p class="mh-shots-caption" data-mh-mode="admin" hidden>A completely redesigned admin, first-class dark mode included, shipped in Maho 26.7. Pick a screen, hit the lightbulb to flip the theme. <a href="demo/">Try it in the live demo →</a></p>

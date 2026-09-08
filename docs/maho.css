@@ -3247,28 +3247,7 @@ body:has(h1[id=blog]) .md-post__meta {
 
 .mh-shot-window:has(.mh-bulb[aria-disabled="true"]) .mh-bulb-arrow { display: none; }
 
-/* ---- Under the window: the page toggle (storefront only) ---- */
-.mh-showcase-strip {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.8em;
-    margin: 1.1em 0 0;
-}
-
-.mh-tstage-picks {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 0.35em;
-    max-width: 100%;
-    padding: 4px;                  /* room for the focus ring and the lift */
-}
-
-.mh-tstage-picks::-webkit-scrollbar { display: none; }
-
-/* Page toggle: home · category · product */
+/* ---- Page toggle: home · category · product (about/themes) ---- */
 .mh-tstage-pages {
     display: flex;
     align-items: center;
@@ -3313,11 +3292,10 @@ body:has(h1[id=blog]) .md-post__meta {
 .mh-themes-page .mh-tstage-scroll { aspect-ratio: 16 / 10; }
 
 .mh-themes-page .mh-tstage-picks {
+    display: flex;
     flex-wrap: wrap;
-    overflow: visible;
     gap: 0.45em;
     margin: 0 0 1.2em;
-    padding: 0;
 }
 
 .md-typeset .mh-themes-page .mh-tstage-pick,
@@ -3498,15 +3476,6 @@ body:has(h1[id=blog]) .md-post__meta {
 @media screen and (max-width: 768px) {
     .mh-term-top .mh-tstage-title { display: none; }
     .mh-tab { padding: 0 0.75em; }
-    /* one scrolling row on a phone, the first swatch flush left */
-    .mh-tstage-picks {
-        flex-wrap: nowrap;
-        justify-content: flex-start;
-        width: 100%;
-        overflow-x: auto;
-        scrollbar-width: none;
-    }
-    .mh-tstage-picks::-webkit-scrollbar { display: none; }
 }
 
 @media screen and (max-width: 600px) {
