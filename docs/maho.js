@@ -637,28 +637,29 @@ function mahoSetupThemeStage(root) {
         });
     }
 
-    /* Switching tabs turns the window over, like looking at the back of the
-       shop: it rotates edge-on, the capture swaps while nothing is visible,
-       and it rotates back in from the other side. The admin is the back, so
-       the two directions are opposite. */
-    var FLIP = 380;
+    /* Switching tabs turns the content over, like looking at the back of the
+       shop: the stage rotates edge-on, the capture swaps while nothing is
+       visible, and it rotates back in from the other side. The admin is the
+       back, so the two directions are opposite. */
+    var FLIP = 260;
     var FLIP_EASE = 'cubic-bezier(0.45, 0.05, 0.55, 0.95)';
+    var stage = root.querySelector('.mh-shot-stage');
     function flipTo(next) {
         var dir = next.mode === 'admin' ? -1 : 1;
-        win.classList.add('is-flipping');
-        win.style.transition = 'transform ' + FLIP + 'ms ' + FLIP_EASE;
-        win.style.transform = 'rotateY(' + (90 * dir) + 'deg)';
+        stage.classList.add('is-flipping');
+        stage.style.transition = 'transform ' + FLIP + 'ms ' + FLIP_EASE;
+        stage.style.transform = 'rotateY(' + (90 * dir) + 'deg)';
         var edge = new Promise(function (res) { setTimeout(res, FLIP); });
         show(next, edge).then(function (swapped) {
-            win.style.transition = 'none';
-            win.style.transform = swapped ? 'rotateY(' + (-90 * dir) + 'deg)' : win.style.transform;
-            void win.offsetWidth;
-            win.style.transition = 'transform ' + FLIP + 'ms ' + FLIP_EASE;
-            win.style.transform = 'rotateY(0deg)';
+            stage.style.transition = 'none';
+            stage.style.transform = swapped ? 'rotateY(' + (-90 * dir) + 'deg)' : stage.style.transform;
+            void stage.offsetWidth;
+            stage.style.transition = 'transform ' + FLIP + 'ms ' + FLIP_EASE;
+            stage.style.transform = 'rotateY(0deg)';
             setTimeout(function () {
-                win.style.transition = '';
-                win.style.transform = '';
-                win.classList.remove('is-flipping');
+                stage.style.transition = '';
+                stage.style.transform = '';
+                stage.classList.remove('is-flipping');
             }, FLIP);
         });
     }
@@ -698,7 +699,7 @@ function mahoSetupThemeStage(root) {
             var c = cur();
             if (m === c.mode) return;
             var next = { mode: m, i: modes[m].i, page: c.page, dark: c.dark };
-            if (fade && win && !win.classList.contains('is-flipping')) flipTo(next);
+            if (fade && stage && !stage.classList.contains('is-flipping')) flipTo(next);
             else show(next);
         });
     });

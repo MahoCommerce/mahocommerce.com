@@ -3631,12 +3631,12 @@ html.mh-full-lock { overflow: hidden; }
 }
 
 
-/* ---- Tab flip: the window turns over between storefront and admin ---- */
-.mh-tstage { perspective: 1600px; }
+/* ---- Tab flip: the content turns over between storefront and admin ---- */
+.mh-shot-window { perspective: 1400px; }
 
-.mh-shot-window {
+.mh-shot-stage {
     transform-style: preserve-3d;
     backface-visibility: hidden;
 }
 
-.mh-shot-window.is-flipping .mh-shot-nav { opacity: 0; }
+.mh-shot-stage.is-flipping .mh-shot-nav { opacity: 0; }
