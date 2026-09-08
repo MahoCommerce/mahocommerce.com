@@ -3481,8 +3481,6 @@ body:has(h1[id=blog]) .md-post__meta {
 @media screen and (max-width: 600px) {
     .mh-theme-grid { grid-template-columns: 1fr; }
     .mh-tstage-scroll { aspect-ratio: 4 / 3; }
-    .mh-tab span { display: none; }   /* icons only; the accessible name is the text */
-    .mh-tab svg { opacity: 1; }
 }
 
 @media (prefers-reduced-motion: reduce) {
