@@ -65,6 +65,8 @@ Available commands:
   dev:create-command            Create a new command that will integrate into your project's Maho CLI set of commands
   dev:frontend:layout:debug     Debug layout for a given URL showing handles, XML files, and block tree
   dev:frontend:theme:create     Create a new frontend theme with proper scaffolding
+  dev:frontend:theme:build      Compile the CSS sources (src/*.css) of every frontend theme into their css/ bundles
+  dev:frontend:theme:export     Write a store's admin theme settings to a theme.css file, so they can be committed
   dev:legacy:rename-mysql4-classes  Search for old Mysql4 classes and replaces them with Resource classes
   dev:lsp:start                 Start the LSP (Language Server Protocol) server for editor integration
   dev:mcp:start                 Start the MCP (Model Context Protocol) server for AI agent integration

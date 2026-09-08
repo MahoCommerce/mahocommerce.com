@@ -1,36 +1,67 @@
 ---
-description: Develop Maho themes the upgrade-safe way, layering CSS variables, extra CSS and local.xml over core files and overriding templates only when truly necessary.
+description: Develop Maho themes the upgrade-safe way. Start from the admin theme settings, set design tokens in theme.css, add CSS rules and local.xml, and override templates only when you must.
 ---
 
 # Theme Development Guide
 
-This guide explains the best way to develop a theme following Maho's philosophy: keep things simple and maintain upgradability. Rather than copying and modifying entire stylesheets or templates, you'll learn how to achieve your desired look with minimal overrides, ensuring your store can receive Maho updates without conflicts.
+This guide explains the best way to develop a theme following Maho's philosophy: keep things simple and maintain upgradability. Rather than copying and modifying entire stylesheets or templates, you achieve the look you want with minimal overrides, so your store can receive Maho updates without conflicts.
+
+!!! info "Maho 26.9 and later"
+    Since Maho 26.9 the `base` design package is a compiled skin, built on Tailwind CSS 4 and daisyUI 5, with eleven [industry themes](../about/themes.md) on top of it. This guide describes that system. A theme written against the earlier stylesheets keeps working with the `legacy` package, see [Upgrading an older theme](#upgrading-an-older-theme).
 
 ## The Upgradability Principle
 
-Maho allows you to override any file from the core: templates (`.phtml`), JavaScript, CSS, images, and layout XML. The fallback system will automatically use your custom file instead of the core version.
+Maho allows you to override any file from the core: templates (`.phtml`), JavaScript, CSS, images, and layout XML. The fallback system automatically uses your custom file instead of the core version.
 
 !!! info "How it works"
     The [Maho Composer Plugin](composer-plugin.md) does all the heavy lifting, keeping core files in the vendor directory while your project folder contains only your customizations.
 
 **However, every file you override creates a maintenance burden.**
 
-When Maho releases updates with bug fixes, security patches, or new features, your overridden files won't benefit from these improvements. You'll need to manually review and merge changes, and the more files you override, the more work each upgrade requires.
+When Maho releases updates with bug fixes, security patches, or new features, your overridden files do not benefit from these improvements. You need to review and merge changes by hand, and the more files you override, the more work each upgrade requires.
 
 **The golden rule: override as little as possible.**
 
+## How the theme system works
+
+Every storefront page loads two stylesheets:
+
+- `css/styles.css` is the compiled engine. It styles every template of `base/default` through the semantic class names the templates already carry, and it is shared by every theme through the skin fallback.
+- `css/theme.css` is the identity of the active theme: design tokens (CSS variables) and a handful of rules. The eleven industry themes are each a `theme.css` of about a hundred lines. No template is forked.
+
+The compiled engine lives in CSS cascade layers, while `theme.css` is unlayered. A rule in `theme.css` therefore always wins, with no `!important` and no specificity battles.
+
+On top of both, **System > Configuration > Design > Theme Settings** lets a merchant set the same tokens in the admin, per website or store view, with a live preview and no files at all. An empty field changes nothing: the theme's own value stands.
+
 ## Customization Tiers
 
-We recommend approaching theme customization in tiers, starting with the least invasive method:
+Approach theme customization in tiers, starting with the least invasive method:
 
-| Tier | Method | Upgradability Impact |
-|------|--------|---------------------|
-| 1 | CSS Variables only | None |
-| 2 | Additional CSS rules | None |
-| 3 | Layout XML via `local.xml` | Minimal |
-| 4 | Template overrides | High - avoid when possible |
+| Tier | Method | Needs | Upgradability impact |
+|------|--------|-------|----------------------|
+| 0 | Theme Settings in the admin | Nothing | None |
+| 1 | Design tokens in `theme.css` | A theme | None |
+| 2 | Additional CSS rules in `theme.css` | A theme | None |
+| 3 | Layout XML via `local.xml` | A theme | Minimal |
+| 4 | Template overrides | A theme | High, avoid when possible |
 
-Most visual customizations can be achieved with Tier 1 and 2 alone.
+Most visual customizations are done with tiers 0 to 2 alone.
+
+## Tier 0: Theme Settings in the admin
+
+Open **System > Configuration > Design > Theme Settings**. The group exposes the tokens that define an identity: the primary, secondary and accent colors, page background and text color, star color, footer colors, body and heading fonts with a web font stylesheet, heading weight and letter spacing, button case and letter spacing, three corner radii, control size, border width, raised surfaces, product image background, a dark mode switch, and a Custom CSS field for anything else. A preview shows the storefront as you type, at phone, tablet and desktop width.
+
+Every field holds the CSS value itself, so `Field Radius` takes `999px`, and `Body Font` takes a font stack. The readable text color on each palette color, and the two quiet surfaces behind the page background, are derived by contrast, so there is no field for them.
+
+**Import a daisyUI Theme** takes the CSS block from the daisyUI theme generator and fills the fields.
+
+When the result should live in git, export it:
+
+```bash
+./maho dev:frontend:theme:export --theme acmestore/default
+```
+
+The command writes the settings as a `theme.css`. Commit the file and clear the fields. See the [theme commands reference](theme-commands.md#devfrontendthemeexport).
 
 ## Setting Up Your Theme
 
@@ -40,23 +71,16 @@ The easiest way to create a new theme is with the CLI command:
 ./maho dev:frontend:theme:create
 ```
 
-!!! info "Availability"
-    The `dev:frontend:theme:create` command is available since Maho 26.1.
-
-This interactive command will prompt you for the package name, theme name, and parent theme, then generate the complete directory structure with properly configured files.
-
-You can also use non-interactive mode:
+This interactive command asks for the package name, the theme name, the parent theme, and whether the theme uses Tailwind. Then it generates the complete directory structure with properly configured files. Every option, and the non-interactive mode, is in the [theme commands reference](theme-commands.md#devfrontendthemecreate).
 
 ```bash
 ./maho dev:frontend:theme:create -p acmestore -t default
 ```
 
 !!! tip "Why use 'default' as your main theme?"
-    Within the same package, any theme automatically falls back to `default`. This means if you later create `acmestore/holiday`, it will inherit from `acmestore/default` without extra configuration. If you named your main theme something else (like `acmestore/main`), sub-themes would skip it and fall back directly to `base/default` unless you explicitly set the parent in `theme.xml`.
+    Within the same package, any theme automatically falls back to `default`. This means if you later create `acmestore/holiday`, it inherits from `acmestore/default` without extra configuration. If you named your main theme something else (like `acmestore/main`), sub-themes would skip it and fall back directly to `base/default` unless you set the parent in `theme.xml`.
 
 ### Generated Structure
-
-The command creates the following structure:
 
 ```
 app/design/frontend/
@@ -71,157 +95,193 @@ public/skin/frontend/
 └── acmestore/
     └── default/
         └── css/
-            └── default.css
+            └── theme.css
 ```
 
-!!! tip "CSS file naming"
-    The CSS file is named after your theme (e.g., `default.css`, `holiday.css`) rather than a generic name like `custom.css`. This prevents accidental collisions with core CSS files like `checkout.css` or `widgets.css`.
+`theme.css` needs no entry in `local.xml`: every page already loads it after the compiled `styles.css`. The generated file lists the most common tokens as comments.
 
-The generated `local.xml` already includes the CSS registration, and the CSS file contains helpful comments with the available variables to customize.
+### Starting from an industry theme
+
+Pass the industry theme as the parent to start from its identity:
+
+```bash
+./maho dev:frontend:theme:create -p acmestore -t default --parent base/fashion
+```
+
+The generated `theme.css` then starts with an import of the parent's `theme.css`. Keep that line: the skin fallback serves the first `theme.css` it finds, so your file would otherwise hide the whole identity of the parent.
 
 ### Activate Your Theme
 
-In the Maho Admin, go to **System → Configuration → Design** and set:
+In the Maho Admin, go to **System > Configuration > Design** and set:
 
-- **Package → Current Package Name**: `acmestore`
-- **Themes → Default**: `default`
+- **Package**: `acmestore`
+- **Theme**: `default`
 
-## Tier 1: CSS Variables
+Then flush the cache.
 
-Maho's base theme uses CSS custom properties (variables) for colors and design tokens. You can completely change the look of your store by simply redefining these variables.
+## Tier 1: Design tokens
 
-See the [complete list of available CSS variables](https://github.com/MahoCommerce/maho/blob/main/public/skin/frontend/base/default/css/styles.css) in the base theme (look for the `:root` block at the top).
+The compiled engine derives every component from a set of CSS variables. Redefine them in `theme.css` to change the whole store.
 
-**Example `default.css`:**
+**Example `theme.css`:**
 
 ```css
-:root {
-    /* Brand colors */
-    --maho-color-primary: #e91e63;
-    --maho-color-primary-hover: #f06292;
-    --maho-color-primary-active: #c2185b;
-    --maho-color-primary-dark: #880e4f;
+@import url('https://fonts.googleapis.com/css2?family=Figtree:wght@400;600;700&display=swap');
 
-    /* Adjust other colors to match your brand */
-    --maho-color-price: #e91e63;
-    --maho-color-special-price: #c2185b;
+:root {
+    --font-display: 'Figtree', sans-serif;   /* headings */
+    --font-body: 'Figtree', sans-serif;
+
+    /* Colors accept any CSS format (hex, oklch, ...) */
+    --color-primary: #0e7a5f;
+    --color-primary-content: #f0fdf8;        /* readable text on primary */
+    --color-base-100: #ffffff;                /* page background */
+    --color-base-200: #f3f6f4;                /* quiet surfaces */
+    --color-base-300: #dfe7e2;                /* borders */
+    --color-base-content: #17221d;            /* text ink */
+
+    /* Shape */
+    --radius-selector: 0.5rem;                /* swatches, badges */
+    --radius-field: 0.5rem;                   /* inputs, buttons */
+    --radius-box: 1rem;                       /* cards, dialogs */
+
+    /* Backdrop behind product images */
+    --product-tile-bg: #f6f4f1;
+
+    /* Hero titles */
+    --font-title: 'Fraunces', serif;          /* defaults to --font-display */
+    --title-weight: 500;
+    --title-tracking: -0.01em;
+
+    /* Buttons */
+    --btn-case: uppercase;
+    --btn-tracking: 0.06em;
+
+    /* Footer */
+    --footer-bg: #10231c;
+    --footer-ink: #eef6f2;
+    --footer-link-hover: #7fd0b4;
 }
 ```
 
-With just these few lines, buttons, links, prices, and interactive elements throughout the entire store will use your brand colors.
+With these lines, buttons, links, badges, cards, forms, navigation and the footer across the whole store follow your identity.
+
+The complete token list, with the default of each one, is in the [theme README in the Maho repository](https://github.com/MahoCommerce/maho/blob/main/public/skin/frontend/README.md). The [eleven industry themes](https://github.com/MahoCommerce/maho/tree/main/public/skin/frontend/base) are real-world examples of this tier: copy the closest one and edit.
+
+### Dark mode
+
+Dark mode follows the device setting through a media query that redefines the same variables. Write the block in your own `theme.css` and it wins over the compiled one:
+
+```css
+@media (prefers-color-scheme: dark) {
+    :root:where(:not([data-color-scheme="light"])) {
+        color-scheme: dark;
+        --color-base-100: #131917;
+        --color-base-200: #1c2420;
+        --color-base-300: #2c3831;
+        --color-base-content: #dbe7e1;
+    }
+}
+```
+
+The `:where()` clause keeps the merchant's **Dark Mode** setting working: when it is off, the storefront sets `data-color-scheme="light"` on the `html` element and the block does not apply. A theme with no dark palette pins `color-scheme: light` inside that block instead, the way the Food and Kids themes do.
 
 ## Tier 2: Additional CSS Rules
 
-When CSS variables aren't enough, add your own CSS rules that target existing elements. Your stylesheet loads after the core CSS, so your rules take precedence.
+When tokens are not enough, add your own rules below them in `theme.css`. Your file is unlayered and loads after the engine, so your selectors always win.
 
 ```css
-/* Custom header height */
-.header {
-    padding: 20px 0;
-}
+/* Pill buttons and uppercase navigation, just for this theme */
+.btn { border-radius: 9999px; }
+#nav a { text-transform: uppercase; letter-spacing: 0.04em; }
 
-/* Custom product card styling */
-.product-item {
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-}
-
-/* Custom button styles */
-.btn-cart {
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
+/* The sale sticker as ink on paper, not a red alert */
+.price-box .discount-percent {
+    background: var(--color-base-content);
+    color: var(--color-base-100);
+    border: none;
 }
 ```
 
 **Tips:**
 
 - Use browser DevTools to identify the selectors you need to target
-- Be as specific as necessary, but avoid `!important` when possible
+- Do not use `!important`. You do not need it
 - Group related customizations with comments for maintainability
 
 ## Tier 3: Layout XML Changes
 
-Use `local.xml` to modify page structure without touching core layout files. You can:
-
-- Add or remove blocks
-- Change block templates
-- Reorder elements
-- Add page-specific assets
-
-!!! warning "Try to avoid copying layout files"
-    Try to avoid as much as possible copying layout XML files (like `catalog.xml` or `checkout.xml`) from the core theme into your theme. These files are large and complex, and when it's time to upgrade you won't remember what changes you made. Put all your layout changes in `local.xml` instead.
-
-**Example: Add CSS only on product pages**
+Use `local.xml` to add, move, or remove blocks without touching templates. The generated file contains commented examples.
 
 ```xml
 <?xml version="1.0"?>
-<layout>
-    <catalog_product_view>
-        <reference name="head">
-            <action method="addCss">
-                <stylesheet>css/product-page.css</stylesheet>
-            </action>
+<layout version="0.1.0">
+    <!-- Remove the newsletter block from every page -->
+    <default>
+        <reference name="left">
+            <remove name="left.newsletter"/>
         </reference>
-    </catalog_product_view>
+    </default>
+
+    <!-- Add a custom block to the homepage -->
+    <cms_index_index>
+        <reference name="content">
+            <block type="core/template" name="custom.block" template="custom/block.phtml"/>
+        </reference>
+    </cms_index_index>
 </layout>
 ```
 
-**Example: Remove a block**
-
-```xml
-<default>
-    <reference name="right">
-        <action method="unsetChild">
-            <name>catalog.compare.sidebar</name>
-        </action>
-    </reference>
-</default>
-```
-
-**Example: Change a template**
-
-```xml
-<default>
-    <reference name="header">
-        <action method="setTemplate">
-            <template>page/html/header-custom.phtml</template>
-        </action>
-    </reference>
-</default>
-```
-
-Note: If you change a template path, you'll need to create that template file in your theme, which moves you into Tier 4.
+Use `./maho dev:frontend:layout:debug <url>` to see the handles, the layout files and the block tree of a page.
 
 ## Tier 4: Template Overrides
 
-When you absolutely must modify HTML structure, copy the template to your theme directory maintaining the same path:
+Copy a template from `base/default` into your theme only when a layout or CSS change cannot do the job. Keep the copy as close to the original as possible, and note the Maho version you copied it from, so you can diff it at the next upgrade.
 
-**Core file:**
-```
-app/design/frontend/base/default/template/catalog/product/view.phtml
+A template you write yourself can use Tailwind class names. That needs your own build, see the next section.
+
+## Your own Tailwind build
+
+Use this when you write your own templates with Tailwind class names, or `@apply` in your CSS. Scaffold the theme with the build shape:
+
+```bash
+./maho dev:frontend:theme:create -p acmestore -t default --tailwind
 ```
 
-**Your override:**
-```
-app/design/frontend/acmestore/default/template/catalog/product/view.phtml
+The command writes `src/tailwind.css` instead of `css/theme.css`:
+
+```css
+@import "../../../base/default/src/tailwind.css";
+
+:root { --color-primary: #0e7a5f; }
+
+@layer components {
+    .acme-banner { @apply alert alert-info rounded-box; }
+}
 ```
 
-**Guidelines for template overrides:**
+That single import carries the whole configuration: the daisyUI plugin, the semantic component layer and every template scan rule, which already covers your own templates. Then compile:
 
-1. **Copy, don't start from scratch** - Always copy the original file and modify it
-2. **Make minimal changes** - Only change what you need; keep the rest intact
-3. **Document your changes** - Add comments explaining what you modified and why
-4. **Track upstream changes** - When upgrading Maho, review changes to files you've overridden
+```bash
+./maho dev:frontend:theme:build --theme acmestore/default
+```
+
+The build writes `css/styles.css`, which the skin fallback serves instead of Maho's bundle. Two things follow:
+
+- The `css/theme.css` slot stays free, so a parent identity such as `base/fashion` still loads on top of your bundle.
+- **You own the engine.** Maho's `styles.css` no longer reaches your store, so rebuild after every Maho upgrade. Commit the compiled CSS: production never needs Node.js.
+
+Add `--watch` to rebuild while you work, and run a plain build before you commit. The command installs the toolchain on first run. See the [theme commands reference](theme-commands.md#devfrontendthemebuild).
 
 ## Creating Sub-themes
 
-For stores that need theme variations, you can create sub-themes within your package. Sub-themes inherit from your main theme, allowing you to maintain a base set of customizations while adding variations on top.
+For stores that need theme variations, create sub-themes within your package. Sub-themes inherit from your main theme, so you maintain one base set of customizations and add variations on top.
 
 ### Use Cases
 
-- **Seasonal themes**: Base theme for everyday use, sub-themes for holidays or special promotions
-- **A/B testing**: Test different designs while sharing core customizations
-- **Multi-store setup**: Shared functionality in base theme, store-specific branding in sub-themes
+- **Seasonal themes**: base theme for everyday use, sub-themes for holidays or promotions
+- **A/B testing**: test different designs while sharing core customizations
+- **Multi-store setup**: shared identity in the base theme, store-specific branding in sub-themes
 
 ### Package Structure
 
@@ -229,43 +289,27 @@ For stores that need theme variations, you can create sub-themes within your pac
 app/design/frontend/
 └── acmestore/
     ├── default/              # Main store theme
-    │   ├── etc/
-    │   │   └── theme.xml
-    │   └── layout/
-    │       └── local.xml
-    │
-    ├── holiday/              # Holiday variation (auto-inherits from default)
-    │   ├── etc/
-    │   │   └── theme.xml
-    │   └── layout/
-    │       └── local.xml
-    │
-    └── premium/              # Premium brand variation (auto-inherits from default)
-        ├── etc/
-        │   └── theme.xml
-        └── layout/
-            └── local.xml
+    │   ├── etc/theme.xml
+    │   └── layout/local.xml
+    ├── holiday/              # Holiday variation (inherits from default)
+    │   ├── etc/theme.xml
+    │   └── layout/local.xml
+    └── premium/              # Premium variation (inherits from default)
+        ├── etc/theme.xml
+        └── layout/local.xml
 
 public/skin/frontend/
 └── acmestore/
-    ├── default/
-    │   └── css/
-    │       └── default.css   # Main store styles
-    │
-    ├── holiday/
-    │   └── css/
-    │       └── holiday.css   # Holiday colors and decorations
-    │
-    └── premium/
-        └── css/
-            └── premium.css   # Premium brand styling
+    ├── default/css/theme.css   # Main identity
+    ├── holiday/css/theme.css   # Holiday colors and decorations
+    └── premium/css/theme.css   # Premium branding
 ```
 
 ### Understanding theme.xml
 
-The `dev:frontend:theme:create` command always generates a `theme.xml` file that explicitly declares the parent theme. While Maho can auto-inherit from `default` within the same package, having an explicit `theme.xml` makes the inheritance chain clear and is the recommended practice.
+The `dev:frontend:theme:create` command always generates a `theme.xml` that declares the parent theme. Maho can inherit from `default` within the same package on its own, but an explicit `theme.xml` makes the chain clear and is the recommended practice.
 
-The only time you need to manually edit `theme.xml` is when a sub-theme should inherit from another sub-theme instead of `default`. For example, if `holiday-vip` should inherit from `holiday`:
+Edit `theme.xml` by hand only when a sub-theme inherits from another sub-theme. For example, when `holiday-vip` inherits from `holiday`:
 
 ```xml
 <?xml version="1.0"?>
@@ -276,47 +320,78 @@ The only time you need to manually edit `theme.xml` is when a sub-theme should i
 
 ### Inheritance Chain
 
-When using the `holiday` sub-theme, Maho looks for files in this order:
+With the `holiday` sub-theme active, Maho looks for files in this order:
 
 1. `acmestore/holiday` (sub-theme)
 2. `acmestore/default` (main theme)
 3. `base/default` (Maho core)
 
-This means:
-
-- Core Maho updates flow through automatically
-- Your main theme customizations apply to all sub-themes
-- Sub-theme-specific changes only exist where needed
+Core Maho updates flow through automatically, your main theme customizations apply to all sub-themes, and sub-theme changes exist only where needed.
 
 ### Sub-theme CSS Strategy
 
-In a sub-theme, you typically only need to override CSS variables:
+The skin fallback serves one `theme.css`, the first it finds. A sub-theme's `theme.css` therefore replaces the main theme's file instead of adding to it. Import the parent first, then override:
 
-**`public/skin/frontend/acmestore/holiday/css/holiday.css`:**
+**`public/skin/frontend/acmestore/holiday/css/theme.css`:**
 
 ```css
+@import url('../../../acmestore/default/css/theme.css');
+
 :root {
-    /* Holiday colors */
-    --maho-color-primary: #c62828;
-    --maho-color-primary-hover: #e53935;
-    --maho-color-primary-active: #b71c1c;
-    --maho-color-background-alt: #fff8e1;
+    --color-primary: #c62828;
+    --color-primary-content: #fff8f8;
+    --color-base-200: #fff8e1;
 }
 
-/* Add seasonal decorations */
+/* Seasonal decorations */
 .header {
     background-image: url('../images/snowflakes.png');
 }
 ```
 
-The main theme styles from `acmestore/default` still load because of the inheritance chain, and the sub-theme's CSS adds the seasonal touch.
+The scaffold command writes that import line for you whenever the parent is not `base/default`.
+
+## Adding your own setting
+
+A theme that needs a field of its own in Theme Settings ships a small module. No PHP class is needed:
+
+```xml
+<!-- app/code/local/Acme/Luxury/etc/config.xml -->
+<global>
+    <design>
+        <tokens>
+            <hero_overlay>
+                <path>acme_luxury/design/hero_overlay</path>
+                <var>--acme-hero-overlay</var>
+            </hero_overlay>
+        </tokens>
+    </design>
+</global>
+```
+
+Declare the field in your module's `etc/system.xml` at that path. It then behaves like a core setting: scoped per store view, exported by `dev:frontend:theme:export`, and silent while empty. The core `Mage_Core` module's `config.xml` is the worked example.
+
+## Upgrading an older theme
+
+Before 26.9 the `base` package shipped plain stylesheets, and custom themes set variables such as `--maho-color-primary`. Those stylesheets now live in the `legacy` package, which is deprecated and will be removed in a later release. A store that upgrades keeps its look: the upgrade writes package `legacy` when no package was ever chosen.
+
+A custom theme written against the old stylesheets keeps working when it names that package as its parent:
+
+```xml
+<theme>
+    <parent>legacy/default</parent>
+</theme>
+```
+
+To move the theme to the compiled skin, set the parent back to `base/default`, rename your stylesheet to `css/theme.css`, and translate its variables to the tokens listed in Tier 1. The industry theme closest to your look is the best template.
 
 ## Summary
 
-1. **Start with CSS variables** - Most branding can be achieved this way
-2. **Add CSS rules** when variables aren't enough
-3. **Use `local.xml`** for layout changes
-4. **Override templates** only as a last resort
-5. **Consider sub-themes** for seasonal or multi-store variations
+1. **Start in the admin**: Theme Settings covers most branding, with no files
+2. **Set design tokens** in `theme.css` for a theme you keep in git
+3. **Add CSS rules** when tokens are not enough
+4. **Use `local.xml`** for layout changes
+5. **Override templates** only as a last resort, with your own Tailwind build when you write new markup
+6. **Consider sub-themes** for seasonal or multi-store variations
 
 Following this approach keeps your themes lean, maintainable, and easy to upgrade.
