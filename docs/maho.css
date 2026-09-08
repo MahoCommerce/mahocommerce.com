@@ -3528,49 +3528,54 @@ body:has(h1[id=blog]) .md-post__meta {
 .mh-shot-window.is-full .mh-full-open { display: none; }
 .mh-shot-window.is-full .mh-full-close { display: block; }
 
-/* The window fills the screen; the capture fills the window and scrolls */
-.mh-shot-window:fullscreen,
-.mh-shot-window:-webkit-full-screen {
+/* The window covers the browser window; the capture fills it and scrolls */
+html.mh-full-lock { overflow: hidden; }
+
+.mh-shot-window.is-full {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;   /* above the sticky site header */
     display: flex;
     flex-direction: column;
-    width: 100%;
-    height: 100%;
     border: 0;
     border-radius: 0;
     box-shadow: none;
     background: #0a0b05;
 }
 
-.mh-shot-window:fullscreen .mh-term-top,
-.mh-shot-window:-webkit-full-screen .mh-term-top {
+.mh-shot-window.is-full .mh-term-top {
     border-radius: 0;
 }
 
-.mh-shot-window:fullscreen .mh-shot-stage,
-.mh-shot-window:-webkit-full-screen .mh-shot-stage {
+.mh-shot-window.is-full .mh-shot-stage {
     display: flex;
     flex-direction: column;
     flex: 1 1 auto;
     min-height: 0;
 }
 
-.mh-shot-window:fullscreen .mh-tstage-scroll,
-.mh-shot-window:-webkit-full-screen .mh-tstage-scroll {
+.mh-shot-window.is-full .mh-tstage-scroll {
     aspect-ratio: auto;
     flex: 1 1 auto;
     min-height: 0;
     border-radius: 0;
 }
 
-/* The arrows sit inside the screen edge instead of straddling the window */
-.mh-shot-window:fullscreen .mh-shot-prev,
-.mh-shot-window:-webkit-full-screen .mh-shot-prev {
+/* The arrows sit inside the window edge instead of straddling the frame */
+.mh-shot-window.is-full .mh-shot-prev {
     left: 1.2em;
     transform: translateY(-50%);
 }
 
-.mh-shot-window:fullscreen .mh-shot-next,
-.mh-shot-window:-webkit-full-screen .mh-shot-next {
+.mh-shot-window.is-full .mh-shot-next {
     right: 1.2em;
     transform: translateY(-50%);
+}
+
+/* The hero showcase animates in with a transform, and a transformed ancestor
+   would pin the fixed window to itself. Drop it while the window is full. */
+.mh-showcase:has(.mh-shot-window.is-full) {
+    animation: none;
+    transform: none;
+    will-change: auto;
 }
