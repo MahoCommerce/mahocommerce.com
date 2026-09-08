@@ -106,14 +106,14 @@ description: Maho is the open-source, self-hosted ecommerce platform you actuall
       <div class="mh-subbar" data-mh-picks="store" data-mh-mode="store" aria-label="Storefront themes">
         <a class="mh-tstage-pick" href="about/themes/#theme-default" data-theme="default" data-name="Default">Default</a>
         <a class="mh-tstage-pick" href="about/themes/#theme-fashion" data-theme="fashion" data-name="Fashion">Fashion</a>
+        <a class="mh-tstage-pick" href="about/themes/#theme-beauty" data-theme="beauty" data-name="Beauty">Beauty</a>
+        <a class="mh-tstage-pick" href="about/themes/#theme-sports" data-theme="sports" data-name="Sports">Sports</a>
+        <a class="mh-tstage-pick" href="about/themes/#theme-kids" data-theme="kids" data-name="Kids" data-dark="no">Kids</a>
         <a class="mh-tstage-pick" href="about/themes/#theme-electronics" data-theme="electronics" data-name="Electronics">Electronics</a>
         <a class="mh-tstage-pick" href="about/themes/#theme-food" data-theme="food" data-name="Food" data-dark="no">Food</a>
         <a class="mh-tstage-pick" href="about/themes/#theme-books" data-theme="books" data-name="Books">Books</a>
         <a class="mh-tstage-pick" href="about/themes/#theme-jewelry" data-theme="jewelry" data-name="Jewelry">Jewelry</a>
-        <a class="mh-tstage-pick" href="about/themes/#theme-beauty" data-theme="beauty" data-name="Beauty">Beauty</a>
         <a class="mh-tstage-pick" href="about/themes/#theme-home" data-theme="home" data-name="Home">Home</a>
-        <a class="mh-tstage-pick" href="about/themes/#theme-sports" data-theme="sports" data-name="Sports">Sports</a>
-        <a class="mh-tstage-pick" href="about/themes/#theme-kids" data-theme="kids" data-name="Kids" data-dark="no">Kids</a>
         <a class="mh-tstage-pick" href="about/themes/#theme-garden" data-theme="garden" data-name="Garden">Garden</a>
       </div>
       <div class="mh-subbar" data-mh-picks="admin" data-mh-mode="admin" aria-label="Admin screens" hidden>

@@ -18,14 +18,14 @@ Pick a theme, step through the home, category and product pages with the arrows,
   <div class="mh-tstage-picks" data-mh-picks="store" aria-label="Choose a theme">
     <a class="mh-tstage-pick" href="#theme-default" data-theme="default" data-name="Default"><span>Default</span></a>
     <a class="mh-tstage-pick" href="#theme-fashion" data-theme="fashion" data-name="Fashion"><span>Fashion</span></a>
+    <a class="mh-tstage-pick" href="#theme-beauty" data-theme="beauty" data-name="Beauty"><span>Beauty</span></a>
+    <a class="mh-tstage-pick" href="#theme-sports" data-theme="sports" data-name="Sports"><span>Sports</span></a>
+    <a class="mh-tstage-pick" href="#theme-kids" data-theme="kids" data-name="Kids" data-dark="no"><span>Kids</span></a>
     <a class="mh-tstage-pick" href="#theme-electronics" data-theme="electronics" data-name="Electronics"><span>Electronics</span></a>
     <a class="mh-tstage-pick" href="#theme-food" data-theme="food" data-name="Food" data-dark="no"><span>Food</span></a>
     <a class="mh-tstage-pick" href="#theme-books" data-theme="books" data-name="Books"><span>Books</span></a>
     <a class="mh-tstage-pick" href="#theme-jewelry" data-theme="jewelry" data-name="Jewelry"><span>Jewelry</span></a>
-    <a class="mh-tstage-pick" href="#theme-beauty" data-theme="beauty" data-name="Beauty"><span>Beauty</span></a>
     <a class="mh-tstage-pick" href="#theme-home" data-theme="home" data-name="Home"><span>Home</span></a>
-    <a class="mh-tstage-pick" href="#theme-sports" data-theme="sports" data-name="Sports"><span>Sports</span></a>
-    <a class="mh-tstage-pick" href="#theme-kids" data-theme="kids" data-name="Kids" data-dark="no"><span>Kids</span></a>
     <a class="mh-tstage-pick" href="#theme-garden" data-theme="garden" data-name="Garden"><span>Garden</span></a>
   </div>
   <div class="mh-tstage-media">
@@ -94,6 +94,39 @@ Pick a theme, step through the home, category and product pages with the arrows,
     </div>
   </div>
 </article>
+<article class="mh-theme-card" id="theme-beauty">
+  <a class="mh-theme-shot mh-tstage-open" href="../../assets/themes/beauty-home-light.webp" data-target="mh-themes-compare" data-theme="beauty" data-page="home" aria-label="View the Beauty theme in the comparison window"><img src="../../assets/themes/thumbs/beauty-home-light.webp" alt="Beauty theme, home page, light mode" width="720" height="1200" loading="lazy" decoding="async"></a>
+  <div class="mh-theme-body">
+    <h3>Beauty <span class="mh-theme-scheme">Light + dark</span></h3>
+    <p>Milky near-white surfaces and petal tiles. One mauve-berry voice with sage in support, pill geometry, lowercase actions.</p>
+    <div class="mh-theme-pages" aria-label="Beauty theme captures"><a class="mh-tstage-open" href="../../assets/themes/beauty-home-light.webp" data-target="mh-themes-compare" data-theme="beauty" data-page="home">Home</a> <a class="mh-tstage-open" href="../../assets/themes/beauty-category-light.webp" data-target="mh-themes-compare" data-theme="beauty" data-page="category">Category</a> <a class="mh-tstage-open" href="../../assets/themes/beauty-product-light.webp" data-target="mh-themes-compare" data-theme="beauty" data-page="product">Product</a></div>
+    <div class="mh-theme-actions">
+      <a class="mh-btn mh-btn-solid" href="https://demo.mahocommerce.com/beauty/" target="_blank" rel="noopener">Open the demo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+    </div>
+  </div>
+</article>
+<article class="mh-theme-card" id="theme-sports">
+  <a class="mh-theme-shot mh-tstage-open" href="../../assets/themes/sports-home-light.webp" data-target="mh-themes-compare" data-theme="sports" data-page="home" aria-label="View the Sports theme in the comparison window"><img src="../../assets/themes/thumbs/sports-home-light.webp" alt="Sports theme, home page, light mode" width="720" height="1200" loading="lazy" decoding="async"></a>
+  <div class="mh-theme-body">
+    <h3>Sports <span class="mh-theme-scheme">Light + dark</span></h3>
+    <p>Athletic. A white page, heavy condensed headlines, black pill buttons, and volt spent only on the sale badge.</p>
+    <div class="mh-theme-pages" aria-label="Sports theme captures"><a class="mh-tstage-open" href="../../assets/themes/sports-home-light.webp" data-target="mh-themes-compare" data-theme="sports" data-page="home">Home</a> <a class="mh-tstage-open" href="../../assets/themes/sports-category-light.webp" data-target="mh-themes-compare" data-theme="sports" data-page="category">Category</a> <a class="mh-tstage-open" href="../../assets/themes/sports-product-light.webp" data-target="mh-themes-compare" data-theme="sports" data-page="product">Product</a></div>
+    <div class="mh-theme-actions">
+      <a class="mh-btn mh-btn-solid" href="https://demo.mahocommerce.com/sports/" target="_blank" rel="noopener">Open the demo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+    </div>
+  </div>
+</article>
+<article class="mh-theme-card" id="theme-kids">
+  <a class="mh-theme-shot mh-tstage-open" href="../../assets/themes/kids-home-light.webp" data-target="mh-themes-compare" data-theme="kids" data-page="home" aria-label="View the Kids theme in the comparison window"><img src="../../assets/themes/thumbs/kids-home-light.webp" alt="Kids theme, home page, light mode" width="720" height="1200" loading="lazy" decoding="async"></a>
+  <div class="mh-theme-body">
+    <h3>Kids <span class="mh-theme-scheme">Light only</span></h3>
+    <p>Toy shop. A bright warm-white page, rotating pastel grounds, one crayon-red action, and buttons that squish.</p>
+    <div class="mh-theme-pages" aria-label="Kids theme captures"><a class="mh-tstage-open" href="../../assets/themes/kids-home-light.webp" data-target="mh-themes-compare" data-theme="kids" data-page="home">Home</a> <a class="mh-tstage-open" href="../../assets/themes/kids-category-light.webp" data-target="mh-themes-compare" data-theme="kids" data-page="category">Category</a> <a class="mh-tstage-open" href="../../assets/themes/kids-product-light.webp" data-target="mh-themes-compare" data-theme="kids" data-page="product">Product</a></div>
+    <div class="mh-theme-actions">
+      <a class="mh-btn mh-btn-solid" href="https://demo.mahocommerce.com/kids/" target="_blank" rel="noopener">Open the demo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+    </div>
+  </div>
+</article>
 <article class="mh-theme-card" id="theme-electronics">
   <a class="mh-theme-shot mh-tstage-open" href="../../assets/themes/electronics-home-light.webp" data-target="mh-themes-compare" data-theme="electronics" data-page="home" aria-label="View the Electronics theme in the comparison window"><img src="../../assets/themes/thumbs/electronics-home-light.webp" alt="Electronics theme, home page, light mode" width="720" height="1200" loading="lazy" decoding="async"></a>
   <div class="mh-theme-body">
@@ -138,17 +171,6 @@ Pick a theme, step through the home, category and product pages with the arrows,
     </div>
   </div>
 </article>
-<article class="mh-theme-card" id="theme-beauty">
-  <a class="mh-theme-shot mh-tstage-open" href="../../assets/themes/beauty-home-light.webp" data-target="mh-themes-compare" data-theme="beauty" data-page="home" aria-label="View the Beauty theme in the comparison window"><img src="../../assets/themes/thumbs/beauty-home-light.webp" alt="Beauty theme, home page, light mode" width="720" height="1200" loading="lazy" decoding="async"></a>
-  <div class="mh-theme-body">
-    <h3>Beauty <span class="mh-theme-scheme">Light + dark</span></h3>
-    <p>Milky near-white surfaces and petal tiles. One mauve-berry voice with sage in support, pill geometry, lowercase actions.</p>
-    <div class="mh-theme-pages" aria-label="Beauty theme captures"><a class="mh-tstage-open" href="../../assets/themes/beauty-home-light.webp" data-target="mh-themes-compare" data-theme="beauty" data-page="home">Home</a> <a class="mh-tstage-open" href="../../assets/themes/beauty-category-light.webp" data-target="mh-themes-compare" data-theme="beauty" data-page="category">Category</a> <a class="mh-tstage-open" href="../../assets/themes/beauty-product-light.webp" data-target="mh-themes-compare" data-theme="beauty" data-page="product">Product</a></div>
-    <div class="mh-theme-actions">
-      <a class="mh-btn mh-btn-solid" href="https://demo.mahocommerce.com/beauty/" target="_blank" rel="noopener">Open the demo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-    </div>
-  </div>
-</article>
 <article class="mh-theme-card" id="theme-home">
   <a class="mh-theme-shot mh-tstage-open" href="../../assets/themes/home-home-light.webp" data-target="mh-themes-compare" data-theme="home" data-page="home" aria-label="View the Home theme in the comparison window"><img src="../../assets/themes/thumbs/home-home-light.webp" alt="Home theme, home page, light mode" width="720" height="1200" loading="lazy" decoding="async"></a>
   <div class="mh-theme-body">
@@ -157,28 +179,6 @@ Pick a theme, step through the home, category and product pages with the arrows,
     <div class="mh-theme-pages" aria-label="Home theme captures"><a class="mh-tstage-open" href="../../assets/themes/home-home-light.webp" data-target="mh-themes-compare" data-theme="home" data-page="home">Home</a> <a class="mh-tstage-open" href="../../assets/themes/home-category-light.webp" data-target="mh-themes-compare" data-theme="home" data-page="category">Category</a> <a class="mh-tstage-open" href="../../assets/themes/home-product-light.webp" data-target="mh-themes-compare" data-theme="home" data-page="product">Product</a></div>
     <div class="mh-theme-actions">
       <a class="mh-btn mh-btn-solid" href="https://demo.mahocommerce.com/home/" target="_blank" rel="noopener">Open the demo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-    </div>
-  </div>
-</article>
-<article class="mh-theme-card" id="theme-sports">
-  <a class="mh-theme-shot mh-tstage-open" href="../../assets/themes/sports-home-light.webp" data-target="mh-themes-compare" data-theme="sports" data-page="home" aria-label="View the Sports theme in the comparison window"><img src="../../assets/themes/thumbs/sports-home-light.webp" alt="Sports theme, home page, light mode" width="720" height="1200" loading="lazy" decoding="async"></a>
-  <div class="mh-theme-body">
-    <h3>Sports <span class="mh-theme-scheme">Light + dark</span></h3>
-    <p>Athletic. A white page, heavy condensed headlines, black pill buttons, and volt spent only on the sale badge.</p>
-    <div class="mh-theme-pages" aria-label="Sports theme captures"><a class="mh-tstage-open" href="../../assets/themes/sports-home-light.webp" data-target="mh-themes-compare" data-theme="sports" data-page="home">Home</a> <a class="mh-tstage-open" href="../../assets/themes/sports-category-light.webp" data-target="mh-themes-compare" data-theme="sports" data-page="category">Category</a> <a class="mh-tstage-open" href="../../assets/themes/sports-product-light.webp" data-target="mh-themes-compare" data-theme="sports" data-page="product">Product</a></div>
-    <div class="mh-theme-actions">
-      <a class="mh-btn mh-btn-solid" href="https://demo.mahocommerce.com/sports/" target="_blank" rel="noopener">Open the demo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-    </div>
-  </div>
-</article>
-<article class="mh-theme-card" id="theme-kids">
-  <a class="mh-theme-shot mh-tstage-open" href="../../assets/themes/kids-home-light.webp" data-target="mh-themes-compare" data-theme="kids" data-page="home" aria-label="View the Kids theme in the comparison window"><img src="../../assets/themes/thumbs/kids-home-light.webp" alt="Kids theme, home page, light mode" width="720" height="1200" loading="lazy" decoding="async"></a>
-  <div class="mh-theme-body">
-    <h3>Kids <span class="mh-theme-scheme">Light only</span></h3>
-    <p>Toy shop. A bright warm-white page, rotating pastel grounds, one crayon-red action, and buttons that squish.</p>
-    <div class="mh-theme-pages" aria-label="Kids theme captures"><a class="mh-tstage-open" href="../../assets/themes/kids-home-light.webp" data-target="mh-themes-compare" data-theme="kids" data-page="home">Home</a> <a class="mh-tstage-open" href="../../assets/themes/kids-category-light.webp" data-target="mh-themes-compare" data-theme="kids" data-page="category">Category</a> <a class="mh-tstage-open" href="../../assets/themes/kids-product-light.webp" data-target="mh-themes-compare" data-theme="kids" data-page="product">Product</a></div>
-    <div class="mh-theme-actions">
-      <a class="mh-btn mh-btn-solid" href="https://demo.mahocommerce.com/kids/" target="_blank" rel="noopener">Open the demo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
     </div>
   </div>
 </article>
