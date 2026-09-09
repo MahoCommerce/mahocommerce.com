@@ -25,8 +25,8 @@ Maho supports the following database engines:
 
 | Engine | Status | Notes |
 |--------|--------|-------|
-| MySQL 8.0+ | Stable | Fully supported, recommended for production |
-| MariaDB | Stable | Fully supported, recommended for production |
+| MySQL 8.4+ | Stable | Fully supported, recommended for production |
+| MariaDB 10.11+ | Stable | Fully supported, recommended for production |
 | PostgreSQL 15+ | Beta | Experimental support, use with caution in production |
 | SQLite | Beta | Lightweight option for development/testing |
 

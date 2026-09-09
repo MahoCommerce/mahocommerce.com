@@ -12,7 +12,7 @@ description: Install and run Maho step by step - system requirements, Composer s
 
 - PHP 8.3 / 8.4 / 8.5
 - Apache/Nginx/Caddy/FrankenPHP[^1] ([configuration](../hosting/web-server.md))
-- MySQL 8.0+ / MariaDB 10.6+ / PostgreSQL 15+ (beta) / SQLite (beta)
+- MySQL 8.4+ / MariaDB 10.11+ / PostgreSQL 15+ (beta) / SQLite (beta)
 
 ??? info "PHP version support policy"
     Maho supports the **three most recent stable PHP releases**. Today that means **8.3, 8.4, and 8.5**.
@@ -22,10 +22,8 @@ description: Install and run Maho step by step - system requirements, Composer s
 ??? info "Supported database versions (only actively maintained releases)"
     | Database   | Version | EOL        |
     |------------|---------|------------|
-    | MySQL      | 8.0     | **Apr 2026 (end of life - upgrade to 8.4 LTS)** |
     | MySQL      | 8.4 LTS | Apr 2032   |
     | MySQL      | 9.x     | Innovation, rolling quarterly releases |
-    | MariaDB    | 10.6 LTS | Jul 2026  |
     | MariaDB    | 10.11 LTS | Feb 2028 |
     | MariaDB    | 11.4 LTS | May 2029  |
     | MariaDB    | 11.8 LTS | Jun 2030  |
@@ -34,7 +32,7 @@ description: Install and run Maho step by step - system requirements, Composer s
     | PostgreSQL | 17      | Nov 2029   |
     | PostgreSQL | 18      | Nov 2030   |
 
-    We recommend using LTS versions for production: **MySQL 8.4 LTS** is the recommended MySQL series now that 8.0 has reached end of life. EOL dates sourced from [endoflife.date](https://endoflife.date).
+    We recommend LTS versions for production: **MySQL 8.4 LTS** or **MariaDB 11.8 LTS**. EOL dates sourced from [endoflife.date](https://endoflife.date).
 
 ## Create your project
 
