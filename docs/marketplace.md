@@ -404,6 +404,23 @@ Discover and install powerful modules to enhance your Maho store. All modules ar
         </div>
     </div>
 
+    <!-- Italian Fiscal Fields -->
+    <div class="app-card" data-category="localization">
+        <span class="app-category">Localization</span>
+        <h3 class="app-title">Italian Fiscal Fields</h3>
+        <p class="app-description">Add the fiscal data that Italian electronic invoicing requires: a private/company selector, Codice Fiscale, PEC email and Codice SdI, on the customer address book and the checkout billing form. Fields show only for the correct country and customer type, with format validation.</p>
+        <div class="app-footer">
+            <div class="app-actions">
+                <button class="app-button app-button-primary" onclick="showInstallModal('empiricompany/maho-italian-fiscal-fields')">
+                    ↓ Install
+                </button>
+                <a href="https://github.com/empiricompany/maho-italian-fiscal-fields" class="app-button app-button-primary" target="_blank">
+                    View Details →
+                </a>
+            </div>
+        </div>
+    </div>
+
     <!-- Maho DataSync -->
     <div class="app-card" data-category="developer-tools">
         <span class="app-category">Developer Tools</span>
