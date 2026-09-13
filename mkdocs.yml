@@ -36,7 +36,26 @@ plugins:
   # so a visitor's address never reaches a third party. It carries a special
   # case for mermaid.min.js, which the theme fetches from unpkg at runtime.
   - privacy
-  - search
+  - search:
+      pagefind:
+        # An unknown language code turns the English stemmer off. The stemmer
+        # cuts "customer" down to "custom", so a page about custom attributes
+        # matched a search for "customer". Prefix matching still lets
+        # "category" find "categories" and "import" find "imported".
+        force_language: zz
+        # Default is nav and footer. The post excerpts on the blog index,
+        # archive and category pages repeat every post, and those listing
+        # pages then outrank the post itself. The posts stay indexed.
+        exclude_selectors:
+          - nav
+          - footer
+          - .md-post--excerpt
+        options:
+          ranking:
+            termFrequency: 0.5
+            pageLength: 1.0
+            termSaturation: 1.0
+            termSimilarity: 2.0
   - social:
       cards_layout_options:
         logo: docs/assets/maho-logo.svg
