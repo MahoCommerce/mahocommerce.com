@@ -14,17 +14,19 @@ Work through these in order. Most of the configuration lives under **System > Co
 
 1. **Log into the admin panel.** Your admin URL is the store address followed by the admin path you chose during installation (for example `https://yourstore.com/admin`). Sign in with the administrator account created at install time.
 
-2. **Fill in your store information.** Under **System > Configuration**, set your store name, contact details, base currency, and time zone. Confirm your secure and unsecure base URLs point at the right domain, since these underpin every link and asset on your site.
+2. **Pick a theme.** Maho ships [eleven storefront themes](../about/themes.md), one for each kind of shop, each in light and dark. Choose the one closest to your business and restyle it from the admin, with no code and no build.
 
-3. **Set up taxes.** Configure your tax classes, rates, and rules so prices and checkout totals are correct for the regions you sell to.
+3. **Fill in your store information.** Under **System > Configuration**, set your store name, contact details, base currency, and time zone. Confirm your secure and unsecure base URLs point at the right domain, since these underpin every link and asset on your site.
 
-4. **Add shipping and payment methods.** Enable the shipping options your store offers and the payment methods you want to accept, both under **System > Configuration**.
+4. **Set up taxes.** Configure your tax classes, rates, and rules so prices and checkout totals are correct for the regions you sell to.
 
-5. **Create your first category and product.** From the **Catalog** menu, add a category to organize your catalog, then create a product and assign it to that category. See [Product Types](product-types.md) for a tour of the product types Maho supports.
+5. **Add shipping and payment methods.** Enable the shipping options your store offers and the payment methods you want to accept, both under **System > Configuration**.
 
-6. **Configure transactional email.** Order confirmations, password resets, and customer notifications all rely on proper email delivery. Set up your SMTP details following the [email sending configuration](../hosting/email-sending-configuration.md) guide.
+6. **Create your first category and product.** From the **Catalog** menu, add a category to organize your catalog, then create a product and assign it to that category. See [Product Types](product-types.md) for a tour of the product types Maho supports.
 
-7. **Turn on anti-spam protection.** Maho ships a built-in, self-hosted, cookieless [captcha](captcha.md) that shields your storefront and admin forms from bots without any third-party scripts or GDPR headaches. Enable it before you expose your forms to the public.
+7. **Configure transactional email.** Order confirmations, password resets, and customer notifications all rely on proper email delivery. Set up your SMTP details following the [email sending configuration](../hosting/email-sending-configuration.md) guide.
+
+8. **Turn on anti-spam protection.** Maho ships a built-in, self-hosted, cookieless [captcha](captcha.md) that shields your storefront and admin forms from bots without any third-party scripts or GDPR headaches. Enable it before you expose your forms to the public.
 
 !!! tip "Take your time with configuration"
     You do not have to get everything perfect on day one. Store info, tax, shipping, and payment can all be revisited as your store grows.
@@ -49,6 +51,6 @@ Once the basics are in place, these are some of the more powerful features docum
 - **[Gift Cards](gift-cards.md)** - sell and redeem gift cards with email delivery, QR codes, and partial redemption at checkout.
 - **[Product Relationship Rules](product-relationship-rules.md)** - generate related products, up-sells, and cross-sells automatically with condition-based rules.
 - **[Feed Manager](feed-manager.md)** - export your catalog to Google Shopping, Facebook, Pinterest, and more with visual mapping and scheduling.
-- **[Magic Link Authentication](magic-link-authentication.md)** - let customers log in without a password using secure, time-limited links sent by email.
+- **[Social Login](social-login.md)** and **[Magic Link Authentication](magic-link-authentication.md)** - let customers sign in with Google, Apple, or a time-limited email link instead of a password.
 
 Every page in this User Guide expands on one piece of the store. Use this page as your map, and dive into the individual guides when you are ready for the detail.

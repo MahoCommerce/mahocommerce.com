@@ -376,15 +376,15 @@ function mahoSetupConfetti() {
     });
 }
 
-/* ---- Blog & Community sidebars: keep their groups expanded ----
+/* ---- Blog, Community & User Guide sidebars: keep their groups expanded ----
    The collapsible sidebar (navigation.sections is off, which keeps the large
-   docs sidebar short) collapses nested groups by default. On the small blog and
-   community sections we want their groups open, the way they were before, so
+   developer docs sidebar short) collapses nested groups by default. On the
+   small blog, community and user guide sections we want their groups open, so
    check every nested toggle in the primary sidebar on each load. The path guard
-   leaves the big docs sidebars collapsible. */
+   leaves the big developer docs sidebar collapsible. */
 function mahoExpandSectionNav() {
     var p = location.pathname;
-    if (p.indexOf('/blog/') === -1 && p.indexOf('/community/') === -1) return;
+    if (p.indexOf('/blog/') === -1 && p.indexOf('/community/') === -1 && p.indexOf('/user-guide/') === -1) return;
     document.querySelectorAll('.md-sidebar--primary .md-nav__item--nested > input.md-nav__toggle').forEach(function (toggle) {
         toggle.checked = true;
     });

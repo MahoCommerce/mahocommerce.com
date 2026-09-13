@@ -74,7 +74,8 @@ plugins:
         declarative-database-schema.md: developer/declarative-database-schema.md
         deepwiki.md: api/deepwiki.md
         demo.md: about/demo.md
-        differences.md: about/differences.md
+        differences.md: about/origins.md
+        about/differences.md: about/origins.md
         edge-caching.md: hosting/edge-caching.md
         email-automation.md: user-guide/email-automation.md
         email-sending-configuration.md: hosting/email-sending-configuration.md
@@ -154,36 +155,36 @@ markdown_extensions:
 
 nav:
   - Home: index.md
+  - About:
+    - Live demo: about/demo.md
+    - Themes: about/themes.md
+    - Origins and differences: about/origins.md
+    - Release strategy: about/release-strategy.md
+    - Roadmap: about/roadmap.md
+    - GenAI transparency: about/genai-transparency.md
   - User Guide:
     - Start here: user-guide/index.md
-    - About:
-      - Live demo: about/demo.md
-      - Themes: about/themes.md
-      - Differences: about/differences.md
-      - Origins: about/origins.md
-      - Release strategy: about/release-strategy.md
-      - Roadmap: about/roadmap.md
-      - GenAI transparency: about/genai-transparency.md
     - Catalog:
-        - Product Types: user-guide/product-types.md
-        - Product Relationship Rules: user-guide/product-relationship-rules.md
-        - Category Import/Export: user-guide/category-import-export.md
-    - Customers & Marketing:
-        - Customer Segments: user-guide/customer-segments.md
-        - Email Automation: user-guide/email-automation.md
-        - Gift Cards: user-guide/gift-cards.md
-        - Revocation Button: user-guide/revocation-button.md
-        - Magic Link Authentication: user-guide/magic-link-authentication.md
-        - Social Login: user-guide/social-login.md
-    - Security:
-        - Two-Factor Authentication: user-guide/two-factor-authentication.md
-        - Captcha: user-guide/captcha.md
-    - Storefront & Growth:
+        - Product types: user-guide/product-types.md
+        - Product relationship rules: user-guide/product-relationship-rules.md
+        - Category import/export: user-guide/category-import-export.md
+    - Marketing:
+        - Customer segments: user-guide/customer-segments.md
+        - Email automation: user-guide/email-automation.md
+        - Gift cards: user-guide/gift-cards.md
+        - Feed manager: user-guide/feed-manager.md
+    - Customer accounts:
+        - Magic link authentication: user-guide/magic-link-authentication.md
+        - Social login: user-guide/social-login.md
+        - Two-factor authentication: user-guide/two-factor-authentication.md
+    - Search engines & AI:
         - SEO: user-guide/seo.md
-        - Structured Data: user-guide/structured-data.md
-        - AI Crawlers & llms.txt: user-guide/ai-and-crawlers.md
-        - Shipping Bridge: user-guide/shipping-bridge.md
-        - Feed Manager: user-guide/feed-manager.md
+        - Structured data: user-guide/structured-data.md
+        - AI crawlers & llms.txt: user-guide/ai-and-crawlers.md
+    - Checkout & compliance:
+        - Captcha: user-guide/captcha.md
+        - Revocation button: user-guide/revocation-button.md
+        - Shipping bridge: user-guide/shipping-bridge.md
   - Developer Docs:
     - Getting started: about/getting-started.md
     - Migrate to Maho: about/migrate-to-maho.md
