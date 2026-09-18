@@ -20,23 +20,23 @@ The scanner runs on Playwright with a headless Chromium build, installed under `
 - Disk space for the browser build.
 - Outbound network access during the install, to download the packages and the browser.
 
-Install the runtime once from the command line. The command depends on your Maho version:
+Install the runtime once from the command line. The command depends on your Maho version.
 
-=== "Maho 26.11 and later"
+### Install the runtime <span class="version-badge">v26.11+</span>
 
-    ```bash
-    ./maho sys:playwright:install
-    ```
+```bash
+./maho sys:playwright:install
+```
 
-    The runtime is shared by every browser-based scanner and lives under `var/browser-runtime`. If `node` or `npm` are not on the PATH of the web server user, set their full paths under **System > Configuration > System > Browser Runtime**. The same section lets you move the runtime directory.
+The runtime is shared by every browser-based scanner and lives under `var/browser-runtime`. If `node` or `npm` are not on the PATH of the web server user, set their full paths under **System > Configuration > System > Browser Runtime**. The same section lets you move the runtime directory.
 
-=== "Maho 26.9 and 26.10"
+### Install the runtime <span class="version-badge">v26.9</span>
 
-    ```bash
-    ./maho accessibility:install
-    ```
+```bash
+./maho accessibility:install
+```
 
-    The runtime belongs to the scanner and lives under `var/accessibility-scan`. If `node` or `npm` are not on the PATH of the web server user, set their full paths under **System > Configuration > Accessibility Scan > Advanced**.
+The runtime belongs to the scanner and lives under `var/accessibility-scan`. If `node` or `npm` are not on the PATH of the web server user, set their full paths under **System > Configuration > Accessibility Scan > Advanced**.
 
 Both commands install Playwright, axe-core and the headless browser, and both accept `--force` to reinstall. The admin dashboard tells you when the runtime is missing or when Node.js is too old.
 
