@@ -181,7 +181,6 @@ nav:
     - Release strategy: about/release-strategy.md
     - Roadmap: about/roadmap.md
     - GenAI transparency: about/genai-transparency.md
-    - Accessibility reports: about/accessibility.md
   - User Guide:
     - Start here: user-guide/index.md
     - Catalog:
@@ -202,6 +201,7 @@ nav:
         - Structured data: user-guide/structured-data.md
         - AI crawlers & llms.txt: user-guide/ai-and-crawlers.md
     - Checkout & compliance:
+        - Accessibility scan: user-guide/accessibility-scan.md
         - Captcha: user-guide/captcha.md
         - Revocation button: user-guide/revocation-button.md
         - Shipping bridge: user-guide/shipping-bridge.md
