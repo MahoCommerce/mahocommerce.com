@@ -1,0 +1,82 @@
+<!doctype html>
+<!--
+  Theme stage: one 1600x900 frame per storefront theme, rendered by render.mjs.
+  SPDX-FileCopyrightText: 2026 Maho <https://mahocommerce.com>
+  SPDX-License-Identifier: AFL-3.0
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<style>
+  @font-face { font-family: "Geist"; src: url("../../docs/assets/fonts/geist-latin.woff2") format("woff2"); font-weight: 100 900; }
+  :root {
+    --ink: #0e0f08; --ink-raised: #1c1f10; --chartreuse: #d7df22; --paper: #f4f5e8;
+    --border: rgba(244,245,232,.12); --card-w: 470px; --card-h: 690px;
+  }
+  * { box-sizing: border-box; margin: 0; }
+  html, body { width: 1600px; height: 900px; overflow: hidden; background: var(--ink); font-family: "Geist", system-ui, sans-serif; color: var(--paper); }
+  body::before {
+    content: ""; position: absolute; inset: 0;
+    background:
+      radial-gradient(900px 520px at 50% 118%, rgba(215,223,34,.16), transparent 70%),
+      radial-gradient(700px 400px at 8% -10%, rgba(215,223,34,.06), transparent 70%);
+  }
+  .top { position: absolute; top: 44px; left: 64px; right: 64px; display: flex; justify-content: space-between; align-items: center; }
+  .top img { height: 34px; }
+  .stack { font-size: 17px; letter-spacing: .01em; color: rgba(244,245,232,.62); }
+  .stack b { color: var(--paper); font-weight: 600; }
+  .stack span { margin: 0 10px; color: var(--chartreuse); }
+  .cards { position: absolute; left: 64px; top: 120px; display: flex; gap: 31px; }
+  .card {
+    position: relative; width: var(--card-w); height: var(--card-h); border-radius: 16px; overflow: hidden;
+    background: var(--ink-raised); border: 1px solid var(--border);
+    box-shadow: 0 30px 80px rgba(0,0,0,.55), 0 0 0 1px rgba(215,223,34,.10);
+  }
+  .bar { height: 38px; background: #15170c; border-bottom: 1px solid var(--border); display: flex; align-items: center; padding: 0 14px; gap: 7px; }
+  .bar i { width: 10px; height: 10px; border-radius: 50%; background: rgba(244,245,232,.18); display: block; }
+  .bar i:first-child { background: rgba(215,223,34,.7); }
+  .bar em { font-style: normal; margin-left: 10px; font-size: 12px; color: rgba(244,245,232,.5); background: rgba(244,245,232,.06); padding: 4px 12px; border-radius: 999px; }
+  .shot { position: absolute; top: 38px; left: 0; width: 100%; height: calc(100% - 38px); }
+  .shot img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: top; }
+  .shot[data-page="product"] img { object-position: 42% top; }
+  .shot img.next { opacity: 0; }
+  .caption { position: absolute; left: 64px; bottom: 44px; display: flex; align-items: baseline; gap: 18px; }
+  .caption h1 { font-size: 46px; font-weight: 600; letter-spacing: -.02em; }
+  .caption .mode { font-size: 15px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--ink); background: var(--chartreuse); padding: 6px 12px; border-radius: 999px; }
+  .caption .count { font-size: 17px; color: rgba(244,245,232,.5); }
+  .dots { position: absolute; right: 64px; bottom: 58px; display: flex; gap: 8px; }
+  .dots i { width: 8px; height: 8px; border-radius: 50%; background: rgba(244,245,232,.18); display: block; }
+  .dots i.on { background: var(--chartreuse); width: 24px; border-radius: 4px; }
+</style>
+</head>
+<body>
+  <div class="top">
+    <img src="../../docs/assets/maho-logo-white.svg" alt="Maho">
+    <div class="stack"><b>Eleven storefront themes</b><span>·</span>Tailwind CSS 4<span>·</span>daisyUI 5<span>·</span>light and dark</div>
+  </div>
+  <div class="cards">
+    <div class="card"><div class="bar"><i></i><i></i><i></i><em>Home</em></div><div class="shot" data-page="home"></div></div>
+    <div class="card"><div class="bar"><i></i><i></i><i></i><em>Category</em></div><div class="shot" data-page="category"></div></div>
+    <div class="card"><div class="bar"><i></i><i></i><i></i><em>Product</em></div><div class="shot" data-page="product"></div></div>
+  </div>
+  <div class="caption"><h1 id="name"></h1><span class="mode" id="mode"></span><span class="count" id="count"></span></div>
+  <div class="dots" id="dots"></div>
+<script>
+  const base = "../../docs/assets/themes/";
+  const pages = ["home", "category", "product"];
+  window.setFrame = ({ theme, mode, name, index, total, next, t }) => {
+    for (const el of document.querySelectorAll(".shot")) {
+      const p = el.dataset.page;
+      el.innerHTML = `<img src="${base}${theme}-${p}-${mode}.webp">` +
+        (next ? `<img class="next" src="${base}${next.theme}-${p}-${next.mode}.webp" style="opacity:${t}">` : "");
+    }
+    document.getElementById("name").textContent = t > .5 && next ? next.name : name;
+    document.getElementById("mode").textContent = t > .5 && next ? next.mode : mode;
+    document.getElementById("count").textContent = `${(t > .5 && next ? next.index : index)} / ${total}`;
+    const on = t > .5 && next ? next.index : index;
+    document.getElementById("dots").innerHTML = Array.from({ length: total }, (_, i) => `<i class="${i + 1 === on ? "on" : ""}"></i>`).join("");
+    return Promise.all([...document.images].map(i => i.decode().catch(() => {})));
+  };
+</script>
+</body>
+</html>
