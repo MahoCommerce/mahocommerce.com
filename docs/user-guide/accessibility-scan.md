@@ -14,19 +14,31 @@ Maho ships a built-in accessibility scanner. It opens a page of your store in a 
 
 ## Requirements
 
-The scanner runs on a shared browser runtime: Playwright with a headless Chromium build, installed under `var/browser-runtime`. It needs:
+The scanner runs on Playwright with a headless Chromium build, installed under `var/` of your Maho installation. It needs:
 
 - Node.js 20 or newer, and npm, on the server that runs Maho.
 - Disk space for the browser build.
 - Outbound network access during the install, to download the packages and the browser.
 
-Install the runtime once from the command line:
+Install the runtime once from the command line. The command depends on your Maho version:
 
-```bash
-./maho sys:playwright:install
-```
+=== "Maho 26.11 and later"
 
-The command installs Playwright, axe-core and the headless browser. Run it again with `--force` to reinstall. If `node` or `npm` are not on the PATH of the web server user, set their full paths under **System > Configuration > System > Browser Runtime**. The same section lets you move the runtime directory. The admin dashboard tells you when the runtime is missing or when Node.js is too old.
+    ```bash
+    ./maho sys:playwright:install
+    ```
+
+    The runtime is shared by every browser-based scanner and lives under `var/browser-runtime`. If `node` or `npm` are not on the PATH of the web server user, set their full paths under **System > Configuration > System > Browser Runtime**. The same section lets you move the runtime directory.
+
+=== "Maho 26.9 and 26.10"
+
+    ```bash
+    ./maho accessibility:install
+    ```
+
+    The runtime belongs to the scanner and lives under `var/accessibility-scan`. If `node` or `npm` are not on the PATH of the web server user, set their full paths under **System > Configuration > Accessibility Scan > Advanced**.
+
+Both commands install Playwright, axe-core and the headless browser, and both accept `--force` to reinstall. The admin dashboard tells you when the runtime is missing or when Node.js is too old.
 
 ## Run a scan from the admin
 
