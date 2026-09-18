@@ -82,7 +82,6 @@ A report opens from the scan history. It has three parts.
 | `--level` | `A`, `AA` or `AAA`. Defaults to the configured level. |
 | `--format` | `table` (default) or `json`. The JSON holds every field the admin view shows. |
 | `--threshold` | Exit with code 1 when the number of violations is above this value. |
-| `--reinstall-playwright` | Reinstall the browser runtime before the scan. |
 
 The exit code is 0 on success, 1 when the threshold is exceeded, and 2 when the scan itself failed. This makes the command usable in a deployment pipeline: scan the staging store after a deploy and fail the pipeline when a new violation appears. Every command-line scan is also stored and appears in the admin history, marked as triggered by the CLI.
 
