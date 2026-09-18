@@ -177,6 +177,7 @@ nav:
   - About:
     - Live demo: about/demo.md
     - Themes: about/themes.md
+    - Accessibility reports: about/accessibility.md
     - Origins and differences: about/origins.md
     - Release strategy: about/release-strategy.md
     - Roadmap: about/roadmap.md
