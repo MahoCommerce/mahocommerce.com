@@ -47,15 +47,6 @@ Each PDF is the merged export of the scanner's own reports for that theme, one s
 
 Each scan also lists between 2 and 19 checks that axe-core could not decide by itself, for example a color contrast over a background image. These are not failures. They are open items for a manual review, and the count is printed in every report.
 
-## What the first run found
-
-The first run, before pull request 1433, found five distinct problems. All of them were in shared templates or theme tokens, so a single fix repaired every theme that had them.
-
-- **Invisible text in the newsletter input.** Nine themes have a dark footer. The newsletter field inherited the light footer text color on a light field, so typed text had a contrast of 1.07:1. This is the kind of bug a sighted tester does not notice until they type.
-- **Two form selects without a label.** The configurable product option select and the "Find Order By" select on the orders and returns page had no associated label, so a screen reader could not name them.
-- **Links in CMS text not distinguishable.** In the default theme, links inside CMS content relied on color alone, with 2.85:1 contrast against the body text. Content links are now always underlined.
-- **Text just under the contrast limit.** The review date and the login tab labels used 65 percent ink and landed at 4.3 to 4.4:1 in two themes. The "In stock" badge in two themes sat at 4.0 to 4.4:1. Small token changes brought every one above 4.5:1.
-
 ## Accessible reports
 
 The PDF files are not accessible documents. The scanner renders them with DomPdf, which produces untagged PDF without a structure tree, a reading order or a document language. This page and the scanner's admin view are the accessible versions of the same data. If you need the raw data in another form, the scanner's JSON output (`--format json`) holds everything the PDF shows.
