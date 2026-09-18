@@ -810,30 +810,39 @@ aside.md-source-file * {
 
 
 /* === CONTENT TABS === */
-/* A segmented control: the label row is a pill, the active tab is an ink pill
-   with chartreuse text (the version badge palette), and the sliding underline
-   Material draws is not needed */
+/* A tab panel: the label bar sits on a bordered box, the active tab shares the
+   panel background and carries a brand stripe, and the panel encloses the
+   content so the reader sees what the tab switches. Material's sliding
+   underline is not needed */
 .md-content .md-typeset .tabbed-set {
     margin: 1.5em 0;
+    border: 1px solid var(--maho-border);
+    border-radius: 12px;
+    background: var(--maho-surface);
+    overflow: hidden;
 }
 .md-content .md-typeset .tabbed-labels {
-    align-self: flex-start;
-    display: inline-flex;
-    gap: 4px;
-    padding: 4px;
-    margin: 0 0 12px;
+    align-self: stretch;
+    display: flex;
+    gap: 0;
+    padding: 0;
+    margin: 0;
     background: var(--maho-surface-warm);
-    border: 1px solid var(--maho-border);
-    border-radius: 99px;
+    border-bottom: 1px solid var(--maho-border);
+    border-radius: 0;
     box-shadow: none;
 }
 .md-content .md-typeset .tabbed-labels::before {
     display: none;
 }
 .md-content .md-typeset .tabbed-labels > label {
-    padding: 6px 16px;
+    margin-bottom: -1px;
+    padding: 10px 20px;
     border: 0;
-    border-radius: 99px;
+    border-right: 1px solid var(--maho-border);
+    border-bottom: 1px solid transparent;
+    border-radius: 0;
+    box-shadow: inset 0 3px 0 transparent;
     font-family: var(--maho-mono);
     font-size: 0.72em;
     font-weight: 500;
@@ -854,11 +863,19 @@ aside.md-source-file * {
 .md-content .md-typeset .tabbed-set > input:nth-child(6):checked ~ .tabbed-labels > label:nth-child(6),
 .md-content .md-typeset .tabbed-set > input:nth-child(7):checked ~ .tabbed-labels > label:nth-child(7),
 .md-content .md-typeset .tabbed-set > input:nth-child(8):checked ~ .tabbed-labels > label:nth-child(8) {
-    background: var(--maho-ink);
-    color: var(--maho-chartreuse);
+    background: var(--maho-surface);
+    border-bottom-color: var(--maho-surface);
+    box-shadow: inset 0 3px 0 var(--maho-brand);
+    color: var(--maho-text-primary);
+}
+.md-content .md-typeset .tabbed-content {
+    padding: 16px 20px;
 }
 .md-content .md-typeset .tabbed-block > :first-child {
     margin-top: 0;
+}
+.md-content .md-typeset .tabbed-block > :last-child {
+    margin-bottom: 0;
 }
 
 /* ============================================================
