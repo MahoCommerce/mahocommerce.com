@@ -201,6 +201,7 @@ nav:
         - Structured data: user-guide/structured-data.md
         - AI crawlers & llms.txt: user-guide/ai-and-crawlers.md
     - Checkout & compliance:
+        - Accessibility scan: user-guide/accessibility-scan.md
         - Captcha: user-guide/captcha.md
         - Revocation button: user-guide/revocation-button.md
         - Shipping bridge: user-guide/shipping-bridge.md
