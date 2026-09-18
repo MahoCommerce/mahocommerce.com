@@ -177,11 +177,11 @@ nav:
   - About:
     - Live demo: about/demo.md
     - Themes: about/themes.md
-    - Accessibility reports: about/accessibility.md
     - Origins and differences: about/origins.md
     - Release strategy: about/release-strategy.md
     - Roadmap: about/roadmap.md
     - GenAI transparency: about/genai-transparency.md
+    - Accessibility reports: about/accessibility.md
   - User Guide:
     - Start here: user-guide/index.md
     - Catalog:
