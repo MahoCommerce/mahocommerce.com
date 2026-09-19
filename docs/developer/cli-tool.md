@@ -58,6 +58,7 @@ Available commands:
   customer:list                 List all customers
  db
   db:connect                    Opens the database command-line interface using credentials from your local.xml file
+  db:optimize                   Rebuild bloated tables to return their free space to the filesystem
   db:query                      Execute a SQL query using the database credentials from your local.xml file
  dev
   dev:api:resource:create       Scaffold an API Platform resource (DTO + provider) for a module, wiring it into the REST + GraphQL API
@@ -102,7 +103,7 @@ Available commands:
   maintenance:enable            Enable maintenance mode
   maintenance:status            Show maintenance mode status
  queue
-  queue:list                    Show per-queue message counts and the active transport
+  queue:list                    Show per-queue message counts and the worker pool each queue is consumed by
   queue:work                    Consume messages from the queue (long-running worker; cron keeps one running automatically)
  sys
   sys:currencies                Get all available currencies
@@ -114,8 +115,10 @@ Available commands:
 
 !!! note
     <span class="version-badge">v26.9+</span> The `queue:*` commands drive the
-    [message queue](message-queue.md). On earlier versions only the `email:queue:*` commands existed,
-    because the queue was email-specific.
+    [message queue](message-queue.md) and its [worker pools](message-queue.md#worker-pools). On earlier
+    versions only the `email:queue:*` commands existed, because the queue was email-specific.
+    `health-check` and `db:optimize` are covered in
+    [Health check & database maintenance](../hosting/health-check.md).
 
 This tool is inspired by [Laravel Artisan](https://laravel.com/docs/11.x/artisan){:target="_blank"},
 [n98-magerun](https://github.com/netz98/n98-magerun){:target="_blank"}, and it was created using the awesome

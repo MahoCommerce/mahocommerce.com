@@ -193,3 +193,5 @@ $ ./maho health-check
 ```
 
 The same health check is also available in the admin backend under **System > Tools > Health Check**.
+Every check, the cleanup prompts and the `db:optimize` command are described in
+[Health check & database maintenance](../hosting/health-check.md).

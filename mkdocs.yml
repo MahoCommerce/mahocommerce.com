@@ -216,6 +216,7 @@ nav:
       - FrankenPHP: hosting/frankenphp.md
       - Cron jobs: hosting/cron.md
       - Maintenance mode: hosting/maintenance-mode.md
+      - Health check & DB maintenance: hosting/health-check.md
       - Logging: hosting/logging.md
       - OpenTelemetry: hosting/opentelemetry.md
       - Email sending (SMTP): hosting/email-sending-configuration.md

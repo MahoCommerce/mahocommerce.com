@@ -72,7 +72,7 @@ QueueManager::dispatch(
 |---|---|---|
 | `$message` | required | The DTO to hand to the handler |
 | `$delaySeconds` | `null` | Do not make the message available for at least this many seconds |
-| `$queue` | `default` | Logical queue name, consumable in isolation with `queue:work --queue=<name>` |
+| `$queue` | `default` | Logical queue name. Decides which [worker pool](#worker-pools) consumes the message, and can be consumed in isolation with `queue:work --queue=<name>` |
 | `$dedupeKey` | `null` | While a pending or processing message with the same key exists, dispatching is a no-op (DB transport) |
 | `$stamps` | `[]` | Additional Messenger stamps, for advanced cases |
 
@@ -176,8 +176,9 @@ Place an order (or dispatch the message by hand from `./maho shell`) and watch i
 growing retry count, and lands as `failed` with the HTTP error once the retries run out; fix the ERP
 and hit **Retry**.
 
-In production you do not run `queue:work` yourself: the [worker](#the-worker) started by cron is
-already consuming every queue.
+In production you do not run `queue:work` yourself: the [workers](#the-worker) started by cron are
+already consuming every queue. Route `erp` to the `fast` pool if the sync must not wait behind bulk jobs,
+see [worker pools](#worker-pools).
 
 ## What a message may contain
 
@@ -216,46 +217,138 @@ be retried or discarded from there.
 
 ## The worker
 
-Consumption is done by a long-running worker process. You normally never start it yourself: the
-`queue_process` cron job runs every minute and acts as a watchdog. When no worker holds the
-`queue.worker` lock, it spawns a detached `./maho queue:work --exclusive`, logging to
+Consumption is done by long-running worker processes. You normally never start them yourself: the
+`queue_process` cron job runs every minute and acts as a watchdog. For every [worker pool](#worker-pools)
+with no live worker, it spawns a detached `./maho queue:work --exclusive --pool=<name>`, logging to
 `var/log/queue-worker.log`.
 
 Consequences worth knowing:
 
-- **A dead worker is back within a minute.** The lock is a machine-local kernel flock, so it disappears
-  the instant the process dies and doubles as the liveness probe.
-- **Each application server runs its own worker.** Parallel consumption is safe: rows are claimed with an
+- **A dead worker is back within a minute.** Each worker holds a machine-local kernel flock named
+  `queue.worker.<pool>.<index>`. The lock disappears the instant the process dies and doubles as the
+  liveness probe.
+- **Each application server runs its own workers.** Parallel consumption is safe: rows are claimed with an
   atomic conditional update, so two workers never process the same message.
-- **The worker recycles hourly** (time limit 3600s, memory limit 256M), which is how newly deployed code
-  gets picked up.
-- **Configuration changes restart it.** A periodic checksum over `core_config_data` stops the worker when
+- **Workers recycle.** A resident worker stops after its pool's time limit (one hour by default) and memory
+  limit, and the watchdog starts a fresh one. This is how newly deployed code gets picked up.
+- **Configuration changes restart them.** A periodic checksum over `core_config_data` stops a worker when
   anything changes, so it never keeps running against stale settings (an old SMTP transport, for example).
 - **Shutdown is graceful.** `SIGTERM`/`SIGINT` let the in-flight message finish before exiting.
 - If PHP's `exec()` is disabled on the host, the watchdog cannot spawn anything and logs an error. Run
-  `./maho queue:work` under your own process supervisor instead.
+  `./maho queue:work --pool=<name>` for each pool under your own process supervisor instead.
+
+### Worker pools
+
+A pool is a group of `queue:work` processes that consume a subset of the logical queues with limits of
+their own. Pools keep latency classes apart: a ten-minute feed build never sits in front of an order
+confirmation email, because the two run in different processes.
+
+Maho ships two pools:
+
+| Pool | Queues | Behaviour | Defaults |
+|---|---|---|---|
+| `fast` | `email`, plus every queue routed to it | Stays resident and polls continuously | 256M memory, 3600s time limit |
+| `slow` | Everything else (the catch-all) | On demand: started when its queues have work due, exits after 60 idle seconds | 512M memory, 3600s time limit |
+
+Exactly one pool is the **catch-all**. It consumes every queue that no other pool claims, so a queue you
+forget to route still drains. Core makes the *slow* pool the catch-all on purpose: an unrouted newcomer
+is likelier to be a slow job than a latency-critical one, and the cost of forgetting is a message
+waiting behind a feed rather than a checkout email stuck behind one.
+
+**Route a queue to a pool** from your module's `config.xml`. One node per queue, so modules never clobber
+each other:
+
+```xml
+<global>
+    <queue>
+        <routing>
+            <erp>fast</erp>
+        </routing>
+    </queue>
+</global>
+```
+
+An empty value (`<erp/>`) unroutes the queue and hands it back to the catch-all, which is how
+`app/etc/local.xml` can retarget a single queue without touching the module.
+
+**Declare a pool** under `<global><queue><pools>`:
+
+```xml
+<global>
+    <queue>
+        <routing>
+            <feeds>bulk</feeds>
+            <imports>bulk</imports>
+        </routing>
+        <pools>
+            <bulk>
+                <count>2</count>
+                <idle_timeout>120</idle_timeout>
+                <memory_limit>1G</memory_limit>
+                <time_limit>7200</time_limit>
+                <sort_order>15</sort_order>
+            </bulk>
+        </pools>
+    </queue>
+</global>
+```
+
+| Node | Default | Meaning |
+|---|---|---|
+| `count` | `1` | Workers the watchdog keeps for this pool. An on-demand pool starts one per due message, up to this number |
+| `idle_timeout` | unset | Seconds with nothing to do before the worker exits. Unset keeps the worker resident; set it to make the pool on demand |
+| `memory_limit` | `256M` | The worker stops once it uses more than this. An empty value removes the limit |
+| `time_limit` | `3600` | The worker stops after this many seconds. `0` removes the limit |
+| `catch_all` | `0` | Marks the pool that consumes every unrouted queue. Declare it on exactly one pool |
+| `active` | `1` | Set to `0` to disable a pool, for example to retire the core `slow` pool from `local.xml` |
+| `sort_order` | `0` | Order in which pools claim queues and in which the watchdog starts them |
+
+Rules the registry enforces, with a line in `var/log/system.log` when one is broken:
+
+- a pool with no queue routed to it and no `catch_all` flag is skipped, since it would consume everything
+  and become a second catch-all
+- a queue routed to an unknown pool falls to the catch-all
+- a second `catch_all` pool is dropped
+- with no `catch_all` at all, unrouted queues are never consumed, and `queue:list` flags them as `none`
+- an invalid `memory_limit` falls back to `256M`
+- if every declared pool is dropped, or none is declared, a single `default` pool consumes everything
+
+On a multi-server install, due and busy counts are cluster-global while worker locks are machine-local,
+so each server may start an on-demand worker for the same backlog. The excess is bounded by `count` and
+drains through the idle timeout.
 
 ### CLI
 
 ```bash
-./maho queue:work                       # consume all queues until stopped
-./maho queue:work --queue=email         # only one queue (repeatable)
-./maho queue:work --stop-when-empty     # drain and exit, handy in scripts
-./maho queue:list                       # per-queue counts and the active transport
+./maho queue:work                             # consume all queues until stopped, no limits
+./maho queue:work --pool=slow                 # consume as the slow pool, with its queues and limits
+./maho queue:work --queue=email               # only one queue (repeatable)
+./maho queue:work --exclude-queue=feeds       # every queue but this one (repeatable)
+./maho queue:work --stop-when-empty           # drain and exit, handy in scripts
+./maho queue:list                             # per-queue counts and the pool each queue belongs to
 ```
 
 | `queue:work` option | Meaning |
 |---|---|
-| `--queue=NAME` | Only consume these queues (repeatable). Default: all |
+| `--pool=NAME` | Consume as this pool: its queues, exclusions, idle timeout, memory and time limits become the defaults |
+| `--index=N` | Which worker of the pool this process is, from `0` to `count - 1`. Used by the watchdog |
+| `--queue=NAME` | Only consume these queues (repeatable). Overrides the pool's queue list and drops its exclusions |
+| `--exclude-queue=NAME` | Never consume these queues (repeatable). Adds to the pool's own exclusions |
 | `--limit=N` | Stop after handling N messages |
 | `--time-limit=SECONDS` | Stop after this many seconds |
 | `--memory-limit=256M` | Stop once memory usage exceeds this limit |
 | `--sleep=SECONDS` | Seconds to sleep when the queue is empty (default 1) |
-| `--stop-when-empty` | Stop as soon as the queue is empty |
-| `--exclusive` | Hold the `queue.worker` lock and refuse to start when another exclusive worker is active (used by the watchdog) |
+| `--idle-timeout=SECONDS` | Stop after this many seconds with nothing to do; `0` stops on the first empty poll |
+| `--stop-when-empty` | Stop as soon as the queue is empty (same as `--idle-timeout=0`) |
+| `--exclusive` | Hold the pool worker lock and refuse to start when another exclusive worker holds it (used by the watchdog). Cannot be combined with `--queue` or `--exclude-queue` |
 
-`queue:list` prints pending, processing, failed and completed counts per queue, plus the oldest pending
-message, which is the quickest way to spot a backlog.
+A hand-run `queue:work` without `--pool` has no limits, exactly as before pools existed. A hand-run
+`queue:work --exclusive` without `--pool` takes the bare `queue.worker` lock, which tells the watchdog
+that one process covers every queue, so it stops spawning pool workers until that process exits.
+
+`queue:list` prints pending, processing, failed and completed counts per queue, the pool that consumes
+each queue, and the oldest pending message, which is the quickest way to spot a backlog. A queue shown
+with pool `none` is never consumed: route it, or mark a pool `catch_all`.
 
 ## Admin
 
