@@ -111,7 +111,7 @@ body {
     letter-spacing: -0.025em;
     line-height: 1.18;
     color: var(--maho-text-primary);
-    text-wrap: balance;
+    text-wrap: pretty;
 }
 
 .md-typeset h1 {
