@@ -279,6 +279,13 @@ description: Maho is the open-source, self-hosted ecommerce platform you actuall
               <span class="mh-store-loc">🇺🇸 United States · Militaria &amp; collectibles</span>
             </span>
           </a>
+          <a class="mh-store-card" href="https://www.tenniswarehouse.com.au" target="_blank" rel="noopener">
+            <span class="mh-store-shot"><img src="assets/stores/tenniswarehouse.webp" alt="Tennis Warehouse Australia storefront" loading="lazy" width="900" height="640"></span>
+            <span class="mh-store-meta">
+              <span class="mh-store-name">Tennis Warehouse Australia</span>
+              <span class="mh-store-loc">🇦🇺 Australia · Tennis gear &amp; apparel</span>
+            </span>
+          </a>
           <a class="mh-store-card" href="https://www.eylinda.de" target="_blank" rel="noopener">
             <span class="mh-store-shot"><img src="assets/stores/eylinda.webp" alt="ey Linda storefront" loading="lazy" width="900" height="640"></span>
             <span class="mh-store-meta">
