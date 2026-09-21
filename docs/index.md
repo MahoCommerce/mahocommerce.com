@@ -18,8 +18,8 @@ description: Maho is the open-source, self-hosted ecommerce platform you actuall
 <section class="mh-hero" aria-label="Maho - open-source on-premises ecommerce platform">
   <div class="mh-hero-inner">
     <div class="mh-hero-copy">
-      <h1 id="homeh1" class="mh-headline"><span class="mh-sr">Maho - </span>Your store, <em>your rules.</em></h1>
-      <p class="mh-lede">The ecommerce platform you actually own. Lean at the core, fully featured out of the box, and open to extend however you like. Self-hosted, with no fees skimming your margins and no vendor holding the keys.</p>
+      <h1 id="homeh1" class="mh-headline"><span class="mh-sr">Maho - </span><span class="mh-setup">The heart of ecommerce,</span><em>the heart of your store.</em></h1>
+      <p class="mh-lede">The free open source ecommerce platform you actually own. Lean at the core, fully featured out of the box, and open to extend however you like. Self-hosted, with no fees skimming your margins and no vendor holding the keys.</p>
       <div class="mh-meta">
         <span><span class="mh-bullet">●</span> Open source</span>
         <span><span class="mh-bullet">●</span> Self-hosted</span>

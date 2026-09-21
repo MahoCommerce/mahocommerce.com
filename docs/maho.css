@@ -1051,6 +1051,15 @@ article:has(#homeh1) {
     border: 0;
 }
 
+#homeh1.mh-headline .mh-setup {
+    display: block;
+    font-size: 0.68em;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    color: var(--maho-on-ink);
+    margin-bottom: 0.18em;
+}
+
 #homeh1.mh-headline em {
     font-style: normal;
     color: var(--maho-chartreuse);
