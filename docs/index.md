@@ -148,6 +148,58 @@ description: Maho is the open-source, self-hosted ecommerce platform you actuall
   </div>
 </section>
 
+<section class="mh-agents" aria-label="Maho is ready for agentic commerce">
+  <div class="mh-agents-inner">
+    <div class="mh-agents-copy">
+      <h2 class="mh-sec-title"><span class="mh-mark">Ready for agentic commerce</span></h2>
+      <p class="mh-sec-lede">More and more of your traffic is an AI agent shopping on someone's behalf. Maho answers it with clean facts, gives you control over which agents get in, and lets your own agents run the store.</p>
+      <ul class="mh-agents-points">
+        <li>
+          <span class="mh-agents-ico" aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3v4a1 1 0 0 0 1 1h4"/><path d="M17 21H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7l5 5v11a2 2 0 0 1-2 2z"/><path d="M9 13h6M9 17h6"/></svg></span>
+          <span><strong>Every page in markdown, on the same URL.</strong> A product answers with name, SKU, price, stock and options. A category answers with a product table. No navigation, no scripts, no guessing where the price is.</span>
+        </li>
+        <li>
+          <span class="mh-agents-ico" aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 4v5c0 5-3.5 8.5-8 9-4.5-.5-8-4-8-9V7z"/><path d="M9 12l2 2 4-4"/></svg></span>
+          <span><strong>llms.txt and robots.txt, generated per store.</strong> Agents find your pages, categories and search. You decide which AI crawlers get in, grouped by purpose, so you can stay in AI answers and still block training bots.</span>
+        </li>
+        <li>
+          <span class="mh-agents-ico" aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="8" width="16" height="12" rx="2"/><path d="M12 4v4M8 2h8M9 14h.01M15 14h.01"/></svg></span>
+          <span><strong>An MCP server for your own agents.</strong> Paste the store URL into Claude, ChatGPT or any MCP client, log in to your admin, and the agent works with the store under the same permissions as the REST API.</span>
+        </li>
+      </ul>
+      <div class="mh-ctas">
+        <a class="mh-btn mh-btn-solid" href="user-guide/ai-and-crawlers/">AI agents guide
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        <a class="mh-btn mh-btn-line" href="api/v2/mcp/">MCP server docs</a>
+      </div>
+    </div>
+    <div class="mh-agents-side">
+      <div class="mh-term-shell">
+        <div class="mh-term">
+          <div class="mh-term-top">
+            <span class="mh-d"></span><span class="mh-d"></span><span class="mh-d"></span>
+            <span class="mh-term-title">agent@anywhere</span>
+          </div>
+          <div class="mh-term-body">
+            <div class="mh-ln"><span class="c"># the same product URL, asked as an agent</span></div>
+            <div class="mh-ln"><span class="p">$</span> curl <span class="k">-H</span> <span class="s">"Accept: text/markdown"</span> https://demo.mahocommerce.com/meridian-slip-dress/</div>
+            <div class="mh-ln"><span class="h"># Meridian slip dress</span></div>
+            <div class="mh-ln">- SKU: W-SLIP-DRESS</div>
+            <div class="mh-ln">- Price: $119.00</div>
+            <div class="mh-ln">- Availability: In stock</div>
+            <div class="mh-ln"><span class="h">## Options</span></div>
+            <div class="mh-ln">| Color  | SKU                 | Price   | Availability |</div>
+            <div class="mh-ln">|--------|---------------------|---------|--------------|</div>
+            <div class="mh-ln">| Black  | W-SLIP-DRESS-BLACK  | $119.00 | In stock     |</div>
+            <div class="mh-ln">| Salmon | W-SLIP-DRESS-SALMON | $119.00 | In stock     |</div>
+          </div>
+        </div>
+      </div>
+      <div class="mh-agents-caption">Real output from the <a href="https://demo.mahocommerce.com/default/meridian-slip-dress.md" target="_blank" rel="noopener">demo store</a>. Browsers and search engines keep the HTML page.</div>
+    </div>
+  </div>
+</section>
+
 <section class="mh-funding" aria-label="Maho is backed by European public funding, partners and sponsors">
   <div class="mh-funding-inner">
     <h2 class="mh-sec-title"><span class="mh-mark">Funded by the European Commission</span></h2>
@@ -313,6 +365,36 @@ Integrated **blog module** for content marketing and SEO, **Meta Pixel** for con
 
 <div class="feature-card" markdown>
 
+:material-palette:{ .feature-icon }
+
+### 1 click theme customizations
+
+**Eleven ready-made themes** for fashion, food, electronics and more, each in **light and dark**. Change **colors, fonts and more** in the **live theme editor** and watch the storefront repaint in a **live preview**.
+
+</div>
+
+<div class="feature-card" markdown>
+
+:material-account-key:{ .feature-icon }
+
+### Social Login
+
+Let customers sign in with **Google, Apple and Facebook** in one tap. Existing accounts are **linked automatically**, guest carts are merged, and 2FA still applies. Fewer forms means **fewer abandoned carts**.
+
+</div>
+
+<div class="feature-card" markdown>
+
+:material-robot-happy:{ .feature-icon }
+
+### Sell to Shoppers That Are Agents
+
+AI agents shop on behalf of your customers. Maho answers them with **clean product facts**: name, price, stock and options, in **markdown on the same URL**. **llms.txt** shows them the way in, and a generated **robots.txt** lets you **choose which AI crawlers** to allow. No plugin, no setup.
+
+</div>
+
+<div class="feature-card" markdown>
+
 :material-shopping:{ .feature-icon }
 
 ### Checkout That Converts
@@ -333,6 +415,16 @@ Modern **minimal checkout layout**, **offcanvas navigation**, and blazing-fast *
 
 <div class="feature-card" markdown>
 
+:material-human-handsup:{ .feature-icon }
+
+### Accessibility Scanner Built In
+
+Run **WCAG audits** straight from the admin with the built-in **accessibility scanner**. Every violation is **outlined on a screenshot** of your page, desktop and mobile, and mapped to the template that caused it. **Scheduled scans** and **PDF export** keep you compliant where accessibility is required by law.
+
+</div>
+
+<div class="feature-card" markdown>
+
 :material-shield-check:{ .feature-icon }
 
 ### Enterprise-Level Security
@@ -347,7 +439,7 @@ Protect your business with **2-factor authentication**, **passkey support** for 
 
 ### Always Getting Better
 
-Regular updates with real improvements like a **redesigned admin with dark mode** (26.7), the **EU revocation button** (26.7), **gift cards** (26.1), **email automation** (25.11), and **customer segmentation** (25.9). Maho evolves with your business needs.
+Regular updates with real improvements like a **brand-new storefront with eleven themes** (26.9), **social login** (26.9), the **accessibility scanner** (26.9), a **redesigned admin with dark mode** (26.7), **gift cards** (26.1), and **email automation** (25.11). Maho evolves with your business needs.
 
 </div>
 
@@ -373,7 +465,7 @@ Regular updates with real improvements like a **redesigned admin with dark mode*
 
 ### Client-Ready Platform
 
-Clean, modern **admin interface** with professional features clients expect: **media management**, **content editor**, **activity logs**, and comprehensive reporting. Built-in **blog and marketing tools** mean you deliver more value out of the box.
+Clean, modern **admin interface** with professional features clients expect: **media management**, **content editor**, **activity logs**, and comprehensive reporting. Built-in **blog and marketing tools**, a **WCAG accessibility scanner** and an **agent-ready storefront** mean you deliver more value out of the box.
 
 </div>
 
@@ -393,7 +485,7 @@ Clean, modern **admin interface** with professional features clients expect: **m
 
 ### Enterprise Features, Zero Licensing
 
-**Multi-store capabilities**, advanced permissions, comprehensive **APIs** (REST, GraphQL, SOAP), and all the features enterprise clients demand. **No per-client licensing fees**, **no SaaS subscriptions** - pure profit margin.
+**Multi-store capabilities**, advanced permissions, comprehensive **APIs** (REST, GraphQL, SOAP, MCP), and all the features enterprise clients demand. **No per-client licensing fees**, **no SaaS subscriptions** - pure profit margin.
 
 </div>
 
@@ -449,7 +541,7 @@ Comprehensive **API documentation** (REST, GraphQL, SOAP), **developer guides** 
 
 ### Modern Tech Stack
 
-**PHP 8.3+** built on industry-standard libraries: **Doctrine DBAL 4.4** for database operations, **Symfony HttpClient** for HTTP requests, **Symfony Validator** for data validation, **Monolog** for logging, and **DomPDF** for documents. **Vanilla JavaScript only** throughout. Contemporary, actively-maintained dependencies you can trust.
+**PHP 8.3+** built on industry-standard libraries: **Doctrine DBAL 4.4** for database operations, **Symfony HttpClient** for HTTP requests, **Symfony Validator** for data validation, **Symfony Messenger** for background jobs, and **Monolog** for logging. A storefront on **Tailwind CSS 4 and daisyUI 5**, **vanilla JavaScript only** throughout. Contemporary, actively-maintained dependencies you can trust.
 
 </div>
 
@@ -475,11 +567,21 @@ Brand-new **REST & GraphQL API** built on API Platform, with **JWT authenticatio
 
 <div class="feature-card" markdown>
 
+:material-robot:{ .feature-icon }
+
+### MCP Server for AI Agents
+
+A **store-facing MCP server** with **OAuth 2.1 browser login**: paste the store URL into Claude, ChatGPT or any MCP client and approve the connection. Tools are derived from the same **ApiResource** metadata as REST, so every resource, third-party ones included, becomes a tool with the same permissions, logging and rate limits. **200+ tools** on a default install.
+
+</div>
+
+<div class="feature-card" markdown>
+
 :material-tools:{ .feature-icon }
 
 ### Great Developer Tools
 
-**CLI tool** for common tasks, **Composer plugin** for module management, **5800+ icon library**, **CSS variables** for theming, and **environment-based configuration**. Tools that actually improve your workflow.
+**CLI tool** for common tasks, **Composer plugin** for module management, **5800+ icon library**, **theme build and scaffold commands** with **design tokens** for theming, and **environment-based configuration**. Tools that actually improve your workflow.
 
 </div>
 
@@ -499,7 +601,7 @@ Choose the database that fits your infrastructure. **MySQL**, **MariaDB**, **Pos
 
 ### Actively Developed
 
-**Regular releases** with substantial improvements - not just patches. Recent additions: a **declarative database schema** system, the **API Platform-based REST & GraphQL API**, **Doctrine DBAL** database layer, **Symfony Cache** subsystem, **libsodium encryption**, and **customer segmentation**. Continuous modernization with real features that matter.
+**Regular releases** with substantial improvements - not just patches. Recent additions: a **Tailwind CSS 4 storefront**, an **MCP server**, a **native job queue**, **OpenTelemetry** observability, a **declarative database schema** system, the **API Platform-based REST & GraphQL API**, and the **Doctrine DBAL** database layer. Continuous modernization with real features that matter.
 
 </div>
 

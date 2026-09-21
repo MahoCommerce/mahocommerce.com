@@ -2793,6 +2793,105 @@ html.mh-anim .mh-reveal.mh-in {
 }
 
 
+
+/* ---- AGENTIC COMMERCE: white band after the hero, copy left, a terminal
+   showing the real markdown answer on the right ---- */
+.mh-agents {
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
+    background: var(--maho-surface);
+    border-bottom: 1px solid var(--maho-border-light);
+    padding: 4.4em 0 4.6em;
+}
+
+.mh-agents-inner {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 0 2em;
+    display: grid;
+    grid-template-columns: 1.05fr 1fr;
+    gap: 4em;
+    align-items: center;
+}
+
+.mh-agents-copy { min-width: 0; }
+
+.mh-agents-points {
+    list-style: none;
+    margin: 1.8em 0 2em;
+    padding: 0;
+    display: grid;
+    gap: 1.1em;
+}
+
+.mh-agents-points li {
+    display: grid;
+    grid-template-columns: 36px 1fr;
+    gap: 0.9em;
+    align-items: start;
+    font-size: 0.92em;
+    line-height: 1.6;
+    color: var(--maho-text-secondary);
+}
+
+.mh-agents-points strong {
+    color: var(--maho-text-primary);
+    font-weight: 600;
+}
+
+.mh-agents-ico {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    background: var(--maho-brand-subtle);
+    border: 1px solid var(--maho-border);
+    color: var(--maho-brand-text);
+    flex: none;
+}
+
+.mh-agents .mh-ctas { margin-top: 0; }
+
+.mh-agents .mh-btn-line {
+    color: var(--maho-text-primary) !important;
+    border-color: rgba(25, 26, 16, 0.3);
+}
+
+.mh-agents .mh-btn-line:hover {
+    border-color: var(--maho-text-primary);
+    color: var(--maho-text-primary) !important;
+}
+
+.mh-agents-side { min-width: 0; }
+
+.mh-agents .mh-term-shell {
+    box-shadow: 0 24px 50px rgba(20, 21, 10, 0.18);
+}
+
+.mh-agents .mh-term-body .h { color: var(--maho-chartreuse); font-weight: 600; }
+
+.mh-agents-caption {
+    margin-top: 1.1em;
+    text-align: center;
+    font-family: var(--maho-mono);
+    font-size: 0.55em;
+    letter-spacing: 0.03em;
+    color: var(--maho-text-tertiary);
+}
+
+.mh-agents-caption a { color: inherit; text-decoration: underline; }
+
+@media screen and (max-width: 960px) {
+    .mh-agents-inner { grid-template-columns: 1fr; gap: 2.6em; }
+}
+
+@media screen and (max-width: 760px) {
+    .mh-agents { padding: 3.2em 0 3.4em; }
+    .mh-agents-inner { padding: 0 1.2em; }
+}
+
 /* === BLOG === */
 body:has(h1[id=blog]) .md-post--excerpt ul li {
     margin-block: 0;
