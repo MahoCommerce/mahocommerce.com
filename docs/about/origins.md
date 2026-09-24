@@ -54,7 +54,7 @@ Zend Framework 1 is gone. Not wrapped, not partially replaced: [removed from the
 | Image processing | intervention/image |
 | PHP `serialize()` in the database | JSON |
 
-The Varien library became `Maho\`, with real namespaces. [Routing](../developer/routing.md), [observers and cron jobs](../developer/observers.md) are declared with PHP attributes, so the last routing XML is gone. Database tables are defined with a [declarative schema](../developer/declarative-database-schema.md) instead of install scripts. Maho runs on PHP 8.3, 8.4 and 8.5.
+The Varien library became `Maho\`, with real namespaces. [Routing](../developer/routing.md), [observers and cron jobs](../developer/observers.md) are declared with PHP attributes, so the last routing XML is gone. Database tables are defined with a [declarative schema](../developer/declarative-database-schema.md) instead of install scripts. Maho runs on the most recent PHP releases (see [system requirements](getting-started.md#system-requirements)).
 
 ### The project
 

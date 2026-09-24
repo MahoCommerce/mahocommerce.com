@@ -39,7 +39,7 @@ While this may seem more complex initially, it will pay off in the long run.
     (see [Encryption key](#encryption-key)), otherwise every encrypted value in it reads as blank
 
 ## PHP Compatibility
-Maho supports the three most recent stable PHP releases, currently 8.3 / 8.4 / 8.5 (see [system requirements](getting-started.md#system-requirements)).
+From Maho 26.11, Maho supports the two most recent stable PHP releases, currently 8.5 / 8.6. Maho 26.9 is the last release that also supports 8.3 / 8.4 (see [system requirements](getting-started.md#system-requirements)).
 Custom code and third-party modules will likely need adaptation to the new PHP version.
 
 !!! note

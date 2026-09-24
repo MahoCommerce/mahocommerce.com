@@ -10,14 +10,23 @@ description: Install and run Maho step by step - system requirements, Composer s
 
 ## System requirements
 
-- PHP 8.3 / 8.4 / 8.5
+!!! warning "Maho 26.11 requires PHP 8.5 or later"
+    Maho 26.9 is the last release that supports PHP 8.3 and 8.4.
+    Upgrade PHP before you upgrade to Maho 26.11.
+
+- PHP 8.5 / 8.6 (Maho 26.9 also supports PHP 8.3 / 8.4)
 - Apache/Nginx/Caddy/FrankenPHP[^1] ([configuration](../hosting/web-server.md))
 - MySQL 8.4+ / MariaDB 10.11+ / PostgreSQL 15+ (beta) / SQLite (beta)
 
 ??? info "PHP version support policy"
-    Maho supports the **three most recent stable PHP releases**. Today that means **8.3, 8.4, and 8.5**.
+    From Maho 26.11, Maho supports the **two most recent stable PHP releases**. Today that means **8.5 and 8.6**.
 
-    When a new PHP minor is released (e.g. 8.6), we add it and drop the oldest - so support would shift to **8.4, 8.5, and 8.6**, and so on. When a new PHP **major** version is released, we'll reevaluate this policy.
+    When a new PHP minor is released (e.g. 8.7), we add it and drop the oldest - so support would shift to **8.6 and 8.7**, and so on. When a new PHP **major** version is released, we'll reevaluate this policy.
+
+    | Maho version    | PHP versions       |
+    |-----------------|--------------------|
+    | 26.11 and later | 8.5, 8.6           |
+    | 26.9            | 8.3, 8.4, 8.5, 8.6 |
 
 ??? info "Supported database versions (only actively maintained releases)"
     | Database   | Version | EOL        |
