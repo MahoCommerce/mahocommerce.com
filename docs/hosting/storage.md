@@ -22,7 +22,7 @@ Each node then reads and writes the same files, and a node can start with an emp
 | `customer_address` | `public/media/customer_address` | Files that customers upload with an address attribute   |
 | `exports`          | `var/export`                    | Dataflow export files                                   |
 | `imports`          | `var/import`                    | Dataflow import files and profile uploads               |
-| `feeds`            | `var/feedmanager`               | The state of a feed generation that runs in batches     |
+| `feeds`            | `var/feedmanager`               | Work files of a feed that the admin generates in batches: a state file and one part file for each batch. The finished feed goes to `media`. |
 | `sitemaps`         | `public`                        | The sitemap files                                       |
 
 The cache, the sessions, the logs, `var/tmp` and the locks are not on a mount. Put the cache and
