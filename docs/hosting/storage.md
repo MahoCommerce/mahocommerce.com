@@ -235,6 +235,8 @@ on the local disk.
 
 - Get a mount with `Mage::getStorage('media')`. It is a Flysystem `Filesystem`, so use `write()`,
   `read()`, `fileExists()`, `delete()` and `listContents()` on it.
+- List the files below a folder at any depth with `$mount->listFiles('my_module')`. The result
+  holds files only, and it is the same on every adapter.
 - Get the URL of a file with `$mount->publicUrl($path)`. It gives the correct URL for every mount,
   also for a mount that you declare. On `media`, it gives the same URL as
   `Mage::getBaseUrl('media')` and the path.
@@ -276,5 +278,6 @@ An operator can then move this mount to a bucket in `local.xml`, like the core m
 A bucket is not a disk. Test your code on a bucket, because these operations change:
 
 - `move()` is a copy and a delete.
-- A deep `listContents()` returns folders on the disk and on Azure, but not always on S3 or GCS. Use `listFiles()` for the files at any depth: it returns the same result on every adapter.
+- A deep `listContents()` returns all the files, but the folders only on some adapters. Use
+  `listFiles()` when you need the files.
 - There are no locks, no seek and no partial reads.
