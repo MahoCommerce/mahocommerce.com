@@ -13,17 +13,21 @@ Each node then reads and writes the same files, and a node can start with an emp
 
 ## The mounts
 
-| Mount          | Local folder         | Contents                                                        |
-|----------------|----------------------|-----------------------------------------------------------------|
-| `media`        | `public/media`       | Product, category and CMS images, downloadable files, feed files |
-| `exports`      | `var/export`         | Dataflow export files                                           |
-| `imports`      | `var/import`         | Dataflow import files and profile uploads                       |
-| `importexport` | `var/importexport`   | Import/Export source files                                      |
-| `feeds`        | `var/feedmanager`    | The state of a feed generation that runs in batches             |
-| `sitemaps`     | `public`             | The sitemap files                                               |
+| Mount              | Local folder                    | Contents                                                |
+|--------------------|---------------------------------|---------------------------------------------------------|
+| `media`            | `public/media`                  | Product, category and CMS images, feed files            |
+| `custom_options`   | `public/media/custom_options`   | Files that customers upload with a product custom option |
+| `downloadable`     | `public/media/downloadable`     | Files that customers buy, and their samples             |
+| `customer`         | `public/media/customer`         | Files that customers upload with a customer attribute   |
+| `customer_address` | `public/media/customer_address` | Files that customers upload with an address attribute   |
+| `exports`          | `var/export`                    | Dataflow export files                                   |
+| `imports`          | `var/import`                    | Dataflow import files and profile uploads               |
+| `feeds`            | `var/feedmanager`               | The state of a feed generation that runs in batches     |
+| `sitemaps`         | `public`                        | The sitemap files                                       |
 
 The cache, the sessions, the logs, `var/tmp` and the locks are not on a mount. Put the cache and
-the sessions on [Redis](redis.md). Each node keeps its own logs and temporary files.
+the sessions on [Redis](redis.md). Each node keeps its own logs and temporary files. System >
+Import/Export keeps its working files on the local disk of the node that runs the import.
 
 ## Install the adapter package
 
@@ -92,45 +96,37 @@ The adapter options:
 Use one bucket or one prefix for each mount. Only the `media` mount holds public files. Keep the
 other mounts in a bucket that allows no public read.
 
-## Private files in the media mount
+## Private files
 
-Three folders of the `media` mount hold files that only Maho can serve:
+The `custom_options`, `downloadable`, `customer` and `customer_address` mounts hold files that only
+Maho can serve. Their local folders are below `public/media`, and the web server denies them.
 
-- `customer/`: the files that customers upload with a customer or address attribute.
-- `custom_options/`: the files that customers upload with a product custom option.
-- `downloadable/`: the files that customers buy.
+A private mount does not follow the `media` mount. When you move `media` to a bucket, move each
+private mount too, or its files stay on the disk of the node that received them. Put the private
+mounts in a bucket that allows no public read, never in the public media bucket:
 
-Do not allow a public read on these folders. On the local disk, the web server denies them. On a
-bucket, the bucket policy must deny them. This S3 policy allows a public read on every object of
-the bucket, except the three folders:
-
-```json
-{
-    "Version": "2012-10-17",
-    "Statement": [
-        {
-            "Effect": "Allow",
-            "Principal": "*",
-            "Action": "s3:GetObject",
-            "NotResource": [
-                "arn:aws:s3:::my-store-media/media/customer/*",
-                "arn:aws:s3:::my-store-media/media/custom_options/*",
-                "arn:aws:s3:::my-store-media/media/downloadable/*"
-            ]
-        }
-    ]
-}
+```xml
+<downloadable>
+    <adapter>
+        <type>s3</type>
+        <bucket>my-store-private</bucket>
+        <prefix>downloadable</prefix>
+        <region>eu-west-1</region>
+    </adapter>
+</downloadable>
 ```
+
+Do the same for `custom_options`, `customer` and `customer_address`, each with its own prefix.
 
 Make sure that a private file answers `403`, and that a product image answers `200`:
 
 ```bash
-curl -I https://my-store-media.s3.eu-west-1.amazonaws.com/media/downloadable/files/links/a/b/file.zip
+curl -I https://my-store-private.s3.eu-west-1.amazonaws.com/downloadable/files/links/a/b/file.zip
 curl -I https://my-store-media.s3.eu-west-1.amazonaws.com/media/catalog/product/a/b/image.jpg
 ```
 
 A customer downloads a purchased file through Maho. When the mount can sign a URL, Maho sends a
-redirect to a signed URL that expires after 15 minutes. Otherwise, Maho streams the file itself.
+redirect to a signed URL that expires after 60 seconds. Otherwise, Maho streams the file itself.
 
 ## Resized product images
 
@@ -175,9 +171,11 @@ Do these steps on one node, with the old local folders still in place:
     ./maho media:warm
     ```
 
-6. Generate the sitemaps again, if the `sitemaps` mount moved.
+6. If the `sitemaps` mount moved, generate the sitemaps again. Then delete the old sitemap files
+   from `public/`, because the web server serves a local file before it asks Maho.
 7. Check the store. Then deploy the same `local.xml` on the other nodes.
-8. Delete the old local folders.
+8. Delete the old local folders of the mounts that moved. For `sitemaps`, delete only the sitemap
+   files, never `public/`.
 
 `storage:migrate` without an argument copies every mount that is not local. To copy some mounts
 only, give their names: `./maho storage:migrate media exports`. The command has these features:
@@ -188,14 +186,22 @@ only, give their names: `./maho storage:migrate media exports`. The command has 
 - It does not copy the folders that Maho creates again: `catalog/product/cache`,
   `catalog/swatches` and `tmp` in the `media` mount. `--include-cache` copies them, and
   `--exclude=FOLDER` excludes more folders.
+- It does not copy the folder of another mount. `media` leaves out `custom_options`,
+  `downloadable`, `customer` and `customer_address`, so a private file never lands in the public
+  bucket. Each private mount copies its own folder.
 - It does not copy the `sitemaps` mount, because its local folder is `public/`. Generate the
-  sitemaps again after the switch.
+  sitemaps again after the switch, then delete the old sitemap files from `public/`.
 - It returns an error code when a file fails, and lists the files that failed.
 
 `media:warm` resizes each product image to each size that a template rendered. `--product=ID`
-resizes the images of one product, and you can give the option more than once.
-`--prune=DAYS` first deletes the sizes that no template rendered during that number of days. Use
-it after a theme change, so that Maho stops resizing the images to the old sizes.
+resizes the images of one product, and you can give the option more than once. Maho records a size
+when a page renders it, so right after an upgrade to 26.11, `media:warm` knows no size yet. Browse
+the main pages of the store once, then run it.
+
+`--prune=DAYS` first forgets the sizes that no template rendered during that number of days, and
+deletes their resized files. Use it after a theme change, so that Maho stops resizing the images to
+the old sizes. Give a number of days that is longer than the life of your page cache: a cached
+page that still shows a forgotten size gets a `404` for that image.
 
 ## For extension developers
 

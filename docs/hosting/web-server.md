@@ -29,8 +29,9 @@ Every configuration must apply these rules:
   absent. There is one exception: send a missing file under `/media/catalog/product/cache/` to
   `public/index.php`. <span class="version-badge">v26.11+</span> Maho creates a resized product
   image on the first request. See [Shared storage](storage.md#resized-product-images).
-- Deny access to `/media/customer/`, `/media/downloadable/` and `/media/custom_options/`. These
-  folders hold the files that customers upload and the files that customers buy.
+- Deny access to `/media/customer/`, `/media/customer_address/`, `/media/downloadable/` and
+  `/media/custom_options/`. These folders hold the files that customers upload and the files that
+  customers buy.
 - Deny access to hidden files. Allow two exceptions: `/.well-known/`, which is a registered path
   prefix and not a hidden file, and `/.thumbs/`, which holds the thumbnails of the admin media
   browser.
@@ -211,7 +212,7 @@ server {
     # ---- End API routing ----
 
     # Customer uploads and purchased files. Maho serves them through PHP only.
-    location ~ ^/media/(customer|downloadable|custom_options)/ {
+    location ~ ^/media/(customer|customer_address|downloadable|custom_options)/ {
         deny all;
     }
 
@@ -331,7 +332,7 @@ maho.example.com {
         respond @private 404
 
         # Customer uploads and purchased files. Maho serves them through PHP only.
-        @private_media path /media/customer/* /media/downloadable/* /media/custom_options/*
+        @private_media path /media/customer/* /media/customer_address/* /media/downloadable/* /media/custom_options/*
         respond @private_media 404
 
         # ---- API routing ----
