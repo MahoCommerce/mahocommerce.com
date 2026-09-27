@@ -276,5 +276,5 @@ An operator can then move this mount to a bucket in `local.xml`, like the core m
 A bucket is not a disk. Test your code on a bucket, because these operations change:
 
 - `move()` is a copy and a delete.
-- A deep `listContents()` returns files only on S3 and GCS. On Azure, it returns the folders too. Filter the items with `isFile()`.
+- A deep `listContents()` returns folders on the disk and on Azure, but not always on S3 or GCS. Filter the items with `isFile()`.
 - There are no locks, no seek and no partial reads.
