@@ -15,7 +15,7 @@ Each node then reads and writes the same files, and a node can start with an emp
 
 | Mount              | Local folder                    | Contents                                                |
 |--------------------|---------------------------------|---------------------------------------------------------|
-| `media`            | `public/media`                  | Product, category and CMS images, feed files            |
+| `media`            | `public/media`                  | Product, category, blog and CMS images, feed files      |
 | `custom_options`   | `public/media/custom_options`   | Files that customers upload with a product custom option |
 | `downloadable`     | `public/media/downloadable`     | Files that customers buy, and their samples             |
 | `customer`         | `public/media/customer`         | Files that customers upload with a customer attribute   |
@@ -94,6 +94,12 @@ The elements of a mount:
 
 The adapter options:
 
+- **local** (the default): `file_mode` and `dir_mode`, each three octal digits. A new folder gets
+  `dir_mode`, 0777 by default, and the umask of the process reduces it, as with `mkdir`. A file
+  on a mount with `<visibility>public</visibility>` gets `file_mode`, 0644 by default. Use 0664
+  and 0775 when the web server user and the command line user share a group. A listing leaves out
+  symbolic links, so the admin media browser does not show a linked folder or file. A read or a
+  write through a link still works.
 - **s3**: `bucket` (required), `prefix`, `region` (default `us-east-1`), `key` and `secret`,
   `endpoint`, `use_path_style_endpoint`. Set both `key` and `secret`, or neither. With neither,
   the AWS SDK finds the credentials itself, for example from an instance role. MinIO needs
@@ -162,6 +168,12 @@ Base Media URL that ends in `/media/`, the paths are the same.
 Maho resizes only the sizes that a template rendered. A request for any other size answers `404`.
 So a visitor cannot fill the bucket with sizes that the store does not use.
 
+When an admin saves a product with a new base, small or thumbnail image, or an import changes
+products, Maho queues a job that resizes these images to every recorded size. The job runs on the
+`catalog_image` queue, in the `slow` worker pool unless you route it elsewhere: see
+[worker pools](../developer/message-queue.md#worker-pools). Until the job runs, the image route
+creates each size on the first request.
+
 ## Move an existing store
 
 Do these steps on one node, with the old local folders still in place:
@@ -229,6 +241,10 @@ on the local disk.
 - Before you read or delete a file whose name comes from a request or from the database, check
   the name with `\Maho\Io::getPathWithinMount($mount, 'my_module', $name)`. It returns `null` when
   the name leaves the folder.
+- A system configuration file field (a subclass of
+  `Mage_Adminhtml_Model_System_Config_Backend_File`) stores its file on the `media` mount.
+  `_getUploadDir()` returns a path on the mount, such as `my_module/logo`. An absolute folder
+  below `public/media` still works, and any other absolute folder is refused.
 - Write a file that a visitor or a crawler can read at any time with `moveAtomic()`. It writes the
   whole file in one step.
 - Keep the cache, the sessions, the logs, the temporary files and the locks on the local disk.
