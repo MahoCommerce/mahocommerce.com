@@ -1,0 +1,283 @@
+---
+description: Put the Maho media, exports, imports, feeds and sitemaps on S3, Google Cloud Storage or Azure Blob Storage, so that several web nodes can run with no shared disk.
+---
+
+# Shared storage <span class="version-badge">v26.11+</span>
+
+Maho keeps the files that all web nodes must see on **storage mounts**. A mount is a named
+[Flysystem](https://flysystem.thephpleague.com/){target=_blank} filesystem. By default, each
+mount is a local folder, and a single-node store needs no configuration.
+
+To run several nodes with no shared disk, point the mounts at a bucket in `app/etc/local.xml`.
+Each node then reads and writes the same files, and a node can start with an empty `public/media`.
+
+## The mounts
+
+| Mount              | Local folder                    | Contents                                                |
+|--------------------|---------------------------------|---------------------------------------------------------|
+| `media`            | `public/media`                  | Product, category, blog and CMS images, feed files      |
+| `custom_options`   | `public/media/custom_options`   | Files that customers upload with a product custom option |
+| `downloadable`     | `public/media/downloadable`     | Files that customers buy, and their samples             |
+| `customer`         | `public/media/customer`         | Files that customers upload with a customer attribute   |
+| `customer_address` | `public/media/customer_address` | Files that customers upload with an address attribute   |
+| `exports`          | `var/export`                    | Dataflow export files                                   |
+| `imports`          | `var/import`                    | Dataflow import files and profile uploads               |
+| `feeds`            | `var/feedmanager`               | Work files of a feed that the admin generates in batches: a state file and one part file for each batch. The finished feed goes to `media`. |
+| `sitemaps`         | `public`                        | The sitemap files                                       |
+
+The cache, the sessions, the logs, `var/tmp` and the locks are not on a mount. Put the cache and
+the sessions on [Redis](redis.md). Each node keeps its own logs and temporary files. System >
+Import/Export keeps its working files on the local disk of the node that runs the import.
+
+## Install the adapter package
+
+Maho includes the local adapter only. Install the package for your storage service:
+
+| Service                                                     | `<type>` | Package                                 |
+|-------------------------------------------------------------|----------|-----------------------------------------|
+| Amazon S3 and S3-compatible (MinIO, Cloudflare R2, Spaces)  | `s3`     | `league/flysystem-aws-s3-v3`            |
+| Google Cloud Storage                                        | `gcs`    | `league/flysystem-google-cloud-storage` |
+| Azure Blob Storage                                          | `azure`  | `azure-oss/storage-blob-flysystem`      |
+
+```bash
+composer require league/flysystem-aws-s3-v3
+```
+
+## Configure a mount
+
+Add a `<storage>` block to `app/etc/local.xml`. A mount in `local.xml` replaces the adapter of the
+mount with the same name. This example puts the `media` mount on S3:
+
+```xml
+<config>
+    <global>
+        <storage>
+            <mounts>
+                <media>
+                    <adapter>
+                        <type>s3</type>
+                        <bucket>my-store-media</bucket>
+                        <prefix>media</prefix>
+                        <region>eu-west-1</region>
+                        <key>AKIA...</key>
+                        <secret>...</secret>
+                    </adapter>
+                </media>
+            </mounts>
+        </storage>
+    </global>
+</config>
+```
+
+The media URLs come from the **Base Media URL** of the store configuration, also when the mount is
+on a bucket. To serve the media from a CDN, set the Base Media URL of each store to the CDN, as you
+do with a local disk:
+
+```bash
+./maho config:set web/unsecure/base_media_url https://cdn.example.com/media/
+./maho config:set web/secure/base_media_url https://cdn.example.com/media/
+```
+
+Then every media URL points to the CDN: the product images, the blog and category images, the
+logo, the `{{media url=...}}` directives, and the images of the extensions.
+
+The elements of a mount:
+
+- `<visibility>`: `public` or `private`, the visibility that Maho sets on each write. Do not set it
+  on an S3 bucket with ACLs disabled, which is the default for new buckets. Give read access with
+  a bucket policy instead.
+- `<adapter>`: the storage service. `<type>` selects the adapter, and the other elements are its
+  options.
+- `<public_url>`: the URL prefix of the files, for a mount that you declare yourself. Without it,
+  Maho uses the URL that the adapter gives, which is usually the bucket URL. Do not set it on
+  `media` or `sitemaps`: they follow the store configuration.
+
+The adapter options:
+
+- **local** (the default): `file_mode` and `dir_mode`, each three octal digits. A new folder gets
+  `dir_mode`, 0777 by default, and the umask of the process reduces it, as with `mkdir`. A file
+  on a mount with `<visibility>public</visibility>` gets `file_mode`, 0644 by default. Use 0664
+  and 0775 when the web server user and the command line user share a group. A listing leaves out
+  symbolic links, so the admin media browser does not show a linked folder or file. A read or a
+  write through a link still works.
+- **s3**: `bucket` (required), `prefix`, `region` (default `us-east-1`), `key` and `secret`,
+  `endpoint`, `use_path_style_endpoint`. Set both `key` and `secret`, or neither. With neither,
+  the AWS SDK finds the credentials itself, for example from an instance role. MinIO needs
+  `endpoint` and `use_path_style_endpoint`.
+- **gcs**: `bucket` (required), `prefix`, `project_id`, `key_file`. `key_file` is the path to a
+  service account JSON file. Without it, the Google client finds the credentials itself.
+- **azure**: `container` (required), `connection_string` (required), `prefix`,
+  `public_container`. Set `public_container` when the container serves files without a
+  signature.
+
+Use one bucket or one prefix for each mount. Only the `media` mount holds public files. Keep the
+other mounts in a bucket that allows no public read.
+
+## Private files
+
+The `custom_options`, `downloadable`, `customer` and `customer_address` mounts hold files that only
+Maho can serve. Their local folders are below `public/media`, and the web server denies them.
+
+A private mount does not follow the `media` mount. When you move `media` to a bucket, move each
+private mount too, or its files stay on the disk of the node that received them. Put the private
+mounts in a bucket that allows no public read, never in the public media bucket:
+
+```xml
+<downloadable>
+    <adapter>
+        <type>s3</type>
+        <bucket>my-store-private</bucket>
+        <prefix>downloadable</prefix>
+        <region>eu-west-1</region>
+    </adapter>
+</downloadable>
+```
+
+Do the same for `custom_options`, `customer` and `customer_address`, each with its own prefix.
+
+Make sure that a private file answers `403`, and that a product image answers `200`:
+
+```bash
+curl -I https://my-store-private.s3.eu-west-1.amazonaws.com/downloadable/files/links/a/b/file.zip
+curl -I https://my-store-media.s3.eu-west-1.amazonaws.com/media/catalog/product/a/b/image.jpg
+```
+
+A customer downloads a purchased file through Maho. When the mount can sign a URL, Maho sends a
+redirect to a signed URL that expires after 60 seconds. Otherwise, Maho streams the file itself.
+
+## Resized product images
+
+Maho resizes a product image on the first request for it. The template writes the URL of the
+resized file, and the resized file does not exist yet. The web server sends the miss under
+`/media/catalog/product/cache/` to `index.php`, and Maho creates the file, stores it on the
+`media` mount and returns it. The next requests get the stored file.
+
+On the local disk, the rules in [Web server configuration](web-server.md) do this. On a bucket,
+the bucket answers the miss, so the CDN in the Base Media URL must send the miss to the store host.
+Configure the CDN to retry a `403` or a `404` under `/media/catalog/product/cache/` on the store
+host, with the same path:
+
+- **Amazon CloudFront**: make an origin group with the bucket as the primary origin and the store
+  host as the secondary origin. Set the failover status codes to `403` and `404`. Use the origin
+  group in the behavior for `/media/catalog/product/cache/*`.
+- **Other CDNs**: use the origin failover or the error rule of the CDN with the same settings.
+
+The path must be the same on the CDN and on the store host. With `<prefix>media</prefix>` and a
+Base Media URL that ends in `/media/`, the paths are the same.
+
+Maho resizes only the sizes that a template rendered. A request for any other size answers `404`.
+So a visitor cannot fill the bucket with sizes that the store does not use.
+
+When an admin saves a product with a new base, small, thumbnail or gallery image, or an import
+changes products, Maho queues a job that resizes the images of the product to every recorded size.
+A gallery image gets the sizes of the base and thumbnail images, which the product page uses for the
+gallery. The job runs on the `catalog_image` queue, in the `slow` worker pool unless you route it
+elsewhere: see [worker pools](../developer/message-queue.md#worker-pools). Until the job runs, the
+image route creates each size on the first request.
+
+## Move an existing store
+
+Do these steps on one node, with the old local folders still in place:
+
+1. Install the adapter package.
+2. Add the `<storage>` block to `app/etc/local.xml`.
+3. Copy the files to the bucket:
+
+    ```bash
+    ./maho storage:migrate --dry-run
+    ./maho storage:migrate
+    ```
+
+4. Flush the cache with `./maho cache:flush`.
+5. Resize the product images before the visitors ask for them:
+
+    ```bash
+    ./maho catalog:image:resize
+    ```
+
+6. If the `sitemaps` mount moved, generate the sitemaps again. Then delete the old sitemap files
+   from `public/`, because the web server serves a local file before it asks Maho.
+7. Check the store. Then deploy the same `local.xml` on the other nodes.
+8. Delete the old local folders of the mounts that moved. For `sitemaps`, delete only the sitemap
+   files, never `public/`.
+
+`storage:migrate` without an argument copies every mount that is not local. To copy some mounts
+only, give their names: `./maho storage:migrate media exports`. The command has these features:
+
+- It never changes the local files.
+- It skips a file that is on the bucket already with the same size. If the command stops, run it
+  again: it copies only the files that are missing.
+- It does not copy the folders that Maho creates again: `catalog/product/cache`,
+  `catalog/swatches` and `tmp` in the `media` mount. `--include-cache` copies them, and
+  `--exclude=FOLDER` excludes more folders.
+- It does not copy the folder of another mount. `media` leaves out `custom_options`,
+  `downloadable`, `customer` and `customer_address`, so a private file never lands in the public
+  bucket. Each private mount copies its own folder.
+- It does not copy the `sitemaps` mount, because its local folder is `public/`. Generate the
+  sitemaps again after the switch, then delete the old sitemap files from `public/`.
+- It returns an error code when a file fails, and lists the files that failed.
+
+`catalog:image:resize` resizes each product image, gallery images included, to each size that a
+template rendered. To resize the images of some products only, give their IDs:
+`./maho catalog:image:resize 12,15,40`.
+Maho records a size when a page renders it, so right after an upgrade to 26.11, the command knows
+no size yet. Browse the main pages of the store once, then run it.
+
+`catalog:image:clean` forgets the sizes that no template rendered in the last 30 days, and deletes
+their resized files. `--days=N` changes the number of days. Run it after a theme change, so that
+Maho stops resizing the images to the old sizes. Give a number of days that is longer than the life
+of your page cache: a cached page that still shows a forgotten size gets a `404` for that image.
+
+## For extension developers
+
+A file that all nodes must see goes through a named mount. A file that one node uses alone stays
+on the local disk.
+
+- Get a mount with `Mage::getStorage('media')`. It is a Flysystem `Filesystem`, so use `write()`,
+  `read()`, `fileExists()`, `delete()` and `listContents()` on it.
+- List the files below a folder at any depth with `$mount->listFiles('my_module')`. The result
+  holds files only, and it is the same on every adapter.
+- Get the URL of a file with `$mount->publicUrl($path)`. It gives the correct URL for every mount,
+  also for a mount that you declare. On `media`, it gives the same URL as
+  `Mage::getBaseUrl('media')` and the path.
+- Store an upload with `$uploader->saveToStorage(Mage::getStorage('media'), 'my_module')`. The
+  upload goes from the PHP temporary file to the mount, with no local copy.
+- Before you read or delete a file whose name comes from a request or from the database, check
+  the name with `\Maho\Io::getPathWithinMount($mount, 'my_module', $name)`. It returns `null` when
+  the name leaves the folder.
+- A system configuration file field (a subclass of
+  `Mage_Adminhtml_Model_System_Config_Backend_File`) stores its file on the `media` mount.
+  `_getUploadDir()` returns a path on the mount, such as `my_module/logo`. An absolute folder
+  below `public/media` still works, and any other absolute folder is refused.
+- Write a file that a visitor or a crawler can read at any time with `moveAtomic()`. It writes the
+  whole file in one step.
+- Keep the cache, the sessions, the logs, the temporary files and the locks on the local disk.
+  Use `core/lock` for a lock that all nodes must see.
+
+To write to a folder that no mount covers, declare a mount in the `config.xml` of your module.
+Declare only a folder that your module writes:
+
+```xml
+<config>
+    <global>
+        <storage>
+            <mounts>
+                <my_module_reports>
+                    <dir>var</dir>
+                    <path>my_module/reports</path>
+                </my_module_reports>
+            </mounts>
+        </storage>
+    </global>
+</config>
+```
+
+`<dir>` is a folder that Maho knows, such as `var` or `media`. `<path>` is the folder below it.
+An operator can then move this mount to a bucket in `local.xml`, like the core mounts.
+
+A bucket is not a disk. Test your code on a bucket, because these operations change:
+
+- `move()` is a copy and a delete.
+- A deep `listContents()` returns all the files, but the folders only on some adapters. Use
+  `listFiles()` when you need the files.
+- There are no locks, no seek and no partial reads.
