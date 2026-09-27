@@ -171,10 +171,9 @@ So a visitor cannot fill the bucket with sizes that the store does not use.
 When an admin saves a product with a new base, small, thumbnail or gallery image, or an import
 changes products, Maho queues a job that resizes the images of the product to every recorded size.
 A gallery image gets the sizes of the base and thumbnail images, which the product page uses for the
-gallery. The job runs on the
-`catalog_image` queue, in the `slow` worker pool unless you route it elsewhere: see
-[worker pools](../developer/message-queue.md#worker-pools). Until the job runs, the image route
-creates each size on the first request.
+gallery. The job runs on the `catalog_image` queue, in the `slow` worker pool unless you route it
+elsewhere: see [worker pools](../developer/message-queue.md#worker-pools). Until the job runs, the
+image route creates each size on the first request.
 
 ## Move an existing store
 
@@ -219,8 +218,8 @@ only, give their names: `./maho storage:migrate media exports`. The command has 
 - It returns an error code when a file fails, and lists the files that failed.
 
 `catalog:image:resize` resizes each product image, gallery images included, to each size that a
-template rendered. To
-resize the images of some products only, give their IDs: `./maho catalog:image:resize 12,15,40`.
+template rendered. To resize the images of some products only, give their IDs:
+`./maho catalog:image:resize 12,15,40`.
 Maho records a size when a page renders it, so right after an upgrade to 26.11, the command knows
 no size yet. Browse the main pages of the store once, then run it.
 
