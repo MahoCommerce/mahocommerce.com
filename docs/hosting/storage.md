@@ -168,7 +168,7 @@ Do these steps on one node, with the old local folders still in place:
 5. Resize the product images before the visitors ask for them:
 
     ```bash
-    ./maho media:warm
+    ./maho catalog:image:resize
     ```
 
 6. If the `sitemaps` mount moved, generate the sitemaps again. Then delete the old sitemap files
@@ -193,15 +193,15 @@ only, give their names: `./maho storage:migrate media exports`. The command has 
   sitemaps again after the switch, then delete the old sitemap files from `public/`.
 - It returns an error code when a file fails, and lists the files that failed.
 
-`media:warm` resizes each product image to each size that a template rendered. `--product=ID`
-resizes the images of one product, and you can give the option more than once. Maho records a size
-when a page renders it, so right after an upgrade to 26.11, `media:warm` knows no size yet. Browse
-the main pages of the store once, then run it.
+`catalog:image:resize` resizes each product image to each size that a template rendered. To
+resize the images of some products only, give their IDs: `./maho catalog:image:resize 12,15,40`.
+Maho records a size when a page renders it, so right after an upgrade to 26.11, the command knows
+no size yet. Browse the main pages of the store once, then run it.
 
-`--prune=DAYS` first forgets the sizes that no template rendered during that number of days, and
-deletes their resized files. Use it after a theme change, so that Maho stops resizing the images to
-the old sizes. Give a number of days that is longer than the life of your page cache: a cached
-page that still shows a forgotten size gets a `404` for that image.
+`catalog:image:clean` forgets the sizes that no template rendered in the last 30 days, and deletes
+their resized files. `--days=N` changes the number of days. Run it after a theme change, so that
+Maho stops resizing the images to the old sizes. Give a number of days that is longer than the life
+of your page cache: a cached page that still shows a forgotten size gets a `404` for that image.
 
 ## For extension developers
 
