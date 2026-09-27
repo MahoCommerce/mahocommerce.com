@@ -46,7 +46,7 @@ composer require league/flysystem-aws-s3-v3
 ## Configure a mount
 
 Add a `<storage>` block to `app/etc/local.xml`. A mount in `local.xml` replaces the adapter of the
-mount with the same name. This example puts the `media` mount on S3, behind a CDN:
+mount with the same name. This example puts the `media` mount on S3:
 
 ```xml
 <config>
@@ -54,7 +54,6 @@ mount with the same name. This example puts the `media` mount on S3, behind a CD
         <storage>
             <mounts>
                 <media>
-                    <public_url>https://cdn.example.com/media/</public_url>
                     <adapter>
                         <type>s3</type>
                         <bucket>my-store-media</bucket>
@@ -70,16 +69,28 @@ mount with the same name. This example puts the `media` mount on S3, behind a CD
 </config>
 ```
 
+The media URLs come from the **Base Media URL** of the store configuration, also when the mount is
+on a bucket. To serve the media from a CDN, set the Base Media URL of each store to the CDN, as you
+do with a local disk:
+
+```bash
+./maho config:set web/unsecure/base_media_url https://cdn.example.com/media/
+./maho config:set web/secure/base_media_url https://cdn.example.com/media/
+```
+
+Then every media URL points to the CDN: the product images, the blog and category images, the
+logo, the `{{media url=...}}` directives, and the images of the extensions.
+
 The elements of a mount:
 
-- `<public_url>`: the URL prefix of the files. Maho writes it in the product image URLs and in the
-  other media URLs. Without it, Maho uses the URL that the adapter gives, which is usually the
-  bucket URL.
 - `<visibility>`: `public` or `private`, the visibility that Maho sets on each write. Do not set it
   on an S3 bucket with ACLs disabled, which is the default for new buckets. Give read access with
   a bucket policy instead.
 - `<adapter>`: the storage service. `<type>` selects the adapter, and the other elements are its
   options.
+- `<public_url>`: the URL prefix of the files, for a mount that you declare yourself. Without it,
+  Maho uses the URL that the adapter gives, which is usually the bucket URL. Do not set it on
+  `media` or `sitemaps`: they follow the store configuration.
 
 The adapter options:
 
@@ -136,7 +147,7 @@ resized file, and the resized file does not exist yet. The web server sends the 
 `media` mount and returns it. The next requests get the stored file.
 
 On the local disk, the rules in [Web server configuration](web-server.md) do this. On a bucket,
-the bucket answers the miss, so the URL in `<public_url>` must send the miss to the store host.
+the bucket answers the miss, so the CDN in the Base Media URL must send the miss to the store host.
 Configure the CDN to retry a `403` or a `404` under `/media/catalog/product/cache/` on the store
 host, with the same path:
 
@@ -146,7 +157,7 @@ host, with the same path:
 - **Other CDNs**: use the origin failover or the error rule of the CDN with the same settings.
 
 The path must be the same on the CDN and on the store host. With `<prefix>media</prefix>` and a
-`<public_url>` that ends in `/media/`, the paths are the same.
+Base Media URL that ends in `/media/`, the paths are the same.
 
 Maho resizes only the sizes that a template rendered. A request for any other size answers `404`.
 So a visitor cannot fill the bucket with sizes that the store does not use.
@@ -210,8 +221,9 @@ on the local disk.
 
 - Get a mount with `Mage::getStorage('media')`. It is a Flysystem `Filesystem`, so use `write()`,
   `read()`, `fileExists()`, `delete()` and `listContents()` on it.
-- Get the URL of a file with `Mage::getStorage('media')->publicUrl($path)`. Do not join
-  `Mage::getBaseUrl('media')` and a path: that URL is wrong when the mount is on a CDN.
+- Get the URL of a file with `$mount->publicUrl($path)`. It gives the correct URL for every mount,
+  also for a mount that you declare. On `media`, it gives the same URL as
+  `Mage::getBaseUrl('media')` and the path.
 - Store an upload with `$uploader->saveToStorage(Mage::getStorage('media'), 'my_module')`. The
   upload goes from the PHP temporary file to the mount, with no local copy.
 - Before you read or delete a file whose name comes from a request or from the database, check
