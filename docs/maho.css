@@ -2892,6 +2892,149 @@ html.mh-anim .mh-reveal.mh-in {
     .mh-agents-inner { padding: 0 1.2em; }
 }
 
+
+/* ---- MAHO CLOUD: white band between the ink developers band and the paper
+   final CTA. The headline runs full width, then the offer sits on the left
+   (what stays yours, the button, the funding note) and the ink card on the
+   right lists what the team runs. Self-hosting stays the default; this is the
+   offer of help, not a paywall. ---- */
+.mh-cloud {
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
+    background: var(--maho-surface);
+    border-bottom: 1px solid var(--maho-border-light);
+    padding: 5.6em 0 5.4em;
+}
+
+.mh-cloud-inner {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 0 2em;
+}
+
+.mh-cloud .mh-sec-head { max-width: 760px; }
+
+/* wider than the shared 56ch so the "what is Maho Cloud" lede fits two lines */
+.mh-cloud .mh-sec-lede { max-width: 68ch; }
+
+/* The empty fr rows above and below center the left column against the
+   taller card, whatever the card's height. */
+.mh-cloud-body {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
+    grid-template-rows: 1fr auto auto auto 1fr;
+    grid-template-areas:
+        ".     ours"
+        "yours ours"
+        "cta   ours"
+        "fund  ours"
+        ".     ours";
+    column-gap: 4em;
+    margin-top: 2.6em;
+}
+
+.mh-cloud-yours { grid-area: yours; }
+.mh-cloud-ours { grid-area: ours; }
+.mh-cloud-body > .mh-ctas { grid-area: cta; margin-top: 2em; }
+.mh-cloud-body > .mh-cloud-fund { grid-area: fund; }
+
+.mh-cloud-ours {
+    border-radius: var(--maho-radius-lg);
+    padding: 1.9em 2em 1.8em;
+    background:
+        radial-gradient(ellipse 80% 70% at 100% 0%, rgba(215, 223, 34, 0.12) 0%, transparent 60%),
+        var(--maho-ink);
+    border: 1px solid var(--maho-ink-border-brand);
+    color: var(--maho-on-ink-soft);
+    box-shadow: 0 24px 50px rgba(20, 21, 10, 0.14);
+}
+
+.md-typeset .mh-cloud-col-title {
+    font-family: var(--maho-mono);
+    font-size: 0.66em;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin: 0 0 1.3em;
+    color: var(--maho-brand-text);
+}
+
+.md-typeset .mh-cloud-ours .mh-cloud-col-title { color: var(--maho-chartreuse); }
+
+/* [dir] matches the specificity of the theme list rules, which indent ul and li */
+.md-typeset .mh-cloud-list,
+[dir] .md-typeset .mh-cloud-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 0.6em;
+}
+
+.md-typeset .mh-cloud-list li,
+[dir] .md-typeset .mh-cloud-list li {
+    display: grid;
+    grid-template-columns: 18px 1fr;
+    gap: 0.8em;
+    align-items: start;
+    margin: 0;
+    font-size: 0.86em;
+    line-height: 1.55;
+}
+
+.mh-cloud-list svg { margin-top: 0.2em; }
+
+.mh-cloud-yours { color: var(--maho-text-secondary); }
+.mh-cloud-yours svg { color: var(--maho-brand); }
+.mh-cloud-ours svg { color: var(--maho-chartreuse); }
+
+.mh-cloud-yours strong { color: var(--maho-text-primary); font-weight: 600; }
+.mh-cloud-ours strong { color: var(--maho-on-ink); font-weight: 600; }
+
+.mh-cloud-price {
+    font-family: var(--maho-mono);
+    font-size: 0.66em;
+    letter-spacing: 0.03em;
+    color: var(--maho-text-tertiary);
+}
+
+.md-typeset .mh-cloud-fund {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.8em;
+    margin: 2em 0 0;
+    padding-top: 1.6em;
+    border-top: 1px solid var(--maho-border-light);
+    font-size: 0.8em;
+    line-height: 1.6;
+    color: var(--maho-text-secondary);
+}
+
+.mh-cloud-fund svg {
+    flex: none;
+    margin-top: 0.1em;
+    color: var(--maho-brand);
+}
+
+.mh-cloud-fund strong { color: var(--maho-text-primary); font-weight: 600; }
+
+/* One column: what stays yours, then the card, then the button and the note */
+@media screen and (max-width: 960px) {
+    .mh-cloud-body {
+        grid-template-columns: minmax(0, 1fr);
+        grid-template-rows: none;
+        grid-template-areas: "yours" "ours" "cta" "fund";
+    }
+    .mh-cloud-ours { margin-top: 2em; }
+}
+
+@media screen and (max-width: 760px) {
+    .mh-cloud { padding: 3.6em 0 3.8em; }
+    .mh-cloud-inner { padding: 0 1.2em; }
+    .mh-cloud-ours { padding: 1.5em 1.3em 1.4em; }
+    .mh-cloud-price { flex-basis: 100%; text-align: center; margin: 0; }
+}
+
 /* === BLOG === */
 body:has(h1[id=blog]) .md-post--excerpt ul li {
     margin-block: 0;

@@ -204,7 +204,7 @@ function mahoTermSetPaused(paused) {
 
 /* Fade/slide content blocks in as they enter the viewport. */
 function mahoSetupReveal() {
-    var selector = '.mh-proof, .mh-sec-head, .mh-themes-inner, .feature-card, .final-cta-inner';
+    var selector = '.mh-proof, .mh-sec-head, .mh-themes-inner, .feature-card, .mh-cloud-col, .final-cta-inner';
     var targets = Array.prototype.slice.call(document.querySelectorAll(selector));
     if (!targets.length) return;
 
