@@ -207,6 +207,10 @@ only, give their names: `./maho storage:migrate media exports`. The command has 
 - It never changes the local files.
 - It skips a file that is on the bucket already with the same size. If the command stops, run it
   again: it copies only the files that are missing.
+- It copies to a bucket with 16 parallel jobs, because each upload waits for the bucket to
+  answer. `--jobs=N` sets another number, and `--jobs=1` copies in one process. A copy to a
+  local folder uses one job. The upload bandwidth of the server limits the speed: when more
+  jobs do not copy faster, the bandwidth is the limit.
 - It does not copy the folders that Maho creates again: `catalog/product/cache`,
   `catalog/swatches` and `tmp` in the `media` mount. `--include-cache` copies them, and
   `--exclude=FOLDER` excludes more folders.
