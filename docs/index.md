@@ -626,6 +626,45 @@ Choose the database that fits your infrastructure. **MySQL**, **MariaDB**, **Pos
 
 </div>
 
+<section class="mh-cloud" id="maho-cloud" aria-label="Maho Cloud, managed hosting by the Maho team">
+  <div class="mh-cloud-inner">
+    <div class="mh-sec-head">
+      <h2 class="mh-sec-title"><span class="mh-mark">Self-hosting has its challenges.<br>We can help, with Maho&nbsp;Cloud.</span></h2>
+      <p class="mh-sec-lede">Maho Cloud is managed hosting from the team that builds Maho. We run the servers, backups and updates, and your store stays yours.</p>
+    </div>
+    <div class="mh-cloud-body">
+      <div class="mh-cloud-yours">
+        <h3 class="mh-cloud-col-title">It stays fully yours</h3>
+        <ul class="mh-cloud-list">
+          <li><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span><strong>Your code.</strong> Open source Maho, with any module and any customization.</span></li>
+          <li><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span><strong>Your data.</strong> Your customers, your orders, your catalog.</span></li>
+        </ul>
+      </div>
+      <div class="mh-cloud-col mh-cloud-ours">
+        <h3 class="mh-cloud-col-title">What we take care of</h3>
+        <ul class="mh-cloud-list">
+          <li><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="7" rx="2"/><rect x="3" y="13" width="18" height="7" rx="2"/><path d="M7 7.5h.01M7 16.5h.01"/></svg><span><strong>The servers.</strong> Arm hardware in carefully chosen data centers.</span></li>
+          <li><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l9 4.5-9 4.5-9-4.5z"/><path d="M3 12l9 4.5 9-4.5M3 16.5l9 4.5 9-4.5"/></svg><span><strong>The stack.</strong> The most modern, optimized and customizable.</span></li>
+          <li><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l8 4v5c0 5-3.5 8.5-8 9-4.5-.5-8-4-8-9V7z"/><path d="M9 12l2 2 4-4"/></svg><span><strong>Security updates.</strong> OS patches, applied for you.</span></li>
+          <li><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><ellipse cx="12" cy="5.5" rx="8" ry="2.5"/><path d="M4 5.5v6c0 1.4 3.6 2.5 8 2.5s8-1.1 8-2.5v-6M4 11.5v6c0 1.4 3.6 2.5 8 2.5s8-1.1 8-2.5v-6"/></svg><span><strong>Backups.</strong> Daily, with offsite copies, verified every night.</span></li>
+          <li><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12h4l3-7 4 14 3-7h4"/></svg><span><strong>Monitoring.</strong> Uptime, TLS expiry, DNS and disk space, with alerts.</span></li>
+          <li><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></svg><span><strong>Maintenance.</strong> Cron and reindexing, already scheduled.</span></li>
+          <li><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20L20 4M20 4h-7M20 4v7"/></svg><span><strong>Growth.</strong> Move to a larger plan without a migration.</span></li>
+        </ul>
+      </div>
+      <div class="mh-ctas">
+        <a class="mh-btn mh-btn-solid" href="https://cloud.mahocommerce.com">See Maho Cloud
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        <span class="mh-cloud-price">From €39 a month</span>
+      </div>
+      <p class="mh-cloud-fund">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20s-7.5-4.6-7.5-10.2A4.3 4.3 0 0 1 12 7.3a4.3 4.3 0 0 1 7.5 2.5C19.5 15.4 12 20 12 20z"/></svg>
+        <span><strong>Every Maho Cloud store helps to fund Maho's development.</strong> It keeps Maho open, free and moving forward, for everyone and for you.</span>
+      </p>
+    </div>
+  </div>
+</section>
+
 <section class="final-cta" aria-label="Get started with Maho">
   <div class="final-cta-inner">
     <h2><span class="mh-mark">Ready to build the future of your ecommerce?</span></h2>

@@ -1,5 +1,5 @@
 ---
-description: Expose Maho's catalog, inventory, pricing, orders and customers to AI agents over the Model Context Protocol, with the same JWT tokens and permissions as REST.
+description: Expose Maho's catalog, inventory, pricing, orders and customers to AI agents over the Model Context Protocol, with an OAuth 2.1 browser login or the same JWT tokens as REST, and the same permissions.
 ---
 
 # MCP (Model Context Protocol) <span class="version-badge">v26.9+</span>
@@ -8,7 +8,7 @@ Maho speaks the [Model Context Protocol](https://modelcontextprotocol.io/), so A
 
 **Endpoint:** `POST /api/mcp`
 **Transport:** streamable HTTP
-**Authentication:** the same JWT bearer token as [REST](authentication.md)
+**Authentication:** an OAuth 2.1 [browser login](#connecting-with-a-browser-login), or the same JWT bearer token as [REST](authentication.md)
 
 There is nothing to configure per tool. The tool catalogue is derived from the [same resource metadata](extending.md) that drives REST and GraphQL, so every resource, including those added by third-party modules, becomes a set of tools the moment it is installed. A default install exposes around 200 of them across catalog, inventory, sales, customers, content, tax and system.
 
@@ -29,14 +29,78 @@ MCP is off by default, like every other protocol, and its two supporting package
 
 2. Go to **System → Configuration → Services → API → API Protocols**.
 3. Set **MCP (Model Context Protocol)** to *Yes*.
-4. Create a token for the agent, see [Authentication](authentication.md). A `client_credentials` service account scoped to just the resources the agent needs is the right choice here, not an admin token.
+4. Choose how the agent authenticates:
+    - **Claude, ChatGPT and other connector interfaces:** on the same page, in **OAuth2 Settings**, set **Authorization Server** to *Yes*. The merchant then connects with a [browser login](#connecting-with-a-browser-login), and nothing is pasted by hand.
+    - **Scripts and clients that let you set a header:** create a token for the agent, see [Authentication](authentication.md). A `client_credentials` service account scoped to just the resources the agent needs is the right choice here, not an admin token. See [Connecting with a bearer token](#connecting-with-a-bearer-token).
 
 If you serve Maho with nginx, Caddy, or anything other than the bundled Apache config, make sure `/api/mcp` reaches `rest.php`, see [Web Server Configuration](../../hosting/web-server.md#api-routing-map). The bundled `public/.htaccess` already routes it.
 
 !!! warning "Remote clients need the host allowlist"
     The MCP SDK ships DNS-rebinding protection that, left at its default, only answers requests whose `Host` is localhost. Maho populates the allowlist from your store's base URLs automatically, but it does so when the API container is compiled. **After changing a base URL or adding a store, clear `var/cache/api_platform`** or remote calls will fail with an opaque transport error. The same already applies to the CORS allowlist, see [Cache invalidation](extending.md#cache-invalidation).
 
-## Connecting a client
+## Connecting with a browser login
+
+With the Authorization Server on, Maho implements the MCP authorization flow (OAuth 2.1 with PKCE), so a client connects to your store the way it connects to any hosted MCP server:
+
+1. In the client, add a remote MCP server (a "custom connector" in Claude and ChatGPT) with the URL `https://your-domain.com/api/mcp`.
+2. The client discovers the authorization server, registers itself, and opens your admin login in the browser.
+3. Log in to the admin as usual. The **Authorize Application** screen shows the application that asks for access. Approve or deny it.
+4. The browser returns to the client with a code, the client exchanges it for tokens, and the agent starts calling tools.
+
+The token acts as the admin user who approved it, so the agent can do what that admin's role allows, through the same gates as REST. To approve a connection, the admin role needs the **System → API → Connected Applications** permission. An admin without it gets a denial, not a token with fewer rights.
+
+The same admin is not asked again when the same application asks for the same scope and resource. A change in either brings the screen back.
+
+**Connected Applications** under **System → API** lists the applications that registered. Select one and revoke it to cut its grants: refreshing fails at once, and access tokens already issued stop working when they expire.
+
+### Settings
+
+All of them are under **System → Configuration → Services → API → OAuth2 Settings**:
+
+| Setting | Default | What it does |
+|---|---|---|
+| Authorization Server | No | Turns the browser login on. |
+| Allow Applications to Register Themselves | Yes | Dynamic client registration (RFC 7591). Registration grants nothing: an admin must still log in and approve. Turning it off blocks most connector interfaces, which have no field for a client id. |
+| MCP Requires Authentication | No | *No:* an agent can browse the public catalog tools without a token, and a client is challenged only when it calls a tool that needs one. *Yes:* `/api/mcp` challenges every request without a token. Turn it on if a client does not start the browser login on its own. |
+| Authorization Code Lifetime | 60 | In seconds. A code is used once, seconds after it is issued. |
+| Access Token Lifetime | 3600 | In seconds. Shared with the [token endpoint](authentication.md). |
+| Refresh Token Lifetime | 86400 | In seconds. Every refresh gives a new refresh token, so a client that is idle for longer than this must log in again. |
+
+### What a client sees
+
+A tool call that needs a token, made without one, returns HTTP `401` with a challenge that points to the metadata of the endpoint:
+
+```http
+WWW-Authenticate: Bearer resource_metadata="https://your-domain.com/.well-known/oauth-protected-resource/api/mcp"
+```
+
+From there the client reads the documents below. Paths that depend on a setting answer `404` while that setting is off.
+
+| Path | What it is |
+|---|---|
+| `/.well-known/oauth-protected-resource/api/mcp` | Protected resource metadata of the MCP endpoint (RFC 9728) |
+| `/.well-known/oauth-protected-resource` | Protected resource metadata of the host root |
+| `/.well-known/oauth-authorization-server` | Authorization server metadata (RFC 8414) |
+| `/api/oauth/authorize` | Authorization endpoint. It sends the browser to the admin login and the approval screen. |
+| `/api/oauth/token` | Token endpoint, for `authorization_code` and `refresh_token` |
+| `/api/oauth/register` | Dynamic client registration (RFC 7591) |
+| `/.well-known/mcp.json` | MCP server card, also at `/.well-known/mcp/server-card.json` |
+| `/.well-known/api-catalog` | The APIs this install serves (RFC 9727) |
+
+The details a client implementer needs:
+
+- **PKCE is required**, with `S256` only. `plain` is refused.
+- **Public and confidential clients:** `token_endpoint_auth_method` can be `none`, `client_secret_post` or `client_secret_basic`.
+- **Redirect URIs** must use `https`, or `http` on a loopback address, and carry no fragment.
+- **The only scope is `mcp`.** The admin role decides what the token can reach, not the scope.
+- **Resource indicators (RFC 8707):** a token is bound to the resource the client asks for. Without a `resource` parameter it is bound to `/api/mcp`, so the rest of the v2 API refuses it.
+- **Refresh tokens rotate.** A refresh token or a code that is used twice is treated as leaked, and the whole grant is revoked.
+
+The authorize, token and registration endpoints are rate limited.
+
+## Connecting with a bearer token
+
+For a script, or a client that lets you set a custom header, send a token from the [token endpoint](authentication.md) on every request. This works with or without the Authorization Server.
 
 The handshake is a normal JSON-RPC `initialize` call. The response carries a `Mcp-Session-Id` header that every subsequent message must echo back. The server accepts every protocol version from `2024-11-05` onwards and advertises the newest one it knows in the `initialize` response, so the version it replies with may be later than the one you sent; that is normal version negotiation, not an error.
 
@@ -102,10 +166,10 @@ The handshake is a normal JSON-RPC `initialize` call. The response carries a `Mc
     }
     ```
 
-!!! note "Static tokens only"
-    Maho's MCP endpoint authenticates with the same static bearer token as the rest of the v2 API. It does **not** implement MCP's OAuth 2.1 / protected-resource-metadata discovery flow, so it works with clients that let you set a custom header, and not with clients that insist on driving an OAuth dance. `GET /api/mcp` returns `405`; the endpoint is POST (plus `DELETE` to end a session and `OPTIONS` for preflight).
+!!! note "A pasted token expires"
+    The token is a JWT with a lifetime (one hour by default), so one pasted into a client config stops working when it expires. For a long-lived agent, raise the token lifetime or have the agent re-issue via `client_credentials`, see [Authentication](authentication.md). A client that supports the [browser login](#connecting-with-a-browser-login) refreshes its own tokens, so prefer it when the client offers it.
 
-    "Static" does not mean eternal: the token is a JWT with a lifetime (one hour by default), so one pasted into a client config stops working when it expires. For a long-lived agent, raise the token lifetime or have the agent re-issue via `client_credentials`, see [Authentication](authentication.md).
+    `GET /api/mcp` returns `405`; the endpoint is POST (plus `DELETE` to end a session and `OPTIONS` for preflight).
 
 ## Server instructions
 
@@ -250,6 +314,8 @@ A refused call comes back as a JSON-RPC error with the reason in the message:
 ```json
 {"jsonrpc": "2.0", "id": 3, "error": {"code": -32603, "message": "Authentication required: send a Maho API bearer token with the MCP request."}}
 ```
+
+The second one also comes with HTTP `401` and the `WWW-Authenticate` challenge, so a client that supports the [browser login](#connecting-with-a-browser-login) can start it.
 
 ## Keeping something out of the catalogue
 

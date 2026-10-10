@@ -551,7 +551,7 @@ REST `GET /giftcards/{id}` is **admin-only and keyed by numeric ID**. A public *
 | PUT | `/cms-blocks/{id}` | Admin/API | Update CMS block |
 | DELETE | `/cms-blocks/{id}` | Admin/API | Delete CMS block |
 
-`POST /cms-pages` requires a non-empty `identifier` (the page's URL key) and rejects a create without one with a `400`. On `PUT`, `identifier` is optional (an omitted field is left unchanged).
+`POST /cms-pages` requires a non-empty `identifier` (the page's URL key) and rejects a create without one with a `422`. On `PUT`, `identifier` is optional (an omitted field is left unchanged).
 
 ---
 
@@ -636,7 +636,7 @@ curl -X PUT /api/rest/v2/revocation-requests/1234 \
 | POST | `/newsletter/unsubscribe` | None | Unsubscribe by email |
 | GET | `/newsletter/status` | Customer/API | Get subscription status |
 
-**Guest subscription control:** Guest (unauthenticated) subscribe is controlled by the Maho config flag `newsletter/subscription/allow_guest_subscribe` (**System > Config > Newsletter > Subscription Options > Allow Guest Subscription**). When disabled, only authenticated customers can subscribe. Recommended: set to **No** for API use to prevent abuse.
+**Guest subscription control:** Guest (unauthenticated) subscribe is controlled by the Maho config flag `newsletter/subscription/allow_guest_subscribe` (**System > Config > Newsletter > Subscription Options > Allow Guest Subscription**). When disabled, only authenticated customers can subscribe, and a guest subscribe returns `403`. Recommended: set to **No** for API use to prevent abuse.
 
 **Confirmation emails:** When `newsletter/subscription/confirm` is enabled, new subscriptions receive a confirmation email and remain inactive until confirmed (double opt-in).
 
