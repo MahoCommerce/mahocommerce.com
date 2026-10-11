@@ -145,35 +145,26 @@ curl -I https://my-store-media.s3.eu-west-1.amazonaws.com/media/catalog/product/
 A customer downloads a purchased file through Maho. When the mount can sign a URL, Maho sends a
 redirect to a signed URL that expires after 60 seconds. Otherwise, Maho streams the file itself.
 
-## Resized product images
+## Resized images
 
-Maho resizes a product image on the first request for it. The template writes the URL of the
-resized file, and the resized file does not exist yet. The web server sends the miss under
-`/media/catalog/product/cache/` to `index.php`, and Maho creates the file, stores it on the
-`media` mount and returns it. The next requests get the stored file.
+Maho creates the resized files of the product, category and blog images before a page links to
+them, at the widths of the [image slots](../developer/theme-development.md#image-slots) of the
+theme. It stores them on the `media` mount, below the `cache/` folder of each image folder, such as
+`catalog/product/cache/`.
 
-On the local disk, the rules in [Web server configuration](web-server.md) do this. On a bucket,
-the bucket answers the miss, so the CDN in the Base Media URL must send the miss to the store host.
-Configure the CDN to retry a `403` or a `404` under `/media/catalog/product/cache/` on the store
-host, with the same path:
+- A save in the admin or through the API creates the files of the new images, after the database
+  commit. This covers products, product duplicates, categories, blog posts and the placeholders.
+- An import queues them on the `image` queue, in the `slow` worker pool unless you route it
+  elsewhere: see [worker pools](../developer/message-queue.md#worker-pools).
+- `image:resize` creates all the files that are missing.
 
-- **Amazon CloudFront**: make an origin group with the bucket as the primary origin and the store
-  host as the secondary origin. Set the failover status codes to `403` and `404`. Use the origin
-  group in the behavior for `/media/catalog/product/cache/*`.
-- **Other CDNs**: use the origin failover or the error rule of the CDN with the same settings.
+A request never creates a file. So the bucket or the CDN serves every resized image directly, and
+it needs no failover rule and no rule on the web server.
 
-The path must be the same on the CDN and on the store host. With `<prefix>media</prefix>` and a
-Base Media URL that ends in `/media/`, the paths are the same.
-
-Maho resizes only the sizes that a template rendered. A request for any other size answers `404`.
-So a visitor cannot fill the bucket with sizes that the store does not use.
-
-When an admin saves a product with a new base, small, thumbnail or gallery image, or an import
-changes products, Maho queues a job that resizes the images of the product to every recorded size.
-A gallery image gets the sizes of the base and thumbnail images, which the product page uses for the
-gallery. The job runs on the `catalog_image` queue, in the `slow` worker pool unless you route it
-elsewhere: see [worker pools](../developer/message-queue.md#worker-pools). Until the job runs, the
-image route creates each size on the first request.
+When the theme or the image settings change, the pages keep the old files until `image:resize` or
+the queue has created the new ones. Then each store view switches to the new files. A config save
+checks this at once, and the `image_settings_check` cron job checks it every 15 minutes, for a
+theme change that a deploy brings.
 
 ## Move an existing store
 
@@ -189,10 +180,10 @@ Do these steps on one node, with the old local folders still in place:
     ```
 
 4. Flush the cache with `./maho cache:flush`.
-5. Resize the product images before the visitors ask for them:
+5. Create the resized images that are missing:
 
     ```bash
-    ./maho catalog:image:resize
+    ./maho image:resize
     ```
 
 6. If the `sitemaps` mount moved, generate the sitemaps again. Then delete the old sitemap files
@@ -211,9 +202,9 @@ only, give their names: `./maho storage:migrate media exports`. The command has 
   answer. `--jobs=N` sets another number, and `--jobs=1` copies in one process. A copy to a
   local folder uses one job. The upload bandwidth of the server limits the speed: when more
   jobs do not copy faster, the bandwidth is the limit.
-- It does not copy the folders that Maho creates again: `catalog/product/cache`,
-  `catalog/swatches` and `tmp` in the `media` mount. `--include-cache` copies them, and
-  `--exclude=FOLDER` excludes more folders.
+- It does not copy the folders that Maho creates again: `catalog/swatches` and `tmp` in the
+  `media` mount. `--include-cache` copies them, and `--exclude=FOLDER` excludes more folders. It
+  copies the resized images, because no request creates them again.
 - It does not copy the folder of another mount. `media` leaves out `custom_options`,
   `downloadable`, `customer` and `customer_address`, so a private file never lands in the public
   bucket. Each private mount copies its own folder.
@@ -221,16 +212,13 @@ only, give their names: `./maho storage:migrate media exports`. The command has 
   sitemaps again after the switch, then delete the old sitemap files from `public/`.
 - It returns an error code when a file fails, and lists the files that failed.
 
-`catalog:image:resize` resizes each product image, gallery images included, to each size that a
-template rendered. To resize the images of some products only, give their IDs:
-`./maho catalog:image:resize 12,15,40`.
-Maho records a size when a page renders it, so right after an upgrade to 26.11, the command knows
-no size yet. Browse the main pages of the store once, then run it.
+`image:resize` creates the resized files that are missing, for all images, or for one entity with
+`--entity=product`, `--entity=category` or `--entity=blog`. Then it switches each store view to
+its current image settings. Run it once after the upgrade to 26.11, then flush the full page
+cache.
 
-`catalog:image:clean` forgets the sizes that no template rendered in the last 30 days, and deletes
-their resized files. `--days=N` changes the number of days. Run it after a theme change, so that
-Maho stops resizing the images to the old sizes. Give a number of days that is longer than the life
-of your page cache: a cached page that still shows a forgotten size gets a `404` for that image.
+`image:clean` deletes the resized files of the image settings that no store view uses, for example
+after a theme change, and the resized files of the releases before 26.11.
 
 ## For extension developers
 

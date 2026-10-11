@@ -26,9 +26,7 @@ Every configuration must apply these rules:
 - Route the `/api/*` paths as the [API routing map](#api-routing-map) below shows.
 - Execute PHP for the entry points only: `index.php`, `rest.php` and `api.php`.
 - Serve the files under `/media`, `/skin` and `/js` directly, and return `404` when the file is
-  absent. There is one exception: send a missing file under `/media/catalog/product/cache/` to
-  `public/index.php`. <span class="version-badge">v26.11+</span> Maho creates a resized product
-  image on the first request. See [Shared storage](storage.md#resized-product-images).
+  absent.
 - Deny access to `/media/customer/`, `/media/customer_address/`, `/media/downloadable/` and
   `/media/custom_options/`. These folders hold the files that customers upload and the files that
   customers buy.
@@ -216,14 +214,6 @@ server {
         deny all;
     }
 
-    # A missing resized product image goes to Maho, which creates it from the
-    # original.
-    location ~ ^/media/catalog/product/cache/ {
-        try_files $uri /index.php$is_args$args;
-        expires 1y;
-        access_log off;
-    }
-
     # Feeds and sitemaps are regenerated in place, so a proxy must not keep
     # an old copy.
     location ~ ^/media/.*\.(xml|csv|json|jsonl|gz)$ {
@@ -372,8 +362,7 @@ Three details of this block are easy to get wrong:
   conditions for the exceptions.
 
 `php_server` already does the work of `try_files` and of the static file server, so no separate
-`file_server` directive is necessary. It also sends a missing resized product image to
-`index.php`, so the cache folder needs no rule of its own. The `not file` condition on each API matcher stops a rewrite
+`file_server` directive is necessary. The `not file` condition on each API matcher stops a rewrite
 when a real file sits at that path.
 
 The official Maho Docker images ship this site block, on the tags for Maho 26.7 and later. If you

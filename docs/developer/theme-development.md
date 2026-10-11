@@ -351,6 +351,54 @@ The skin fallback serves one `theme.css`, the first it finds. A sub-theme's `the
 
 The scaffold command writes that import line for you whenever the parent is not `base/default`.
 
+## Image slots <span class="version-badge">v26.11+</span> { #image-slots }
+
+A slot names a place where images show, such as the product listing or the product gallery. Its
+value is the largest width in px of the images in that place. A template names the slot, and never
+a size:
+
+```php
+<img <?= $this->helper('catalog/image')->init($_product, 'image')->getImgAttributes('listing') ?>
+     alt="<?= $this->escapeHtml($_product->getName()) ?>">
+```
+
+Maho writes `src`, `srcset`, `sizes`, `width` and `height` from the slot and the image ratio, and
+the browser picks the file. Your CSS still sets the size of the image box.
+
+Declare the slots in the `<images>` node of `theme.xml`. Each image gets a file at 1x and at 2x of
+each slot. When each slot is twice the previous one, the slots share their files. The
+`base/default` slots give 5 files for each image: 150, 300, 600, 1200 and 2400.
+
+```xml
+<theme>
+    <parent>base/default</parent>
+    <images>
+        <slots>
+            <thumbnail>150</thumbnail>
+            <listing>300</listing>
+            <gallery>600</gallery>
+            <banner>1200</banner>
+        </slots>
+        <product>
+            <ratio>1:1</ratio>
+            <fit>contain</fit>
+        </product>
+    </images>
+</theme>
+```
+
+- A slot that your theme does not declare comes from the parent theme, and at the end from
+  `base/default`. The core templates use the four slots above.
+- Each image entity (`product`, `category`, `blog`) takes a `ratio`, such as `original`, `1:1` or
+  `3:4`, and a `fit`. `contain` fits the image in the box and fills the rest with the background
+  color. `cover` fills the box and crops the image.
+- Give the first image that a page shows `fetchpriority="high"`, and the images below the fold
+  `loading="lazy"`.
+
+After you change the slots, the ratio or the fit, run `./maho image:resize`. The store keeps the
+old files until the new ones exist, so no page links to a missing file. Then `./maho image:clean`
+deletes the files that no store view uses.
+
 ## Adding your own setting
 
 A theme that needs a field of its own in Theme Settings ships a small module. No PHP class is needed:
