@@ -455,8 +455,6 @@ The PowerShot A630 packs a vast array of advanced features into a remarkably com
   'required_options' => string '0' (length=1)
   'has_options' => string '0' (length=1)
   'image_label' => null
-  'small_image_label' => null
-  'thumbnail_label' => null
   'created_at' => string '2012-03-29 12:47:56' (length=19)
   'updated_at' => string '2012-03-29 12:47:56' (length=19)
   'country_of_manufacture' => null

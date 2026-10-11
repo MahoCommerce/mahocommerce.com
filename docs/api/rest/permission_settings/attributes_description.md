@@ -266,7 +266,7 @@ Attributes for the product resource are divided into those available for the Adm
 | ID  | Image file ID | Available only for READ operations |
 | Label | A label that will be displayed on the frontend when pointing to the image |     |
 | Position | The Sort Order option. The order in which the images are displayed in the MORE VIEWS section. |     |
-| Type | Image type. Can have the following values: Base Image, Small Image, or Thumbnail. |     |
+| Type | Image type. The standard value is Main Image. |     |
 | URL | Image file URL path | Available only for READ operations |
 | File Content | Image file content (base_64 encoded) | Available only for WRITE operations |
 | File MIME Type | File MIME type. Can have the following values: image/jpeg, image/png, image/gif, etc. | Available only for WRITE operations |

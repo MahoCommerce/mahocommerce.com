@@ -57,7 +57,7 @@ $newImage = [
     ],
     'label' => 'Cool Image Through Soap',
     'position' => 2,
-    'types' => ['small_image'],
+    'types' => ['image'],
     'exclude' => 0
 ];
 
@@ -233,8 +233,6 @@ array
       'types' =>
         array
           0 => string 'image' (length=5)
-          1 => string 'small_image' (length=11)
-          2 => string 'thumbnail' (length=9)
 ```
 
 ## Info
@@ -338,8 +336,6 @@ array
   'types' =>
     array
       0 => string 'image' (length=5)
-      1 => string 'small_image' (length=11)
-      2 => string 'thumbnail' (length=9)
 ```
 
 ## Types
@@ -349,7 +345,7 @@ array
 - `catalog_product_attribute_media.types` (SOAP V1)
 - `catalogProductAttributeMediaTypes` (SOAP V2)
 
-Allows you to retrieve product image types including standard `image`, `small_image`, `thumbnail` etc.
+Allows you to retrieve the product image types, starting with the standard `image`. <span class="version-badge">v26.11+</span> A product has one standard image type: `small_image` and `thumbnail` are gone.
 Note that if the product attribute set contains attributes of the media image type
 (**Catalog Input Type for Store Owner > Media Image**), it will also be returned in the response.
 
@@ -426,14 +422,6 @@ array
     array
       'code' => string 'image' (length=5)
       'scope' => string 'store' (length=5)
-  1 =>
-    array
-      'code' => string 'small_image' (length=11)
-      'scope' => string 'store' (length=5)
-  2 =>
-    array
-      'code' => string 'thumbnail' (length=9)
-      'scope' => string 'store' (length=5)
 ```
 
 ## Create
@@ -508,7 +496,7 @@ $result = $proxy->call(
 		    'file' => $file,
 		    'label' => 'Label',
 		    'position' => '100',
-		    'types' => ['thumbnail'],
+		    'types' => ['image'],
 		    'exclude' => 0
         ]
 	]
@@ -534,7 +522,7 @@ $result = $proxy->catalogProductAttributeMediaCreate(
 	    'file' => $file,
 	    'label' => 'Label',
 	    'position' => '100',
-	    'types' => ['thumbnail'],
+	    'types' => ['image'],
 	    'exclude' => 0
     ]
 );
@@ -553,7 +541,7 @@ $result = $proxy->catalogProductAttributeMediaCreate(
         'data' => (object)[
             'label' => 'image_label',
             'position' => '1',
-            'types' => ['thumbnail'],
+            'types' => ['image'],
             'exclude' => '0',
             'file' => (object)[
                 'content' => 'R0lGODlhAQABAIAAAAAAAAAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==',
@@ -695,7 +683,7 @@ $result = $proxy->catalogProductAttributeMediaUpdate(
             'label' => 'tulips',
             'position' => '1',
             'remove' => '0',
-            'types' => ['small_image']
+            'types' => ['image']
         ]
     ]
 );
