@@ -169,8 +169,21 @@ can still go missing, for example after an extension writes an image with SQL. O
 web server sends the request for a missing resized file to Maho, which creates the file and returns
 it. `public/.htaccess` and Caddy do this already, and nginx needs the rule in
 [web server](web-server.md#nginx). Maho accepts only a path of image settings that a store view
-uses and of an original that exists, so any other path gets a 404 and writes nothing. A bucket
-never sends a missing file to Maho, so there the queue and `image:resize` repair the files.
+uses and of an original that exists, so any other path gets a 404 and writes nothing.
+
+A bucket never sends a missing file to Maho by itself. There, the queue and `image:resize` repair
+the files. To repair a file at the first request, configure the CDN to send a miss below
+`/media/<folder>/cache/` to Maho at the same path. Maho answers at `/media/` followed by the path
+on the `media` mount, writes the file to the bucket, and returns it. The next request gets the
+file from the bucket.
+
+- S3 answers `403`, not `404`, for a missing file when the bucket policy does not allow listing.
+  Send both codes to Maho.
+- In CloudFront, make an origin group with the bucket as the primary origin and the Maho host as
+  the secondary origin. Set the failover on `403` and `404`, and use the group for the behavior
+  of `media/*/cache/*`.
+- On another CDN, use its rule for a failover or a fallback origin, such as a Cloudflare Worker
+  or a Bunny edge rule.
 
 When the theme or the image settings change, the pages keep the old files until `image:resize` or
 the queue has created the new ones. Then each store view switches to the new files. A config save
