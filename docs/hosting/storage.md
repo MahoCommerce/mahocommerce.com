@@ -236,10 +236,12 @@ only, give their names: `./maho storage:migrate media exports`. The command has 
   sitemaps again after the switch, then delete the old sitemap files from `public/`.
 - It returns an error code when a file fails, and lists the files that failed.
 
-`storage:image:resize` creates the resized files that are missing, for all images, or for one entity with
-`--entity=product`, `--entity=category`, `--entity=blog` or `--entity=swatch`. Then it switches each store view to
-its current image settings. Run it once after the upgrade to 26.11, then flush the full page
-cache.
+`storage:image:resize` creates the resized files that are missing, for all images, or for one
+entity with `--entity=product`, `--entity=category`, `--entity=blog` or `--entity=swatch`. Then it
+switches each store view to its current image settings. A store view keeps its old settings when a
+file fails, so run the command again: it creates only what is missing. On a bucket, it resizes with
+16 parallel jobs, because each image waits for a read and for one write per width. `--jobs=N` sets
+another number. Run it once after the upgrade to 26.11, then flush the full page cache.
 
 `storage:image:clean` deletes the resized files of the image settings that no store view uses, for example
 after a theme change, and the resized files of the releases before 26.11.
