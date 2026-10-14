@@ -389,9 +389,18 @@ each slot. When each slot is twice the previous one, the slots share their files
 
 - A slot that your theme does not declare comes from the parent theme, and at the end from
   `base/default`. The core templates use the four slots above.
-- Each image entity (`product`, `category`, `blog`) takes a `ratio`, such as `original`, `1:1` or
-  `3:4`, and a `fit`. `contain` fits the image in the box and fills the rest with the background
-  color. `cover` fills the box and crops the image.
+- Each image entity (`product`, `category`, `blog`, `swatch`) takes a `ratio`, such as `original`,
+  `1:1` or `3:4`, and a `fit`. `contain` fits the image in the box and fills the rest with the
+  background color. `cover` fills the box and crops the image.
+- An entity can list the slots that its images use, in its own `<slots>` node, so it gets no files
+  for the other slots. A slot with a value has that width for this entity only. The list of a child
+  theme replaces the list of its parent. `base/default` gives `swatch` one `listing` slot of 36 px.
+- Only the theme in the store config of a store view gives these values. A design change, a user
+  agent exception or the custom design of a category or a product does not change them.
+- A product has one image role, `image`. `small_image` and `thumbnail` are deprecated names of
+  it, so do not use them as attribute codes. For a second image in one place of the layout, create
+  a product attribute with the input type **Media Image**. The gallery shows it as one more role,
+  and a template calls `init($_product, 'my_code')`.
 - Give the first image that a page shows `fetchpriority="high"`, and the images below the fold
   `loading="lazy"`.
 

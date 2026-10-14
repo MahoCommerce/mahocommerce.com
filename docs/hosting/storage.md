@@ -27,7 +27,9 @@ Each node then reads and writes the same files, and a node can start with an emp
 
 The cache, the sessions, the logs, `var/tmp` and the locks are not on a mount. Put the cache and
 the sessions on [Redis](redis.md). Each node keeps its own logs and temporary files. System >
-Import/Export keeps its working files on the local disk of the node that runs the import.
+Import/Export keeps its working files on the local disk of the node that runs the import. On more
+than one node, set the lock backend to `db`, so that all nodes share the locks: see
+[locking across multiple servers](cron.md#locking-across-multiple-servers).
 
 ## Install the adapter package
 
@@ -147,19 +149,28 @@ redirect to a signed URL that expires after 60 seconds. Otherwise, Maho streams 
 
 ## Resized images
 
-Maho creates the resized files of the product, category and blog images before a page links to
-them, at the widths of the [image slots](../developer/theme-development.md#image-slots) of the
-theme. It stores them on the `media` mount, below the `cache/` folder of each image folder, such as
-`catalog/product/cache/`.
+Maho creates the resized files of the product, category, blog and swatch images before a page
+links to them, at the widths of the [image slots](../developer/theme-development.md#image-slots) of
+the theme. It stores them on the `media` mount, below the `cache/` folder of each image folder, such
+as `catalog/product/cache/`. The swatch images are the files in `wysiwyg/swatches`. A swatch with
+only a color has no file: the page draws it from the color.
 
 - A save in the admin or through the API creates the files of the new images, after the database
-  commit. This covers products, product duplicates, categories, blog posts and the placeholders.
+  commit. This covers products, product duplicates, categories, blog posts, the placeholders and
+  an upload to `wysiwyg/swatches`. The other new gallery images of a product go to the queue, so a
+  save with many images returns fast.
 - An import queues them on the `image` queue, in the `slow` worker pool unless you route it
   elsewhere: see [worker pools](../developer/message-queue.md#worker-pools).
+- A resize that fails goes to the queue, which tries it again.
 - `image:resize` creates all the files that are missing.
 
-A request never creates a file. So the bucket or the CDN serves every resized image directly, and
-it needs no failover rule and no rule on the web server.
+So the bucket or the CDN serves every resized image directly, and it needs no failover rule. A file
+can still go missing, for example after an extension writes an image with SQL. On a local disk, the
+web server sends the request for a missing resized file to Maho, which creates the file and returns
+it. `public/.htaccess` and Caddy do this already, and nginx needs the rule in
+[web server](web-server.md#nginx). Maho accepts only a path of image settings that a store view
+uses and of an original that exists, so any other path gets a 404 and writes nothing. A bucket
+never sends a missing file to Maho, so there the queue and `image:resize` repair the files.
 
 When the theme or the image settings change, the pages keep the old files until `image:resize` or
 the queue has created the new ones. Then each store view switches to the new files. A config save
@@ -213,7 +224,7 @@ only, give their names: `./maho storage:migrate media exports`. The command has 
 - It returns an error code when a file fails, and lists the files that failed.
 
 `image:resize` creates the resized files that are missing, for all images, or for one entity with
-`--entity=product`, `--entity=category` or `--entity=blog`. Then it switches each store view to
+`--entity=product`, `--entity=category`, `--entity=blog` or `--entity=swatch`. Then it switches each store view to
 its current image settings. Run it once after the upgrade to 26.11, then flush the full page
 cache.
 
@@ -245,6 +256,39 @@ on the local disk.
   whole file in one step.
 - Keep the cache, the sessions, the logs, the temporary files and the locks on the local disk.
   Use `core/lock` for a lock that all nodes must see.
+
+To give the images of your module resized files, declare an image entity in its `config.xml`:
+
+```xml
+<config>
+    <global>
+        <images>
+            <entities>
+                <my_module>
+                    <source>my_module/images</source>
+                    <provider>my_module/image</provider>
+                    <background>my_module/images/background_color</background>
+                </my_module>
+            </entities>
+        </images>
+    </global>
+</config>
+```
+
+- `<source>` is the folder of the originals on the `media` mount.
+- `<provider>` is a model that implements `Mage_Core_Model_Image_ProviderInterface`. Its
+  `getImageFiles()` returns every original, for `image:resize`.
+- `<background>` is optional. It is the store config path of the color that fills the box of the
+  `contain` fit. Without it, the color is white.
+- `<watermark>` is optional. It is the start of the store config paths of a watermark, such as
+  `design/watermark/image`. Maho reads `_image`, `_size`, `_position` and `_imageOpacity` after it,
+  and looks for the file in the `watermark` folder below `<source>`.
+
+A template then asks for the attributes of one slot:
+`Mage::helper('core/image')->init('my_module', $file)?->getImgAttributes('listing')`. After a save
+that changes an image, call
+`Mage::getSingleton('core/image_resizer')->createFilesAfterCommit('my_module', [$file])`. A theme
+sets the ratio and the fit of the entity in its `theme.xml`, under the same name.
 
 To write to a folder that no mount covers, declare a mount in the `config.xml` of your module.
 Declare only a folder that your module writes:

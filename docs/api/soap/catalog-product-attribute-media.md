@@ -345,7 +345,8 @@ array
 - `catalog_product_attribute_media.types` (SOAP V1)
 - `catalogProductAttributeMediaTypes` (SOAP V2)
 
-Allows you to retrieve the product image types, starting with the standard `image`. <span class="version-badge">v26.11+</span> A product has one standard image type: `small_image` and `thumbnail` are gone.
+Allows you to retrieve the product image types, starting with the standard `image`. <span class="version-badge">v26.11+</span> A product has one standard image type: `small_image` and `thumbnail` are gone. A create or an
+update that still names them sets `image`.
 Note that if the product attribute set contains attributes of the media image type
 (**Catalog Input Type for Store Owner > Media Image**), it will also be returned in the response.
 

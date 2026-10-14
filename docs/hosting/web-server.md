@@ -26,7 +26,9 @@ Every configuration must apply these rules:
 - Route the `/api/*` paths as the [API routing map](#api-routing-map) below shows.
 - Execute PHP for the entry points only: `index.php`, `rest.php` and `api.php`.
 - Serve the files under `/media`, `/skin` and `/js` directly, and return `404` when the file is
-  absent.
+  absent. <span class="version-badge">v26.11+</span> One exception: send a request for a missing
+  resized image, below `/media/<folder>/cache/<hash>/<width>/`, to `index.php`. Maho creates the
+  file and returns it.
 - Deny access to `/media/customer/`, `/media/customer_address/`, `/media/downloadable/` and
   `/media/custom_options/`. These folders hold the files that customers upload and the files that
   customers buy.
@@ -223,6 +225,13 @@ server {
         access_log off;
     }
 
+    # A missing resized image goes to Maho, which creates it from the original.
+    location ~ ^/media/.+/cache/[0-9a-f]{12}/[0-9]+/ {
+        try_files $uri /index.php$is_args$args;
+        expires 1y;
+        access_log off;
+    }
+
     # These three directories hold static files only. A missing file must give a
     # 404, and must not start a full Maho bootstrap.
     location ~ ^/(media|skin|js)/ {
@@ -362,7 +371,8 @@ Three details of this block are easy to get wrong:
   conditions for the exceptions.
 
 `php_server` already does the work of `try_files` and of the static file server, so no separate
-`file_server` directive is necessary. The `not file` condition on each API matcher stops a rewrite
+`file_server` directive is necessary. It also sends a missing resized image to `index.php`, which
+creates it, and gives a 404 for any other missing static file. The `not file` condition on each API matcher stops a rewrite
 when a real file sits at that path.
 
 The official Maho Docker images ship this site block, on the tags for Maho 26.7 and later. If you
