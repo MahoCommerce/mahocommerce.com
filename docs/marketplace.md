@@ -554,6 +554,23 @@ Discover and install powerful modules to enhance your Maho store. All modules ar
         </div>
     </div>
 
+    <!-- Razorpay -->
+    <div class="app-card" data-category="payment">
+        <span class="app-category">Payment</span>
+        <h3 class="app-title">Razorpay</h3>
+        <p class="app-description">Accept payments through Razorpay, India's leading payment gateway, with Razorpay Checkout. Creates a Razorpay order for each Maho order, verifies payment signatures server-side, and supports the payment.captured webhook as a backup.</p>
+        <div class="app-footer">
+            <div class="app-actions">
+                <button class="app-button app-button-primary" onclick="showInstallModal('kalp707/maho-razorpay')">
+                    ↓ Install
+                </button>
+                <a href="https://github.com/kalp707/maho-razorpay" class="app-button app-button-primary" target="_blank">
+                    View Details →
+                </a>
+            </div>
+        </div>
+    </div>
+
     <!-- Revolut -->
     <div class="app-card" data-category="payment">
         <span class="app-category">Payment</span>
@@ -613,6 +630,23 @@ Discover and install powerful modules to enhance your Maho store. All modules ar
                     ↓ Install
                 </button>
                 <a href="https://github.com/empiricompany/openmage-tiktok-tracking" class="app-button app-button-primary" target="_blank">
+                    View Details →
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Size Chart -->
+    <div class="app-card" data-category="marketing">
+        <span class="app-category">Marketing</span>
+        <h3 class="app-title">Size Chart</h3>
+        <p class="app-description">Create reusable size guides in the admin with the WYSIWYG editor, assign them to products, and show a "Size Guide" link that opens the chart in a modal on the product page.</p>
+        <div class="app-footer">
+            <div class="app-actions">
+                <button class="app-button app-button-primary" onclick="showInstallModal('kalp707/maho-sizechart')">
+                    ↓ Install
+                </button>
+                <a href="https://github.com/kalp707/maho-sizechart" class="app-button app-button-primary" target="_blank">
                     View Details →
                 </a>
             </div>
