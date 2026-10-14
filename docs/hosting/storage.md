@@ -295,6 +295,10 @@ on the local disk.
   not change, such as a migration, use `$mount->withoutChangeEvents()`.
 - Get the width and the height of an image on a mount with
   `Mage::getSingleton('core/image_size')->get($mount, $path)`. It never reads a file on a bucket.
+- Before a template shows the images of a list, call
+  `Mage::getSingleton('core/image_size')->preload('my_module', $files)`. It reads the sizes of all
+  the images with one query. Maho does this for the storefront product collections, the product
+  gallery and the blog posts.
 - Keep the cache, the sessions, the logs, the temporary files and the locks on the local disk.
   Use `core/lock` for a lock that all nodes must see.
 
