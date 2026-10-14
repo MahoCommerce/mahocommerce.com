@@ -162,7 +162,7 @@ only a color has no file: the page draws it from the color.
 - An import queues them on the `image` queue, in the `slow` worker pool unless you route it
   elsewhere: see [worker pools](../developer/message-queue.md#worker-pools).
 - A resize that fails goes to the queue, which tries it again.
-- `image:resize` creates all the files that are missing.
+- `storage:image:resize` creates all the files that are missing.
 
 So the bucket or the CDN serves every resized image directly, and it needs no failover rule. A file
 can still go missing, for example after an extension writes an image with SQL. On a local disk, the
@@ -171,7 +171,7 @@ it. `public/.htaccess` and Caddy do this already, and nginx needs the rule in
 [web server](web-server.md#nginx). Maho accepts only a path of image settings that a store view
 uses and of an original that exists, so any other path gets a 404 and writes nothing.
 
-A bucket never sends a missing file to Maho by itself. There, the queue and `image:resize` repair
+A bucket never sends a missing file to Maho by itself. There, the queue and `storage:image:resize` repair
 the files. To repair a file at the first request, configure the CDN to send a miss below
 `/media/<folder>/cache/` to Maho at the same path. Maho answers at `/media/` followed by the path
 on the `media` mount, writes the file to the bucket, and returns it. The next request gets the
@@ -185,7 +185,7 @@ file from the bucket.
 - On another CDN, use its rule for a failover or a fallback origin, such as a Cloudflare Worker
   or a Bunny edge rule.
 
-When the theme or the image settings change, the pages keep the old files until `image:resize` or
+When the theme or the image settings change, the pages keep the old files until `storage:image:resize` or
 the queue has created the new ones. Then each store view switches to the new files. A config save
 checks this at once, and the `image_settings_check` cron job checks it every 15 minutes, for a
 theme change that a deploy brings.
@@ -207,7 +207,7 @@ Do these steps on one node, with the old local folders still in place:
 5. Create the resized images that are missing:
 
     ```bash
-    ./maho image:resize
+    ./maho storage:image:resize
     ```
 
 6. If the `sitemaps` mount moved, generate the sitemaps again. Then delete the old sitemap files
@@ -236,12 +236,12 @@ only, give their names: `./maho storage:migrate media exports`. The command has 
   sitemaps again after the switch, then delete the old sitemap files from `public/`.
 - It returns an error code when a file fails, and lists the files that failed.
 
-`image:resize` creates the resized files that are missing, for all images, or for one entity with
+`storage:image:resize` creates the resized files that are missing, for all images, or for one entity with
 `--entity=product`, `--entity=category`, `--entity=blog` or `--entity=swatch`. Then it switches each store view to
 its current image settings. Run it once after the upgrade to 26.11, then flush the full page
 cache.
 
-`image:clean` deletes the resized files of the image settings that no store view uses, for example
+`storage:image:clean` deletes the resized files of the image settings that no store view uses, for example
 after a theme change, and the resized files of the releases before 26.11.
 
 ## For extension developers
@@ -290,7 +290,7 @@ To give the images of your module resized files, declare an image entity in its 
 
 - `<source>` is the folder of the originals on the `media` mount.
 - `<provider>` is a model that implements `Mage_Core_Model_Image_ProviderInterface`. Its
-  `getImageFiles()` returns every original, for `image:resize`.
+  `getImageFiles()` returns every original, for `storage:image:resize`.
 - `<background>` is optional. It is the store config path of the color that fills the box of the
   `contain` fit. Without it, the color is white.
 - `<watermark>` is optional. It is the start of the store config paths of a watermark, such as

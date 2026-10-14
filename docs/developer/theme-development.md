@@ -404,8 +404,8 @@ each slot. When each slot is twice the previous one, the slots share their files
 - Give the first image that a page shows `fetchpriority="high"`, and the images below the fold
   `loading="lazy"`.
 
-After you change the slots, the ratio or the fit, run `./maho image:resize`. The store keeps the
-old files until the new ones exist, so no page links to a missing file. Then `./maho image:clean`
+After you change the slots, the ratio or the fit, run `./maho storage:image:resize`. The store keeps the
+old files until the new ones exist, so no page links to a missing file. Then `./maho storage:image:clean`
 deletes the files that no store view uses.
 
 ## Adding your own setting
