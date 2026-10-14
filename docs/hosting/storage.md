@@ -190,6 +190,24 @@ the queue has created the new ones. Then each store view switches to the new fil
 checks this at once, and the `image_settings_check` cron job checks it every 15 minutes, for a
 theme change that a deploy brings.
 
+### Image sizes
+
+An image with the ratio `original` gets its `width` and `height` from the size of its original.
+Maho keeps that size in the `core_image_size` table, so a page never reads an original from a
+bucket. A cache flush does not touch the table.
+
+- The resizer stores the size each time that it reads an original.
+- `storage:image:resize` stores the size of each original that has none.
+- When Maho writes, moves or deletes a file on a mount, it deletes the stored size of that file.
+  The next resize stores the new size.
+- On a local disk, a page reads the size of an original that has no stored size, and stores it.
+- On a bucket, a page shows an original that has no stored size without `width` and `height`, and
+  the `image` queue reads its size. The next page has it.
+
+A change to the originals outside Maho, for example with the bucket console or with a restore,
+keeps the old sizes. After such a change, click **Flush Catalog Images Cache** in **System > Cache
+Management**. The queue reads all the sizes again, and the old sizes stay until it replaces them.
+
 ## Move an existing store
 
 Do these steps on one node, with the old local folders still in place:
@@ -241,10 +259,12 @@ entity with `--entity=product`, `--entity=category`, `--entity=blog` or `--entit
 switches each store view to its current image settings. A store view keeps its old settings when a
 file fails, so run the command again: it creates only what is missing. On a bucket, it resizes with
 16 parallel jobs, because each image waits for a read and for one write per width. `--jobs=N` sets
-another number. Run it once after the upgrade to 26.11, then flush the full page cache.
+another number. Then it stores the size of each original that has no stored size. Run it once after
+the upgrade to 26.11, before you open the store, then flush the full page cache.
 
 `storage:image:clean` deletes the resized files of the image settings that no store view uses, for example
-after a theme change, and the resized files of the releases before 26.11.
+after a theme change, and the resized files of the releases before 26.11. It also deletes the stored
+sizes of the originals that no record uses.
 
 ## For extension developers
 
@@ -269,6 +289,12 @@ on the local disk.
   below `public/media` still works, and any other absolute folder is refused.
 - Write a file that a visitor or a crawler can read at any time with `moveAtomic()`. It writes the
   whole file in one step.
+- Each `write()`, `writeStream()`, `move()`, `copy()`, `delete()` and `deleteDirectory()` of a mount
+  dispatches the `storage_mount_change` event with the `mount`, the changed `paths` and the
+  deleted `folders`. Maho uses it to delete the stored size of an image. To copy files that do
+  not change, such as a migration, use `$mount->withoutChangeEvents()`.
+- Get the width and the height of an image on a mount with
+  `Mage::getSingleton('core/image_size')->get($mount, $path)`. It never reads a file on a bucket.
 - Keep the cache, the sessions, the logs, the temporary files and the locks on the local disk.
   Use `core/lock` for a lock that all nodes must see.
 
