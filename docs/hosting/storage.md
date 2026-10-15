@@ -203,6 +203,8 @@ bucket. A cache flush does not touch the table.
 - On a local disk, a page reads the size of an original that has no stored size, and stores it.
 - On a bucket, a page shows an original that has no stored size without `width` and `height`, and
   the `image` queue reads its size. The next page has it.
+- The stored sizes also tell whether a swatch image in `wysiwyg/swatches` exists. A missing file
+  has a size of 0 x 0. So a page with color swatches does not ask the bucket for each color.
 
 A change to the originals outside Maho, for example with the bucket console or with a restore,
 keeps the old sizes. After such a change, click **Flush Catalog Images Cache** in **System > Cache
