@@ -43,6 +43,8 @@ Available commands:
   cache:enable                  Enable all caches
   cache:flush                   Flush cache
   cache:minify:flush            Flush minified CSS/JS cache
+ catalog
+  catalog:price:website-overrides  List price rows scoped to a store or website, flagging those that look like an old converted seed
  config
   config:delete                 Delete configuration values from core_config_data table
   config:get                    Get specific configuration path values
@@ -105,6 +107,10 @@ Available commands:
  queue
   queue:list                    Show per-queue message counts and the worker pool each queue is consumed by
   queue:work                    Consume messages from the queue (long-running worker; cron keeps one running automatically)
+ storage
+  storage:image:clean           Delete the resized files of image settings that no store view uses
+  storage:image:resize          Create the missing resized files of the images, and store the missing image sizes
+  storage:migrate               Copy the local folder of storage mounts to the adapter that local.xml configures, such as an S3 bucket
  sys
   sys:currencies                Get all available currencies
   sys:directory:regions:import  Import states/provinces for a country from ISO 3166-2 standard with localization
@@ -119,6 +125,8 @@ Available commands:
     versions only the `email:queue:*` commands existed, because the queue was email-specific.
     `health-check` and `db:optimize` are covered in
     [Health check & database maintenance](../hosting/health-check.md).
+    <span class="version-badge">v26.11+</span> `storage:migrate`, `storage:image:resize`
+    and `storage:image:clean` are covered in [Shared storage](../hosting/storage.md#move-an-existing-store).
 
 This tool is inspired by [Laravel Artisan](https://laravel.com/docs/11.x/artisan){:target="_blank"},
 [n98-magerun](https://github.com/netz98/n98-magerun){:target="_blank"}, and it was created using the awesome

@@ -212,6 +212,7 @@ nav:
     - Hosting & Operations:
       - Web server configuration: hosting/web-server.md
       - Redis (cache & sessions): hosting/redis.md
+      - Shared storage (S3): hosting/storage.md
       - Edge caching integration: hosting/edge-caching.md
       - FrankenPHP: hosting/frankenphp.md
       - Cron jobs: hosting/cron.md

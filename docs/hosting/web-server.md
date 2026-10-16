@@ -26,7 +26,12 @@ Every configuration must apply these rules:
 - Route the `/api/*` paths as the [API routing map](#api-routing-map) below shows.
 - Execute PHP for the entry points only: `index.php`, `rest.php` and `api.php`.
 - Serve the files under `/media`, `/skin` and `/js` directly, and return `404` when the file is
-  absent.
+  absent. <span class="version-badge">v26.11+</span> One exception: send a request for a missing
+  resized image, below `/media/<folder>/cache/<hash>/<width>/`, to `index.php`. Maho creates the
+  file and returns it.
+- Deny access to `/media/customer/`, `/media/customer_address/`, `/media/downloadable/` and
+  `/media/custom_options/`. These folders hold the files that customers upload and the files that
+  customers buy.
 - Deny access to hidden files. Allow two exceptions: `/.well-known/`, which is a registered path
   prefix and not a hidden file, and `/.thumbs/`, which holds the thumbnails of the admin media
   browser.
@@ -206,12 +211,24 @@ server {
     }
     # ---- End API routing ----
 
+    # Customer uploads and purchased files. Maho serves them through PHP only.
+    location ~ ^/media/(customer|customer_address|downloadable|custom_options)/ {
+        deny all;
+    }
+
     # Feeds and sitemaps are regenerated in place, so a proxy must not keep
     # an old copy.
     location ~ ^/media/.*\.(xml|csv|json|jsonl|gz)$ {
         try_files $uri =404;
         expires -1;
         add_header Cache-Control "no-cache, must-revalidate";
+        access_log off;
+    }
+
+    # A missing resized image goes to Maho, which creates it from the original.
+    location ~ ^/media/.+/cache/[0-9a-f]{12}/[0-9]+/ {
+        try_files $uri /index.php$is_args$args;
+        expires 1y;
         access_log off;
     }
 
@@ -313,6 +330,10 @@ maho.example.com {
         }
         respond @private 404
 
+        # Customer uploads and purchased files. Maho serves them through PHP only.
+        @private_media path /media/customer/* /media/customer_address/* /media/downloadable/* /media/custom_options/*
+        respond @private_media 404
+
         # ---- API routing ----
         @api_v2 {
             path_regexp api_v2 ^/api/rest/v2(/|$)
@@ -350,7 +371,8 @@ Three details of this block are easy to get wrong:
   conditions for the exceptions.
 
 `php_server` already does the work of `try_files` and of the static file server, so no separate
-`file_server` directive is necessary. The `not file` condition on each API matcher stops a rewrite
+`file_server` directive is necessary. It also sends a missing resized image to `index.php`, which
+creates it, and gives a 404 for any other missing static file. The `not file` condition on each API matcher stops a rewrite
 when a real file sits at that path.
 
 The official Maho Docker images ship this site block, on the tags for Maho 26.7 and later. If you
