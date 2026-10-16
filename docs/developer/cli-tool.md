@@ -109,7 +109,7 @@ Available commands:
   queue:work                    Consume messages from the queue (long-running worker; cron keeps one running automatically)
  storage
   storage:image:clean           Delete the resized files of image settings that no store view uses
-  storage:image:resize          Create the missing resized files of the images, then switch the store views to the current image settings
+  storage:image:resize          Create the missing resized files of the images, and store the missing image sizes
   storage:migrate               Copy the local folder of storage mounts to the adapter that local.xml configures, such as an S3 bucket
  sys
   sys:currencies                Get all available currencies

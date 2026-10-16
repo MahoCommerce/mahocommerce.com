@@ -185,10 +185,13 @@ file from the bucket.
 - On another CDN, use its rule for a failover or a fallback origin, such as a Cloudflare Worker
   or a Bunny edge rule.
 
-When the theme or the image settings change, the pages keep the old files until `storage:image:resize` or
-the queue has created the new ones. Then each store view switches to the new files. A config save
-checks this at once, and the `image_settings_check` cron job checks it every 15 minutes, for a
-theme change that a deploy brings.
+When the theme or the image settings change, the image URLs change at once, and the queue creates
+the new files. A config save checks this at once, and the `image_settings_check` cron job checks it
+every 15 minutes: it queues the files of each settings folder or width folder that is missing on
+the `media` mount. Until the files exist, a local disk creates each file on its first request. A
+bucket shows each image when the queue has created it, or at once with the CDN rule above. So on a
+bucket without that rule, run `storage:image:resize` in a deploy that changes the slots, the ratio
+or the fit of a theme, before the store opens.
 
 ### Image sizes
 
@@ -203,8 +206,10 @@ bucket. A cache flush does not touch the table.
 - On a local disk, a page reads the size of an original that has no stored size, and stores it.
 - On a bucket, a page shows an original that has no stored size without `width` and `height`, and
   the `image` queue reads its size. The next page has it.
-- The stored sizes also tell whether a swatch image in `wysiwyg/swatches` exists. A missing file
-  has a size of 0 x 0. So a page with color swatches does not ask the bucket for each color.
+- The stored sizes also tell whether a swatch image in `wysiwyg/swatches` exists. On a bucket, a
+  missing file has a size of 0 x 0, so a page with color swatches does not ask the bucket for each
+  color. On a local disk, a missing file has no stored size, so a file that you copy there later
+  shows.
 
 A change to the originals outside Maho, for example with the bucket console or with a restore,
 keeps the old sizes. After such a change, click **Flush Catalog Images Cache** in **System > Cache
@@ -257,12 +262,17 @@ only, give their names: `./maho storage:migrate media exports`. The command has 
 - It returns an error code when a file fails, and lists the files that failed.
 
 `storage:image:resize` creates the resized files that are missing, for all images, or for one
-entity with `--entity=product`, `--entity=category`, `--entity=blog` or `--entity=swatch`. Then it
-switches each store view to its current image settings. A store view keeps its old settings when a
-file fails, so run the command again: it creates only what is missing. On a bucket, it resizes with
+entity with `--entity=product`, `--entity=category`, `--entity=blog` or `--entity=swatch`. When a
+file fails, run the command again: it creates only what is missing. On a bucket, it resizes with
 16 parallel jobs, because each image waits for a read and for one write per width. `--jobs=N` sets
 another number. Then it stores the size of each original that has no stored size. Run it once after
-the upgrade to 26.11, before you open the store, then flush the full page cache.
+the upgrade to 26.11, then flush the full page cache:
+
+- On a bucket without a CDN rule that sends a miss to Maho, run it before you open the store.
+  Without it, the images are missing until the queue has created them.
+- On a local disk with the web server rule, it is optional. Maho creates a missing file on its
+  first request, and the `image_settings_check` cron job queues the missing files within 15
+  minutes. Run it to avoid many resizes at once on the first visits.
 
 `storage:image:clean` deletes the resized files of the image settings that no store view uses, for example
 after a theme change, and the resized files of the releases before 26.11. It also deletes the stored
@@ -332,10 +342,21 @@ To give the images of your module resized files, declare an image entity in its 
   and looks for the file in the `watermark` folder below `<source>`.
 
 A template then asks for the attributes of one slot:
-`Mage::helper('core/image')->init('my_module', $file)?->getImgAttributes('listing')`. After a save
-that changes an image, call
-`Mage::getSingleton('core/image_resizer')->createFilesAfterCommit('my_module', [$file])`. A theme
-sets the ratio and the fit of the entity in its `theme.xml`, under the same name.
+`Mage::helper('core/image')->init('my_module', $file)?->getImgAttributes('listing')`. A theme sets
+the ratio and the fit of the entity in its `theme.xml`, under the same name.
+
+When the image is the value of an EAV attribute, give the attribute a backend model that extends
+`Mage_Eav_Model_Entity_Attribute_Backend_Image` and returns the entity name from
+`getImageEntity()`. The backend does the rest:
+
+- It saves an upload to `<source>` and creates the resized files after the database commit. It
+  does the same for a file name that an import sets.
+- It deletes the old file, with its resized files, when no record uses it any more.
+- Its `getImageFiles()` lists every value of the attribute, so the provider can return it.
+
+The category and blog post images use this backend. For an image that is not an EAV attribute,
+call `Mage::getSingleton('core/image_resizer')->createFilesAfterCommit('my_module', [$file])` after
+a save that changes it.
 
 To write to a folder that no mount covers, declare a mount in the `config.xml` of your module.
 Declare only a folder that your module writes:

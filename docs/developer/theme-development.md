@@ -398,15 +398,19 @@ each slot. When each slot is twice the previous one, the slots share their files
 - Only the theme in the store config of a store view gives these values. A design change, a user
   agent exception or the custom design of a category or a product does not change them.
 - A product has one image role, `image`. `small_image` and `thumbnail` are deprecated names of
-  it, so do not use them as attribute codes. For a second image in one place of the layout, create
-  a product attribute with the input type **Media Image**. The gallery shows it as one more role,
-  and a template calls `init($_product, 'my_code')`.
+  it, so do not use them as attribute codes. `init($_product, 'small_image')`, `getSmallImage()`,
+  and a product collection that selects, filters or sorts by an old name all give `image`. For a
+  second image in one place of the layout, create a product attribute with the input type
+  **Media Image**. The gallery shows it as one more role, its images get resized files too, and a
+  template calls `init($_product, 'my_code')`.
 - Give the first image that a page shows `fetchpriority="high"`, and the images below the fold
   `loading="lazy"`.
 
-After you change the slots, the ratio or the fit, run `./maho storage:image:resize`. The store keeps the
-old files until the new ones exist, so no page links to a missing file. Then `./maho storage:image:clean`
-deletes the files that no store view uses.
+After you change the slots, the ratio or the fit, run `./maho storage:image:resize`. The image URLs
+follow the new values at once. On a local disk, Maho creates a missing file on its first request.
+On a bucket, run the command before the store opens, or the images are missing until the queue has
+created them: see [resized images](../hosting/storage.md#resized-images). Then
+`./maho storage:image:clean` deletes the files that no store view uses.
 
 ## Adding your own setting
 
