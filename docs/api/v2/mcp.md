@@ -86,6 +86,7 @@ From there the client reads the documents below. Paths that depend on a setting 
 | `/api/oauth/register` | Dynamic client registration (RFC 7591) |
 | `/.well-known/mcp.json` | MCP server card, also at `/.well-known/mcp/server-card.json` |
 | `/.well-known/api-catalog` | The APIs this install serves (RFC 9727) |
+| `/.well-known/ai-catalog.json` | The AI catalog that lists the MCP server card, for agents and for the Lighthouse `ard-schema` audit |
 
 The details a client implementer needs:
 
