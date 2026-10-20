@@ -342,6 +342,23 @@ Discover and install powerful modules to enhance your Maho store. All modules ar
         </div>
     </div>
 
+    <!-- GNU Taler -->
+    <div class="app-card" data-category="payment">
+        <span class="app-category">Payment</span>
+        <h3 class="app-title">GNU Taler</h3>
+        <p class="app-description">Accept payments through GNU Taler, the free and open source, privacy-preserving payment system. Shoppers pay from a Taler wallet with a QR code or one click. Partial and full online refunds from the admin.</p>
+        <div class="app-footer">
+            <div class="app-actions">
+                <button class="app-button app-button-primary" onclick="showInstallModal('mahocommerce/module-taler')">
+                    ↓ Install
+                </button>
+                <a href="https://github.com/MahoCommerce/module-taler" class="app-button app-button-primary" target="_blank">
+                    View Details →
+                </a>
+            </div>
+        </div>
+    </div>
+
     <!-- HiPay Fullservice -->
     <div class="app-card" data-category="payment">
         <span class="app-category">Payment</span>
