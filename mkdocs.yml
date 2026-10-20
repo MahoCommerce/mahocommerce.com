@@ -131,7 +131,8 @@ plugins:
         roadmap.md: about/roadmap.md
         robotstxt.md: hosting/robotstxt.md
         routing.md: developer/routing.md
-        sboms.md: about/sboms.md
+        sboms.md: about/security.md
+        about/sboms.md: about/security.md
         seo.md: user-guide/seo.md
         shipping-bridge.md: user-guide/shipping-bridge.md
         svg-support.md: hosting/svg-support.md
@@ -208,7 +209,7 @@ nav:
   - Developer Docs:
     - Getting started: about/getting-started.md
     - Migrate to Maho: about/migrate-to-maho.md
-    - Security & supply chain: about/sboms.md
+    - Security & supply chain: about/security.md
     - Hosting & Operations:
       - Web server configuration: hosting/web-server.md
       - Redis (cache & sessions): hosting/redis.md

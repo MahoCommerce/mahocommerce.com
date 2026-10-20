@@ -94,7 +94,7 @@ These are features that Magento 1 and OpenMage never had, each with its own page
 
 ### The process
 
-Maho ships a release [every two months](release-strategy.md), with bugfix patch releases in between. Every release carries [SBOMs](sboms.md) and passes the same [quality and security checks](../blog/posts/2026-06-10-quality-and-security-as-code.md) across every repository. [Language packs](../developer/language-packs.md) are rebuilt for every release. All of this happens in the open, on a [public roadmap](roadmap.md), with [full transparency about how we use AI](genai-transparency.md).
+Maho ships a release [every two months](release-strategy.md), with bugfix patch releases in between. Every release carries [SBOMs](security.md) and passes the same [quality and security checks](../blog/posts/2026-06-10-quality-and-security-as-code.md) across every repository. [Language packs](../developer/language-packs.md) are rebuilt for every release. All of this happens in the open, on a [public roadmap](roadmap.md), with [full transparency about how we use AI](genai-transparency.md).
 
 For the complete list, release by release, see the [release notes](../blog/index.md).
 
