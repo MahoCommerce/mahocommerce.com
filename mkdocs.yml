@@ -208,7 +208,7 @@ nav:
   - Developer Docs:
     - Getting started: about/getting-started.md
     - Migrate to Maho: about/migrate-to-maho.md
-    - Security & SBOMs: about/sboms.md
+    - Security & supply chain: about/sboms.md
     - Hosting & Operations:
       - Web server configuration: hosting/web-server.md
       - Redis (cache & sessions): hosting/redis.md
