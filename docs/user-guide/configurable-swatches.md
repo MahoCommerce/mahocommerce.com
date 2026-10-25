@@ -69,8 +69,8 @@ a material is shown consistently across a catalog.
 3. Upload the file into the `wysiwyg/swatches` folder of the media storage, for example from
    **CMS > Media Library**. There is no upload field in the attribute form: the swatch image is a
    media file, so it is uploaded like any other media file.
-4. To replace a swatch, delete the old file first. The Media Library saves a second file with the
-   same name as `blue-light_1.webp`, and the store does not find that name.
+4. To replace a swatch, delete the old file first. If a file with the same name exists, the Media
+   Library saves the new file as `blue-light_1.webp`, and the store does not find that name.
 
 A square image of about 100 x 100 pixels is enough, the store generates the sizes it needs.
 
