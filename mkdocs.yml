@@ -186,6 +186,7 @@ nav:
     - Start here: user-guide/index.md
     - Catalog:
         - Product types: user-guide/product-types.md
+        - Configurable swatches: user-guide/configurable-swatches.md
         - Product relationship rules: user-guide/product-relationship-rules.md
         - Category import/export: user-guide/category-import-export.md
     - Marketing:
