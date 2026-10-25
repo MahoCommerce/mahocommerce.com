@@ -122,6 +122,7 @@ description: Maho is the open-source, self-hosted ecommerce platform you actuall
         <button class="mh-tstage-pick" type="button" data-light="assets/admin-screens/product-edit-light.webp" data-dark="assets/admin-screens/product-edit-dark.webp" data-title="Product edit">Product edit</button>
         <button class="mh-tstage-pick" type="button" data-light="assets/admin-screens/system-config-light.webp" data-dark="assets/admin-screens/system-config-dark.webp" data-title="System config">System config</button>
         <button class="mh-tstage-pick" type="button" data-light="assets/admin-screens/cms-editor-light.webp" data-dark="assets/admin-screens/cms-editor-dark.webp" data-title="CMS editor">CMS editor</button>
+        <button class="mh-tstage-pick" type="button" data-light="assets/admin-screens/page-builder-light.webp" data-dark="assets/admin-screens/page-builder-dark.webp" data-title="Page builder">Page builder</button>
         <button class="mh-tstage-pick" type="button" data-light="assets/admin-screens/category-tree-light.webp" data-dark="assets/admin-screens/category-tree-dark.webp" data-title="Category tree">Category tree</button>
         <button class="mh-tstage-pick" type="button" data-light="assets/admin-screens/navigation-light.webp" data-dark="assets/admin-screens/navigation-dark.webp" data-title="Navigation">Navigation</button>
         <button class="mh-tstage-pick" type="button" data-light="assets/admin-screens/health-check-light.webp" data-dark="assets/admin-screens/health-check-dark.webp" data-title="Health check">Health check</button>
@@ -548,7 +549,7 @@ Comprehensive **API documentation** (REST, GraphQL, SOAP), **developer guides** 
 
 ### Modern Tech Stack
 
-**PHP 8.3+** built on industry-standard libraries: **Doctrine DBAL 4.4** for database operations, **Symfony HttpClient** for HTTP requests, **Symfony Validator** for data validation, **Symfony Messenger** for background jobs, and **Monolog** for logging. A storefront on **Tailwind CSS 4 and daisyUI 5**, **vanilla JavaScript only** throughout. Contemporary, actively-maintained dependencies you can trust.
+**PHP 8.3+** built on industry-standard libraries: **Doctrine DBAL 4.4** for database operations, **Symfony HttpClient** for HTTP requests, **Symfony Validator** for data validation, **Symfony Messenger** for background jobs, and **Monolog** for logging. A storefront and an admin on **Tailwind CSS 4 and daisyUI 5**, **vanilla JavaScript only** throughout. Contemporary, actively-maintained dependencies you can trust.
 
 </div>
 

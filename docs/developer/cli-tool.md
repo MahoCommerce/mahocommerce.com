@@ -63,6 +63,7 @@ Available commands:
   db:optimize                   Rebuild bloated tables to return their free space to the filesystem
   db:query                      Execute a SQL query using the database credentials from your local.xml file
  dev
+  dev:admin:theme:build         Compile the CSS sources (src/*.css) of every admin theme into their css/ bundles
   dev:api:resource:create       Scaffold an API Platform resource (DTO + provider) for a module, wiring it into the REST + GraphQL API
   dev:api:resource:list         List the API Platform resources discovered across all modules (REST routes, methods, permissions)
   dev:create-command            Create a new command that will integrate into your project's Maho CLI set of commands

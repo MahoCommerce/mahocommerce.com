@@ -76,7 +76,7 @@ On top of that base, Maho ships [eleven storefront themes](themes.md), one for e
 
 ### The admin
 
-The admin got a [complete redesign](../blog/posts/2026-06-14-admin-redesign.md) with light and dark mode and one design system across every screen. The legacy admin theme is gone. New in it: a media library with an image editor, content versioning, an activity log, a health check page, cron management, a countries and regions editor, dashboard charts, a [5800+ icon library](../developer/icons-library.md), and login with passkeys or [two-factor authentication](../user-guide/two-factor-authentication.md).
+The admin got a [complete redesign](../blog/posts/2026-06-14-admin-redesign.md) with light and dark mode and one design system across every screen. The legacy admin theme is gone. Since 26.11 the admin is built on [Tailwind CSS 4 and daisyUI 5](../developer/admin-theme.md), like the storefront. New in it: a media library with an image editor, content versioning, an activity log, a health check page, cron management, a countries and regions editor, dashboard charts, a [5800+ icon library](../developer/icons-library.md), and login with passkeys or [two-factor authentication](../user-guide/two-factor-authentication.md).
 
 ### The APIs
 

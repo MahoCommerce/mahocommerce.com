@@ -121,6 +121,7 @@ A theme without a `src/` directory needs no build. Its `css/` files are served a
 |---|---|---|
 | `--theme package/theme` | `-t` | Build one theme instead of all |
 | `--watch` | `-w` | Rebuild on every change until you press Ctrl+C |
+| `--map` | | Add an inline source map, so the browser developer tools show the `src/` files |
 
 ```bash
 # Build one theme
@@ -130,7 +131,9 @@ A theme without a `src/` directory needs no build. Its `css/` files are served a
 ./maho dev:frontend:theme:build --theme acmestore/default --watch
 ```
 
-Watch output is not minified. Run a plain build before you commit.
+Watch output is not minified. Run a plain build, without `--watch` and `--map`, before you commit.
+
+The admin skin has the same build, with `dev:admin:theme:build`. See [Admin theme](admin-theme.md#rebuild-the-admin-css).
 
 ### The toolchain
 
