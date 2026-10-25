@@ -20,8 +20,8 @@ Go to **System > Configuration > Catalog > Configurable Swatches**.
 | Setting | What it does |
 |---------|--------------|
 | Enabled | Turns the feature on |
-| Product Attributes to Show as Swatches in Product Detail | The attributes drawn as swatches on the product page, for example `color` and `size` |
-| Product Attribute to Use for Swatches in Product Listing | The single attribute used in category and search results, in the layered navigation filters and in the "shopping by" tag |
+| Product Attributes to Show as Swatches in Product Detail | The attributes drawn as swatches on the product page, in the layered navigation filters and in the "shopping by" tag, for example `color` and `size` |
+| Product Attribute to Use for Swatches in Product Listing | The single attribute used in category and search results |
 | Dynamic Price Change for Swatches in Product Listing | When a customer picks a swatch in a listing, the price shown follows the selected variant |
 | Swatch Dimensions on Product Detail Page | Inner size of the swatches on the product page, in pixels |
 | Swatch Dimensions in Product Listing | Inner size of the swatches in listings |
@@ -36,7 +36,8 @@ Two things are easy to miss:
 
 ## How a swatch can look
 
-A swatch shows one of three things, and the store picks the richest one available:
+A swatch shows one of three things. When a value has more than one, the order in
+[Which appearance wins](#which-appearance-wins) decides:
 
 | Appearance | What it is | Good for |
 |------------|------------|----------|
@@ -50,9 +51,9 @@ A swatch shows one of three things, and the store picks the richest one availabl
 2. Open the **Manage Label / Options** tab. Every option row has a colour picker.
 3. Pick the colour and save the attribute.
 
-The colour picker appears only for the attributes that are enabled as swatches in the
-configuration above. A colour belongs to the option, so it is the same in every store view: use an
-image if a value has to look different per store view.
+The colour picker appears only for the attributes listed in **Product Attributes to Show as
+Swatches in Product Detail**. A colour belongs to the option, so it is the same in every store
+view: use an image if a value has to look different per store view.
 
 ## Using one image for a value across the catalog
 
@@ -68,8 +69,8 @@ a material is shown consistently across a catalog.
 3. Upload the file into the `wysiwyg/swatches` folder of the media storage, for example from
    **CMS > Media Library**. There is no upload field in the attribute form: the swatch image is a
    media file, so it is uploaded like any other media file.
-4. Empty the **Pregenerated configurable swatches image files** cache in **System > Cache
-   Management** if the previous swatch is still visible.
+4. To replace a swatch, delete the old file first. The Media Library saves a second file with the
+   same name as `blue-light_1.webp`, and the store does not find that name.
 
 A square image of about 100 x 100 pixels is enough, the store generates the sizes it needs.
 
@@ -135,8 +136,8 @@ safe choice for a texture.
 
 ## What happens when a customer picks a swatch
 
-- The product name and price update to the selected variant, and the gallery switches to the
-  photos of that variant.
+- The price updates to the selected variant, and the main image changes to the image of that
+  option.
 - With **Dynamic Price Change** enabled, the price in a listing updates without opening the
   product page, which keeps a "from" price honest while the customer browses.
 - Options that are out of stock follow the store setting about showing out of stock products.
@@ -147,12 +148,11 @@ safe choice for a texture.
 |---------|---------------|
 | Swatches show as text | The value has no colour, no catalog file and no labelled image |
 | No swatch and no dropdown | Configurable Swatches is disabled, or the listing attribute is empty |
-| No colour picker in the attribute | The attribute is not listed in the two attribute settings |
+| No colour picker in the attribute | The attribute is not listed in **Product Attributes to Show as Swatches in Product Detail** |
 | A catalog image is ignored | The file name (lower case, hyphens, exact name) or the extension. On most servers file names are case sensitive, so `Blue-Light.webp` does not match `blue-light.webp` |
 | A labelled image does not appear | A catalog file with that name exists and wins, or the image is on a child variant instead of the configurable product |
 | Text in one store view, image in another | The value has no variant visible in that store view, for example out of stock and hidden, so the translated name cannot be connected to the file |
-| Filters show a colour, the product page shows text | The attribute is enabled for the listing only, not for the product page |
-| The previous swatch is still visible | Empty the swatch image cache |
+| The previous swatch is still visible | The new file was saved with a suffix, such as `blue-light_1.webp`. Delete both files, then upload the new one again |
 
 ## Related
 
