@@ -68,7 +68,7 @@ A Configurable Product allows customers to choose from a set of variations (like
 
 - Parent product is not sold directly (it's a container)
 - Each variation (child) is a Simple Product with its own SKU and stock
-- Customers select options using dropdowns or swatches on the product page
+- Customers select options using dropdowns or [swatches](configurable-swatches.md) on the product page
 - Price can vary by option (e.g., larger size costs more)
 - Only one unit is added to cart at a time
 

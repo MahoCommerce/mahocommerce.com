@@ -1,0 +1,160 @@
+---
+description: Show colour, image and text swatches instead of dropdowns - the settings that turn them on, the three ways to give a value an appearance, and what changes in listings and filters.
+---
+
+# Configurable Swatches
+
+Swatches replace the plain dropdown of a configurable product with something a customer recognises
+at a glance: a colour, a sample of fabric, a pattern, or the option name as a text chip. The same
+feature also puts swatches in product listings and in the layered navigation filters, so a customer
+can pick a colour without opening the product page.
+
+Swatches are a presentation layer on top of attributes and variants. They do not create a new
+product type and they do not change stock: a swatch only decides how the options of an attribute
+are drawn, and the attribute must have options for swatches to make sense.
+
+## Turning swatches on
+
+Go to **System > Configuration > Catalog > Configurable Swatches**.
+
+| Setting | What it does |
+|---------|--------------|
+| Enabled | Turns the feature on |
+| Product Attributes to Show as Swatches in Product Detail | The attributes drawn as swatches on the product page, for example `color` and `size` |
+| Product Attribute to Use for Swatches in Product Listing | The single attribute used in category and search results, in the layered navigation filters and in the "shopping by" tag |
+| Dynamic Price Change for Swatches in Product Listing | When a customer picks a swatch in a listing, the price shown follows the selected variant |
+| Swatch Dimensions on Product Detail Page | Inner size of the swatches on the product page, in pixels |
+| Swatch Dimensions in Product Listing | Inner size of the swatches in listings |
+| Swatch Dimensions in Layered Navigation | Inner size of the swatches in filters |
+
+Two things are easy to miss:
+
+- The feature is off when **Product Attribute to Use for Swatches in Product Listing** is empty,
+  even if Enabled is set to Yes. The product page stops showing swatches too.
+- An attribute is drawn with swatches only if it is listed in one of the two attribute settings.
+  Making the attribute filterable is not enough on its own.
+
+## How a swatch can look
+
+A swatch shows one of three things, and the store picks the richest one available:
+
+| Appearance | What it is | Good for |
+|------------|------------|----------|
+| Colour | a solid colour, one per option | standard colours, no photography of the single values |
+| Image | a picture, shared by the whole catalog (one file per value) or belonging to one product (a fabric, a texture, a print) | fabrics, materials, patterns |
+| Text | the option name, also the fallback when a value has no colour and no image | sizes |
+
+## Setting a colour
+
+1. Go to **Catalog > Attributes > Manage Attributes** and open the attribute, `color` for example.
+2. Open the **Manage Label / Options** tab. Every option row has a colour picker.
+3. Pick the colour and save the attribute.
+
+The colour picker appears only for the attributes that are enabled as swatches in the
+configuration above. A colour belongs to the option, so it is the same in every store view: use an
+image if a value has to look different per store view.
+
+## Using one image for a value across the catalog
+
+One small file per value, shared by every product that carries that value. This is how a fabric or
+a material is shown consistently across a catalog.
+
+1. Name the file after the option: lower case, with spaces and symbols turned into hyphens.
+   `Blue Light` becomes `blue-light.webp`, `Caffè` becomes `caffe.webp`, `70% Lana` becomes
+   `70-lana.webp`.
+2. Use the image format of the store, the one set under **System > Configuration > Advanced >
+   System > Storage Configuration for Media**, in **File type for image conversions**. With WebP
+   configured, the file must be `blue-light.webp`; another extension is not found.
+3. Upload the file into the `wysiwyg/swatches` folder of the media storage, for example from
+   **CMS > Media Library**. There is no upload field in the attribute form: the swatch image is a
+   media file, so it is uploaded like any other media file.
+4. Empty the **Pregenerated configurable swatches image files** cache in **System > Cache
+   Management** if the previous swatch is still visible.
+
+A square image of about 100 x 100 pixels is enough, the store generates the sizes it needs.
+
+When the option name is translated in a store view, the store looks for the file named after the
+name in the default language, so one file serves all the translations of that value. That fallback
+needs the value to have at least one variant visible in the store view: a colour that is out of
+stock and hidden falls back to the option name as text.
+
+## Using an image for one product and one value
+
+Use this when the swatch belongs to a single product, for example a print that only exists on one
+shirt.
+
+1. Open the **configurable** product, not a child variant.
+2. In the **Images** tab upload the picture, or pick an existing one.
+3. In its **Label** field write the option name, then `-swatch`, for example `Bianco-swatch`. Write
+   it in the language of the store view where it has to appear; the default language is the
+   fallback.
+4. Save the product.
+
+The label decides the relationship between the swatch and the photo of that option:
+
+| Label of the image | Swatch | Photo of that option |
+|--------------------|--------|----------------------|
+| `Bianco-swatch` | shows this image | stays the photo of the variant |
+| `Bianco` | shows this image only when there is no colour and no catalog file for the value | becomes this image |
+
+So a label without the suffix is the way to have one picture that is both the swatch and the photo
+of that colour. The suffix is the way to show a texture as a swatch and keep the garment photo.
+
+In both cases the image is hidden from the product gallery, so it does not appear twice.
+
+The label works on the parent product only: images uploaded on the child variants are not used for
+swatches.
+
+## Which appearance wins
+
+When a value has more than one appearance, the store uses the first one that exists:
+
+1. the image labelled `<option name>-swatch` on the configurable product;
+2. the catalog file in `wysiwyg/swatches`;
+3. the colour of the option;
+4. the image labelled `<option name>` on the configurable product;
+5. the option name as text.
+
+Two practical consequences: a catalog file hides a labelled image without the suffix (the photo of
+the option still changes, the swatch does not), and the suffix always wins, which is why it is the
+safe choice for a texture.
+
+## Where swatches appear
+
+| Place | Which attributes | Which appearance |
+|-------|------------------|------------------|
+| Product page | every attribute enabled for the product page | colour, catalog image, product image |
+| Category and search results | the single listing attribute, shown when the product has at least two values | colour, catalog image, product image |
+| Layered navigation filters | the filterable attributes enabled as swatches | colour or catalog image |
+| "Shopping by" tag of an active filter | the same attributes | colour or catalog image |
+
+!!! note "Filters never show per product images"
+    A per product swatch is a product page and listing feature. Both the filter list and the
+    "shopping by" tag use only the colour or the catalog file, so a value that has to look the
+    same in a filter needs one of those two.
+
+## What happens when a customer picks a swatch
+
+- The product name and price update to the selected variant, and the gallery switches to the
+  photos of that variant.
+- With **Dynamic Price Change** enabled, the price in a listing updates without opening the
+  product page, which keeps a "from" price honest while the customer browses.
+- Options that are out of stock follow the store setting about showing out of stock products.
+
+## Troubleshooting
+
+| Symptom | What to check |
+|---------|---------------|
+| Swatches show as text | The value has no colour, no catalog file and no labelled image |
+| No swatch and no dropdown | Configurable Swatches is disabled, or the listing attribute is empty |
+| No colour picker in the attribute | The attribute is not listed in the two attribute settings |
+| A catalog image is ignored | The file name (lower case, hyphens, exact name) or the extension. On most servers file names are case sensitive, so `Blue-Light.webp` does not match `blue-light.webp` |
+| A labelled image does not appear | A catalog file with that name exists and wins, or the image is on a child variant instead of the configurable product |
+| Text in one store view, image in another | The value has no variant visible in that store view, for example out of stock and hidden, so the translated name cannot be connected to the file |
+| Filters show a colour, the product page shows text | The attribute is enabled for the listing only, not for the product page |
+| The previous swatch is still visible | Empty the swatch image cache |
+
+## Related
+
+- [Product Types](product-types.md) for configurable products and their variants.
+- [SEO](seo.md) for the crawl rules of layered navigation pages, which also carry the swatches.
