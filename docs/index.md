@@ -16,6 +16,8 @@ description: Maho is the open-source, self-hosted ecommerce platform you actuall
 </div>
 
 <section class="mh-hero" aria-label="Maho - open-source on-premises ecommerce platform">
+  <div class="mh-hero-track">
+  <div class="mh-hero-pin">
   <div class="mh-hero-inner">
     <div class="mh-hero-copy">
       <h1 id="homeh1" class="mh-headline"><span class="mh-sr">Maho - </span><span class="mh-setup">The heart of ecommerce,</span><em>the heart of your store.</em></h1>
@@ -31,8 +33,30 @@ description: Maho is the open-source, self-hosted ecommerce platform you actuall
         <a class="mh-btn mh-btn-line" href="getting-started/">Get started</a>
         <a class="mh-btn mh-btn-ghost" href="https://discord.gg/dWgcVUFTrS">Join the community</a>
       </div>
+      <div class="mh-steps" id="mh-hero-steps">
+        <div class="mh-step is-active" data-step="0">
+          <span class="mh-step-bar" aria-hidden="true"></span>
+          <h3 class="mh-step-title"><button type="button" class="mh-step-button" data-step-button="0" aria-controls="mh-slides" aria-current="true">Fully featured out of the box</button></h3>
+          <div class="mh-step-body"><p class="mh-step-text">Most platforms sell these as paid add-ons. Maho has them in the core, from an accessibility scanner and a storefront ready for AI agents to eleven industry themes, a page builder, passkeys, product feeds and email automation.</p></div>
+        </div>
+        <div class="mh-step" data-step="1">
+          <span class="mh-step-bar" aria-hidden="true"></span>
+          <h3 class="mh-step-title"><button type="button" class="mh-step-button" data-step-button="1" aria-controls="mh-slides">Modern stack, open to extend</button></h3>
+          <div class="mh-step-body"><p class="mh-step-text">PHP 8.5+, Symfony 8.1+ and Tailwind CSS 4, with no legacy JavaScript framework. REST, GraphQL and an MCP server for AI agents are in the core. Modules and events extend it without core edits.</p></div>
+        </div>
+        <div class="mh-step" data-step="2">
+          <span class="mh-step-bar" aria-hidden="true"></span>
+          <h3 class="mh-step-title"><button type="button" class="mh-step-button" data-step-button="2" aria-controls="mh-slides">A complete toolchain</button></h3>
+          <div class="mh-step-body"><p class="mh-step-text">One <code>docker run</code> to try it, one <code>composer create-project</code> to start your own store. Official Docker images, the <code>maho</code> CLI, a Composer plugin and a PHPStan plugin, all made by the Maho team. No account, no signup, no meter running.</p></div>
+        </div>
+        <div class="mh-step" data-step="3">
+          <span class="mh-step-bar" aria-hidden="true"></span>
+          <h3 class="mh-step-title"><button type="button" class="mh-step-button" data-step-button="3" aria-controls="mh-slides">100% yours</button></h3>
+          <div class="mh-step-body"><p class="mh-step-text">Your code, your data, your server, your keys. Open source under OSL-3.0, on any host in any country you pick. No license fee, no revenue share, and no vendor that can switch your store off.</p></div>
+        </div>
+      </div>
     </div>
-    <div class="mh-hero-side">
+    <div class="mh-hero-side" id="mh-hero-side">
       <div class="logo mh-logo" aria-hidden="true">
         <div class="lp">
           <div class="lp1"><img alt="" src="assets/maho-symbol.svg" width="90" height="89"></div>
@@ -40,43 +64,153 @@ description: Maho is the open-source, self-hosted ecommerce platform you actuall
           <div class="lp3"><img alt="" src="assets/maho-logo-dot.svg" width="24" height="24"></div>
         </div>
       </div>
-      <div class="mh-term-shell">
-      <button class="mh-motion-btn mh-motion-btn-dark mh-term-pause" id="mh-term-pause" type="button" aria-label="Pause the terminal animation" title="Pause the terminal animation">
-        <svg class="mh-ico-pause" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M9 5v14M15 5v14"/></svg>
-        <svg class="mh-ico-play" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 4.8l11 7.2-11 7.2z"/></svg>
-      </button>
-      <div class="mh-term" aria-hidden="true">
-        <div class="mh-term-top">
-          <span class="mh-d"></span><span class="mh-d"></span><span class="mh-d"></span>
-          <span class="mh-term-title">maho@yourserver</span>
-        </div>
-        <div class="mh-term-stage">
-          <div class="mh-term-body mh-term-scene mh-scene-composer">
-            <div class="mh-ln"><span class="c"># spin up a new store in one line</span></div>
-            <div class="mh-ln"><span class="p">$</span> composer <span class="k">create-project</span> <span class="s">mahocommerce/maho-starter</span> my-shop</div>
-            <div class="mh-ln"><span class="c">  ✓ Installing mahocommerce/maho</span></div>
-            <div class="mh-ln"><span class="c">  ✓ Generating autoload files</span></div>
-            <div class="mh-ln"><span class="c">  ✓ Running database migrations</span></div>
-            <div class="mh-ln"><span class="c">  ✓ Maho installed · admin at /admin</span></div>
-            <div class="mh-ln"><span class="p">$</span> cd my-shop && ./maho serve<span class="mh-cur"></span></div>
-          </div>
-          <div class="mh-term-body mh-term-scene mh-scene-docker">
-            <div class="mh-ln"><span class="c"># prefer containers? try it instantly</span></div>
-            <div class="mh-ln"><span class="p">$</span> docker <span class="k">run</span> -p 54321:443 <span class="s">mahocommerce/maho:nightly</span></div>
-            <div class="mh-ln"><span class="c">  ✓ Pulling mahocommerce/maho:nightly</span></div>
-            <div class="mh-ln"><span class="c">  ✓ Starting Maho · SQLite, zero config</span></div>
-            <div class="mh-ln"><span class="c">  ✓ Web installer ready</span></div>
-            <div class="mh-ln"><span class="c">  ✓ Running at https://localhost:54321</span></div>
-            <div class="mh-ln"><span class="p">$</span> open https://localhost:54321<span class="mh-cur"></span></div>
+      <div class="mh-stage-glow" aria-hidden="true"></div>
+      <div class="mh-stage-ring" aria-hidden="true"></div>
+      <div class="mh-stage-rig">
+        <div class="mh-stage-float">
+          <div class="mh-slides" id="mh-slides" role="group" aria-label="What Maho gives you">
+            <span class="mh-slides-sheen" aria-hidden="true"></span>
+
+            <div class="mh-slide is-active" data-slide="0">
+              <svg class="mh-art" viewBox="0 0 480 240" fill="none" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <g transform="translate(240 120) scale(1.1) translate(-240 -120)">
+                  <circle cx="240" cy="120" r="100" class="orbit"/>
+                  <g class="st">
+                    <path d="M204 104l8-16h56l8 16z"/>
+                    <path d="M204 104a9 9 0 0 0 18 0a9 9 0 0 0 18 0a9 9 0 0 0 18 0a9 9 0 0 0 18 0"/>
+                    <path d="M210 113v41h60v-41"/>
+                  </g>
+                  <path d="M232 154v-22h16v22" class="acc"/>
+                  <g class="node"><circle cx="201" cy="28" r="16"/><path d="M199 22a2 2 0 1 0 4 0a2 2 0 1 0-4 0M194 26h14M201 26v5l-4 5M201 31l4 5" class="acc"/></g>
+                  <text x="177" y="25" class="lb ft" text-anchor="end"><tspan>Accessibility</tspan><tspan x="177" dy="16">scanner</tspan></text>
+                  <g class="node"><circle cx="151" cy="74" r="16"/><path d="M152 67h5v14h-5M143 74h10M149 70l4 4-4 4" class="acc"/></g>
+                  <text x="127" y="79" class="lb ft" text-anchor="end">Social login</text>
+                  <g class="node"><circle cx="140" cy="120" r="16"/><path d="M132 120a3.5 3.5 0 1 0 7 0a3.5 3.5 0 1 0-7 0M139 120h9M144 120v3M147 120v3" class="acc"/></g>
+                  <text x="116" y="117" class="lb ft" text-anchor="end"><tspan>Passkeys</tspan><tspan x="116" dy="16">and 2FA</tspan></text>
+                  <g class="node"><circle cx="151" cy="166" r="16"/><path d="M143 158h7l9 9-7 7-9-9zM146.5 161.5h.01" class="acc"/></g>
+                  <text x="127" y="163" class="lb ft" text-anchor="end"><tspan>Dynamic</tspan><tspan x="127" dy="16">categories</tspan></text>
+                  <g class="node"><circle cx="201" cy="212" r="16"/><path d="M191 206h20v13h-20zM191 206l10 7 10-7" class="acc"/></g>
+                  <text x="177" y="209" class="lb ft" text-anchor="end"><tspan>Email</tspan><tspan x="177" dy="16">automation</tspan></text>
+                  <g class="node"><circle cx="279" cy="28" r="16"/><path d="M271 24h16v12h-16zM279 24v-3M279 19.5h.01M275 29.5h2M281 29.5h2M276 33h6" class="acc"/></g>
+                  <text x="303" y="25" class="lb ft"><tspan>Agent-ready</tspan><tspan x="303" dy="16">storefront</tspan></text>
+                  <g class="node"><circle cx="329" cy="74" r="16"/><path d="M320 69h18v12h-18zM326 69v12M320 74h18" class="acc"/></g>
+                  <text x="353" y="79" class="lb ft">Gift cards</text>
+                  <g class="node"><circle cx="340" cy="120" r="16"/><path d="M334 126h.01M334 119a7 7 0 0 1 7 7M334 113a13 13 0 0 1 13 13" class="acc"/></g>
+                  <text x="364" y="125" class="lb ft">Product feeds</text>
+                  <g class="node"><circle cx="329" cy="166" r="16"/><path d="M320 158h18v5h-18zM320 166h8v8h-8zM330 166h8v8h-8z" class="acc"/></g>
+                  <text x="353" y="171" class="lb ft">Page builder</text>
+                  <g class="node"><circle cx="279" cy="212" r="16"/><path d="M272 207a3 3 0 1 0 6 0a3 3 0 1 0-6 0M280 207a3 3 0 1 0 6 0a3 3 0 1 0-6 0M269 220a6 6 0 0 1 12 0M277 220a6 6 0 0 1 12 0" class="acc"/></g>
+                  <text x="303" y="209" class="lb ft"><tspan>Customer</tspan><tspan x="303" dy="16">segments</tspan></text>
+                </g>
+              </svg>
+            </div>
+
+            <div class="mh-slide" data-slide="1">
+              <svg class="mh-art" viewBox="0 0 480 240" fill="none" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <g class="st">
+                  <rect x="12" y="28" width="150" height="40" rx="8"/>
+                  <rect x="12" y="100" width="150" height="40" rx="8"/>
+                  <rect x="12" y="172" width="150" height="40" rx="8"/>
+                </g>
+                <text x="28" y="54" class="lb lg">PHP 8.5+</text>
+                <text x="28" y="126" class="lb lg">Symfony 8.1+</text>
+                <text x="28" y="198" class="lb lg">Tailwind CSS 4</text>
+                <path class="flow" d="M166 48l26 52M166 120h26M166 192l26-52"/>
+                <rect x="196" y="88" width="88" height="64" rx="12" class="acc-fill"/>
+                <text x="240" y="125" class="lb lg on-acc" text-anchor="middle">Maho core</text>
+                <path class="flow" d="M288 100l26-52M288 120h26M288 140l26 52"/>
+                <g class="st">
+                  <rect x="318" y="28" width="150" height="40" rx="8"/>
+                  <rect x="318" y="100" width="150" height="40" rx="8"/>
+                  <rect x="318" y="172" width="150" height="40" rx="8"/>
+                </g>
+                <text x="334" y="54" class="lb lg">REST API</text>
+                <text x="334" y="126" class="lb lg">GraphQL API</text>
+                <text x="334" y="198" class="lb lg acc-t">MCP server</text>
+              </svg>
+            </div>
+
+            <div class="mh-slide" data-slide="2">
+              <svg class="mh-art" viewBox="0 0 480 240" fill="none" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <rect x="12" y="10" width="456" height="34" rx="7" class="st"/>
+                <text x="26" y="32" class="lb mono cmd"><tspan class="acc-t">$</tspan> docker run -p 54321:443 <tspan class="img">mahocommerce/maho:nightly</tspan></text>
+                <g class="st">
+                  <rect x="12" y="56" width="148" height="84" rx="9"/>
+                  <rect x="166" y="56" width="148" height="84" rx="9"/>
+                  <rect x="320" y="56" width="148" height="84" rx="9"/>
+                  <rect x="12" y="150" width="148" height="84" rx="9"/>
+                  <rect x="166" y="150" width="148" height="84" rx="9"/>
+                  <rect x="320" y="150" width="148" height="84" rx="9"/>
+                </g>
+                <g class="node"><circle cx="42" cy="82" r="16"/><path d="M34 78l8-4 8 4v9l-8 4-8-4zM34 78l8 4 8-4M42 82v9" class="acc"/></g>
+                <text x="26" y="118" class="lb ft">Docker images</text>
+                <text x="26" y="133" class="lb mono">FrankenPHP, HTTP/3</text>
+                <g class="node"><circle cx="196" cy="82" r="16"/><path d="M187 75h18v14h-18zM191 80l3 2-3 2M197 85h4" class="acc"/></g>
+                <text x="180" y="118" class="lb ft">maho CLI</text>
+                <text x="180" y="133" class="lb mono">install, build, run</text>
+                <g class="node"><circle cx="350" cy="82" r="16"/><path d="M341 76h6l2 2h10v11h-18z" class="acc"/></g>
+                <text x="334" y="118" class="lb ft">Starter project</text>
+                <text x="334" y="133" class="lb mono">maho-starter</text>
+                <g class="node"><circle cx="42" cy="176" r="16"/><path d="M34 175a6 6 0 1 0 12 0a6 6 0 1 0-12 0M44.5 179.5l5 5M37 175l2 2 3.5-3.5" class="acc"/></g>
+                <text x="26" y="212" class="lb ft" textLength="124" lengthAdjust="spacingAndGlyphs">Composer&thinsp;+&thinsp;PHPStan</text>
+                <text x="26" y="227" class="lb mono">official plugins</text>
+                <g class="node"><circle cx="196" cy="176" r="16"/><path d="M189 176a7 7 0 1 0 14 0a7 7 0 1 0-14 0" class="acc"/><path d="M196 169a7 7 0 0 0 0 14z" class="acc-fill"/></g>
+                <text x="180" y="212" class="lb ft">Theme tooling</text>
+                <text x="180" y="227" class="lb mono">Tailwind, tokens</text>
+                <g class="node"><circle cx="350" cy="176" r="16"/><path d="M350 168l7 3v5c0 5-3 8-7 9-4-1-7-4-7-9v-5zM347 176.5l2 2 4-4" class="acc"/></g>
+                <text x="334" y="212" class="lb ft">SBOMs&thinsp;+&thinsp;SLSA L3</text>
+                <text x="334" y="227" class="lb mono">scanned every day</text>
+              </svg>
+            </div>
+
+            <div class="mh-slide" data-slide="3">
+              <svg class="mh-art" viewBox="0 0 480 240" fill="none" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <g class="node"><circle cx="36" cy="36" r="16"/><path d="M31 30l-5 6 5 6M41 30l5 6-5 6M38 28l-4 16" class="acc"/></g>
+                <text x="62" y="34" class="lb ft">Your code</text>
+                <text x="62" y="50" class="lb mono">fork it, OSL-3.0</text>
+                <g class="node"><circle cx="36" cy="88" r="16"/><path d="M28 82a8 3 0 1 0 16 0a8 3 0 1 0-16 0M28 82v12a8 3 0 0 0 16 0v-12M28 88a8 3 0 0 0 16 0" class="acc"/></g>
+                <text x="62" y="86" class="lb ft">Your data</text>
+                <text x="62" y="102" class="lb mono">stays where you put it</text>
+                <g class="node"><circle cx="36" cy="140" r="16"/><path d="M28 132h16v7h-16zM28 141h16v7h-16zM40 135.5h.01M40 144.5h.01" class="acc"/></g>
+                <text x="62" y="138" class="lb ft">Your server</text>
+                <text x="62" y="154" class="lb mono">any host, any country</text>
+                <g class="node"><circle cx="36" cy="192" r="16"/><path d="M28 192a3.5 3.5 0 1 0 7 0a3.5 3.5 0 1 0-7 0M35 192h9M40 192v3M43 192v3" class="acc"/></g>
+                <text x="62" y="190" class="lb ft">Your keys</text>
+                <text x="62" y="206" class="lb mono">no one can shut you down</text>
+                <path class="flow" d="M226 114h36"/>
+                <path d="M272 30h184v170l-11.5 8l-11.5-8l-11.5 8l-11.5-8l-11.5 8l-11.5-8l-11.5 8l-11.5-8l-11.5 8l-11.5-8l-11.5 8l-11.5-8l-11.5 8l-11.5-8l-11.5 8l-11.5-8z" class="st"/>
+                <text x="364" y="54" class="lb sm" text-anchor="middle">Your Maho bill</text>
+                <path d="M286 66h156M286 162h156" class="st"/>
+                <text x="286" y="92" class="lb mono ft">license fee</text>
+                <text x="442" y="92" class="lb ft acc-t" text-anchor="end">€0</text>
+                <text x="286" y="118" class="lb mono ft">revenue share</text>
+                <text x="442" y="118" class="lb ft acc-t" text-anchor="end">0%</text>
+                <text x="286" y="144" class="lb mono ft">vendor lock-in</text>
+                <text x="442" y="144" class="lb ft acc-t" text-anchor="end">none</text>
+                <text x="286" y="187" class="lb ft">total</text>
+                <text x="442" y="188" class="lb tot acc-t" text-anchor="end">€0</text>
+              </svg>
+            </div>
+
+            <div class="mh-slides-nav">
+              <button class="mh-motion-btn mh-motion-btn-dark" id="mh-slides-pause" type="button" aria-label="Pause the slides" title="Pause the slides" hidden>
+                <svg class="mh-ico-pause" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M9 5v14M15 5v14"/></svg>
+                <svg class="mh-ico-play" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 4.8l11 7.2-11 7.2z"/></svg>
+              </button>
+            </div>
           </div>
         </div>
       </div>
-      </div>
-      <div class="mh-term-caption">One command to a running store. No account, no signup, no meter running.</div>
     </div>
+  </div>
+  <div class="mh-hero-hint" aria-hidden="true">Scroll<span></span></div>
+  </div>
   </div>
 
   <div class="mh-showcase mh-tstage" id="mh-showcase" data-src-base="assets/themes/" data-theme="default" data-mode="store" aria-label="The Maho storefront themes and the admin, in light and dark">
+    <div class="mh-showcase-head">
+      <h2 class="mh-sec-title"><span class="mh-mark">10 + 1 professionally curated, industry-focused themes</span></h2>
+    </div>
     <div class="mh-shot-window" id="mh-shot-window">
       <div class="mh-term-top">
         <span class="mh-d" aria-hidden="true"></span><span class="mh-d" aria-hidden="true"></span><span class="mh-d" aria-hidden="true"></span>
@@ -144,8 +278,8 @@ description: Maho is the open-source, self-hosted ecommerce platform you actuall
 
 
 
-    <p class="mh-shots-caption" data-mh-mode="store">Eleven storefront themes ship with Maho 26.9, light and dark included. Use the arrows to walk through the pages and the themes, scroll the page inside the window, hit the lightbulb for dark mode. <a href="about/themes/">Compare all eleven themes →</a></p>
-    <p class="mh-shots-caption" data-mh-mode="admin" hidden>A completely redesigned admin, first-class dark mode included, shipped in Maho 26.7. Pick a screen, hit the lightbulb to flip the theme. <a href="demo/">Try it in the live demo →</a></p>
+    <p class="mh-shots-caption" data-mh-mode="store"><a class="mh-btn mh-btn-line" href="about/themes/">Compare all eleven themes <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></p>
+    <p class="mh-shots-caption" data-mh-mode="admin" hidden><a class="mh-btn mh-btn-line" href="demo/">Try it in the live demo <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></p>
   </div>
 </section>
 
@@ -373,31 +507,11 @@ Integrated **blog module** for content marketing and SEO, **Meta Pixel** for con
 
 <div class="feature-card" markdown>
 
-:material-palette:{ .feature-icon }
-
-### 1 click theme customizations
-
-**Eleven ready-made themes** for fashion, food, electronics and more, each in **light and dark**. Change **colors, fonts and more** in the **live theme editor** and watch the storefront repaint in a **live preview**.
-
-</div>
-
-<div class="feature-card" markdown>
-
 :material-account-key:{ .feature-icon }
 
 ### Social Login
 
 Let customers sign in with **Google, Apple and Facebook** in one tap. Existing accounts are **linked automatically**, guest carts are merged, and 2FA still applies. Fewer forms means **fewer abandoned carts**.
-
-</div>
-
-<div class="feature-card" markdown>
-
-:material-robot-happy:{ .feature-icon }
-
-### Sell to Shoppers That Are Agents
-
-AI agents shop on behalf of your customers. Maho answers them with **clean product facts**: name, price, stock and options, in **markdown on the same URL**. **llms.txt** shows them the way in, and a generated **robots.txt** lets you **choose which AI crawlers** to allow. No plugin, no setup.
 
 </div>
 
@@ -473,17 +587,7 @@ Regular updates with real improvements like a **brand-new storefront with eleven
 
 ### Client-Ready Platform
 
-Clean, modern **admin interface** with professional features clients expect: **media management**, **content editor**, **activity logs**, and comprehensive reporting. Built-in **blog and marketing tools**, a **WCAG accessibility scanner** and an **agent-ready storefront** mean you deliver more value out of the box.
-
-</div>
-
-<div class="feature-card" markdown>
-
-:material-rocket:{ .feature-icon }
-
-### Fast Project Deployment
-
-**Docker support** for consistent environments, **environment variable configuration** for easy setup, and modern development tools. Get client projects live **faster with less friction**.
+Clean, modern **admin interface** with professional features clients expect: **media management**, **content editor**, **activity logs**, and comprehensive reporting. Built-in **blog and marketing tools** mean you deliver more value out of the box.
 
 </div>
 
@@ -503,27 +607,7 @@ Clean, modern **admin interface** with professional features clients expect: **m
 
 ### Independent, Not Isolated
 
-Maho stands on a **[battle-tested open-source foundation](about/origins.md)**, hardened by real stores running in production. **Active development**, thorough documentation, and **direct access to the maintainers** mean you're never stuck.
-
-</div>
-
-<div class="feature-card" markdown>
-
-:material-book-open-page-variant:{ .feature-icon }
-
-### Complete Documentation
-
-Comprehensive **API documentation** (REST, GraphQL, SOAP), **developer guides** covering MVC, ORM, and architecture, plus **[AI-powered deep code documentation](https://deepwiki.com/MahoCommerce/maho){:target="_blank"}** via DeepWiki. Onboard new team members quickly and reduce training costs.
-
-</div>
-
-<div class="feature-card" markdown>
-
-:material-server:{ .feature-icon }
-
-### On-Premises Control
-
-**Self-hosted** means your clients **own their data** and you control the infrastructure. **No vendor lock-in**, **no platform fees** eating margins, **no forced migrations**. Perfect for clients with compliance requirements.
+Maho stands on a **[battle-tested open-source foundation](about/origins.md)**, hardened by real stores running in production. **Active development**, **API documentation and developer guides**, **[AI-powered code documentation](https://deepwiki.com/MahoCommerce/maho){:target="_blank"}** via DeepWiki, and **direct access to the maintainers** mean you're never stuck.
 
 </div>
 
@@ -549,7 +633,7 @@ Comprehensive **API documentation** (REST, GraphQL, SOAP), **developer guides** 
 
 ### Modern Tech Stack
 
-**PHP 8.3+** built on industry-standard libraries: **Doctrine DBAL 4.4** for database operations, **Symfony HttpClient** for HTTP requests, **Symfony Validator** for data validation, **Symfony Messenger** for background jobs, and **Monolog** for logging. A storefront and an admin on **Tailwind CSS 4 and daisyUI 5**, **vanilla JavaScript only** throughout. Contemporary, actively-maintained dependencies you can trust.
+**PHP 8.5+** built on industry-standard libraries: **Doctrine DBAL 4.4** for database operations, **Symfony HttpClient** for HTTP requests, **Symfony Validator** for data validation, **Symfony Messenger** for background jobs, and **Monolog** for logging. A storefront and an admin on **Tailwind CSS 4 and daisyUI 5**, **vanilla JavaScript only** throughout. Contemporary, actively-maintained dependencies you can trust.
 
 </div>
 
@@ -570,26 +654,6 @@ Well-designed **MVC pattern**, powerful **ORM with collections**, **event-driven
 ### Comprehensive APIs
 
 Brand-new **REST & GraphQL API** built on API Platform, with **JWT authentication**, granular per-resource permissions, and **OpenAPI docs**, plus the legacy SOAP and XML-RPC APIs for older integrations.
-
-</div>
-
-<div class="feature-card" markdown>
-
-:material-robot:{ .feature-icon }
-
-### MCP Server for AI Agents
-
-A **store-facing MCP server** with **OAuth 2.1 browser login**: paste the store URL into Claude, ChatGPT or any MCP client and approve the connection. Tools are derived from the same **ApiResource** metadata as REST, so every resource, third-party ones included, becomes a tool with the same permissions, logging and rate limits. **200+ tools** on a default install.
-
-</div>
-
-<div class="feature-card" markdown>
-
-:material-tools:{ .feature-icon }
-
-### Great Developer Tools
-
-**CLI tool** for common tasks, **Composer plugin** for module management, **5800+ icon library**, **theme build and scaffold commands** with **design tokens** for theming, and **environment-based configuration**. Tools that actually improve your workflow.
 
 </div>
 

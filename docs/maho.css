@@ -948,20 +948,27 @@ article:has(#homeh1) {
 }
 
 
-/* ---- HERO: deep ink, chartreuse glow, blueprint grid ---- */
+/* ---- HERO: deep ink, chartreuse glow, blueprint grid ----
+   The top glow and the grid are on .mh-hero-pin, not on the section: in the
+   scroll mode the track is several screens tall and only the pin is on
+   screen. `overflow: clip`, never `hidden`, or the pin cannot stick. */
 .mh-hero {
     position: relative;
     background:
-        radial-gradient(ellipse 75% 90% at 78% -10%, rgba(215, 223, 34, 0.16) 0%, transparent 55%),
-        radial-gradient(ellipse 50% 70% at 8% 110%, rgba(215, 223, 34, 0.07) 0%, transparent 60%),
+        radial-gradient(ellipse 50% 40% at 8% 100%, rgba(215, 223, 34, 0.07) 0%, transparent 60%),
         var(--maho-ink);
     color: var(--maho-on-ink);
-    overflow: hidden;
+    overflow: clip;
     padding-bottom: 4.4em;
 }
 
+.mh-hero-pin {
+    position: relative;
+    background: radial-gradient(ellipse 75% 90% at 78% -10%, rgba(215, 223, 34, 0.16) 0%, transparent 55%);
+}
+
 /* Blueprint grid, fading toward the bottom */
-.mh-hero::before {
+.mh-hero-pin::before {
     content: '';
     position: absolute;
     inset: 0;
@@ -1177,29 +1184,482 @@ article:has(#homeh1) {
     font-size: 0.7em;
 }
 
-/* ---- Terminal panel ---- */
+/* ---- HERO STAGE ----
+   The same construction as the hero of cloud.mahocommerce.com: a glow and a
+   turning ring behind the panel, a slow float, a tilt toward the pointer
+   (--mh-hx, --mh-hy) and a tilt back while the hero leaves: the page scrolls
+   past it, or the screenshots window rises over it (--mh-hp, 0 to 1).
+   maho.js sets the variables. The scroll moves use
+   `translate`, not `transform`, because the entrance animations of the hero
+   hold `transform`. */
 .mh-hero-side {
+    --mh-hx: 0deg;
+    --mh-hy: 0deg;
+    position: relative;
     display: flex;
     flex-direction: column;
+    /* As tall as the copy, with the panel in the middle: the glow and the
+       ring center on the panel, and the logo sits level with the headline */
+    align-self: stretch;
+    justify-content: center;
     min-width: 0;
+    perspective: 1600px;
+    translate: 0 calc(var(--mh-hp, 0) * 60px);
 }
 
-/* Animated logo sitting above the terminal. Hidden on mobile, where the
-   header logo takes over the branding. */
+.mh-hero-copy {
+    translate: 0 calc(var(--mh-hp, 0) * 90px);
+    opacity: calc(1 - var(--mh-hp, 0) * 0.5);
+}
+
+/* The animated logo, level with the headline at the top of the column,
+   out of the flow so the panel stays in the middle of the ring. Hidden
+   below 1220px, where the header logo takes over the branding. */
 .mh-hero-side > .mh-logo {
-    margin: 0 auto 1.4em;
+    position: absolute;
+    top: 0.45em;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
     max-width: 17em;
     width: 100%;
 }
 
 @media screen and (max-width: 76.1875em) {
-    .mh-hero-side > .mh-logo {
-        display: none;
+    .mh-hero-side > .mh-logo { display: none; }
+}
+
+.mh-stage-glow {
+    position: absolute;
+    inset: -8% -6%;
+    border-radius: 50%;
+    background: radial-gradient(closest-side, rgba(215, 223, 34, 0.2), rgba(215, 223, 34, 0.05) 60%, transparent);
+    filter: blur(34px);
+    pointer-events: none;
+    animation: mhStageGlow 9s ease-in-out infinite;
+}
+
+.mh-stage-ring {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 90%;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    border: 1px dashed var(--maho-ink-border-brand);
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    animation: mhStageRing 90s linear infinite;
+}
+
+.mh-stage-ring::before {
+    content: '';
+    position: absolute;
+    top: 14%;
+    left: 14%;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--maho-chartreuse);
+    box-shadow: 0 0 16px 4px rgba(215, 223, 34, 0.55);
+}
+
+.mh-stage-rig {
+    position: relative;
+    transform-style: preserve-3d;
+    transform:
+        rotateX(calc(var(--mh-hx) + var(--mh-hp, 0) * 16deg))
+        rotateY(calc(var(--mh-hy) - 4deg + (var(--mh-sp, 0.5) - 0.5) * -14deg));
+    transition: transform 0.9s var(--maho-ease-out);
+}
+
+.mh-stage-float {
+    transform-style: preserve-3d;
+    animation: mhStageFloat 8s ease-in-out infinite;
+}
+
+@keyframes mhStageGlow {
+    0%, 100% { opacity: 0.75; transform: scale(1); }
+    50%      { opacity: 1; transform: scale(1.05); }
+}
+
+@keyframes mhStageRing { to { transform: translate(-50%, -50%) rotate(360deg); } }
+
+@keyframes mhStageFloat {
+    0%, 100% { transform: translateY(0); }
+    50%      { transform: translateY(-8px); }
+}
+
+
+/* ---- HERO SLIDES ----
+   Four slides in one framed panel, each a line-art drawing. One slide is visible at a time. The art and the controls sit at
+   different depths, so they part when the panel tilts. No `overflow:
+   hidden` here: it would flatten the depths. */
+.mh-slides {
+    position: relative;
+    padding: 1.9em 1em 1.9em;
+    border-radius: var(--maho-radius-lg);
+    background: linear-gradient(160deg, #11130a 0%, #0a0b05 55%);
+    border: 1px solid var(--maho-ink-border-brand);
+    box-shadow: var(--maho-glow), 0 40px 80px -20px rgba(0, 0, 0, 0.75);
+    transform-style: preserve-3d;
+}
+
+/* A soft light that follows the pointer (--mh-mx, --mh-my), and a diagonal
+   glass edge */
+.mh-slides-sheen {
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    pointer-events: none;
+    background:
+        radial-gradient(520px circle at var(--mh-mx, 70%) var(--mh-my, 0%), rgba(215, 223, 34, 0.07), transparent 45%),
+        linear-gradient(115deg, rgba(255, 255, 255, 0.045) 0%, rgba(255, 255, 255, 0) 30%);
+}
+
+.mh-slide {
+    display: none;
+    margin: 0;
+    transform-style: preserve-3d;
+}
+
+.mh-slide.is-active { display: block; }
+
+.mh-stage-rig .mh-slide > * { transform: translateZ(46px); }
+.mh-stage-rig .mh-slides-nav { transform: translateZ(14px); }
+
+/* Line art draws itself. maho.js gives each stroked shape pathLength="1" and
+   a stagger (--d), then adds .is-drawable; without JavaScript the art is
+   simply there. Labels and filled marks fade up once the lines are mostly
+   drawn. */
+.mh-art.is-drawable [pathLength] { stroke-dasharray: 1 1; }
+
+.mh-slide.is-active .mh-art.is-drawable [pathLength] {
+    animation: mhDraw 1.1s var(--maho-ease-out) var(--d, 0s) both;
+}
+
+.mh-slide.is-active .mh-art.is-drawable :is(.lb, .acc-fill, .dot) {
+    animation: mhMark 0.5s var(--maho-ease-out) 0.55s both;
+}
+
+@keyframes mhDraw {
+    from { stroke-dashoffset: 1; }
+    to   { stroke-dashoffset: 0; }
+}
+
+@keyframes mhMark {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+.mh-art {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 2 / 1;
+    font-family: var(--maho-sans);
+}
+
+.mh-art .st { stroke: var(--maho-on-ink-soft); stroke-width: 1.5; }
+.mh-art .acc { stroke: var(--maho-chartreuse); stroke-width: 1.75; }
+.mh-art .acc-fill { fill: var(--maho-chartreuse); stroke: none; }
+.mh-art .dot { fill: #8bc34a; stroke: none; }
+.mh-art .node { stroke: var(--maho-on-ink-soft); stroke-width: 1.5; }
+.mh-art .node circle { fill: #11130a; }
+.mh-art .orbit { stroke: var(--maho-ink-border); stroke-width: 1; stroke-dasharray: 3 5; }
+.mh-art .lb { fill: var(--maho-on-ink); font-size: 12px; font-weight: 500; stroke: none; }
+.mh-art .lb.sm { font-size: 10.5px; fill: var(--maho-on-ink-soft); }
+.mh-art .lb.ft { font-size: 14px; }
+.mh-art .lb.lg { font-size: 16px; }
+.mh-art .lb.mono.ft { font-size: 12px; }
+.mh-art .lb.tot { font-size: 20px; font-weight: 700; }
+.mh-art .lb.mono.cmd { font-size: 12px; fill: var(--maho-on-ink); }
+.mh-art .lb .img { fill: #c9a8ff; }
+.mh-art .lb .acc-t { fill: var(--maho-chartreuse); }
+.mh-art .lb.mono { font-family: var(--maho-mono); font-size: 10.5px; fill: var(--maho-on-ink-soft); }
+.mh-art .lb.acc-t { fill: var(--maho-chartreuse); }
+.mh-art .lb.on-acc { fill: var(--maho-ink); font-weight: 600; }
+
+/* Flow arrows: a moving dash says "this goes there" */
+.mh-art .flow {
+    stroke: var(--maho-chartreuse);
+    stroke-width: 1.75;
+    stroke-dasharray: 5 6;
+    animation: mhFlow 1.2s linear infinite;
+}
+
+@keyframes mhFlow { to { stroke-dashoffset: -22; } }
+
+.mh-art .orbit { transform-origin: 240px 120px; animation: mhSpin 60s linear infinite; }
+
+/* The pause button of the slideshow, in the corner of the panel. maho.js
+   shows it only in the slideshow mode; `display` would beat `hidden`. */
+.mh-slides-nav .mh-motion-btn[hidden] { display: none; }
+
+.mh-slides-nav {
+    position: absolute;
+    right: 0.9em;
+    bottom: 0.9em;
+}
+
+
+/* ---- HERO STEPS ----
+   The titles and texts of the four slides: a rule on the left, the active
+   step bright with its text open, the others dim with the text closed.
+   Each step has a bar on the rule: it fills while a slide holds in the
+   slideshow (.is-cycling, --mh-hold), and with the scroll through its slide
+   in the scroll mode (.is-scrolling, --mh-sub on the hero); passed steps
+   stay lit. The title button covers the whole step. */
+.mh-steps {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    margin-top: 2em;
+    /* maho.js sets the height of the tallest open step, so the hero
+       does not move when the active step changes */
+    min-height: var(--mh-steps-h, auto);
+    border-left: 1px solid var(--maho-ink-border);
+}
+
+.mh-step {
+    position: relative;
+    padding: 0.5em 0 0.5em 1.3em;
+    opacity: 0.45;
+    transition: opacity var(--maho-duration-slow) var(--maho-ease);
+}
+
+.mh-step:hover,
+.mh-step.is-active { opacity: 1; }
+
+.md-typeset .mh-step-title {
+    margin: 0;
+    font-family: var(--maho-display);
+    font-size: 1em;
+    font-weight: 650;
+    letter-spacing: -0.015em;
+    line-height: 1.3;
+    color: var(--maho-on-ink);
+}
+
+.mh-step-button {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    background: none;
+    font: inherit;
+    color: inherit;
+    text-align: left;
+    cursor: pointer;
+}
+
+.mh-step-button::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+}
+
+.mh-step-button:focus-visible { outline: none; }
+
+.mh-step:has(.mh-step-button:focus-visible) {
+    outline: 2px solid var(--maho-chartreuse);
+    outline-offset: 2px;
+    border-radius: var(--maho-radius-sm);
+}
+
+.mh-step-body {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.5s var(--maho-ease-out);
+}
+
+.mh-step.is-active .mh-step-body { grid-template-rows: 1fr; }
+
+.md-typeset .mh-step-text {
+    overflow: hidden;
+    min-height: 0;
+    max-width: 52ch;
+    margin: 0;
+    padding-top: 0.3em;
+    font-size: 0.875em;
+    line-height: 1.6;
+    color: var(--maho-on-ink-soft);
+}
+
+.md-typeset .mh-step-text code {
+    padding: 0.05em 0.35em;
+    background: rgba(244, 245, 232, 0.08);
+    color: var(--maho-on-ink);
+    font-size: 0.85em;
+}
+
+.mh-step-bar {
+    position: absolute;
+    left: -1px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+}
+
+.mh-step-bar::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--maho-chartreuse);
+    box-shadow: 0 0 12px rgba(215, 223, 34, 0.6);
+    transform: scaleY(0);
+    transform-origin: top;
+}
+
+.mh-step.is-active .mh-step-bar::after { transform: scaleY(1); }
+
+.mh-steps.is-cycling .mh-step.is-active .mh-step-bar::after {
+    animation: mhStepFill var(--mh-hold, 6s) linear forwards;
+}
+
+@keyframes mhStepFill {
+    from { transform: scaleY(0); }
+    to   { transform: scaleY(1); }
+}
+
+.mh-steps.is-scrolling .mh-step.is-done .mh-step-bar::after { transform: scaleY(1); }
+
+.mh-steps.is-scrolling .mh-step.is-active .mh-step-bar::after {
+    transform: scaleY(var(--mh-sub, 0));
+    animation: none;
+}
+
+/* The glowing dot at the tip of the bar, in the scroll mode */
+.mh-steps.is-scrolling .mh-step.is-active .mh-step-bar::before {
+    content: '';
+    position: absolute;
+    z-index: 1;
+    left: 50%;
+    top: calc(var(--mh-sub, 0) * 100%);
+    width: 10px;
+    height: 10px;
+    margin: -5px 0 0 -5px;
+    border-radius: 50%;
+    background: var(--maho-chartreuse);
+    box-shadow: 0 0 0 4px rgba(215, 223, 34, 0.18), 0 0 18px 4px rgba(215, 223, 34, 0.5);
+}
+
+/* "Scroll" hint at the foot of the pinned hero; it fades out as soon as
+   the scroll starts */
+.mh-hero-hint { display: none; }
+
+
+/* ---- HERO SCROLL MODE ----
+   Wide and tall enough screens: the track is the pin plus 120vh, so each of
+   the four slides holds for 30vh of scroll, plus the finale. The
+   pin sticks under the Material header (2.4rem), and maho.js maps the
+   scroll through the track to a slide (--mh-sp, 0 to 1, also turns the
+   panel). The same media query is in maho.js.
+   The finale: the screenshots window follows the track, pulled up by
+   --mh-fin (the screen less 4rem), so it scrolls up over the pinned hero
+   while the pin still holds, and ends just under the header.
+   Meanwhile the hero fades and the window goes from tilted back to flat
+   (--mh-fp, 0 to 1). When the track ends, the pin lets go and the window is
+   in place. maho.js reads --mh-fin from the margin and sets .has-finale;
+   without JavaScript nothing would fade, so the window stays below. */
+@media screen and (min-width: 1025px) and (min-height: 720px) {
+    .mh-hero { --mh-fin: calc(100vh - 4rem); }
+
+    .mh-hero-track { height: calc(100vh - 2.4rem + 120vh + var(--mh-fin)); }
+
+    .mh-hero-pin {
+        position: sticky;
+        z-index: 0;
+        top: 2.4rem;
+        height: calc(100vh - 2.4rem);
+        display: flex;
+        align-items: center;
+    }
+
+    .mh-hero-pin > .mh-hero-inner {
+        opacity: calc(1 - var(--mh-fp, 0) * 1.6); /* gone before the window covers it */
+        scale: calc(1 - var(--mh-fp, 0) * 0.06);
+    }
+
+    .mh-hero.is-past .mh-hero-inner { pointer-events: none; }
+
+    .mh-hero.has-finale .mh-showcase {
+        z-index: 1;
+        margin-top: calc(-1 * var(--mh-fin));
+        animation: none;
+        transform-origin: 50% 0;
+        transform:
+            perspective(1600px)
+            rotateX(calc((1 - var(--mh-fp, 1)) * 26deg))
+            scale(calc(0.9 + var(--mh-fp, 1) * 0.1));
+    }
+
+    /* The title and the whole window fit the screen when the pin lets go:
+       the capture area takes the height that is left (it scrolls inside) */
+    .mh-hero.has-finale .mh-showcase-head { margin-bottom: 1.2em; }
+
+    .mh-hero.has-finale .mh-shot-window:not(.is-full) { container-type: inline-size; }
+
+    .mh-hero.has-finale .mh-shot-window:not(.is-full) .mh-tstage-scroll {
+        aspect-ratio: auto;
+        height: min(100cqw * 32 / 45, 100vh - 16rem);
+    }
+
+    /* The capture scrolls inside the window: while the window rises under
+       the pointer, it would catch the wheel and stop the page */
+    .mh-hero.is-rising .mh-showcase { pointer-events: none; }
+
+    .mh-hero-pin > .mh-hero-inner {
+        width: 100%;
+        padding-top: 0;
+        padding-bottom: 2.5em;
+    }
+
+    .mh-hero-hint {
+        position: absolute;
+        left: 50%;
+        bottom: 1.2em;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.55em;
+        transform: translateX(-50%);
+        font-family: var(--maho-mono);
+        font-size: 0.6em;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+        color: var(--maho-on-ink-faint);
+        opacity: clamp(0, calc(1 - var(--mh-sp, 0) * 8), 1);
+        transition: opacity 0.3s var(--maho-ease);
+        pointer-events: none;
+    }
+
+    .mh-hero-hint span {
+        position: relative;
+        width: 1px;
+        height: 34px;
+        overflow: hidden;
+        background: var(--maho-ink-border);
+    }
+
+    .mh-hero-hint span::after {
+        content: '';
+        position: absolute;
+        left: -1px;
+        top: -10px;
+        width: 3px;
+        height: 10px;
+        border-radius: 2px;
+        background: var(--maho-chartreuse);
+        animation: mhHint 1.8s var(--maho-ease) infinite;
     }
 }
 
-/* Static shell carries the glow so it doesn't sweep over the caption
-   when the inner terminal does its 3D flip. */
+@keyframes mhHint {
+    from { transform: translateY(0); }
+    to   { transform: translateY(44px); }
+}
+
+/* Static shell carries the glow of the agents terminal */
 .mh-term-shell {
     position: relative;
     border-radius: var(--maho-radius-lg);
@@ -1208,8 +1668,8 @@ article:has(#homeh1) {
 }
 
 /* ---- Motion pause controls (WCAG 2.2.2 Pause, Stop, Hide) ----
-   The terminal types on a loop and the sponsor strip scrolls on a loop. Both
-   start on their own and never end, so both need a control that any visitor can
+   The hero slideshow (on wide but short screens) and the sponsor strip run on
+   a loop. Both start on their own and never end, so both need a control that any visitor can
    reach, not only one who has set prefers-reduced-motion at the OS level.
    Same 26px disc as the screenshot lightbulb, in a light and a dark variant. */
 .mh-motion-btn {
@@ -1266,14 +1726,6 @@ article:has(#homeh1) {
 .mh-motion-btn .mh-ico-play { display: none; }
 .mh-motion-btn.is-paused .mh-ico-pause { display: none; }
 .mh-motion-btn.is-paused .mh-ico-play { display: block; }
-
-/* Sits over the terminal chrome, outside the aria-hidden window itself. */
-.mh-term-pause {
-    position: absolute;
-    top: 0.55em;
-    right: 0.7em;
-    z-index: 3;
-}
 
 .mh-marquee-head {
     display: flex;
@@ -1365,52 +1817,6 @@ article:has(#homeh1) {
 
 @keyframes mhBlink { 50% { opacity: 0; } }
 
-.mh-term-caption {
-    margin-top: 1.1em;
-    text-align: center;
-    font-family: var(--maho-mono);
-    font-size: 0.55em;
-    letter-spacing: 0.03em;
-    color: var(--maho-on-ink-soft);
-}
-
-/* ---- Terminal: auto-cycling Composer / Docker scenes ----
-   JS-driven (maho.js): a scene types out, holds, the window flips and the
-   next scene types. Without JS / reduced motion: just the Composer scene. */
-.mh-term-stage {
-    position: relative;
-}
-
-html.mh-anim .mh-term {
-    transform-origin: center center;
-    transform-style: preserve-3d;
-    backface-visibility: hidden;
-    will-change: transform;
-}
-
-.mh-scene-composer {
-    position: relative;
-}
-
-.mh-scene-docker {
-    position: absolute;
-    inset: 0;
-    display: none;
-}
-
-html.mh-anim .mh-scene-docker {
-    display: block;
-}
-
-html.mh-anim .mh-term-scene {
-    opacity: 0;
-    transition: opacity 0.25s var(--maho-ease);
-}
-
-html.mh-anim .mh-term-scene.is-active {
-    opacity: 1;
-}
-
 /* ---- Hero entrance (pure CSS, fill-mode both, no FOUC) ---- */
 .mh-hero-copy > *,
 .mh-hero-side {
@@ -1423,6 +1829,7 @@ html.mh-anim .mh-term-scene.is-active {
 .mh-lede            { animation-delay: 0.22s; }
 .mh-ctas            { animation-delay: 0.32s; }
 .mh-meta            { animation-delay: 0.42s; }
+.mh-steps           { animation-delay: 0.5s; }
 .mh-hero-side       { animation: mhRiseTerm 0.85s var(--maho-ease-out) 0.2s both; }
 .mh-showcase        { will-change: transform, opacity; animation: mhRise 0.8s var(--maho-ease-out) 0.5s both; }
 
@@ -1453,6 +1860,25 @@ html.mh-anim .mh-term-scene.is-active {
     max-width: 1000px;
     margin: 0 auto;
     padding: 0 2em;
+}
+
+/* The title over the screenshots window: it rises with the window at the
+   end of the hero and leads into it */
+.mh-showcase-head {
+    max-width: 46em;
+    margin: 0 auto 2em;
+    text-align: center;
+}
+
+.md-typeset .mh-showcase-head .mh-sec-title {
+    color: var(--maho-on-ink);
+    text-wrap: balance;
+}
+
+.md-typeset .mh-showcase-head .mh-sec-title .mh-mark {
+    /* the band of the other titles; dimmer on ink, so the light text stays
+       legible */
+    background: linear-gradient(transparent 78%, rgba(215, 223, 34, 0.35) 78%);
 }
 
 /* Window frame, matched to the terminal chrome above.
@@ -1631,23 +2057,11 @@ html.mh-anim .mh-term-scene.is-active {
 }
 
 /* Caption role, shared with .mh-store-loc. Light on ink, so compensated. */
+/* Under the window: one button, to the themes page or to the demo */
 .mh-shots-caption {
-    max-width: 1000px;
-    margin: 1.2em auto 0;
+    margin: 1.6em auto 0;
     text-align: center;
-    font-size: 0.85em;
-    line-height: 1.72;
-    letter-spacing: 0.004em;
-    color: var(--maho-on-ink-soft);
 }
-
-.mh-shots-caption a {
-    color: var(--maho-chartreuse);
-    text-decoration: none;
-    font-weight: 600;
-}
-
-.mh-shots-caption a:hover { text-decoration: underline; }
 
 
 /* ---- STORES: real merchants running Maho ----
@@ -1789,7 +2203,7 @@ html.mh-anim .mh-term-scene.is-active {
 }
 
 .mh-store-loc {
-    /* Caption role, same size as .mh-shots-caption. */
+    /* Caption role */
     font-size: 0.85em;
     color: var(--maho-text-secondary);
 }
@@ -2437,6 +2851,50 @@ html.mh-anim .mh-reveal.mh-in {
 
     .mh-hero-side { max-width: 600px; }
 
+    /* One column, scroll-driven too: the panel goes between the buttons and
+       the steps and sticks under the header on an ink backdrop, and the
+       steps scroll under it with every text open. maho.js selects the step
+       nearest to a line at 10% of the space below the panel. Each step
+       starts at the top of its box, so the first title sits close under
+       the panel. */
+    .mh-hero-inner {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0;
+    }
+
+    .mh-hero-copy { display: contents; }
+
+    .mh-hero-side {
+        order: 1;
+        position: sticky;
+        top: 2.4rem;
+        z-index: 2;
+        max-width: none;
+        margin-top: 2em;
+        padding: 1em 0 1.6em;
+        background: linear-gradient(to bottom, var(--maho-ink) 84%, rgba(14, 15, 8, 0));
+        translate: none;
+    }
+
+    .mh-stage-rig { width: 100%; max-width: 560px; margin: 0 auto; }
+    .mh-stage-ring { display: none; }
+
+    .mh-steps { order: 2; margin: 2em 0 0; }
+
+    .mh-step {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        min-height: 26vh;
+        opacity: 0.35;
+    }
+
+    .mh-step:hover:not(.is-active) { opacity: 0.55; }
+    .mh-step.is-active { opacity: 1; }
+    .mh-step .mh-step-body { grid-template-rows: 1fr; min-height: 0; }
+
     /* tighter accent-image column on narrower viewports */
     .mh-sec-head:has(.mh-sec-media) {
         grid-template-columns: minmax(0, 1fr) 340px;
@@ -2544,6 +3002,16 @@ html.mh-anim .mh-reveal.mh-in {
     .mh-bulb,
     .mh-bulb-arrow,
     .mh-tstage-scroll { animation: none !important; } /* hint label stays visible, just static */
+    .mh-hero-side,
+    .mh-hero-copy { translate: none; opacity: 1; }
+    .mh-stage-glow,
+    .mh-stage-ring,
+    .mh-stage-float,
+    .mh-art .flow,
+    .mh-art .orbit,
+    .mh-hero-hint span::after { animation: none; }
+    .mh-stage-rig { transform: rotateY(-4deg); transition: none; }
+    .mh-hero-pin > .mh-hero-inner { scale: none; } /* the fade stays: it does not move */
 }
 
 

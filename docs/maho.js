@@ -52,7 +52,7 @@ function mahoSetupVideos() {
 
 /* ============================================================
    HOME PAGE MOTION
-   Terminal "typing" cascade + scroll-reveal for content blocks.
+   Scroll-driven hero slides + scroll-reveal for content blocks.
    Pure progressive enhancement: if this never runs, the page is
    fully visible and usable. Honors prefers-reduced-motion.
    ============================================================ */
@@ -60,146 +60,314 @@ function mahoReducedMotion() {
     return window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 }
 
-/* Pending terminal timers, tracked so we can cancel the loop and avoid
-   duplicate cycles across Material "instant" navigations. */
-var mahoTermTimers = [];
-function mahoClearTerm() {
-    mahoTermTimers.forEach(function (id) { clearTimeout(id); });
-    mahoTermTimers = [];
-}
-function mahoTermDelay(fn, ms) {
-    var id = setTimeout(fn, ms);
-    mahoTermTimers.push(id);
-    return id;
+/* ---- Hero slides ----
+   The scroll drives the slides, in two ways. Wide and tall screens (the CSS
+   HERO SCROLL MODE query): the hero is a scroll track, its pin sticks, and
+   each quarter of the track shows the next slide. One column (up to 1024px):
+   the panel sticks under the header, and the step nearest to a line at 10%
+   of the space below it is active. A step title scrolls to its slide. Wide
+   but short screens: a slideshow on a timer, a title selects, the pause
+   button stops it (WCAG 2.2.2). Reduced motion: no timer, no drawing, no
+   tilt; the scroll and the titles still select.
+   Window listeners outlive a Material "instant" navigation, so each setup
+   removes the listeners of the one before. */
+var mahoHeroTeardown = null;
+
+function mahoTeardownHero() {
+    if (mahoHeroTeardown) mahoHeroTeardown();
+    mahoHeroTeardown = null;
 }
 
-/* Hide every line of a scene so it can be typed out from blank. */
-function mahoBlankScene(scene) {
-    var lines = Array.prototype.slice.call(scene.querySelectorAll('.mh-ln'));
-    var cursor = scene.querySelector('.mh-cur');
-    lines.forEach(function (ln) {
-        ln.style.transition = 'none';
-        ln.style.opacity = '0';
-        ln.style.clipPath = 'inset(0 100% 0 0)';
+function mahoOnMedia(mq, fn) {
+    if (mq.addEventListener) mq.addEventListener('change', fn);
+    else if (mq.addListener) mq.addListener(fn);
+}
+
+function mahoOffMedia(mq, fn) {
+    if (mq.removeEventListener) mq.removeEventListener('change', fn);
+    else if (mq.removeListener) mq.removeListener(fn);
+}
+
+function mahoSetupHeroSlides() {
+    mahoTeardownHero();
+
+    var slides = document.getElementById('mh-slides');
+    if (!slides) return;
+    var hero = slides.closest('.mh-hero');
+    var track = hero.querySelector('.mh-hero-track');
+    var pin = hero.querySelector('.mh-hero-pin');
+    var side = document.getElementById('mh-hero-side');
+    var items = Array.prototype.slice.call(slides.querySelectorAll('[data-slide]'));
+    var stepList = document.getElementById('mh-hero-steps');
+    var steps = stepList ? Array.prototype.slice.call(stepList.querySelectorAll('[data-step]')) : [];
+    var pause = document.getElementById('mh-slides-pause');
+    var showcase = hero.querySelector('.mh-showcase');
+    var header = document.querySelector('.md-header');
+    var heroScroll = window.matchMedia('screen and (min-width: 1025px) and (min-height: 720px)');
+    var narrowHero = window.matchMedia('screen and (max-width: 64em)');
+    var reduceMotion = mahoReducedMotion();
+    var HOLD_MS = 6000;
+    var current = 0;
+    var timer = null;
+    var frame = null;
+
+    slides.style.setProperty('--mh-hold', HOLD_MS + 'ms');
+
+    /* Line art draws itself: every stroked shape gets a length of 1 and a
+       delay in document order. Flow dashes, the orbit and filled marks keep
+       their own look. .is-live lets the terminal slide type its lines. */
+    slides.classList.toggle('is-live', !reduceMotion);
+    slides.querySelectorAll('.mh-art').forEach(function (art) {
+        art.classList.toggle('is-drawable', !reduceMotion);
+        if (reduceMotion) return;
+        var shapes = Array.prototype.slice.call(art.querySelectorAll('rect, circle, path')).filter(function (el) {
+            return !el.matches('.flow, .orbit, .acc-fill, .dot');
+        });
+        shapes.forEach(function (el, i) {
+            el.setAttribute('pathLength', '1');
+            el.style.setProperty('--d', (i * 0.035).toFixed(3) + 's');
+        });
     });
-    if (cursor) cursor.style.opacity = '0';
-}
 
-/* Reveal a scene's lines one after another with a left-to-right "typing"
-   wipe - command lines take longer than output lines. Calls onDone when the
-   last line (and cursor) have settled. */
-function mahoTypeScene(scene, onDone) {
-    mahoBlankScene(scene);
-    var lines = Array.prototype.slice.call(scene.querySelectorAll('.mh-ln'));
-    var cursor = scene.querySelector('.mh-cur');
+    function clamp01(v) { return Math.min(1, Math.max(0, v)); }
+    function headerHeight() { return header ? header.offsetHeight : 0; }
+    function isPaused() { return pause && pause.classList.contains('is-paused'); }
+    function timerMode() {
+        return !heroScroll.matches && !narrowHero.matches && !reduceMotion && items.length > 1 && !!pause;
+    }
+    function narrowReference() {
+        var bottom = side.getBoundingClientRect().bottom;
+        return bottom + (window.innerHeight - bottom) * 0.1;
+    }
+    function trackRange() { return track.offsetHeight - pin.offsetHeight; }
+    /* The end of the track where the screenshots window rises over the
+       pinned hero: the CSS pulls the window up by that much */
+    function finaleRange() {
+        return showcase ? Math.max(0, -parseFloat(window.getComputedStyle(showcase).marginTop) || 0) : 0;
+    }
+    function stepsRange() { return trackRange() - finaleRange(); }
+    // The scroll position where the pin starts to hold
+    function trackTop() { return track.getBoundingClientRect().top + window.scrollY - headerHeight(); }
+    hero.classList.add('has-finale');
 
-    var t = 0;
-    lines.forEach(function (ln) {
-        var isCmd = !!ln.querySelector('.p');
-        var len = (ln.textContent || '').length;
-        var dur = isCmd ? Math.min(900, Math.max(420, len * 16)) : 150;
-        mahoTermDelay(function () {
-            ln.style.transition = 'clip-path ' + dur + 'ms linear, opacity 120ms ease';
-            ln.style.opacity = '1';
-            ln.style.clipPath = 'inset(0 0 0 0)';
-        }, t);
-        t += dur + (isCmd ? 150 : 80);
-    });
-    if (cursor) mahoTermDelay(function () { cursor.style.opacity = ''; }, t);
-    if (onDone) mahoTermDelay(onDone, t);
-}
-
-/* Flip the whole terminal window backwards: rotate to edge-on, run swap()
-   while it's hidden, then flip back in and call done(). */
-function mahoFlipTerminal(term, swap, done) {
-    var EASE = 'cubic-bezier(0.45, 0.05, 0.55, 0.95)';
-    var HALF = 360;
-    term.style.animation = 'none'; // release the entrance animation's transform
-    term.style.transition = 'transform ' + HALF + 'ms ' + EASE;
-    term.style.transform = 'rotateX(-90deg)';
-
-    mahoTermDelay(function () {
-        swap(); // swap the visible scene while the panel is edge-on (invisible)
-        term.style.transition = 'none';
-        term.style.transform = 'rotateX(90deg)';
-        void term.offsetWidth; // commit the jump before flipping back in
-        term.style.transition = 'transform ' + HALF + 'ms ' + EASE;
-        term.style.transform = 'rotateX(0deg)';
-        mahoTermDelay(done, HALF);
-    }, HALF);
-}
-
-/* Show every line of a scene at once, with no typing. Used when the visitor
-   pauses: the terminal must stay readable, not freeze half-typed. */
-function mahoRevealScene(scene) {
-    Array.prototype.slice.call(scene.querySelectorAll('.mh-ln')).forEach(function (ln) {
-        ln.style.transition = 'none';
-        ln.style.opacity = '1';
-        ln.style.clipPath = 'inset(0 0 0 0)';
-    });
-    var cursor = scene.querySelector('.mh-cur');
-    if (cursor) cursor.style.opacity = '';
-}
-
-/* Which terminal is running, which scene it is on, and whether the visitor
-   stopped it. Module-level so the pause button can act on it. */
-var mahoTerm = { el: null, scenes: [], i: 0, paused: false };
-
-/* Drive the terminal: type the active scene, hold, flip to the next scene,
-   type it, and repeat. A single scene just types once. */
-function mahoRunTerminal() {
-    var t = mahoTerm;
-    if (!t.el || t.paused || !t.scenes.length) return;
-
-    var HOLD = 3400; // dwell on a finished scene before flipping away
-
-    function activate(idx) {
-        t.scenes.forEach(function (s, k) { s.classList.toggle('is-active', k === idx); });
+    // Restart the fill of the active step bar from zero
+    function restartFill() {
+        if (!stepList) return;
+        stepList.classList.remove('is-cycling');
+        if (!timerMode() || isPaused()) return;
+        void stepList.offsetWidth;
+        stepList.classList.add('is-cycling');
     }
 
-    function typeCurrent() {
-        if (t.paused) return;
-        mahoTypeScene(t.scenes[t.i], function () {
-            if (t.paused || t.scenes.length < 2) return; // single scene: type once and stop
-            mahoTermDelay(function () {
-                if (t.paused) return;
-                mahoFlipTerminal(t.el, function () {
-                    t.i = (t.i + 1) % t.scenes.length;
-                    activate(t.i);
-                    mahoBlankScene(t.scenes[t.i]); // blank before it flips into view
-                }, typeCurrent);
-            }, HOLD);
+    function show(index) {
+        if (index === current && items[index].classList.contains('is-active')) return;
+        current = index;
+        items.forEach(function (s, i) { s.classList.toggle('is-active', i === index); });
+        steps.forEach(function (step, i) {
+            step.classList.toggle('is-active', i === index);
+            step.classList.toggle('is-done', i < index);
+            var button = step.querySelector('[data-step-button]');
+            if (i === index) button.setAttribute('aria-current', 'true');
+            else button.removeAttribute('aria-current');
+        });
+        restartFill();
+    }
+
+    function stop() { window.clearTimeout(timer); }
+    function schedule() {
+        stop();
+        if (!timerMode() || isPaused() || document.hidden) return;
+        timer = window.setTimeout(function () { show((current + 1) % items.length); schedule(); }, HOLD_MS);
+    }
+
+    /* --mh-sp: progress through the steps of the track (0 to 1). --mh-fp:
+       progress of the finale, the screenshots window rising over the hero.
+       --mh-hp: progress of the hero leaving, which tilts the panel back.
+       --mh-sub: progress through the active slide, which fills its step
+       bar. */
+    function setFinale(fp) {
+        hero.style.setProperty('--mh-fp', fp.toFixed(4));
+        // A few pixels short of the end count as the end: the browser's own
+        // focus scroll can stop there, and the window must take the pointer
+        hero.classList.toggle('is-rising', fp > 0 && fp < 0.97);
+        hero.classList.toggle('is-past', fp > 0.5);
+    }
+
+    function sync() {
+        frame = null;
+        var headerH = headerHeight();
+        if (heroScroll.matches) {
+            var range = stepsRange();
+            var finale = finaleRange();
+            var y = headerH - track.getBoundingClientRect().top;
+            var p = clamp01(y / range);
+            var fp = finale ? clamp01((y - range) / finale) : 0;
+            var scaled = p * items.length;
+            var index = Math.min(items.length - 1, Math.floor(scaled));
+            hero.style.setProperty('--mh-sp', p.toFixed(4));
+            hero.style.setProperty('--mh-hp', fp.toFixed(4));
+            hero.style.setProperty('--mh-sub', clamp01(scaled - index).toFixed(4));
+            setFinale(fp);
+            show(index);
+            return;
+        }
+        setFinale(0);
+        if (narrowHero.matches && side && steps.length) {
+            var ref = narrowReference();
+            var rects = steps.map(function (step) { return step.getBoundingClientRect(); });
+            var centers = rects.map(function (r) { return r.top + r.height / 2; });
+            var nearest = 0;
+            centers.forEach(function (c, i) {
+                if (Math.abs(c - ref) < Math.abs(centers[nearest] - ref)) nearest = i;
+            });
+            hero.style.setProperty('--mh-sp', clamp01((ref - centers[0]) / (centers[centers.length - 1] - centers[0])).toFixed(4));
+            hero.style.setProperty('--mh-hp', '0');
+            hero.style.setProperty('--mh-sub', clamp01((ref - rects[nearest].top) / rects[nearest].height).toFixed(4));
+            show(nearest);
+        } else {
+            hero.style.setProperty('--mh-sp', '0.5');
+            hero.style.setProperty('--mh-hp', clamp01((headerH - pin.getBoundingClientRect().top) / pin.offsetHeight).toFixed(4));
+        }
+    }
+    function requestSync() { if (frame === null) frame = window.requestAnimationFrame(sync); }
+
+    /* The open step texts have different heights. The list keeps the
+       height of the closed titles plus the tallest text, so the centred
+       hero does not move when the active step changes. */
+    function fitSteps() {
+        if (!stepList) return;
+        var closed = 0;
+        var tallest = 0;
+        steps.forEach(function (step) {
+            var text = step.querySelector('.mh-step-text');
+            var css = window.getComputedStyle(text);
+            // A closed text keeps its padding
+            var padding = parseFloat(css.paddingTop) + parseFloat(css.paddingBottom);
+            closed += step.offsetHeight - step.querySelector('.mh-step-body').offsetHeight + padding;
+            tallest = Math.max(tallest, text.scrollHeight - padding);
+        });
+        stepList.style.setProperty('--mh-steps-h', Math.ceil(closed + tallest) + 'px');
+    }
+    function onResize() {
+        fitSteps();
+        requestSync();
+    }
+
+    function applyMode() {
+        fitSteps();
+        if (stepList) stepList.classList.toggle('is-scrolling', heroScroll.matches || narrowHero.matches);
+        if (pause) pause.hidden = !timerMode();
+        restartFill();
+        schedule();
+        sync();
+    }
+
+    var behavior = reduceMotion ? 'auto' : 'smooth';
+    var stepClicks = steps.map(function (step, i) {
+        var onClick = function () {
+            if (heroScroll.matches) {
+                window.scrollTo({ top: trackTop() + stepsRange() * (i + 0.1) / items.length, behavior: behavior });
+                return;
+            }
+            if (narrowHero.matches && side) {
+                var r = step.getBoundingClientRect();
+                window.scrollTo({ top: window.scrollY + r.top + r.height / 2 - narrowReference(), behavior: behavior });
+                return;
+            }
+            show(i);
+            schedule();
+        };
+        step.querySelector('[data-step-button]').addEventListener('click', onClick);
+        return onClick;
+    });
+
+    function onPause() {
+        var paused = pause.classList.toggle('is-paused');
+        var label = paused ? 'Resume the slides' : 'Pause the slides';
+        pause.setAttribute('aria-label', label);
+        pause.setAttribute('title', label);
+        if (paused) {
+            stop();
+            if (stepList) stepList.classList.remove('is-cycling');
+        } else {
+            show((current + 1) % items.length);
+            schedule();
+        }
+    }
+    if (pause) pause.addEventListener('click', onPause);
+
+    // Do not burn cycles in a background tab
+    function onVisibility() {
+        if (document.hidden) stop();
+        else { restartFill(); schedule(); }
+    }
+
+    // The stage tilts toward the pointer, and the sheen follows it
+    var tilt = side && !reduceMotion && window.matchMedia('(pointer: fine)').matches;
+    function onPointerMove(e) {
+        var r = side.getBoundingClientRect();
+        side.style.setProperty('--mh-hy', (((e.clientX - r.left) / r.width - 0.5) * 12).toFixed(2) + 'deg');
+        side.style.setProperty('--mh-hx', (((e.clientY - r.top) / r.height - 0.5) * -9).toFixed(2) + 'deg');
+        var s = slides.getBoundingClientRect();
+        slides.style.setProperty('--mh-mx', ((e.clientX - s.left) / s.width * 100).toFixed(1) + '%');
+        slides.style.setProperty('--mh-my', ((e.clientY - s.top) / s.height * 100).toFixed(1) + '%');
+    }
+    function onPointerLeave() {
+        side.style.setProperty('--mh-hy', '0deg');
+        side.style.setProperty('--mh-hx', '0deg');
+    }
+    if (tilt) {
+        side.addEventListener('pointermove', onPointerMove);
+        side.addEventListener('pointerleave', onPointerLeave);
+    }
+
+    /* In the finale the hero and the window share the screen, so the browser
+       does not scroll to a focused control. Scroll to where that control is
+       the one in view: the hero before the window rises, the window after. */
+    function onFocusIn(e) {
+        if (!heroScroll.matches || !finaleRange()) return;
+        var inPin = pin.contains(e.target);
+        var inShowcase = showcase && showcase.contains(e.target);
+        // After the frame: the browser runs its own focus scroll after this event
+        window.requestAnimationFrame(function () {
+            var y = headerHeight() - track.getBoundingClientRect().top;
+            if (inPin && y > stepsRange()) {
+                window.scrollTo({ top: trackTop() + stepsRange(), behavior: 'auto' });
+            } else if (inShowcase && y < trackRange()) {
+                window.scrollTo({ top: trackTop() + trackRange(), behavior: 'auto' });
+            }
         });
     }
+    hero.addEventListener('focusin', onFocusIn);
 
-    activate(t.i);
-    mahoBlankScene(t.scenes[t.i]);
-    mahoTermDelay(typeCurrent, 360); // let the panel slide in first
-}
+    document.addEventListener('visibilitychange', onVisibility);
+    window.addEventListener('scroll', requestSync, { passive: true });
+    window.addEventListener('resize', onResize, { passive: true });
+    if (document.fonts) document.fonts.ready.then(fitSteps);
+    mahoOnMedia(heroScroll, applyMode);
+    mahoOnMedia(narrowHero, applyMode);
+    applyMode();
 
-function mahoCycleTerminal(term) {
-    if (!term) return;
-    var scenes = Array.prototype.slice.call(term.querySelectorAll('.mh-term-scene'));
-    if (!scenes.length) return;
-    mahoTerm = { el: term, scenes: scenes, i: 0, paused: false };
-    mahoRunTerminal();
-}
-
-/* Stop the loop and leave the current scene complete, or start it again.
-   A flip can be in flight when the visitor hits pause, so the panel's inline
-   rotation is cleared too; otherwise it would stay stuck edge-on. */
-function mahoTermSetPaused(paused) {
-    var t = mahoTerm;
-    t.paused = paused;
-    if (!t.el) return;
-    if (paused) {
-        mahoClearTerm();
-        t.el.style.transition = 'none';
-        t.el.style.transform = 'none';
-        if (t.scenes[t.i]) mahoRevealScene(t.scenes[t.i]);
-    } else {
-        mahoRunTerminal();
-    }
+    mahoHeroTeardown = function () {
+        stop();
+        if (frame !== null) window.cancelAnimationFrame(frame);
+        document.removeEventListener('visibilitychange', onVisibility);
+        window.removeEventListener('scroll', requestSync);
+        window.removeEventListener('resize', onResize);
+        if (stepList) stepList.style.removeProperty('--mh-steps-h');
+        mahoOffMedia(heroScroll, applyMode);
+        mahoOffMedia(narrowHero, applyMode);
+        steps.forEach(function (step, i) {
+            step.querySelector('[data-step-button]').removeEventListener('click', stepClicks[i]);
+        });
+        if (pause) pause.removeEventListener('click', onPause);
+        hero.removeEventListener('focusin', onFocusIn);
+        if (tilt) {
+            side.removeEventListener('pointermove', onPointerMove);
+            side.removeEventListener('pointerleave', onPointerLeave);
+            onPointerLeave();
+        }
+    };
 }
 
 /* Fade/slide content blocks in as they enter the viewport. */
@@ -270,23 +438,11 @@ function mahoSetupStores() {
     if (next) next.addEventListener('click', function () { page(1); });
 }
 
-/* Wire the two pause controls. Everything that moves on its own must have a
-   control any visitor can reach, not only one who set prefers-reduced-motion
-   at the OS level (WCAG 2.2.2, Level A). */
+/* Wire the sponsor strip pause control. Everything that moves on its own must
+   have a control any visitor can reach, not only one who set
+   prefers-reduced-motion at the OS level (WCAG 2.2.2, Level A). The hero
+   slideshow wires its own control in mahoSetupHeroSlides. */
 function mahoSetupMotionControls() {
-    var termBtn = document.getElementById('mh-term-pause');
-    if (termBtn && termBtn.dataset.mhWired !== 'on') {
-        termBtn.dataset.mhWired = 'on';
-        termBtn.addEventListener('click', function () {
-            var paused = !termBtn.classList.contains('is-paused');
-            mahoTermSetPaused(paused);
-            termBtn.classList.toggle('is-paused', paused);
-            var label = paused ? 'Play the terminal animation' : 'Pause the terminal animation';
-            termBtn.setAttribute('aria-label', label);
-            termBtn.setAttribute('title', label);
-        });
-    }
-
     var mqBtn = document.getElementById('mh-marquee-pause');
     var marquee = document.querySelector('.mh-funding-marquee');
     if (mqBtn && marquee && mqBtn.dataset.mhWired !== 'on') {
@@ -304,23 +460,17 @@ function mahoSetupMotionControls() {
 
 /* The OS setting can change while the page is open. CSS reacts on its own,
    but the scripted motion has to be told, or a visitor who switches reduce
-   motion on mid-session keeps the typing loop until they reload. */
+   motion on mid-session keeps the slideshow timer and the line drawing until
+   they reload. */
 var mahoMotionWatched = false;
 function mahoWatchReducedMotion() {
     if (mahoMotionWatched || !window.matchMedia) return;
     mahoMotionWatched = true;
     var mq = window.matchMedia('(prefers-reduced-motion: reduce)');
-    var onChange = function () {
-        if (mq.matches) {
-            mahoClearTerm();
-            if (mahoTerm.el && mahoTerm.scenes.length) mahoRevealScene(mahoTerm.scenes[mahoTerm.i]);
-            document.documentElement.classList.remove('mh-anim');
-        } else if (document.querySelector('.mh-hero')) {
-            mahoInitHome();
-        }
-    };
-    if (mq.addEventListener) mq.addEventListener('change', onChange);
-    else if (mq.addListener) mq.addListener(onChange);
+    mahoOnMedia(mq, function () {
+        if (mq.matches) document.documentElement.classList.remove('mh-anim');
+        if (document.querySelector('.mh-hero')) mahoInitHome();
+    });
 }
 
 function mahoInitHome() {
@@ -329,10 +479,10 @@ function mahoInitHome() {
 
     var hero = document.querySelector('.mh-hero');
     if (!hero) {
-        /* Left the home page. Without this the terminal timers keep firing
-           against detached nodes for the rest of the session. */
-        mahoClearTerm();
-        mahoTerm = { el: null, scenes: [], i: 0, paused: false };
+        /* Left the home page. Without this the scroll listeners and the
+           slideshow timer keep firing against detached nodes for the rest of
+           the session. */
+        mahoTeardownHero();
         return;
     }
 
@@ -340,19 +490,11 @@ function mahoInitHome() {
        carry a WCAG obligation and must not depend on a decorative showcase. */
     mahoSafe('motion controls', mahoSetupMotionControls);
     mahoSafe('stores carousel', mahoSetupStores);
+    mahoSafe('hero slides', mahoSetupHeroSlides); // reduced motion too: the scroll still selects
 
     if (mahoReducedMotion()) return; // CSS keeps everything visible
 
-    mahoSafe('terminal', function () {
-        mahoClearTerm(); // avoid duplicate cycles across instant navigations
-        document.documentElement.classList.add('mh-anim');
-        mahoCycleTerminal(document.querySelector('.mh-term'));
-
-        /* The control keeps its own state, so a re-init must not silently
-           restart motion the visitor already stopped. */
-        var pauseBtn = document.getElementById('mh-term-pause');
-        if (pauseBtn && pauseBtn.classList.contains('is-paused')) mahoTermSetPaused(true);
-    });
+    document.documentElement.classList.add('mh-anim');
     mahoSafe('scroll reveal', mahoSetupReveal);
 }
 
