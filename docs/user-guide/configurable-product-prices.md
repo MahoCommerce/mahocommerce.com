@@ -69,6 +69,8 @@ different value per website. Select a store view of that website with the store 
 | Category pages and search results | The price of the configurable product |
 | Category pages, with Dynamic Price Change on | The price changes when the customer clicks a swatch of the listing attribute (see below) |
 | Cart and order | The price from the full calculation above |
+| Structured data, for each variant | The price of the configurable product plus the option prices of the values of the variant (see [Structured Data](structured-data.md)) |
+| Product feeds, for each variant (v26.11+) | The same price as the structured data (see [Feed Manager](feed-manager.md#variant-prices)) |
 
 A configurable product appears in category pages and search results only when at least one of its
 children is enabled, is in the same website and has no required custom options. Without such a
