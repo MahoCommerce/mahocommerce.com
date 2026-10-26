@@ -219,7 +219,7 @@ When exporting configurable product children, you often need data from the paren
 !!! tip "Item Group ID"
     The Google, Facebook, Bing, and Pinterest mapping templates ship with an `item_group_id` field pre-configured as `sku` with **Use Parent: Always**. When you export simple children of configurables, this resolves to the parent's SKU, telling these platforms that the variants belong to the same item. The field is part of the default mapping - you can edit or remove it like any other.
 
-### Variant prices <span class="version-badge">v26.11+</span> { #variant-prices }
+### Variant prices <span class="version-badge">v26.9.3+</span> { #variant-prices }
 
 The store does not use the price of a child of a configurable product. Checkout charges the price of the parent plus the option prices of the selected values (see [Configurable Product Prices](configurable-product-prices.md)). The feed sends the same price for each variant, so the feed price matches the product page and checkout.
 
