@@ -117,19 +117,9 @@ if you customize the toolbar.
 
 ## URL structure
 
-Clean, stable URLs are a core part of SEO. The Catalog > Search Engine Optimizations group controls
-how catalog URLs are built:
-
-- **Product URL Suffix** / **Category URL Suffix** - an optional suffix such as `.html` appended to
-  product and category URLs. Leave blank for extensionless URLs.
-- **Use Categories Path for Product URLs** - when enabled, product URLs include the category path
-  (`/men/jackets/product-name`) instead of a bare product slug.
-- **Create Permanent Redirect for URLs if URL Key Changed** (`save_rewrites_history`) - when a
-  product or category URL key changes, Maho automatically creates a permanent **301 redirect** from
-  the old URL to the new one, preserving link equity and avoiding broken links.
-
-URL rewrites are stored in the `core_url_rewrite` table, and you can add custom rewrites and
-redirects there as well.
+Clean, stable URLs are a core part of SEO. [URL Rewrites](url-rewrites.md) explains how Maho builds
+product and category URLs, the URL suffixes, the category path in product URLs, the redirects when a
+URL key changes, and custom rewrites.
 
 Maho also normalizes the request URL itself. A request for `/index.php`, or for a page served
 through `/index.php/...`, answers with a **301 redirect** to the same page without that segment.

@@ -144,3 +144,5 @@ With 0, it keeps them forever.
 
 - [SEO](seo.md) for canonical tags and the other search engine settings.
 - [Scope](scope.md) for store view values and **Use Default Value**.
+- [CMS Pages and Blocks in Store Views](cms-store-views.md) for a CMS page that has the same path as
+  a rewrite.

@@ -8,7 +8,7 @@ categories:
 
 Your customers see the storefront. **You** see the admin, every single day. It's where you add products, chase orders, tweak config, and spend hours that nobody outside your team ever notices. And while Maho has spent its whole life modernizing this platform from the inside, PHP 8.3+, a rebuilt checkout, modern tooling, one piece at a time, the admin was the one big surface still wearing the look it was born with.
 
-So we rebuilt it. Maho's admin panel has been **completely redesigned**: a modern, calm, consistent interface with first-class **dark mode**. It lands in core with **26.7 in July**, but you don't have to wait, you can click around the real thing on our [live demo](/demo/) right now.
+So we rebuilt it. Maho's admin panel has been **completely redesigned**: a modern, calm, consistent interface with first-class **dark mode**. It lands in core with **26.7 in July**, but you don't have to wait, you can click around the real thing on our [live demo](/about/demo.md) right now.
 
 <!-- more -->
 
@@ -54,7 +54,7 @@ And as always, it's **fully open source**. Every token, every rule, every pixel 
 
 ## Try it before it ships
 
-You can experience the whole thing today, no install required. Head to our [**live demo**](/demo/), open the admin panel with the credentials listed there, and click the scheme toggle in the top bar to flip between light and dark. Have a wander through the dashboard, the product grids, system configuration, and the health check, it's the exact build heading into 26.7.
+You can experience the whole thing today, no install required. Head to our [**live demo**](/about/demo.md), open the admin panel with the credentials listed there, and click the scheme toggle in the top bar to flip between light and dark. Have a wander through the dashboard, the product grids, system configuration, and the health check, it's the exact build heading into 26.7.
 
 The redesign ships in core with **Maho 26.7 this July**. If you're already running Maho, you'll get it as part of the upgrade, with zero migration work on your side.
 

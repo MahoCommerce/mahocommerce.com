@@ -64,7 +64,9 @@ value of the scope above it applies again.
 
 !!! note "Values set by the server"
     The hosting can also set a configuration value with an environment variable. A value set this
-    way wins over the value in the admin, and a change in the admin has no effect on it.
+    way wins over the value in the admin, and a change in the admin has no effect on it. See
+    [Override configurations with ENV variables](../developer/override-configurations.md) for the
+    names of the variables.
 
 ## Product and category values
 

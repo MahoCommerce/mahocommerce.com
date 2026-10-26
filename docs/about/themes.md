@@ -204,7 +204,7 @@ Each theme is a thin layer of CSS variables, about a hundred lines, on top of on
 **From the admin, with no code.** Open **System > Configuration > Design > Theme Settings**. The page has a live preview and exposes the controls that define an identity: primary, secondary and accent colors, page background and text color, star rating color, footer colors, body and heading fonts with a web font stylesheet, heading weight and letter spacing, button case and letter spacing, three corner radii, control size, border width, raised surfaces, product image background, and a dark mode block for values that differ in dark mode. A **Custom CSS** field takes anything else. You can also import a daisyUI theme in one paste. Every field is optional: an empty field keeps the theme's own value, so a theme switch never leaves stale settings behind.
 
 <figure markdown>
-![Theme Settings in the Maho admin: the color, font and radius fields on the left, and a live preview of the storefront on the right](../../assets/admin-screens/theme-settings.webp){ loading=lazy decoding=async width="2666" height="1286" }
+![Theme Settings in the Maho admin: the color, font and radius fields on the left, and a live preview of the storefront on the right](../assets/admin-screens/theme-settings.webp){ loading=lazy decoding=async width="2666" height="1286" }
 <figcaption>Theme Settings in the admin. Every change shows in the live preview, on mobile, tablet and desktop, before you save.</figcaption>
 </figure>
 
