@@ -428,6 +428,27 @@ description: Maho is the open-source, self-hosted ecommerce platform you actuall
               <span class="mh-store-loc">🇩🇪 Germany · Fashion &amp; apparel</span>
             </span>
           </a>
+          <a class="mh-store-card" href="https://petmuffin.it" target="_blank" rel="noopener">
+            <span class="mh-store-shot"><img src="assets/stores/petmuffin.webp" alt="PetMuffin storefront" loading="lazy" width="900" height="640"></span>
+            <span class="mh-store-meta">
+              <span class="mh-store-name">PetMuffin</span>
+              <span class="mh-store-loc">🇮🇹 Italy · Pet supplies</span>
+            </span>
+          </a>
+          <a class="mh-store-card" href="https://ilparadisodellabrugola.it" target="_blank" rel="noopener">
+            <span class="mh-store-shot"><img src="assets/stores/ilparadisodellabrugola.webp" alt="Il Paradiso della Brugola storefront" loading="lazy" width="900" height="640"></span>
+            <span class="mh-store-meta">
+              <span class="mh-store-name">Il Paradiso della Brugola</span>
+              <span class="mh-store-loc">🇮🇹 Italy · Hardware &amp; tools</span>
+            </span>
+          </a>
+          <a class="mh-store-card" href="https://chenabura.com" target="_blank" rel="noopener">
+            <span class="mh-store-shot"><img src="assets/stores/chenabura.webp" alt="Chenabura storefront" loading="lazy" width="900" height="640"></span>
+            <span class="mh-store-meta">
+              <span class="mh-store-name">Chenabura</span>
+              <span class="mh-store-loc">🇮🇹 Italy · Food</span>
+            </span>
+          </a>
         </div>
       </div>
       <button class="mh-stores-arrow mh-stores-next" type="button" aria-label="More stores">
