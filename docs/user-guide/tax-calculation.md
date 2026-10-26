@@ -94,7 +94,7 @@ amount.
 
 | Setting | Options | What it does |
 |---------|---------|--------------|
-| Tax Class for Shipping | A product tax class | The tax class of the shipping amount. Without a class, shipping has no tax |
+| Tax Class for Shipping | A product tax class | The tax class of the shipping amount. Without a class, shipping has no tax. This setting is in the **Tax Classes** group |
 | Tax Calculation Method Based On | Unit Price, Row Total, Total (default) | When the store rounds the tax: for each unit, for each cart line, or on the total. The results can differ by a cent |
 | Tax Calculation Based On | Shipping Address, Billing Address, Shipping Origin | The address of the tax (see above) |
 | Apply Customer Tax | Before Discount, After Discount (default) | If the store calculates the tax on the price before or after the discount |

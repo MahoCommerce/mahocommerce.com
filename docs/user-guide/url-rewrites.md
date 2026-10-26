@@ -46,8 +46,9 @@ The URL of a product must be unique in its store view. When the URL that the sto
 already in use, by another product, a category or a custom rewrite, the store picks another one:
 
 1. It tries the URL key with the product ID added, for example `summer-dress-42`.
-2. If that is also in use, it adds a number that counts up, for example `summer-dress-1`, then
-   `summer-dress-2`.
+2. If that is also in use, it takes the highest number already in use after the URL key in that
+   store view, and adds 1. For a product, the number is above the product ID, for example
+   `summer-dress-43`.
 
 For a category, the store goes directly to step 2.
 
@@ -131,7 +132,7 @@ With 0, it keeps them forever.
 | What you see | Why | What to do |
 |--------------|-----|------------|
 | The product URL ends with the product ID, such as `summer-dress-42` | Another product, a category or a custom rewrite already uses `summer-dress` in that store view | Find the other URL in **Catalog > URL Rewrite Management** and change one of the two URL keys |
-| The product URL ends with `-1` or `-2` | The same reason: the plain URL key, and for a product the URL key with the ID, are already in use | The same action as above |
+| The product URL ends with a number above the product ID, such as `summer-dress-43`, or the category URL ends with a number, such as `dresses-1` | The same reason: the plain URL key, and for a product the URL key with the ID, are already in use | The same action as above |
 | The product URL contains the category path | **Use Categories Path for Product URLs** is Yes and the customer came from a category page | Set the setting to No if you want only short product URLs |
 | The URL contains `catalog/product/view/id/` | The product has no rewrite in this store view | Check that the product is assigned to the website, then reindex **Catalog URL Rewrites** |
 | An old link gives "page not found" after you changed the URL key | **Create Permanent Redirect for old URL** was cleared when you saved | Add a custom rewrite from the old URL to the new one, with **Redirect** set to **Permanent (301)** |

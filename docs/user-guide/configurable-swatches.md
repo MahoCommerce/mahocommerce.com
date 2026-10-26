@@ -22,7 +22,7 @@ Go to **System > Configuration > Catalog > Configurable Swatches**.
 | Enabled | Turns the feature on |
 | Product Attributes to Show as Swatches in Product Detail | The attributes drawn as swatches on the product page, in the layered navigation filters and in the "shopping by" tag, for example `color` and `size` |
 | Product Attribute to Use for Swatches in Product Listing | The single attribute used in category and search results |
-| Dynamic Price Change for Swatches in Product Listing | When a customer picks a swatch in a listing, the price shown follows the selected variant |
+| Dynamic Price Change for Swatches in Product Listing | When a customer picks a swatch in a listing, the price shown adds the price of the selected option, if the option has one |
 | Swatch Dimensions on Product Detail Page | Inner size of the swatches on the product page, in pixels |
 | Swatch Dimensions in Product Listing | Inner size of the swatches in listings |
 | Swatch Dimensions in Layered Navigation | Inner size of the swatches in filters |
