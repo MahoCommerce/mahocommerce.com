@@ -5,6 +5,10 @@ on:
     - cron: '0 6 * * 1'
   workflow_dispatch:
 
+# We never upgrade to MkDocs 2, so its warning is noise.
+env:
+  DISABLE_MKDOCS_2_WARNING: true
+
 jobs:
   upgrade:
     runs-on: ubuntu-latest

@@ -47,12 +47,15 @@ where you can check pages, navigation, and rendering. Production builds are hand
 
 ### Documentation Structure
 - **docs/**: Main documentation content
-  - **api/**: REST and SOAP API documentation
   - **blog/**: Release announcements and updates
-  - **community/**: Contributing guides and community projects
-  - **maho-for-devs/**: Developer guide covering MVC, ORM, and architecture
+  - **about/**, **community/**: Pages about the project
   - **assets/**: Images, logos, and static assets
   - **overrides/**: Custom MkDocs theme overrides
+- The user guide, the developer docs, the API docs and the hosting docs (`user-guide/`,
+  `developer/`, `api/` and `hosting/`) live in the Maho repository, next to the code. The hook
+  `hooks/maho_docs.py` adds them at build time, from the `main` branch of Maho. Change these
+  pages, their images and their menu (the `.nav.yml` files) in a Maho pull request.
+- To preview a change in a local Maho checkout, run `MAHO_DOCS_SOURCE=../maho ./start.sh`.
 
 ### Content Guidelines
 - Documentation is written in Markdown
@@ -70,6 +73,7 @@ where you can check pages, navigation, and rendering. Production builds are hand
 
 - This is the documentation repository, not the Maho framework itself
 - The main Maho framework repository is at https://github.com/MahoCommerce/maho
-- Pull requests for documentation should be submitted to this repository
+- Pull requests for the user guide, the developer docs, the API docs and the hosting docs go to
+  the Maho repository. The other pages stay in this repository
 - Always test documentation changes locally before submitting PRs
 - The site uses Material theme features like search, social cards, and minification
