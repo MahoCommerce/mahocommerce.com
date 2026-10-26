@@ -8,8 +8,8 @@ Maho repository, next to the code that they describe:
   module declares <global><docs><audience>path</audience></docs></global>
 
 A module page goes to the site folder of its audience (user to user-guide/, developer to
-developer/, sysadmin to hosting/), so its URL does not show the module. Two pages with the same
-URL stop the build.
+developer/, sysadmin to hosting/, api to api/), so its URL does not show the module. Two pages
+with the same URL stop the build.
 
 A nav entry that names a .nav.yml file of Maho is replaced by the entries of that file. With a
 title, the entries become a section. Without a title, they go in the list where the entry is.
@@ -31,7 +31,7 @@ from mkdocs.structure.files import File
 
 REPOSITORY = 'https://github.com/MahoCommerce/maho.git'
 ROOT_FOLDERS = ['user-guide', 'developer', 'api', 'hosting']
-AUDIENCE_FOLDERS = {'user': 'user-guide', 'developer': 'developer', 'sysadmin': 'hosting'}
+AUDIENCE_FOLDERS = {'user': 'user-guide', 'developer': 'developer', 'sysadmin': 'hosting', 'api': 'api'}
 SPARSE_PATHS = ['/docs/', '/app/code/core/*/*/docs/', '/app/code/core/*/*/etc/config.xml']
 
 maho_dir = ''
