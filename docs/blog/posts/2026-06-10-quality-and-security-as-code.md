@@ -68,7 +68,7 @@ So for every repository in the org we publish a complete, machine-readable SBOM:
 
 Then we scan those SBOMs **every day** with two independent engines, [Grype](https://github.com/anchore/grype) and [Trivy](https://github.com/aquasecurity/trivy), and merge the results so nobody has to reconcile two reports by hand.
 
-All of it is public and version-controlled in the [`sboms`](https://github.com/MahoCommerce/sboms) repo, with a [live summary right here on the site](/sboms/). Whether you're an enterprise vetting Maho before adoption or a security team auditing what's already in production, the answers are sitting there waiting for you, no NDA, no sales call, no scanning a single line yourself.
+All of it is public and version-controlled in the [`sboms`](https://github.com/MahoCommerce/sboms) repo, with a [live summary right here on the site](/about/security.md). Whether you're an enterprise vetting Maho before adoption or a security team auditing what's already in production, the answers are sitting there waiting for you, no NDA, no sales call, no scanning a single line yourself.
 
 ## What this means for your store
 

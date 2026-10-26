@@ -18,7 +18,7 @@ Work through these in order. Most of the configuration lives under **System > Co
 
 3. **Fill in your store information.** Under **System > Configuration**, set your store name, contact details, base currency, and time zone. Confirm your secure and unsecure base URLs point at the right domain, since these underpin every link and asset on your site.
 
-4. **Set up taxes.** Configure your tax classes, rates, and rules so prices and checkout totals are correct for the regions you sell to.
+4. **Set up taxes.** Configure your tax classes, rates, and rules so prices and checkout totals are correct for the regions you sell to. See [Tax in the Cart and in the Order](tax-calculation.md) for the address that the store uses for the tax.
 
 5. **Add shipping and payment methods.** Enable the shipping options your store offers and the payment methods you want to accept, both under **System > Configuration**.
 

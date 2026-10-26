@@ -139,10 +139,12 @@ plugins:
         theme-development.md: developer/theme-development.md
 
 validation:
+  nav:
+    omitted_files: warn
   links:
     not_found: warn
     anchors: warn
-    absolute_links: warn
+    absolute_links: relative_to_docs
     unrecognized_links: warn
 
 markdown_extensions:
@@ -189,6 +191,12 @@ nav:
         - Configurable swatches: user-guide/configurable-swatches.md
         - Product relationship rules: user-guide/product-relationship-rules.md
         - Category import/export: user-guide/category-import-export.md
+        - Configurable product prices: user-guide/configurable-product-prices.md
+        - Stock status: user-guide/stock-status.md
+        - URL rewrites: user-guide/url-rewrites.md
+    - Store views & content:
+        - "Scope: default, website and store view": user-guide/scope.md
+        - CMS pages and blocks in store views: user-guide/cms-store-views.md
     - Marketing:
         - Customer segments: user-guide/customer-segments.md
         - Email automation: user-guide/email-automation.md
@@ -207,6 +215,7 @@ nav:
         - Captcha: user-guide/captcha.md
         - Revocation button: user-guide/revocation-button.md
         - Shipping bridge: user-guide/shipping-bridge.md
+        - Tax in the cart and in the order: user-guide/tax-calculation.md
   - Developer Docs:
     - Getting started: about/getting-started.md
     - Migrate to Maho: about/migrate-to-maho.md

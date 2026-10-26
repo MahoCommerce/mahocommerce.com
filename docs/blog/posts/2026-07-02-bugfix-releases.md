@@ -14,7 +14,7 @@ Maho moves fast, and every new `YY.m` release proves it: new features, performan
 
 ## Why our versioning works this way
 
-Our [release strategy](/about/release-strategy/) has always been transparent: each `YY.m` release is free to make the platform genuinely better, cleaner, faster, more modern. Upgrades are well documented and smooth, and comprehensive release notes tell you exactly what changed and what to check. It's what lets Maho evolve at the pace it does.
+Our [release strategy](/about/release-strategy.md) has always been transparent: each `YY.m` release is free to make the platform genuinely better, cleaner, faster, more modern. Upgrades are well documented and smooth, and comprehensive release notes tell you exactly what changed and what to check. It's what lets Maho evolve at the pace it does.
 
 It's also an honest reflection of who we are. **Maho is built by a small, focused team**, and maintaining long-term support for many versions at once is a luxury of much larger organizations. That's why our support policy has always been simple: the current release is the supported release. Spreading ourselves across multiple support branches would have meant slowing down the main line, and the main line is where Maho's value comes from.
 
@@ -40,6 +40,6 @@ A few things worth knowing:
 - **Most fixes still land in the next `YY.m` release**, as they always have. A fix is backported when we judge it necessary, typically significant bugs and security issues that shouldn't wait.
 - **Every release comes with release notes, patches included.** Read them before upgrading, they're written to give you everything you need to upgrade safely.
 
-The [release strategy page](/about/release-strategy/) has been updated with all the details.
+The [release strategy page](/about/release-strategy.md) has been updated with all the details.
 
 Maho rocks! 🚀

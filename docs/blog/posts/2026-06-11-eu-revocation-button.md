@@ -97,7 +97,7 @@ The module schema installs automatically on the next request (or run your usual 
 1. Turn on *System → Configuration → Sales → Revocation Button*.
 2. Add the **Revocation Button** widget to your footer so it's visible on every page.
 
-That's it. The [Revocation Button documentation](/revocation-button/) walks through every setting, the admin workflow, and the email templates in detail.
+That's it. The [Revocation Button documentation](/user-guide/revocation-button.md) walks through every setting, the admin workflow, and the email templates in detail.
 
 When **26.7 arrives in July** the feature is already in core, so just drop the patch entry, remove the plugin if you only added it for this, and `composer update` as normal, nothing to migrate.
 

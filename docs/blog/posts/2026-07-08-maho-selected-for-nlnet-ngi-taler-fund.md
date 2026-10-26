@@ -48,7 +48,7 @@ Worth every step. For a project built and maintained with a fraction of the reso
 
 A huge thank you to the **NLnet Foundation** team for believing in Maho and for the work they do for the open internet. And, as always, thank you to **our community, sponsors and contributors**, who kept this project alive and growing to the point where it could earn this recognition.
 
-You'll find the NLnet and NGI TALER logos on our [sponsors page](/sponsors/) from today.
+You'll find the NLnet and NGI TALER logos on our [sponsors page](/sponsors.md) from today.
 
 The best is yet to come.  
 Maho rocks! 🚀
