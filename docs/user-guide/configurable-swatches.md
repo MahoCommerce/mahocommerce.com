@@ -137,8 +137,9 @@ safe choice for a texture.
 
 ## What happens when a customer picks a swatch
 
-- The price updates to the selected variant, and the main image changes to the image of that
-  option.
+- The price updates to the price of the configurable product plus the price of the selected
+  option, if the option has one (see [Configurable product prices](configurable-product-prices.md)).
+  The main image changes to the image of that option.
 - With **Dynamic Price Change for Swatches in Product Listing** enabled, the price in a listing
   updates without opening the product page.
 - Options that are out of stock follow the store setting about showing out of stock products.
