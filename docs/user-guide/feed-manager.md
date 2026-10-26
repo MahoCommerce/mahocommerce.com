@@ -211,7 +211,7 @@ When exporting configurable product children, you often need data from the paren
     | Description | Always | All variants share the same description |
     | URL | Always | Link to main configurable page, not child |
     | Image | If Empty | Use child image if available, else parent's |
-    | Price | Never | The feed already sends the price that checkout charges for the variant (see below) |
+    | Price | Any | Every mode gives the price that checkout charges for the variant (see [Variant prices](#variant-prices)) |
     | Size | Never | Variant-specific attribute |
     | Color | Never | Variant-specific attribute |
     | item_group_id | Always | Resolves to the parent configurable's SKU |
@@ -221,7 +221,7 @@ When exporting configurable product children, you often need data from the paren
 
 ### Variant prices <span class="version-badge">v26.9.3+</span> { #variant-prices }
 
-The store does not use the price of a child of a configurable product. Checkout charges the price of the parent plus the option prices of the selected values (see [Configurable Product Prices](configurable-product-prices.md)). The feed sends the same price for each variant, so the feed price matches the product page and checkout.
+The store does not use the price of a child of a configurable product. Checkout charges the price of the parent plus the option prices of the selected values (see [Configurable Product Prices](configurable-product-prices.md)). For each variant, the feed sends the price that checkout charges for that variant, so the feed price matches the product page and checkout.
 
 - `price`, `final_price`, `regular_price` and `special_price` are the same field of the parent, plus the option prices of the values of the child.
 - `special_from_date`, `special_to_date` and `sale_price_effective_date` come from the parent.
