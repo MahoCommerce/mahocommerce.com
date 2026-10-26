@@ -14,6 +14,8 @@ RUN pip install --no-cache-dir \
     cairosvg
 ARG CACHEBUST=1
 RUN pip install --no-cache-dir --upgrade mkdocs-materialx
+# We never upgrade to MkDocs 2, so its warning is noise.
+ENV DISABLE_MKDOCS_2_WARNING=true
 WORKDIR /docs
 EXPOSE 8000
 ENTRYPOINT ["mkdocs"]

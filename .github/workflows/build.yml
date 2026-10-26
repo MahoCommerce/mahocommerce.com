@@ -8,6 +8,10 @@ on:
 permissions:
   contents: read
 
+# We never upgrade to MkDocs 2, so its warning is noise.
+env:
+  DISABLE_MKDOCS_2_WARNING: true
+
 jobs:
   build:
     runs-on: ubuntu-latest
