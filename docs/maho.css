@@ -3390,11 +3390,12 @@ html.mh-anim .mh-reveal.mh-in {
 .mh-cloud-body {
     display: grid;
     grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
-    grid-template-rows: 1fr auto auto auto 1fr;
+    grid-template-rows: 1fr auto auto auto auto 1fr;
     grid-template-areas:
         ".     ours"
         "yours ours"
         "cta   ours"
+        "app   ours"
         "fund  ours"
         ".     ours";
     column-gap: 4em;
@@ -3428,6 +3429,10 @@ html.mh-anim .mh-reveal.mh-in {
 }
 
 .md-typeset .mh-cloud-ours .mh-cloud-col-title { color: var(--maho-chartreuse); }
+
+/* the card keeps its own height, aligned with the top of the left column */
+.mh-cloud-ours { align-self: start; }
+[dir] .md-typeset .mh-cloud-ours .mh-cloud-list { gap: 0.8em; }
 
 /* [dir] matches the specificity of the theme list rules, which indent ul and li */
 .md-typeset .mh-cloud-list,
@@ -3486,12 +3491,137 @@ html.mh-anim .mh-reveal.mh-in {
 
 .mh-cloud-fund strong { color: var(--maho-text-primary); font-weight: 600; }
 
-/* One column: what stays yours, then the card, then the button and the note */
+/* The mobile app sits in the left column, under the button, aligned right:
+   a chat bubble and a small pair of tilted phones (iPhone in front, Android
+   behind). The whole block links to the app on the Maho Cloud site. */
+.md-typeset a.mh-cloud-app {
+    grid-area: app;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 1.4em;
+    margin-top: 1.6em;
+    padding-right: 0.4em;
+    color: inherit;
+    /* !important beats the .md-content link underline, as on the store cards */
+    text-decoration: none !important;
+}
+
+.mh-cloud-phones {
+    display: flex;
+    flex: none;
+    align-items: center;
+}
+
+/* Two columns: the phones cross the column gap and pop out over the left
+   edge of the ink card. The overlap stays inside the card's left padding,
+   so the phones never cover the list icons. */
+@media screen and (min-width: 961px) {
+    .mh-cloud-phones {
+        position: relative;
+        z-index: 3;
+        margin-right: -5.4em;
+    }
+}
+
+.mh-cloud-phone {
+    position: relative;
+    display: block;
+    transition: transform 0.4s var(--maho-ease-out);
+}
+
+.mh-cloud-iphone {
+    z-index: 2;
+    width: 62px;
+    transform: rotate(-8deg);
+}
+
+.mh-cloud-android {
+    z-index: 1;
+    width: 58px;
+    margin-left: -20px;
+    transform: translateY(-10px) rotate(7deg);
+}
+
+.mh-cloud-app:hover .mh-cloud-iphone,
+.mh-cloud-app:focus-visible .mh-cloud-iphone { transform: translateY(-3px) rotate(-5deg); }
+
+.mh-cloud-app:hover .mh-cloud-android,
+.mh-cloud-app:focus-visible .mh-cloud-android { transform: translateY(-14px) rotate(10deg); }
+
+.mh-cloud-phone-body {
+    position: relative;
+    display: block;
+    padding: 3px;
+    border-radius: 14px;
+    background: linear-gradient(145deg, #4a4c42 0%, #1c1d17 30%, #0b0c08 60%, #3a3c33 100%);
+    box-shadow:
+        inset 0 0 0 1px rgba(255, 255, 255, 0.14),
+        inset 0 0 0 2px #050604,
+        0 14px 28px -8px rgba(20, 21, 10, 0.35);
+}
+
+.mh-cloud-phone-body img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 11px;
+}
+
+.mh-cloud-android .mh-cloud-phone-body { border-radius: 11px; }
+.mh-cloud-android .mh-cloud-phone-body img { border-radius: 8px; }
+
+.mh-cloud-phone-island {
+    position: absolute;
+    top: 6px;
+    left: 50%;
+    width: 28%;
+    height: 5px;
+    border-radius: 99px;
+    background: #000;
+    transform: translateX(-50%);
+}
+
+.mh-cloud-phone-punch {
+    position: absolute;
+    top: 6px;
+    left: 50%;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: #000;
+    transform: translateX(-50%);
+}
+
+/* The bubble's tail points down-right, at the phones */
+.mh-cloud-bubble {
+    position: relative;
+    max-width: 24em;
+    padding: 0.8em 1.05em;
+    border-radius: 18px 18px 4px 18px;
+    background: var(--maho-ink);
+    color: var(--maho-on-ink-soft);
+    font-size: 0.8em;
+    line-height: 1.5;
+    box-shadow: 0 10px 24px -10px rgba(20, 21, 10, 0.4);
+}
+
+.mh-cloud-bubble strong { color: var(--maho-on-ink); font-weight: 600; }
+
+.mh-cloud-bubble-more {
+    color: var(--maho-chartreuse);
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.mh-cloud-app:hover .mh-cloud-bubble-more { text-decoration: underline; }
+
+/* One column: what stays yours, then the card, the button, the app and the note */
 @media screen and (max-width: 960px) {
     .mh-cloud-body {
         grid-template-columns: minmax(0, 1fr);
         grid-template-rows: none;
-        grid-template-areas: "yours" "ours" "cta" "fund";
+        grid-template-areas: "yours" "ours" "cta" "app" "fund";
     }
     .mh-cloud-ours { margin-top: 2em; }
 }

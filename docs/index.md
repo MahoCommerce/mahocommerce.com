@@ -743,6 +743,23 @@ Choose the database that fits your infrastructure. **MySQL**, **MariaDB**, **Pos
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
         <span class="mh-cloud-price">From €39 a month</span>
       </div>
+      <a class="mh-cloud-app" href="https://cloud.mahocommerce.com/#mobile">
+        <span class="mh-cloud-bubble"><strong>On mobile too.</strong> Alerts, charts and deploys in the Maho Cloud app, for iPhone, iPad and Android. <span class="mh-cloud-bubble-more">See the app &rarr;</span></span>
+        <span class="mh-cloud-phones" aria-hidden="true">
+          <span class="mh-cloud-phone mh-cloud-iphone">
+            <span class="mh-cloud-phone-body">
+              <img src="assets/cloud/app-ios-stores.webp" alt="" width="600" height="1304" loading="lazy">
+              <span class="mh-cloud-phone-island"></span>
+            </span>
+          </span>
+          <span class="mh-cloud-phone mh-cloud-android">
+            <span class="mh-cloud-phone-body">
+              <img src="assets/cloud/app-android-stores.webp" alt="" width="600" height="1347" loading="lazy">
+              <span class="mh-cloud-phone-punch"></span>
+            </span>
+          </span>
+        </span>
+      </a>
       <p class="mh-cloud-fund">
         <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20s-7.5-4.6-7.5-10.2A4.3 4.3 0 0 1 12 7.3a4.3 4.3 0 0 1 7.5 2.5C19.5 15.4 12 20 12 20z"/></svg>
         <span><strong>Every Maho Cloud store helps to fund Maho's development.</strong> It keeps Maho open, free and moving forward, for everyone and for you.</span>
