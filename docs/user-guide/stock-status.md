@@ -9,8 +9,10 @@ Availability**, In Stock or Out of Stock). They are separate fields. The store s
 only when its stock availability is In Stock, not when its quantity is above zero. Most "I set the
 quantity and it is still out of stock" problems come from this difference.
 
-The storefront does not read these fields directly. It reads the **Stock Status** index, which
-the store builds from them. So an index that is not up to date can also show the wrong status.
+Category pages and search results do not read these fields directly. They read the **Stock
+Status** index, which the store builds from them. So an index that is not up to date can also show
+the wrong status. The option dropdowns of a configurable product read the fields of each child
+directly.
 
 ## Where you set the stock of a product
 

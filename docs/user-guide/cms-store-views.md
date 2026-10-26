@@ -80,6 +80,11 @@ status.
 The admin keeps a page that a **CMS Home Page** or **CMS No Route Page** setting uses. You cannot
 delete it, and when you disable it, the store keeps it enabled and shows a warning.
 
+This protection does not always work. When two pages have the same URL key, the setting can store
+the URL key with the page ID, for example `home|5`. The admin then does not find the page, and lets
+you disable or delete it. Before you disable or delete a page, check these two settings in each
+scope.
+
 ## Static blocks on a page
 
 A static block shows where a template, a widget or a CMS page places it. In each store view, the

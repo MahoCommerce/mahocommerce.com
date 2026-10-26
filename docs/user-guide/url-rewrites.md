@@ -4,7 +4,7 @@ description: How Maho builds product and category URLs from the URL key, why a U
 
 # URL Rewrites
 
-Every product and category page has a readable URL, such as `/women/dresses/summer-dress`. The
+A product or category page normally has a readable URL, such as `/women/dresses/summer-dress`. The
 store builds this URL from the **URL Key** of the product or category and saves it as a URL
 rewrite. When a customer opens the URL, the store looks up the rewrite and shows the page.
 
