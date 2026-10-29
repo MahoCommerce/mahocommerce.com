@@ -370,6 +370,142 @@ function mahoSetupHeroSlides() {
     };
 }
 
+/* ---- Maho Admin: each feature selects a screen on both phones ----
+   The scroll drives it on every screen size. The phones are sticky: beside
+   the list on a wide screen (the CSS SCROLL MODE query), above it on one
+   column. The feature nearest to the reference line is active: the middle
+   of the viewport on a wide screen, 40% down the space below the phones on
+   one column. The rail fills to that line, and --mh-ap (0 to 1 through the
+   list) turns and moves the phones. A click scrolls to its feature.
+   Reduced motion: no tilt; the scroll and the titles still select. Same teardown as the
+   hero: window listeners outlive an instant navigation. */
+var mahoAdminTeardown = null;
+
+function mahoTeardownAdminApp() {
+    if (mahoAdminTeardown) mahoAdminTeardown();
+    mahoAdminTeardown = null;
+}
+
+function mahoSetupAdminApp() {
+    mahoTeardownAdminApp();
+
+    var list = document.getElementById('mh-admin-tabs');
+    var phones = document.getElementById('mh-admin-phones');
+    if (!list || !phones) return;
+
+    var tabs = Array.prototype.slice.call(list.querySelectorAll('[data-admin-tab]'));
+    var shots = Array.prototype.slice.call(phones.querySelectorAll('[data-shot]'));
+    var wide = window.matchMedia('screen and (min-width: 1025px)');
+    var reduceMotion = mahoReducedMotion();
+    var current = -1;
+    var frame = null;
+
+    function clamp01(v) { return Math.min(1, Math.max(0, v)); }
+
+    function show(index) {
+        if (index === current) return;
+        current = index;
+        tabs.forEach(function (t, i) {
+            t.classList.toggle('is-active', i === index);
+            t.setAttribute('aria-selected', String(i === index));
+        });
+        shots.forEach(function (s) {
+            var shot = Number(s.getAttribute('data-shot'));
+            s.classList.toggle('is-active', shot === index);
+            s.classList.toggle('is-past', shot < index);
+        });
+        phones.setAttribute('data-screen', String(index));
+        phones.setAttribute('aria-labelledby', tabs[index].id);
+    }
+
+    function referenceLine() {
+        if (wide.matches) return window.innerHeight / 2;
+        var bottom = phones.getBoundingClientRect().bottom;
+        return bottom + (window.innerHeight - bottom) * 0.4;
+    }
+
+    function sync() {
+        frame = null;
+        var ref = referenceLine();
+        var box = list.getBoundingClientRect();
+        var centers = tabs.map(function (t) {
+            var r = t.getBoundingClientRect();
+            return r.top + r.height / 2;
+        });
+        var first = centers[0];
+        var last = centers[centers.length - 1];
+
+        phones.style.setProperty('--mh-ap', clamp01((ref - first) / (last - first)).toFixed(4));
+        list.style.setProperty('--mh-arail', clamp01((ref - box.top) / box.height).toFixed(4));
+
+        var nearest = 0;
+        centers.forEach(function (c, i) {
+            if (Math.abs(c - ref) < Math.abs(centers[nearest] - ref)) nearest = i;
+        });
+        show(nearest);
+    }
+    function requestSync() { if (frame === null) frame = window.requestAnimationFrame(sync); }
+
+    var tabClicks = tabs.map(function (t, i) {
+        var onClick = function () {
+            show(i);
+            var r = t.getBoundingClientRect();
+            window.scrollTo({
+                top: window.scrollY + r.top + r.height / 2 - referenceLine(),
+                behavior: reduceMotion ? 'auto' : 'smooth'
+            });
+        };
+        t.addEventListener('click', onClick);
+        return onClick;
+    });
+
+    // Arrow keys move between the tabs, as in a tab list
+    function onKey(e) {
+        var step = { ArrowDown: 1, ArrowRight: 1, ArrowUp: -1, ArrowLeft: -1 }[e.key];
+        if (!step) return;
+        e.preventDefault();
+        var from = tabs.indexOf(document.activeElement);
+        var next = ((from < 0 ? current : from) + step + tabs.length) % tabs.length;
+        tabs[next].focus({ preventScroll: true });
+        tabs[next].click();
+    }
+    list.addEventListener('keydown', onKey);
+
+    // The phones tilt toward the pointer
+    var tilt = !reduceMotion && window.matchMedia('(pointer: fine)').matches;
+    function onPointerMove(e) {
+        var r = phones.getBoundingClientRect();
+        phones.style.setProperty('--mh-ary', (((e.clientX - r.left) / r.width - 0.5) * 14).toFixed(2) + 'deg');
+        phones.style.setProperty('--mh-arx', (((e.clientY - r.top) / r.height - 0.5) * -10).toFixed(2) + 'deg');
+    }
+    function onPointerLeave() {
+        phones.style.setProperty('--mh-ary', '0deg');
+        phones.style.setProperty('--mh-arx', '0deg');
+    }
+    if (tilt) {
+        phones.addEventListener('pointermove', onPointerMove);
+        phones.addEventListener('pointerleave', onPointerLeave);
+    }
+
+    window.addEventListener('scroll', requestSync, { passive: true });
+    window.addEventListener('resize', requestSync, { passive: true });
+    mahoOnMedia(wide, requestSync);
+    sync();
+
+    mahoAdminTeardown = function () {
+        if (frame !== null) window.cancelAnimationFrame(frame);
+        window.removeEventListener('scroll', requestSync);
+        window.removeEventListener('resize', requestSync);
+        mahoOffMedia(wide, requestSync);
+        tabs.forEach(function (t, i) { t.removeEventListener('click', tabClicks[i]); });
+        list.removeEventListener('keydown', onKey);
+        if (tilt) {
+            phones.removeEventListener('pointermove', onPointerMove);
+            phones.removeEventListener('pointerleave', onPointerLeave);
+        }
+    };
+}
+
 /* Fade/slide content blocks in as they enter the viewport. */
 function mahoSetupReveal() {
     var selector = '.mh-proof, .mh-sec-head, .mh-themes-inner, .feature-card, .mh-cloud-col, .final-cta-inner';
@@ -483,6 +619,7 @@ function mahoInitHome() {
            slideshow timer keep firing against detached nodes for the rest of
            the session. */
         mahoTeardownHero();
+        mahoTeardownAdminApp();
         return;
     }
 
@@ -491,6 +628,7 @@ function mahoInitHome() {
     mahoSafe('motion controls', mahoSetupMotionControls);
     mahoSafe('stores carousel', mahoSetupStores);
     mahoSafe('hero slides', mahoSetupHeroSlides); // reduced motion too: the scroll still selects
+    mahoSafe('admin app', mahoSetupAdminApp); // the same
 
     if (mahoReducedMotion()) return; // CSS keeps everything visible
 

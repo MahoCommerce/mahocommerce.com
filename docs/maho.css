@@ -505,7 +505,7 @@ body {
 
 
 /* === LINKS === */
-.md-content a:not(.md-button):not(.mh-btn):not(.mh-store-card):not(.mh-tab):not(.mh-tstage-pick):not(.tabbed-labels *) {
+.md-content a:not(.md-button):not(.mh-btn):not(.mh-store-card):not(.mh-tab):not(.mh-tstage-pick):not(.tabbed-labels *):not(.mh-admin *) {
     color: var(--maho-brand-text);
     text-decoration: underline;
     text-decoration-color: rgba(173, 180, 26, 0.4);
@@ -515,7 +515,7 @@ body {
                 text-decoration-color var(--maho-duration) var(--maho-ease);
 }
 
-.md-content a:not(.md-button):not(.mh-btn):not(.mh-store-card):not(.mh-tab):not(.mh-tstage-pick):hover {
+.md-content a:not(.md-button):not(.mh-btn):not(.mh-store-card):not(.mh-tab):not(.mh-tstage-pick):not(.mh-admin *):hover {
     color: var(--maho-brand-dark);
     text-decoration-color: var(--maho-brand);
 }
@@ -3361,6 +3361,696 @@ html.mh-anim .mh-reveal.mh-in {
 }
 
 
+/* ---- MAHO ADMIN: the mobile app, for iPhone, iPad and Android. Ink band
+   between the white agentic commerce band and the paper funding band. The
+   same stage as the mobile section of the Maho Cloud site: copy and feature
+   list on the left, an iPhone and an Android phone on the right.
+
+   Each feature selects a screen on both phones. The scroll selects it on
+   every screen size (see SCROLL MODE below and mahoSetupAdminApp in
+   maho.js), and --mh-ap (0 to 1, the scroll through the list) turns and
+   moves the phones. The screens keep the aspect ratio of the store
+   screenshots, so nothing is cropped: iPhone 1320x2868, Android 1080x2160.
+   `overflow: clip`, never `hidden`: a hidden overflow makes the band a
+   scroll container, and the phones then never stick. ---- */
+.mh-admin {
+    position: relative;
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
+    overflow: clip;
+    padding: 6em 0 5.4em;
+    background:
+        radial-gradient(ellipse 55% 45% at 78% 40%, rgba(215, 223, 34, 0.09) 0%, transparent 70%),
+        var(--maho-ink);
+    color: var(--maho-on-ink-soft);
+    scroll-margin-top: 2.4rem;
+}
+
+.mh-admin-inner {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 0 2em;
+}
+
+.mh-admin-inner {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
+    gap: 3.5em;
+    align-items: center;
+}
+
+.mh-admin-copy { min-width: 0; }
+
+.md-typeset .mh-admin .mh-sec-title { color: var(--maho-on-ink); }
+
+.md-typeset .mh-admin .mh-sec-title .mh-mark {
+    /* the band of the other titles, as on the themes showcase; dimmer on
+       ink, so the light text stays legible */
+    background: linear-gradient(transparent 78%, rgba(215, 223, 34, 0.35) 78%);
+}
+
+.mh-admin .mh-sec-lede { color: var(--maho-on-ink-soft); }
+
+.md-typeset .mh-admin-kicker {
+    display: flex;
+    align-items: center;
+    gap: 0.7em;
+    margin: 0 0 1.3em;
+    font-family: var(--maho-mono);
+    font-size: 0.68em;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--maho-chartreuse);
+}
+
+.mh-admin-new {
+    padding: 0.3em 0.65em;
+    border-radius: 99px;
+    background: var(--maho-chartreuse);
+    color: var(--maho-ink);
+    box-shadow: 0 4px 14px rgba(215, 223, 34, 0.35);
+}
+
+/* Store badges: drawn in the site's style, not the stores' artwork. The
+   badges and the platforms line are as wide as the badges, so the line
+   centres under them. */
+.mh-admin-get {
+    display: inline-flex;
+    flex-direction: column;
+    margin-top: 1.8em;
+}
+
+.mh-admin-stores {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75em;
+}
+
+.mh-admin-store,
+.md-typeset a.mh-admin-store {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.7em;
+    min-width: 11.5em;
+    padding: 0.6em 1.1em 0.6em 0.95em;
+    border-radius: var(--maho-radius-md);
+    background: var(--maho-on-ink);
+    color: var(--maho-ink);
+    text-decoration: none !important;
+    line-height: 1.1;
+    transition: transform var(--maho-duration) var(--maho-ease),
+                box-shadow var(--maho-duration) var(--maho-ease),
+                background var(--maho-duration) var(--maho-ease);
+}
+
+.md-typeset a.mh-admin-store:hover,
+.md-typeset a.mh-admin-store:focus-visible {
+    color: var(--maho-ink);
+    background: var(--maho-chartreuse);
+    transform: translateY(-2px);
+    box-shadow: 0 12px 32px rgba(215, 223, 34, 0.28);
+}
+
+.md-typeset a.mh-admin-store:focus-visible {
+    outline: 2px solid var(--maho-chartreuse);
+    outline-offset: 3px;
+}
+
+.mh-admin-store svg { width: 1.45em; height: 1.45em; flex: none; }
+
+.mh-admin-store > span { display: flex; flex-direction: column; }
+
+.mh-admin-store small {
+    font-size: 0.66em;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+}
+
+.mh-admin-store strong {
+    font-size: 1.08em;
+    font-weight: 650;
+    letter-spacing: -0.02em;
+}
+
+.mh-admin-store.is-soon {
+    background: transparent;
+    color: var(--maho-on-ink-soft);
+    border: 1px dashed rgba(244, 245, 232, 0.28);
+    cursor: default;
+}
+
+.mh-admin-store-soon {
+    position: absolute;
+    top: -0.55em;
+    right: -0.5em;
+    padding: 0.18em 0.5em;
+    border-radius: 99px;
+    background: var(--maho-chartreuse);
+    color: var(--maho-ink);
+    font-family: var(--maho-mono);
+    font-size: 0.58em;
+    font-style: normal;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    box-shadow: 0 4px 14px rgba(215, 223, 34, 0.35);
+}
+
+.md-typeset .mh-admin-platforms {
+    margin: 0.9em 0 0;
+    text-align: center;
+    font-family: var(--maho-mono);
+    font-size: 0.62em;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--maho-chartreuse);
+}
+
+/* The price and the funding note, under the store badges: one card with a
+   gradient border, the price on the left and the note on the right, and the
+   footnote of the price along the bottom. */
+.mh-admin-offer {
+    position: relative;
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    max-width: 34em;
+    margin-top: 2em;
+    border: 1px solid transparent;
+    border-radius: var(--maho-radius-lg);
+    background:
+        radial-gradient(ellipse 60% 90% at 0% 0%, rgba(215, 223, 34, 0.12) 0%, transparent 70%) padding-box,
+        linear-gradient(var(--maho-ink-soft), var(--maho-ink-soft)) padding-box,
+        linear-gradient(135deg, rgba(215, 223, 34, 0.65), rgba(215, 223, 34, 0.06) 45%, rgba(215, 223, 34, 0.06) 60%, rgba(215, 223, 34, 0.4)) border-box;
+    box-shadow: 0 24px 60px -24px rgba(215, 223, 34, 0.25);
+}
+
+.mh-admin-price {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.5em;
+    padding: 1.3em 1.5em 1.1em;
+}
+
+.mh-admin-price-label {
+    font-family: var(--maho-mono);
+    font-size: 0.6em;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--maho-chartreuse);
+}
+
+/* The euro sign and the cents ride high and small, as on a price tag;
+   the period sits on the baseline of the number */
+.mh-admin-price-value {
+    display: block;
+    white-space: nowrap;
+    font-size: 3em;
+    font-weight: 650;
+    letter-spacing: -0.05em;
+    line-height: 1;
+    color: var(--maho-on-ink);
+    font-variant-numeric: tabular-nums;
+}
+
+.mh-admin-cur,
+.mh-admin-dec {
+    font-size: 0.45em;
+    letter-spacing: -0.02em;
+    vertical-align: 0.95em;
+}
+
+.mh-admin-cur { margin-right: 0.06em; color: var(--maho-on-ink-soft); }
+
+.mh-admin-per {
+    margin-left: 0.3em;
+    font-size: 0.27em;
+    font-weight: 500;
+    letter-spacing: 0;
+    color: var(--maho-on-ink-soft);
+}
+
+.mh-admin-star { margin-left: 0.1em; color: var(--maho-chartreuse); }
+
+.mh-admin-fund {
+    display: flex;
+    align-items: center;
+    gap: 0.9em;
+    padding: 1.1em 1.4em;
+    border-left: 1px solid var(--maho-ink-border);
+}
+
+.md-typeset .mh-admin-fund p {
+    margin: 0;
+    font-size: 0.8em;
+    line-height: 1.55;
+    color: var(--maho-on-ink-soft);
+}
+
+.mh-admin-fund strong { display: block; color: var(--maho-on-ink); font-weight: 600; }
+
+/* The heart of the funding notes (Maho Admin and Maho Cloud): it sits in
+   a lit disc and beats twice, then rests */
+.mh-heart {
+    position: relative;
+    display: inline-flex;
+    flex: none;
+    align-items: center;
+    justify-content: center;
+    width: 2.4em;
+    height: 2.4em;
+    border-radius: 50%;
+}
+
+.mh-heart svg { animation: mhHeartBeat 2.8s ease-in-out infinite; }
+
+@keyframes mhHeartBeat {
+    0%, 30%, 100% { transform: scale(1); }
+    8% { transform: scale(1.18); }
+    16% { transform: scale(0.96); }
+    22% { transform: scale(1.12); }
+}
+
+.mh-admin-heart {
+    background: rgba(215, 223, 34, 0.12);
+    color: var(--maho-chartreuse);
+    box-shadow: inset 0 0 0 1px var(--maho-ink-border-brand), 0 0 22px rgba(215, 223, 34, 0.18);
+}
+
+.mh-admin-heart svg { filter: drop-shadow(0 0 6px rgba(215, 223, 34, 0.6)); }
+
+.md-typeset .mh-admin-note {
+    grid-column: 1 / -1;
+    margin: 0;
+    padding: 0.7em 1.5em 0.8em;
+    border-top: 1px solid var(--maho-ink-border);
+    font-family: var(--maho-mono);
+    font-size: 0.58em;
+    letter-spacing: 0.02em;
+    color: var(--maho-on-ink-faint);
+}
+
+/* Narrow: the price over the note */
+@media screen and (max-width: 640px) {
+    .mh-admin-offer { grid-template-columns: minmax(0, 1fr); }
+    .mh-admin-price { padding-bottom: 0.4em; }
+    .mh-admin-fund { border-left: 0; padding-top: 0.9em; }
+}
+
+/* Feature list: every body stays visible (no JavaScript needed to read
+   it); the active one is bright. */
+.mh-admin-tabs {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    margin: 2.2em 0 0;
+    border-left: 1px solid var(--maho-ink-border);
+}
+
+.md-typeset .mh-admin-tab {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3em;
+    width: 100%;
+    margin: 0;
+    padding: 0.8em 0 0.8em 1.4em;
+    background: none;
+    border: 0;
+    text-align: left;
+    font: inherit;
+    color: inherit;
+    cursor: pointer;
+    opacity: 0.5;
+    transition: opacity var(--maho-duration-slow) var(--maho-ease);
+}
+
+.md-typeset .mh-admin-tab:hover,
+.md-typeset .mh-admin-tab:focus-visible,
+.md-typeset .mh-admin-tab.is-active { opacity: 1; }
+
+.md-typeset .mh-admin-tab:focus-visible {
+    outline: 2px solid var(--maho-chartreuse);
+    outline-offset: 2px;
+    border-radius: var(--maho-radius-sm);
+}
+
+.mh-admin-tab-title {
+    font-size: 1em;
+    font-weight: 650;
+    letter-spacing: -0.015em;
+    color: var(--maho-on-ink);
+}
+
+.mh-admin-tab-body {
+    font-size: 0.88em;
+    line-height: 1.6;
+    color: var(--maho-on-ink-soft);
+    max-width: 48ch;
+}
+
+.mh-admin-tab-body strong { color: var(--maho-on-ink); font-weight: 600; }
+
+/* The progress rail on the list's left rule: it fills to the line that
+   selects the feature (--mh-arail, set by maho.js), with a glowing dot at
+   its tip */
+.mh-admin-rail {
+    position: absolute;
+    left: -1px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    pointer-events: none;
+}
+
+.mh-admin-rail-fill {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, rgba(215, 223, 34, 0.15), var(--maho-chartreuse));
+    transform: scaleY(var(--mh-arail, 0));
+    transform-origin: top;
+}
+
+.mh-admin-rail-dot {
+    position: absolute;
+    left: 50%;
+    top: calc(var(--mh-arail, 0) * 100%);
+    width: 10px;
+    height: 10px;
+    margin: -5px 0 0 -5px;
+    border-radius: 50%;
+    background: var(--maho-chartreuse);
+    box-shadow: 0 0 0 4px rgba(215, 223, 34, 0.18), 0 0 18px 4px rgba(215, 223, 34, 0.5);
+}
+
+/* The stage. --mh-aw sizes everything; the rig takes the pointer tilt
+   (--mh-arx, --mh-ary, set by maho.js). */
+.mh-admin-phones {
+    --mh-aw: clamp(220px, 21vw, 290px);
+    --mh-arx: 0deg;
+    --mh-ary: 0deg;
+    --mh-ap: 0.5;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    padding: 3em 0 2.5em;
+    perspective: 1800px;
+}
+
+.mh-admin-glow {
+    position: absolute;
+    inset: 12% 8%;
+    border-radius: 50%;
+    background: radial-gradient(closest-side, rgba(215, 223, 34, 0.28), rgba(215, 223, 34, 0.06) 60%, transparent);
+    filter: blur(30px);
+    pointer-events: none;
+    animation: mhAdminGlow 9s ease-in-out infinite;
+}
+
+.mh-admin-ring {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: calc(var(--mh-aw) * 2.3);
+    aspect-ratio: 1;
+    border-radius: 50%;
+    border: 1px dashed var(--maho-ink-border-brand);
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    animation: mhAdminRing 80s linear infinite;
+}
+
+.mh-admin-ring::before {
+    content: '';
+    position: absolute;
+    top: 14%;
+    left: 14%;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--maho-chartreuse);
+    box-shadow: 0 0 16px 4px rgba(215, 223, 34, 0.55);
+}
+
+@keyframes mhAdminGlow {
+    0%, 100% { opacity: 0.75; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.06); }
+}
+
+@keyframes mhAdminRing {
+    to { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+.mh-admin-rig {
+    position: relative;
+    display: flex;
+    align-items: center;
+    transform-style: preserve-3d;
+    transform:
+        rotateX(calc(var(--mh-arx) + (var(--mh-ap) - 0.5) * -8deg))
+        rotateY(calc(var(--mh-ary) + (var(--mh-ap) - 0.5) * -26deg));
+    transition: transform 0.9s var(--maho-ease-out);
+}
+
+.mh-admin-phone { position: relative; flex: none; }
+
+.mh-admin-iphone {
+    width: var(--mh-aw);
+    z-index: 2;
+    transform: translateY(calc((var(--mh-ap) - 0.5) * 50px)) rotate(calc(-4deg + (var(--mh-ap) - 0.5) * 4deg)) translateZ(40px);
+    transition: transform 0.9s var(--maho-ease-out);
+}
+
+.mh-admin-android {
+    width: calc(var(--mh-aw) * 0.9);
+    margin-left: calc(var(--mh-aw) * -0.2);
+    z-index: 1;
+    transform: translateY(calc(-9% + (var(--mh-ap) - 0.5) * -110px)) rotate(calc(6deg + (var(--mh-ap) - 0.5) * -6deg));
+    transition: transform 0.9s var(--maho-ease-out);
+}
+
+.mh-admin-float { animation: mhAdminFloat 7s ease-in-out infinite; }
+.mh-admin-android .mh-admin-float { animation-delay: -3.5s; }
+
+@keyframes mhAdminFloat {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-14px); }
+}
+
+.mh-admin-body {
+    position: relative;
+    padding: 3.4%;
+    border-radius: 15% / 7%;
+    background: linear-gradient(145deg, #4a4c42 0%, #1c1d17 30%, #0b0c08 60%, #3a3c33 100%);
+    box-shadow:
+        inset 0 0 0 1.5px rgba(255, 255, 255, 0.14),
+        inset 0 0 0 4px #050604,
+        0 40px 80px -20px rgba(0, 0, 0, 0.8),
+        0 18px 40px -10px rgba(0, 0, 0, 0.6);
+}
+
+/* Side buttons */
+.mh-admin-body::before,
+.mh-admin-body::after {
+    content: '';
+    position: absolute;
+    width: 3px;
+    border-radius: 2px;
+    background: linear-gradient(90deg, #2a2b24, #5a5c50);
+}
+
+.mh-admin-iphone .mh-admin-body::before { left: -3px; top: 20%; height: 7%; box-shadow: 0 calc(var(--mh-aw) * 0.24) 0 #3d3f35; }
+.mh-admin-iphone .mh-admin-body::after { right: -3px; top: 27%; height: 12%; }
+.mh-admin-android .mh-admin-body { border-radius: 11% / 5.5%; padding: 3%; }
+.mh-admin-android .mh-admin-body::before { right: -3px; top: 18%; height: 11%; }
+.mh-admin-android .mh-admin-body::after { right: -3px; top: 33%; height: 6%; }
+
+.mh-admin-screen {
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+    border-radius: 12.5% / 5.8%;
+    background: #f2f2ea;
+    aspect-ratio: 1320 / 2868;
+}
+
+.mh-admin-android .mh-admin-screen {
+    border-radius: 8.5% / 4.25%;
+    aspect-ratio: 1080 / 2160;
+}
+
+/* Glass reflection over the screen */
+.mh-admin-screen::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 3;
+    background: linear-gradient(115deg, rgba(255, 255, 255, 0.16) 0%, rgba(255, 255, 255, 0) 32%);
+    pointer-events: none;
+}
+
+.md-typeset .mh-admin-shot {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    max-width: none;
+    object-fit: cover;
+    opacity: 0;
+    transform: translateY(14%) scale(0.96);
+    transition: opacity 0.5s var(--maho-ease), transform 0.8s var(--maho-ease-out);
+}
+
+/* A screen the list scrolled past leaves upward; the next comes from below */
+.md-typeset .mh-admin-shot.is-past { transform: translateY(-14%) scale(0.96); }
+
+.md-typeset .mh-admin-shot.is-active {
+    opacity: 1;
+    transform: none;
+}
+
+.md-typeset .mh-admin-android .mh-admin-shot { transition-delay: 0.08s; }
+
+.mh-admin-island {
+    position: absolute;
+    z-index: 4;
+    top: 4.6%;
+    left: 50%;
+    width: 29%;
+    height: 3.7%;
+    border-radius: 99px;
+    background: #000;
+    transform: translateX(-50%);
+}
+
+.mh-admin-punch {
+    position: absolute;
+    z-index: 4;
+    top: 4%;
+    left: 50%;
+    width: 4.6%;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 35%, #2a2d3a, #000 60%);
+    transform: translateX(-50%);
+}
+
+/* === SCROLL MODE (wide screens) ===
+   The phones stick in the middle of the viewport while the feature list
+   scrolls past them. A feature is active when its centre is the nearest to
+   the middle of the viewport; the rail fills to that line. maho.js checks
+   the same media query. */
+@media screen and (min-width: 1025px) {
+    /* the bottom margin of the list already leaves room under it */
+    .mh-admin { padding-bottom: 1em; }
+
+    .mh-admin-inner { align-items: start; }
+
+    .mh-admin-phones {
+        --mh-aw: min(21vw, 290px, calc((100vh - 220px) / 2.4));
+        position: sticky;
+        top: 2.4rem;
+        height: calc(100vh - 2.4rem);
+        min-height: 560px;
+        align-items: center;
+        padding: 0;
+    }
+
+    /* The bottom margin keeps the list (and so the sticky phones) on screen
+       until the last feature reaches the middle: half the viewport less half
+       a feature. */
+    .mh-admin-tabs { margin: 3em 0 calc(50vh - 16vh); }
+
+    .md-typeset .mh-admin-tab {
+        min-height: 32vh;
+        justify-content: center;
+        opacity: 0.28;
+        transform: translateX(0);
+        transition: opacity 0.5s var(--maho-ease), transform 0.6s var(--maho-ease-out);
+    }
+
+    .md-typeset .mh-admin-tab.is-active { opacity: 1; transform: translateX(8px); }
+    .md-typeset .mh-admin-tab:hover:not(.is-active) { opacity: 0.55; }
+
+    .mh-admin-tab-title { font-size: 1.35em; letter-spacing: -0.025em; }
+    .mh-admin-tab-body { font-size: 0.98em; }
+}
+
+/* One column, scroll-driven too: the phones go between the badges and the
+   feature list and stick under the header, smaller, on an ink backdrop that
+   hides the list scrolling under them. A feature is active when its centre
+   is the nearest to a line at 40% of the space below the phones. No ring:
+   it would cross the list. */
+@media screen and (max-width: 1024px) {
+    .mh-admin-inner {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0;
+    }
+
+    .mh-admin-copy { display: contents; }
+
+    .mh-admin-phones {
+        --mh-aw: clamp(130px, 22vw, 190px);
+        order: 1;
+        position: sticky;
+        top: 2.4rem;
+        z-index: 2;
+        /* edge to edge, so the backdrop has no visible sides */
+        margin: 1.5em -2em 0;
+        padding: 1.4em 2em 1.8em;
+        background: linear-gradient(to bottom, var(--maho-ink) 84%, rgba(14, 15, 8, 0));
+    }
+
+    /* No glow: it would show through the backdrop */
+    .mh-admin { background: var(--maho-ink); }
+
+    .mh-admin-ring { display: none; }
+
+    .mh-admin-tabs { order: 2; margin: 11vh 0 0; }
+
+    .md-typeset .mh-admin-tab {
+        min-height: 30vh;
+        justify-content: center;
+        opacity: 0.35;
+    }
+
+    .mh-admin-get { align-self: flex-start; }
+}
+
+@media screen and (max-width: 640px) {
+    .mh-admin-phones { --mh-aw: min(29vw, 130px); padding: 1em 0 1.4em; }
+    .mh-admin-get { display: flex; align-self: stretch; }
+    .mh-admin-store,
+    .md-typeset a.mh-admin-store { min-width: 0; flex: 1 1 10em; }
+}
+
+@media screen and (max-width: 760px) {
+    .mh-admin { padding: 3.6em 0 3.8em; }
+    .mh-admin-inner { padding: 0 1.2em; }
+    .mh-admin-phones { margin-left: -1.2em; margin-right: -1.2em; padding-left: 1.2em; padding-right: 1.2em; }
+}
+
+/* Reduced motion: nothing floats, turns or slides; the scroll and the
+   feature titles still select a screen */
+@media (prefers-reduced-motion: reduce) {
+    .mh-admin-glow,
+    .mh-admin-ring,
+    .mh-admin-float { animation: none; }
+    .mh-admin-phones { --mh-ap: 0.5; }
+    .mh-admin-rig { transform: none; }
+    .md-typeset .mh-admin-tab.is-active { transform: none; }
+    .md-typeset .mh-admin-shot { transition: none !important; }
+    .md-typeset a.mh-admin-store:hover { transform: none; }
+    .mh-heart svg { animation: none; }
+}
+
+
 /* ---- MAHO CLOUD: white band between the ink developers band and the paper
    final CTA. The headline runs full width, then the offer sits on the left
    (what stays yours, the button, the funding note) and the ink card on the
@@ -3473,23 +4163,30 @@ html.mh-anim .mh-reveal.mh-in {
 
 .md-typeset .mh-cloud-fund {
     display: flex;
-    align-items: flex-start;
-    gap: 0.8em;
+    align-items: center;
+    gap: 1em;
     margin: 2em 0 0;
-    padding-top: 1.6em;
-    border-top: 1px solid var(--maho-border-light);
+    padding: 1.05em 1.3em;
+    border: 1px solid transparent;
+    border-radius: var(--maho-radius-lg);
+    background:
+        radial-gradient(ellipse 45% 130% at 0% 50%, rgba(215, 223, 34, 0.2) 0%, transparent 70%) padding-box,
+        linear-gradient(var(--maho-surface), var(--maho-surface)) padding-box,
+        linear-gradient(135deg, rgba(173, 180, 26, 0.6), rgba(173, 180, 26, 0.1) 45%, rgba(173, 180, 26, 0.1) 60%, rgba(173, 180, 26, 0.4)) border-box;
+    box-shadow: 0 18px 40px -22px rgba(133, 138, 17, 0.4);
     font-size: 0.8em;
-    line-height: 1.6;
+    line-height: 1.55;
     color: var(--maho-text-secondary);
 }
 
-.mh-cloud-fund svg {
-    flex: none;
-    margin-top: 0.1em;
-    color: var(--maho-brand);
-}
+.mh-cloud-fund strong { display: block; color: var(--maho-text-primary); font-weight: 600; }
 
-.mh-cloud-fund strong { color: var(--maho-text-primary); font-weight: 600; }
+/* On white, the chartreuse disc carries the darker brand heart */
+.mh-cloud-heart {
+    background: rgba(215, 223, 34, 0.3);
+    color: var(--maho-brand-dark);
+    box-shadow: inset 0 0 0 1px rgba(173, 180, 26, 0.35), 0 0 24px rgba(215, 223, 34, 0.45);
+}
 
 /* The mobile app sits in the left column, under the button, aligned right:
    a chat bubble and a small pair of tilted phones (iPhone in front, Android

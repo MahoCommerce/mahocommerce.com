@@ -335,6 +335,104 @@ description: Maho is the open-source, self-hosted ecommerce platform you actuall
   </div>
 </section>
 
+<section class="mh-admin" id="maho-admin" aria-labelledby="mh-admin-title">
+  <div class="mh-admin-inner">
+    <div class="mh-admin-copy">
+      <p class="mh-admin-kicker"><span class="mh-admin-new">New</span> Compatible with Maho 26.11+</p>
+      <h2 class="mh-sec-title" id="mh-admin-title"><span class="mh-mark">Your store, in your pocket</span></h2>
+      <p class="mh-sec-lede">Maho Admin is the official app for Maho. Ship an order from the warehouse, fix a price on the train, check the sales from the sofa. The app talks straight to your own store, with no server of ours in the middle and no tracking.</p>
+      <div class="mh-admin-get">
+        <div class="mh-admin-stores">
+          <span class="mh-admin-store is-soon" aria-label="App Store: coming soon">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.152 6.896c-.948 0-2.415-1.078-3.96-1.04-2.04.027-3.91 1.183-4.961 3.014-2.117 3.675-.546 9.103 1.519 12.09 1.013 1.454 2.208 3.09 3.792 3.039 1.52-.065 2.09-.987 3.935-.987 1.831 0 2.35.987 3.96.948 1.637-.026 2.676-1.48 3.676-2.948 1.156-1.688 1.636-3.325 1.662-3.415-.039-.013-3.182-1.221-3.22-4.857-.026-3.04 2.48-4.494 2.597-4.559-1.429-2.09-3.623-2.324-4.39-2.376-2-.156-3.675 1.09-4.61 1.09zM15.53 3.83c.843-1.012 1.4-2.427 1.245-3.83-1.207.052-2.662.805-3.532 1.818-.78.896-1.454 2.338-1.273 3.714 1.338.104 2.715-.688 3.559-1.701"/></svg>
+            <span><small>Coming soon to the</small><strong>App Store</strong></span>
+            <em class="mh-admin-store-soon" aria-hidden="true">Soon</em>
+          </span>
+          <a class="mh-admin-store" href="https://play.google.com/store/apps/details?id=com.mahocommerce.admin" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M22.018 13.298l-3.919 2.218-3.515-3.493 3.543-3.521 3.891 2.202a1.49 1.49 0 0 1 0 2.594zM1.337.924a1.486 1.486 0 0 0-.112.568v21.017c0 .217.045.419.124.6l11.155-11.087L1.337.924zm12.207 10.065l3.258-3.238L3.45.195a1.466 1.466 0 0 0-.946-.179l11.04 10.973zm0 2.067l-11 10.933c.298.036.612-.016.906-.183l13.324-7.54-3.23-3.21z"/></svg>
+            <span><small>Get it on</small><strong>Google Play</strong></span>
+          </a>
+        </div>
+        <p class="mh-admin-platforms">iPhone &middot; iPad &middot; Android phones, tablets and foldables</p>
+      </div>
+      <div class="mh-admin-offer">
+        <div class="mh-admin-price">
+          <span class="mh-admin-price-label">Subscription</span>
+          <span class="mh-admin-price-value"><span class="mh-admin-cur">€</span>9<span class="mh-admin-dec">.99</span><span class="mh-admin-per">/month<span class="mh-admin-star">*</span></span></span>
+        </div>
+        <div class="mh-admin-fund">
+          <span class="mh-heart mh-admin-heart" aria-hidden="true"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M12 20.3s-7.8-4.7-7.8-10.5A4.5 4.5 0 0 1 12 7.1a4.5 4.5 0 0 1 7.8 2.7c0 5.8-7.8 10.5-7.8 10.5z"/></svg></span>
+          <p><strong>Every subscription helps to fund Maho.</strong> It keeps Maho open, free and moving forward, for everyone.</p>
+        </div>
+        <p class="mh-admin-note">* For one Maho instance, with all its websites and store views.</p>
+      </div>
+      <div class="mh-admin-tabs" id="mh-admin-tabs" role="tablist" aria-label="Maho Admin features">
+        <span class="mh-admin-rail" aria-hidden="true"><span class="mh-admin-rail-fill"></span><span class="mh-admin-rail-dot"></span></span>
+        <button type="button" role="tab" id="mh-admin-tab-0" class="mh-admin-tab is-active" aria-selected="true" aria-controls="mh-admin-phones" data-admin-tab="0">
+          <span class="mh-admin-tab-title">Your numbers at a glance</span>
+          <span class="mh-admin-tab-body">How the store is doing <strong>right now</strong>: sales, orders, bestsellers and visitors, for every website and store view.</span>
+        </button>
+        <button type="button" role="tab" id="mh-admin-tab-1" class="mh-admin-tab" aria-selected="false" aria-controls="mh-admin-phones" data-admin-tab="1">
+          <span class="mh-admin-tab-title">Every order, one search away</span>
+          <span class="mh-admin-tab-body">Find any order, customer or product <strong>instantly</strong>, with the same search as your admin.</span>
+        </button>
+        <button type="button" role="tab" id="mh-admin-tab-2" class="mh-admin-tab" aria-selected="false" aria-controls="mh-admin-phones" data-admin-tab="2">
+          <span class="mh-admin-tab-title">Invoice, ship and refund</span>
+          <span class="mh-admin-tab-body">Take an order <strong>from start to finish</strong> without a computer: invoice, ship, refund, and keep the customer informed.</span>
+        </button>
+        <button type="button" role="tab" id="mh-admin-tab-3" class="mh-admin-tab" aria-selected="false" aria-controls="mh-admin-phones" data-admin-tab="3">
+          <span class="mh-admin-tab-title">The whole admin, not a teaser</span>
+          <span class="mh-admin-tab-body">Catalog, customers, promotions and content. <strong>The admin you know</strong>, made for a phone.</span>
+        </button>
+        <button type="button" role="tab" id="mh-admin-tab-4" class="mh-admin-tab" aria-selected="false" aria-controls="mh-admin-phones" data-admin-tab="4">
+          <span class="mh-admin-tab-title">Edit a product anywhere</span>
+          <span class="mh-admin-tab-body">Fix a price, update the stock or add a photo <strong>the moment you notice</strong>. No laptop needed.</span>
+        </button>
+        <button type="button" role="tab" id="mh-admin-tab-5" class="mh-admin-tab" aria-selected="false" aria-controls="mh-admin-phones" data-admin-tab="5">
+          <span class="mh-admin-tab-title">Reports, with charts</span>
+          <span class="mh-admin-tab-body">The reports of your admin <strong>as clear charts</strong>: sales, products, customers and carts.</span>
+        </button>
+      </div>
+    </div>
+    <div class="mh-admin-phones" id="mh-admin-phones" role="tabpanel" aria-labelledby="mh-admin-tab-0" data-screen="0">
+      <div class="mh-admin-glow" aria-hidden="true"></div>
+      <div class="mh-admin-ring" aria-hidden="true"></div>
+      <div class="mh-admin-rig">
+        <div class="mh-admin-phone mh-admin-iphone">
+          <div class="mh-admin-float">
+            <div class="mh-admin-body">
+              <div class="mh-admin-screen">
+                <img class="mh-admin-shot is-active" data-shot="0" src="assets/admin-app/ios-01.webp" alt="iPhone: the dashboard, with the revenue of the last 7 days and a chart" width="600" height="1304" loading="lazy">
+                <img class="mh-admin-shot" data-shot="1" src="assets/admin-app/ios-02.webp" alt="" width="600" height="1304" loading="lazy">
+                <img class="mh-admin-shot" data-shot="2" src="assets/admin-app/ios-03.webp" alt="" width="600" height="1304" loading="lazy">
+                <img class="mh-admin-shot" data-shot="3" src="assets/admin-app/ios-04.webp" alt="" width="600" height="1304" loading="lazy">
+                <img class="mh-admin-shot" data-shot="4" src="assets/admin-app/ios-05.webp" alt="" width="600" height="1304" loading="lazy">
+                <img class="mh-admin-shot" data-shot="5" src="assets/admin-app/ios-06.webp" alt="" width="600" height="1304" loading="lazy">
+              </div>
+              <span class="mh-admin-island" aria-hidden="true"></span>
+            </div>
+          </div>
+        </div>
+        <div class="mh-admin-phone mh-admin-android">
+          <div class="mh-admin-float">
+            <div class="mh-admin-body">
+              <div class="mh-admin-screen">
+                <img class="mh-admin-shot is-active" data-shot="0" src="assets/admin-app/android-01.webp" alt="Android: the same dashboard" width="600" height="1200" loading="lazy">
+                <img class="mh-admin-shot" data-shot="1" src="assets/admin-app/android-02.webp" alt="" width="600" height="1200" loading="lazy">
+                <img class="mh-admin-shot" data-shot="2" src="assets/admin-app/android-03.webp" alt="" width="600" height="1200" loading="lazy">
+                <img class="mh-admin-shot" data-shot="3" src="assets/admin-app/android-04.webp" alt="" width="600" height="1200" loading="lazy">
+                <img class="mh-admin-shot" data-shot="4" src="assets/admin-app/android-05.webp" alt="" width="600" height="1200" loading="lazy">
+                <img class="mh-admin-shot" data-shot="5" src="assets/admin-app/android-06.webp" alt="" width="600" height="1200" loading="lazy">
+              </div>
+              <span class="mh-admin-punch" aria-hidden="true"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section class="mh-funding" aria-label="Maho is backed by European public funding, partners and sponsors">
   <div class="mh-funding-inner">
     <h2 class="mh-sec-title"><span class="mh-mark">Funded by the European Commission</span></h2>
@@ -761,7 +859,7 @@ Choose the database that fits your infrastructure. **MySQL**, **MariaDB**, **Pos
         </span>
       </a>
       <p class="mh-cloud-fund">
-        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20s-7.5-4.6-7.5-10.2A4.3 4.3 0 0 1 12 7.3a4.3 4.3 0 0 1 7.5 2.5C19.5 15.4 12 20 12 20z"/></svg>
+        <span class="mh-heart mh-cloud-heart" aria-hidden="true"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M12 20.3s-7.8-4.7-7.8-10.5A4.5 4.5 0 0 1 12 7.1a4.5 4.5 0 0 1 7.8 2.7c0 5.8-7.8 10.5-7.8 10.5z"/></svg></span>
         <span><strong>Every Maho Cloud store helps to fund Maho's development.</strong> It keeps Maho open, free and moving forward, for everyone and for you.</span>
       </p>
     </div>
