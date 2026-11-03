@@ -6,7 +6,15 @@
         <link>https://mahocommerce.com</link>
         <description>Maho ecommerce platform</description>
         <language>en</language>
-        <lastBuildDate>Fri, 12 Sep 2024 12:00:00 UTC</lastBuildDate>
+        <lastBuildDate>Sun, 01 Nov 2026 12:00:00 UTC</lastBuildDate>
         <ttl>300</ttl>
+        <item>
+            <title>Maho 26.11.0 is out</title>
+            <link>https://mahocommerce.com/blog/2026/11/01/maho-26110-is-out-today/</link>
+            <guid>https://mahocommerce.com/blog/2026/11/01/maho-26110-is-out-today/</guid>
+            <description>An AI assistant on every admin page, a drag-and-drop page builder, S3, Google Cloud Storage and Azure for media, a redesigned admin and product gallery layouts. Maho 26.11.0 requires PHP 8.5.</description>
+            <pubDate>Sun, 01 Nov 2026 12:00:00 UTC</pubDate>
+            <severity>4</severity>
+        </item>
     </channel>
 </rss>
