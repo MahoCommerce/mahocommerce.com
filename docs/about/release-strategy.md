@@ -41,7 +41,17 @@ While our versioning works with Composer, **every new YY.m release may contain b
 
 ## Support Policy
 
-**The current YY.m release is supported until the next one ships.** As a small team, we cannot provide long-term support for many versions simultaneously, so support always tracks the most recent release.
+**Only the latest release is supported.** When a new YY.m release ships, the previous one stops getting fixes, and you upgrade to keep getting them.
+
+### Why there is no long-term support
+
+**We believe that upgrading is part of the life of a store.** We have worked as technical consultants for many years, and we saw the same story again and again: long-term support is often a way to not upgrade. A store stays on an old version for years, the custom code grows around it, and the technical debt grows with it. When the support finally ends, the upgrade is a huge and expensive project, and often a full replatforming. Small and regular upgrades cost much less than one big jump.
+
+**Security makes this more important every day.** With AI tools, vulnerabilities are found faster than ever, by researchers and by attackers. An old version collects known issues, and the only real fix is to be on the current release. A store that upgrades regularly is a safer store.
+
+**And we prefer to spend our time and our budget on innovation.** Maho moves fast: new features, a modern stack, legacy code removed at every release. Long-term support means keeping several versions alive at the same time: porting every fix to each of them, testing each of them, and answering issues for old code. Large vendors pay for that with license fees. Maho is free, with no license fee and no revenue share, the work on it is voluntary, and the budget comes from [our sponsors](#you-can-help-us-provide-more) and from public grants such as the NLnet NGI TALER Fund. Every hour and every euro goes into the release that everybody uses.
+
+We think this is a fair balance: Maho stays free for everybody, and every upgrade brings your store new features and the latest security fixes.
 
 ### Bugfix (patch) releases
 
@@ -55,12 +65,17 @@ Here's how it works:
 
 This lets you stay on a known-stable series and pick up `26.7.x` patch releases via Composer, without having to jump to the next YY.m release before you're ready to review its breaking changes. As always, **review the release notes for every release** - including patches - before upgrading.
 
+### If you need help with upgrades
+
+- [Maho Cloud](https://cloud.mahocommerce.com){target=_blank} hosts your store on servers run by the Maho team.
+- [Hire us](mailto:info@mahocommerce.com) to manage your store and its upgrades.
+
 ## You Can Help Us Provide More
 
-Please consider sponsoring. Your support enables us to deliver more features, updates, and support.
+The support policy follows our budget, and the budget follows the sponsors. Our goal is not long-term support: upgrades stay part of the life of a store. But with more sponsors, we can give every store **a longer upgrade window**: the previous release keeps getting security fixes for some weeks after the next one ships, so you can plan your upgrade instead of rushing it.
+
+    If your company depends on Maho and wants a longer window, sponsor the project, or [write to us](mailto:info@mahocommerce.com) to fund it directly. Every sponsor brings it closer, and the whole community gets it.
 
 <a href="https://github.com/sponsors/fballiano" target=_blank title="Sponsor me on GitHub"><img src="https://img.shields.io/badge/sponsor-30363D?style=for-the-badge&logo=GitHub-Sponsors&logoColor=#white" alt="Sponsor me on GitHub" /></a>
 <a href="https://www.buymeacoffee.com/fballiano" target=_blank title="Buy me a coffee"><img src="https://img.shields.io/badge/Buy_Me_A_Coffee-FFDD00?style=for-the-badge&logo=buy-me-a-coffee&logoColor=black" alt="Buy me a coffee" /></a>
 <a href="https://www.paypal.com/paypalme/fabrizioballiano" target=_blank title="Donate via PayPal"><img src="https://img.shields.io/badge/PayPal-00457C?style=for-the-badge&logo=paypal&logoColor=white" alt="Donate via PayPal" /></a>
-
-Or [hire us to manage your store](mailto:info@mahocommerce.com).
