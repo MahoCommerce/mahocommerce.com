@@ -1,0 +1,38 @@
+{
+  "updated": "2026-11-04",
+  "issues": {
+    "all_time": {
+      "count": 191,
+      "median_hours": 6.4,
+      "within_24h": 77,
+      "within_48h": 82,
+      "within_7d": 95
+    },
+    "last_12_months": {
+      "count": 174,
+      "median_hours": 5.6,
+      "within_24h": 79,
+      "within_48h": 84,
+      "within_7d": 96
+    },
+    "bugs": null
+  },
+  "releases": {
+    "feature": 14,
+    "patch": 8,
+    "first": "24.9.0",
+    "latest": "26.11.0",
+    "headline_features": 116
+  },
+  "pull_requests": {
+    "merged": 1046,
+    "merged_latest_release": 171
+  },
+  "open_issues": 15,
+  "open_bugs": 0,
+  "vulnerabilities": {
+    "critical": 0,
+    "high": 0
+  },
+  "tests": 6980
+}

@@ -53,6 +53,16 @@ While our versioning works with Composer, **every new YY.m release may contain b
 
 We think this is a fair balance: Maho stays free for everybody, and every upgrade brings your store new features and the latest security fixes.
 
+### Why upgrading is safe
+
+Regular upgrades work only when every release is solid, and quality is something you can measure:
+
+- **[[stats.tests]] automated tests** run on every change before it can be merged, on MySQL, MariaDB, PostgreSQL and SQLite, together with static analysis, coding standards and security scans.
+- **Issues don't pile up:** only [[stats.open_issues]] issues are open in the whole repository today, and an issue reported by the community is closed in a median of [[stats.issues.all_time.median_hours]] hours.
+- **[[stats.vulnerabilities.critical]] known critical and [[stats.vulnerabilities.high]] known high vulnerabilities** in Maho and all its dependencies, which are [scanned every day](security.md).
+
+These numbers come from our public repositories and update every day, through a [public script](https://github.com/MahoCommerce/mahocommerce.com/blob/main/tools/stats.py){target=_blank}.
+
 ### Bugfix (patch) releases
 
 **Starting with 26.7, Maho has bugfix releases.** Most fixes simply land in the next YY.m release. But when a bug or security issue can't wait for the next calendar release, we can ship a **patch release** on the current series instead of forcing you onto a version that may contain breaking changes. Not every fix is backported - a fix is ported to a bugfix release only when we judge it necessary.

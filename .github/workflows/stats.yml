@@ -1,0 +1,43 @@
+name: Stats
+
+# Refreshes docs/assets/data/stats.json, the numbers that the pages show.
+# A commit to main makes the hosting rebuild the site.
+on:
+  schedule:
+    - cron: '17 4 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  stats:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Check out the Maho tests, where the script counts the test cases
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          repository: MahoCommerce/maho
+          path: .maho
+          sparse-checkout: tests
+          persist-credentials: false
+
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
+        with:
+          python-version: '3.12'
+
+      - name: Read the numbers from GitHub
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          MAHO_SOURCE: .maho
+        run: python -I tools/stats.py
+
+      - name: Commit the numbers that changed
+        run: |
+          git diff --quiet docs/assets/data/stats.json && exit 0
+          git config user.name "github-actions[bot]"
+          git config user.email "41898283+github-actions[bot]@users.noreply.github.com"
+          git commit -m "Updated the Maho numbers" -- docs/assets/data/stats.json
+          git push

@@ -34,6 +34,7 @@ extra_javascript:
 # Adds the docs of the Maho repository. See the docblock of the hook.
 hooks:
   - hooks/maho_docs.py
+  - hooks/stats.py
 
 plugins:
   # Downloads external assets at build time and serves them from this origin,

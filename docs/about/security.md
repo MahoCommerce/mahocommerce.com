@@ -14,6 +14,8 @@ diligence, a sysadmin running Maho in production, or a security team auditing th
   [SLSA](https://slsa.dev/) Build Level 3, with a signed record of how it was built.
 - **Protected builds and sources**: immutable releases, pinned CI actions and protected branches
   across the whole organization.
+- **Tested on every change**: [[stats.tests]] automated tests on MySQL, MariaDB, PostgreSQL and
+  SQLite, plus static analysis and security scans, before any change is merged.
 
 ## Current status
 
