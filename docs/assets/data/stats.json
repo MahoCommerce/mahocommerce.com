@@ -1,16 +1,16 @@
 {
-  "updated": "2026-11-04",
+  "updated": "2026-11-05",
   "issues": {
     "all_time": {
-      "count": 191,
+      "count": 192,
       "median_hours": 6.4,
-      "within_24h": 77,
+      "within_24h": 78,
       "within_48h": 82,
       "within_7d": 95
     },
     "last_12_months": {
-      "count": 174,
-      "median_hours": 5.6,
+      "count": 175,
+      "median_hours": 5.5,
       "within_24h": 79,
       "within_48h": 84,
       "within_7d": 96
@@ -25,7 +25,7 @@
     "headline_features": 116
   },
   "pull_requests": {
-    "merged": 1046,
+    "merged": 1048,
     "merged_latest_release": 171
   },
   "open_issues": 15,
@@ -34,5 +34,5 @@
     "critical": 0,
     "high": 0
   },
-  "tests": 6980
+  "tests": 7018
 }
