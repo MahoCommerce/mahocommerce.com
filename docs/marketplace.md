@@ -683,6 +683,20 @@ Discover and install powerful modules to enhance your Maho store. All modules ar
             </div>
         </div>
     </div>
+
+    <!-- Theme Kit -->
+    <div class="app-card" data-category="developer-tools">
+        <span class="app-category">Developer Tools</span>
+        <h3 class="app-title">Theme Kit</h3>
+        <p class="app-description">A template to package and ship a Maho frontend theme as a Composer module. Includes code quality tools, CI checks and a --pack option for the theme build command, which copies the built assets back into the package.</p>
+        <div class="app-footer">
+            <div class="app-actions">
+                <a href="https://github.com/empiricompany/maho-theme-kit" class="app-button app-button-primary" target="_blank">
+                    View Details →
+                </a>
+            </div>
+        </div>
+    </div>
 </div>
 
 <!-- Install Dialog -->
