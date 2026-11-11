@@ -1,16 +1,16 @@
 {
-  "updated": "2026-11-10",
+  "updated": "2026-11-11",
   "issues": {
     "all_time": {
-      "count": 195,
+      "count": 196,
       "median_hours": 6.4,
-      "within_24h": 77,
+      "within_24h": 78,
       "within_48h": 83,
       "within_7d": 95
     },
     "last_12_months": {
-      "count": 178,
-      "median_hours": 5.6,
+      "count": 179,
+      "median_hours": 5.5,
       "within_24h": 79,
       "within_48h": 84,
       "within_7d": 96
@@ -31,14 +31,14 @@
     "headline_features": 116
   },
   "pull_requests": {
-    "merged": 1072,
+    "merged": 1076,
     "merged_latest_release": 171
   },
-  "open_issues": 18,
-  "open_bugs": 0,
+  "open_issues": 20,
+  "open_bugs": 1,
   "vulnerabilities": {
     "critical": 0,
     "high": 1
   },
-  "tests": 7308
+  "tests": 7325
 }
