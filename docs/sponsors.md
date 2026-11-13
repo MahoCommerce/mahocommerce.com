@@ -44,7 +44,6 @@ This project is funded through the [NGI TALER Fund](https://nlnet.nl/taler){targ
 <a href="https://blackfire.io" title="Blackfire" target="_blank"><img src="/assets/sponsors/blackfire.webp" alt="Blackfire"></a>
     <a href="https://cloudflare.com" title="Cloudflare" target="_blank"><img src="/assets/sponsors/cloudflare.webp" alt="Cloudflare"></a>
     <a href="https://www.jetbrains.com" title="JetBrains" target="_blank"><img src="/assets/sponsors/jetbrains.svg" alt="JetBrains"></a>
-    <a href="https://www.magentiamo.it" title="Magentiamo" target="_blank"><img src="/assets/sponsors/magentiamo.webp" alt="Magentiamo"></a>
 </div>
 
 ## Affiliate partnerships

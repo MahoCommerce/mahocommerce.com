@@ -461,7 +461,6 @@ description: Maho is the open-source, self-hosted ecommerce platform you actuall
             <img src="assets/sponsors/blackfire.webp" alt="Blackfire" loading="lazy">
             <img src="assets/sponsors/cloudflare.webp" alt="Cloudflare" loading="lazy">
             <img src="assets/sponsors/jetbrains.svg" alt="JetBrains" loading="lazy">
-            <img src="assets/sponsors/magentiamo.webp" alt="Magentiamo" loading="lazy">
           </div>
           <div class="mh-marquee-group" aria-hidden="true">
             <img src="assets/sponsors/deinetuer.svg" alt="" loading="lazy">
@@ -471,7 +470,6 @@ description: Maho is the open-source, self-hosted ecommerce platform you actuall
             <img src="assets/sponsors/blackfire.webp" alt="" loading="lazy">
             <img src="assets/sponsors/cloudflare.webp" alt="" loading="lazy">
             <img src="assets/sponsors/jetbrains.svg" alt="" loading="lazy">
-            <img src="assets/sponsors/magentiamo.webp" alt="" loading="lazy">
           </div>
         </div>
       </div>
