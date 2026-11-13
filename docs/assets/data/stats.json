@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-12",
+  "updated": "2026-11-13",
   "issues": {
     "all_time": {
       "count": 199,
@@ -25,20 +25,20 @@
   },
   "releases": {
     "feature": 14,
-    "patch": 8,
+    "patch": 9,
     "first": "24.9.0",
     "latest": "26.11.0",
     "headline_features": 116
   },
   "pull_requests": {
-    "merged": 1087,
+    "merged": 1094,
     "merged_latest_release": 171
   },
   "open_issues": 18,
   "open_bugs": 0,
   "vulnerabilities": {
     "critical": 0,
-    "high": 1
+    "high": 0
   },
-  "tests": 8251
+  "tests": 8295
 }
