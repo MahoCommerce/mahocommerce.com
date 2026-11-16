@@ -1,6 +1,6 @@
 babel==2.18.0
-backrefs==8.2
-bracex==3.2.2
+backrefs==8.3
+bracex==3.2.3
 cairocffi==1.7.1
 CairoSVG==2.9.1
 certifi==2026.10.23
@@ -36,7 +36,7 @@ platformdirs==4.14.5
 properdocs==1.6.7
 pycparser==3.12
 Pygments==2.21.0
-pymdown-extensions==13.0
+pymdown-extensions==13.1
 python-dateutil==4.0.0
 PyYAML==6.0.3
 pyyaml_env_tag==1.1
@@ -45,5 +45,5 @@ six==1.17.0
 tinycss2==1.5.1
 urllib3==2.8.0
 watchdog==7.1.0
-wcmatch==12.0.1
+wcmatch==12.0.3
 webencodings==0.6.1
