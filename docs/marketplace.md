@@ -571,6 +571,23 @@ Discover and install powerful modules to enhance your Maho store. All modules ar
         </div>
     </div>
 
+    <!-- Product Labels -->
+    <div class="app-card" data-category="marketing">
+        <span class="app-category">Marketing</span>
+        <h3 class="app-title">Product Labels</h3>
+        <p class="app-description">Rule-driven product labels for category listings, product pages, widgets and carousels, built on the native catalog price rule conditions. Text and images per store view with dynamic placeholders like <code>{discount_percent}</code>, a live preview in the rule, and one query per page on the storefront.</p>
+        <div class="app-footer">
+            <div class="app-actions">
+                <button class="app-button app-button-primary" onclick="showInstallModal('empiricompany/maho-product-labels')">
+                    ↓ Install
+                </button>
+                <a href="https://github.com/empiricompany/maho-product-labels" class="app-button app-button-primary" target="_blank">
+                    View Details →
+                </a>
+            </div>
+        </div>
+    </div>
+
     <!-- Razorpay -->
     <div class="app-card" data-category="payment">
         <span class="app-category">Payment</span>
